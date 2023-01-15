@@ -1,0 +1,3 @@
+
+rootProject.name = "SP Mobile"
+include ':app'

@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <item
+        android:id="@+id/action_refresh"
+        android:icon="@drawable/fab_refresh"
+        android:title="Refresh"
+        app:showAsAction="never" />
+    <item
+        android:id="@+id/action_humanitarian_registration"
+        android:icon="@drawable/menu_add_24"
+        android:title="Humanitarian registration"
+        app:showAsAction="never"
+        />
+    <item
+        android:id="@+id/action_from_development_record"
+        android:icon="@drawable/menu_add_24"
+        android:title="From development record"
+        app:showAsAction="never"
+        />
+    <item
+        android:id="@+id/action_download_households"
+        android:icon="@drawable/menu_download_24"
+        android:title="Download households"
+        app:showAsAction="never"
+        />
+
+</menu>

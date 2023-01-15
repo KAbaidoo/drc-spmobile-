@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:showIn="navigation_view">
+
+    <group android:checkableBehavior="single">
+        <item
+            android:id="@+id/nav_dashboard"
+            android:icon="@drawable/menu_dashboard"
+            android:title="Dashboard" />
+        <item
+            android:id="@+id/nav_household"
+            android:icon="@drawable/menu_household"
+            android:title="Household" />
+        <item
+            android:id="@+id/nav_targeting"
+            android:icon="@drawable/menu_targeting"
+            android:title="Targeting" />
+
+        <item
+            android:id="@+id/nav_non_consenting"
+            android:icon="@drawable/menu_non_consenting"
+            android:title="Non-consenting" />
+        <item
+            android:id="@+id/nav_profile"
+            android:icon="@drawable/menu_profile"
+            android:title="Profile" />
+    </group>
+</menu>

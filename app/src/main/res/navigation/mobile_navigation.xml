@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/mobile_navigation"
+    app:startDestination="@id/nav_dashboard">
+
+    <fragment
+        android:id="@+id/nav_dashboard"
+        android:name="io.bewsys.spmobile.ui.dashboard.DashboardFragment"
+        android:label="Dashboard"
+        tools:layout="@layout/fragment_dashboard" />
+    <fragment
+        android:id="@+id/nav_household"
+        android:name="io.bewsys.spmobile.ui.households.HouseholdsFragment"
+        android:label="Household"
+        tools:layout="@layout/fragment_households" />
+    <fragment
+        android:id="@+id/nav_targeting"
+        android:name="io.bewsys.spmobile.ui.targeting.TargetingFragment"
+        android:label="Targeting"
+        tools:layout="@layout/fragment_targeting" />
+    <fragment
+        android:id="@+id/nav_non_consenting"
+        android:name="io.bewsys.spmobile.ui.nonconsenting.NonConsentingHouseholdsFragment"
+        android:label="Non-consenting Households"
+        tools:layout="@layout/fragment_non_consenting" />
+    <fragment
+        android:id="@+id/nav_profile"
+        android:name="io.bewsys.spmobile.ui.profile.ProfileFragment"
+        android:label="Profile"
+        tools:layout="@layout/fragment_profile" />
+</navigation>
