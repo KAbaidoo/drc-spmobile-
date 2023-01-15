@@ -7,14 +7,18 @@ import android.view.MenuItem
 import android.view.View
 import androidx.core.view.MenuProvider
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
 import androidx.lifecycle.Lifecycle
 import io.bewsys.spmobile.R
 import io.bewsys.spmobile.databinding.FragmentTargetingBinding
 
 
 class TargetingFragment : Fragment(R.layout.fragment_targeting) {
+    val viewModel: TargetingViewModel by viewModels()
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
         val binding = FragmentTargetingBinding.bind(view)
 
         val menuHost = requireActivity()

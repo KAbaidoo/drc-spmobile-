@@ -7,11 +7,15 @@ import android.view.MenuItem
 import android.view.View
 import androidx.core.view.MenuProvider
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
 import androidx.lifecycle.Lifecycle
 import io.bewsys.spmobile.R
 import io.bewsys.spmobile.databinding.FragmentNonConsentingBinding
 
 class NonConsentingHouseholdsFragment :Fragment (R.layout.fragment_non_consenting){
+
+    val viewModel:NonConsentingViewModel by viewModels()
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
