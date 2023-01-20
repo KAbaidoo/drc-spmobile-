@@ -14,29 +14,4 @@ import javax.inject.Singleton
 @InstallIn(SingletonComponent::class)
 object AppModule {
 
-//    @Provides
-//    @Singleton
-//    fun provideRetrofit():Retrofit =
-//        Retrofit.Builder()
-////                uncomment
-//            .baseUrl("CourseApi.BASE_URL")
-//            .addConverterFactory(GsonConverterFactory.create())
-//            .build()
-
-//    @Provides
-//    @Singleton
-//    fun provideCourseApi(retrofit: Retrofit): CourseApi =
-//        retrofit.create(CourseApi::class.java)
-//
-//
-//
-//
-//    @Provides
-//    @Singleton
-//    fun provideDatabase(app: Application) : CourseDatabase =
-//        Room.databaseBuilder(app, CourseDatabase::class.java, "course_database")
-//            .build()
-//
-//    @Provides
-//    fun provideCourseDao(db:CourseDatabase)= db.courseDao()
 }

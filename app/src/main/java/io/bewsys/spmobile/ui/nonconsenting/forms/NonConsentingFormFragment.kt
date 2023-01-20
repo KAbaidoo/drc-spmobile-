@@ -1,4 +1,4 @@
-package io.bewsys.spmobile.ui.nonconsenting
+package io.bewsys.spmobile.ui.nonconsenting.forms
 
 import android.os.Bundle
 import android.view.View
@@ -32,5 +32,9 @@ class NonConsentingFormFragment :Fragment (R.layout.fragment_non_consenting_form
         val municipality = resources.getStringArray(R.array.municipality)
         val municipalityAdapter = ArrayAdapter(requireContext(), R.layout.dropdown_item_non_consent_form, municipality)
         (binding.autoCompleteTextViewMunicipality as? AutoCompleteTextView)?.setAdapter(municipalityAdapter)
+
+        val groupment = resources.getStringArray(R.array.groupment)
+        val groupmentAdapter = ArrayAdapter(requireContext(), R.layout.dropdown_item_non_consent_form, groupment)
+        (binding.autoCompleteTextGroupment as? AutoCompleteTextView)?.setAdapter(groupmentAdapter)
     }
 }

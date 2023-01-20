@@ -24,4 +24,10 @@
         <item>second municipality</item>
         <item>third municipality</item>
     </string-array>
+
+    <string-array name="groupment">
+        <item>first group</item>
+        <item>second group</item>
+        <item>third groupm</item>
+    </string-array>
 </resources>

@@ -11,7 +11,7 @@
         <item
             android:id="@+id/nav_household"
             android:icon="@drawable/menu_household"
-            android:title="Household" />
+            android:title="Households" />
         <item
             android:id="@+id/nav_targeting"
             android:icon="@drawable/menu_targeting"

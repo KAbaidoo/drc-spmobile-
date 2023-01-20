@@ -6,9 +6,10 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:padding="24dp"
-    tools:context=".ui.nonconsenting.NonConsentingFormFragment">
+    tools:context=".ui.nonconsenting.forms.NonConsentingFormFragment">
 
     <ScrollView
+        android:scrollbars="none"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
@@ -22,7 +23,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
                 android:layout_marginBottom="16dp"
-                android:text="Non-Consenting household form"
+                android:text="Non-Consenting Household Form"
                 android:textAlignment="center"
                 android:textAppearance="@style/TextAppearance.MaterialComponents.Headline3"
                 android:textSize="20sp"
@@ -37,7 +38,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
-                android:hint="Choose reason"
+                android:hint="Reason"
                 android:minHeight="20dp"
                 app:boxStrokeColor="@color/design_default_color_primary"
                 app:boxStrokeWidth="2dp">
@@ -69,88 +70,108 @@
 
             </com.google.android.material.textfield.TextInputLayout>
 
-            <com.google.android.material.textfield.TextInputLayout
-
-                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
+<!-- province and territory-->
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
-                android:hint="Choose province"
-                android:minHeight="20dp"
-                app:boxStrokeColor="@color/design_default_color_primary"
-                app:boxStrokeWidth="2dp">
+                android:orientation="horizontal">
 
-                <AutoCompleteTextView
-                    android:id="@+id/autoCompleteTextViewProvince"
+                <com.google.android.material.textfield.TextInputLayout
+
+                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:inputType="none" />
+                    android:layout_marginEnd="8dp"
+                    android:layout_weight="1"
+                    android:hint="Province"
+                    android:minHeight="20dp"
+                    app:boxStrokeColor="@color/design_default_color_primary"
+                    app:boxStrokeWidth="2dp">
 
-            </com.google.android.material.textfield.TextInputLayout>
+                    <AutoCompleteTextView
+                        android:id="@+id/autoCompleteTextViewProvince"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:inputType="none" />
 
-            <com.google.android.material.textfield.TextInputLayout
+                </com.google.android.material.textfield.TextInputLayout>
 
-                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
+                <com.google.android.material.textfield.TextInputLayout
+
+                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="8dp"
+                    android:layout_weight="1"
+                    android:hint="Territory"
+                    android:minHeight="20dp"
+                    app:boxStrokeColor="@color/design_default_color_primary"
+                    app:boxStrokeWidth="2dp">
+
+                    <AutoCompleteTextView
+                        android:id="@+id/autoCompleteTextViewTerritory"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:inputType="none" />
+
+                </com.google.android.material.textfield.TextInputLayout>
+            </LinearLayout>
+
+            <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="match_parent"
                 android:layout_marginTop="16dp"
-                android:hint="Choose Territory"
-                android:minHeight="20dp"
-                app:boxStrokeColor="@color/design_default_color_primary"
-                app:boxStrokeWidth="2dp">
+                android:orientation="horizontal">
+                <com.google.android.material.textfield.TextInputLayout
 
-                <AutoCompleteTextView
-                    android:id="@+id/autoCompleteTextViewTerritory"
+                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:inputType="none" />
+                    android:layout_weight="1"
+                    android:hint="Municipality"
+                    android:layout_marginEnd="8dp"
+                    android:minHeight="20dp"
+                    app:boxStrokeColor="@color/design_default_color_primary"
+                    app:boxStrokeWidth="2dp">
 
-            </com.google.android.material.textfield.TextInputLayout>
+                    <AutoCompleteTextView
+                        android:id="@+id/autoCompleteTextViewMunicipality"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:inputType="none" />
 
-            <com.google.android.material.textfield.TextInputLayout
+                </com.google.android.material.textfield.TextInputLayout>
+                <com.google.android.material.textfield.TextInputLayout
 
-                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
-                android:hint="Urban municipality/ Rural municipality/ Sector"
-                android:minHeight="20dp"
-                app:boxStrokeColor="@color/design_default_color_primary"
-                app:boxStrokeWidth="2dp">
-
-                <AutoCompleteTextView
-                    android:id="@+id/autoCompleteTextViewMunicipality"
+                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:inputType="none" />
+               android:layout_marginStart="8dp"
+                    android:layout_weight="1"
+                    android:hint="Groupment"
+                    android:minHeight="20dp"
+                    app:boxStrokeColor="@color/design_default_color_primary"
+                    app:boxStrokeWidth="2dp">
 
-            </com.google.android.material.textfield.TextInputLayout>
+                    <AutoCompleteTextView
+                        android:id="@+id/autoCompleteTextGroupment"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:inputType="none" />
 
-            <com.google.android.material.textfield.TextInputLayout
+                </com.google.android.material.textfield.TextInputLayout>
 
-                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
-                android:hint="Urban municipality/ Rural municipality/ Sector"
-                android:minHeight="20dp"
-                app:boxStrokeColor="@color/design_default_color_primary"
-                app:boxStrokeWidth="2dp">
 
-                <AutoCompleteTextView
-                    android:id="@+id/autoCompleteTextViewGroupment"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:inputType="none" />
+            </LinearLayout>
 
-            </com.google.android.material.textfield.TextInputLayout>
 
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/textFieldAddress"
                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
+                android:layout_marginTop="8dp"
                 android:hint="Address"
                 android:minHeight="20dp"
                 app:boxStrokeColor="@color/design_default_color_primary"
@@ -178,7 +199,7 @@
                 <com.google.android.material.textfield.TextInputEditText
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="37.42222"/>
+                    android:text="37.42222" />
             </com.google.android.material.textfield.TextInputLayout>
 
             <com.google.android.material.textfield.TextInputLayout

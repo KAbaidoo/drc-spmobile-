@@ -14,7 +14,14 @@
         android:id="@+id/nav_household"
         android:name="io.bewsys.spmobile.ui.households.HouseholdsFragment"
         android:label="Household"
-        tools:layout="@layout/fragment_households" />
+        tools:layout="@layout/fragment_households" >
+        <action
+            android:id="@+id/action_nav_household_to_humanitarianFormFragment"
+            app:destination="@id/humanitarianFormFragment" />
+        <action
+            android:id="@+id/action_nav_household_to_developmentalFormFragment"
+            app:destination="@id/developmentalFormFragment" />
+    </fragment>
     <fragment
         android:id="@+id/nav_targeting"
         android:name="io.bewsys.spmobile.ui.targeting.TargetingFragment"
@@ -36,7 +43,17 @@
         tools:layout="@layout/fragment_profile" />
     <fragment
         android:id="@+id/nonConsentingFormFragment"
-        android:name="io.bewsys.spmobile.ui.nonconsenting.NonConsentingFormFragment"
-        android:label="Non-consenting Households Form"
+        android:name="io.bewsys.spmobile.ui.nonconsenting.forms.NonConsentingFormFragment"
+        android:label="Add non-consenting household"
         tools:layout="@layout/fragment_non_consenting_form" />
+    <fragment
+        android:id="@+id/developmentalFormFragment"
+        android:name="io.bewsys.spmobile.ui.households.forms.DevelopmentalFormFragment"
+        android:label="Add developmental registration"
+        tools:layout="@layout/fragment_developmental_form" />
+    <fragment
+        android:id="@+id/humanitarianFormFragment"
+        android:name="io.bewsys.spmobile.ui.households.forms.HumanitarianFormFragment"
+        android:label="Add humanitarian registration"
+        tools:layout="@layout/fragment_humanitarian_form" />
 </navigation>
