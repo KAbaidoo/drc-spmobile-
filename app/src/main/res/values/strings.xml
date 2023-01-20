@@ -1,3 +1,27 @@
 <resources>
     <string name="app_name">SP Mobile</string>
+
+    <string-array name="reasons">
+        <item>No-refusal</item>
+        <item>Household absent</item>
+        <item>Other</item>
+    </string-array>
+
+    <string-array name="provinces">
+        <item>first province</item>
+        <item>second province</item>
+        <item>third province</item>
+    </string-array>
+
+    <string-array name="territories">
+        <item>first territory</item>
+        <item>second territory</item>
+        <item>third territory</item>
+    </string-array>
+
+    <string-array name="municipality">
+        <item>first municipality</item>
+        <item>second municipality</item>
+        <item>third municipality</item>
+    </string-array>
 </resources>

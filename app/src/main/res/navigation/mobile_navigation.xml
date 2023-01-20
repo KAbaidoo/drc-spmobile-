@@ -22,12 +22,21 @@
         tools:layout="@layout/fragment_targeting" />
     <fragment
         android:id="@+id/nav_non_consenting"
-        android:name="io.bewsys.spmobile.ui.nonconsenting.NonConsentingHouseholdsFragment"
+        android:name="io.bewsys.spmobile.ui.nonconsenting.NonConsentingFragment"
         android:label="Non-consenting Households"
-        tools:layout="@layout/fragment_non_consenting" />
+        tools:layout="@layout/fragment_non_consenting" >
+        <action
+            android:id="@+id/action_nav_non_consenting_to_nonConsentingFormFragment"
+            app:destination="@id/nonConsentingFormFragment" />
+    </fragment>
     <fragment
         android:id="@+id/nav_profile"
         android:name="io.bewsys.spmobile.ui.profile.ProfileFragment"
         android:label="Profile"
         tools:layout="@layout/fragment_profile" />
+    <fragment
+        android:id="@+id/nonConsentingFormFragment"
+        android:name="io.bewsys.spmobile.ui.nonconsenting.NonConsentingFormFragment"
+        android:label="Non-consenting Households Form"
+        tools:layout="@layout/fragment_non_consenting_form" />
 </navigation>

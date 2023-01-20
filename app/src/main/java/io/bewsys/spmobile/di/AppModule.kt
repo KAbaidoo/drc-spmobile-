@@ -14,14 +14,14 @@ import javax.inject.Singleton
 @InstallIn(SingletonComponent::class)
 object AppModule {
 
-    @Provides
-    @Singleton
-    fun provideRetrofit():Retrofit =
-        Retrofit.Builder()
-//                uncomment
-            .baseUrl("CourseApi.BASE_URL")
-            .addConverterFactory(GsonConverterFactory.create())
-            .build()
+//    @Provides
+//    @Singleton
+//    fun provideRetrofit():Retrofit =
+//        Retrofit.Builder()
+////                uncomment
+//            .baseUrl("CourseApi.BASE_URL")
+//            .addConverterFactory(GsonConverterFactory.create())
+//            .build()
 
 //    @Provides
 //    @Singleton

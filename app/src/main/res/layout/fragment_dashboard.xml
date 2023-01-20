@@ -4,22 +4,23 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:padding="24dp"
     tools:context=".ui.dashboard.DashboardFragment">
 
     <GridLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:columnCount="2"
-        android:padding="16dp"
+
         android:rowCount="3">
 
         <com.google.android.material.card.MaterialCardView
-            android:layout_width="160dp"
-            android:layout_height="160dp"
-            android:layout_margin="8dp"
-            app:cardCornerRadius="8dp"
+            android:layout_width="152dp"
+            android:layout_height="152dp"
+            android:layout_margin="12dp"
+            app:cardCornerRadius="12dp"
             app:cardElevation="3dp"
-            app:strokeColor="@color/black"
+            app:strokeColor="@color/charcoal"
             app:strokeWidth="1dp">
 
             <LinearLayout
@@ -50,12 +51,12 @@
 
         </com.google.android.material.card.MaterialCardView>
         <com.google.android.material.card.MaterialCardView
-            android:layout_width="160dp"
-            android:layout_height="160dp"
-            android:layout_margin="8dp"
-            app:cardCornerRadius="8dp"
+            android:layout_width="152dp"
+            android:layout_height="152dp"
+            android:layout_margin="12dp"
+            app:cardCornerRadius="12dp"
             app:cardElevation="3dp"
-            app:strokeColor="@color/black"
+            app:strokeColor="@color/charcoal"
             app:strokeWidth="1dp">
 
             <LinearLayout
@@ -86,12 +87,12 @@
 
         </com.google.android.material.card.MaterialCardView>
         <com.google.android.material.card.MaterialCardView
-            android:layout_width="160dp"
-            android:layout_height="160dp"
-            android:layout_margin="8dp"
-            app:cardCornerRadius="8dp"
+            android:layout_width="152dp"
+            android:layout_height="152dp"
+            android:layout_margin="12dp"
+            app:cardCornerRadius="12dp"
             app:cardElevation="3dp"
-            app:strokeColor="@color/black"
+            app:strokeColor="@color/charcoal"
             app:strokeWidth="1dp">
 
             <LinearLayout
@@ -122,12 +123,12 @@
 
         </com.google.android.material.card.MaterialCardView>
         <com.google.android.material.card.MaterialCardView
-            android:layout_width="160dp"
-            android:layout_height="160dp"
-            android:layout_margin="8dp"
-            app:cardCornerRadius="8dp"
+            android:layout_width="152dp"
+            android:layout_height="152dp"
+            android:layout_margin="12dp"
+            app:cardCornerRadius="12dp"
             app:cardElevation="3dp"
-            app:strokeColor="@color/black"
+            app:strokeColor="@color/charcoal"
             app:strokeWidth="1dp">
 
             <LinearLayout
@@ -158,12 +159,12 @@
 
         </com.google.android.material.card.MaterialCardView>
         <com.google.android.material.card.MaterialCardView
-            android:layout_width="160dp"
-            android:layout_height="160dp"
-            android:layout_margin="8dp"
-            app:cardCornerRadius="8dp"
+            android:layout_width="152dp"
+            android:layout_height="152dp"
+            android:layout_margin="12dp"
+            app:cardCornerRadius="12dp"
             app:cardElevation="3dp"
-            app:strokeColor="@color/black"
+            app:strokeColor="@color/charcoal"
             app:strokeWidth="1dp">
 
             <LinearLayout
@@ -194,12 +195,13 @@
 
         </com.google.android.material.card.MaterialCardView>
         <com.google.android.material.card.MaterialCardView
-            android:layout_width="160dp"
-            android:layout_height="160dp"
-            android:layout_margin="8dp"
-            app:cardCornerRadius="8dp"
+            android:layout_width="152dp"
+            android:layout_height="152dp"
+            android:layout_margin="12dp"
+            app:cardCornerRadius="12dp"
             app:cardElevation="3dp"
-            app:strokeColor="@color/black"
+
+            app:strokeColor="@color/charcoal"
             app:strokeWidth="1dp">
 
             <LinearLayout
@@ -234,14 +236,7 @@
     </GridLayout>
 
 
-    <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:id="@+id/fab_add_task"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="bottom|end"
-        android:layout_margin="16dp"
-        android:contentDescription="refresh"
-        android:src="@drawable/fab_refresh" />
+
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>
 
