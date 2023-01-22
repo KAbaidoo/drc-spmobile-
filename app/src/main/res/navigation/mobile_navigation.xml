@@ -56,4 +56,8 @@
         android:name="io.bewsys.spmobile.ui.households.forms.HumanitarianFormFragment"
         android:label="Add humanitarian registration"
         tools:layout="@layout/fragment_humanitarian_form" />
+    <fragment
+        android:id="@+id/settingsFragment3"
+        android:name="io.bewsys.spmobile.ui.settings.SettingsFragment"
+        android:label="SettingsFragment" />
 </navigation>

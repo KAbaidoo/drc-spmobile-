@@ -30,4 +30,13 @@
         <item>second group</item>
         <item>third groupm</item>
     </string-array>
+    <string-array name="language">
+        <item>French</item>
+        <item>English</item>
+    </string-array>
+    <string-array name="locales">
+        <item>"en-US"</item>
+        <item>"fr-FR"</item>
+    </string-array>
+
 </resources>

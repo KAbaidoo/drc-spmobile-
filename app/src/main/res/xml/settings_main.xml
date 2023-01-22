@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.preference.PreferenceScreen xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context=".ui.settings.SettingsFragment">
+    <PreferenceCategory
+        app:key="preferences_category"
+        app:title="Preferences">
+        <ListPreference
+            app:defaultValue="1"
+            app:dialogTitle="Choose language"
+            app:entries="@array/language"
+            app:entryValues="@array/locales"
+            app:key="language"
+            app:summary="%s"
+            app:title="language" />
+
+    </PreferenceCategory>
+    <PreferenceCategory
+        app:key="advanced_category"
+        app:title="Advanced">
+        <EditTextPreference
+            app:key="host"
+            app:title="Host"
+            app:persistent="true"
+            app:dialogTitle="Host server url"
+            app:defaultValue=""
+           />
+
+        <Preference
+            app:key="help"
+            app:summary="Report technical issues"
+            app:title="Help" />
+
+    </PreferenceCategory>
+
+
+</androidx.preference.PreferenceScreen>

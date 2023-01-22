@@ -6,40 +6,45 @@
     <group android:checkableBehavior="single">
         <item
             android:id="@+id/nav_dashboard"
-            android:icon="@drawable/menu_dashboard"
+            android:icon="@drawable/menu_dashboard_24"
             android:title="Dashboard" />
         <item
             android:id="@+id/nav_household"
-            android:icon="@drawable/menu_household"
+            android:icon="@drawable/menu_household_24"
             android:title="Households" />
         <item
             android:id="@+id/nav_targeting"
-            android:icon="@drawable/menu_targeting"
+            android:icon="@drawable/menu_targeting_24"
             android:title="Targeting" />
 
         <item
             android:id="@+id/nav_non_consenting"
-            android:icon="@drawable/menu_non_consenting"
+            android:icon="@drawable/menu_cancel_24"
             android:title="Non-consenting" />
     </group>
 
 
-        <group >
-            <item android:id="@+id/subtitle"
-                android:title="Account">
-                <menu>
-                    <item
-                        android:id="@+id/nav_profile"
-                        android:icon="@drawable/menu_profile"
-                        android:title="Profile" />
-                    <item
-                        android:id="@+id/nav_logout"
-                        android:icon="@drawable/menu_logout_24"
-                        android:title="Logout" />
-                </menu>
-            </item>
+    <group>
+        <item
+            android:id="@+id/subtitle"
+            android:title="Account">
+            <menu>
+                <item
+                    android:id="@+id/nav_profile"
+                    android:icon="@drawable/menu_profile_24"
+                    android:title="Profile" />
+                <item
+                    android:id="@+id/settingsFragment3"
+                    android:icon="@drawable/menu_settings_24"
+                    android:title="Settings" />
+                <item
+                    android:id="@+id/nav_logout"
+                    android:icon="@drawable/menu_logout_24"
+                    android:title="Logout" />
+            </menu>
+        </item>
 
-        </group>
+    </group>
 
 
 </menu>

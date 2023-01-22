@@ -34,7 +34,7 @@ buildscript {
         testExtJunitVersion = "1.1.2"
         retrofit_version = "2.9.0"
         glide_version = "4.11.0"
-        exoplayerVersion = "1.0.0-alpha03"
+        preferenceVersion = "1.2.0"
     }
 
     repositories {

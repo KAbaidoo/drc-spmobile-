@@ -5,23 +5,22 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:padding="24dp"
+    android:background="#C9F1F3F3"
     tools:context=".ui.dashboard.DashboardFragment">
 
     <GridLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:columnCount="2"
-
         android:rowCount="3">
 
         <com.google.android.material.card.MaterialCardView
             android:layout_width="152dp"
             android:layout_height="152dp"
             android:layout_margin="12dp"
-            app:cardCornerRadius="12dp"
-            app:cardElevation="3dp"
+            app:cardCornerRadius="16dp"
             app:strokeColor="@color/charcoal"
-            app:strokeWidth="1dp">
+            app:strokeWidth="0.1dp">
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -54,10 +53,10 @@
             android:layout_width="152dp"
             android:layout_height="152dp"
             android:layout_margin="12dp"
-            app:cardCornerRadius="12dp"
-            app:cardElevation="3dp"
+            app:cardCornerRadius="16dp"
+
             app:strokeColor="@color/charcoal"
-            app:strokeWidth="1dp">
+            app:strokeWidth="0.1dp">
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -90,10 +89,10 @@
             android:layout_width="152dp"
             android:layout_height="152dp"
             android:layout_margin="12dp"
-            app:cardCornerRadius="12dp"
-            app:cardElevation="3dp"
+            app:cardCornerRadius="16dp"
+
             app:strokeColor="@color/charcoal"
-            app:strokeWidth="1dp">
+            app:strokeWidth="0.1dp">
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -119,17 +118,16 @@
                     android:textAppearance="@style/TextAppearance.MaterialComponents.Body2"
                     android:textColor="?android:textColorPrimary" />
             </LinearLayout>
-
+<!--            app:cardElevation="3dp"-->
 
         </com.google.android.material.card.MaterialCardView>
         <com.google.android.material.card.MaterialCardView
             android:layout_width="152dp"
             android:layout_height="152dp"
             android:layout_margin="12dp"
-            app:cardCornerRadius="12dp"
-            app:cardElevation="3dp"
+            app:cardCornerRadius="16dp"
             app:strokeColor="@color/charcoal"
-            app:strokeWidth="1dp">
+            app:strokeWidth="0.1dp">
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -162,10 +160,10 @@
             android:layout_width="152dp"
             android:layout_height="152dp"
             android:layout_margin="12dp"
-            app:cardCornerRadius="12dp"
-            app:cardElevation="3dp"
+            app:cardCornerRadius="16dp"
+
             app:strokeColor="@color/charcoal"
-            app:strokeWidth="1dp">
+            app:strokeWidth="0.1dp">
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -198,11 +196,11 @@
             android:layout_width="152dp"
             android:layout_height="152dp"
             android:layout_margin="12dp"
-            app:cardCornerRadius="12dp"
-            app:cardElevation="3dp"
+            app:cardCornerRadius="16dp"
+
 
             app:strokeColor="@color/charcoal"
-            app:strokeWidth="1dp">
+            app:strokeWidth="0.1dp">
 
             <LinearLayout
                 android:layout_width="match_parent"

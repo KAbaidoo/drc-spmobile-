@@ -8,4 +8,6 @@
     <color name="black">#232323</color>
     <color name="charcoal">#403D3D</color>
     <color name="white">#FFFFFFFF</color>
+    <color name="shell">#E8E5E5</color>
+
 </resources>

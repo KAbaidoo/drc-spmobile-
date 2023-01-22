@@ -9,9 +9,11 @@
     tools:context=".ui.nonconsenting.forms.NonConsentingFormFragment">
 
     <ScrollView
-        android:scrollbars="none"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:scrollbars="none"
+        tools:layout_editor_absoluteX="24dp"
+        tools:layout_editor_absoluteY="-101dp">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -70,7 +72,7 @@
 
             </com.google.android.material.textfield.TextInputLayout>
 
-<!-- province and territory-->
+            <!-- province and territory-->
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -123,14 +125,15 @@
                 android:layout_height="match_parent"
                 android:layout_marginTop="16dp"
                 android:orientation="horizontal">
+
                 <com.google.android.material.textfield.TextInputLayout
 
                     style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:layout_marginEnd="8dp"
                     android:layout_weight="1"
                     android:hint="Municipality"
-                    android:layout_marginEnd="8dp"
                     android:minHeight="20dp"
                     app:boxStrokeColor="@color/design_default_color_primary"
                     app:boxStrokeWidth="2dp">
@@ -142,12 +145,13 @@
                         android:inputType="none" />
 
                 </com.google.android.material.textfield.TextInputLayout>
+
                 <com.google.android.material.textfield.TextInputLayout
 
                     style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-               android:layout_marginStart="8dp"
+                    android:layout_marginStart="8dp"
                     android:layout_weight="1"
                     android:hint="Groupment"
                     android:minHeight="20dp"
