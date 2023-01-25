@@ -54,7 +54,7 @@
             </com.google.android.material.textfield.TextInputLayout>
 
             <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/textFieldOtherReason"
+                android:id="@+id/text_field_other_reason"
                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -171,7 +171,7 @@
 
 
             <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/textFieldAddress"
+                android:id="@+id/text_field_address"
                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -190,7 +190,7 @@
             </com.google.android.material.textfield.TextInputLayout>
 
             <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/textFieldLatitude"
+                android:id="@+id/text_field_lon"
                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -207,7 +207,7 @@
             </com.google.android.material.textfield.TextInputLayout>
 
             <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/textFieldLongitude"
+                android:id="@+id/text_field_lat"
                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -232,10 +232,9 @@
                 android:orientation="horizontal">
 
                 <com.google.android.material.button.MaterialButton
-                    android:id="@+id/bottonUpdateUser"
-                    android:layout_width="108dp"
-                    android:layout_height="52dp"
-                    android:text="Register" />
+                    android:id="@+id/botton_register"
+                    style="@style/styled_button"
+                    android:text="register" />
 
             </LinearLayout>
         </LinearLayout>

@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.preference.PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context=".ui.settings.SettingsFragment">
+    <PreferenceCategory
+        app:title="Configuration">
+        <EditTextPreference
+            app:dialogTitle="Primary host url"
+            app:key="primary_host"
+            app:persistent="true"
+            app:title="Primary"
+            app:useSimpleSummaryProvider="true" />
+
+        <EditTextPreference
+
+            app:dialogTitle="Secondary host url"
+            app:key="secondary_host"
+            app:persistent="true"
+            app:title="Secondary"
+            app:useSimpleSummaryProvider="true" />
+    </PreferenceCategory>
+
+
+</androidx.preference.PreferenceScreen>

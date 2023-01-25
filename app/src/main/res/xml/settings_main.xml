@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.preference.PreferenceScreen xmlns:app="http://schemas.android.com/apk/res-auto"
+<androidx.preference.PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     tools:context=".ui.settings.SettingsFragment">
     <PreferenceCategory
@@ -11,20 +12,17 @@
             app:entries="@array/language"
             app:entryValues="@array/locales"
             app:key="language"
-            app:summary="%s"
-            app:title="language" />
+            app:useSimpleSummaryProvider="true"
+            app:title="Language" />
 
     </PreferenceCategory>
     <PreferenceCategory
         app:key="advanced_category"
         app:title="Advanced">
-        <EditTextPreference
-            app:key="host"
+        <Preference
+            app:fragment="io.bewsys.spmobile.ui.settings.HostSettingsFragment"
             app:title="Host"
-            app:persistent="true"
-            app:dialogTitle="Host server url"
-            app:defaultValue=""
-           />
+            app:summary="Configure host server urls"/>
 
         <Preference
             app:key="help"

@@ -13,7 +13,7 @@
     <fragment
         android:id="@+id/nav_household"
         android:name="io.bewsys.spmobile.ui.households.HouseholdsFragment"
-        android:label="Household"
+        android:label="Households"
         tools:layout="@layout/fragment_households" >
         <action
             android:id="@+id/action_nav_household_to_humanitarianFormFragment"
@@ -57,7 +57,15 @@
         android:label="Add humanitarian registration"
         tools:layout="@layout/fragment_humanitarian_form" />
     <fragment
-        android:id="@+id/settingsFragment3"
+        android:id="@+id/nav_settings"
         android:name="io.bewsys.spmobile.ui.settings.SettingsFragment"
-        android:label="SettingsFragment" />
+        android:label="Settings" >
+        <action
+            android:id="@+id/action_nav_settings_to_hostSettingsFragment"
+            app:destination="@id/hostSettingsFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/hostSettingsFragment"
+        android:name="io.bewsys.spmobile.ui.settings.HostSettingsFragment"
+        android:label="Host settings" />
 </navigation>
