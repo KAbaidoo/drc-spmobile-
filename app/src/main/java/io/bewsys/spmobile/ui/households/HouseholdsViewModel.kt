@@ -1,17 +1,14 @@
 package io.bewsys.spmobile.ui.households
 
-import androidx.hilt.Assisted
-import androidx.hilt.lifecycle.ViewModelInject
+
 import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import io.bewsys.spmobile.ui.nonconsenting.NonConsentingViewModel
 import kotlinx.coroutines.channels.Channel
 import kotlinx.coroutines.flow.receiveAsFlow
 import kotlinx.coroutines.launch
 
-class HouseholdsViewModel @ViewModelInject constructor(
-    @Assisted private val state: SavedStateHandle) : ViewModel() {
+class HouseholdsViewModel(private val state: SavedStateHandle) : ViewModel() {
 
     private val householdsEventChannel = Channel<HouseholdEvent>()
     val householdsEventEvent = householdsEventChannel.receiveAsFlow()
