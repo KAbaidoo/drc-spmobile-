@@ -1,0 +1,27 @@
+CREATE TABLE cbt_form_areas (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    cbt_form_id INTEGER,
+    assigned_to_type TEXT ,
+    assigned_to INTEGER ,
+    status TEXT
+);
+
+getAllCbtFormAreas:
+SELECT *
+FROM cbt_form_areas;
+
+insertCbtFormArea:
+INSERT
+INTO cbt_form_areas
+VALUES(?,?,?,?,?);
+
+getByCbtFormId:
+SELECT *
+FROM cbt_form_areas
+WHERE cbt_form_id = :cbt_form_id;
+
+
+
+
+
+

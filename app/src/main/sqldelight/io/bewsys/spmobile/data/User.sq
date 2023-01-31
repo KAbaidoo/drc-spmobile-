@@ -1,0 +1,23 @@
+CREATE TABLE users (
+    username TEXT NOT NULL PRIMARY KEY,
+    meta_data TEXT,
+    password TEXT
+ );
+
+getByUsername:
+SELECT *
+FROM users
+WHERE username = :username;
+
+getAllUsers:
+SELECT *
+FROM users;
+
+insertUser:
+INSERT OR REPLACE
+INTO users
+VALUES(?, ?, ?);
+
+deleteByUsername:
+DELETE FROM users
+WHERE username = :username;

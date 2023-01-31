@@ -1,0 +1,19 @@
+CREATE TABLE health_areas (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    name TEXT,
+    health_zone_id INTEGER
+);
+
+getByHealthZoneId:
+SELECT *
+FROM health_areas
+WHERE health_zone_id = :health_zone_id;
+
+getAllHealthAreas:
+SELECT *
+FROM health_areas;
+
+insertHealthArea:
+INSERT
+INTO health_areas
+VALUES(?,?,?);

@@ -3,8 +3,8 @@ plugins {
     id 'kotlin-android'
     id 'androidx.navigation.safeargs.kotlin'
     id 'org.jetbrains.kotlin.android'
-    id 'kotlin-parcelize'
     id 'kotlin-kapt'
+    id 'app.cash.sqldelight'
 }
 
 
@@ -43,7 +43,7 @@ android {
 
 dependencies {
     // Default dependencies
-    implementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlinVersion"
+
     implementation "androidx.core:core-ktx:$ktxVersion"
     implementation "androidx.appcompat:appcompat:$appCompatVersion"
     implementation "com.google.android.material:material:$materialVersion"
@@ -66,6 +66,9 @@ dependencies {
     // SLF4J Logger
     implementation "io.insert-koin:koin-logger-slf4j:$koin_ktor"
 
+    // SQL Delight
+    implementation "app.cash.sqldelight:android-driver:$sqldelight_version"
+    implementation "app.cash.sqldelight:coroutines-extensions:$sqldelight_version"
 
     // Lifecycle + ViewModel & LiveData
     implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:$lifecycle_version"
@@ -95,4 +98,12 @@ dependencies {
     implementation "androidx.preference:preference-ktx:$preferenceVersion"
 
 
+}
+
+sqldelight {
+    databases{
+        SPDatabase {
+            packageName = "io.bewsys.spmobile"
+        }
+    }
 }

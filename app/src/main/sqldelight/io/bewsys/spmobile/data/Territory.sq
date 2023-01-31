@@ -1,0 +1,20 @@
+CREATE TABLE territories (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    name TEXT,
+    province_id INTEGER
+);
+
+getByProvinceId:
+SELECT *
+FROM territories
+WHERE province_id = :province_id;
+
+getAllTerritoriess:
+SELECT *
+FROM territories;
+
+insertTerritory:
+INSERT
+INTO territories
+VALUES(?,?,?);
+

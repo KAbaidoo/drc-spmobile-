@@ -1,0 +1,34 @@
+CREATE TABLE non_consent_households (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    province_id INTEGER,
+    community_id INTEGER,
+    gps_longitude TEXT,
+    gps_latitude TEXT,
+    reason TEXT,
+    other_non_consent_reason TEXT,
+    status TEXT
+);
+
+getAllNonConsentHouseholds:
+SELECT *
+FROM non_consent_households;
+
+insertNonConsentHousehold:
+INSERT
+INTO non_consent_households
+VALUES(?,?,?,?,?,?,?,?);
+
+getByCommunityId:
+SELECT *
+FROM non_consent_households
+WHERE community_id = :community_id;
+
+getByProvinceId:
+SELECT *
+FROM non_consent_households
+WHERE province_id = :province_id;
+
+getByReason:
+SELECT *
+FROM non_consent_households
+WHERE reason LIKE :searchQuery;

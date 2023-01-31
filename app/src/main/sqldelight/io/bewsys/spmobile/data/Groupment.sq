@@ -1,0 +1,20 @@
+CREATE TABLE groupments (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    name TEXT,
+    community_id INTEGER
+);
+
+getByCommunityId:
+SELECT *
+FROM groupments
+WHERE community_id = :community_id;
+
+getAllGroupments:
+SELECT *
+FROM groupments;
+
+insertGroupment:
+INSERT
+INTO groupments
+VALUES(?,?,?);
+

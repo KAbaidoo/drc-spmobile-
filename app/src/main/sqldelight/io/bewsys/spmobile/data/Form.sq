@@ -1,0 +1,26 @@
+CREATE TABLE forms (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    title TEXT,
+    slug TEXT ,
+    fields TEXT,
+    collective_forms TEXT,
+    sub_forms TEXT,
+    status TEXT
+);
+
+getAllForms:
+SELECT *
+FROM forms;
+
+insertForm:
+INSERT
+INTO forms
+VALUES(?,?,?,?,?,?,?);
+
+
+
+
+
+
+
+

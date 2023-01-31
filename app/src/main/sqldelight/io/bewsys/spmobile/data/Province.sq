@@ -1,0 +1,19 @@
+CREATE TABLE provinces (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    name TEXT,
+    capital TEXT
+);
+
+getByCapital:
+SELECT *
+FROM provinces
+WHERE capital = :capital;
+
+getAllProvinces:
+SELECT *
+FROM provinces;
+
+insertProvince:
+INSERT
+INTO provinces
+VALUES(?,?,?);

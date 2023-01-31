@@ -55,8 +55,6 @@ class MainActivity : AppCompatActivity()
                 R.id.nav_logout -> Toast.makeText(this@MainActivity, "Logout clicked!", Toast.LENGTH_LONG).show()
             }
         }
-
-
     }
 
 

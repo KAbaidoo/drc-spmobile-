@@ -1,0 +1,41 @@
+CREATE TABLE household_cbt_evaluations (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+   remote_id INTEGER ,
+   household_id INTEGER,
+   cbt_form_id INTEGER,
+   cbt_form_field_id INTEGER,
+   answer TEXT,
+   status TEXT
+);
+
+
+getAllCbtEvaluations:
+SELECT *
+FROM household_cbt_evaluations;
+
+insertCbtEvaluation:
+INSERT
+INTO household_cbt_evaluations
+VALUES(?,?,?,?,?,?,?);
+
+getByRemoteId:
+SELECT *
+FROM household_cbt_evaluations
+WHERE remote_id = :remote_id;
+
+getByHouseholdId:
+SELECT *
+FROM household_cbt_evaluations
+WHERE household_id = :household_id;
+
+getByCbtFormId:
+SELECT *
+FROM household_cbt_evaluations
+WHERE cbt_form_id = :cbt_form_id;
+
+getByCbtFormFieldId:
+SELECT *
+FROM household_cbt_evaluations
+WHERE cbt_form_field_id = :cbt_form_field_id;
+
+

@@ -1,0 +1,22 @@
+CREATE TABLE communities (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    name TEXT,
+    territory_id INTEGER,
+    household_count INTEGER,
+    member_count INTEGER
+);
+
+getByTerritoryId:
+SELECT *
+FROM communities
+WHERE territory_id = :territory_id;
+
+getAllCommunities:
+SELECT *
+FROM communities;
+
+insertCommunity:
+INSERT
+INTO communities
+VALUES(?,?,?,?,?);
+

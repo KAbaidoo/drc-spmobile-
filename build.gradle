@@ -20,9 +20,15 @@ buildscript {
         espressoVersion = "3.5.1"
         fragmentVersion = "1.5.5"
         gradleVersion = "7.4.0"
+
+        // koin dependency injection
         koin_version = "3.3.2"
         koin_android_version = "3.3.2"
         koin_ktor = "3.3.0"
+
+        // SQLDelight database
+        sqldelight_version = "2.0.0-alpha05"
+
         junitVersion = "4.13.2"
         kotlinVersion = "1.7.21"
         ktxVersion = "1.9.0"
@@ -32,7 +38,6 @@ buildscript {
         cardviewVersion = "1.0.0"
         navigation_version = "2.5.3"
         testExtJunitVersion = "1.1.5"
-
         glide_version = "4.11.0"
         preferenceVersion = "1.2.0"
     }
@@ -47,7 +52,7 @@ buildscript {
         classpath "com.android.tools.build:gradle:$gradleVersion"
         classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlinVersion"
         classpath "androidx.navigation:navigation-safe-args-gradle-plugin:$navigation_version"
-
+        classpath "app.cash.sqldelight:gradle-plugin:$sqldelight_version"
     }
 }
 

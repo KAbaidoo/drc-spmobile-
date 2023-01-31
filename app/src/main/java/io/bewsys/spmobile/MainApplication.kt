@@ -1,9 +1,8 @@
 package io.bewsys.spmobile
 
 import android.app.Application
-import io.bewsys.spmobile.di.viewModelKoinModule
+import io.bewsys.spmobile.di.appModule
 import org.koin.android.ext.koin.androidContext
-import org.koin.android.ext.koin.androidLogger
 import org.koin.core.context.GlobalContext.startKoin
 
 
@@ -13,7 +12,7 @@ class MainApplication : Application() {
 
         startKoin{
             androidContext(this@MainApplication)
-            modules(viewModelKoinModule)
+            modules(appModule)
         }
     }
 }
