@@ -5,6 +5,7 @@ import android.util.Log
 import android.view.View
 import android.widget.ArrayAdapter
 import android.widget.AutoCompleteTextView
+import androidx.core.widget.doOnTextChanged
 import androidx.fragment.app.Fragment
 import io.bewsys.spmobile.R
 import org.koin.androidx.viewmodel.ext.android.viewModel
@@ -98,11 +99,18 @@ class AddNonConsentingHouseholdFragment : Fragment(R.layout.fragment_non_consent
                     }
                 }
             }
+            textFieldOtherReason.editText?.doOnTextChanged{ text,_,_,_ ->
+                viewModel.otherReason = text.toString()
+            }
+            textFieldAddress.editText?.doOnTextChanged{ text,_,_,_ ->
+                viewModel.otherReason = text.toString()
+            }
+
             buttonRegister.setOnClickListener {
-                viewModel.otherReason = textFieldOtherReason.editText?.text.toString()
-                viewModel.address = textFieldAddress.editText?.text.toString()
-                viewModel.lon = textFieldLon.editText?.text.toString()
-                viewModel.lat = textFieldLat.editText?.text.toString()
+
+//                viewModel.lon = textFieldLon.editText?.text.toString()
+//                viewModel.lat = textFieldLat.editText?.text.toString()
+
                 viewModel.onRegisterClicked()
             }
 
