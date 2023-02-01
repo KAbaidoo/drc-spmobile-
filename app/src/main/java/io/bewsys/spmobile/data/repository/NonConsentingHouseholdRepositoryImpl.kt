@@ -10,7 +10,7 @@ import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.withContext
 
 
-class NonConsentingHouseholdRepositoryImpl(db:Database) : NonConsentingHouseholdDataSource {
+class NonConsentingHouseholdRepositoryImpl(db:Database) : INonConsentingHouseholdRepository {
 
     private val queries = db.nonConsentHouseholdQueries
 
@@ -24,10 +24,10 @@ class NonConsentingHouseholdRepositoryImpl(db:Database) : NonConsentingHousehold
         }
 
     override suspend fun insertNonConsentingHousehold(
-        newNonConsentHousehold: NonConsentHousehold
+        newNonConsentHouseholds: NonConsentHousehold
     ): Unit = withContext(Dispatchers.IO) {
 
-        newNonConsentHousehold.apply {
+        newNonConsentHouseholds.apply {
             queries.insertNonConsentHousehold(
                 id,
                 province_id,

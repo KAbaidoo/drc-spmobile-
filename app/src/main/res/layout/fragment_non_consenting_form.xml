@@ -36,6 +36,7 @@
 
             <com.google.android.material.textfield.TextInputLayout
 
+                android:id="@+id/text_field_reason"
                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -85,6 +86,7 @@
                     style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:id="@+id/text_field_province"
                     android:layout_marginEnd="8dp"
                     android:layout_weight="1"
                     android:hint="Province"
@@ -107,6 +109,7 @@
                     style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:id="@+id/text_field_territory"
                     android:layout_marginStart="8dp"
                     android:layout_weight="1"
                     android:hint="Territory"
@@ -120,8 +123,7 @@
                         android:layout_height="wrap_content"
                         android:ellipsize="end"
                         android:inputType="none"
-                        android:singleLine="true"
-                        />
+                        android:singleLine="true" />
 
                 </com.google.android.material.textfield.TextInputLayout>
             </LinearLayout>
@@ -139,6 +141,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginEnd="8dp"
                     android:layout_weight="1"
+                    android:id="@+id/text_field_community"
                     android:hint="Community"
                     android:minHeight="20dp"
                     app:boxStrokeWidth="2dp">
@@ -158,6 +161,7 @@
                     style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:id="@+id/text_field_groupment"
                     android:layout_marginStart="8dp"
                     android:layout_weight="1"
                     android:hint="Groupment"
@@ -241,7 +245,7 @@
                 android:orientation="horizontal">
 
                 <com.google.android.material.button.MaterialButton
-                    android:id="@+id/botton_register"
+                    android:id="@+id/button_register"
                     style="@style/styled_button"
                     android:text="register" />
 

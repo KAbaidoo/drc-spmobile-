@@ -5,7 +5,7 @@ import io.bewsys.spmobile.data.model.NonConsentHousehold
 import kotlinx.coroutines.flow.Flow
 
 
-interface NonConsentingHouseholdDataSource {
+interface INonConsentingHouseholdRepository {
     suspend fun getAllNonConsentingHouseholds(): Flow<List<NonConsentHouseholdEntity>>
 
     suspend fun getNonConsentingHousehold(id: Long): NonConsentHouseholdEntity?
