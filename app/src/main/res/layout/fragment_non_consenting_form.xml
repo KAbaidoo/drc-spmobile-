@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:padding="24dp"
-    tools:context=".ui.nonconsenting.forms.NonConsentingFormFragment">
+    tools:context=".ui.nonconsenting.forms.AddNonConsentingHouseholdFragment">
 
     <ScrollView
         android:layout_width="match_parent"
@@ -42,14 +42,15 @@
                 android:layout_marginTop="16dp"
                 android:hint="Reason"
                 android:minHeight="20dp"
-                app:boxStrokeColor="@color/design_default_color_primary"
                 app:boxStrokeWidth="2dp">
 
                 <AutoCompleteTextView
                     android:id="@+id/autoCompleteTextViewReason"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:inputType="none" />
+                    android:ellipsize="end"
+                    android:inputType="none"
+                    android:singleLine="true" />
 
             </com.google.android.material.textfield.TextInputLayout>
 
@@ -61,7 +62,7 @@
                 android:layout_marginTop="16dp"
                 android:hint="If other reason, indicate here"
                 android:minHeight="20dp"
-                app:boxStrokeColor="@color/design_default_color_primary"
+
                 app:boxStrokeWidth="2dp">
 
                 <com.google.android.material.textfield.TextInputEditText
@@ -88,14 +89,16 @@
                     android:layout_weight="1"
                     android:hint="Province"
                     android:minHeight="20dp"
-                    app:boxStrokeColor="@color/design_default_color_primary"
+
                     app:boxStrokeWidth="2dp">
 
                     <AutoCompleteTextView
                         android:id="@+id/autoCompleteTextViewProvince"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:inputType="none" />
+                        android:ellipsize="end"
+                        android:inputType="none"
+                        android:singleLine="true" />
 
                 </com.google.android.material.textfield.TextInputLayout>
 
@@ -108,14 +111,17 @@
                     android:layout_weight="1"
                     android:hint="Territory"
                     android:minHeight="20dp"
-                    app:boxStrokeColor="@color/design_default_color_primary"
+
                     app:boxStrokeWidth="2dp">
 
                     <AutoCompleteTextView
                         android:id="@+id/autoCompleteTextViewTerritory"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:inputType="none" />
+                        android:ellipsize="end"
+                        android:inputType="none"
+                        android:singleLine="true"
+                        />
 
                 </com.google.android.material.textfield.TextInputLayout>
             </LinearLayout>
@@ -133,16 +139,17 @@
                     android:layout_height="wrap_content"
                     android:layout_marginEnd="8dp"
                     android:layout_weight="1"
-                    android:hint="Municipality"
+                    android:hint="Community"
                     android:minHeight="20dp"
-                    app:boxStrokeColor="@color/design_default_color_primary"
                     app:boxStrokeWidth="2dp">
 
                     <AutoCompleteTextView
-                        android:id="@+id/autoCompleteTextViewMunicipality"
+                        android:id="@+id/autoCompleteTextViewCommunity"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:inputType="none" />
+                        android:ellipsize="end"
+                        android:inputType="none"
+                        android:singleLine="true" />
 
                 </com.google.android.material.textfield.TextInputLayout>
 
@@ -155,14 +162,16 @@
                     android:layout_weight="1"
                     android:hint="Groupment"
                     android:minHeight="20dp"
-                    app:boxStrokeColor="@color/design_default_color_primary"
+
                     app:boxStrokeWidth="2dp">
 
                     <AutoCompleteTextView
                         android:id="@+id/autoCompleteTextGroupment"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:inputType="none" />
+                        android:ellipsize="end"
+                        android:inputType="none"
+                        android:singleLine="true" />
 
                 </com.google.android.material.textfield.TextInputLayout>
 
@@ -178,7 +187,7 @@
                 android:layout_marginTop="8dp"
                 android:hint="Address"
                 android:minHeight="20dp"
-                app:boxStrokeColor="@color/design_default_color_primary"
+
                 app:boxStrokeWidth="2dp">
 
                 <com.google.android.material.textfield.TextInputEditText
@@ -197,7 +206,7 @@
                 android:layout_marginTop="16dp"
                 android:enabled="false"
                 android:minHeight="20dp"
-                app:boxStrokeColor="@color/design_default_color_primary"
+
                 app:boxStrokeWidth="2dp">
 
                 <com.google.android.material.textfield.TextInputEditText
@@ -214,7 +223,7 @@
                 android:layout_marginTop="16dp"
                 android:enabled="false"
                 android:minHeight="20dp"
-                app:boxStrokeColor="@color/design_default_color_primary"
+
                 app:boxStrokeWidth="2dp">
 
                 <com.google.android.material.textfield.TextInputEditText

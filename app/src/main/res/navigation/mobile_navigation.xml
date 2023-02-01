@@ -43,7 +43,7 @@
         tools:layout="@layout/fragment_profile" />
     <fragment
         android:id="@+id/nonConsentingFormFragment"
-        android:name="io.bewsys.spmobile.ui.nonconsenting.forms.NonConsentingFormFragment"
+        android:name="io.bewsys.spmobile.ui.nonconsenting.forms.AddNonConsentingHouseholdFragment"
         android:label="Add non-consenting household"
         tools:layout="@layout/fragment_non_consenting_form" />
     <fragment

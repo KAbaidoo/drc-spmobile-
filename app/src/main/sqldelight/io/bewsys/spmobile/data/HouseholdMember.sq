@@ -1,0 +1,47 @@
+CREATE TABLE  household_members (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    remote_id INTEGER,
+    firstname TEXT,
+    lastname TEXT,
+    middlename TEXT,
+    age TEXT,
+    profile_picture TEXT ,
+    sex TEXT,
+    date_of_birth TEXT,
+    age_known TEXT ,
+    dob_known TEXT ,
+    is_head INTEGER DEFAULT 0 NOT NULL ,
+    is_member_respondent INTEGER DEFAULT 0 NOT NULL,
+    family_bond_id INTEGER,
+    marital_status_id INTEGER,
+    birth_certificate INTEGER,
+    educational_level_id INTEGER,
+    school_attendance_id INTEGER,
+    pregnancy_status TEXT,
+    disability_id INTEGER,
+    socio_professional_category_id INTEGER,
+    sector_of_work_id INTEGER,
+    household_id INTEGER,
+    status TEXT
+    );
+
+getAllHouseholdMembers:
+SELECT *
+FROM household_members;
+
+insertCbtEvaluation:
+INSERT
+INTO household_members
+VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?);
+
+getByRemoteId:
+SELECT *
+FROM household_members
+WHERE remote_id = :remote_id;
+
+getByHouseholdId:
+SELECT *
+FROM household_members
+WHERE household_id = :household_id;
+
+
