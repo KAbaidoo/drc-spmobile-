@@ -1,4 +1,4 @@
-CREATE TABLE  household_members (
+CREATE TABLE  householdMember (
     id INTEGER PRIMARY KEY AUTOINCREMENT,
     remote_id INTEGER,
     firstname TEXT,
@@ -27,21 +27,21 @@ CREATE TABLE  household_members (
 
 getAllHouseholdMembers:
 SELECT *
-FROM household_members;
+FROM householdMember;
 
 insertCbtEvaluation:
 INSERT
-INTO household_members
+INTO householdMember
 VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?);
 
 getByRemoteId:
 SELECT *
-FROM household_members
+FROM householdMember
 WHERE remote_id = :remote_id;
 
 getByHouseholdId:
 SELECT *
-FROM household_members
+FROM householdMember
 WHERE household_id = :household_id;
 
 

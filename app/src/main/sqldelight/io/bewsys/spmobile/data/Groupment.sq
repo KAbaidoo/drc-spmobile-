@@ -1,4 +1,4 @@
-CREATE TABLE groupments (
+CREATE TABLE groupment (
     id INTEGER PRIMARY KEY AUTOINCREMENT,
     name TEXT,
     community_id INTEGER
@@ -6,15 +6,15 @@ CREATE TABLE groupments (
 
 getByCommunityId:
 SELECT *
-FROM groupments
+FROM groupment
 WHERE community_id = :community_id;
 
 getAllGroupments:
 SELECT *
-FROM groupments;
+FROM groupment;
 
 insertGroupment:
 INSERT
-INTO groupments
+INTO groupment
 VALUES(?,?,?);
 

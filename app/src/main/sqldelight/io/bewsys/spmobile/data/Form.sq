@@ -1,4 +1,4 @@
-CREATE TABLE forms (
+CREATE TABLE form (
     id INTEGER PRIMARY KEY AUTOINCREMENT,
     title TEXT,
     slug TEXT ,
@@ -10,11 +10,11 @@ CREATE TABLE forms (
 
 getAllForms:
 SELECT *
-FROM forms;
+FROM form;
 
 insertForm:
 INSERT
-INTO forms
+INTO form
 VALUES(?,?,?,?,?,?,?);
 
 

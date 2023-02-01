@@ -1,4 +1,4 @@
-CREATE TABLE household_cbt_evaluations (
+CREATE TABLE householdCbtEvaluations (
     id INTEGER PRIMARY KEY AUTOINCREMENT,
    remote_id INTEGER ,
    household_id INTEGER,
@@ -11,31 +11,31 @@ CREATE TABLE household_cbt_evaluations (
 
 getAllCbtEvaluations:
 SELECT *
-FROM household_cbt_evaluations;
+FROM householdCbtEvaluations;
 
 insertCbtEvaluation:
 INSERT
-INTO household_cbt_evaluations
+INTO householdCbtEvaluations
 VALUES(?,?,?,?,?,?,?);
 
 getByRemoteId:
 SELECT *
-FROM household_cbt_evaluations
+FROM householdCbtEvaluations
 WHERE remote_id = :remote_id;
 
 getByHouseholdId:
 SELECT *
-FROM household_cbt_evaluations
+FROM householdCbtEvaluations
 WHERE household_id = :household_id;
 
 getByCbtFormId:
 SELECT *
-FROM household_cbt_evaluations
+FROM householdCbtEvaluations
 WHERE cbt_form_id = :cbt_form_id;
 
 getByCbtFormFieldId:
 SELECT *
-FROM household_cbt_evaluations
+FROM householdCbtEvaluations
 WHERE cbt_form_field_id = :cbt_form_field_id;
 
 

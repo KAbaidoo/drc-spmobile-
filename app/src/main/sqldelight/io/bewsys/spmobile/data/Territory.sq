@@ -1,4 +1,4 @@
-CREATE TABLE territories (
+CREATE TABLE territory (
     id INTEGER PRIMARY KEY AUTOINCREMENT,
     name TEXT,
     province_id INTEGER
@@ -6,15 +6,15 @@ CREATE TABLE territories (
 
 getByProvinceId:
 SELECT *
-FROM territories
+FROM territory
 WHERE province_id = :province_id;
 
 getAllTerritoriess:
 SELECT *
-FROM territories;
+FROM territory;
 
 insertTerritory:
 INSERT
-INTO territories
+INTO territory
 VALUES(?,?,?);
 

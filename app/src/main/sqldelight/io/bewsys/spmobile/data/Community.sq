@@ -1,22 +1,36 @@
-CREATE TABLE communities (
-    id INTEGER PRIMARY KEY AUTOINCREMENT,
+CREATE TABLE communityEntity (
+    id INTEGER NOT NULL PRIMARY KEY,
     name TEXT,
     territory_id INTEGER,
     household_count INTEGER,
     member_count INTEGER
 );
 
+INSERT INTO communityEntity (name, territory_id,household_count,member_count) VALUES ('Community 1',1,10,1);
+INSERT INTO communityEntity (name, territory_id,household_count,member_count) VALUES ('Community 2',2,10,1);
+INSERT INTO communityEntity (name, territory_id,household_count,member_count) VALUES ('Community 3',3,10,1);
+INSERT INTO communityEntity (name, territory_id,household_count,member_count) VALUES ('Community 4',4,10,1);
+
 getByTerritoryId:
 SELECT *
-FROM communities
+FROM communityEntity
 WHERE territory_id = :territory_id;
 
 getAllCommunities:
 SELECT *
-FROM communities;
+FROM communityEntity;
 
 insertCommunity:
 INSERT
-INTO communities
+INTO communityEntity
 VALUES(?,?,?,?,?);
 
+getById:
+SELECT *
+FROM communityEntity
+WHERE id = :id;
+
+getByName:
+SELECT *
+FROM communityEntity
+WHERE name LIKE ('%'||:query||'%') ;

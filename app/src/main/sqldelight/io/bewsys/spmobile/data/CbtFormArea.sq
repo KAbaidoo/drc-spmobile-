@@ -1,4 +1,4 @@
-CREATE TABLE cbt_form_areas (
+CREATE TABLE cbtFormAreas (
     id INTEGER PRIMARY KEY AUTOINCREMENT,
     cbt_form_id INTEGER,
     assigned_to_type TEXT ,
@@ -8,16 +8,16 @@ CREATE TABLE cbt_form_areas (
 
 getAllCbtFormAreas:
 SELECT *
-FROM cbt_form_areas;
+FROM cbtFormAreas;
 
 insertCbtFormArea:
 INSERT
-INTO cbt_form_areas
+INTO cbtFormAreas
 VALUES(?,?,?,?,?);
 
 getByCbtFormId:
 SELECT *
-FROM cbt_form_areas
+FROM cbtFormAreas
 WHERE cbt_form_id = :cbt_form_id;
 
 

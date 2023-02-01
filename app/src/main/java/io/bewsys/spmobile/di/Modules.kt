@@ -2,7 +2,7 @@ package io.bewsys.spmobile.di
 
 import app.cash.sqldelight.db.SqlDriver
 import app.cash.sqldelight.driver.android.AndroidSqliteDriver
-import io.bewsys.spmobile.SPDatabase
+import io.bewsys.spmobile.Database
 import io.bewsys.spmobile.ui.dashboard.DashboardViewModel
 import io.bewsys.spmobile.ui.households.HouseholdsViewModel
 import io.bewsys.spmobile.ui.nonconsenting.NonConsentingViewModel
@@ -14,8 +14,8 @@ import org.koin.dsl.module
 
 val appModule = module {
 
-    single<SqlDriver> { AndroidSqliteDriver(SPDatabase.Schema,androidContext(),"sp.db") }
-    single { SPDatabase(get()) }
+    single<SqlDriver> { AndroidSqliteDriver(Database.Schema,androidContext(),"sp.db") }
+    single { Database(get()) }
 
     viewModel { DashboardViewModel(get()) }
     viewModel { HouseholdsViewModel(get()) }

@@ -1,4 +1,4 @@
-CREATE TABLE users (
+CREATE TABLE user (
     username TEXT NOT NULL PRIMARY KEY,
     meta_data TEXT,
     password TEXT
@@ -6,18 +6,18 @@ CREATE TABLE users (
 
 getByUsername:
 SELECT *
-FROM users
+FROM user
 WHERE username = :username;
 
 getAllUsers:
 SELECT *
-FROM users;
+FROM user;
 
 insertUser:
 INSERT OR REPLACE
-INTO users
+INTO user
 VALUES(?, ?, ?);
 
 deleteByUsername:
-DELETE FROM users
+DELETE FROM user
 WHERE username = :username;

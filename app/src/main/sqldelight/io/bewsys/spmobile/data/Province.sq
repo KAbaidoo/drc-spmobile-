@@ -1,19 +1,35 @@
-CREATE TABLE provinces (
+CREATE TABLE provinceEntity (
     id INTEGER PRIMARY KEY AUTOINCREMENT,
     name TEXT,
     capital TEXT
 );
 
+INSERT INTO provinceEntity (name, capital) VALUES ('Province 1','capital 1');
+INSERT INTO provinceEntity (name, capital) VALUES ('Province 2','capital 2');
+INSERT INTO provinceEntity (name, capital) VALUES ('Province 3','capital 3');
+INSERT INTO provinceEntity (name, capital) VALUES ('Province 4','capital 4');
+
+
 getByCapital:
 SELECT *
-FROM provinces
+FROM provinceEntity
 WHERE capital = :capital;
 
 getAllProvinces:
 SELECT *
-FROM provinces;
+FROM provinceEntity;
 
 insertProvince:
 INSERT
-INTO provinces
+INTO provinceEntity
 VALUES(?,?,?);
+
+getById:
+SELECT *
+FROM provinceEntity
+WHERE id = :id;
+
+getByName:
+SELECT *
+FROM provinceEntity
+WHERE name LIKE ('%'||:query||'%') ;

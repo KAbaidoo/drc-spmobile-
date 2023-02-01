@@ -67,7 +67,7 @@ dependencies {
     // SLF4J Logger
     implementation "io.insert-koin:koin-logger-slf4j:$koin_ktor"
 
-    // SQL Delight
+//     SQL Delight
     implementation "app.cash.sqldelight:android-driver:$sqldelight_version"
     implementation "app.cash.sqldelight:coroutines-extensions:$sqldelight_version"
 
@@ -103,7 +103,7 @@ dependencies {
 
 sqldelight {
     databases{
-        SPDatabase {
+        Database {
             packageName = "io.bewsys.spmobile"
         }
     }
