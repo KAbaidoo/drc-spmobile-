@@ -100,10 +100,10 @@ class AddNonConsentingHouseholdFragment : Fragment(R.layout.fragment_non_consent
                 }
             }
             textFieldOtherReason.editText?.doOnTextChanged{ text,_,_,_ ->
-                viewModel.otherReason = text.toString()
+                viewModel.otherReason = text as String
             }
             textFieldAddress.editText?.doOnTextChanged{ text,_,_,_ ->
-                viewModel.otherReason = text.toString()
+                viewModel.address = text as String
             }
 
             buttonRegister.setOnClickListener {
