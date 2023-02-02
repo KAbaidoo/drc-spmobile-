@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:padding="24dp"
-    android:background="#C9F1F3F3"
+    android:background="@color/shell"
     tools:context=".ui.dashboard.DashboardFragment">
 
     <GridLayout

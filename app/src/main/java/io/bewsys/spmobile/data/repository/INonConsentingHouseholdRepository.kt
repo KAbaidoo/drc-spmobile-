@@ -11,6 +11,6 @@ interface INonConsentingHouseholdRepository {
     suspend fun getNonConsentingHousehold(id: Long): NonConsentHouseholdEntity?
 
     suspend fun insertNonConsentingHousehold(
-        newNonConsentHouseholds: NonConsentHousehold
+        newNonConsentingHouseholds: NonConsentHousehold
     ):Unit
 }

@@ -1,8 +1,6 @@
-package io.bewsys.spmobile.ui.nonconsenting.forms
+package io.bewsys.spmobile.ui.nonconsenting.form
 
-import android.util.Log
 import androidx.lifecycle.*
-import app.cash.sqldelight.db.QueryResult.Unit.value
 import io.bewsys.spmobile.data.CommunityEntity
 import io.bewsys.spmobile.data.ProvinceEntity
 import io.bewsys.spmobile.data.model.NonConsentHousehold
@@ -115,6 +113,7 @@ class AddNonConsentingHouseholdViewModel(
         provinceRepositoryImpl.getByName(it)
     }
 
+
     fun getProvinceId() {
         viewModelScope.launch {
             provinceQuery.collect {
@@ -136,7 +135,7 @@ class AddNonConsentingHouseholdViewModel(
     }
 
     fun onRegisterClicked() {
-        if (reason.isBlank() || otherReason.isBlank() || province.isBlank() || territory.isBlank() || community.isBlank() || groupment.isBlank() || address.isBlank() /*|| lon.isBlank() || lat.isBlank()*/) {
+        if (reason.isBlank() || otherReason.isBlank() || province.isBlank() || territory.isBlank() || community.isBlank() || groupment.isBlank() || address.isBlank()) {
             showInvalidInputMessage()
             return
         } else {
@@ -170,10 +169,12 @@ class AddNonConsentingHouseholdViewModel(
     private fun showInvalidInputMessage() = viewModelScope.launch {
         addNonConsentingHouseholdChannel.send(
             AddNonConsentingHouseholdEvent.ShowInvalidInputMessage(
-                "One or more text fields might be empty!"
+                "One or more fields empty!"
             )
         )
     }
+
+
 
 
     sealed class AddNonConsentingHouseholdEvent {

@@ -9,7 +9,7 @@ import io.bewsys.spmobile.data.repository.ProvinceRepositoryImpl
 import io.bewsys.spmobile.ui.dashboard.DashboardViewModel
 import io.bewsys.spmobile.ui.households.HouseholdsViewModel
 import io.bewsys.spmobile.ui.nonconsenting.NonConsentingViewModel
-import io.bewsys.spmobile.ui.nonconsenting.forms.AddNonConsentingHouseholdViewModel
+import io.bewsys.spmobile.ui.nonconsenting.form.AddNonConsentingHouseholdViewModel
 import io.bewsys.spmobile.ui.profile.ProfileViewModel
 import io.bewsys.spmobile.ui.targeting.TargetingViewModel
 import org.koin.android.ext.koin.androidContext
@@ -27,7 +27,7 @@ val appModule = module {
 
     viewModel { DashboardViewModel(get()) }
     viewModel { HouseholdsViewModel(get()) }
-    viewModel { NonConsentingViewModel(get()) }
+    viewModel { NonConsentingViewModel(get(),get(),get()) }
     viewModel { ProfileViewModel(get()) }
     viewModel { TargetingViewModel(get()) }
     viewModel { ProfileViewModel(get()) }

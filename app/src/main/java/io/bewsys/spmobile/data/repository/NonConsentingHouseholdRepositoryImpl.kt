@@ -24,10 +24,10 @@ class NonConsentingHouseholdRepositoryImpl(db:Database) : INonConsentingHousehol
         }
 
     override suspend fun insertNonConsentingHousehold(
-        newNonConsentHouseholds: NonConsentHousehold
+        newNonConsentingHouseholds: NonConsentHousehold
     ): Unit = withContext(Dispatchers.IO) {
 
-        newNonConsentHouseholds.apply {
+        newNonConsentingHouseholds.apply {
             queries.insertNonConsentHousehold(
                 id,
                 province_id,

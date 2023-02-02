@@ -66,4 +66,4 @@ class MainActivity : AppCompatActivity()
 
 }
 const val ADD_NON_CONSENTING_HOUSEHOLD_RESULT_OK = Activity.RESULT_FIRST_USER
-//const val EDIT_TASK_RESULT_OK = Activity.RESULT_FIRST_USER + 1
+//const val EDIT_NON_CONSENTING_HOUSEHOLD_RESULT_OK = Activity.RESULT_FIRST_USER + 1

@@ -1,15 +1,20 @@
-package io.bewsys.spmobile.ui.nonconsenting.forms
+package io.bewsys.spmobile.ui.nonconsenting.form
 
 import android.os.Bundle
-import android.util.Log
 import android.view.View
 import android.widget.ArrayAdapter
 import android.widget.AutoCompleteTextView
-import androidx.core.widget.doOnTextChanged
+import androidx.core.os.bundleOf
+import androidx.core.widget.addTextChangedListener
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.setFragmentResult
+import androidx.lifecycle.lifecycleScope
+import androidx.navigation.fragment.findNavController
+import com.google.android.material.snackbar.Snackbar
 import io.bewsys.spmobile.R
 import org.koin.androidx.viewmodel.ext.android.viewModel
 import io.bewsys.spmobile.databinding.FragmentNonConsentingFormBinding
+import io.bewsys.spmobile.util.exhaustive
 
 class AddNonConsentingHouseholdFragment : Fragment(R.layout.fragment_non_consenting_form) {
 
@@ -55,8 +60,8 @@ class AddNonConsentingHouseholdFragment : Fragment(R.layout.fragment_non_consent
             (autoCompleteTextViewReason as? AutoCompleteTextView)?.apply {
                 setAdapter(
                     ArrayAdapter(context, dropdownLayout, reasons).also {
-                        setOnItemClickListener { _, _, _,_ ->
-                            viewModel.reason = textFieldReason.editText?.text.toString()
+                        addTextChangedListener {
+                            viewModel.reason = it.toString()
                         }
                     }
                 )
@@ -64,8 +69,8 @@ class AddNonConsentingHouseholdFragment : Fragment(R.layout.fragment_non_consent
             (autoCompleteTextViewProvince as? AutoCompleteTextView)?.apply {
                 setAdapter(
                     ArrayAdapter(context, dropdownLayout, provinces).also {
-                        setOnItemClickListener { _, _, _, _ ->
-                            viewModel.province = textFieldProvince.editText?.text.toString()
+                        addTextChangedListener {
+                            viewModel.province = it.toString()
                             viewModel.getProvinceId()
                         }
                     }
@@ -74,8 +79,8 @@ class AddNonConsentingHouseholdFragment : Fragment(R.layout.fragment_non_consent
             (autoCompleteTextViewCommunity as? AutoCompleteTextView)?.apply {
                 setAdapter(
                     ArrayAdapter(context, dropdownLayout, communities).also {
-                        setOnItemClickListener { _, _, _, _ ->
-                            viewModel.community = textFieldCommunity.editText?.text.toString()
+                        addTextChangedListener {
+                            viewModel.community = it.toString()
                             viewModel.getCommunityId()
                         }
                     }
@@ -85,25 +90,28 @@ class AddNonConsentingHouseholdFragment : Fragment(R.layout.fragment_non_consent
                 setAdapter(
                     ArrayAdapter(context, dropdownLayout, territories)
                 ).also {
-                    setOnItemClickListener { _, _, _, _ ->
-                        viewModel.territory = textFieldTerritory.editText?.text.toString()
+                    addTextChangedListener {
+                        viewModel.territory = it.toString()
                     }
                 }
             }
             (autoCompleteTextGroupment as? AutoCompleteTextView)?.apply {
                 setAdapter(
                     ArrayAdapter(context, dropdownLayout, groupment)
-                ).also {
-                    setOnItemClickListener { _, _, _, _ ->
-                        viewModel.groupment = textFieldGroupment.editText?.text.toString()
+                ).also { addTextChangedListener {
+                        viewModel.groupment = it.toString()
                     }
                 }
             }
-            textFieldOtherReason.editText?.doOnTextChanged{ text,_,_,_ ->
-                viewModel.otherReason = text as String
+            textFieldOtherReason.editText?.addTextChangedListener {
+                viewModel.reason = it.toString()
             }
-            textFieldAddress.editText?.doOnTextChanged{ text,_,_,_ ->
-                viewModel.address = text as String
+
+            textFieldAddress.editText?.addTextChangedListener {
+                viewModel.address = it.toString()
+            }
+            textFieldOtherReason.editText?.addTextChangedListener {
+                viewModel.otherReason = it.toString()
             }
 
             buttonRegister.setOnClickListener {
@@ -114,6 +122,26 @@ class AddNonConsentingHouseholdFragment : Fragment(R.layout.fragment_non_consent
                 viewModel.onRegisterClicked()
             }
 
+        }
+
+        viewLifecycleOwner.lifecycleScope.launchWhenStarted {
+            viewModel.addNonConsentingHouseholdEvent.collect{
+                event ->
+                when (event){
+                    is AddNonConsentingHouseholdViewModel.AddNonConsentingHouseholdEvent.ShowInvalidInputMessage ->
+                    {
+                        Snackbar.make(requireView(),event.msg, Snackbar.LENGTH_LONG).show()
+                    }
+                    is AddNonConsentingHouseholdViewModel.AddNonConsentingHouseholdEvent.NavigateBackWithResults -> {
+
+                        setFragmentResult(
+                            "add_non_consenting_household_request",
+                            bundleOf("add_non_consenting_household_result" to event.results)
+                        )
+                        findNavController().popBackStack()
+                    }
+                }.exhaustive
+            }
         }
 
     }

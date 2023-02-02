@@ -5,13 +5,14 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:padding="24dp"
-    tools:context=".ui.nonconsenting.forms.AddNonConsentingHouseholdFragment">
+
+    tools:context=".ui.nonconsenting.form.AddNonConsentingHouseholdFragment">
 
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:scrollbars="none"
+        android:padding="24dp"
         tools:layout_editor_absoluteX="24dp"
         tools:layout_editor_absoluteY="-101dp">
 
@@ -78,15 +79,15 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
+                android:layout_marginTop="8dp"
                 android:orientation="horizontal">
 
                 <com.google.android.material.textfield.TextInputLayout
 
+                    android:id="@+id/text_field_province"
                     style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:id="@+id/text_field_province"
                     android:layout_marginEnd="8dp"
                     android:layout_weight="1"
                     android:hint="Province"
@@ -106,10 +107,10 @@
 
                 <com.google.android.material.textfield.TextInputLayout
 
+                    android:id="@+id/text_field_territory"
                     style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:id="@+id/text_field_territory"
                     android:layout_marginStart="8dp"
                     android:layout_weight="1"
                     android:hint="Territory"
@@ -136,12 +137,12 @@
 
                 <com.google.android.material.textfield.TextInputLayout
 
+                    android:id="@+id/text_field_community"
                     style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginEnd="8dp"
                     android:layout_weight="1"
-                    android:id="@+id/text_field_community"
                     android:hint="Community"
                     android:minHeight="20dp"
                     app:boxStrokeWidth="2dp">
@@ -158,10 +159,10 @@
 
                 <com.google.android.material.textfield.TextInputLayout
 
+                    android:id="@+id/text_field_groupment"
                     style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:id="@+id/text_field_groupment"
                     android:layout_marginStart="8dp"
                     android:layout_weight="1"
                     android:hint="Groupment"
@@ -241,6 +242,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
+                android:layout_marginBottom="24dp"
                 android:gravity="end"
                 android:orientation="horizontal">
 
