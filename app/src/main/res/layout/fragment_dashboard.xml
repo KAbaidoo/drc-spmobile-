@@ -4,39 +4,32 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:padding="24dp"
     android:background="@color/shell"
+    android:padding="24dp"
     tools:context=".ui.dashboard.DashboardFragment">
-
     <GridLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:columnCount="2"
         android:rowCount="3">
-
         <com.google.android.material.card.MaterialCardView
             android:layout_width="152dp"
             android:layout_height="152dp"
             android:layout_margin="12dp"
             app:cardCornerRadius="16dp"
-            app:strokeColor="@color/charcoal"
-            app:strokeWidth="0.1dp">
-
+            app:cardElevation="3dp">
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:orientation="vertical">
-
                 <TextView
-
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="0"
                     android:textAlignment="center"
                     android:textAppearance="@style/TextAppearance.MaterialComponents.Headline6"
                     android:textColor="?android:textColorPrimary" />
-
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -46,33 +39,26 @@
                     android:textAppearance="@style/TextAppearance.MaterialComponents.Body2"
                     android:textColor="?android:textColorPrimary" />
             </LinearLayout>
-
-
         </com.google.android.material.card.MaterialCardView>
+
         <com.google.android.material.card.MaterialCardView
             android:layout_width="152dp"
             android:layout_height="152dp"
             android:layout_margin="12dp"
             app:cardCornerRadius="16dp"
-
-            app:strokeColor="@color/charcoal"
-            app:strokeWidth="0.1dp">
-
+            app:cardElevation="3dp">
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:orientation="vertical">
-
                 <TextView
-
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="0"
                     android:textAlignment="center"
                     android:textAppearance="@style/TextAppearance.MaterialComponents.Headline6"
                     android:textColor="?android:textColorPrimary" />
-
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -82,26 +68,21 @@
                     android:textAppearance="@style/TextAppearance.MaterialComponents.Body2"
                     android:textColor="?android:textColorPrimary" />
             </LinearLayout>
-
-
         </com.google.android.material.card.MaterialCardView>
+
         <com.google.android.material.card.MaterialCardView
             android:layout_width="152dp"
             android:layout_height="152dp"
             android:layout_margin="12dp"
             app:cardCornerRadius="16dp"
-
-            app:strokeColor="@color/charcoal"
-            app:strokeWidth="0.1dp">
+            app:cardElevation="3dp">
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:orientation="vertical">
-
                 <TextView
-
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="0"
@@ -118,32 +99,27 @@
                     android:textAppearance="@style/TextAppearance.MaterialComponents.Body2"
                     android:textColor="?android:textColorPrimary" />
             </LinearLayout>
-<!--            app:cardElevation="3dp"-->
-
+            <!--            app:cardElevation="3dp"-->
         </com.google.android.material.card.MaterialCardView>
+
         <com.google.android.material.card.MaterialCardView
             android:layout_width="152dp"
             android:layout_height="152dp"
             android:layout_margin="12dp"
             app:cardCornerRadius="16dp"
-            app:strokeColor="@color/charcoal"
-            app:strokeWidth="0.1dp">
-
+            app:cardElevation="3dp">
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:orientation="vertical">
-
                 <TextView
-
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="0"
                     android:textAlignment="center"
                     android:textAppearance="@style/TextAppearance.MaterialComponents.Headline6"
                     android:textColor="?android:textColorPrimary" />
-
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -153,33 +129,26 @@
                     android:textAppearance="@style/TextAppearance.MaterialComponents.Body2"
                     android:textColor="?android:textColorPrimary" />
             </LinearLayout>
-
-
         </com.google.android.material.card.MaterialCardView>
+
         <com.google.android.material.card.MaterialCardView
             android:layout_width="152dp"
             android:layout_height="152dp"
             android:layout_margin="12dp"
             app:cardCornerRadius="16dp"
-
-            app:strokeColor="@color/charcoal"
-            app:strokeWidth="0.1dp">
-
+            app:cardElevation="3dp">
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:orientation="vertical">
-
                 <TextView
-
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="0"
                     android:textAlignment="center"
                     android:textAppearance="@style/TextAppearance.MaterialComponents.Headline6"
                     android:textColor="?android:textColorPrimary" />
-
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -189,27 +158,19 @@
                     android:textAppearance="@style/TextAppearance.MaterialComponents.Body2"
                     android:textColor="?android:textColorPrimary" />
             </LinearLayout>
-
-
         </com.google.android.material.card.MaterialCardView>
         <com.google.android.material.card.MaterialCardView
             android:layout_width="152dp"
             android:layout_height="152dp"
             android:layout_margin="12dp"
             app:cardCornerRadius="16dp"
-
-
-            app:strokeColor="@color/charcoal"
-            app:strokeWidth="0.1dp">
-
+            app:cardElevation="3dp">
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:orientation="vertical">
-
                 <TextView
-
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="0"
@@ -226,15 +187,7 @@
                     android:textAppearance="@style/TextAppearance.MaterialComponents.Body2"
                     android:textColor="?android:textColorPrimary" />
             </LinearLayout>
-
-
         </com.google.android.material.card.MaterialCardView>
-
-
     </GridLayout>
-
-
-
-
 </androidx.coordinatorlayout.widget.CoordinatorLayout>
 
