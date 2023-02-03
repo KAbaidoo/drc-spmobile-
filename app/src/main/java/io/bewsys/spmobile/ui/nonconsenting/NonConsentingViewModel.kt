@@ -1,10 +1,7 @@
 package io.bewsys.spmobile.ui.nonconsenting
 
 
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.ViewModel
-import androidx.lifecycle.viewModelScope
+import androidx.lifecycle.*
 import io.bewsys.spmobile.data.model.NonConsentHousehold
 import io.bewsys.spmobile.data.repository.CommunityRepositoryImpl
 import io.bewsys.spmobile.data.repository.NonConsentingHouseholdRepositoryImpl
@@ -32,7 +29,7 @@ class NonConsentingViewModel(
         loadNonConsentingHouseholds()
     }
 
-    private fun loadNonConsentingHouseholds() {
+ /*   private fun loadNonConsentingHouseholds() {
         viewModelScope.launch {
             nonConsentingHouseholdRepositoryImpl.getAllNonConsentingHouseholds().collectLatest {
                 _nonConsentingHouseholds.value = it.map { entity ->
@@ -51,6 +48,33 @@ class NonConsentingViewModel(
                 }
                 //add on each statement here to commit each to work manager
             }
+        }
+    }
+    */
+
+    private fun loadNonConsentingHouseholds() {
+        viewModelScope.launch {
+            nonConsentingHouseholdRepositoryImpl.getAllNonConsentingHouseholds()
+           .map { households ->
+                households.map {
+                    NonConsentHousehold(
+                        it.id,
+                        it.province_id,
+                        it.community_id,
+                        it.province_id?.let { id -> provinceRepositoryImpl.getById(id)?.name },
+                        it.community_id?.let { id -> communityRepositoryImpl.getById(id)?.name },
+                        it.gps_longitude,
+                        it.gps_latitude,
+                        it.reason,
+                        it.other_non_consent_reason,
+                        it.status
+                    )
+                }  //add on each statement here to commit each to work manager
+
+            }.collectLatest {
+                    _nonConsentingHouseholds.value = it
+            }
+
         }
     }
 
