@@ -20,7 +20,7 @@ SELECT *
 FROM provinceEntity;
 
 insertProvince:
-INSERT
+INSERT OR REPLACE
 INTO provinceEntity
 VALUES(?,?,?);
 

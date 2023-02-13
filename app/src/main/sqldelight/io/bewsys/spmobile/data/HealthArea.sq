@@ -14,6 +14,6 @@ SELECT *
 FROM healthAreas;
 
 insertHealthArea:
-INSERT
+INSERT OR REPLACE
 INTO healthAreas
 VALUES(?,?,?);

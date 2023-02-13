@@ -13,7 +13,7 @@ SELECT *
 FROM form;
 
 insertForm:
-INSERT
+INSERT OR REPLACE
 INTO form
 VALUES(?,?,?,?,?,?,?);
 

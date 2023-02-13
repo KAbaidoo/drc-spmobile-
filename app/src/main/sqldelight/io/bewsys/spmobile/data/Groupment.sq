@@ -14,7 +14,7 @@ SELECT *
 FROM groupment;
 
 insertGroupment:
-INSERT
+INSERT OR REPLACE
 INTO groupment
 VALUES(?,?,?);
 

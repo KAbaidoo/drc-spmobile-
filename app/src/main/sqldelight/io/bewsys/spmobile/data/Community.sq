@@ -21,7 +21,7 @@ SELECT *
 FROM communityEntity;
 
 insertCommunity:
-INSERT
+INSERT OR REPLACE
 INTO communityEntity
 VALUES(?,?,?,?,?);
 

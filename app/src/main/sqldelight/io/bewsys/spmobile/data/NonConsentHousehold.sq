@@ -13,6 +13,10 @@ getAllNonConsentHouseholds:
 SELECT *
 FROM nonConsentHouseholdEntity;
 
+updateNonConsentHousehold:
+UPDATE nonConsentHouseholdEntity
+SET status = :status WHERE id = :id;
+
 insertNonConsentHousehold:
 INSERT
 INTO nonConsentHouseholdEntity
@@ -37,3 +41,6 @@ getByReason:
 SELECT *
 FROM nonConsentHouseholdEntity
 WHERE reason LIKE :searchQuery;
+
+lastInsertRowId:
+SELECT last_insert_rowid();

@@ -12,11 +12,11 @@ import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import com.google.android.material.snackbar.Snackbar
 import io.bewsys.spmobile.R
+import io.bewsys.spmobile.databinding.FragmentAddNonConsentingBinding
 import org.koin.androidx.viewmodel.ext.android.viewModel
-import io.bewsys.spmobile.databinding.FragmentNonConsentingFormBinding
 import io.bewsys.spmobile.util.exhaustive
 
-class AddNonConsentingHouseholdFragment : Fragment(R.layout.fragment_non_consenting_form) {
+class AddNonConsentingHouseholdFragment : Fragment(R.layout.fragment_add_non_consenting) {
 
     private val provinces = mutableListOf<String>()
     private val communities = mutableListOf<String>()
@@ -25,7 +25,7 @@ class AddNonConsentingHouseholdFragment : Fragment(R.layout.fragment_non_consent
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        val binding = FragmentNonConsentingFormBinding.bind(view)
+        val binding =FragmentAddNonConsentingBinding.bind(view)
 
         viewModel.provinces.observe(viewLifecycleOwner) {
             it.map { provinceEntity ->
@@ -52,7 +52,6 @@ class AddNonConsentingHouseholdFragment : Fragment(R.layout.fragment_non_consent
             textFieldTerritory.editText?.setText(viewModel.territory)
             textFieldGroupment.editText?.setText(viewModel.groupment)
             textFieldOtherReason.editText?.setText(viewModel.otherReason)
-            textFieldAddress.editText?.setText(viewModel.address)
             textFieldLon.editText?.setText(viewModel.lon)
             textFieldLat.editText?.setText(viewModel.lat)
 
@@ -107,9 +106,7 @@ class AddNonConsentingHouseholdFragment : Fragment(R.layout.fragment_non_consent
                 viewModel.reason = it.toString()
             }
 
-            textFieldAddress.editText?.addTextChangedListener {
-                viewModel.address = it.toString()
-            }
+
             textFieldOtherReason.editText?.addTextChangedListener {
                 viewModel.otherReason = it.toString()
             }

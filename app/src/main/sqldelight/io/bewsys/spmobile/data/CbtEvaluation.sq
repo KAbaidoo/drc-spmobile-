@@ -14,7 +14,7 @@ SELECT *
 FROM householdCbtEvaluations;
 
 insertCbtEvaluation:
-INSERT
+INSERT OR REPLACE
 INTO householdCbtEvaluations
 VALUES(?,?,?,?,?,?,?);
 

@@ -1,7 +1,9 @@
 package io.bewsys.spmobile.data.repository
 
+import android.util.Log
 import app.cash.sqldelight.coroutines.asFlow
 import app.cash.sqldelight.coroutines.mapToList
+import app.cash.sqldelight.db.QueryResult.Unit.value
 import io.bewsys.spmobile.Database
 import io.bewsys.spmobile.data.NonConsentHouseholdEntity
 import io.bewsys.spmobile.data.model.NonConsentHousehold
@@ -10,7 +12,7 @@ import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.withContext
 
 
-class NonConsentingHouseholdRepositoryImpl(db:Database) : INonConsentingHouseholdRepository {
+class NonConsentingHouseholdRepositoryImpl(db: Database) : INonConsentingHouseholdRepository {
 
     private val queries = db.nonConsentHouseholdQueries
 
@@ -40,6 +42,15 @@ class NonConsentingHouseholdRepositoryImpl(db:Database) : INonConsentingHousehol
             )
         }
 
+    }
+
+    override suspend fun getLastInsertedRowId(): Long = withContext(Dispatchers.IO) {
+         queries.lastInsertRowId().executeAsOne()
+
+    }
+
+    override suspend fun updateStatus( status: String,id: Long) {
+        queries.updateNonConsentHousehold(status,id)
     }
 
 }

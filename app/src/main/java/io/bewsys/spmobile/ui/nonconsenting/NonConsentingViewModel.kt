@@ -29,28 +29,6 @@ class NonConsentingViewModel(
         loadNonConsentingHouseholds()
     }
 
- /*   private fun loadNonConsentingHouseholds() {
-        viewModelScope.launch {
-            nonConsentingHouseholdRepositoryImpl.getAllNonConsentingHouseholds().collectLatest {
-                _nonConsentingHouseholds.value = it.map { entity ->
-                    NonConsentHousehold(
-                        entity.id,
-                        entity.province_id,
-                        entity.community_id,
-                        entity.province_id?.let { id -> provinceRepositoryImpl.getById(id)?.name },
-                        entity.community_id?.let { id -> communityRepositoryImpl.getById(id)?.name },
-                        entity.gps_longitude,
-                        entity.gps_latitude,
-                        entity.reason,
-                        entity.other_non_consent_reason,
-                        entity.status
-                    )
-                }
-                //add on each statement here to commit each to work manager
-            }
-        }
-    }
-    */
 
     private fun loadNonConsentingHouseholds() {
         viewModelScope.launch {

@@ -6,13 +6,14 @@ plugins {
     id 'kotlin-kapt'
     id 'app.cash.sqldelight'
     id 'kotlin-parcelize'
+    id 'org.jetbrains.kotlin.plugin.serialization'
 }
 
 
 android {
     namespace 'io.bewsys.spmobile'
     compileSdkVersion rootProject.compileSdkVersion
-    buildToolsVersion "30.0.3"
+//    buildToolsVersion "30.0.3"
 
     defaultConfig {
         applicationId "io.bewsys.spmobile"
@@ -62,8 +63,10 @@ dependencies {
     implementation "io.insert-koin:koin-androidx-workmanager:$koin_android_version"
     // Navigation Graph
     implementation "io.insert-koin:koin-androidx-navigation:$koin_android_version"
+
     // Koin for Ktor
     implementation "io.insert-koin:koin-ktor:$koin_ktor"
+
     // SLF4J Logger
     implementation "io.insert-koin:koin-logger-slf4j:$koin_ktor"
 
@@ -98,11 +101,19 @@ dependencies {
 //    preference
     implementation "androidx.preference:preference-ktx:$preferenceVersion"
 
+//    ktor
+    implementation 'io.ktor:ktor-client-android:1.5.0'
+    implementation 'io.ktor:ktor-client-serialization:1.5.0'
+    implementation 'org.jetbrains.kotlinx:kotlinx-serialization-json:1.0.1'
+    implementation 'io.ktor:ktor-client-logging-jvm:1.5.0'
+
+//    workManager
+    implementation "androidx.work:work-runtime-ktx:$work_version"
 
 }
 
 sqldelight {
-    databases{
+    databases {
         Database {
             packageName = "io.bewsys.spmobile"
         }

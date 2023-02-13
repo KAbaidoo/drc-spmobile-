@@ -12,5 +12,9 @@ interface INonConsentingHouseholdRepository {
 
     suspend fun insertNonConsentingHousehold(
         newNonConsentingHouseholds: NonConsentHousehold
-    ):Unit
+    ): Unit
+
+    suspend fun getLastInsertedRowId(): Long
+
+    suspend fun updateStatus(status: String, id: Long)
 }

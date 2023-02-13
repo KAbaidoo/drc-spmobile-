@@ -41,7 +41,7 @@ class NonConsentingHouseholdAdapter(private val listener: OnItemClickListener) :
                     val position = adapterPosition
                     if (position != RecyclerView.NO_POSITION) {
                         val nonConsentingHousehold = getItem(position)
-                        listener.onItemClick(nonConsentingHousehold)
+//                        listener.onItemClick(nonConsentingHousehold)
                     }
                 }
             }
@@ -51,7 +51,7 @@ class NonConsentingHouseholdAdapter(private val listener: OnItemClickListener) :
             binding.apply {
                 textViewProvinceName.text = nonConsentingHousehold.province_name ?: ""
                 textViewCommunityName.text = nonConsentingHousehold.community_name ?: ""
-                if (!nonConsentingHousehold.status.isNullOrEmpty()) imageViewIcon.setImageResource(R.drawable.cloud_done_24)
+                if (!nonConsentingHousehold.status.isNullOrEmpty()) checkBoxIcon.isChecked = true
             }
         }
     }

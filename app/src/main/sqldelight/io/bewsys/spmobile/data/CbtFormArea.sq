@@ -11,7 +11,7 @@ SELECT *
 FROM cbtFormAreas;
 
 insertCbtFormArea:
-INSERT
+INSERT OR REPLACE
 INTO cbtFormAreas
 VALUES(?,?,?,?,?);
 

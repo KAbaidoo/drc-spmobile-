@@ -14,7 +14,7 @@ SELECT *
 FROM territory;
 
 insertTerritory:
-INSERT
+INSERT OR REPLACE
 INTO territory
 VALUES(?,?,?);
 

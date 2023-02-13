@@ -39,6 +39,42 @@
         <item>en-US</item>
         <item>fr-FR</item>
     </string-array>
+    <string-array name="short_number_list">
+        <item>0</item>
+        <item>1</item>
+        <item>2</item>
+        <item>3</item>
+        <item>4</item>
+        <item>5</item>
+        <item>6</item>
+        <item>7</item>
+    </string-array>
+    <string-array name="long_number_list">
+        <item>0</item>
+        <item>1</item>
+        <item>2</item>
+        <item>3</item>
+        <item>4</item>
+        <item>5</item>
+        <item>6</item>
+        <item>7</item>
+        <item>8</item>
+        <item>9</item>
+        <item>10</item>
+        <item>11</item>
+        <item>12</item>
+        <item>13</item>
+        <item>14</item>
+        <item>15</item>
+        <item>16</item>
+        <item>17</item>
+        <item>18</item>
+        <item>19</item>
+        <item>20</item>
+    </string-array>
+
+
+
     <string name="empty_string" />
     <string name="Failed_to_submit_email">Failed_to_submit_email</string>
     <string name="Email_submitted_successfully">Email_submitted_successfully</string>
@@ -236,7 +272,7 @@
     <string name="Failed_to_upload_non_consent_data">Failed_to_upload_non_consent_data</string>
     <string name="Non_consent_data_uploaded">Non_consent_data_uploaded</string>
     <string name="Error">Error</string>
-    <string name="Groupment">_Groupement</string>
+    <string name="Groupment">Groupement</string>
     <string name="General">_General</string>
     <string name="Emergency">_Emergency</string>
     <string name="Migration_Duration_Form">Migration_Duration_Form</string>
@@ -303,5 +339,10 @@
     <string name="Invalid_login_credentials">Invalid_login_credentials</string>
     <string name="User_logged_out_successfully">User_logged_out_successfully</string>
     <string name="Age_and_date_of_birth_do_not_tally">Age_and_date_of_birth_do_not_tally</string>
+    <string name="cloud_icon_description">cloud_icon</string>
+    <string name="zero_count">0</string>
+    <string name="territories">Territories</string>
+    <string name="hint_choose">Choose</string>
+    <string name="button_register">register</string>
 
 </resources>

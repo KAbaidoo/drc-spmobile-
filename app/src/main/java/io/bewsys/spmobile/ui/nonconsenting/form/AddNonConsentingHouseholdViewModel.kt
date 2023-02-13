@@ -1,6 +1,10 @@
 package io.bewsys.spmobile.ui.nonconsenting.form
 
+import android.app.Application
 import androidx.lifecycle.*
+import androidx.work.*
+
+import io.bewsys.spmobile.KEY_DATA_ID
 import io.bewsys.spmobile.data.CommunityEntity
 import io.bewsys.spmobile.data.ProvinceEntity
 import io.bewsys.spmobile.data.model.NonConsentHousehold
@@ -8,16 +12,21 @@ import io.bewsys.spmobile.data.repository.CommunityRepositoryImpl
 import io.bewsys.spmobile.data.repository.NonConsentingHouseholdRepositoryImpl
 import io.bewsys.spmobile.data.repository.ProvinceRepositoryImpl
 import io.bewsys.spmobile.ui.ADD_NON_CONSENTING_HOUSEHOLD_RESULT_OK
+import io.bewsys.spmobile.work.UploadWorker
 import kotlinx.coroutines.channels.Channel
 import kotlinx.coroutines.flow.*
 import kotlinx.coroutines.launch
 
+
 class AddNonConsentingHouseholdViewModel(
+    application: Application,
     private val state: SavedStateHandle,
     private val nonConsentingHouseholdRepositoryImpl: NonConsentingHouseholdRepositoryImpl,
     private val provinceRepositoryImpl: ProvinceRepositoryImpl,
     private val communityRepositoryImpl: CommunityRepositoryImpl
 ) : ViewModel() {
+    private val workManager = WorkManager.getInstance(application)
+
 
     private val _provinces = MutableLiveData<List<ProvinceEntity>>()
     val provinces: LiveData<List<ProvinceEntity>>
@@ -26,6 +35,7 @@ class AddNonConsentingHouseholdViewModel(
     private val _communities = MutableLiveData<List<CommunityEntity>>()
     val communities: LiveData<List<CommunityEntity>>
         get() = _communities
+
 
     init {
         loadProvinces()
@@ -82,11 +92,7 @@ class AddNonConsentingHouseholdViewModel(
             field = value
             state["groupment"] = value
         }
-    var address = state.get<String>("address") ?: ""
-        set(value) {
-            field = value
-            state["address"] = value
-        }
+
     var lon = state.get<String>("lon") ?: ""
         set(value) {
             field = value
@@ -135,7 +141,7 @@ class AddNonConsentingHouseholdViewModel(
     }
 
     fun onRegisterClicked() {
-        if (reason.isBlank() || otherReason.isBlank() || province.isBlank() || territory.isBlank() || community.isBlank() || groupment.isBlank() || address.isBlank()) {
+        if (reason.isBlank() || otherReason.isBlank() || province.isBlank() || territory.isBlank() || community.isBlank() || groupment.isBlank()) {
             showInvalidInputMessage()
             return
         } else {
@@ -159,12 +165,36 @@ class AddNonConsentingHouseholdViewModel(
                 newNonConsentingHousehold
             )
 
+            uploadNonConsentingHousehold(nonConsentingHouseholdRepositoryImpl.getLastInsertedRowId())
+
+//            lastly
             addNonConsentingHouseholdChannel.send(
                 AddNonConsentingHouseholdEvent.NavigateBackWithResults(
                     ADD_NON_CONSENTING_HOUSEHOLD_RESULT_OK
                 )
             )
+
         }
+
+    private fun uploadNonConsentingHousehold(itemId: Long) = viewModelScope.launch {
+
+        val constraints = Constraints.Builder()
+            .setRequiredNetworkType(NetworkType.CONNECTED)
+            .build()
+
+        val uploadRequest = OneTimeWorkRequestBuilder<UploadWorker>()
+            .setConstraints(constraints)
+            .setInputData(createInputDataForId(itemId))
+            .build()
+        workManager.enqueue(uploadRequest)
+
+    }
+
+    private fun createInputDataForId(id: Long): Data {
+        val builder = Data.Builder()
+        builder.putLong(KEY_DATA_ID, id)
+        return builder.build()
+    }
 
     private fun showInvalidInputMessage() = viewModelScope.launch {
         addNonConsentingHouseholdChannel.send(
@@ -173,8 +203,6 @@ class AddNonConsentingHouseholdViewModel(
             )
         )
     }
-
-
 
 
     sealed class AddNonConsentingHouseholdEvent {
