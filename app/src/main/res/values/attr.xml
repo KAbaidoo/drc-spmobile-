@@ -2,6 +2,7 @@
 <resources>
     <declare-styleable name="EditTextQuestion">
         <attr name="questionText" format="string" />
-        <attr name="answerText" format="string" />
+        <attr name="isEnabled" format="boolean" />
+        <attr name="android:inputType" format="integer" />
     </declare-styleable>
 </resources>

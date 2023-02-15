@@ -6,16 +6,19 @@
     xmlns:tools="http://schemas.android.com/tools"
     tools:context=".ui.targeting.TargetingFragment">
 
+
+
+
     <io.bewsys.spmobile.ui.views.EditTextQuestion
         android:id="@+id/edit_text_question"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:questionText="what is you name?"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:isEnabled="false"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"/>
-
+        app:layout_constraintTop_toTopOf="parent"
+        app:questionText="what is you name?" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
 

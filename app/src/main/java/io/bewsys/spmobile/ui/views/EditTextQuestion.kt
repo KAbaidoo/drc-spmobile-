@@ -22,20 +22,20 @@ constructor(
     private var answerView: TextInputLayout
     private var typedArray: TypedArray? = null
 
-
-
-    val answer: String
-        get() = answerView.editText?.text.toString()
+    var answer: String
+        set(value) {
+            answerView.editText?.setText(value)
+        }
+            get() = answerView.editText?.text.toString()
 
 
     init {
-
         val inflater = ctx.getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater
         inflater.inflate(R.layout.edit_text_question, this)
         questionView = findViewById(R.id.text_field_question)
         answerView = findViewById(R.id.edit_text_answer)
 
-        if(attributeSet != null){
+        if (attributeSet != null) {
             typedArray = ctx.theme.obtainStyledAttributes(
                 attributeSet,
                 R.styleable.EditTextQuestion,
@@ -43,13 +43,13 @@ constructor(
                 0
             )
             questionView.text =
-                typedArray?.getString(R.styleable.EditTextQuestion_questionText).toString()?:""
+                typedArray?.getString(R.styleable.EditTextQuestion_questionText).toString()
+            answerView.editText?.isEnabled =
+                typedArray?.getBoolean(R.styleable.EditTextQuestion_isEnabled, true) ?: true
+            answerView.editText?.inputType =
+                typedArray?.getType(R.styleable.EditTextQuestion_android_inputType) as Int
             answerView.editText?.setText("")
         }
-
-
-
-
     }
 
     fun addTextChangedListener(action: (Editable?) -> Unit) {

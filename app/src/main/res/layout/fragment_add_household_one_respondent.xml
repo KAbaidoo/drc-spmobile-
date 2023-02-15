@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:padding="8dp"
+        android:scrollbars="none">
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+
+            <TextView
+                style="@style/heading_form_sub"
+                android:text="Respondent" />
+
+            <io.bewsys.spmobile.ui.views.EditTextQuestion
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:padding="4dp"
+                app:questionText="Firstname" />
+
+            <io.bewsys.spmobile.ui.views.EditTextQuestion
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:padding="4dp"
+                app:questionText="Middlename" />
+
+            <io.bewsys.spmobile.ui.views.EditTextQuestion
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:padding="4dp"
+                app:questionText="Lastname" />
+
+            <io.bewsys.spmobile.ui.views.EditTextQuestion
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:inputType="date"
+                android:padding="4dp"
+                app:questionText="Date of birth - make date picker" />
+
+            <io.bewsys.spmobile.ui.views.EditTextQuestion
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:padding="4dp"
+                app:questionText="Family bond to head - make radio" />
+
+            <io.bewsys.spmobile.ui.views.EditTextQuestion
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:padding="4dp"
+                app:questionText="Voter ID" />
+
+            <io.bewsys.spmobile.ui.views.EditTextQuestion
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:inputType="phone"
+                android:padding="4dp"
+                app:questionText="Phone number" />
+        </LinearLayout>
+
+    </ScrollView>
+</androidx.constraintlayout.widget.ConstraintLayout>

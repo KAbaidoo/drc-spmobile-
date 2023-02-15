@@ -13,15 +13,11 @@ import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class ProfileFragment : Fragment(R.layout.fragment_profile) {
 
-
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
         val binding = FragmentProfileBinding.bind(view)
         val viewModel: ProfileViewModel by viewModel()
-
-
-
 
     }
 

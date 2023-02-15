@@ -9,4 +9,24 @@
         <item name="android:textColor">@color/black</item>
         <item name="android:backgroundTint">@color/honey_yellow</item>
     </style>
+
+    <style name="heading_form_main">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_marginTop">8dp</item>
+        <item name="android:layout_marginBottom">16dp</item>
+        <item name="android:textAlignment">center</item>
+        <item name="android:textAppearance">@style/TextAppearance.MaterialComponents.Headline3
+        </item>
+        <item name="android:textSize">20sp</item>
+    </style>
+
+    <style name="heading_form_sub">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_margin">14dp</item>
+        <item name="android:textSize">20sp</item>
+        <item name="android:textAppearance">@style/TextAppearance.MaterialComponents.Headline4
+        </item>
+    </style>
 </resources>

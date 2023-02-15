@@ -42,6 +42,7 @@ buildscript {
         preferenceVersion = "1.2.0"
 
         work_version= "2.7.1"
+        viewpager_version = "1.0.0"
     }
 
     repositories {

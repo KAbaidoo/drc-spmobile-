@@ -19,7 +19,7 @@ class TargetingFragment : Fragment(R.layout.fragment_targeting) {
 
         binding.apply {
             editTextQuestion.apply {
-                answer
+                answer="some answer"
                 addTextChangedListener {
                     viewModel.printAnswer(answer)
                 }

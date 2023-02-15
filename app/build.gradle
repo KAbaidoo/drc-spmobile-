@@ -110,6 +110,9 @@ dependencies {
 //    workManager
     implementation "androidx.work:work-runtime-ktx:$work_version"
 
+    //viewPager
+    implementation "androidx.viewpager2:viewpager2:$viewpager_version"
+
 }
 
 sqldelight {
