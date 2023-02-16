@@ -25,171 +25,171 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:padding="4dp"
-                app:questionText="Household status" />
+                android:text="Household status" />
 
             <io.bewsys.spmobile.ui.views.EditTextQuestion
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:padding="4dp"
-                app:questionText="Status" />
+                android:text="Status" />
             <io.bewsys.spmobile.ui.views.EditTextQuestion
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:inputType="text"
                 android:padding="4dp"
-                app:questionText="Migration status" />
+                android:text="Migration status" />
             <io.bewsys.spmobile.ui.views.EditTextQuestion
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:inputType="text"
                 android:padding="4dp"
-                app:questionText="Other migration status" />
+                android:text="Other migration status" />
 
             <io.bewsys.spmobile.ui.views.EditTextQuestion
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:inputType="number"
                 android:padding="4dp"
-                app:questionText="Duration displaced returned repatriated refugee" />
+                android:text="Duration displaced returned repatriated refugee" />
 
             <io.bewsys.spmobile.ui.views.EditTextQuestion
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:inputType="number"
                 android:padding="4dp"
-                app:questionText="Number of months displaced returned repatriated refugee" />
+                android:text="Number of months displaced returned repatriated refugee" />
 
             <io.bewsys.spmobile.ui.views.EditTextQuestion
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:inputType="text"
                 android:padding="4dp"
-                app:questionText="Unit of migration duration" />
+                android:text="Unit of migration duration" />
 
             <io.bewsys.spmobile.ui.views.EditTextQuestion
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:padding="4dp"
-                app:questionText="Bank account or bankcard available - radio" />
+                android:text="Bank account or bankcard available - radio" />
 
             <io.bewsys.spmobile.ui.views.EditTextQuestion
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:inputType="date"
                 android:padding="4dp"
-                app:questionText="Is income regular - radio" />
+                android:text="Is income regular - radio" />
 
             <io.bewsys.spmobile.ui.views.EditTextQuestion
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:padding="4dp"
-                app:questionText="Access to cultivable land- radio" />
+                android:text="Access to cultivable land- radio" />
 
             <io.bewsys.spmobile.ui.views.EditTextQuestion
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:padding="4dp"
-                app:questionText="Owner of cultivable land - radio" />
+                android:text="Owner of cultivable land - radio" />
 
             <io.bewsys.spmobile.ui.views.EditTextQuestion
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:padding="4dp"
-                app:questionText="Practice of cash crop farming or commercial farming - radio" />
+                android:text="Practice of cash crop farming or commercial farming - radio" />
 
 
             <io.bewsys.spmobile.ui.views.EditTextQuestion
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:padding="4dp"
-                app:questionText="Has livestock" />
+                android:text="Has livestock" />
             <io.bewsys.spmobile.ui.views.EditTextQuestion
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:padding="4dp"
-                app:questionText="Has household goods" />
+                android:text="Has household goods" />
             <io.bewsys.spmobile.ui.views.EditTextQuestion
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:padding="4dp"
-                app:questionText="Affected by conflict" />
+                android:text="Affected by conflict" />
             <io.bewsys.spmobile.ui.views.EditTextQuestion
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:padding="4dp"
-                app:questionText="Affected by epidemic" />
+                android:text="Affected by epidemic" />
             <io.bewsys.spmobile.ui.views.EditTextQuestion
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:padding="4dp"
-                app:questionText="Affected by climate shock" />
+                android:text="Affected by climate shock" />
 
             <io.bewsys.spmobile.ui.views.EditTextQuestion
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:padding="4dp"
-                app:questionText="Affected by other shock" />
+                android:text="Affected by other shock" />
 
             <io.bewsys.spmobile.ui.views.EditTextQuestion
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:padding="4dp"
-                app:questionText="Take children out of school" />
+                android:text="Take children out of school" />
             <io.bewsys.spmobile.ui.views.EditTextQuestion
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:padding="4dp"
-                app:questionText="Sale of production assets" />
+                android:text="Sale of production assets" />
             <io.bewsys.spmobile.ui.views.EditTextQuestion
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:padding="4dp"
-                app:questionText="Use of child labor" />
+                android:text="Use of child labor" />
 
             <io.bewsys.spmobile.ui.views.EditTextQuestion
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:padding="4dp"
-                app:questionText="Use of early marriage" />
+                android:text="Use of early marriage" />
 
             <io.bewsys.spmobile.ui.views.EditTextQuestion
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:padding="4dp"
-                app:questionText="Give up health care" />
+                android:text="Give up health care" />
 
             <io.bewsys.spmobile.ui.views.EditTextQuestion
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:padding="4dp"
-                app:questionText="Days spent other coping strategy" />
-
-            <io.bewsys.spmobile.ui.views.EditTextQuestion
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:padding="4dp"
-                android:inputType="number"
-                app:questionText="Household monthly income" />
+                android:text="Days spent other coping strategy" />
 
             <io.bewsys.spmobile.ui.views.EditTextQuestion
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:padding="4dp"
                 android:inputType="number"
-                app:questionText="Minimum monthly income necessary live without difficulties - int" />
+                android:text="Household monthly income" />
 
             <io.bewsys.spmobile.ui.views.EditTextQuestion
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:padding="4dp"
                 android:inputType="number"
-                app:questionText="Household member with benefit from social assistance program" />
+                android:text="Minimum monthly income necessary live without difficulties - int" />
+
             <io.bewsys.spmobile.ui.views.EditTextQuestion
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:padding="4dp"
                 android:inputType="number"
-                app:questionText="Name of social assistance program" />
+                android:text="Household member with benefit from social assistance program" />
+            <io.bewsys.spmobile.ui.views.EditTextQuestion
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="4dp"
+                android:inputType="number"
+                android:text="Name of social assistance program" />
 
 
 

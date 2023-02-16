@@ -73,6 +73,12 @@
         <item>20</item>
     </string-array>
 
+    <string-array name="yes_or_no">
+        <item>yes</item>
+        <item>no</item>
+    </string-array>
+
+
 
 
     <string name="empty_string" />

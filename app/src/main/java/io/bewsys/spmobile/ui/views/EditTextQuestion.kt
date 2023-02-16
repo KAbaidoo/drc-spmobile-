@@ -4,9 +4,11 @@ import android.content.Context
 import android.content.res.TypedArray
 import android.text.Editable
 import android.util.AttributeSet
+import android.view.Gravity
 import android.view.LayoutInflater
 import android.widget.LinearLayout
 import android.widget.TextView
+import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.widget.addTextChangedListener
 import com.google.android.material.textfield.TextInputLayout
 import io.bewsys.spmobile.R
@@ -30,8 +32,10 @@ constructor(
 
 
     init {
-        val inflater = ctx.getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater
-        inflater.inflate(R.layout.edit_text_question, this)
+        LayoutInflater.from(ctx).inflate(R.layout.edit_text_question,this,true)
+        orientation = LinearLayout.VERTICAL
+        gravity = Gravity.CENTER
+
         questionView = findViewById(R.id.text_field_question)
         answerView = findViewById(R.id.edit_text_answer)
 
@@ -43,9 +47,9 @@ constructor(
                 0
             )
             questionView.text =
-                typedArray?.getString(R.styleable.EditTextQuestion_questionText).toString()
+                typedArray?.getString(R.styleable.EditTextQuestion_android_text).toString()
             answerView.editText?.isEnabled =
-                typedArray?.getBoolean(R.styleable.EditTextQuestion_isEnabled, true) ?: true
+                typedArray?.getBoolean(R.styleable.EditTextQuestion_android_enabled, true) ?: true
             answerView.editText?.inputType =
                 typedArray?.getType(R.styleable.EditTextQuestion_android_inputType) as Int
             answerView.editText?.setText("")

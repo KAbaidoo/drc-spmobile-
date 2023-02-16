@@ -24,7 +24,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:padding="4dp"
-                app:questionText="Number of goat owned" />
+                android:text="Number of goat owned" />
 
         </LinearLayout>
 

@@ -28,29 +28,21 @@
                 android:layout_weight="1"
                 android:inputType="text"
                 android:padding="4dp"
-                app:questionText="Firstname" />
+                android:text="Firstname" />
 
             <io.bewsys.spmobile.ui.views.EditTextQuestion
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:padding="4dp"
-                app:questionText="Middlename" />
+                android:text="Middlename" />
 
             <io.bewsys.spmobile.ui.views.EditTextQuestion
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:padding="4dp"
-                app:questionText="Lastname" />
-
-            <io.bewsys.spmobile.ui.views.EditTextQuestion
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:inputType="text"
-                android:padding="4dp"
-                app:questionText="Head sex - make radio" />
+                android:text="Lastname" />
 
             <io.bewsys.spmobile.ui.views.EditTextQuestion
                 android:layout_width="match_parent"
@@ -58,7 +50,7 @@
                 android:layout_weight="1"
                 android:inputType="text"
                 android:padding="4dp"
-                app:questionText="Head age known - make radio " />
+                android:text="Head sex - make radio" />
 
             <io.bewsys.spmobile.ui.views.EditTextQuestion
                 android:layout_width="match_parent"
@@ -66,7 +58,7 @@
                 android:layout_weight="1"
                 android:inputType="text"
                 android:padding="4dp"
-                app:questionText="Head age" />
+                android:text="Head age known - make radio " />
 
             <io.bewsys.spmobile.ui.views.EditTextQuestion
                 android:layout_width="match_parent"
@@ -74,7 +66,15 @@
                 android:layout_weight="1"
                 android:inputType="text"
                 android:padding="4dp"
-                app:questionText="Head Date of birth known - make radio " />
+                android:text="Head age" />
+
+            <io.bewsys.spmobile.ui.views.EditTextQuestion
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:inputType="text"
+                android:padding="4dp"
+                android:text="Head Date of birth known - make radio " />
 
             <io.bewsys.spmobile.ui.views.EditTextQuestion
                 android:layout_width="match_parent"
@@ -82,14 +82,14 @@
                 android:layout_weight="1"
                 android:inputType="date"
                 android:padding="4dp"
-                app:questionText="Date of birth - make date picker" />
+                android:text="Date of birth - make date picker" />
 
             <io.bewsys.spmobile.ui.views.EditTextQuestion
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:padding="4dp"
-                app:questionText="Voter ID" />
+                android:text="Voter ID" />
 
             <io.bewsys.spmobile.ui.views.EditTextQuestion
                 android:layout_width="match_parent"
@@ -97,7 +97,7 @@
                 android:layout_weight="1"
                 android:inputType="phone"
                 android:padding="4dp"
-                app:questionText="Phone number" />
+                android:text="Phone number" />
 
             <io.bewsys.spmobile.ui.views.EditTextQuestion
                 android:layout_width="match_parent"
@@ -105,7 +105,7 @@
                 android:layout_weight="1"
                 android:inputType="text"
                 android:padding="4dp"
-                app:questionText="Marital status - radio" />
+                android:text="Marital status - radio" />
 
             <io.bewsys.spmobile.ui.views.EditTextQuestion
                 android:layout_width="match_parent"
@@ -113,49 +113,49 @@
                 android:layout_weight="1"
                 android:inputType="text"
                 android:padding="4dp"
-                app:questionText="Birth certificate" />
+                android:text="Birth certificate" />
 
             <io.bewsys.spmobile.ui.views.EditTextQuestion
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:inputType="text"
                 android:padding="4dp"
-                app:questionText="Educational level" />
+                android:text="Educational level" />
 
             <io.bewsys.spmobile.ui.views.EditTextQuestion
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:inputType="text"
                 android:padding="4dp"
-                app:questionText="Disability" />
+                android:text="Disability" />
 
             <io.bewsys.spmobile.ui.views.EditTextQuestion
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:inputType="text"
                 android:padding="4dp"
-                app:questionText="Socio-professional category" />
+                android:text="Socio-professional category" />
 
             <io.bewsys.spmobile.ui.views.EditTextQuestion
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:inputType="text"
                 android:padding="4dp"
-                app:questionText="School attendance" />
+                android:text="School attendance" />
 
             <io.bewsys.spmobile.ui.views.EditTextQuestion
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:inputType="text"
                 android:padding="4dp"
-                app:questionText="Sector of work" />
+                android:text="Sector of work" />
 
             <io.bewsys.spmobile.ui.views.EditTextQuestion
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:inputType="text"
                 android:padding="4dp"
-                app:questionText="Pregnancy status" />
+                android:text="Pregnancy status" />
 
 
 
@@ -164,94 +164,94 @@
                 android:layout_height="wrap_content"
                 android:inputType="text"
                 android:padding="4dp"
-                app:questionText="Territory or town" />
+                android:text="Territory or town" />
 
             <io.bewsys.spmobile.ui.views.EditTextQuestion
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:inputType="text"
                 android:padding="4dp"
-                app:questionText="Is head respondent status - int Make radio" />
+                android:text="Is head respondent status - int Make radio" />
 
             <io.bewsys.spmobile.ui.views.EditTextQuestion
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:inputType="text"
                 android:padding="4dp"
-                app:questionText="Area of residence -int" />
+                android:text="Area of residence -int" />
 
             <io.bewsys.spmobile.ui.views.EditTextQuestion
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:inputType="text"
                 android:padding="4dp"
-                app:questionText="Province" />
+                android:text="Province" />
             <io.bewsys.spmobile.ui.views.EditTextQuestion
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:inputType="text"
                 android:padding="4dp"
-                app:questionText="Community" />
+                android:text="Community" />
 
             <io.bewsys.spmobile.ui.views.EditTextQuestion
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:inputType="text"
                 android:padding="4dp"
-                app:questionText="Territory" />
+                android:text="Territory" />
 
             <io.bewsys.spmobile.ui.views.EditTextQuestion
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:inputType="text"
                 android:padding="4dp"
-                app:questionText="Health zone" />
+                android:text="Health zone" />
 
             <io.bewsys.spmobile.ui.views.EditTextQuestion
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:inputType="text"
                 android:padding="4dp"
-                app:questionText="Health area" />
+                android:text="Health area" />
 
             <io.bewsys.spmobile.ui.views.EditTextQuestion
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:inputType="text"
                 android:padding="4dp"
-                app:questionText="Groupment" />
+                android:text="Groupment" />
 
             <io.bewsys.spmobile.ui.views.EditTextQuestion
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:inputType="text"
                 android:padding="4dp"
-                app:questionText="Address" />
+                android:text="Address" />
             <io.bewsys.spmobile.ui.views.EditTextQuestion
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:inputType="text"
                 android:padding="4dp"
-                app:questionText="village_or_quartier" />
+                android:text="village_or_quartier" />
 
             <io.bewsys.spmobile.ui.views.EditTextQuestion
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:inputType="text"
                 android:padding="4dp"
-                app:questionText="Comments" />
+                android:text="Comments" />
             <io.bewsys.spmobile.ui.views.EditTextQuestion
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:inputType="text"
                 android:padding="4dp"
-                app:questionText="mobile_money_username" />
+                android:text="mobile_money_username" />
             <io.bewsys.spmobile.ui.views.EditTextQuestion
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:inputType="text"
                 android:padding="4dp"
-                app:questionText="mobile_money_number" />
+                android:text="mobile_money_number" />
 
 
 

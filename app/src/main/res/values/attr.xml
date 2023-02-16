@@ -1,8 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <declare-styleable name="EditTextQuestion">
-        <attr name="questionText" format="string" />
-        <attr name="isEnabled" format="boolean" />
+        <attr name="android:text" format="string" />
+        <attr name="android:enabled" format="boolean" />
         <attr name="android:inputType" format="integer" />
+    </declare-styleable>
+    <declare-styleable name="RadioButtonQuestion">
+        <attr name="android:text" format="string" />
+        <attr name="android:enabled" format="boolean" />
+       <attr name="android:entries" format="reference"/>
     </declare-styleable>
 </resources>

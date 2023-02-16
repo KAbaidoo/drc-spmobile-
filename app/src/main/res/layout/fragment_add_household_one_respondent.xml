@@ -26,21 +26,21 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:padding="4dp"
-                app:questionText="Firstname" />
+                android:text="Firstname" />
 
             <io.bewsys.spmobile.ui.views.EditTextQuestion
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:padding="4dp"
-                app:questionText="Middlename" />
+                android:text="Middlename" />
 
             <io.bewsys.spmobile.ui.views.EditTextQuestion
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:padding="4dp"
-                app:questionText="Lastname" />
+                android:text="Lastname" />
 
             <io.bewsys.spmobile.ui.views.EditTextQuestion
                 android:layout_width="match_parent"
@@ -48,21 +48,21 @@
                 android:layout_weight="1"
                 android:inputType="date"
                 android:padding="4dp"
-                app:questionText="Date of birth - make date picker" />
+                android:text="Date of birth - make date picker" />
 
             <io.bewsys.spmobile.ui.views.EditTextQuestion
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:padding="4dp"
-                app:questionText="Family bond to head - make radio" />
+                android:text="Family bond to head - make radio" />
 
             <io.bewsys.spmobile.ui.views.EditTextQuestion
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:padding="4dp"
-                app:questionText="Voter ID" />
+                android:text="Voter ID" />
 
             <io.bewsys.spmobile.ui.views.EditTextQuestion
                 android:layout_width="match_parent"
@@ -70,7 +70,7 @@
                 android:layout_weight="1"
                 android:inputType="phone"
                 android:padding="4dp"
-                app:questionText="Phone number" />
+                android:text="Phone number" />
         </LinearLayout>
 
     </ScrollView>
