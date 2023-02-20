@@ -27,6 +27,7 @@ class AddNonConsentingHouseholdFragment : Fragment(R.layout.fragment_add_non_con
 
         val binding =FragmentAddNonConsentingBinding.bind(view)
 
+        //TODO Refactor to use Paired PairMediatorLiveData
         viewModel.provinces.observe(viewLifecycleOwner) {
             it.map { provinceEntity ->
                 provinceEntity.name?.let { name -> provinces.add(name) }
@@ -41,7 +42,7 @@ class AddNonConsentingHouseholdFragment : Fragment(R.layout.fragment_add_non_con
         val reasons = resources.getStringArray(R.array.reasons)
         val groupment = resources.getStringArray(R.array.groupment)
         val territories = resources.getStringArray(R.array.territories)
-        val dropdownLayout = R.layout.dropdown_item_non_consent_form
+        val dropdownLayout = R.layout.dropdown_item
 
 
         binding.apply {

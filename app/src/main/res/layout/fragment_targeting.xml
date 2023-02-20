@@ -8,11 +8,11 @@
     xmlns:tools="http://schemas.android.com/tools"
     tools:context=".ui.targeting.TargetingFragment">
 
-    <io.bewsys.spmobile.ui.views.RadioButtonQuestion
+    <io.bewsys.spmobile.ui.views.QuantityQuestion
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Some option based question"
-        android:entries="@array/marital_status"
+        android:text="Some quantity question"
+        android:entries="@array/short_number_list"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

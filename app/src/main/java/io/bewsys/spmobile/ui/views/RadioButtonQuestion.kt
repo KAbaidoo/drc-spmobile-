@@ -66,11 +66,7 @@ constructor(
     }
 
     private fun setUpRadioButtons(entries: Array<CharSequence>?) {
-//        if (entries != null) {
-//            if (entries.size > 3) {
-//                radioGroup.orientation = VERTICAL
-//            }
-//        }
+
 
         entries?.let {
             for (index in it.indices) {
@@ -84,7 +80,7 @@ constructor(
             }
             radioGroup.setOnCheckedChangeListener { group, checkedId ->
                 _answer = findViewById<RadioButton>(checkedId).text.toString()
-                Log.d("RADIO_BUTTON", _answer!!)
+
             }
         }
     }

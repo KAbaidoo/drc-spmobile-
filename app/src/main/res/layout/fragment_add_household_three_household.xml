@@ -15,7 +15,6 @@
             android:layout_height="wrap_content"
             android:orientation="vertical">
 
-
             <TextView
                 style="@style/heading_form_sub"
                 android:text="Household" />
@@ -42,10 +41,8 @@
                 android:text="Duration displaced returned repatriated refugee" />
 
             <io.bewsys.spmobile.ui.views.EditTextQuestion
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                style="@style/question_style"
                 android:inputType="number"
-                android:padding="4dp"
                 android:text="Number of months displaced returned repatriated refugee" />
 
             <io.bewsys.spmobile.ui.views.EditTextQuestion
@@ -140,31 +137,23 @@
                 android:text="Days spent other coping strategy" />
 
             <io.bewsys.spmobile.ui.views.EditTextQuestion
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                style="@style/question_style"
                 android:inputType="number"
-                android:padding="4dp"
                 android:text="Household monthly income" />
 
             <io.bewsys.spmobile.ui.views.EditTextQuestion
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                style="@style/question_style"
                 android:inputType="number"
-                android:padding="4dp"
                 android:text="Minimum monthly income necessary live without difficulties - int" />
 
             <io.bewsys.spmobile.ui.views.EditTextQuestion
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                style="@style/question_style"
                 android:inputType="number"
-                android:padding="4dp"
                 android:text="Household member with benefit from social assistance program" />
 
             <io.bewsys.spmobile.ui.views.EditTextQuestion
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:inputType="text"
-                android:padding="4dp"
+                style="@style/question_style"
+
                 android:text="Name of social assistance program" />
 
         </LinearLayout>

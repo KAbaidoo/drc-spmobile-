@@ -56,11 +56,11 @@ constructor(
         }
     }
 
-    fun addTextChangedListener(action: (Editable?) -> Unit) {
-        answerView.editText?.addTextChangedListener {
-            action.invoke(it)
-        }
-    }
+//    fun addTextChangedListener(action: (Editable?) -> Unit) {
+//        answerView.editText?.addTextChangedListener {
+//            action.invoke(it)
+//        }
+//    }
 
 
 }
