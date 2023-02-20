@@ -10,16 +10,16 @@
         android:id="@+id/text_field_question"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="8dp"
         android:textAlignment="textStart"
+        android:layout_marginBottom="8dp"
         android:textAppearance="@style/TextAppearance.MaterialComponents.Body1" />
 
     <RadioGroup
         android:id="@+id/radio_group"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:paddingStart="8dp">
+        android:orientation="vertical"
+       >
 
 
     </RadioGroup>

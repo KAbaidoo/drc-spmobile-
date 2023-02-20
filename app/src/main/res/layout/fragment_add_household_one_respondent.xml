@@ -14,7 +14,8 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical">
+            android:orientation="vertical"
+            android:padding="8dp">
 
 
             <TextView
@@ -22,54 +23,37 @@
                 android:text="Respondent" />
 
             <io.bewsys.spmobile.ui.views.EditTextQuestion
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
+                style="@style/question_style"
                 android:padding="4dp"
                 android:text="Firstname" />
 
             <io.bewsys.spmobile.ui.views.EditTextQuestion
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
+                style="@style/question_style"
                 android:padding="4dp"
                 android:text="Middlename" />
 
             <io.bewsys.spmobile.ui.views.EditTextQuestion
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
+                style="@style/question_style"
                 android:padding="4dp"
                 android:text="Lastname" />
 
             <io.bewsys.spmobile.ui.views.EditTextQuestion
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
+                style="@style/question_style"
                 android:inputType="date"
-                android:padding="4dp"
                 android:text="Date of birth - make date picker" />
 
-            <io.bewsys.spmobile.ui.views.EditTextQuestion
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:padding="4dp"
+            <io.bewsys.spmobile.ui.views.RadioButtonQuestion
+                style="@style/question_style"
+                android:entries="@array/yes_or_no"
                 android:text="Family bond to head - make radio" />
 
             <io.bewsys.spmobile.ui.views.EditTextQuestion
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:padding="4dp"
+                style="@style/question_style"
                 android:text="Voter ID" />
 
             <io.bewsys.spmobile.ui.views.EditTextQuestion
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
+                style="@style/question_style"
                 android:inputType="phone"
-                android:padding="4dp"
                 android:text="Phone number" />
         </LinearLayout>
 

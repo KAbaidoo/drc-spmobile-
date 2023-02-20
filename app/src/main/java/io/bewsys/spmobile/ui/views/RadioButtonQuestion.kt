@@ -12,6 +12,7 @@ import android.widget.RadioButton
 
 import android.widget.RadioGroup
 import android.widget.TextView
+import androidx.core.view.get
 import androidx.core.view.marginEnd
 
 import io.bewsys.spmobile.R
@@ -25,12 +26,16 @@ constructor(
     private var questionView: TextView
     private var radioGroup: RadioGroup
     private var typedArray: TypedArray? = null
+    private var _answer: String? = ""
+
+    val answer: String
+        get() = _answer.toString()
 
 
     init {
 
         LayoutInflater.from(ctx).inflate(R.layout.radio_button_question, this, true)
-        orientation = LinearLayout.VERTICAL
+        orientation = VERTICAL
         gravity = Gravity.CENTER
 
         questionView = findViewById(R.id.text_field_question)
@@ -60,9 +65,12 @@ constructor(
         }
     }
 
-
     private fun setUpRadioButtons(entries: Array<CharSequence>?) {
-
+//        if (entries != null) {
+//            if (entries.size > 3) {
+//                radioGroup.orientation = VERTICAL
+//            }
+//        }
 
         entries?.let {
             for (index in it.indices) {
@@ -74,10 +82,13 @@ constructor(
                 }
                 radioGroup.addView(r)
             }
+            radioGroup.setOnCheckedChangeListener { group, checkedId ->
+                _answer = findViewById<RadioButton>(checkedId).text.toString()
+                Log.d("RADIO_BUTTON", _answer!!)
+            }
         }
-
-
     }
 
-
 }
+
+

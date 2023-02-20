@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
@@ -22,34 +21,24 @@
                 android:text="Household" />
 
             <io.bewsys.spmobile.ui.views.EditTextQuestion
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:padding="4dp"
+                style="@style/question_style"
                 android:text="Household status" />
 
             <io.bewsys.spmobile.ui.views.EditTextQuestion
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:padding="4dp"
+                style="@style/question_style"
                 android:text="Status" />
+
             <io.bewsys.spmobile.ui.views.EditTextQuestion
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:inputType="text"
-                android:padding="4dp"
+                style="@style/question_style"
                 android:text="Migration status" />
+
             <io.bewsys.spmobile.ui.views.EditTextQuestion
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:inputType="text"
-                android:padding="4dp"
+                style="@style/question_style"
                 android:text="Other migration status" />
 
             <io.bewsys.spmobile.ui.views.EditTextQuestion
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                style="@style/question_style"
                 android:inputType="number"
-                android:padding="4dp"
                 android:text="Duration displaced returned repatriated refugee" />
 
             <io.bewsys.spmobile.ui.views.EditTextQuestion
@@ -60,102 +49,88 @@
                 android:text="Number of months displaced returned repatriated refugee" />
 
             <io.bewsys.spmobile.ui.views.EditTextQuestion
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:inputType="text"
-                android:padding="4dp"
+                style="@style/question_style"
                 android:text="Unit of migration duration" />
 
-            <io.bewsys.spmobile.ui.views.EditTextQuestion
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:padding="4dp"
-                android:text="Bank account or bankcard available - radio" />
+            <io.bewsys.spmobile.ui.views.RadioButtonQuestion
+                style="@style/question_style"
+                android:entries="@array/yes_or_no"
+                android:text="Bank account or bankcard available" />
 
-            <io.bewsys.spmobile.ui.views.EditTextQuestion
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:inputType="date"
-                android:padding="4dp"
-                android:text="Is income regular - radio" />
+            <io.bewsys.spmobile.ui.views.RadioButtonQuestion
+                style="@style/question_style"
+                android:entries="@array/yes_or_no"
+                android:text="Is income regular" />
 
-            <io.bewsys.spmobile.ui.views.EditTextQuestion
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:padding="4dp"
-                android:text="Access to cultivable land- radio" />
+            <io.bewsys.spmobile.ui.views.RadioButtonQuestion
+                style="@style/question_style"
+                android:entries="@array/yes_or_no"
+                android:text="Access to cultivable land" />
 
-            <io.bewsys.spmobile.ui.views.EditTextQuestion
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:padding="4dp"
-                android:text="Owner of cultivable land - radio" />
+            <io.bewsys.spmobile.ui.views.RadioButtonQuestion
+                style="@style/question_style"
+                android:entries="@array/yes_or_no"
+                android:text="Owner of cultivable land" />
 
-            <io.bewsys.spmobile.ui.views.EditTextQuestion
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:padding="4dp"
-                android:text="Practice of cash crop farming or commercial farming - radio" />
+            <io.bewsys.spmobile.ui.views.RadioButtonQuestion
+                style="@style/question_style"
+                android:entries="@array/yes_or_no"
+                android:text="Practice of cash crop farming or commercial farming" />
 
 
-            <io.bewsys.spmobile.ui.views.EditTextQuestion
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:padding="4dp"
+            <io.bewsys.spmobile.ui.views.RadioButtonQuestion
+                style="@style/question_style"
+                android:entries="@array/yes_or_no"
                 android:text="Has livestock" />
-            <io.bewsys.spmobile.ui.views.EditTextQuestion
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:padding="4dp"
+
+            <io.bewsys.spmobile.ui.views.RadioButtonQuestion
+                style="@style/question_style"
+                android:entries="@array/yes_or_no"
                 android:text="Has household goods" />
-            <io.bewsys.spmobile.ui.views.EditTextQuestion
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:padding="4dp"
+
+            <io.bewsys.spmobile.ui.views.RadioButtonQuestion
+                style="@style/question_style"
+                android:entries="@array/yes_or_no"
                 android:text="Affected by conflict" />
-            <io.bewsys.spmobile.ui.views.EditTextQuestion
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:padding="4dp"
+
+            <io.bewsys.spmobile.ui.views.RadioButtonQuestion
+                style="@style/question_style"
+                android:entries="@array/yes_or_no"
                 android:text="Affected by epidemic" />
-            <io.bewsys.spmobile.ui.views.EditTextQuestion
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:padding="4dp"
+
+            <io.bewsys.spmobile.ui.views.RadioButtonQuestion
+                style="@style/question_style"
+                android:entries="@array/yes_or_no"
                 android:text="Affected by climate shock" />
 
-            <io.bewsys.spmobile.ui.views.EditTextQuestion
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:padding="4dp"
+            <io.bewsys.spmobile.ui.views.RadioButtonQuestion
+                style="@style/question_style"
+                android:entries="@array/yes_or_no"
                 android:text="Affected by other shock" />
 
-            <io.bewsys.spmobile.ui.views.EditTextQuestion
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:padding="4dp"
+            <io.bewsys.spmobile.ui.views.RadioButtonQuestion
+                style="@style/question_style"
+                android:entries="@array/yes_or_no"
                 android:text="Take children out of school" />
-            <io.bewsys.spmobile.ui.views.EditTextQuestion
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:padding="4dp"
+
+            <io.bewsys.spmobile.ui.views.RadioButtonQuestion
+                style="@style/question_style"
+                android:entries="@array/yes_or_no"
                 android:text="Sale of production assets" />
-            <io.bewsys.spmobile.ui.views.EditTextQuestion
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:padding="4dp"
+
+            <io.bewsys.spmobile.ui.views.RadioButtonQuestion
+                style="@style/question_style"
+                android:entries="@array/yes_or_no"
                 android:text="Use of child labor" />
 
-            <io.bewsys.spmobile.ui.views.EditTextQuestion
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:padding="4dp"
+            <io.bewsys.spmobile.ui.views.RadioButtonQuestion
+                style="@style/question_style"
+                android:entries="@array/yes_or_no"
                 android:text="Use of early marriage" />
 
-            <io.bewsys.spmobile.ui.views.EditTextQuestion
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:padding="4dp"
+            <io.bewsys.spmobile.ui.views.RadioButtonQuestion
+                style="@style/question_style"
+                android:entries="@array/yes_or_no"
                 android:text="Give up health care" />
 
             <io.bewsys.spmobile.ui.views.EditTextQuestion
@@ -167,31 +142,30 @@
             <io.bewsys.spmobile.ui.views.EditTextQuestion
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:padding="4dp"
                 android:inputType="number"
+                android:padding="4dp"
                 android:text="Household monthly income" />
 
             <io.bewsys.spmobile.ui.views.EditTextQuestion
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:padding="4dp"
                 android:inputType="number"
+                android:padding="4dp"
                 android:text="Minimum monthly income necessary live without difficulties - int" />
 
             <io.bewsys.spmobile.ui.views.EditTextQuestion
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:padding="4dp"
                 android:inputType="number"
+                android:padding="4dp"
                 android:text="Household member with benefit from social assistance program" />
+
             <io.bewsys.spmobile.ui.views.EditTextQuestion
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:inputType="text"
                 android:padding="4dp"
-                android:inputType="number"
                 android:text="Name of social assistance program" />
-
-
 
         </LinearLayout>
 

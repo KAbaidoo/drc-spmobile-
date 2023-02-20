@@ -77,6 +77,16 @@
         <item>yes</item>
         <item>no</item>
     </string-array>
+    <string-array name="male_or_female">
+        <item>Male</item>
+        <item>Female</item>
+    </string-array>
+    <string-array name="marital_status">
+        <item>Married</item>
+        <item>Single</item>
+        <item>Divorced</item>
+        <item>Widowed</item>
+    </string-array>
 
 
 
