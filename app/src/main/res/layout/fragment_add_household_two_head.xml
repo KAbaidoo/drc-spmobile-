@@ -53,10 +53,11 @@
                 android:entries="@array/yes_or_no"
                 android:text="Head Date of birth known" />
 
-            <io.bewsys.spmobile.ui.views.EditTextQuestion
+            <io.bewsys.spmobile.ui.views.DatePickertQuestion
+                android:id="@+id/text_view_dob"
                 style="@style/question_style"
                 android:inputType="date"
-                android:text="Date of birth - make date picker" />
+                android:text="Date of birth" />
 
             <io.bewsys.spmobile.ui.views.EditTextQuestion
                 style="@style/question_style"

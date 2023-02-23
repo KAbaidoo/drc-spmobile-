@@ -18,14 +18,14 @@ import com.google.android.material.textfield.TextInputLayout
 import io.bewsys.spmobile.R
 import org.koin.core.KoinApplication.Companion.init
 
-class EditTextQuestion @JvmOverloads
+class DatePickertQuestion @JvmOverloads
 constructor(
     ctx: Context,
     attributeSet: AttributeSet? = null,
     defStyleAttr: Int = 0
 ) : LinearLayout(ctx, attributeSet, defStyleAttr) {
     private var questionView: TextView
-    private var answerView: TextInputLayout
+     var answerView: TextInputLayout
     private var typedArray: TypedArray? = null
 
     var answer: String
@@ -36,7 +36,7 @@ constructor(
 
 
     init {
-        LayoutInflater.from(ctx).inflate(R.layout.edit_text_question,this,true)
+        LayoutInflater.from(ctx).inflate(R.layout.date_picker_question,this,true)
         orientation = LinearLayout.VERTICAL
         gravity = Gravity.CENTER
 
@@ -65,11 +65,6 @@ constructor(
 
 
 
-//    fun addOnClickedListener(action: () -> Unit) {
-//        answerView.setOnClickListener {
-//            action.invoke()
-//        }
-//    }
 
 
 }
