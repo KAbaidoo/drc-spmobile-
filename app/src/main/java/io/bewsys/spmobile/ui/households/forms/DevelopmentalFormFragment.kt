@@ -41,14 +41,15 @@ class DevelopmentalFormFragment : Fragment(R.layout.fragment_developmental_form)
                         remove()
                         findNavController().popBackStack()
 
-
                     } else {
                         pager.currentItem = pager.currentItem - 1
                     }
                 }
 
             })
+
         }
+
     }
 
 

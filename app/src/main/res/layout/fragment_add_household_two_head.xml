@@ -10,12 +10,10 @@
         android:padding="8dp"
         android:scrollbars="none">
 
-
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical">
-
 
             <TextView
                 style="@style/heading_form_sub"
@@ -46,6 +44,7 @@
 
             <io.bewsys.spmobile.ui.views.EditTextQuestion
                 style="@style/question_style"
+                android:inputType="number"
                 android:text="Head age" />
 
             <io.bewsys.spmobile.ui.views.RadioButtonQuestion
@@ -97,8 +96,9 @@
                 style="@style/question_style"
                 android:text="Sector of work" />
 
-            <io.bewsys.spmobile.ui.views.EditTextQuestion
+            <io.bewsys.spmobile.ui.views.RadioButtonQuestion
                 style="@style/question_style"
+                android:entries="@array/yes_or_no"
                 android:text="Pregnancy status" />
 
 
@@ -145,7 +145,7 @@
 
             <io.bewsys.spmobile.ui.views.EditTextQuestion
                 style="@style/question_style"
-                android:text="village_or_quartier" />
+                android:text="Village or quartier" />
 
             <io.bewsys.spmobile.ui.views.EditTextQuestion
                 style="@style/question_style"

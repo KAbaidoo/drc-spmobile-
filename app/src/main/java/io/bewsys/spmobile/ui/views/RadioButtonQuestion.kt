@@ -2,6 +2,7 @@ package io.bewsys.spmobile.ui.views
 
 import android.content.Context
 import android.content.res.TypedArray
+import android.text.Editable
 import android.text.Layout.Alignment
 import android.util.AttributeSet
 import android.util.Log
@@ -14,6 +15,7 @@ import android.widget.RadioGroup
 import android.widget.TextView
 import androidx.core.view.get
 import androidx.core.view.marginEnd
+import androidx.core.widget.addTextChangedListener
 
 import io.bewsys.spmobile.R
 
@@ -22,15 +24,17 @@ constructor(
     private val ctx: Context,
     attributeSet: AttributeSet? = null,
     defStyleAttr: Int = 0
-) : LinearLayout(ctx, attributeSet, defStyleAttr) {
+) : CustomQuestionViews(ctx, attributeSet, defStyleAttr) {
     private var questionView: TextView
     private var radioGroup: RadioGroup
     private var typedArray: TypedArray? = null
     private var _answer: String? = ""
 
-    val answer: String
+    override var answer: String = ""
         get() = _answer.toString()
 
+    override var title: String = ""
+        get() = questionView.text.toString()
 
     init {
 
@@ -65,8 +69,9 @@ constructor(
         }
     }
 
-    private fun setUpRadioButtons(entries: Array<CharSequence>?) {
 
+
+    private fun setUpRadioButtons(entries: Array<CharSequence>?) {
 
         entries?.let {
             for (index in it.indices) {
@@ -78,11 +83,17 @@ constructor(
                 }
                 radioGroup.addView(r)
             }
-            radioGroup.setOnCheckedChangeListener { group, checkedId ->
-                _answer = findViewById<RadioButton>(checkedId).text.toString()
 
-            }
         }
+    }
+    override fun addTextChangedListener(action: (String?) -> Unit) {
+        radioGroup.setOnCheckedChangeListener { _, checkedId ->
+            _answer = findViewById<RadioButton>(checkedId).text.toString()
+            action.invoke((_answer))
+        }
+//        autoCompleteTextView.addTextChangedListener {
+//            action.invoke(it)
+//        }
     }
 
 }

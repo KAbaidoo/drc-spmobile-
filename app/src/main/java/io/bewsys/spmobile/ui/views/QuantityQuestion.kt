@@ -2,6 +2,7 @@ package io.bewsys.spmobile.ui.views
 
 import android.content.Context
 import android.content.res.TypedArray
+import android.text.Editable
 import android.util.AttributeSet
 import android.util.Log
 import android.view.Gravity
@@ -15,14 +16,16 @@ constructor(
     private val ctx: Context,
     attributeSet: AttributeSet? = null,
     defStyleAttr: Int = 0
-) : LinearLayout(ctx, attributeSet, defStyleAttr) {
+) : CustomQuestionViews(ctx, attributeSet, defStyleAttr) {
     private var questionView: TextView
     private var autoCompleteTextView: AutoCompleteTextView
     private var typedArray: TypedArray? = null
     private var _answer: String? = ""
 
+    override var title: String = ""
+        get() = questionView.text.toString()
 
-    val answer: String
+    override var answer: String = ""
         get() = _answer.toString()
 
 
@@ -71,6 +74,11 @@ constructor(
             )
         }
 
+    }
+    override fun addTextChangedListener(action: (String?) -> Unit) {
+        autoCompleteTextView.addTextChangedListener {
+            action.invoke(it.toString())
+        }
     }
 
 }

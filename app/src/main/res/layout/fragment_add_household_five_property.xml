@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
@@ -10,250 +9,154 @@
         android:padding="8dp"
         android:scrollbars="none">
 
-
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical">
 
-
             <TextView
                 style="@style/heading_form_sub"
-                android:text="Household head" />
+                android:text="Property" />
+
+            <io.bewsys.spmobile.ui.views.QuantityQuestion
+                style="@style/question_style"
+                android:entries="@array/short_number_list"
+                android:text="Number of bed owned" />
+
+            <io.bewsys.spmobile.ui.views.QuantityQuestion
+                style="@style/question_style"
+                android:entries="@array/short_number_list"
+                android:text="Number of table owned" />
+
+            <io.bewsys.spmobile.ui.views.QuantityQuestion
+                style="@style/question_style"
+                android:entries="@array/long_number_list"
+                android:text="Number of chair owned" />
+
+            <io.bewsys.spmobile.ui.views.QuantityQuestion
+                style="@style/question_style"
+                android:entries="@array/short_number_list"
+                android:text="Number of sofa owned" />
 
 
-            <io.bewsys.spmobile.ui.views.EditTextQuestion
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:inputType="text"
-                android:padding="4dp"
-                android:text="Firstname" />
+            <io.bewsys.spmobile.ui.views.QuantityQuestion
+                style="@style/question_style"
+                android:entries="@array/long_number_list"
+                android:text="Number of mosquito nets owned" />
 
-            <io.bewsys.spmobile.ui.views.EditTextQuestion
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:padding="4dp"
-                android:text="Middlename" />
+            <io.bewsys.spmobile.ui.views.QuantityQuestion
+                style="@style/question_style"
+                android:entries="@array/short_number_list"
+                android:text="Number of cultivable land owned" />
 
-            <io.bewsys.spmobile.ui.views.EditTextQuestion
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:padding="4dp"
-                android:text="Lastname" />
+            <io.bewsys.spmobile.ui.views.QuantityQuestion
+                style="@style/question_style"
+                android:entries="@array/short_number_list"
+                android:text="Number of meals eaten by adults 18 plus yesterday" />
 
-            <io.bewsys.spmobile.ui.views.EditTextQuestion
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:inputType="text"
-                android:padding="4dp"
-                android:text="Head sex - make radio" />
+            <io.bewsys.spmobile.ui.views.QuantityQuestion
+                style="@style/question_style"
+                android:entries="@array/short_number_list"
+                android:text="Number of meals eaten by children 6 to 17 yesterday" />
 
-            <io.bewsys.spmobile.ui.views.EditTextQuestion
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:inputType="text"
-                android:padding="4dp"
-                android:text="Head age known - make radio " />
+            <io.bewsys.spmobile.ui.views.QuantityQuestion
+                style="@style/question_style"
+                android:entries="@array/short_number_list"
+                android:text="Number of meals eaten by children 2 to 5 yesterday" />
 
-            <io.bewsys.spmobile.ui.views.EditTextQuestion
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:inputType="text"
-                android:padding="4dp"
-                android:text="Head age" />
+            <io.bewsys.spmobile.ui.views.QuantityQuestion
+                style="@style/question_style"
+                android:entries="@array/short_number_list"
+                android:text="Number of meals eaten by children 2 to 5 yesterday" />
 
-            <io.bewsys.spmobile.ui.views.EditTextQuestion
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:inputType="text"
-                android:padding="4dp"
-                android:text="Head Date of birth known - make radio " />
+            <io.bewsys.spmobile.ui.views.QuantityQuestion
+                style="@style/question_style"
+                android:entries="@array/short_number_list"
+                android:text="Number of meals eaten by children 2 to 5 yesterday" />
 
-            <io.bewsys.spmobile.ui.views.EditTextQuestion
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:inputType="date"
-                android:padding="4dp"
-                android:text="Date of birth - make date picker" />
+            <io.bewsys.spmobile.ui.views.QuantityQuestion
+                style="@style/question_style"
+                android:entries="@array/short_number_list"
+                android:text="Number of days in week consumed staple foods" />
 
-            <io.bewsys.spmobile.ui.views.EditTextQuestion
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:padding="4dp"
-                android:text="Voter ID" />
+            <io.bewsys.spmobile.ui.views.QuantityQuestion
+                style="@style/question_style"
+                android:entries="@array/short_number_list"
+                android:text="Number of days in week consumed legumes or nuts" />
 
-            <io.bewsys.spmobile.ui.views.EditTextQuestion
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:inputType="phone"
-                android:padding="4dp"
-                android:text="Phone number" />
+            <io.bewsys.spmobile.ui.views.QuantityQuestion
+                style="@style/question_style"
+                android:entries="@array/short_number_list"
+                android:text="Number of days in week consumed dairy products" />
 
-            <io.bewsys.spmobile.ui.views.EditTextQuestion
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:inputType="text"
-                android:padding="4dp"
-                android:text="Marital status - radio" />
+            <io.bewsys.spmobile.ui.views.QuantityQuestion
+                style="@style/question_style"
+                android:entries="@array/short_number_list"
+                android:text="Number of days in week consumed meat" />
 
-            <io.bewsys.spmobile.ui.views.EditTextQuestion
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:inputType="text"
-                android:padding="4dp"
-                android:text="Birth certificate" />
+            <io.bewsys.spmobile.ui.views.QuantityQuestion
+                style="@style/question_style"
+                android:entries="@array/short_number_list"
+                android:text="Number of days in week consumed vegetables" />
 
-            <io.bewsys.spmobile.ui.views.EditTextQuestion
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:inputType="text"
-                android:padding="4dp"
-                android:text="Educational level" />
+            <io.bewsys.spmobile.ui.views.QuantityQuestion
+                style="@style/question_style"
+                android:entries="@array/short_number_list"
+                android:text="Number of days in week consumed fruits" />
 
-            <io.bewsys.spmobile.ui.views.EditTextQuestion
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:inputType="text"
-                android:padding="4dp"
-                android:text="Disability" />
+            <io.bewsys.spmobile.ui.views.QuantityQuestion
+                style="@style/question_style"
+                android:entries="@array/short_number_list"
+                android:text="Number of days in week consumed cooking oils" />
 
-            <io.bewsys.spmobile.ui.views.EditTextQuestion
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:inputType="text"
-                android:padding="4dp"
-                android:text="Socio-professional category" />
+            <io.bewsys.spmobile.ui.views.QuantityQuestion
+                style="@style/question_style"
+                android:entries="@array/short_number_list"
+                android:text="Number of days in week consumed sugar or sweet products" />
 
-            <io.bewsys.spmobile.ui.views.EditTextQuestion
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:inputType="text"
-                android:padding="4dp"
-                android:text="School attendance" />
+            <io.bewsys.spmobile.ui.views.QuantityQuestion
+                style="@style/question_style"
+                android:entries="@array/short_number_list"
+                android:text="Days spent reduce amount consumed coping strategy" />
 
-            <io.bewsys.spmobile.ui.views.EditTextQuestion
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:inputType="text"
-                android:padding="4dp"
-                android:text="Sector of work" />
+            <io.bewsys.spmobile.ui.views.QuantityQuestion
+                style="@style/question_style"
+                android:entries="@array/short_number_list"
+                android:text="Days spent reduce meals consumed coping strategy" />
 
-            <io.bewsys.spmobile.ui.views.EditTextQuestion
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:inputType="text"
-                android:padding="4dp"
-                android:text="Pregnancy status" />
+            <io.bewsys.spmobile.ui.views.QuantityQuestion
+                style="@style/question_style"
+                android:entries="@array/short_number_list"
+                android:text="Days spent reduce meals adult forfeit meal for child coping strategy" />
 
+            <io.bewsys.spmobile.ui.views.QuantityQuestion
+                style="@style/question_style"
+                android:entries="@array/short_number_list"
+                android:text="Days spent eat less expensively coping strategy" />
 
+            <io.bewsys.spmobile.ui.views.QuantityQuestion
+                style="@style/question_style"
+                android:entries="@array/short_number_list"
+                android:text="Days spent borrow food or rely on family help coping strategy" />
+
+            <io.bewsys.spmobile.ui.views.QuantityQuestion
+                style="@style/question_style"
+                android:entries="@array/short_number_list"
+                android:text="Days spent days without eating coping strategy" />
+
+            <io.bewsys.spmobile.ui.views.QuantityQuestion
+                style="@style/question_style"
+                android:entries="@array/short_number_list"
+                android:text="Days spent begging coping strategy" />
+
+            <io.bewsys.spmobile.ui.views.QuantityQuestion
+                style="@style/question_style"
+                android:entries="@array/short_number_list"
+                android:text="Days spent consume wild food coping strategy" />
 
             <io.bewsys.spmobile.ui.views.EditTextQuestion
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:inputType="text"
-                android:padding="4dp"
-                android:text="Territory or town" />
-
-            <io.bewsys.spmobile.ui.views.EditTextQuestion
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:inputType="text"
-                android:padding="4dp"
-                android:text="Is head respondent status - int Make radio" />
-
-            <io.bewsys.spmobile.ui.views.EditTextQuestion
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:inputType="text"
-                android:padding="4dp"
-                android:text="Area of residence -int" />
-
-            <io.bewsys.spmobile.ui.views.EditTextQuestion
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:inputType="text"
-                android:padding="4dp"
-                android:text="Province" />
-            <io.bewsys.spmobile.ui.views.EditTextQuestion
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:inputType="text"
-                android:padding="4dp"
-                android:text="Community" />
-
-            <io.bewsys.spmobile.ui.views.EditTextQuestion
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:inputType="text"
-                android:padding="4dp"
-                android:text="Territory" />
-
-            <io.bewsys.spmobile.ui.views.EditTextQuestion
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:inputType="text"
-                android:padding="4dp"
-                android:text="Health zone" />
-
-            <io.bewsys.spmobile.ui.views.EditTextQuestion
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:inputType="text"
-                android:padding="4dp"
-                android:text="Health area" />
-
-            <io.bewsys.spmobile.ui.views.EditTextQuestion
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:inputType="text"
-                android:padding="4dp"
-                android:text="Groupment" />
-
-            <io.bewsys.spmobile.ui.views.EditTextQuestion
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:inputType="text"
-                android:padding="4dp"
-                android:text="Address" />
-            <io.bewsys.spmobile.ui.views.EditTextQuestion
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:inputType="text"
-                android:padding="4dp"
-                android:text="village_or_quartier" />
-
-            <io.bewsys.spmobile.ui.views.EditTextQuestion
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:inputType="text"
-                android:padding="4dp"
-                android:text="Comments" />
-            <io.bewsys.spmobile.ui.views.EditTextQuestion
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:inputType="text"
-                android:padding="4dp"
-                android:text="mobile_money_username" />
-            <io.bewsys.spmobile.ui.views.EditTextQuestion
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:inputType="text"
-                android:padding="4dp"
-                android:text="mobile_money_number" />
-
-
+                style="@style/question_style"
+                android:text="Other household activities in past 12 months" />
 
         </LinearLayout>
 

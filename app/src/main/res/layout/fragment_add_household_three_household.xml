@@ -131,9 +131,8 @@
                 android:text="Give up health care" />
 
             <io.bewsys.spmobile.ui.views.EditTextQuestion
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:padding="4dp"
+                style="@style/question_style"
+            android:inputType="number"
                 android:text="Days spent other coping strategy" />
 
             <io.bewsys.spmobile.ui.views.EditTextQuestion
@@ -144,16 +143,14 @@
             <io.bewsys.spmobile.ui.views.EditTextQuestion
                 style="@style/question_style"
                 android:inputType="number"
-                android:text="Minimum monthly income necessary live without difficulties - int" />
+                android:text="Minimum monthly income necessary live without difficulties" />
 
             <io.bewsys.spmobile.ui.views.EditTextQuestion
                 style="@style/question_style"
-                android:inputType="number"
                 android:text="Household member with benefit from social assistance program" />
 
             <io.bewsys.spmobile.ui.views.EditTextQuestion
                 style="@style/question_style"
-
                 android:text="Name of social assistance program" />
 
         </LinearLayout>

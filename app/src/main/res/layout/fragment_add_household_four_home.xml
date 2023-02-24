@@ -9,82 +9,167 @@
         android:padding="8dp"
         android:scrollbars="none">
 
-
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical">
 
+
             <TextView
                 style="@style/heading_form_sub"
                 android:text="Property" />
 
+
             <io.bewsys.spmobile.ui.views.EditTextQuestion
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:padding="4dp"
+                style="@style/question_style"
+                android:inputType="number"
                 android:text="Number of goat owned" />
+
+            <io.bewsys.spmobile.ui.views.EditTextQuestion
+                style="@style/question_style"
+                android:inputType="number"
+                android:text="Number of sheep owned" />
+
+            <io.bewsys.spmobile.ui.views.EditTextQuestion
+                style="@style/question_style"
+                android:inputType="number"
+                android:text="Number of cow owned" />
+
+            <io.bewsys.spmobile.ui.views.EditTextQuestion
+                style="@style/question_style"
+                android:inputType="number"
+                android:text="Number of rabbit owned" />
+
+            <io.bewsys.spmobile.ui.views.EditTextQuestion
+                style="@style/question_style"
+                android:inputType="number"
+                android:text="Number of pigs owned" />
+
+
+            <io.bewsys.spmobile.ui.views.EditTextQuestion
+                style="@style/question_style"
+                android:inputType="number"
+                android:text="Number of poultry owned" />
+
+            <io.bewsys.spmobile.ui.views.EditTextQuestion
+                style="@style/question_style"
+                android:inputType="number"
+                android:text="Number of guinea pigs owned" />
+
+            <io.bewsys.spmobile.ui.views.QuantityQuestion
+                style="@style/question_style"
+                android:entries="@array/short_number_list"
+                android:text="Number of cars owned" />
+
+            <io.bewsys.spmobile.ui.views.QuantityQuestion
+                style="@style/question_style"
+                android:entries="@array/short_number_list"
+                android:text="Number of motobike owned" />
+
+            <io.bewsys.spmobile.ui.views.QuantityQuestion
+                style="@style/question_style"
+                android:entries="@array/short_number_list"
+                android:text="Number of bicycle owned" />
+
+            <io.bewsys.spmobile.ui.views.QuantityQuestion
+                style="@style/question_style"
+                android:entries="@array/short_number_list"
+                android:text="Number of cart owned" />
+
+
+            <io.bewsys.spmobile.ui.views.QuantityQuestion
+                style="@style/question_style"
+                android:entries="@array/short_number_list"
+                android:text="Number of plow owned" />
+
+            <io.bewsys.spmobile.ui.views.QuantityQuestion
+                style="@style/question_style"
+                android:entries="@array/short_number_list"
+                android:text="Number of wheelbarrow owned" />
+
+            <io.bewsys.spmobile.ui.views.QuantityQuestion
+                style="@style/question_style"
+                android:entries="@array/short_number_list"
+                android:text="Number of rickshaw owned" />
+
+
+            <io.bewsys.spmobile.ui.views.QuantityQuestion
+                style="@style/question_style"
+                android:entries="@array/short_number_list"
+                android:text="Number of mattress owned" />
+
+            <io.bewsys.spmobile.ui.views.QuantityQuestion
+                style="@style/question_style"
+                android:entries="@array/short_number_list"
+                android:text="Number of fridge owned" />
+
+            <io.bewsys.spmobile.ui.views.QuantityQuestion
+                style="@style/question_style"
+                android:entries="@array/short_number_list"
+                android:text="Number of fan owned" />
+
+            <io.bewsys.spmobile.ui.views.QuantityQuestion
+                style="@style/question_style"
+                android:entries="@array/short_number_list"
+                android:text="Number of air conditionor owned" />
+
+
+            <io.bewsys.spmobile.ui.views.QuantityQuestion
+                style="@style/question_style"
+                android:entries="@array/short_number_list"
+                android:text="Number of television owned" />
+
+            <io.bewsys.spmobile.ui.views.QuantityQuestion
+                style="@style/question_style"
+                android:entries="@array/short_number_list"
+                android:text="Number of radio owned" />
+
+            <io.bewsys.spmobile.ui.views.QuantityQuestion
+                style="@style/question_style"
+                android:entries="@array/short_number_list"
+                android:text="Number of Canal TNT TV Cable owned" />
+
+            <io.bewsys.spmobile.ui.views.QuantityQuestion
+                style="@style/question_style"
+                android:entries="@array/short_number_list"
+                android:text="Number of DVD driver owned" />
+
+            <io.bewsys.spmobile.ui.views.QuantityQuestion
+                style="@style/question_style"
+                android:entries="@array/short_number_list"
+                android:text="Number of computer owned" />
+
+            <io.bewsys.spmobile.ui.views.QuantityQuestion
+                style="@style/question_style"
+                android:entries="@array/short_number_list"
+                android:text="Number of stove or oven owned" />
+
+            <io.bewsys.spmobile.ui.views.QuantityQuestion
+                style="@style/question_style"
+                android:entries="@array/short_number_list"
+                android:text="Number of oil stove owned" />
+
+            <io.bewsys.spmobile.ui.views.QuantityQuestion
+                style="@style/question_style"
+                android:entries="@array/short_number_list"
+                android:text="Number of solar plate owned" />
+
+            <io.bewsys.spmobile.ui.views.QuantityQuestion
+                style="@style/question_style"
+                android:entries="@array/short_number_list"
+                android:text="Number of sewing machines owned" />
+
+            <io.bewsys.spmobile.ui.views.QuantityQuestion
+                style="@style/question_style"
+                android:entries="@array/short_number_list"
+                android:text="Number of electric iron owned" />
+
+            <io.bewsys.spmobile.ui.views.QuantityQuestion
+                style="@style/question_style"
+                android:entries="@array/short_number_list"
+                android:text="Number of charcoal iron owned" />
 
         </LinearLayout>
 
     </ScrollView>
 </androidx.constraintlayout.widget.ConstraintLayout>
-<!--
-
-    other_livestock_owned TEXT ,
-    number_of_goat_owned INTEGER ,
-    number_of_sheep_owned INTEGER ,
-    number_of_cow_owned INTEGER ,
-    number_of_rabbit_owned INTEGER ,
-    number_of_pigs_owned INTEGER ,
-    number_of_poultry_owned INTEGER ,
-    number_of_guinea_pig_owned INTEGER ,
-    number_of_cars_owned INTEGER ,
-    number_of_motorbike_owned INTEGER ,
-    number_of_bicycle_owned INTEGER ,
-    number_of_cart_owned INTEGER ,
-    number_of_plow_owned INTEGER ,
-    number_of_wheelbarrow_owned INTEGER ,
-    number_of_rickshaw_owned INTEGER ,
-    number_of_mattress_owned INTEGER ,
-    number_of_fridge_owned INTEGER ,
-    number_of_fan_owned INTEGER ,
-    number_of_air_conditioner_owned INTEGER ,
-    number_of_radio_owned INTEGER ,
-    number_of_television_owned INTEGER ,
-    number_of_canal_tnt_tv_cable_owned INTEGER ,
-    number_of_dvd_driver_owned INTEGER ,
-    number_of_handset_or_phone_owned INTEGER ,
-    number_of_computer_owned INTEGER ,
-    number_of_stove_or_oven_owned INTEGER ,
-    number_of_oil_stove_owned INTEGER ,
-    number_of_solar_plate_owned INTEGER ,
-    number_of_sewing_machine_owned INTEGER ,
-    number_of_electric_iron_owned INTEGER ,
-    number_of_charcoal_iron_owned INTEGER ,
-    number_of_bed_owned INTEGER ,
-    number_of_table_owned INTEGER ,
-    number_of_chair_owned INTEGER ,
-    number_of_sofa_owned INTEGER ,
-    number_of_mosquito_nets_owned INTEGER ,
-    amount_of_cultivable_land_owned INTEGER ,
-    number_of_meals_eaten_by_adults_18_plus_yesterday INTEGER ,
-    number_of_meals_eaten_by_children_6_to_17_yesterday INTEGER ,
-    number_of_meals_eaten_by_children_2_to_5_yesterday INTEGER ,
-    number_of_days_in_week_consumed_staple_foods INTEGER ,
-    number_of_days_in_week_consumed_legumes_or_nuts INTEGER ,
-    number_of_days_in_week_consumed_dairy_products INTEGER ,
-    number_of_days_in_week_consumed_meat INTEGER ,
-    number_of_days_in_week_consumed_vegetables INTEGER ,
-    number_of_days_in_week_consumed_fruits INTEGER ,
-    number_of_days_in_week_consumed_cooking_oils INTEGER ,
-    number_of_days_in_week_consumed_sugar_or_sweet_products INTEGER ,
-    days_spent_reduce_amount_consumed_coping_strategy INTEGER ,
-    days_spent_reduce_meals_consumed_coping_strategy INTEGER ,
-    days_spent_reduce_meals_adult_forfeit_meal_for_child_coping_strategy INTEGER ,
-    days_spent_eat_less_expensively_coping_strategy INTEGER ,
-    days_spent_borrow_food_or_rely_on_family_help_coping_strategy INTEGER ,
-    days_spent_days_without_eating_coping_strategy INTEGER ,
-    days_spent_begging_coping_strategy INTEGER ,
-    days_spent_consume_wild_food_coping_strategy INTEGER ,
-    other_household_activities_in_past_12_months TEXT-->

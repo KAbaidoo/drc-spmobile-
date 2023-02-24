@@ -29,7 +29,6 @@
         <com.google.android.material.textfield.TextInputEditText
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:inputType="text"
             android:maxLines="3" />
 
     </com.google.android.material.textfield.TextInputLayout>

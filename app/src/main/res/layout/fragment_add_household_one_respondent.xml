@@ -12,24 +12,20 @@
 
 
         <LinearLayout
+            android:id="@+id/linear_layout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
             android:padding="8dp">
 
 
-            <TextView
-                style="@style/heading_form_sub"
-                android:text="Respondent" />
-
             <io.bewsys.spmobile.ui.views.EditTextQuestion
                 style="@style/question_style"
-                android:padding="4dp"
                 android:text="Firstname" />
 
             <io.bewsys.spmobile.ui.views.EditTextQuestion
                 style="@style/question_style"
-                android:padding="4dp"
+
                 android:text="Middlename" />
 
             <io.bewsys.spmobile.ui.views.EditTextQuestion
@@ -38,7 +34,6 @@
                 android:text="Lastname" />
 
             <io.bewsys.spmobile.ui.views.DatePickertQuestion
-                android:id="@+id/text_view_dob"
                 style="@style/question_style"
                 android:inputType="date"
                 android:text="Date of birth" />
@@ -60,3 +55,7 @@
 
     </ScrollView>
 </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <!--<TextView-->
+    <!--style="@style/heading_form_sub"-->
+    <!--android:text="Respondent" />-->
