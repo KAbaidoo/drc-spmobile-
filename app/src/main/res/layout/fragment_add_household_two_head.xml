@@ -1,9 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-
+<androidx.appcompat.widget.LinearLayoutCompat xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
-
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+    <TextView
+        style="@style/heading_form_sub"
+        android:text="Household head" />
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -11,31 +13,27 @@
         android:scrollbars="none">
 
         <LinearLayout
+            android:id="@+id/linear_layout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical">
 
-            <TextView
-                style="@style/heading_form_sub"
-                android:text="Household head" />
-
+            <io.bewsys.spmobile.ui.views.EditTextQuestion
+                style="@style/question_style"
+                android:text="Household head Firstname" />
 
             <io.bewsys.spmobile.ui.views.EditTextQuestion
                 style="@style/question_style"
-                android:text="Firstname" />
+                android:text="Household head Middlename" />
 
             <io.bewsys.spmobile.ui.views.EditTextQuestion
                 style="@style/question_style"
-                android:text="Middlename" />
-
-            <io.bewsys.spmobile.ui.views.EditTextQuestion
-                style="@style/question_style"
-                android:text="Lastname" />
+                android:text="Household head Lastname" />
 
             <io.bewsys.spmobile.ui.views.RadioButtonQuestion
                 style="@style/question_style"
                 android:entries="@array/male_or_female"
-                android:text="Head sex" />
+                android:text="Household head sex" />
 
             <io.bewsys.spmobile.ui.views.RadioButtonQuestion
                 style="@style/question_style"
@@ -45,61 +43,61 @@
             <io.bewsys.spmobile.ui.views.EditTextQuestion
                 style="@style/question_style"
                 android:inputType="number"
-                android:text="Head age" />
+                android:text="Household head age" />
 
             <io.bewsys.spmobile.ui.views.RadioButtonQuestion
                 style="@style/question_style"
                 android:entries="@array/yes_or_no"
-                android:text="Head Date of birth known" />
+                android:text="Head DOB known" />
 
             <io.bewsys.spmobile.ui.views.DatePickertQuestion
                 android:id="@+id/text_view_dob"
                 style="@style/question_style"
                 android:inputType="date"
-                android:text="Date of birth" />
+                android:text="Household head DOB" />
 
             <io.bewsys.spmobile.ui.views.EditTextQuestion
                 style="@style/question_style"
-                android:text="Voter ID" />
+                android:text="Household head voter ID card" />
 
             <io.bewsys.spmobile.ui.views.EditTextQuestion
                 style="@style/question_style"
                 android:inputType="phone"
-                android:text="Phone number" />
+                android:text="Household head phone number" />
 
             <io.bewsys.spmobile.ui.views.RadioButtonQuestion
                 style="@style/question_style"
                 android:entries="@array/marital_status"
-                android:text="Marital status" />
+                android:text="Household head marital status" />
 
             <io.bewsys.spmobile.ui.views.EditTextQuestion
                 style="@style/question_style"
-                android:text="Birth certificate" />
+                android:text="Household head birth certificate" />
 
             <io.bewsys.spmobile.ui.views.EditTextQuestion
                 style="@style/question_style"
-                android:text="Educational level" />
+                android:text="Household head educational level" />
 
             <io.bewsys.spmobile.ui.views.EditTextQuestion
                 style="@style/question_style"
-                android:text="Disability" />
+                android:text="Household head disability id" />
 
             <io.bewsys.spmobile.ui.views.EditTextQuestion
                 style="@style/question_style"
-                android:text="Socio-professional category" />
+                android:text="Household head socio professional category" />
 
             <io.bewsys.spmobile.ui.views.EditTextQuestion
                 style="@style/question_style"
-                android:text="School attendance" />
+                android:text="Household head school attendance" />
 
             <io.bewsys.spmobile.ui.views.EditTextQuestion
                 style="@style/question_style"
-                android:text="Sector of work" />
+                android:text="Household head sector of work" />
 
             <io.bewsys.spmobile.ui.views.RadioButtonQuestion
                 style="@style/question_style"
                 android:entries="@array/yes_or_no"
-                android:text="Pregnancy status" />
+                android:text="Household head pregnancy status" />
 
 
             <io.bewsys.spmobile.ui.views.EditTextQuestion
@@ -113,7 +111,7 @@
 
             <io.bewsys.spmobile.ui.views.EditTextQuestion
                 style="@style/question_style"
-                android:text="Area of residence -int" />
+                android:text="Area of residence" />
 
             <io.bewsys.spmobile.ui.views.EditTextQuestion
                 style="@style/question_style"
@@ -158,10 +156,10 @@
             <io.bewsys.spmobile.ui.views.EditTextQuestion
                 style="@style/question_style"
                 android:inputType="phone"
-                android:text="Mobile money number" />
+                android:text="Mobile money phone number" />
 
 
         </LinearLayout>
 
     </ScrollView>
-</androidx.constraintlayout.widget.ConstraintLayout>
+</androidx.appcompat.widget.LinearLayoutCompat>

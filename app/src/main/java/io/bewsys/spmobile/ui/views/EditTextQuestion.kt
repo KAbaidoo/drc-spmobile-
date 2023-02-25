@@ -14,6 +14,7 @@ import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.widget.addTextChangedListener
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.findFragment
+import app.cash.sqldelight.db.QueryResult.Unit.value
 import com.google.android.material.datepicker.MaterialDatePicker
 import com.google.android.material.textfield.TextInputLayout
 import io.bewsys.spmobile.R
@@ -29,8 +30,11 @@ constructor(
     private var answerView: TextInputLayout
     private var typedArray: TypedArray? = null
 
-    override var answer: String = ""
+    override var answer: String
         get() = answerView.editText?.text.toString()
+        set(value) {
+            answerView.editText?.setText(value)
+        }
 
     override var title: String = ""
         get() = questionView.text.toString()
@@ -62,7 +66,7 @@ constructor(
                     R.styleable.EditTextQuestion_android_inputType,
                     InputType.TYPE_CLASS_TEXT
                 ) as Int
-            answerView.editText?.setText("")
+//            answerView.editText?.setText("")
 
         }
 

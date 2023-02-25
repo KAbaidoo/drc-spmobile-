@@ -72,6 +72,7 @@
                 android:id="@+id/check_box_icon"
                 android:layout_width="24dp"
                 android:layout_height="24dp"
+                android:focusable="false"
                 android:button="@drawable/state_list_cloud"
                 android:contentDescription="@string/cloud_icon_description"
 

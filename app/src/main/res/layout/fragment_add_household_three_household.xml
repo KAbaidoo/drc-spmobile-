@@ -1,7 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.appcompat.widget.LinearLayoutCompat xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <TextView
+        style="@style/heading_form_sub"
+        android:text="Household" />
 
     <ScrollView
         android:layout_width="match_parent"
@@ -11,13 +16,11 @@
 
 
         <LinearLayout
+            android:id="@+id/linear_layout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical">
 
-            <TextView
-                style="@style/heading_form_sub"
-                android:text="Household" />
 
             <io.bewsys.spmobile.ui.views.EditTextQuestion
                 style="@style/question_style"
@@ -132,7 +135,7 @@
 
             <io.bewsys.spmobile.ui.views.EditTextQuestion
                 style="@style/question_style"
-            android:inputType="number"
+                android:inputType="number"
                 android:text="Days spent other coping strategy" />
 
             <io.bewsys.spmobile.ui.views.EditTextQuestion
@@ -156,4 +159,4 @@
         </LinearLayout>
 
     </ScrollView>
-</androidx.constraintlayout.widget.ConstraintLayout>
+</androidx.appcompat.widget.LinearLayoutCompat>

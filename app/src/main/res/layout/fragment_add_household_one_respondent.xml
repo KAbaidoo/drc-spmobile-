@@ -1,8 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-
+<androidx.appcompat.widget.LinearLayoutCompat xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+    <TextView
+        style="@style/heading_form_sub"
+        android:text="Respondent" />
 
     <ScrollView
         android:layout_width="match_parent"
@@ -21,41 +24,37 @@
 
             <io.bewsys.spmobile.ui.views.EditTextQuestion
                 style="@style/question_style"
-                android:text="Firstname" />
+                android:text="Respondent Firstname" />
 
             <io.bewsys.spmobile.ui.views.EditTextQuestion
                 style="@style/question_style"
-
-                android:text="Middlename" />
+                android:text="Respondent Middlename" />
 
             <io.bewsys.spmobile.ui.views.EditTextQuestion
                 style="@style/question_style"
                 android:padding="4dp"
-                android:text="Lastname" />
+                android:text="Respondent Lastname" />
 
             <io.bewsys.spmobile.ui.views.DatePickertQuestion
                 style="@style/question_style"
                 android:inputType="date"
-                android:text="Date of birth" />
+                android:text="Respondent DOB" />
 
             <io.bewsys.spmobile.ui.views.RadioButtonQuestion
                 style="@style/question_style"
                 android:entries="@array/yes_or_no"
-                android:text="Family bond to head" />
+                android:text="Respondent Family bond to head" />
 
             <io.bewsys.spmobile.ui.views.EditTextQuestion
                 style="@style/question_style"
-                android:text="Voter ID" />
+                android:text="Respondent Voter ID" />
 
             <io.bewsys.spmobile.ui.views.EditTextQuestion
                 style="@style/question_style"
                 android:inputType="phone"
-                android:text="Phone number" />
+                android:text="Respondent Phone number" />
         </LinearLayout>
 
     </ScrollView>
-</androidx.constraintlayout.widget.ConstraintLayout>
+</androidx.appcompat.widget.LinearLayoutCompat>
 
-    <!--<TextView-->
-    <!--style="@style/heading_form_sub"-->
-    <!--android:text="Respondent" />-->

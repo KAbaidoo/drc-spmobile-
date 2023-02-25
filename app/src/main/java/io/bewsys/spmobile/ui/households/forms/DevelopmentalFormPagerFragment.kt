@@ -6,8 +6,8 @@ import androidx.activity.OnBackPressedCallback
 
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentActivity
+import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
-import androidx.viewpager.widget.ViewPager
 import androidx.viewpager2.adapter.FragmentStateAdapter
 import androidx.viewpager2.widget.ViewPager2
 import io.bewsys.spmobile.R
@@ -18,14 +18,13 @@ private const val NUM_PAGES = 5
 class DevelopmentalFormFragment : Fragment(R.layout.fragment_developmental_form) {
     private lateinit var viewPager: ViewPager2
 
-
+//    private val sharedViewModel:SharedDevelopmentalFormViewModel by activityViewModels()
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
         val binding = FragmentDevelopmentalFormBinding.bind(view)
 
-
-
+//TODO add menu to clear form
 
         binding.apply {
 
@@ -39,6 +38,7 @@ class DevelopmentalFormFragment : Fragment(R.layout.fragment_developmental_form)
                 override fun handleOnBackPressed() {
                     if (pager.currentItem == 0) {
                         remove()
+//                        sharedViewModel.clearEntries()
                         findNavController().popBackStack()
 
                     } else {
@@ -52,6 +52,10 @@ class DevelopmentalFormFragment : Fragment(R.layout.fragment_developmental_form)
 
     }
 
+//    override fun onStop() {
+//        super.onStop()
+//        sharedViewModel.clearEntries()
+//    }
 
 
     private inner class ScreenSlidePagerAdapter(

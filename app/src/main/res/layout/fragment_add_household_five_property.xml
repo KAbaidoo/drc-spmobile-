@@ -1,7 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.appcompat.widget.LinearLayoutCompat xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
 
     <ScrollView
         android:layout_width="match_parent"
@@ -9,7 +11,7 @@
         android:padding="8dp"
         android:scrollbars="none">
 
-        <LinearLayout
+        <androidx.appcompat.widget.LinearLayoutCompat
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical">
@@ -18,147 +20,171 @@
                 style="@style/heading_form_sub"
                 android:text="Property" />
 
-            <io.bewsys.spmobile.ui.views.QuantityQuestion
-                style="@style/question_style"
-                android:entries="@array/short_number_list"
-                android:text="Number of bed owned" />
+            <LinearLayout
+                android:id="@+id/linear_layout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
 
-            <io.bewsys.spmobile.ui.views.QuantityQuestion
-                style="@style/question_style"
-                android:entries="@array/short_number_list"
-                android:text="Number of table owned" />
+                <io.bewsys.spmobile.ui.views.QuantityQuestion
+                    style="@style/question_style"
+                    android:entries="@array/short_number_list"
+                    android:text="Number of bed owned" />
 
-            <io.bewsys.spmobile.ui.views.QuantityQuestion
-                style="@style/question_style"
-                android:entries="@array/long_number_list"
-                android:text="Number of chair owned" />
+                <io.bewsys.spmobile.ui.views.QuantityQuestion
+                    style="@style/question_style"
+                    android:entries="@array/short_number_list"
+                    android:text="Number of table owned" />
 
-            <io.bewsys.spmobile.ui.views.QuantityQuestion
-                style="@style/question_style"
-                android:entries="@array/short_number_list"
-                android:text="Number of sofa owned" />
+                <io.bewsys.spmobile.ui.views.QuantityQuestion
+                    style="@style/question_style"
+                    android:entries="@array/long_number_list"
+                    android:text="Number of chair owned" />
+
+                <io.bewsys.spmobile.ui.views.QuantityQuestion
+                    style="@style/question_style"
+                    android:entries="@array/short_number_list"
+                    android:text="Number of sofa owned" />
 
 
-            <io.bewsys.spmobile.ui.views.QuantityQuestion
-                style="@style/question_style"
-                android:entries="@array/long_number_list"
-                android:text="Number of mosquito nets owned" />
+                <io.bewsys.spmobile.ui.views.QuantityQuestion
+                    style="@style/question_style"
+                    android:entries="@array/long_number_list"
+                    android:text="Number of mosquito nets owned" />
 
-            <io.bewsys.spmobile.ui.views.QuantityQuestion
-                style="@style/question_style"
-                android:entries="@array/short_number_list"
-                android:text="Number of cultivable land owned" />
+                <io.bewsys.spmobile.ui.views.QuantityQuestion
+                    style="@style/question_style"
+                    android:entries="@array/short_number_list"
+                    android:text="Number of cultivable land owned" />
 
-            <io.bewsys.spmobile.ui.views.QuantityQuestion
-                style="@style/question_style"
-                android:entries="@array/short_number_list"
-                android:text="Number of meals eaten by adults 18 plus yesterday" />
+                <io.bewsys.spmobile.ui.views.QuantityQuestion
+                    style="@style/question_style"
+                    android:entries="@array/short_number_list"
+                    android:text="Number of meals eaten by adults 18 plus yesterday" />
 
-            <io.bewsys.spmobile.ui.views.QuantityQuestion
-                style="@style/question_style"
-                android:entries="@array/short_number_list"
-                android:text="Number of meals eaten by children 6 to 17 yesterday" />
+                <io.bewsys.spmobile.ui.views.QuantityQuestion
+                    style="@style/question_style"
+                    android:entries="@array/short_number_list"
+                    android:text="Number of meals eaten by children 6 to 17 yesterday" />
 
-            <io.bewsys.spmobile.ui.views.QuantityQuestion
-                style="@style/question_style"
-                android:entries="@array/short_number_list"
-                android:text="Number of meals eaten by children 2 to 5 yesterday" />
+                <io.bewsys.spmobile.ui.views.QuantityQuestion
+                    style="@style/question_style"
+                    android:entries="@array/short_number_list"
+                    android:text="Number of meals eaten by children 2 to 5 yesterday" />
 
-            <io.bewsys.spmobile.ui.views.QuantityQuestion
-                style="@style/question_style"
-                android:entries="@array/short_number_list"
-                android:text="Number of meals eaten by children 2 to 5 yesterday" />
+                <io.bewsys.spmobile.ui.views.QuantityQuestion
+                    style="@style/question_style"
+                    android:entries="@array/short_number_list"
+                    android:text="Number of meals eaten by children 2 to 5 yesterday" />
 
-            <io.bewsys.spmobile.ui.views.QuantityQuestion
-                style="@style/question_style"
-                android:entries="@array/short_number_list"
-                android:text="Number of meals eaten by children 2 to 5 yesterday" />
+                <io.bewsys.spmobile.ui.views.QuantityQuestion
+                    style="@style/question_style"
+                    android:entries="@array/short_number_list"
+                    android:text="Number of meals eaten by children 2 to 5 yesterday" />
 
-            <io.bewsys.spmobile.ui.views.QuantityQuestion
-                style="@style/question_style"
-                android:entries="@array/short_number_list"
-                android:text="Number of days in week consumed staple foods" />
+                <io.bewsys.spmobile.ui.views.QuantityQuestion
+                    style="@style/question_style"
+                    android:entries="@array/short_number_list"
+                    android:text="Number of days in week consumed staple foods" />
 
-            <io.bewsys.spmobile.ui.views.QuantityQuestion
-                style="@style/question_style"
-                android:entries="@array/short_number_list"
-                android:text="Number of days in week consumed legumes or nuts" />
+                <io.bewsys.spmobile.ui.views.QuantityQuestion
+                    style="@style/question_style"
+                    android:entries="@array/short_number_list"
+                    android:text="Number of days in week consumed legumes or nuts" />
 
-            <io.bewsys.spmobile.ui.views.QuantityQuestion
-                style="@style/question_style"
-                android:entries="@array/short_number_list"
-                android:text="Number of days in week consumed dairy products" />
+                <io.bewsys.spmobile.ui.views.QuantityQuestion
+                    style="@style/question_style"
+                    android:entries="@array/short_number_list"
+                    android:text="Number of days in week consumed dairy products" />
 
-            <io.bewsys.spmobile.ui.views.QuantityQuestion
-                style="@style/question_style"
-                android:entries="@array/short_number_list"
-                android:text="Number of days in week consumed meat" />
+                <io.bewsys.spmobile.ui.views.QuantityQuestion
+                    style="@style/question_style"
+                    android:entries="@array/short_number_list"
+                    android:text="Number of days in week consumed meat" />
 
-            <io.bewsys.spmobile.ui.views.QuantityQuestion
-                style="@style/question_style"
-                android:entries="@array/short_number_list"
-                android:text="Number of days in week consumed vegetables" />
+                <io.bewsys.spmobile.ui.views.QuantityQuestion
+                    style="@style/question_style"
+                    android:entries="@array/short_number_list"
+                    android:text="Number of days in week consumed vegetables" />
 
-            <io.bewsys.spmobile.ui.views.QuantityQuestion
-                style="@style/question_style"
-                android:entries="@array/short_number_list"
-                android:text="Number of days in week consumed fruits" />
+                <io.bewsys.spmobile.ui.views.QuantityQuestion
+                    style="@style/question_style"
+                    android:entries="@array/short_number_list"
+                    android:text="Number of days in week consumed fruits" />
 
-            <io.bewsys.spmobile.ui.views.QuantityQuestion
-                style="@style/question_style"
-                android:entries="@array/short_number_list"
-                android:text="Number of days in week consumed cooking oils" />
+                <io.bewsys.spmobile.ui.views.QuantityQuestion
+                    style="@style/question_style"
+                    android:entries="@array/short_number_list"
+                    android:text="Number of days in week consumed cooking oils" />
 
-            <io.bewsys.spmobile.ui.views.QuantityQuestion
-                style="@style/question_style"
-                android:entries="@array/short_number_list"
-                android:text="Number of days in week consumed sugar or sweet products" />
+                <io.bewsys.spmobile.ui.views.QuantityQuestion
+                    style="@style/question_style"
+                    android:entries="@array/short_number_list"
+                    android:text="Number of days in week consumed sugar or sweet products" />
 
-            <io.bewsys.spmobile.ui.views.QuantityQuestion
-                style="@style/question_style"
-                android:entries="@array/short_number_list"
-                android:text="Days spent reduce amount consumed coping strategy" />
+                <io.bewsys.spmobile.ui.views.QuantityQuestion
+                    style="@style/question_style"
+                    android:entries="@array/short_number_list"
+                    android:text="Days spent reduce amount consumed coping strategy" />
 
-            <io.bewsys.spmobile.ui.views.QuantityQuestion
-                style="@style/question_style"
-                android:entries="@array/short_number_list"
-                android:text="Days spent reduce meals consumed coping strategy" />
+                <io.bewsys.spmobile.ui.views.QuantityQuestion
+                    style="@style/question_style"
+                    android:entries="@array/short_number_list"
+                    android:text="Days spent reduce meals consumed coping strategy" />
 
-            <io.bewsys.spmobile.ui.views.QuantityQuestion
-                style="@style/question_style"
-                android:entries="@array/short_number_list"
-                android:text="Days spent reduce meals adult forfeit meal for child coping strategy" />
+                <io.bewsys.spmobile.ui.views.QuantityQuestion
+                    style="@style/question_style"
+                    android:entries="@array/short_number_list"
+                    android:text="Days spent reduce meals adult forfeit meal for child coping strategy" />
 
-            <io.bewsys.spmobile.ui.views.QuantityQuestion
-                style="@style/question_style"
-                android:entries="@array/short_number_list"
-                android:text="Days spent eat less expensively coping strategy" />
+                <io.bewsys.spmobile.ui.views.QuantityQuestion
+                    style="@style/question_style"
+                    android:entries="@array/short_number_list"
+                    android:text="Days spent eat less expensively coping strategy" />
 
-            <io.bewsys.spmobile.ui.views.QuantityQuestion
-                style="@style/question_style"
-                android:entries="@array/short_number_list"
-                android:text="Days spent borrow food or rely on family help coping strategy" />
+                <io.bewsys.spmobile.ui.views.QuantityQuestion
+                    style="@style/question_style"
+                    android:entries="@array/short_number_list"
+                    android:text="Days spent borrow food or rely on family help coping strategy" />
 
-            <io.bewsys.spmobile.ui.views.QuantityQuestion
-                style="@style/question_style"
-                android:entries="@array/short_number_list"
-                android:text="Days spent days without eating coping strategy" />
+                <io.bewsys.spmobile.ui.views.QuantityQuestion
+                    style="@style/question_style"
+                    android:entries="@array/short_number_list"
+                    android:text="Days spent days without eating coping strategy" />
 
-            <io.bewsys.spmobile.ui.views.QuantityQuestion
-                style="@style/question_style"
-                android:entries="@array/short_number_list"
-                android:text="Days spent begging coping strategy" />
+                <io.bewsys.spmobile.ui.views.QuantityQuestion
+                    style="@style/question_style"
+                    android:entries="@array/short_number_list"
+                    android:text="Days spent begging coping strategy" />
 
-            <io.bewsys.spmobile.ui.views.QuantityQuestion
-                style="@style/question_style"
-                android:entries="@array/short_number_list"
-                android:text="Days spent consume wild food coping strategy" />
+                <io.bewsys.spmobile.ui.views.QuantityQuestion
+                    style="@style/question_style"
+                    android:entries="@array/short_number_list"
+                    android:text="Days spent consume wild food coping strategy" />
 
-            <io.bewsys.spmobile.ui.views.EditTextQuestion
-                style="@style/question_style"
-                android:text="Other household activities in past 12 months" />
+                <io.bewsys.spmobile.ui.views.EditTextQuestion
+                    style="@style/question_style"
+                    android:text="Other household activities in past 12 months" />
 
-        </LinearLayout>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:layout_marginBottom="24dp"
+                android:gravity="end"
+                android:orientation="horizontal">
+
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/button_register"
+                    style="@style/styled_button"
+                    android:text="@string/button_register" />
+            </LinearLayout>
+
+        </androidx.appcompat.widget.LinearLayoutCompat>
 
     </ScrollView>
-</androidx.constraintlayout.widget.ConstraintLayout>
+
+</androidx.appcompat.widget.LinearLayoutCompat>

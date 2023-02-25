@@ -177,7 +177,6 @@ class AddNonConsentingHouseholdViewModel(
         }
 
     private fun uploadNonConsentingHousehold(itemId: Long) = viewModelScope.launch {
-
         val constraints = Constraints.Builder()
             .setRequiredNetworkType(NetworkType.CONNECTED)
             .build()
