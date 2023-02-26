@@ -75,7 +75,6 @@ class SharedDevelopmentalFormViewModel : ViewModel() {
             household_head_pregnancy_status =  _entriesMap["household_head_pregnancy_status"],
             unit_of_migration_duration =  _entriesMap["unit_of_migration_duration"],
             territory_or_town =  _entriesMap["territory_or_town"],
-            status =  _entriesMap["status"],
             bank_account_or_bank_card_available =  _entriesMap["bank_account_or_bank_card_available"],
             is_income_regular =  _entriesMap["is_income_regular"],
             household_member_access_to_cultivable_land =  _entriesMap["household_member_access_to_cultivable_land"],

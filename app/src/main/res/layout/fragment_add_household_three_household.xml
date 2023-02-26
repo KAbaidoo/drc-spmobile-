@@ -28,10 +28,6 @@
 
             <io.bewsys.spmobile.ui.views.EditTextQuestion
                 style="@style/question_style"
-                android:text="Status" />
-
-            <io.bewsys.spmobile.ui.views.EditTextQuestion
-                style="@style/question_style"
                 android:text="Migration status" />
 
             <io.bewsys.spmobile.ui.views.EditTextQuestion
