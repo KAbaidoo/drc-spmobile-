@@ -3,6 +3,7 @@ package io.bewsys.spmobile.ui.nonconsenting.form
 import android.app.Application
 import androidx.lifecycle.*
 import androidx.work.*
+import io.bewsys.spmobile.ADD_NON_CONSENTING_HOUSEHOLD_RESULT_OK
 
 import io.bewsys.spmobile.KEY_DATA_ID
 import io.bewsys.spmobile.data.CommunityEntity
@@ -11,7 +12,6 @@ import io.bewsys.spmobile.data.model.NonConsentHousehold
 import io.bewsys.spmobile.data.repository.CommunityRepositoryImpl
 import io.bewsys.spmobile.data.repository.NonConsentingHouseholdRepositoryImpl
 import io.bewsys.spmobile.data.repository.ProvinceRepositoryImpl
-import io.bewsys.spmobile.ui.ADD_NON_CONSENTING_HOUSEHOLD_RESULT_OK
 import io.bewsys.spmobile.work.UploadWorker
 import kotlinx.coroutines.channels.Channel
 import kotlinx.coroutines.flow.*

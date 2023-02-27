@@ -38,6 +38,7 @@ class NonConsentingFragment : Fragment(R.layout.fragment_non_consenting) ,NonCon
         viewModel.nonConsentingHouseholds.observe(viewLifecycleOwner){
             nonConsentingHouseholdAdapter.submitList(it)
         }
+
         viewLifecycleOwner.lifecycleScope.launchWhenStarted {
             viewModel.nonConsentingEvent.collect { event ->
                 when (event) {

@@ -32,6 +32,7 @@ class HouseholdRepositoryImpl(db: Database) : HouseholdRepository {
         household: HouseholdModel
     ): Unit = withContext(Dispatchers.IO) {
 
+
         household.apply {
             queries.insertHousehold(
                 id = id,

@@ -3,22 +3,26 @@ package io.bewsys.spmobile.ui.households.forms
 import android.os.Bundle
 import android.view.View
 import androidx.activity.OnBackPressedCallback
+import androidx.core.os.bundleOf
+import androidx.fragment.app.*
 
-import androidx.fragment.app.Fragment
-import androidx.fragment.app.FragmentActivity
-import androidx.fragment.app.activityViewModels
+import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import androidx.viewpager2.adapter.FragmentStateAdapter
 import androidx.viewpager2.widget.ViewPager2
+import com.google.android.material.snackbar.Snackbar
 import io.bewsys.spmobile.R
 import io.bewsys.spmobile.databinding.FragmentDevelopmentalFormBinding
+import io.bewsys.spmobile.ui.households.forms.pages.*
+import org.koin.androidx.viewmodel.ext.android.activityViewModel
 
 private const val NUM_PAGES = 5
 
 class DevelopmentalFormFragment : Fragment(R.layout.fragment_developmental_form) {
     private lateinit var viewPager: ViewPager2
 
-//    private val sharedViewModel:SharedDevelopmentalFormViewModel by activityViewModels()
+    private val sharedViewModel: SharedDevelopmentalFormViewModel by activityViewModel()
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
@@ -38,24 +42,38 @@ class DevelopmentalFormFragment : Fragment(R.layout.fragment_developmental_form)
                 override fun handleOnBackPressed() {
                     if (pager.currentItem == 0) {
                         remove()
-//                        sharedViewModel.clearEntries()
                         findNavController().popBackStack()
 
                     } else {
                         pager.currentItem = pager.currentItem - 1
                     }
                 }
-
             })
+        }
+
+        viewLifecycleOwner.lifecycleScope.launchWhenStarted {
+            sharedViewModel.addDevelopmentalHouseholdEvent.collect { event ->
+                when (event) {
+                    is SharedDevelopmentalFormViewModel.AddDevelopmentalHouseholdEvent.ShowInvalidInputMessage -> {
+                        Snackbar.make(requireView(), event.msg, Snackbar.LENGTH_LONG).show()
+                    }
+                    is SharedDevelopmentalFormViewModel.AddDevelopmentalHouseholdEvent.NavigateBackWithResults -> {
+
+                        setFragmentResult(
+                            "add_household_request",
+                            bundleOf("add_household_result" to event.results)
+                        )
+                        sharedViewModel.clearEntries()
+                        findNavController().popBackStack()
+                    }
+                }
+
+            }
 
         }
 
     }
 
-//    override fun onStop() {
-//        super.onStop()
-//        sharedViewModel.clearEntries()
-//    }
 
 
     private inner class ScreenSlidePagerAdapter(
@@ -76,6 +94,7 @@ class DevelopmentalFormFragment : Fragment(R.layout.fragment_developmental_form)
 
     }
 }
+
 private const val MIN_SCALE = 0.85f
 private const val MIN_ALPHA = 0.5f
 

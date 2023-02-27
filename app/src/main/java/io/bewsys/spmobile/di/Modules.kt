@@ -5,10 +5,12 @@ import app.cash.sqldelight.driver.android.AndroidSqliteDriver
 import io.bewsys.spmobile.Database
 import io.bewsys.spmobile.api.KtorHttpClient
 import io.bewsys.spmobile.data.repository.CommunityRepositoryImpl
+import io.bewsys.spmobile.data.repository.HouseholdRepositoryImpl
 import io.bewsys.spmobile.data.repository.NonConsentingHouseholdRepositoryImpl
 import io.bewsys.spmobile.data.repository.ProvinceRepositoryImpl
 import io.bewsys.spmobile.ui.dashboard.DashboardViewModel
 import io.bewsys.spmobile.ui.households.HouseholdsViewModel
+import io.bewsys.spmobile.ui.households.forms.SharedDevelopmentalFormViewModel
 import io.bewsys.spmobile.ui.nonconsenting.NonConsentingViewModel
 import io.bewsys.spmobile.ui.nonconsenting.form.AddNonConsentingHouseholdViewModel
 import io.bewsys.spmobile.ui.profile.ProfileViewModel
@@ -27,17 +29,19 @@ val appModule = module {
 
     factory { CommunityRepositoryImpl(get()) }
     factory { ProvinceRepositoryImpl(get()) }
+    factory { HouseholdRepositoryImpl(get()) }
     factory { NonConsentingHouseholdRepositoryImpl(get()) }
 
     worker { UploadWorker( androidContext(), get()) }
 
     viewModel { DashboardViewModel(get(), get()) }
-    viewModel { HouseholdsViewModel(get()) }
+    viewModel { HouseholdsViewModel(get(), get()) }
     viewModel { NonConsentingViewModel(get(), get(), get()) }
     viewModel { ProfileViewModel(get()) }
     viewModel { TargetingViewModel() }
     viewModel { ProfileViewModel(get()) }
     viewModel { AddNonConsentingHouseholdViewModel(get(), get(), get(), get(), get()) }
+    viewModel { SharedDevelopmentalFormViewModel(get(), get()) }
 
 
 }

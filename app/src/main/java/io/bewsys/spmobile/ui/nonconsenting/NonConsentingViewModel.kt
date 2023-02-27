@@ -2,11 +2,11 @@ package io.bewsys.spmobile.ui.nonconsenting
 
 
 import androidx.lifecycle.*
+import io.bewsys.spmobile.ADD_NON_CONSENTING_HOUSEHOLD_RESULT_OK
 import io.bewsys.spmobile.data.model.NonConsentHousehold
 import io.bewsys.spmobile.data.repository.CommunityRepositoryImpl
 import io.bewsys.spmobile.data.repository.NonConsentingHouseholdRepositoryImpl
 import io.bewsys.spmobile.data.repository.ProvinceRepositoryImpl
-import io.bewsys.spmobile.ui.ADD_NON_CONSENTING_HOUSEHOLD_RESULT_OK
 import kotlinx.coroutines.channels.Channel
 import kotlinx.coroutines.flow.*
 import kotlinx.coroutines.launch

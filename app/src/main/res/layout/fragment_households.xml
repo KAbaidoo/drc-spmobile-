@@ -9,7 +9,10 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
-
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recycler_view_households"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
         <TextView
             android:id="@+id/text_developmental_action"
             style="@style/TextAppearance.MaterialComponents.Body1"

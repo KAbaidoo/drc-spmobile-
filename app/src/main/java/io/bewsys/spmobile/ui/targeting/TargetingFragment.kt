@@ -17,15 +17,6 @@ class TargetingFragment : Fragment(R.layout.fragment_targeting) {
         val binding = FragmentTargetingBinding.bind(view)
         val viewModel: TargetingViewModel by viewModel()
 
-//        binding.apply {
-//            editTextQuestion.apply {
-//                answer="some answer"
-//                addTextChangedListener {
-//                    viewModel.printAnswer(answer)
-//                }
-//
-//            }
-//        }
 
     }
 

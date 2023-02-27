@@ -53,9 +53,7 @@ data class HouseholdModel(
     val health_zone_id: Long?=null,
     val health_area_id: Long?=null,
     val groupment_id: Long?=null,
-
     val duration_displaced_returned_repatriated_refugee: Long?=null,
-
     val unit_of_migration_duration: String?=null,
     val territory_or_town: String?=null,
     val household_status: String?=null,
@@ -77,8 +75,6 @@ data class HouseholdModel(
     val give_up_health_care: String?=null,
     val days_spent_other_coping_strategy: String?=null,
     val number_of_months_displaced_returned_repatriated_refugee: Long?=null,
-
-//TODO upload image
     val gps_longitude: String?=null,
     val gps_latitude: String?=null,
     val start_time: String?=null,
@@ -90,33 +86,23 @@ data class HouseholdModel(
     val mobile_money_phone_number: String?=null,
     val village_or_quartier: String?=null,
     val other_household_migration_status: String?=null,
-
     val other_occupation_status_of_current_accommodation: String?=null,
     val other_main_material_of_exterior_walls: String?=null,
     val other_main_soil_material: String?=null,
-
     val occupation_status_of_current_accommodation: Long?=null,
     val main_material_of_exterior_walls: Long?=null,
     val main_soil_material: Long?=null,
     val number_of_rooms_used_for_sleeping: Long?=null,
     val type_of_fuel_used_for_household_cooking: Long?=null,
-
-
-
-
     val other_type_of_fuel_used_for_household_cooking: String?=null,
     val main_source_of_household_drinking_water: Long?=null,
     val other_main_source_of_household_drinking_water: String?=null,
     val type_of_household_toilet: Long?=null,
     val other_type_of_household_toilet: String?=null,
     val method_of_waste_disposal: Long?=null,
-
     val place_to_wash_hands: Long?=null,
     val minimum_monthly_income_necessary_live_without_difficulties: Long?=null,
     val household_monthly_income: Long?=null,
-
-
-
     val number_of_goat_owned: Long?=null,
     val number_of_sheep_owned: Long?=null,
     val number_of_cow_owned: Long?=null,
@@ -164,9 +150,6 @@ data class HouseholdModel(
     val number_of_days_in_week_consumed_fruits: Long?=null,
     val number_of_days_in_week_consumed_cooking_oils: Long?=null,
     val number_of_days_in_week_consumed_sugar_or_sweet_products: Long?=null,
-
-
-
     val days_spent_reduce_amount_consumed_coping_strategy: Long?=null,
     val days_spent_reduce_meals_consumed_coping_strategy: Long?=null,
     val days_spent_reduce_meals_adult_forfeit_meal_for_child_coping_strategy: Long?=null,
@@ -175,8 +158,6 @@ data class HouseholdModel(
     val days_spent_days_without_eating_coping_strategy: Long?=null,
     val days_spent_begging_coping_strategy: Long?=null,
     val days_spent_consume_wild_food_coping_strategy: Long?=null,
-
-
     val other_household_activities_in_past_12_months: String?=null,
     val other_method_of_waste_disposal: String?=null,
     val other_livestock_owned: String?=null,

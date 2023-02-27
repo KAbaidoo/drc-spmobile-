@@ -10,19 +10,23 @@ import android.widget.Toast
 import androidx.core.view.MenuProvider
 
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.setFragmentResultListener
 
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
+import androidx.recyclerview.widget.LinearLayoutManager
+import com.google.android.material.snackbar.Snackbar
 
 import io.bewsys.spmobile.R
+import io.bewsys.spmobile.data.model.HouseholdModel
 import io.bewsys.spmobile.databinding.FragmentHouseholdsBinding
 
 import io.bewsys.spmobile.util.exhaustive
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 
-class HouseholdsFragment : Fragment(R.layout.fragment_households) {
+class HouseholdsFragment : Fragment(R.layout.fragment_households),HouseholdAdapter.OnItemClickListener {
 
     var isOpen: Boolean = false
 
@@ -31,31 +35,45 @@ class HouseholdsFragment : Fragment(R.layout.fragment_households) {
 
         val viewModel: HouseholdsViewModel by viewModel()
         val binding = FragmentHouseholdsBinding.bind(view)
+        val householdAdapter = HouseholdAdapter(this)
 
         hideActions(binding)
-        binding.fabAddRegistration.setOnClickListener {
-            viewModel.onAddRegistrationFabClicked()
-        }
-        binding.fabDevelopmental.setOnClickListener {
-            viewModel.onDevelopmentalFabClicked()
-        }
-        binding.textDevelopmentalAction.setOnClickListener {
-            viewModel.onDevelopmentalFabClicked()
+
+        binding.apply {
+            fabAddRegistration.setOnClickListener {
+                viewModel.onAddRegistrationFabClicked()
+            }
+            fabDevelopmental.setOnClickListener {
+                viewModel.onDevelopmentalFabClicked()
+            }
+            textDevelopmentalAction.setOnClickListener {
+                viewModel.onDevelopmentalFabClicked()
+            }
+            fabHumanitarian.setOnClickListener {
+                viewModel.onHumanitarianFabClicked()
+            }
+            textHumanitarianAction.setOnClickListener {
+                viewModel.onHumanitarianFabClicked()
+            }
+            recyclerViewHouseholds.apply {
+                adapter = householdAdapter
+                layoutManager = LinearLayoutManager(requireContext())
+                setHasFixedSize(true)
+            }
         }
 
-        binding.fabHumanitarian.setOnClickListener {
-            viewModel.onHumanitarianFabClicked()
+        viewModel.households.observe(viewLifecycleOwner){
+            householdAdapter.submitList(it)
         }
-        binding.textHumanitarianAction.setOnClickListener {
-            viewModel.onHumanitarianFabClicked()
-        }
+
+
+
+
         viewLifecycleOwner.lifecycleScope.launchWhenStarted {
             viewModel.householdsEventEvent.collect { event ->
                 when (event) {
                     is HouseholdsViewModel.HouseholdEvent.AddRegistrationClicked -> {
                         if (!isOpen) showActions(binding) else hideActions(binding)
-//                        val action = NonConsentingFragmentDirections.actionNavNonConsentingToNonConsentingFormFragment()
-//                        findNavController().navigate(action)
                     }
                     is HouseholdsViewModel.HouseholdEvent.DevelopmentalClicked -> {
                         val action = HouseholdsFragmentDirections.actionNavHouseholdToDevelopmentalFormFragment()
@@ -65,6 +83,11 @@ class HouseholdsFragment : Fragment(R.layout.fragment_households) {
                         val action = HouseholdsFragmentDirections.actionNavHouseholdToHumanitarianFormFragment()
                         findNavController().navigate(action)
                     }
+                    is HouseholdsViewModel.HouseholdEvent.ShowHouseholdSavedConfirmationMessage -> Snackbar.make(
+                        requireView(),
+                        event.msg,
+                        Snackbar.LENGTH_SHORT
+                    ).show()
 
                 }
             }.exhaustive
@@ -90,6 +113,12 @@ class HouseholdsFragment : Fragment(R.layout.fragment_households) {
                 }
             }
         }, viewLifecycleOwner, Lifecycle.State.RESUMED)
+
+
+        setFragmentResultListener("add_household_request") { _, bundle ->
+            val result = bundle.getInt("add_household_result")
+            viewModel.onAddHouseholdResult(result)
+        }
     }
 
     private fun showActions(binding: FragmentHouseholdsBinding) {
@@ -111,5 +140,9 @@ class HouseholdsFragment : Fragment(R.layout.fragment_households) {
         binding.textDevelopmentalAction.visibility = View.GONE
         binding.textHumanitarianAction.visibility = View.GONE
 
+    }
+
+    override fun onItemClick(household: HouseholdModel) {
+        TODO("Not yet implemented")
     }
 }
