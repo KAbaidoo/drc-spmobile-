@@ -3,7 +3,7 @@ package io.bewsys.spmobile.di
 import app.cash.sqldelight.db.SqlDriver
 import app.cash.sqldelight.driver.android.AndroidSqliteDriver
 import io.bewsys.spmobile.Database
-import io.bewsys.spmobile.api.KtorHttpClient
+import io.bewsys.spmobile.api.Api
 import io.bewsys.spmobile.data.repository.CommunityRepositoryImpl
 import io.bewsys.spmobile.data.repository.HouseholdRepositoryImpl
 import io.bewsys.spmobile.data.repository.NonConsentingHouseholdRepositoryImpl
@@ -16,6 +16,8 @@ import io.bewsys.spmobile.ui.nonconsenting.form.AddNonConsentingHouseholdViewMod
 import io.bewsys.spmobile.ui.profile.ProfileViewModel
 import io.bewsys.spmobile.ui.targeting.TargetingViewModel
 import io.bewsys.spmobile.work.UploadWorker
+import io.ktor.client.*
+import io.ktor.client.engine.android.*
 import org.koin.android.ext.koin.androidContext
 import org.koin.androidx.viewmodel.dsl.viewModel
 import org.koin.androidx.workmanager.dsl.worker
@@ -25,7 +27,9 @@ val appModule = module {
 
     single<SqlDriver> { AndroidSqliteDriver(Database.Schema, androidContext(), "sp.db") }
     single { Database(get()) }
-    single { KtorHttpClient().getHttpClient()}
+
+    single { Api(HttpClient(Android).engine).getClient()}
+
 
     factory { CommunityRepositoryImpl(get()) }
     factory { ProvinceRepositoryImpl(get()) }
