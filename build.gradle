@@ -16,7 +16,7 @@ buildscript {
         appCompatVersion = "1.6.0"
         constraintLayoutVersion = "2.1.4"
         coroutinesVersion = "1.6.4"
-        dataStoreVersion = "1.1.0-alpha01"
+//        dataStoreVersion = "1.1.0-alpha01"
         espressoVersion = "3.5.1"
         fragmentVersion = "1.5.5"
         gradleVersion = "7.4.0"
@@ -40,7 +40,12 @@ buildscript {
         testExtJunitVersion = "1.1.5"
         glide_version = "4.11.0"
         preferenceVersion = "1.2.0"
+        dataStoreVersion = "1.0.0-alpha02"
+//        dataStoreVersion = "1.0.0"
 
+        mockitoVersion = "5.0.0"
+        mockitoKotlinVersion = "3.2.0"
+        mockkVersion = "1.4.1"
 //        ktor http client
         ktor_version = "2.2.3"
 

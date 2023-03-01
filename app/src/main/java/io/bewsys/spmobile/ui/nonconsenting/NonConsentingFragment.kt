@@ -11,6 +11,7 @@ import com.google.android.material.snackbar.Snackbar
 import io.bewsys.spmobile.R
 import io.bewsys.spmobile.data.model.NonConsentHousehold
 import io.bewsys.spmobile.databinding.FragmentNonConsentingBinding
+import io.bewsys.spmobile.ui.dashboard.DashboardFragmentDirections
 import io.bewsys.spmobile.util.exhaustive
 import org.koin.androidx.viewmodel.ext.android.viewModel
 

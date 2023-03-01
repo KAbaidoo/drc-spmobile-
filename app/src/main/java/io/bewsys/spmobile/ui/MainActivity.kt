@@ -10,30 +10,29 @@ import androidx.navigation.NavController
 
 import androidx.navigation.findNavController
 import androidx.navigation.ui.*
-import androidx.preference.Preference
-import androidx.preference.PreferenceFragmentCompat
+
 
 import com.google.android.material.navigation.NavigationView
-import com.google.android.material.snackbar.Snackbar
+
 import io.bewsys.spmobile.R
 import io.bewsys.spmobile.databinding.ActivityMainBinding
-import io.bewsys.spmobile.ui.settings.SettingsFragmentDirections
+import io.bewsys.spmobile.ui.login.LoginFragment
 
 
-class MainActivity : AppCompatActivity()
-    {
+class MainActivity : AppCompatActivity() {
 
     private lateinit var appBarConfiguration: AppBarConfiguration
     private lateinit var binding: ActivityMainBinding
     private lateinit var navController: NavController
-
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
+
         setSupportActionBar(binding.appBarMain.toolbar)
+
+
 
 
         val drawerLayout: DrawerLayout = binding.drawerLayout
@@ -49,13 +48,22 @@ class MainActivity : AppCompatActivity()
         setupActionBarWithNavController(navController, appBarConfiguration)
         navView.setupWithNavController(navController)
 
+
+
+
         navView.setOnClickListener {
             when (it.id) {
                 R.id.nav_settings -> navController.navigate(R.id.nav_settings)
                 R.id.nav_profile -> navController.navigate(R.id.nav_profile)
-                R.id.nav_logout -> Toast.makeText(this@MainActivity, "Logout clicked!", Toast.LENGTH_LONG).show()
+                R.id.nav_logout -> Toast.makeText(
+                    applicationContext,
+                    "Logout clicked!",
+                    Toast.LENGTH_LONG
+                ).show()
             }
         }
+
+
     }
 
 
@@ -63,5 +71,7 @@ class MainActivity : AppCompatActivity()
         val navController = findNavController(R.id.nav_host_fragment)
         return navController.navigateUp(appBarConfiguration) || super.onSupportNavigateUp()
     }
+
+
 
 }

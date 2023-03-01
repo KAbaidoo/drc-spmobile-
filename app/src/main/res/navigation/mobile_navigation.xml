@@ -9,7 +9,11 @@
         android:id="@+id/nav_dashboard"
         android:name="io.bewsys.spmobile.ui.dashboard.DashboardFragment"
         android:label="Dashboard"
-        tools:layout="@layout/fragment_dashboard" />
+        tools:layout="@layout/fragment_dashboard" >
+        <action
+            android:id="@+id/action_nav_dashboard_to_loginFragment"
+            app:destination="@id/loginFragment" />
+    </fragment>
     <fragment
         android:id="@+id/nav_household"
         android:name="io.bewsys.spmobile.ui.households.HouseholdsFragment"
@@ -68,4 +72,13 @@
         android:id="@+id/hostSettingsFragment"
         android:name="io.bewsys.spmobile.ui.settings.HostSettingsFragment"
         android:label="Host settings" />
+    <fragment
+        android:id="@+id/loginFragment"
+        android:name="io.bewsys.spmobile.ui.login.LoginFragment"
+        android:label="Login"
+        tools:layout="@layout/fragment_login" >
+        <action
+            android:id="@+id/action_loginFragment_to_nav_dashboard"
+            app:destination="@id/nav_dashboard" />
+    </fragment>
 </navigation>
