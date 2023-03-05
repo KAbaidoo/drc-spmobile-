@@ -23,7 +23,8 @@ class KtorHttpClient(private val httpClientEngine: HttpClientEngine) {
         defaultRequest {
             url("http://mis.bewsys.dev/api/")
 
-            headers.appendIfNameAbsent(HttpHeaders.ContentType,
+            headers.appendIfNameAbsent(
+                HttpHeaders.ContentType,
                 ContentType.Application.Json.toString()
             )
         }
@@ -41,7 +42,7 @@ class KtorHttpClient(private val httpClientEngine: HttpClientEngine) {
         {
             logger = object : Logger {
                 override fun log(message: String) {
-                    Log.v("Logger Ktor =>", message)
+                    Log.v(TAG_KTOR_LOGGER, message)
                 }
             }
             level = LogLevel.ALL
@@ -50,7 +51,7 @@ class KtorHttpClient(private val httpClientEngine: HttpClientEngine) {
         install(ResponseObserver)
         {
             onResponse { response ->
-                Log.d("HTTP status:", "${response.status.value}")
+                Log.d(TAG_HTTP_STATUS_LOGGER, "${response.status.value}")
             }
         }
 
@@ -58,15 +59,17 @@ class KtorHttpClient(private val httpClientEngine: HttpClientEngine) {
         {
             header(HttpHeaders.ContentType, ContentType.Application.Json)
         }
+        install(HttpTimeout) {
+            requestTimeoutMillis = TIME_OUT
+        }
 
 
     }
 
-//    companion object {
-//        private const val TIME_OUT = 10_000
-//        private const val TAG_KTOR_LOGGER = "ktor_logger:"
-//        private const val TAG_HTTP_STATUS_LOGGER = "http_status:"
-//
-//    }
+    companion object {
+        private const val TIME_OUT = 60_000L
+        private const val TAG_KTOR_LOGGER = "ktor_logger:"
+        private const val TAG_HTTP_STATUS_LOGGER = "http_status:"
+    }
 
 }
