@@ -3,25 +3,25 @@ package io.bewsys.spmobile.ui.nonconsenting
 
 import androidx.lifecycle.*
 import io.bewsys.spmobile.ADD_NON_CONSENTING_HOUSEHOLD_RESULT_OK
-import io.bewsys.spmobile.data.model.NonConsentHousehold
-import io.bewsys.spmobile.data.repository.CommunityRepositoryImpl
-import io.bewsys.spmobile.data.repository.NonConsentingHouseholdRepositoryImpl
-import io.bewsys.spmobile.data.repository.ProvinceRepositoryImpl
+import io.bewsys.spmobile.data.local.NonConsentHouseholdModel
+import io.bewsys.spmobile.data.repository.CommunityRepository
+import io.bewsys.spmobile.data.repository.NonConsentingHouseholdRepository
+import io.bewsys.spmobile.data.repository.ProvinceRepository
 import kotlinx.coroutines.channels.Channel
 import kotlinx.coroutines.flow.*
 import kotlinx.coroutines.launch
 
 class NonConsentingViewModel(
-    private val nonConsentingHouseholdRepositoryImpl: NonConsentingHouseholdRepositoryImpl,
-    private val provinceRepositoryImpl: ProvinceRepositoryImpl,
-    private val communityRepositoryImpl: CommunityRepositoryImpl
+    private val nonConsentingHouseholdRepository: NonConsentingHouseholdRepository,
+    private val provinceRepository: ProvinceRepository,
+    private val communityRepository: CommunityRepository
 ) : ViewModel() {
 
     private val _nonConsentingEventChannel = Channel<NonConsentingEvent>()
     val nonConsentingEvent = _nonConsentingEventChannel.receiveAsFlow()
 
-    private val _nonConsentingHouseholds = MutableLiveData<List<NonConsentHousehold>>()
-    val nonConsentingHouseholds: LiveData<List<NonConsentHousehold>>
+    private val _nonConsentingHouseholds = MutableLiveData<List<NonConsentHouseholdModel>>()
+    val nonConsentingHouseholds: LiveData<List<NonConsentHouseholdModel>>
         get() = _nonConsentingHouseholds
 
 
@@ -32,15 +32,15 @@ class NonConsentingViewModel(
 
     private fun loadNonConsentingHouseholds() {
         viewModelScope.launch {
-            nonConsentingHouseholdRepositoryImpl.getAllNonConsentingHouseholds()
+            nonConsentingHouseholdRepository.getAllNonConsentingHouseholds()
            .map { households ->
                 households.map {
-                    NonConsentHousehold(
+                    NonConsentHouseholdModel(
                         it.id,
                         it.province_id,
                         it.community_id,
-                        it.province_id?.let { id -> provinceRepositoryImpl.getById(id)?.name },
-                        it.community_id?.let { id -> communityRepositoryImpl.getById(id)?.name },
+                        it.province_id?.let { id -> provinceRepository.getById(id)?.name },
+                        it.community_id?.let { id -> communityRepository.getById(id)?.name },
                         it.gps_longitude,
                         it.gps_latitude,
                         it.reason,

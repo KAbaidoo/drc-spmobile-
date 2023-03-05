@@ -1,30 +1,29 @@
 package io.bewsys.spmobile.ui.dashboard
 
-import android.util.Log
 import androidx.lifecycle.*
-import app.cash.sqldelight.db.QueryResult.Unit.value
+import io.bewsys.spmobile.ADD_NON_CONSENTING_HOUSEHOLD_RESULT_OK
+import io.bewsys.spmobile.LOGIN_RESULT_OK
 
-import io.bewsys.spmobile.data.repository.CommunityRepositoryImpl
-import io.bewsys.spmobile.data.repository.ProvinceRepositoryImpl
-import io.bewsys.spmobile.prefsstore.PreferencesManager
+import io.bewsys.spmobile.data.repository.CommunityRepository
+import io.bewsys.spmobile.data.repository.ProvinceRepository
+import io.bewsys.spmobile.data.prefsstore.PreferencesManager
+import io.bewsys.spmobile.data.repository.UserRepository
 import io.bewsys.spmobile.ui.nonconsenting.NonConsentingViewModel
 import io.bewsys.spmobile.util.PairMediatorLiveData
 import kotlinx.coroutines.channels.Channel
 import kotlinx.coroutines.flow.collectLatest
-import kotlinx.coroutines.flow.count
 import kotlinx.coroutines.flow.receiveAsFlow
 import kotlinx.coroutines.launch
 
 private const val TAG = "Dashboard"
 
 class DashboardViewModel(
-    private val provinceRepositoryImpl: ProvinceRepositoryImpl,
-    private val communityRepositoryImpl: CommunityRepositoryImpl,
-    private val preferencesManager: PreferencesManager
+    private val provinceRepository: ProvinceRepository,
+    private val communityRepository: CommunityRepository
 
 ) : ViewModel() {
-    private val _dashboardEvent = Channel<DashboardEvent>()
-    val dashboardEvent = _dashboardEvent.receiveAsFlow()
+    private val _dashboardEventChannel = Channel<DashboardEvent>()
+    val dashboardEvent = _dashboardEventChannel.receiveAsFlow()
 
 
     private val _provinceCount = MutableLiveData(0)
@@ -37,28 +36,41 @@ class DashboardViewModel(
         loadProvinceCount()
     }
 
-    val prefs = preferencesManager.preferencesFlow.asLiveData()
 
     private fun loadProvinceCount() = viewModelScope.launch {
-        provinceRepositoryImpl.getAllProvinces().collectLatest {
+        provinceRepository.getAllProvinces().collectLatest {
             _provinceCount.value = it.count()
         }
     }
 
     private fun loadCommunityCount() = viewModelScope.launch {
-        communityRepositoryImpl.getAllCommunities().collectLatest {
+        communityRepository.getAllCommunities().collectLatest {
             _communityCount.value = it.count()
         }
     }
 
-    fun navigateToLoginScreen() = viewModelScope.launch {
-        _dashboardEvent.send(DashboardEvent.NavigateToLogin)
+    fun onAddNonConsentingHouseholdResult(result: Int) {
+        when (result) {
+            LOGIN_RESULT_OK -> ShowLoginSuccessfulMessage()
+        }
     }
+
+
+    private fun ShowLoginSuccessfulMessage() =
+        viewModelScope.launch {
+            _dashboardEventChannel.send(
+                DashboardEvent.ShowLoginSuccessfulMessage(
+                    "Login Successful!"
+                )
+            )
+        }
 
     sealed class DashboardEvent {
-        object NavigateToLogin : DashboardEvent()
+        data class ShowLoginSuccessfulMessage(val msg: String) : DashboardEvent()
 
     }
+
+
 }
 
 

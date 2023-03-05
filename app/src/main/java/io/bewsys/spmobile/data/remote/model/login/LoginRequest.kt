@@ -1,4 +1,4 @@
-package io.bewsys.spmobile.api.model.login
+package io.bewsys.spmobile.data.remote.model.login
 
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
@@ -8,6 +8,6 @@ import kotlinx.serialization.Serializable
 data class LoginRequest(
     @SerialName("email")
     val email: String,
-    @SerialName("permissions")
+    @SerialName("password")
     val password: String
 )

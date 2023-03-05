@@ -1,4 +1,4 @@
-package io.bewsys.spmobile.api.model.login
+package io.bewsys.spmobile.data.remote.model.login
 
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable

@@ -5,13 +5,8 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
-import io.bewsys.spmobile.R
-import io.bewsys.spmobile.data.model.HouseholdModel
-import io.bewsys.spmobile.data.model.NonConsentHousehold
+import io.bewsys.spmobile.data.local.HouseholdModel
 import io.bewsys.spmobile.databinding.ItemHouseholdBinding
-import io.bewsys.spmobile.databinding.ItemNonConsentingHouseholdBinding
-import io.bewsys.spmobile.ui.nonconsenting.NonConsentingHouseholdAdapter
-import io.ktor.server.routing.RoutingPath.Companion.root
 
 
 class HouseholdAdapter(private val listener: OnItemClickListener) :
@@ -51,17 +46,17 @@ class HouseholdAdapter(private val listener: OnItemClickListener) :
             }
         }
 
-        fun bind(household: HouseholdModel) {
+        fun bind(householdModel: HouseholdModel) {
             binding.apply {
 //                textViewProvinceName.text = household.province_name ?: ""
 //                textViewCommunityName.text = household.community_name ?: ""
-                if (!household.status.isNullOrEmpty()) checkBoxIcon.isChecked = true
+                if (!householdModel.status.isNullOrEmpty()) checkBoxIcon.isChecked = true
             }
         }
     }
 
     interface OnItemClickListener {
-        fun onItemClick(household: HouseholdModel)
+        fun onItemClick(householdModel: HouseholdModel)
 
     }
 

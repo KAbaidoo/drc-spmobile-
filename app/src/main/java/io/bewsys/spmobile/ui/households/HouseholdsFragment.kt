@@ -5,8 +5,6 @@ import android.view.Menu
 import android.view.MenuInflater
 import android.view.MenuItem
 import android.view.View
-import android.widget.TextView
-import android.widget.Toast
 import androidx.core.view.MenuProvider
 
 import androidx.fragment.app.Fragment
@@ -19,7 +17,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.android.material.snackbar.Snackbar
 
 import io.bewsys.spmobile.R
-import io.bewsys.spmobile.data.model.HouseholdModel
+import io.bewsys.spmobile.data.local.HouseholdModel
 import io.bewsys.spmobile.databinding.FragmentHouseholdsBinding
 
 import io.bewsys.spmobile.util.exhaustive
@@ -142,7 +140,7 @@ class HouseholdsFragment : Fragment(R.layout.fragment_households),HouseholdAdapt
 
     }
 
-    override fun onItemClick(household: HouseholdModel) {
+    override fun onItemClick(householdModel: HouseholdModel) {
         TODO("Not yet implemented")
     }
 }

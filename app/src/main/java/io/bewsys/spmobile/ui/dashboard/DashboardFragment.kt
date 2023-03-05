@@ -5,8 +5,10 @@ import android.util.Log
 
 import android.view.View
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.setFragmentResultListener
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
+import com.google.android.material.snackbar.Snackbar
 import io.bewsys.spmobile.R
 import io.bewsys.spmobile.databinding.FragmentDashboardBinding
 import kotlinx.coroutines.flow.collectLatest
@@ -31,21 +33,21 @@ class DashboardFragment : Fragment(R.layout.fragment_dashboard) {
             }
         }
 
-        viewModel.prefs.observe(viewLifecycleOwner){
-            if(it.isLoggedIn.not()){
-              viewModel.navigateToLoginScreen()
-                Log.d(TAG, it.isLoggedIn.toString())
-            }
-
+        setFragmentResultListener("login_request") { _, bundle ->
+            val result = bundle.getInt("login_result")
+            viewModel.onAddNonConsentingHouseholdResult(result)
         }
 
         viewLifecycleOwner.lifecycleScope.launchWhenStarted {
             viewModel.dashboardEvent.collect { event ->
                 when (event) {
-                    is DashboardViewModel.DashboardEvent.NavigateToLogin -> {
+                    is DashboardViewModel.DashboardEvent.ShowLoginSuccessfulMessage -> {
 
-                        findNavController().navigate(R.id.action_nav_dashboard_to_loginFragment)
-                        Log.d(TAG, event.toString())
+                        Snackbar.make(
+                            requireView(),
+                            event.msg,
+                            Snackbar.LENGTH_SHORT
+                        ).show()
                     }
                 }
             }

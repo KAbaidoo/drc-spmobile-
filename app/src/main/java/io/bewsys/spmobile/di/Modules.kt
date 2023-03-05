@@ -3,10 +3,10 @@ package io.bewsys.spmobile.di
 import app.cash.sqldelight.db.SqlDriver
 import app.cash.sqldelight.driver.android.AndroidSqliteDriver
 import io.bewsys.spmobile.Database
-import io.bewsys.spmobile.api.KtorHttpClient
-import io.bewsys.spmobile.api.UserApi
+import io.bewsys.spmobile.data.remote.KtorHttpClient
+import io.bewsys.spmobile.data.remote.UserApi
 import io.bewsys.spmobile.data.repository.*
-import io.bewsys.spmobile.prefsstore.PreferencesManager
+import io.bewsys.spmobile.data.prefsstore.PreferencesManager
 import io.bewsys.spmobile.ui.dashboard.DashboardViewModel
 import io.bewsys.spmobile.ui.households.HouseholdsViewModel
 import io.bewsys.spmobile.ui.households.forms.SharedDevelopmentalFormViewModel
@@ -15,6 +15,7 @@ import io.bewsys.spmobile.ui.nonconsenting.NonConsentingViewModel
 import io.bewsys.spmobile.ui.nonconsenting.form.AddNonConsentingHouseholdViewModel
 import io.bewsys.spmobile.ui.profile.ProfileViewModel
 import io.bewsys.spmobile.ui.targeting.TargetingViewModel
+import io.bewsys.spmobile.ui.MainViewModel
 import io.bewsys.spmobile.work.UploadWorker
 import io.ktor.client.*
 import io.ktor.client.engine.android.*
@@ -32,16 +33,15 @@ val appModule = module {
 
 
     factory { UserApi(get()) }
-    factory { CommunityRepositoryImpl(get()) }
-    factory { ProvinceRepositoryImpl(get()) }
-    factory { HouseholdRepositoryImpl(get()) }
-    factory { NonConsentingHouseholdRepositoryImpl(get()) }
-    factory { UserRepositoryImpl(get()) }
-
+    factory { CommunityRepository(get()) }
+    factory { ProvinceRepository(get()) }
+    factory { HouseholdRepository(get()) }
+    factory { NonConsentingHouseholdRepository(get()) }
+    factory { UserRepository(get(),get()) }
 
     worker { UploadWorker(androidContext(), get()) }
 
-    viewModel { DashboardViewModel(get(), get(), get()) }
+    viewModel { DashboardViewModel(get(), get()) }
     viewModel { HouseholdsViewModel(get(), get()) }
     viewModel { NonConsentingViewModel(get(), get(), get()) }
     viewModel { ProfileViewModel(get()) }
@@ -49,7 +49,9 @@ val appModule = module {
     viewModel { ProfileViewModel(get()) }
     viewModel { AddNonConsentingHouseholdViewModel(get(), get(), get(), get(), get()) }
     viewModel { SharedDevelopmentalFormViewModel(get(), get()) }
-    viewModel { LoginViewModel(get(), get(), get()) }
+    viewModel { LoginViewModel(get(), get()) }
+    viewModel { MainViewModel(get()) }
+
 
 
 }

@@ -1,19 +1,15 @@
 package io.bewsys.spmobile
 
 import android.app.Application
-import android.content.Context
-import io.bewsys.spmobile.api.UserApi
-import io.bewsys.spmobile.prefsstore.PreferencesManager
+import io.bewsys.spmobile.data.prefsstore.PreferencesManager
 import io.ktor.client.call.*
 import io.ktor.client.engine.android.*
 import kotlinx.coroutines.test.runTest
-import org.junit.Assert
 import org.junit.Assert.assertEquals
 import org.junit.Before
 import org.junit.Test
 import org.junit.runner.RunWith
 import org.mockito.Mock
-import org.mockito.Mockito.mock
 import org.mockito.junit.MockitoJUnitRunner
 import org.mockito.kotlin.mock
 

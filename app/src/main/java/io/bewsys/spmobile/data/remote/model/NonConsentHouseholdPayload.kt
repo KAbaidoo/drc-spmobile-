@@ -1,6 +1,4 @@
-package io.bewsys.spmobile.api.model
-import android.os.Parcelable
-import kotlinx.parcelize.Parcelize
+package io.bewsys.spmobile.data.remote.model
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 

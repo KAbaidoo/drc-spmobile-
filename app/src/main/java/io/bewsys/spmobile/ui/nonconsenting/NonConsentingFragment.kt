@@ -9,9 +9,8 @@ import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.android.material.snackbar.Snackbar
 import io.bewsys.spmobile.R
-import io.bewsys.spmobile.data.model.NonConsentHousehold
+import io.bewsys.spmobile.data.local.NonConsentHouseholdModel
 import io.bewsys.spmobile.databinding.FragmentNonConsentingBinding
-import io.bewsys.spmobile.ui.dashboard.DashboardFragmentDirections
 import io.bewsys.spmobile.util.exhaustive
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
@@ -65,7 +64,7 @@ class NonConsentingFragment : Fragment(R.layout.fragment_non_consenting) ,NonCon
         }
     }
 
-    override fun onItemClick(nonConsentingHousehold: NonConsentHousehold) {
+    override fun onItemClick(nonConsentingHousehold: NonConsentHouseholdModel) {
         TODO("Not yet implemented")
     }
 }

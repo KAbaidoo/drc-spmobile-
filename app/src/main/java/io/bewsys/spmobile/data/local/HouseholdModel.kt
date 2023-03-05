@@ -1,4 +1,4 @@
-package io.bewsys.spmobile.data.model
+package io.bewsys.spmobile.data.local
 import android.os.Parcelable
 import kotlinx.parcelize.Parcelize
 

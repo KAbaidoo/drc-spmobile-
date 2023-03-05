@@ -3,11 +3,8 @@ package io.bewsys.spmobile.ui.households
 
 import androidx.lifecycle.*
 import io.bewsys.spmobile.ADD_HOUSEHOLD_RESULT_OK
-import io.bewsys.spmobile.ADD_NON_CONSENTING_HOUSEHOLD_RESULT_OK
-import io.bewsys.spmobile.data.model.HouseholdModel
-import io.bewsys.spmobile.data.model.NonConsentHousehold
-import io.bewsys.spmobile.data.repository.HouseholdRepositoryImpl
-import io.bewsys.spmobile.ui.nonconsenting.NonConsentingViewModel
+import io.bewsys.spmobile.data.local.HouseholdModel
+import io.bewsys.spmobile.data.repository.HouseholdRepository
 import kotlinx.coroutines.channels.Channel
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.flow.map
@@ -16,7 +13,7 @@ import kotlinx.coroutines.launch
 
 class HouseholdsViewModel(
     private val state: SavedStateHandle,
-    private val householdRepositoryImpl: HouseholdRepositoryImpl
+    private val householdRepository: HouseholdRepository
 ) : ViewModel() {
 
     private val householdsEventChannel = Channel<HouseholdEvent>()
@@ -34,7 +31,7 @@ class HouseholdsViewModel(
 //    Todo: get province and community ids
     private fun loadHouseholds() {
         viewModelScope.launch {
-            householdRepositoryImpl.getAllHouseholds()
+            householdRepository.getAllHouseholds()
                 .map { households ->
                     households.map {
                         HouseholdModel(

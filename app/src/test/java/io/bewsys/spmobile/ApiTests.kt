@@ -1,18 +1,12 @@
 package io.bewsys.spmobile
 
-import android.util.Log
-import io.bewsys.spmobile.api.KtorHttpClient
-import io.bewsys.spmobile.api.UserApi
-import io.bewsys.spmobile.api.model.login.LoginRequest
-import io.bewsys.spmobile.api.model.login.LoginResponse
-import io.bewsys.spmobile.data.repository.UserRepositoryImpl
-import io.bewsys.spmobile.prefsstore.PreferencesManager
-import io.bewsys.spmobile.ui.login.LoginViewModel
+import io.bewsys.spmobile.data.remote.KtorHttpClient
+import io.bewsys.spmobile.data.remote.UserApi
+import io.bewsys.spmobile.data.repository.UserRepository
 import io.ktor.client.*
 import io.ktor.client.call.*
 import io.ktor.client.engine.android.*
 import io.ktor.client.request.*
-import io.ktor.client.statement.*
 import kotlinx.coroutines.flow.drop
 import kotlinx.coroutines.flow.first
 
@@ -20,8 +14,6 @@ import kotlinx.coroutines.test.runTest
 import org.junit.Test
 
 import org.junit.Assert.*
-import org.junit.Before
-import org.mockito.kotlin.mock
 
 /**
  * Example local unit test, which will execute on the development machine (host).
@@ -62,7 +54,7 @@ class ApiTests {
 
 
         val mockUserApi = UserApi(apiMock.getClient())
-        val userRepo = UserRepositoryImpl(mockUserApi)
+        val userRepo = UserRepository(mockUserApi)
 
         val result = userRepo.login("kobbykolmes@gmail.com", "password").drop(1).first()
 

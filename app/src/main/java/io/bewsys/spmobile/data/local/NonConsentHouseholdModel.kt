@@ -1,10 +1,10 @@
-package io.bewsys.spmobile.data.model
+package io.bewsys.spmobile.data.local
 import android.os.Parcelable
 import kotlinx.parcelize.Parcelize
 
 
 @Parcelize
-data class NonConsentHousehold(
+data class NonConsentHouseholdModel(
     val id: Long? = null,
     val province_id: Long?,
     val community_id: Long?,

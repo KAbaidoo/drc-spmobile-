@@ -24,9 +24,7 @@
     </group>
 
 
-    <group>
         <item
-            android:id="@+id/subtitle"
             android:title="Account">
             <menu>
                 <item
@@ -38,13 +36,12 @@
                     android:icon="@drawable/menu_settings_24"
                     android:title="Settings" />
                 <item
-                    android:id="@+id/nav_logout"
+                    android:id="@+id/nav_login"
                     android:icon="@drawable/menu_logout_24"
                     android:title="Logout" />
+
             </menu>
         </item>
-
-    </group>
 
 
 </menu>

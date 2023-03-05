@@ -4,15 +4,15 @@ import android.os.Bundle
 import android.view.View
 import androidx.core.view.children
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.activityViewModels
 import io.bewsys.spmobile.R
 import io.bewsys.spmobile.databinding.FragmentAddHouseholdTwoHeadBinding
 import io.bewsys.spmobile.ui.households.forms.SharedDevelopmentalFormViewModel
 import io.bewsys.spmobile.ui.views.CustomQuestionViews
+import org.koin.androidx.viewmodel.ext.android.activityViewModel
 
 class FormPhaseTwoFragment : Fragment(R.layout.fragment_add_household_two_head) {
 
-    private val sharedViewModel: SharedDevelopmentalFormViewModel by activityViewModels()
+    private val sharedViewModel: SharedDevelopmentalFormViewModel by activityViewModel()
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 

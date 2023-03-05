@@ -5,13 +5,12 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
-import io.bewsys.spmobile.R
-import io.bewsys.spmobile.data.model.NonConsentHousehold
+import io.bewsys.spmobile.data.local.NonConsentHouseholdModel
 import io.bewsys.spmobile.databinding.ItemNonConsentingHouseholdBinding
 
 
 class NonConsentingHouseholdAdapter(private val listener: OnItemClickListener) :
-    ListAdapter<NonConsentHousehold, NonConsentingHouseholdAdapter.NonConsentingHouseholdViewHolder>(
+    ListAdapter<NonConsentHouseholdModel, NonConsentingHouseholdAdapter.NonConsentingHouseholdViewHolder>(
         DiffCallback()
     ) {
     override fun onCreateViewHolder(
@@ -47,7 +46,7 @@ class NonConsentingHouseholdAdapter(private val listener: OnItemClickListener) :
             }
         }
 
-        fun bind(nonConsentingHousehold: NonConsentHousehold) {
+        fun bind(nonConsentingHousehold: NonConsentHouseholdModel) {
             binding.apply {
                 textViewProvinceName.text = nonConsentingHousehold.province_name ?: ""
                 textViewCommunityName.text = nonConsentingHousehold.community_name ?: ""
@@ -57,17 +56,17 @@ class NonConsentingHouseholdAdapter(private val listener: OnItemClickListener) :
     }
 
     interface OnItemClickListener {
-        fun onItemClick(nonConsentingHousehold: NonConsentHousehold)
+        fun onItemClick(nonConsentingHousehold: NonConsentHouseholdModel)
 
     }
 
-    class DiffCallback : DiffUtil.ItemCallback<NonConsentHousehold>() {
-        override fun areItemsTheSame(oldItem: NonConsentHousehold, newItem: NonConsentHousehold) =
+    class DiffCallback : DiffUtil.ItemCallback<NonConsentHouseholdModel>() {
+        override fun areItemsTheSame(oldItem: NonConsentHouseholdModel, newItem: NonConsentHouseholdModel) =
             oldItem.id == newItem.id
 
         override fun areContentsTheSame(
-            oldItem: NonConsentHousehold,
-            newItem: NonConsentHousehold
+            oldItem: NonConsentHouseholdModel,
+            newItem: NonConsentHouseholdModel
         ) = oldItem == newItem
     }
 }

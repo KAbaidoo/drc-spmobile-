@@ -1,13 +1,12 @@
 package io.bewsys.spmobile.work
 
-import android.content.ClipData
 import android.content.Context
 import android.util.Log
 import androidx.work.CoroutineWorker
 import androidx.work.WorkerParameters
 import io.bewsys.spmobile.KEY_DATA_ID
 import io.bewsys.spmobile.data.NonConsentHouseholdEntity
-import io.bewsys.spmobile.data.repository.NonConsentingHouseholdRepositoryImpl
+import io.bewsys.spmobile.data.repository.NonConsentingHouseholdRepository
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.withContext
@@ -22,7 +21,7 @@ class UploadWorker(
     params: WorkerParameters,
 ) : CoroutineWorker(ctx, params), KoinComponent {
 
-    val repository: NonConsentingHouseholdRepositoryImpl by inject()
+    val repository: NonConsentingHouseholdRepository by inject()
 
     override suspend fun doWork(): Result {
         val id = inputData.getLong(KEY_DATA_ID, -1)

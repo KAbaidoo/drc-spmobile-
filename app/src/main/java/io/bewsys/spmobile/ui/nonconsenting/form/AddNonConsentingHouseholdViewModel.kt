@@ -8,10 +8,10 @@ import io.bewsys.spmobile.ADD_NON_CONSENTING_HOUSEHOLD_RESULT_OK
 import io.bewsys.spmobile.KEY_DATA_ID
 import io.bewsys.spmobile.data.CommunityEntity
 import io.bewsys.spmobile.data.ProvinceEntity
-import io.bewsys.spmobile.data.model.NonConsentHousehold
-import io.bewsys.spmobile.data.repository.CommunityRepositoryImpl
-import io.bewsys.spmobile.data.repository.NonConsentingHouseholdRepositoryImpl
-import io.bewsys.spmobile.data.repository.ProvinceRepositoryImpl
+import io.bewsys.spmobile.data.local.NonConsentHouseholdModel
+import io.bewsys.spmobile.data.repository.CommunityRepository
+import io.bewsys.spmobile.data.repository.NonConsentingHouseholdRepository
+import io.bewsys.spmobile.data.repository.ProvinceRepository
 import io.bewsys.spmobile.work.UploadWorker
 import kotlinx.coroutines.channels.Channel
 import kotlinx.coroutines.flow.*
@@ -21,9 +21,9 @@ import kotlinx.coroutines.launch
 class AddNonConsentingHouseholdViewModel(
     application: Application,
     private val state: SavedStateHandle,
-    private val nonConsentingHouseholdRepositoryImpl: NonConsentingHouseholdRepositoryImpl,
-    private val provinceRepositoryImpl: ProvinceRepositoryImpl,
-    private val communityRepositoryImpl: CommunityRepositoryImpl
+    private val nonConsentingHouseholdRepository: NonConsentingHouseholdRepository,
+    private val provinceRepository: ProvinceRepository,
+    private val communityRepository: CommunityRepository
 ) : ViewModel() {
     private val workManager = WorkManager.getInstance(application)
 
@@ -44,7 +44,7 @@ class AddNonConsentingHouseholdViewModel(
 
     private fun loadProvinces() {
         viewModelScope.launch {
-            provinceRepositoryImpl.getAllProvinces().collectLatest {
+            provinceRepository.getAllProvinces().collectLatest {
                 _provinces.value = it
             }
         }
@@ -52,7 +52,7 @@ class AddNonConsentingHouseholdViewModel(
 
     private fun loadCommunities() {
         viewModelScope.launch {
-            communityRepositoryImpl.getAllCommunities().collectLatest {
+            communityRepository.getAllCommunities().collectLatest {
                 _communities.value = it
             }
         }
@@ -116,7 +116,7 @@ class AddNonConsentingHouseholdViewModel(
         }
 
     private val provinceQuery = state.getStateFlow("province", "").flatMapLatest {
-        provinceRepositoryImpl.getByName(it)
+        provinceRepository.getByName(it)
     }
 
 
@@ -129,7 +129,7 @@ class AddNonConsentingHouseholdViewModel(
     }
 
     private val communityQuery = state.getStateFlow("community", "").flatMapLatest {
-        communityRepositoryImpl.getByName(it)
+        communityRepository.getByName(it)
     }
 
     fun getCommunityId() {
@@ -145,7 +145,7 @@ class AddNonConsentingHouseholdViewModel(
             showInvalidInputMessage()
             return
         } else {
-            NonConsentHousehold(
+            NonConsentHouseholdModel(
                 province_id = provinceId,
                 community_id = communityId,
                 gps_latitude = lat,
@@ -158,14 +158,14 @@ class AddNonConsentingHouseholdViewModel(
         }
     }
 
-    private fun addNonConsentingHousehold(newNonConsentingHousehold: NonConsentHousehold) =
+    private fun addNonConsentingHousehold(newNonConsentingHousehold: NonConsentHouseholdModel) =
         viewModelScope.launch {
 
-            nonConsentingHouseholdRepositoryImpl.insertNonConsentingHousehold(
+            nonConsentingHouseholdRepository.insertNonConsentingHousehold(
                 newNonConsentingHousehold
             )
 
-            uploadNonConsentingHousehold(nonConsentingHouseholdRepositoryImpl.getLastInsertedRowId())
+            uploadNonConsentingHousehold(nonConsentingHouseholdRepository.getLastInsertedRowId())
 
 //            lastly
             addNonConsentingHouseholdChannel.send(

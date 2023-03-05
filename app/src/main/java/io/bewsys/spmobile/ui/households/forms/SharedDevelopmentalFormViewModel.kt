@@ -6,11 +6,8 @@ import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import io.bewsys.spmobile.ADD_HOUSEHOLD_RESULT_OK
-import io.bewsys.spmobile.ADD_NON_CONSENTING_HOUSEHOLD_RESULT_OK
-import io.bewsys.spmobile.data.Household
-import io.bewsys.spmobile.data.model.HouseholdModel
-import io.bewsys.spmobile.data.repository.HouseholdRepositoryImpl
-import io.bewsys.spmobile.ui.nonconsenting.form.AddNonConsentingHouseholdViewModel
+import io.bewsys.spmobile.data.local.HouseholdModel
+import io.bewsys.spmobile.data.repository.HouseholdRepository
 import kotlinx.coroutines.channels.Channel
 import kotlinx.coroutines.flow.receiveAsFlow
 import kotlinx.coroutines.launch
@@ -19,7 +16,7 @@ import java.text.DateFormat
 
 class SharedDevelopmentalFormViewModel(
     application: Application,
-    private val householdRepositoryImpl: HouseholdRepositoryImpl
+    private val householdRepository: HouseholdRepository
 ) : ViewModel() {
 
 //    private val _entries = MutableLiveData<Map<String,String>>()
@@ -133,8 +130,8 @@ class SharedDevelopmentalFormViewModel(
 
     }
 
-    private fun addHousehold(newHousehold: HouseholdModel) = viewModelScope.launch {
-        householdRepositoryImpl.insertHousehold(newHousehold)
+    private fun addHousehold(newHouseholdModel: HouseholdModel) = viewModelScope.launch {
+        householdRepository.insertHousehold(newHouseholdModel)
 
 //upload with workmanager
 
