@@ -40,7 +40,7 @@ class PrefStoreTests {
 
         prefStore.preferencesFlow.collect {
             assertEquals(true, it.isLoggedIn)
-            assertEquals("Test name", it.username)
+            assertEquals("Test name", it.name)
         }
 
 

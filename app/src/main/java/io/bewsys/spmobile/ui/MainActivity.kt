@@ -50,6 +50,7 @@ class MainActivity : AppCompatActivity() {
             }
         }
 
+
         val drawerLayout: DrawerLayout = binding.drawerLayout
         val navView: NavigationView = binding.navView
 

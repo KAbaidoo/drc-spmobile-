@@ -1,24 +1,30 @@
 package io.bewsys.spmobile.data.remote
 
 
+
 import android.util.Log
+import io.bewsys.spmobile.data.prefsstore.PreferencesManager
 import io.ktor.client.*
-import io.ktor.client.engine.*
+
+import io.ktor.client.engine.android.*
+
 import io.ktor.client.plugins.*
 import io.ktor.client.plugins.contentnegotiation.*
 import io.ktor.client.plugins.logging.*
 import io.ktor.client.plugins.observer.*
 
 import io.ktor.client.request.*
+
 import io.ktor.http.*
 import io.ktor.serialization.kotlinx.json.*
 import io.ktor.util.*
 import kotlinx.serialization.json.Json
 
 
-class KtorHttpClient(private val httpClientEngine: HttpClientEngine) {
 
-    fun getClient() = HttpClient(httpClientEngine) {
+class KtorHttpClient{
+
+    fun getClient() = HttpClient(Android) {
 
         defaultRequest {
             url("http://mis.bewsys.dev/api/")
@@ -27,6 +33,8 @@ class KtorHttpClient(private val httpClientEngine: HttpClientEngine) {
                 HttpHeaders.ContentType,
                 ContentType.Application.Json.toString()
             )
+            accept(ContentType.Application.Json)
+
         }
 
         install(ContentNegotiation) {
@@ -55,11 +63,20 @@ class KtorHttpClient(private val httpClientEngine: HttpClientEngine) {
             }
         }
 
-        install(DefaultRequest)
-        {
-            header(HttpHeaders.ContentType, ContentType.Application.Json)
-        }
+//        engine {
+//            connectTimeout = 120_000
+//            socketTimeout =120_000
+//
+//        }
+
+//        install(DefaultRequest)
+//        {
+//            header(HttpHeaders.ContentType, ContentType.Application.Json)
+//
+//        }
         install(HttpTimeout) {
+            connectTimeoutMillis = TIME_OUT
+            socketTimeoutMillis = TIME_OUT
             requestTimeoutMillis = TIME_OUT
         }
 

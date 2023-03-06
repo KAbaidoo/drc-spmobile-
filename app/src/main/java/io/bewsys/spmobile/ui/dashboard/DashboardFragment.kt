@@ -33,15 +33,23 @@ class DashboardFragment : Fragment(R.layout.fragment_dashboard) {
             }
         }
 
-        setFragmentResultListener("login_request") { _, bundle ->
-            val result = bundle.getInt("login_result")
-            viewModel.onAddNonConsentingHouseholdResult(result)
+
+        setFragmentResultListener("user_request") { _, bundle ->
+            val result = bundle.getInt("user_result")
+            viewModel.onResult(result)
         }
 
         viewLifecycleOwner.lifecycleScope.launchWhenStarted {
             viewModel.dashboardEvent.collect { event ->
                 when (event) {
                     is DashboardViewModel.DashboardEvent.ShowLoginSuccessfulMessage -> {
+                        Snackbar.make(
+                            requireView(),
+                            event.msg,
+                            Snackbar.LENGTH_SHORT
+                        ).show()
+                    }
+                    is DashboardViewModel.DashboardEvent.ShowUpdateSuccessfulMessage -> {
 
                         Snackbar.make(
                             requireView(),
@@ -49,6 +57,7 @@ class DashboardFragment : Fragment(R.layout.fragment_dashboard) {
                             Snackbar.LENGTH_SHORT
                         ).show()
                     }
+
                 }
             }
         }

@@ -57,53 +57,52 @@ class LoginFragment : Fragment(R.layout.fragment_login) {
                 viewModel.password = it.toString()
             }
 
-            binding.apply {
-                requireActivity().actionBar?.hide()
-                buttonLogin.setOnClickListener {
-                    viewModel.login()
-                }
 
-                viewLifecycleOwner.lifecycleScope.launch {
-                    viewLifecycleOwner.lifecycle.repeatOnLifecycle(Lifecycle.State.STARTED) {
-                        viewModel.loginEvent.collectLatest { event ->
-                            when (event) {
-                                is LoginViewModel.LoginEvent.Loading -> progressBar.isVisible = true
+            buttonLogin.setOnClickListener {
+                viewModel.login()
+            }
 
-                                is LoginViewModel.LoginEvent.Successful -> {
-                                    progressBar.isVisible = false
-                                    setFragmentResult(
-                                        "login_request",
-                                        bundleOf("login_result" to event.results)
-                                    )
-                                    findNavController().navigate(R.id.nav_dashboard)
-                                }
-                                is LoginViewModel.LoginEvent.ShowMessage ->
-                                    Snackbar.make(requireView(), event.msg, Snackbar.LENGTH_LONG)
-                                        .show()
+            viewLifecycleOwner.lifecycleScope.launch {
+                viewLifecycleOwner.lifecycle.repeatOnLifecycle(Lifecycle.State.STARTED) {
+                    viewModel.loginEvent.collectLatest { event ->
+                        when (event) {
+                            is LoginViewModel.LoginEvent.Loading -> progressBar.isVisible = true
 
-                                is LoginViewModel.LoginEvent.Exception -> {
-                                    progressBar.isVisible = false
-                                    Snackbar.make(
-                                        requireView(),
-                                        event.errorMsg,
-                                        Snackbar.LENGTH_LONG
-                                    ).show()
-                                }
-                                is LoginViewModel.LoginEvent.Failure -> {
-                                    progressBar.isVisible = false
-                                    Snackbar.make(
-                                        requireView(),
-                                        event.errorMsg,
-                                        Snackbar.LENGTH_LONG
-                                    ).show()
-                                }
+                            is LoginViewModel.LoginEvent.Successful -> {
+                                progressBar.isVisible = false
+                                setFragmentResult(
+                                    "user_request",
+                                    bundleOf("user_result" to event.results)
+                                )
+                                findNavController().navigate(R.id.nav_dashboard)
+                            }
+                            is LoginViewModel.LoginEvent.ShowMessage ->
+                                Snackbar.make(requireView(), event.msg, Snackbar.LENGTH_LONG)
+                                    .show()
+
+                            is LoginViewModel.LoginEvent.Exception -> {
+                                progressBar.isVisible = false
+                                Snackbar.make(
+                                    requireView(),
+                                    event.errorMsg,
+                                    Snackbar.LENGTH_LONG
+                                ).show()
+                            }
+                            is LoginViewModel.LoginEvent.Failure -> {
+                                progressBar.isVisible = false
+                                Snackbar.make(
+                                    requireView(),
+                                    event.errorMsg,
+                                    Snackbar.LENGTH_LONG
+                                ).show()
                             }
                         }
                     }
                 }
             }
+
         }
-      viewModel.showLoggedOutMessage()
+        viewModel.showLoggedOutMessage()
 
     }
 

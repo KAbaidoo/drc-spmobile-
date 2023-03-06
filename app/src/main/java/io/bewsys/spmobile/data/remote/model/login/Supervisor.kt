@@ -3,7 +3,7 @@ package io.bewsys.spmobile.data.remote.model.login
 import kotlinx.serialization.Serializable
 
 @Serializable
-data class TeamLeader(
+data class Supervisor(
     val api_token: String?,
     val community_id: String?,
     val confirmation_code: String?,
@@ -26,7 +26,7 @@ data class TeamLeader(
     val status: String?,
     val supervisor: String?,
     val team_leader: String?,
-    val team_leader_supervisor_relation: TeamLeaderSupervisorRelation?,
+    val team_leader_supervisor_relation: String?,
     val ticket_role: String?,
     val updated_at: String?,
     val vac_type: String?

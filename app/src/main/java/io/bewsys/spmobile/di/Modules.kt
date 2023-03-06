@@ -17,8 +17,7 @@ import io.bewsys.spmobile.ui.profile.ProfileViewModel
 import io.bewsys.spmobile.ui.targeting.TargetingViewModel
 import io.bewsys.spmobile.ui.MainViewModel
 import io.bewsys.spmobile.work.UploadWorker
-import io.ktor.client.*
-import io.ktor.client.engine.android.*
+
 import org.koin.android.ext.koin.androidContext
 import org.koin.androidx.viewmodel.dsl.viewModel
 import org.koin.androidx.workmanager.dsl.worker
@@ -28,7 +27,7 @@ val appModule = module {
 
     single<SqlDriver> { AndroidSqliteDriver(Database.Schema, androidContext(), "sp.db") }
     single { Database(get()) }
-    single { KtorHttpClient(HttpClient(Android).engine).getClient() }
+    single { KtorHttpClient().getClient() }
     single { PreferencesManager(androidContext()) }
 
 
@@ -44,14 +43,11 @@ val appModule = module {
     viewModel { DashboardViewModel(get(), get()) }
     viewModel { HouseholdsViewModel(get(), get()) }
     viewModel { NonConsentingViewModel(get(), get(), get()) }
-    viewModel { ProfileViewModel(get()) }
+    viewModel { ProfileViewModel(get(),get()) }
     viewModel { TargetingViewModel(get()) }
-    viewModel { ProfileViewModel(get()) }
     viewModel { AddNonConsentingHouseholdViewModel(get(), get(), get(), get(), get()) }
     viewModel { SharedDevelopmentalFormViewModel(get(), get()) }
     viewModel { LoginViewModel(get(), get()) }
     viewModel { MainViewModel(get()) }
-
-
-
 }
+//HttpClient(Android).engine

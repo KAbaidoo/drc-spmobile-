@@ -3,6 +3,7 @@ package io.bewsys.spmobile.ui.dashboard
 import androidx.lifecycle.*
 import io.bewsys.spmobile.ADD_NON_CONSENTING_HOUSEHOLD_RESULT_OK
 import io.bewsys.spmobile.LOGIN_RESULT_OK
+import io.bewsys.spmobile.UPDATE_USER_RESULT_OK
 
 import io.bewsys.spmobile.data.repository.CommunityRepository
 import io.bewsys.spmobile.data.repository.ProvinceRepository
@@ -49,14 +50,15 @@ class DashboardViewModel(
         }
     }
 
-    fun onAddNonConsentingHouseholdResult(result: Int) {
+    fun onResult(result: Int) {
         when (result) {
-            LOGIN_RESULT_OK -> ShowLoginSuccessfulMessage()
+            UPDATE_USER_RESULT_OK -> showUpdateSuccessfulMessage()
+            LOGIN_RESULT_OK -> showLoginSuccessfulMessage()
         }
     }
 
 
-    private fun ShowLoginSuccessfulMessage() =
+    private fun showLoginSuccessfulMessage() =
         viewModelScope.launch {
             _dashboardEventChannel.send(
                 DashboardEvent.ShowLoginSuccessfulMessage(
@@ -65,8 +67,19 @@ class DashboardViewModel(
             )
         }
 
+    private fun showUpdateSuccessfulMessage() =
+        viewModelScope.launch {
+            _dashboardEventChannel.send(
+                DashboardEvent.ShowUpdateSuccessfulMessage(
+                    "User updated Successfully!"
+                )
+            )
+        }
+
+
     sealed class DashboardEvent {
         data class ShowLoginSuccessfulMessage(val msg: String) : DashboardEvent()
+        data class ShowUpdateSuccessfulMessage(val msg: String) : DashboardEvent()
 
     }
 
