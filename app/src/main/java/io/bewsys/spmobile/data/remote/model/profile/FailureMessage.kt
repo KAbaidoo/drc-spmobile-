@@ -6,7 +6,7 @@ import kotlinx.serialization.Serializable
 
 
 @Serializable
-data class ResponseMessage(
+data class FailureMessage(
     @SerialName("message")
     val msg: String,
 )

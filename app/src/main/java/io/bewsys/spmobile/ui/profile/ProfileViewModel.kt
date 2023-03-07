@@ -5,8 +5,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 
 import io.bewsys.spmobile.UPDATE_USER_RESULT_OK
-import io.bewsys.spmobile.data.remote.model.login.ErrorResponse
-import io.bewsys.spmobile.data.remote.model.profile.ResponseMessage
+import io.bewsys.spmobile.data.remote.model.profile.FailureMessage
 import io.bewsys.spmobile.data.repository.UserRepository
 
 import io.bewsys.spmobile.util.Resource
@@ -51,8 +50,8 @@ class ProfileViewModel(
                         _userProfileEventChannel.send( UserProfileEvent.Loading)
                     }
                     is Resource.Failure ->{
-                        val responseMessage = results.error as ResponseMessage
-                        _userProfileEventChannel.send( UserProfileEvent.Failure(responseMessage.msg))
+                        val failureMessage = results.error as FailureMessage
+                        _userProfileEventChannel.send( UserProfileEvent.Failure(failureMessage.msg))
                     }
                     is Resource.Exception -> {
                         results.throwable.localizedMessage?.let { errorMsg->

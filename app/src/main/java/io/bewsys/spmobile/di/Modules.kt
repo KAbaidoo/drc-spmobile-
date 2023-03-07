@@ -7,6 +7,7 @@ import io.bewsys.spmobile.data.remote.KtorHttpClient
 import io.bewsys.spmobile.data.remote.UserApi
 import io.bewsys.spmobile.data.repository.*
 import io.bewsys.spmobile.data.prefsstore.PreferencesManager
+import io.bewsys.spmobile.data.remote.NonConsentingHouseholdApi
 import io.bewsys.spmobile.ui.dashboard.DashboardViewModel
 import io.bewsys.spmobile.ui.households.HouseholdsViewModel
 import io.bewsys.spmobile.ui.households.forms.SharedDevelopmentalFormViewModel
@@ -32,10 +33,11 @@ val appModule = module {
 
 
     factory { UserApi(get()) }
+    factory { NonConsentingHouseholdApi(get()) }
     factory { CommunityRepository(get()) }
     factory { ProvinceRepository(get()) }
     factory { HouseholdRepository(get()) }
-    factory { NonConsentingHouseholdRepository(get()) }
+    factory { NonConsentingHouseholdRepository(get(),get(),get()) }
     factory { UserRepository(get(),get()) }
 
     worker { UploadWorker(androidContext(), get()) }

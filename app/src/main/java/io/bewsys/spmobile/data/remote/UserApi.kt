@@ -14,12 +14,12 @@ class UserApi(private val client: HttpClient) {
 //        contentType(ContentType.Application.Json)
     }
 
-    suspend fun updateUser(id: Long, userProfile: UserPayload, accessToken:String): HttpResponse =
+    suspend fun updateUser(id: Long, payload: UserPayload, accessToken:String): HttpResponse =
         client.patch("user") {
             url { appendPathSegments("$id") }
             headers {
                 append(HttpHeaders.Authorization, "Bearer $accessToken")
             }
-            setBody(userProfile)
+            setBody(payload)
         }
 }

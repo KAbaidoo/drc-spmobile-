@@ -6,7 +6,7 @@ import io.bewsys.spmobile.data.remote.UserApi
 import io.bewsys.spmobile.data.remote.model.login.ErrorResponse
 import io.bewsys.spmobile.data.remote.model.login.LoginRequest
 import io.bewsys.spmobile.data.remote.model.login.LoginResponse
-import io.bewsys.spmobile.data.remote.model.profile.ResponseMessage
+import io.bewsys.spmobile.data.remote.model.profile.FailureMessage
 import io.bewsys.spmobile.data.remote.model.profile.UserPayload
 import io.bewsys.spmobile.data.remote.model.profile.UserResponse
 import io.bewsys.spmobile.util.Resource
@@ -69,7 +69,7 @@ class UserRepository(
                             preferencesManager.saveUser(res.data.user)
 
                         } else {
-                            emit(Resource.Failure<ResponseMessage>(it.body()))
+                            emit(Resource.Failure<FailureMessage>(it.body()))
                         }
                     }
 
@@ -77,6 +77,6 @@ class UserRepository(
                 emit(Resource.Exception(throwable, null))
                 Log.d(TAG, "Exception: ${throwable.localizedMessage}")
             }
-    }
+    }.flowOn(Dispatchers.IO)
 }
 

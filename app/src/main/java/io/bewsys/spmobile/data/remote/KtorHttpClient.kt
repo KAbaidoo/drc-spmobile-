@@ -3,7 +3,6 @@ package io.bewsys.spmobile.data.remote
 
 
 import android.util.Log
-import io.bewsys.spmobile.data.prefsstore.PreferencesManager
 import io.ktor.client.*
 
 import io.ktor.client.engine.android.*

@@ -119,7 +119,6 @@ class AddNonConsentingHouseholdViewModel(
         provinceRepository.getByName(it)
     }
 
-
     fun getProvinceId() {
         viewModelScope.launch {
             provinceQuery.collect {

@@ -6,9 +6,15 @@ import androidx.work.CoroutineWorker
 import androidx.work.WorkerParameters
 import io.bewsys.spmobile.KEY_DATA_ID
 import io.bewsys.spmobile.data.NonConsentHouseholdEntity
+import io.bewsys.spmobile.data.remote.model.noconsent.FailureMessage
+import io.bewsys.spmobile.data.remote.model.noconsent.NonConsentHouseholdPayload
 import io.bewsys.spmobile.data.repository.NonConsentingHouseholdRepository
+import io.bewsys.spmobile.util.Resource
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.coroutineScope
 import kotlinx.coroutines.delay
+import kotlinx.coroutines.flow.collectLatest
+import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.withContext
 import org.koin.core.component.KoinComponent
 import org.koin.core.component.inject
@@ -28,41 +34,64 @@ class UploadWorker(
         return withContext(Dispatchers.IO) {
 
             try {
-
                 if (id < 0) {
                     Log.e(TAG, "Invalid input id")
                     throw IllegalArgumentException("Invalid input id")
                 }
                 val item = getItem(id)
-
-//                uploadItem(item)
-
-                updateItem(id)
+                item?.let { uploadItem(item) }
 
 
-
-
-
-
-                Result.success()
             } catch (throwable: Throwable) {
                 Log.e(TAG, "Error uploading data")
                 Result.failure()
-            }
+            }!!
 
         }
 
-
     }
 
-    private suspend fun uploadItem(item: NonConsentHouseholdEntity?) {
 
+    private suspend fun uploadItem(item: NonConsentHouseholdEntity): Result {
+        return withContext(Dispatchers.IO) {
+            var result: Result = Result.failure()
+            repository.uploadNonConsentingHousehold(
+                NonConsentHouseholdPayload(
+                    item.id,
+                    item.province_id,
+                    item.community_id,
+                    10,
+                    10,
+                    "home address",
+                    item.gps_longitude,
+                    item.gps_latitude,
+                    item.reason,
+                    item.other_non_consent_reason,
+                    item.status
+                )
+            ).collectLatest { response ->
+                result = when (response) {
+                    is Resource.Success -> {
+                        updateItem(item.id)
+                        Result.success()
+                    }
+                    is Resource.Exception -> {
+                        Result.failure()
+                    }
+                    else -> {
+                        Result.failure()
+                    }
+
+                }
+            }
+            result
+        }
     }
+
 
     private suspend fun updateItem(id: Long) {
         delay(2000L)
         repository.updateStatus("submitted", id)
-
     }
 
     private suspend fun getItem(id: Long): NonConsentHouseholdEntity? =
