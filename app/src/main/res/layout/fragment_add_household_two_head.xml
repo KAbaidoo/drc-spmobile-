@@ -18,6 +18,11 @@
             android:layout_height="wrap_content"
             android:orientation="vertical">
 
+            <io.bewsys.spmobile.ui.views.RadioButtonQuestion
+                style="@style/question_style"
+                android:entries="@array/initial_registration"
+                android:text="Initial registration type" />
+
             <io.bewsys.spmobile.ui.views.EditTextQuestion
                 style="@style/question_style"
                 android:text="Household head Firstname" />

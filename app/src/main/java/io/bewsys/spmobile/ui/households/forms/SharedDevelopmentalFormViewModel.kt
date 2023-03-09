@@ -5,9 +5,12 @@ import android.util.Log
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import androidx.work.*
 import io.bewsys.spmobile.ADD_HOUSEHOLD_RESULT_OK
+import io.bewsys.spmobile.KEY_DATA_ID
 import io.bewsys.spmobile.data.local.HouseholdModel
 import io.bewsys.spmobile.data.repository.HouseholdRepository
+import io.bewsys.spmobile.work.HouseholdUploadWorker
 import kotlinx.coroutines.channels.Channel
 import kotlinx.coroutines.flow.receiveAsFlow
 import kotlinx.coroutines.launch
@@ -18,12 +21,10 @@ class SharedDevelopmentalFormViewModel(
     application: Application,
     private val householdRepository: HouseholdRepository
 ) : ViewModel() {
+    private val workManager = WorkManager.getInstance(application)
 
-//    private val _entries = MutableLiveData<Map<String,String>>()
-//    val entries: LiveData<Map<String,String>> = _entries
-
-    private val AddDevelopmentalHouseholdEventChannel = Channel<AddDevelopmentalHouseholdEvent>()
-    val addDevelopmentalHouseholdEvent = AddDevelopmentalHouseholdEventChannel.receiveAsFlow()
+    private val addHouseholdEventChannel = Channel<AddDevelopmentalHouseholdEvent>()
+    val addDevelopmentalHouseholdEvent = addHouseholdEventChannel.receiveAsFlow()
 
 
     private val _entriesMap = mutableMapOf<String, String>()
@@ -43,16 +44,18 @@ class SharedDevelopmentalFormViewModel(
         _entriesMap.clear()
     }
 
-    fun printResults(title: String, str: String) {
-        viewModelScope.launch {
-            Log.d("FORM_VIEW_MODEL", "$title: $str")
-        }
+
+     fun setStartTime() {
+        _entriesMap["start_time"] =DateFormat.getTimeInstance().format(System.currentTimeMillis())
     }
+
+
 
     fun onRegisterClicked() {
 
         HouseholdModel(
             survey_date = DateFormat.getDateInstance().format(System.currentTimeMillis()),
+            initial_registration_type = _entriesMap["initial_registration_type"],
             respondent_firstname = _entriesMap["respondent_firstname"],
             respondent_middlename = _entriesMap["respondent_middlename"],
             respondent_lastname = _entriesMap["respondent_lastname"],
@@ -99,7 +102,7 @@ class SharedDevelopmentalFormViewModel(
             gps_longitude = _entriesMap["gps_longitude"],
             gps_latitude = _entriesMap["gps_latitude"],
             start_time = _entriesMap["start_time"],
-            finish_time = _entriesMap["finish_time"],
+            finish_time =  DateFormat.getTimeInstance().format(System.currentTimeMillis()),
             address = _entriesMap["address"],
             comments = _entriesMap["comments"],
             profile_picture = _entriesMap["profile_picture"],
@@ -121,10 +124,69 @@ class SharedDevelopmentalFormViewModel(
             other_household_activities_in_past_12_months = _entriesMap["other_household_activities_in_past_12_months"],
             duration_displaced_returned_repatriated_refugee = _entriesMap["duration_displaced_returned_repatriated_refugee"]?.toLong(),
             number_of_months_displaced_returned_repatriated_refugee = _entriesMap["number_of_months_displaced_returned_repatriated_refugee"]?.toLong(),
-//            number_of_months_displaced_returned_repatriated_refugee = _entriesMap["number_of_months_displaced_returned_repatriated_refugee"]?.toLong(),
+            number_of_meals_eaten_by_children_6_to_17_yesterday = _entriesMap["number_of_meals_eaten_by_children_6_to_17_yesterday"]?.toLong(),
+            number_of_days_in_week_consumed_sugar_or_sweet_products = _entriesMap["number_of_days_in_week_consumed_sugar_or_sweet_products"]?.toLong(),
+            number_of_days_in_week_consumed_vegetables = _entriesMap["number_of_days_in_week_consumed_vegetables"]?.toLong(),
+            number_of_days_in_week_consumed_staple_foods = _entriesMap["number_of_days_in_week_consumed_staple_foods"]?.toLong(),
+            number_of_days_in_week_consumed_meat = _entriesMap["number_of_days_in_week_consumed_meat"]?.toLong(),
+            number_of_bicycle_owned = _entriesMap["number_of_bicycle_owned"]?.toLong(),
+            number_of_days_in_week_consumed_legumes_or_nuts = _entriesMap["number_of_days_in_week_consumed_legumes_or_nuts"]?.toLong(),
+            number_of_days_in_week_consumed_fruits = _entriesMap["number_of_days_in_week_consumed_fruits"]?.toLong(),
+            number_of_days_in_week_consumed_dairy_products = _entriesMap["number_of_days_in_week_consumed_dairy_products"]?.toLong(),
+            number_of_days_in_week_consumed_cooking_oils = _entriesMap["number_of_days_in_week_consumed_dairy_products"]?.toLong(),
+            number_of_meals_eaten_by_children_2_to_5_yesterday = _entriesMap["number_of_meals_eaten_by_children_2_to_5_yesterday"]?.toLong(),
+            number_of_mosquito_nets_owned = _entriesMap["number_of_mosquito_nets_owned"]?.toLong(),
+            number_of_guinea_pig_owned = _entriesMap["number_of_guinea_pig_owned"]?.toLong(),
+            number_of_poultry_owned = _entriesMap["number_of_poultry_owned"]?.toLong(),
+            number_of_oil_stove_owned = _entriesMap["number_of_oil_stove_owned"]?.toLong(),
+            number_of_rabbit_owned = _entriesMap["number_of_rabbit_owned"]?.toLong(),
+            number_of_sheep_owned = _entriesMap["number_of_sheep_owned"]?.toLong(),
+            number_of_motorbike_owned = _entriesMap["number_of_motorbike_owned"]?.toLong(),
+            number_of_rooms_used_for_sleeping = _entriesMap["number_of_rooms_used_for_sleeping"]?.toLong(),
+            number_of_wheelbarrow_owned = _entriesMap["number_of_wheelbarrow_owned"]?.toLong(),
+            number_of_radio_owned = _entriesMap["number_of_radio_owned"]?.toLong(),
+            number_of_stove_or_oven_owned = _entriesMap["number_of_stove_or_oven_owned"]?.toLong(),
+            number_of_rickshaw_owned = _entriesMap["number_of_rickshaw_owned"]?.toLong(),
+            number_of_solar_plate_owned = _entriesMap["number_of_solar_plate_owned"]?.toLong(),
+            number_of_sewing_machine_owned = _entriesMap["number_of_sewing_machine_owned"]?.toLong(),
+            number_of_mattress_owned = _entriesMap["number_of_mattress_owned"]?.toLong(),
+            number_of_television_owned = _entriesMap["number_of_television_owned"]?.toLong(),
+            number_of_table_owned = _entriesMap["number_of_table_owned"]?.toLong(),
+            number_of_sofa_owned = _entriesMap["number_of_sofa_owned"]?.toLong(),
+            number_of_handset_or_phone_owned = _entriesMap["number_of_handset_or_phone_owned"]?.toLong(),
+            number_of_electric_iron_owned = _entriesMap["number_of_electric_iron_owned"]?.toLong(),
+            number_of_plow_owned = _entriesMap["number_of_plow_owned"]?.toLong(),
+            number_of_goat_owned = _entriesMap["number_of_goat_owned"]?.toLong(),
+            number_of_fridge_owned = _entriesMap["number_of_fridge_owned"]?.toLong(),
+            number_of_dvd_driver_owned = _entriesMap["number_of_dvd_driver_owned"]?.toLong(),
+            number_of_pigs_owned = _entriesMap["number_of_pigs_owned"]?.toLong(),
+            number_of_fan_owned = _entriesMap["number_of_fan_owned"]?.toLong(),
+            number_of_canal_tnt_tv_cable_owned = _entriesMap["number_of_canal_tnt_tv_cable_owned"]?.toLong(),
+            number_of_cow_owned = _entriesMap["number_of_cow_owned"]?.toLong(),
+            number_of_meals_eaten_by_adults_18_plus_yesterday = _entriesMap["number_of_meals_eaten_by_adults_18_plus_yesterday"]?.toLong(),
+            number_of_charcoal_iron_owned = _entriesMap["number_of_charcoal_iron_owned"]?.toLong(),
+            number_of_computer_owned = _entriesMap["number_of_computer_owned"]?.toLong(),
+            number_of_chair_owned = _entriesMap["number_of_chair_owned"]?.toLong(),
+            number_of_cart_owned = _entriesMap["number_of_cart_owned"]?.toLong(),
+            number_of_cars_owned = _entriesMap["number_of_cars_owned"]?.toLong(),
+            number_of_bed_owned = _entriesMap["number_of_bed_owned"]?.toLong(),
+            number_of_air_conditioner_owned = _entriesMap["number_of_air_conditioner_owned"]?.toLong(),
+            days_spent_reduce_meals_consumed_coping_strategy = _entriesMap["days_spent_reduce_meals_consumed_coping_strategy"]?.toLong(),
+            days_spent_reduce_meals_adult_forfeit_meal_for_child_coping_strategy = _entriesMap["days_spent_reduce_meals_adult_forfeit_meal_for_child_coping_strategy"]?.toLong(),
+            days_spent_reduce_amount_consumed_coping_strategy = _entriesMap["days_spent_reduce_amount_consumed_coping_strategy"]?.toLong(),
+            days_spent_eat_less_expensively_coping_strategy = _entriesMap["days_spent_eat_less_expensively_coping_strategy"]?.toLong(),
+            days_spent_days_without_eating_coping_strategy = _entriesMap["days_spent_days_without_eating_coping_strategy"]?.toLong(),
+            days_spent_consume_wild_food_coping_strategy = _entriesMap["days_spent_consume_wild_food_coping_strategy"]?.toLong(),
+            days_spent_borrow_food_or_rely_on_family_help_coping_strategy = _entriesMap["days_spent_borrow_food_or_rely_on_family_help_coping_strategy"]?.toLong(),
+            days_spent_begging_coping_strategy = _entriesMap["days_spent_begging_coping_strategy"]?.toLong(),
+            amount_of_cultivable_land_owned = _entriesMap["amount_of_cultivable_land_owned"]?.toLong(),
+            minimum_monthly_income_necessary_live_without_difficulties = _entriesMap["minimum_monthly_income_necessary_live_without_difficulties"]?.toLong(),
+            household_monthly_income = _entriesMap["household_monthly_income"]?.toLong(),
+            survey_no = "kr101111111111111",
+            temp_survey_no = "SQE211"
 
 
-        ).also {
+            ).also {
             addHousehold(it)
         }
 
@@ -133,16 +195,35 @@ class SharedDevelopmentalFormViewModel(
     private fun addHousehold(newHouseholdModel: HouseholdModel) = viewModelScope.launch {
         householdRepository.insertHousehold(newHouseholdModel)
 
-//upload with workmanager
+//upload with work manager
+        uploadNonConsentingHousehold(householdRepository.getLastInsertedRowId())
 
 
-        AddDevelopmentalHouseholdEventChannel.send(
+        addHouseholdEventChannel.send(
             AddDevelopmentalHouseholdEvent.NavigateBackWithResults(
                 ADD_HOUSEHOLD_RESULT_OK
             )
         )
     }
 
+    private fun uploadNonConsentingHousehold(itemId: Long) = viewModelScope.launch {
+        val constraints = Constraints.Builder()
+            .setRequiredNetworkType(NetworkType.CONNECTED)
+            .build()
+
+        val uploadRequest = OneTimeWorkRequestBuilder<HouseholdUploadWorker>()
+            .setConstraints(constraints)
+            .setInputData(createInputDataForId(itemId))
+            .build()
+        workManager.enqueue(uploadRequest)
+
+    }
+
+    private fun createInputDataForId(id: Long): Data {
+        val builder = Data.Builder()
+        builder.putLong(KEY_DATA_ID, id)
+        return builder.build()
+    }
 
 
     sealed class AddDevelopmentalHouseholdEvent {

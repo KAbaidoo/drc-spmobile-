@@ -8,6 +8,12 @@
         <item>Other</item>
     </string-array>
 
+    <string-array name="initial_registration">
+        <item>General</item>
+
+
+    </string-array>
+
     <string-array name="provinces">
         <item>first province</item>
         <item>second province</item>
@@ -87,8 +93,6 @@
         <item>Divorced</item>
         <item>Widowed</item>
     </string-array>
-
-
 
 
     <string name="empty_string" />

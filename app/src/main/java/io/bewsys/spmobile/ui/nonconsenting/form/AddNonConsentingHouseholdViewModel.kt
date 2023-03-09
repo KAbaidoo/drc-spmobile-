@@ -12,7 +12,7 @@ import io.bewsys.spmobile.data.local.NonConsentHouseholdModel
 import io.bewsys.spmobile.data.repository.CommunityRepository
 import io.bewsys.spmobile.data.repository.NonConsentingHouseholdRepository
 import io.bewsys.spmobile.data.repository.ProvinceRepository
-import io.bewsys.spmobile.work.UploadWorker
+import io.bewsys.spmobile.work.NonConsentUploadWorker
 import kotlinx.coroutines.channels.Channel
 import kotlinx.coroutines.flow.*
 import kotlinx.coroutines.launch
@@ -21,7 +21,7 @@ import kotlinx.coroutines.launch
 class AddNonConsentingHouseholdViewModel(
     application: Application,
     private val state: SavedStateHandle,
-    private val nonConsentingHouseholdRepository: NonConsentingHouseholdRepository,
+    private val nonConsentingRepository: NonConsentingHouseholdRepository,
     private val provinceRepository: ProvinceRepository,
     private val communityRepository: CommunityRepository
 ) : ViewModel() {
@@ -160,11 +160,11 @@ class AddNonConsentingHouseholdViewModel(
     private fun addNonConsentingHousehold(newNonConsentingHousehold: NonConsentHouseholdModel) =
         viewModelScope.launch {
 
-            nonConsentingHouseholdRepository.insertNonConsentingHousehold(
+            nonConsentingRepository.insertNonConsentingHousehold(
                 newNonConsentingHousehold
             )
 
-            uploadNonConsentingHousehold(nonConsentingHouseholdRepository.getLastInsertedRowId())
+            uploadNonConsentingHousehold(nonConsentingRepository.getLastInsertedRowId())
 
 //            lastly
             addNonConsentingHouseholdChannel.send(
@@ -180,7 +180,7 @@ class AddNonConsentingHouseholdViewModel(
             .setRequiredNetworkType(NetworkType.CONNECTED)
             .build()
 
-        val uploadRequest = OneTimeWorkRequestBuilder<UploadWorker>()
+        val uploadRequest = OneTimeWorkRequestBuilder<NonConsentUploadWorker>()
             .setConstraints(constraints)
             .setInputData(createInputDataForId(itemId))
             .build()

@@ -9,14 +9,13 @@ buildscript {
     ext {
         // Sdk and tools
         minSdkVersion = 21
-        targetSdkVersion = 32
-        compileSdkVersion = 33
+        targetSdkVersion = 28
+        compileSdkVersion = 32
 
         // App dependencies
-        appCompatVersion = "1.6.0"
+        appCompatVersion = "1.5.0"
         constraintLayoutVersion = "2.1.4"
         coroutinesVersion = "1.6.4"
-//        dataStoreVersion = "1.1.0-alpha01"
         espressoVersion = "3.5.1"
         fragmentVersion = "1.5.5"
         gradleVersion = "7.4.0"
@@ -31,7 +30,7 @@ buildscript {
 
         junitVersion = "4.13.2"
         kotlinVersion = "1.8.0"
-        ktxVersion = "1.9.0"
+        ktxVersion = "1.8.0"
         lifecycle_version = "2.5.1"
         arch_version = "2.1.0"
         materialVersion = "1.9.0-alpha01"
@@ -41,7 +40,7 @@ buildscript {
         glide_version = "4.11.0"
         preferenceVersion = "1.2.0"
         dataStoreVersion = "1.0.0-alpha02"
-//        dataStoreVersion = "1.0.0"
+
 
         mockitoVersion = "5.0.0"
         mockitoKotlinVersion = "3.2.0"
@@ -65,7 +64,6 @@ buildscript {
         classpath "androidx.navigation:navigation-safe-args-gradle-plugin:$navigation_version"
         classpath "app.cash.sqldelight:gradle-plugin:$sqldelight_version"
         classpath "org.jetbrains.kotlin:kotlin-serialization:$kotlinVersion"
-//        classpath "io.ktor:ktor-client-mock:$ktor_version"
     }
 }
 

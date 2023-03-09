@@ -5,13 +5,26 @@ import app.cash.sqldelight.coroutines.mapToList
 import io.bewsys.spmobile.Database
 import io.bewsys.spmobile.data.Household
 import io.bewsys.spmobile.data.local.HouseholdModel
+import io.bewsys.spmobile.data.prefsstore.PreferencesManager
+import io.bewsys.spmobile.data.remote.HouseholdApi
+import io.bewsys.spmobile.data.remote.model.household.HouseholdPayload
+import io.bewsys.spmobile.data.remote.model.login.ErrorResponse
+import io.bewsys.spmobile.data.remote.model.noconsent.FailureMessage
+import io.bewsys.spmobile.util.Resource
+import io.ktor.client.call.*
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.first
+import kotlinx.coroutines.flow.flow
+import kotlinx.coroutines.flow.flowOn
 import kotlinx.coroutines.withContext
 
 
-class HouseholdRepository(db: Database) {
-
+class HouseholdRepository(
+    db: Database,
+    private val api: HouseholdApi,
+    private val preferencesManager: PreferencesManager
+) {
     private val queries = db.householdQueries
 
     suspend fun getAllHouseholds(): Flow<List<Household>> =
@@ -27,6 +40,7 @@ class HouseholdRepository(db: Database) {
         householdModel: HouseholdModel
     ): Unit = withContext(Dispatchers.IO) {
 
+        val userPref = preferencesManager.preferencesFlow.first()
 
         householdModel.apply {
             queries.insertHousehold(
@@ -100,13 +114,13 @@ class HouseholdRepository(db: Database) {
                 other_household_activities_in_past_12_months = other_household_activities_in_past_12_months,
                 duration_displaced_returned_repatriated_refugee = duration_displaced_returned_repatriated_refugee,
                 number_of_months_displaced_returned_repatriated_refugee = number_of_months_displaced_returned_repatriated_refugee,
-                supervisor_id = supervisor_id,
+                supervisor_id = userPref.supervisorId,
                 temp_survey_no = temp_survey_no,
                 survey_no = survey_no,
                 remote_id = remote_id,
                 cac = cac,
-                team_leader_id = team_leader_id,
-                user_id = user_id,
+                team_leader_id = userPref.teamLeaderId,
+                user_id = userPref.id,
                 consent = consent,
                 CBT_score = CBT_score,
                 initial_registration_type = initial_registration_type,
@@ -201,5 +215,23 @@ class HouseholdRepository(db: Database) {
     suspend fun updateStatus(status: String, id: Long) {
         queries.updateStatus(status, id)
     }
+
+    //    ================================================================
+    //   *********************** network calls  ************************
+    suspend fun uploadHousehold(payload: HouseholdPayload) = flow {
+
+        try {
+            val userPref = preferencesManager.preferencesFlow.first()
+            val response = api.uploadHousehold(payload, userPref.token)
+
+            if (response.status.value in 200..299) {
+                emit(Resource.Success<Any>(response.body()))
+            } else {
+                emit(Resource.Failure<ErrorResponse>(response.body()))
+            }
+        } catch (throwable: Throwable) {
+            emit(Resource.Exception(throwable, null))
+        }
+    }.flowOn(Dispatchers.IO)
 
 }

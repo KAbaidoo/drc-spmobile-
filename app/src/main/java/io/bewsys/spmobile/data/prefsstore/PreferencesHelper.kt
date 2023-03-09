@@ -12,6 +12,7 @@ import io.bewsys.spmobile.data.prefsstore.PreferencesManager.PreferenceKeys.PHON
 import io.bewsys.spmobile.data.prefsstore.PreferencesManager.PreferenceKeys.SUPERVISOR_ID
 import io.bewsys.spmobile.data.prefsstore.PreferencesManager.PreferenceKeys.SUPERVISOR_NAME
 import io.bewsys.spmobile.data.prefsstore.PreferencesManager.PreferenceKeys.TEAM_LEADER
+import io.bewsys.spmobile.data.prefsstore.PreferencesManager.PreferenceKeys.TEAM_LEADER_ID
 import io.bewsys.spmobile.data.prefsstore.PreferencesManager.PreferenceKeys.TOKEN
 import io.bewsys.spmobile.data.remote.model.login.User
 
@@ -30,6 +31,7 @@ data class UserPreferences(
     val id: Long?,
     val phoneNumber: String,
     val teamLeader: String,
+    val teamLeaderId: String,
     val supervisorName: String,
     val supervisorId: String,
     val token: String
@@ -59,6 +61,7 @@ class PreferencesManager(context: Context) {
             val id = preferences[ID]
             val phoneNumber = preferences[PHONE_NUMBER] ?: ""
             val teamLeader = preferences[TEAM_LEADER] ?: ""
+            val teamLeaderId = preferences[TEAM_LEADER_ID] ?: ""
             val supervisorName = preferences[SUPERVISOR_NAME] ?: ""
             val supervisorId = preferences[SUPERVISOR_ID] ?: ""
             val token = preferences[TOKEN] ?: ""
@@ -69,6 +72,7 @@ class PreferencesManager(context: Context) {
                 id,
                 phoneNumber,
                 teamLeader,
+                teamLeaderId,
                 supervisorName,
                 supervisorId,
                 token
@@ -83,6 +87,8 @@ class PreferencesManager(context: Context) {
             preferences[PHONE_NUMBER] = user.phone_number.toString()
             preferences[TEAM_LEADER] =
                 user.enumerator_team_leader_relation?.team_leader?.name.toString()
+            preferences[TEAM_LEADER_ID] =
+                user.enumerator_team_leader_relation?.team_leader?.id.toString()
             preferences[SUPERVISOR_NAME] =
                 user.enumerator_team_leader_relation?.team_leader?.supervisor.toString()
             preferences[SUPERVISOR_ID] =
@@ -110,6 +116,7 @@ class PreferencesManager(context: Context) {
         val ID = preferencesKey<Long>("id")
         val PHONE_NUMBER = preferencesKey<String>("phone_number")
         val TEAM_LEADER = preferencesKey<String>("team_leader")
+        val TEAM_LEADER_ID = preferencesKey<String>("team_leader_id")
         val SUPERVISOR_NAME = preferencesKey<String>("supervisor_name")
         val SUPERVISOR_ID = preferencesKey<String>("supervisor_id")
         val IS_LOGGED_IN = preferencesKey<Boolean>("logged_in")

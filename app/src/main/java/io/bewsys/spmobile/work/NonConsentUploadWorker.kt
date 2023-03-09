@@ -6,23 +6,20 @@ import androidx.work.CoroutineWorker
 import androidx.work.WorkerParameters
 import io.bewsys.spmobile.KEY_DATA_ID
 import io.bewsys.spmobile.data.NonConsentHouseholdEntity
-import io.bewsys.spmobile.data.remote.model.noconsent.FailureMessage
 import io.bewsys.spmobile.data.remote.model.noconsent.NonConsentHouseholdPayload
 import io.bewsys.spmobile.data.repository.NonConsentingHouseholdRepository
 import io.bewsys.spmobile.util.Resource
 import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.coroutineScope
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.collectLatest
-import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.withContext
 import org.koin.core.component.KoinComponent
 import org.koin.core.component.inject
 
 
-private const val TAG = "UploadWorker"
+private const val TAG = "NonConsentUploadWorker"
 
-class UploadWorker(
+class NonConsentUploadWorker(
     ctx: Context,
     params: WorkerParameters,
 ) : CoroutineWorker(ctx, params), KoinComponent {

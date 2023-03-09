@@ -84,11 +84,11 @@ class DevelopmentalFormFragment : Fragment(R.layout.fragment_developmental_form)
 
 
         override fun createFragment(position: Int): Fragment = when (position) {
-            0 -> FormPhaseOneFragment()
-            1 -> FormPhaseTwoFragment()
-            2 -> FormPhaseThreeFragment()
-            3 -> FormPhaseFourFragment()
-            else -> FormPhaseFiveFragment()
+            0 -> FormStepOneFragment()
+            1 -> FormStepTwoFragment()
+            2 -> FormStepThreeFragment()
+            3 -> FormStepFourFragment()
+            else -> FormStepFiveFragment()
         }
 
 

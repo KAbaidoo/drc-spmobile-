@@ -54,7 +54,6 @@ class NonConsentingHouseholdRepository(
             )
         }
     }
-
     suspend fun getLastInsertedRowId(): Long = withContext(Dispatchers.IO) {
         queries.lastInsertRowId().executeAsOne()
     }
@@ -64,6 +63,7 @@ class NonConsentingHouseholdRepository(
     }
 
     //    ================================================================
+    //   *********************** network calls  ************************
     suspend fun uploadNonConsentingHousehold(payload: NonConsentHouseholdPayload) = flow {
 
         try {
