@@ -14,6 +14,6 @@ class HumanitarianFormFragment :Fragment (R.layout.fragment_humanitarian_form){
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        val binding = FragmentHumanitarianFormBinding.bind(view)
+//        val binding = FragmentHumanitarianFormBinding.bind(view)
     }
 }

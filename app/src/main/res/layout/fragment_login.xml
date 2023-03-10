@@ -31,7 +31,7 @@
             android:layout_height="80dp"
             android:layout_gravity="center_horizontal"
             android:layout_margin="8dp"
-            android:contentDescription="congo logo"
+            android:contentDescription="@string/congo_logo"
             android:src="@drawable/congologo" />
 
 
@@ -41,14 +41,14 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="20dp"
-            android:contentDescription="Email"
+            android:contentDescription="@string/email"
             android:minHeight="20dp"
             app:boxStrokeWidth="2dp">
 
             <com.google.android.material.textfield.TextInputEditText
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="Email"
+                android:hint="@string/email"
                 android:inputType="textEmailAddress" />
 
         </com.google.android.material.textfield.TextInputLayout>
@@ -60,14 +60,14 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="20dp"
-            android:contentDescription="password"
+            android:contentDescription="@string/password"
             android:minHeight="20dp"
             app:boxStrokeWidth="2dp">
 
             <com.google.android.material.textfield.TextInputEditText
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="password"
+                android:hint="@string/password"
                 android:inputType="textPassword" />
 
         </com.google.android.material.textfield.TextInputLayout>
@@ -83,7 +83,7 @@
             <com.google.android.material.button.MaterialButton
                 android:id="@+id/button_login"
                 style="@style/styled_button"
-                android:text="@string/LOGIN" />
+                android:text="@string/login" />
         </LinearLayout>
     </androidx.appcompat.widget.LinearLayoutCompat>
 

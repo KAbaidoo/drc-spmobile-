@@ -20,7 +20,7 @@
             android:orientation="vertical">
 
             <TextView
-                android:text="@string/Non_Consent_Household_Form"
+                android:text="@string/non_consent_household_form"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -31,7 +31,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
-                android:text="Reason"
+                android:text="@string/reason"
                 android:textAppearance="@style/TextAppearance.MaterialComponents.Body1" />
 
             <com.google.android.material.textfield.TextInputLayout
@@ -47,6 +47,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:ellipsize="end"
+                    android:hint="@string/reason"
                     android:inputType="none"
                     android:singleLine="true" />
 
@@ -56,7 +57,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
-                android:text="If other reason, indicate here"
+                android:text="@string/if_other_reason_indicate_here"
                 android:textAppearance="@style/TextAppearance.MaterialComponents.Body1" />
 
             <com.google.android.material.textfield.TextInputLayout
@@ -70,7 +71,7 @@
                 <com.google.android.material.textfield.TextInputEditText
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:hint=""
+                    android:hint="@string/if_other_reason_indicate_here"
                     android:inputType="text"
                     android:maxLines="3" />
 
@@ -81,7 +82,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
-                android:orientation="horizontal">
+                android:orientation="horizontal"
+                android:baselineAligned="false">
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -93,7 +95,7 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Province"
+                        android:text="@string/province"
                         android:textAppearance="@style/TextAppearance.MaterialComponents.Body1" />
 
 
@@ -102,7 +104,7 @@
                         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense.ExposedDropdownMenu"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:hint="Choose"
+                        android:hint="@string/hint_choose"
                         android:minHeight="20dp"
                         app:boxStrokeWidth="2dp">
 
@@ -128,7 +130,7 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Territory"
+                        android:text="@string/territory"
                         android:textAppearance="@style/TextAppearance.MaterialComponents.Body1" />
 
 
@@ -137,7 +139,7 @@
                         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense.ExposedDropdownMenu"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:hint="Choose"
+                        android:hint="@string/hint_choose"
                         android:minHeight="20dp"
                         app:boxStrokeWidth="2dp">
 
@@ -159,7 +161,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
-                android:orientation="horizontal">
+                android:orientation="horizontal"
+                android:baselineAligned="false">
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -171,7 +174,7 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Community"
+                        android:text="@string/community"
                         android:textAppearance="@style/TextAppearance.MaterialComponents.Body1" />
 
 
@@ -206,7 +209,7 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Groupment"
+                        android:text="@string/groupment"
                         android:textAppearance="@style/TextAppearance.MaterialComponents.Body1" />
 
 
@@ -215,7 +218,7 @@
                         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense.ExposedDropdownMenu"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:hint="Choose"
+                        android:hint="@string/hint_choose"
                         android:minHeight="20dp"
                         app:boxStrokeWidth="2dp">
 
@@ -237,7 +240,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
-                android:orientation="horizontal">
+                android:orientation="horizontal"
+                android:baselineAligned="false">
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -261,10 +265,9 @@
                         <com.google.android.material.textfield.TextInputEditText
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:text="37.42222" />
+                            android:text="@string/lon_placeholder" />
                     </com.google.android.material.textfield.TextInputLayout>
                 </LinearLayout>
-"
                <LinearLayout
                    android:layout_width="match_parent"
                    android:layout_height="wrap_content"
@@ -288,7 +291,7 @@
                        <com.google.android.material.textfield.TextInputEditText
                            android:layout_width="match_parent"
                            android:layout_height="wrap_content"
-                           android:text="31.42222" />
+                           android:text="@string/lat_placeholder" />
                    </com.google.android.material.textfield.TextInputLayout>
                </LinearLayout>
 

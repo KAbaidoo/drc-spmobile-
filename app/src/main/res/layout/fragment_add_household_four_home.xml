@@ -6,7 +6,7 @@
 
     <TextView
         style="@style/heading_form_sub"
-        android:text="Property" />
+        android:text="@string/property" />
 
     <ScrollView
         android:layout_width="match_parent"
@@ -24,151 +24,151 @@
             <io.bewsys.spmobile.ui.views.EditTextQuestion
                 style="@style/question_style"
                 android:inputType="number"
-                android:text="Number of goat owned" />
+                android:text="@string/number_of_goat_owned" />
 
             <io.bewsys.spmobile.ui.views.EditTextQuestion
                 style="@style/question_style"
                 android:inputType="number"
-                android:text="Number of sheep owned" />
+                android:text="@string/number_of_sheep_owned" />
 
             <io.bewsys.spmobile.ui.views.EditTextQuestion
                 style="@style/question_style"
                 android:inputType="number"
-                android:text="Number of cow owned" />
+                android:text="@string/number_of_cow_owned" />
 
             <io.bewsys.spmobile.ui.views.EditTextQuestion
                 style="@style/question_style"
                 android:inputType="number"
-                android:text="Number of rabbit owned" />
+                android:text="@string/number_of_rabbit_owned" />
 
             <io.bewsys.spmobile.ui.views.EditTextQuestion
                 style="@style/question_style"
                 android:inputType="number"
-                android:text="Number of pigs owned" />
+                android:text="@string/number_of_pigs_owned" />
 
 
             <io.bewsys.spmobile.ui.views.EditTextQuestion
                 style="@style/question_style"
                 android:inputType="number"
-                android:text="Number of poultry owned" />
+                android:text="@string/number_of_poultry_owned" />
 
             <io.bewsys.spmobile.ui.views.EditTextQuestion
                 style="@style/question_style"
                 android:inputType="number"
-                android:text="Number of guinea pigs owned" />
+                android:text="@string/number_of_guinea_pigs_owned" />
 
             <io.bewsys.spmobile.ui.views.QuantityQuestion
                 style="@style/question_style"
                 android:entries="@array/short_number_list"
-                android:text="Number of cars owned" />
+                android:text="@string/number_of_cars_owned" />
 
             <io.bewsys.spmobile.ui.views.QuantityQuestion
                 style="@style/question_style"
                 android:entries="@array/short_number_list"
-                android:text="Number of motobike owned" />
+                android:text="@string/number_of_motobike_owned" />
 
             <io.bewsys.spmobile.ui.views.QuantityQuestion
                 style="@style/question_style"
                 android:entries="@array/short_number_list"
-                android:text="Number of bicycle owned" />
+                android:text="@string/number_of_bicycle_owned" />
 
             <io.bewsys.spmobile.ui.views.QuantityQuestion
                 style="@style/question_style"
                 android:entries="@array/short_number_list"
-                android:text="Number of cart owned" />
-
-
-            <io.bewsys.spmobile.ui.views.QuantityQuestion
-                style="@style/question_style"
-                android:entries="@array/short_number_list"
-                android:text="Number of plow owned" />
-
-            <io.bewsys.spmobile.ui.views.QuantityQuestion
-                style="@style/question_style"
-                android:entries="@array/short_number_list"
-                android:text="Number of wheelbarrow owned" />
-
-            <io.bewsys.spmobile.ui.views.QuantityQuestion
-                style="@style/question_style"
-                android:entries="@array/short_number_list"
-                android:text="Number of rickshaw owned" />
+                android:text="@string/number_of_cart_owned" />
 
 
             <io.bewsys.spmobile.ui.views.QuantityQuestion
                 style="@style/question_style"
                 android:entries="@array/short_number_list"
-                android:text="Number of mattress owned" />
+                android:text="@string/number_of_plow_owned" />
 
             <io.bewsys.spmobile.ui.views.QuantityQuestion
                 style="@style/question_style"
                 android:entries="@array/short_number_list"
-                android:text="Number of fridge owned" />
+                android:text="@string/number_of_wheelbarrow_owned" />
 
             <io.bewsys.spmobile.ui.views.QuantityQuestion
                 style="@style/question_style"
                 android:entries="@array/short_number_list"
-                android:text="Number of fan owned" />
-
-            <io.bewsys.spmobile.ui.views.QuantityQuestion
-                style="@style/question_style"
-                android:entries="@array/short_number_list"
-                android:text="Number of air conditionor owned" />
+                android:text="@string/number_of_rickshaw_owned" />
 
 
             <io.bewsys.spmobile.ui.views.QuantityQuestion
                 style="@style/question_style"
                 android:entries="@array/short_number_list"
-                android:text="Number of television owned" />
+                android:text="@string/number_of_mattress_owned" />
 
             <io.bewsys.spmobile.ui.views.QuantityQuestion
                 style="@style/question_style"
                 android:entries="@array/short_number_list"
-                android:text="Number of radio owned" />
+                android:text="@string/number_of_fridge_owned" />
 
             <io.bewsys.spmobile.ui.views.QuantityQuestion
                 style="@style/question_style"
                 android:entries="@array/short_number_list"
-                android:text="Number of Canal TNT TV Cable owned" />
+                android:text="@string/number_of_fan_owned" />
 
             <io.bewsys.spmobile.ui.views.QuantityQuestion
                 style="@style/question_style"
                 android:entries="@array/short_number_list"
-                android:text="Number of DVD driver owned" />
+                android:text="@string/number_of_air_conditionor_owned" />
+
 
             <io.bewsys.spmobile.ui.views.QuantityQuestion
                 style="@style/question_style"
                 android:entries="@array/short_number_list"
-                android:text="Number of computer owned" />
+                android:text="@string/number_of_television_owned" />
 
             <io.bewsys.spmobile.ui.views.QuantityQuestion
                 style="@style/question_style"
                 android:entries="@array/short_number_list"
-                android:text="Number of stove or oven owned" />
+                android:text="@string/number_of_radio_owned" />
 
             <io.bewsys.spmobile.ui.views.QuantityQuestion
                 style="@style/question_style"
                 android:entries="@array/short_number_list"
-                android:text="Number of oil stove owned" />
+                android:text="@string/number_of_canal_tnt_tv_cable_owned" />
 
             <io.bewsys.spmobile.ui.views.QuantityQuestion
                 style="@style/question_style"
                 android:entries="@array/short_number_list"
-                android:text="Number of solar plate owned" />
+                android:text="@string/number_of_dvd_driver_owned" />
 
             <io.bewsys.spmobile.ui.views.QuantityQuestion
                 style="@style/question_style"
                 android:entries="@array/short_number_list"
-                android:text="Number of sewing machines owned" />
+                android:text="@string/number_of_computer_owned" />
 
             <io.bewsys.spmobile.ui.views.QuantityQuestion
                 style="@style/question_style"
                 android:entries="@array/short_number_list"
-                android:text="Number of electric iron owned" />
+                android:text="@string/number_of_stove_or_oven_owned" />
 
             <io.bewsys.spmobile.ui.views.QuantityQuestion
                 style="@style/question_style"
                 android:entries="@array/short_number_list"
-                android:text="Number of charcoal iron owned" />
+                android:text="@string/number_of_oil_stove_owned" />
+
+            <io.bewsys.spmobile.ui.views.QuantityQuestion
+                style="@style/question_style"
+                android:entries="@array/short_number_list"
+                android:text="@string/number_of_solar_plate_owned" />
+
+            <io.bewsys.spmobile.ui.views.QuantityQuestion
+                style="@style/question_style"
+                android:entries="@array/short_number_list"
+                android:text="@string/number_of_sewing_machines_owned" />
+
+            <io.bewsys.spmobile.ui.views.QuantityQuestion
+                style="@style/question_style"
+                android:entries="@array/short_number_list"
+                android:text="@string/number_of_electric_iron_owned" />
+
+            <io.bewsys.spmobile.ui.views.QuantityQuestion
+                style="@style/question_style"
+                android:entries="@array/short_number_list"
+                android:text="@string/number_of_charcoal_iron_owned" />
 
         </LinearLayout>
 

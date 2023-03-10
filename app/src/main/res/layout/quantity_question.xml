@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <merge xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     xmlns:app="http://schemas.android.com/apk/res-auto"
@@ -22,16 +23,18 @@
         app:boxStrokeWidth="2dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="Qty"
+        android:hint="@string/qty"
         android:minHeight="20dp">
 
         <AutoCompleteTextView
             android:id="@+id/autocomplete_text_view"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+
             android:ellipsize="end"
             android:inputType="none"
-            android:singleLine="true" />
+            android:singleLine="true"
+            tools:ignore="LabelFor,VisualLintTextFieldSize" />
 
     </com.google.android.material.textfield.TextInputLayout>
 </merge>

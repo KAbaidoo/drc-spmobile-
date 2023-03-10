@@ -5,7 +5,7 @@
     android:orientation="vertical">
     <TextView
         style="@style/heading_form_sub"
-        android:text="Household head" />
+        android:text="@string/household_head" />
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -21,147 +21,147 @@
             <io.bewsys.spmobile.ui.views.RadioButtonQuestion
                 style="@style/question_style"
                 android:entries="@array/initial_registration"
-                android:text="Initial registration type" />
+                android:text="@string/initial_registration_type" />
 
             <io.bewsys.spmobile.ui.views.EditTextQuestion
                 style="@style/question_style"
-                android:text="Household head Firstname" />
+                android:text="@string/household_head_firstname" />
 
             <io.bewsys.spmobile.ui.views.EditTextQuestion
                 style="@style/question_style"
-                android:text="Household head Middlename" />
+                android:text="@string/household_head_middlename" />
 
             <io.bewsys.spmobile.ui.views.EditTextQuestion
                 style="@style/question_style"
-                android:text="Household head Lastname" />
+                android:text="@string/household_head_lastname" />
 
             <io.bewsys.spmobile.ui.views.RadioButtonQuestion
                 style="@style/question_style"
                 android:entries="@array/male_or_female"
-                android:text="Household head sex" />
+                android:text="@string/household_head_sex" />
 
             <io.bewsys.spmobile.ui.views.RadioButtonQuestion
                 style="@style/question_style"
                 android:entries="@array/yes_or_no"
-                android:text="Head age known" />
+                android:text="@string/head_age_known" />
 
             <io.bewsys.spmobile.ui.views.EditTextQuestion
                 style="@style/question_style"
                 android:inputType="number"
-                android:text="Household head age" />
+                android:text="@string/household_head_age" />
 
             <io.bewsys.spmobile.ui.views.RadioButtonQuestion
                 style="@style/question_style"
                 android:entries="@array/yes_or_no"
-                android:text="Head DOB known" />
+                android:text="@string/head_dob_known" />
 
             <io.bewsys.spmobile.ui.views.DatePickertQuestion
                 android:id="@+id/text_view_dob"
                 style="@style/question_style"
                 android:inputType="date"
-                android:text="Household head DOB" />
+                android:text="@string/household_head_dob" />
 
             <io.bewsys.spmobile.ui.views.EditTextQuestion
                 style="@style/question_style"
-                android:text="Household head voter ID card" />
+                android:text="@string/household_head_voter_id_card" />
 
             <io.bewsys.spmobile.ui.views.EditTextQuestion
                 style="@style/question_style"
                 android:inputType="phone"
-                android:text="Household head phone number" />
+                android:text="@string/household_head_phone_number" />
 
             <io.bewsys.spmobile.ui.views.RadioButtonQuestion
                 style="@style/question_style"
                 android:entries="@array/marital_status"
-                android:text="Household head marital status" />
+                android:text="@string/household_head_marital_status" />
 
             <io.bewsys.spmobile.ui.views.EditTextQuestion
                 style="@style/question_style"
-                android:text="Household head birth certificate" />
+                android:text="@string/household_head_birth_certificate" />
 
             <io.bewsys.spmobile.ui.views.EditTextQuestion
                 style="@style/question_style"
-                android:text="Household head educational level" />
+                android:text="@string/household_head_educational_level" />
 
             <io.bewsys.spmobile.ui.views.EditTextQuestion
                 style="@style/question_style"
-                android:text="Household head disability id" />
+                android:text="@string/household_head_disability_id" />
 
             <io.bewsys.spmobile.ui.views.EditTextQuestion
                 style="@style/question_style"
-                android:text="Household head socio professional category" />
+                android:text="@string/household_head_socio_professional_category" />
 
             <io.bewsys.spmobile.ui.views.EditTextQuestion
                 style="@style/question_style"
-                android:text="Household head school attendance" />
+                android:text="@string/household_head_school_attendance" />
 
             <io.bewsys.spmobile.ui.views.EditTextQuestion
                 style="@style/question_style"
-                android:text="Household head sector of work" />
+                android:text="@string/household_head_sector_of_work" />
 
             <io.bewsys.spmobile.ui.views.RadioButtonQuestion
                 style="@style/question_style"
                 android:entries="@array/yes_or_no"
-                android:text="Household head pregnancy status" />
+                android:text="@string/household_head_pregnancy_status" />
 
 
             <io.bewsys.spmobile.ui.views.EditTextQuestion
                 style="@style/question_style"
-                android:text="Territory or town" />
+                android:text="@string/territory_or_town" />
 
             <io.bewsys.spmobile.ui.views.RadioButtonQuestion
                 style="@style/question_style"
                 android:entries="@array/yes_or_no"
-                android:text="Is head respondent" />
+                android:text="@string/is_head_respondent" />
 
             <io.bewsys.spmobile.ui.views.EditTextQuestion
                 style="@style/question_style"
-                android:text="Area of residence" />
+                android:text="@string/area_of_residence" />
 
             <io.bewsys.spmobile.ui.views.EditTextQuestion
                 style="@style/question_style"
-                android:text="Province" />
+                android:text="@string/province" />
 
             <io.bewsys.spmobile.ui.views.EditTextQuestion
                 style="@style/question_style"
-                android:text="Community" />
+                android:text="@string/community" />
 
             <io.bewsys.spmobile.ui.views.EditTextQuestion
                 style="@style/question_style"
-                android:text="Territory" />
+                android:text="@string/territory" />
 
             <io.bewsys.spmobile.ui.views.EditTextQuestion
                 style="@style/question_style"
-                android:text="Health zone" />
+                android:text="@string/health_zone" />
 
             <io.bewsys.spmobile.ui.views.EditTextQuestion
                 style="@style/question_style"
-                android:text="Health area" />
+                android:text="@string/health_area" />
 
             <io.bewsys.spmobile.ui.views.EditTextQuestion
                 style="@style/question_style"
-                android:text="Groupment" />
+                android:text="@string/groupment" />
 
             <io.bewsys.spmobile.ui.views.EditTextQuestion
                 style="@style/question_style"
-                android:text="Address" />
+                android:text="@string/address" />
 
             <io.bewsys.spmobile.ui.views.EditTextQuestion
                 style="@style/question_style"
-                android:text="Village or quartier" />
+                android:text="@string/village_or_quartier" />
 
             <io.bewsys.spmobile.ui.views.EditTextQuestion
                 style="@style/question_style"
-                android:text="Comments" />
+                android:text="@string/comments" />
 
             <io.bewsys.spmobile.ui.views.EditTextQuestion
                 style="@style/question_style"
-                android:text="Mobile money username" />
+                android:text="@string/mobile_money_username" />
 
             <io.bewsys.spmobile.ui.views.EditTextQuestion
                 style="@style/question_style"
                 android:inputType="phone"
-                android:text="Mobile money phone number" />
+                android:text="@string/mobile_money_phone_number" />
 
 
         </LinearLayout>

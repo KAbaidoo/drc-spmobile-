@@ -127,9 +127,9 @@ class AddNonConsentingHouseholdFragment : Fragment(R.layout.fragment_add_non_con
                 event ->
                 when (event){
                     is AddNonConsentingHouseholdViewModel.AddNonConsentingHouseholdEvent.ShowInvalidInputMessage ->
-                    {
+
                         Snackbar.make(requireView(),event.msg, Snackbar.LENGTH_LONG).show()
-                    }
+
                     is AddNonConsentingHouseholdViewModel.AddNonConsentingHouseholdEvent.NavigateBackWithResults -> {
 
                         setFragmentResult(

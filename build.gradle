@@ -9,11 +9,11 @@ buildscript {
     ext {
         // Sdk and tools
         minSdkVersion = 21
-        targetSdkVersion = 28
+        targetSdkVersion = 32
         compileSdkVersion = 32
 
         // App dependencies
-        appCompatVersion = "1.5.0"
+        appCompatVersion = "1.5.1"
         constraintLayoutVersion = "2.1.4"
         coroutinesVersion = "1.6.4"
         espressoVersion = "3.5.1"

@@ -224,7 +224,7 @@ class HouseholdUploadWorker(
                             Result.success()
                         }
                         is Resource.Exception -> {
-                            Log.d(TAG, response.throwable.localizedMessage)
+                            response.throwable.localizedMessage?.let { Log.d(TAG, it) }
                             Result.failure()
                         }
 

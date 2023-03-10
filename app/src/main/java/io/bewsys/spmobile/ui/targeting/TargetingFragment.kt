@@ -15,13 +15,11 @@ class TargetingFragment : Fragment(R.layout.fragment_targeting) {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+//
+//        val binding = FragmentTargetingBinding.bind(view)
+//        val viewModel: TargetingViewModel by viewModel()
 
-        val binding = FragmentTargetingBinding.bind(view)
-        val viewModel: TargetingViewModel by viewModel()
 
-        binding.buttonLogout.setOnClickListener {
-            viewModel.logout()
-        }
 
 
 
