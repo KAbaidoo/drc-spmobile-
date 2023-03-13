@@ -24,7 +24,10 @@
     <style name="heading_form_sub">
         <item name="android:layout_width">match_parent</item>
         <item name="android:layout_height">wrap_content</item>
-        <item name="android:layout_margin">14dp</item>
+        <item name="android:layout_marginTop">32dp</item>
+        <item name="android:layout_marginStart">32dp</item>
+        <item name="android:layout_marginEnd">32dp</item>
+
         <item name="android:textSize">20sp</item>
         <item name="android:textAppearance">@style/TextAppearance.MaterialComponents.Headline4
         </item>

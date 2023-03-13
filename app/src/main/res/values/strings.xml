@@ -164,6 +164,8 @@
     <string name="navigation_header">Navigation header</string>
     <string name="username">Username</string>
     <string name="qty">Qty</string>
+    <string name="failure_dialog_message">Message</string>
+    <string name="failure_dialog_ok">OK</string>
 
     <string-array name="reasons">
         <item>No (refusal)</item>

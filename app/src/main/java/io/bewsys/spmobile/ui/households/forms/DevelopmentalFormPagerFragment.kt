@@ -11,6 +11,7 @@ import androidx.navigation.fragment.findNavController
 import androidx.viewpager2.adapter.FragmentStateAdapter
 import androidx.viewpager2.widget.ViewPager2
 import com.google.android.material.snackbar.Snackbar
+import com.google.android.material.tabs.TabLayoutMediator
 import io.bewsys.spmobile.R
 import io.bewsys.spmobile.databinding.FragmentDevelopmentalFormBinding
 import io.bewsys.spmobile.ui.households.forms.pages.*
@@ -35,7 +36,12 @@ class DevelopmentalFormFragment : Fragment(R.layout.fragment_developmental_form)
             viewPager = pager
             val pagerAdapter = ScreenSlidePagerAdapter(requireActivity())
             viewPager.adapter = pagerAdapter
-            pager.setPageTransformer(ZoomOutPageTransformer())
+
+            TabLayoutMediator(tabLayout,viewPager){
+                tab, position ->
+            }.attach()
+//            pager.setPageTransformer(ZoomOutPageTransformer())
+
 
             requireActivity().onBackPressedDispatcher.addCallback(object :
                 OnBackPressedCallback(true) {
@@ -94,9 +100,10 @@ class DevelopmentalFormFragment : Fragment(R.layout.fragment_developmental_form)
 
     }
 }
-
+/*
 private const val MIN_SCALE = 0.85f
 private const val MIN_ALPHA = 0.5f
+
 
 class ZoomOutPageTransformer : ViewPager2.PageTransformer {
 
@@ -136,3 +143,4 @@ class ZoomOutPageTransformer : ViewPager2.PageTransformer {
         }
     }
 }
+ */

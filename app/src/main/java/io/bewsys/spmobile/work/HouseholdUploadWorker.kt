@@ -6,11 +6,8 @@ import androidx.work.CoroutineWorker
 import androidx.work.WorkerParameters
 import io.bewsys.spmobile.KEY_DATA_ID
 import io.bewsys.spmobile.data.Household
-import io.bewsys.spmobile.data.NonConsentHouseholdEntity
 import io.bewsys.spmobile.data.remote.model.household.HouseholdPayload
-import io.bewsys.spmobile.data.remote.model.noconsent.NonConsentHouseholdPayload
 import io.bewsys.spmobile.data.repository.HouseholdRepository
-import io.bewsys.spmobile.data.repository.NonConsentingHouseholdRepository
 import io.bewsys.spmobile.util.Resource
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.delay
@@ -58,19 +55,11 @@ class HouseholdUploadWorker(
             item.apply {
                 repository.uploadHousehold(
                     HouseholdPayload(
-                        id,
-                        remote_id,
                         survey_no,
-                        cac,
-                        temp_survey_no,
-                        supervisor_id,
                         team_leader_id,
                         user_id,
                         survey_date,
-                        consent,
-                        CBT_score,
                         initial_registration_type,
-                        respondent_type,
                         respondent_firstname,
                         respondent_middlename,
                         respondent_lastname,
@@ -215,7 +204,7 @@ class HouseholdUploadWorker(
                         other_livestock_owned,
                         household_member_with_benefit_from_social_assistance_program,
                         name_of_social_assistance_program,
-                        affected_by_other_shock
+                        affected_by_other_shock, temp_survey_no
                     )
                 ).collectLatest { response ->
                     result = when (response) {

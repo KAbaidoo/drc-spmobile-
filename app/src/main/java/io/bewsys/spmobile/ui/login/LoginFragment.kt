@@ -82,19 +82,15 @@ class LoginFragment : Fragment(R.layout.fragment_login) {
 
                             is LoginViewModel.LoginEvent.Exception -> {
                                 progressBar.isVisible = false
-                                Snackbar.make(
-                                    requireView(),
-                                    event.errorMsg,
-                                    Snackbar.LENGTH_LONG
-                                ).show()
+                                val action = LoginFragmentDirections.actionGlobalLoginDialogFragment(event.errorMsg)
+                                findNavController().navigate(action)
                             }
                             is LoginViewModel.LoginEvent.Failure -> {
                                 progressBar.isVisible = false
-                                Snackbar.make(
-                                    requireView(),
-                                    event.errorMsg,
-                                    Snackbar.LENGTH_LONG
-                                ).show()
+
+                                val action = LoginFragmentDirections.actionGlobalLoginDialogFragment(event.errorMsg)
+                                findNavController().navigate(action)
+
                             }
                         }
                     }

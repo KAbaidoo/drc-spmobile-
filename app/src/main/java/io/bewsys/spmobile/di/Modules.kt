@@ -18,7 +18,10 @@ import io.bewsys.spmobile.ui.nonconsenting.form.AddNonConsentingHouseholdViewMod
 import io.bewsys.spmobile.ui.profile.ProfileViewModel
 import io.bewsys.spmobile.ui.targeting.TargetingViewModel
 import io.bewsys.spmobile.ui.MainViewModel
+import io.bewsys.spmobile.ui.login.LoginDialogViewModel
 import io.bewsys.spmobile.work.NonConsentUploadWorker
+import io.ktor.client.*
+import io.ktor.client.engine.android.*
 
 import org.koin.android.ext.koin.androidContext
 import org.koin.androidx.viewmodel.dsl.viewModel
@@ -29,7 +32,7 @@ val appModule = module {
 
     single<SqlDriver> { AndroidSqliteDriver(Database.Schema, androidContext(), "sp.db") }
     single { Database(get()) }
-    single { KtorHttpClient().getClient() }
+    single { KtorHttpClient(androidContext()).getClient() }
     single { PreferencesManager(androidContext()) }
 
 
@@ -53,5 +56,6 @@ val appModule = module {
     viewModel { SharedDevelopmentalFormViewModel(get(), get()) }
     viewModel { LoginViewModel(get(), get()) }
     viewModel { MainViewModel(get()) }
+    viewModel { LoginDialogViewModel(get()) }
 }
 //HttpClient(Android).engine

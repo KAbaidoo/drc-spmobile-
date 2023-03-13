@@ -50,11 +50,8 @@ class MainActivity : AppCompatActivity() {
             }
         }
 
-
         val drawerLayout: DrawerLayout = binding.drawerLayout
         val navView: NavigationView = binding.navView
-
-
 
 
         navController = findNavController(R.id.nav_host_fragment)
@@ -88,15 +85,10 @@ class MainActivity : AppCompatActivity() {
                     binding.appBarMain.toolbar.visibility = View.VISIBLE
             }
         }
-
-
     }
-
 
     override fun onSupportNavigateUp(): Boolean {
         val navController = findNavController(R.id.nav_host_fragment)
         return navController.navigateUp(appBarConfiguration) || super.onSupportNavigateUp()
     }
-
-
 }

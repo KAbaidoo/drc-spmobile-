@@ -73,4 +73,14 @@
         android:name="io.bewsys.spmobile.ui.login.LoginFragment"
         android:label="Login"
         tools:layout="@layout/fragment_login" />
+    <dialog
+        android:id="@+id/loginDialogFragment"
+        android:name="io.bewsys.spmobile.ui.login.LoginDialogFragment"
+        android:label="LoginDialogFragment" >
+        <argument
+            android:name="errorMessage"
+            app:argType="string"
+            android:defaultValue="Login failed!" />
+    </dialog>
+    <action android:id="@+id/action_global_loginDialogFragment" app:destination="@id/loginDialogFragment" />
 </navigation>
