@@ -1,4 +1,4 @@
-CREATE TABLE user (
+CREATE TABLE userEntity (
     username TEXT NOT NULL PRIMARY KEY,
     meta_data TEXT,
     password TEXT
@@ -6,18 +6,18 @@ CREATE TABLE user (
 
 getByUsername:
 SELECT *
-FROM user
+FROM userEntity
 WHERE username = :username;
 
 getAllUsers:
 SELECT *
-FROM user;
+FROM userEntity;
 
 insertUser:
 INSERT OR REPLACE
-INTO user
+INTO userEntity
 VALUES(?, ?, ?);
 
 deleteByUsername:
-DELETE FROM user
+DELETE FROM userEntity
 WHERE username = :username;

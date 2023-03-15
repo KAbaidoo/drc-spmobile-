@@ -1,6 +1,5 @@
 package io.bewsys.spmobile.data.remote
 
-import android.util.Log
 import io.bewsys.spmobile.data.remote.model.household.HouseholdPayload
 
 import io.ktor.client.*

@@ -93,7 +93,6 @@ class LoginViewModel(
         data class ShowMessage(val msg: String) : LoginEvent()
         data class Failure(val errorMsg: String) : LoginEvent()
         data class Successful(val results:Int) : LoginEvent()
-
         object Loading : LoginEvent()
         data class Exception (val errorMsg:String ): LoginEvent()
     }

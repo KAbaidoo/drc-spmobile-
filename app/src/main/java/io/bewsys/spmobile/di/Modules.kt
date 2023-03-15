@@ -3,12 +3,9 @@ package io.bewsys.spmobile.di
 import app.cash.sqldelight.db.SqlDriver
 import app.cash.sqldelight.driver.android.AndroidSqliteDriver
 import io.bewsys.spmobile.Database
-import io.bewsys.spmobile.data.remote.KtorHttpClient
-import io.bewsys.spmobile.data.remote.UserApi
 import io.bewsys.spmobile.data.repository.*
 import io.bewsys.spmobile.data.prefsstore.PreferencesManager
-import io.bewsys.spmobile.data.remote.HouseholdApi
-import io.bewsys.spmobile.data.remote.NonConsentingHouseholdApi
+import io.bewsys.spmobile.data.remote.*
 import io.bewsys.spmobile.ui.dashboard.DashboardViewModel
 import io.bewsys.spmobile.ui.households.HouseholdsViewModel
 import io.bewsys.spmobile.ui.households.forms.SharedDevelopmentalFormViewModel
@@ -20,8 +17,6 @@ import io.bewsys.spmobile.ui.targeting.TargetingViewModel
 import io.bewsys.spmobile.ui.MainViewModel
 import io.bewsys.spmobile.ui.login.LoginDialogViewModel
 import io.bewsys.spmobile.work.NonConsentUploadWorker
-import io.ktor.client.*
-import io.ktor.client.engine.android.*
 
 import org.koin.android.ext.koin.androidContext
 import org.koin.androidx.viewmodel.dsl.viewModel
@@ -39,20 +34,21 @@ val appModule = module {
     factory { UserApi(get()) }
     factory { HouseholdApi(get()) }
     factory { NonConsentingHouseholdApi(get()) }
-    factory { CommunityRepository(get()) }
-    factory { ProvinceRepository(get()) }
+    factory { DashboardApi(get()) }
+
+    factory { DashboardRepository(get(),get(),get()) }
     factory { HouseholdRepository(get(),get(),get()) }
     factory { NonConsentingHouseholdRepository(get(),get(),get()) }
     factory { UserRepository(get(),get()) }
 
     worker { NonConsentUploadWorker(androidContext(), get()) }
 
-    viewModel { DashboardViewModel(get(), get()) }
+    viewModel { DashboardViewModel(get()) }
     viewModel { HouseholdsViewModel(get(), get()) }
-    viewModel { NonConsentingViewModel(get(), get(), get()) }
+    viewModel { NonConsentingViewModel(get(), get()) }
     viewModel { ProfileViewModel(get(),get()) }
     viewModel { TargetingViewModel(get()) }
-    viewModel { AddNonConsentingHouseholdViewModel(get(), get(), get(), get(), get()) }
+    viewModel { AddNonConsentingHouseholdViewModel(get(), get(), get(), get())}
     viewModel { SharedDevelopmentalFormViewModel(get(), get()) }
     viewModel { LoginViewModel(get(), get()) }
     viewModel { MainViewModel(get()) }

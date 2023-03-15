@@ -5,12 +5,12 @@ import kotlinx.serialization.Serializable
 @Serializable
 data class HouseholdPayload(
     val survey_no: String?=null,
-//    val supervisor_id: String?=null,
+    val supervisor_id: String?=null,
     val team_leader_id: String?=null,
     val user_id: Long?=null,
     val survey_date: String?=null,
     val initial_registration_type: String?=null,
-//    val respondent_type: Long?=null,
+    val respondent_type: Long?=null,
     val respondent_firstname: String?=null,
     val respondent_middlename: String?=null,
     val respondent_lastname: String?=null,
@@ -156,7 +156,8 @@ data class HouseholdPayload(
     val household_member_with_benefit_from_social_assistance_program: String?=null,
     val name_of_social_assistance_program: String?=null,
     val affected_by_other_shock: String?=null,
-    val temp_survey_no: String? = null,
+    val temp_survey_no: String?=null,
+    val remote_id: Long?=null
     )
 
 /*

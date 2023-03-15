@@ -1,4 +1,5 @@
 package io.bewsys.spmobile.data.local
+
 import android.os.Parcelable
 import kotlinx.parcelize.Parcelize
 
@@ -7,7 +8,7 @@ data class HouseholdModel(
     val id: Long?=null,
     val remote_id: Long?=null,
     val survey_no: String?=null,
-    val cac: String?=null,
+    val cac: Long?=null,
     val temp_survey_no: String?=null,
     val supervisor_id: String?=null,
     val team_leader_id: String?=null,
@@ -17,7 +18,6 @@ data class HouseholdModel(
     val CBT_score: Long?=null,
     val initial_registration_type: String?=null,
     val respondent_type: Long?=null,
-
     val respondent_firstname: String?=null,
     val respondent_middlename: String?=null,
     val respondent_lastname: String?=null,
@@ -43,7 +43,6 @@ data class HouseholdModel(
     val household_head_school_attendance_id: String?=null,
     val household_head_sector_of_work_id: String?=null,
     val household_head_pregnancy_status: String?=null,
-
     val household_migration_status: Long?=null,
     val is_head_respondent: Long?=null,
     val area_of_residence: Long?=null,
@@ -164,5 +163,4 @@ data class HouseholdModel(
     val household_member_with_benefit_from_social_assistance_program: String?=null,
     val name_of_social_assistance_program: String?=null,
     val affected_by_other_shock: String?=null,
-
-    ):Parcelable
+) : Parcelable

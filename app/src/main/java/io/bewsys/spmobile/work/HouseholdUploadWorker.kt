@@ -5,10 +5,11 @@ import android.util.Log
 import androidx.work.CoroutineWorker
 import androidx.work.WorkerParameters
 import io.bewsys.spmobile.KEY_DATA_ID
-import io.bewsys.spmobile.data.Household
+import io.bewsys.spmobile.data.HouseholdEntity
 import io.bewsys.spmobile.data.remote.model.household.HouseholdPayload
 import io.bewsys.spmobile.data.repository.HouseholdRepository
 import io.bewsys.spmobile.util.Resource
+import io.ktor.client.utils.EmptyContent.status
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.collectLatest
@@ -48,7 +49,7 @@ class HouseholdUploadWorker(
     }
 
 
-    private suspend fun uploadItem(item: Household): Result {
+    private suspend fun uploadItem(item: HouseholdEntity): Result {
         return withContext(Dispatchers.IO) {
             var result: Result = Result.failure()
 
@@ -56,10 +57,12 @@ class HouseholdUploadWorker(
                 repository.uploadHousehold(
                     HouseholdPayload(
                         survey_no,
+                        supervisor_id,
                         team_leader_id,
                         user_id,
                         survey_date,
                         initial_registration_type,
+                        respondent_type,
                         respondent_firstname,
                         respondent_middlename,
                         respondent_lastname,
@@ -204,7 +207,10 @@ class HouseholdUploadWorker(
                         other_livestock_owned,
                         household_member_with_benefit_from_social_assistance_program,
                         name_of_social_assistance_program,
-                        affected_by_other_shock, temp_survey_no
+                        affected_by_other_shock,
+                        temp_survey_no,
+                        remote_id
+
                     )
                 ).collectLatest { response ->
                     result = when (response) {
@@ -235,7 +241,7 @@ class HouseholdUploadWorker(
         repository.updateStatus("submitted", id)
     }
 
-    private suspend fun getItem(id: Long): Household? =
+    private suspend fun getItem(id: Long): HouseholdEntity? =
         repository.getHousehold(id)
 
 

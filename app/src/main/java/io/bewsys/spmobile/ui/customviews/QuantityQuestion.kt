@@ -1,10 +1,8 @@
-package io.bewsys.spmobile.ui.views
+package io.bewsys.spmobile.ui.customviews
 
 import android.content.Context
 import android.content.res.TypedArray
-import android.text.Editable
 import android.util.AttributeSet
-import android.util.Log
 import android.view.Gravity
 import android.view.LayoutInflater
 import android.widget.*

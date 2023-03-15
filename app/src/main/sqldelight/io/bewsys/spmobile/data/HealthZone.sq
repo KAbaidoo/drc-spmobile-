@@ -1,0 +1,24 @@
+CREATE TABLE healthZoneEntity (
+    id INTEGER NOT NULL PRIMARY KEY,
+    name TEXT,
+    province_id TEXT
+);
+
+getByProvinceId:
+SELECT *
+FROM healthZoneEntity
+WHERE province_id = :province_id;
+
+getAllHealthAreas:
+SELECT *
+FROM healthZoneEntity;
+
+insertHealthArea:
+INSERT OR REPLACE
+INTO healthZoneEntity
+VALUES(?,?,?);
+
+getById:
+SELECT *
+FROM healthZoneEntity
+WHERE id = :id;

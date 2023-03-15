@@ -1,20 +1,30 @@
-CREATE TABLE territory (
-    id INTEGER PRIMARY KEY AUTOINCREMENT,
+CREATE TABLE territoryEntity (
+    id INTEGER NOT NULL PRIMARY KEY,
     name TEXT,
-    province_id INTEGER
+    province_id TEXT,
+    survey_no_code TEXT
 );
 
 getByProvinceId:
 SELECT *
-FROM territory
+FROM territoryEntity
 WHERE province_id = :province_id;
 
 getAllTerritoriess:
 SELECT *
-FROM territory;
+FROM territoryEntity;
 
 insertTerritory:
 INSERT OR REPLACE
-INTO territory
-VALUES(?,?,?);
+INTO territoryEntity
+VALUES(?,?,?,?);
 
+getById:
+SELECT *
+FROM territoryEntity
+WHERE id = :id;
+
+getByName:
+SELECT *
+FROM territoryEntity
+WHERE name LIKE ('%'||:query||'%') ;

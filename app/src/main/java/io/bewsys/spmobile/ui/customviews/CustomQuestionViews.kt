@@ -1,22 +1,8 @@
-package io.bewsys.spmobile.ui.views
+package io.bewsys.spmobile.ui.customviews
 
 import android.content.Context
-import android.content.res.TypedArray
-import android.text.Editable
 import android.util.AttributeSet
-import android.view.Gravity
-import android.view.LayoutInflater
-import android.view.MotionEvent
 import android.widget.LinearLayout
-import android.widget.TextView
-import androidx.constraintlayout.widget.ConstraintLayout
-import androidx.core.widget.addTextChangedListener
-import androidx.fragment.app.Fragment
-import androidx.fragment.app.findFragment
-import com.google.android.material.datepicker.MaterialDatePicker
-import com.google.android.material.textfield.TextInputLayout
-import io.bewsys.spmobile.R
-import org.koin.core.KoinApplication.Companion.init
 
 open class CustomQuestionViews @JvmOverloads
 constructor(

@@ -3,13 +3,12 @@ package io.bewsys.spmobile.data.repository
 import app.cash.sqldelight.coroutines.asFlow
 import app.cash.sqldelight.coroutines.mapToList
 import io.bewsys.spmobile.Database
-import io.bewsys.spmobile.data.Household
+import io.bewsys.spmobile.data.HouseholdEntity
 import io.bewsys.spmobile.data.local.HouseholdModel
 import io.bewsys.spmobile.data.prefsstore.PreferencesManager
 import io.bewsys.spmobile.data.remote.HouseholdApi
 import io.bewsys.spmobile.data.remote.model.household.HouseholdPayload
 import io.bewsys.spmobile.data.remote.model.login.ErrorResponse
-import io.bewsys.spmobile.data.remote.model.noconsent.FailureMessage
 import io.bewsys.spmobile.util.Resource
 import io.ktor.client.call.*
 import kotlinx.coroutines.Dispatchers
@@ -27,11 +26,11 @@ class HouseholdRepository(
 ) {
     private val queries = db.householdQueries
 
-    suspend fun getAllHouseholds(): Flow<List<Household>> =
+    suspend fun getAllHouseholds(): Flow<List<HouseholdEntity>> =
         queries.getAllHousholds().asFlow().mapToList(context = Dispatchers.Default)
 
 
-    suspend fun getHousehold(id: Long): Household? =
+    suspend fun getHousehold(id: Long): HouseholdEntity? =
         withContext(Dispatchers.IO) {
             queries.getById(id).executeAsOneOrNull()
         }
@@ -44,7 +43,7 @@ class HouseholdRepository(
 
         householdModel.apply {
             queries.insertHousehold(
-                id = id,
+                id = null,
                 survey_date = survey_date,
                 respondent_firstname = respondent_firstname,
                 respondent_middlename = respondent_middlename,
@@ -117,7 +116,7 @@ class HouseholdRepository(
                 supervisor_id = userPref.supervisorId,
                 temp_survey_no = temp_survey_no,
                 survey_no = survey_no,
-                remote_id = remote_id,
+                remote_id = null,
                 cac = cac,
                 team_leader_id = userPref.teamLeaderId,
                 user_id = userPref.id,

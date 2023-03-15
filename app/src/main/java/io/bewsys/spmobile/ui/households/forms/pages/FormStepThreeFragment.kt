@@ -7,7 +7,7 @@ import androidx.fragment.app.Fragment
 import io.bewsys.spmobile.R
 import io.bewsys.spmobile.databinding.FragmentAddHouseholdThreeHouseholdBinding
 import io.bewsys.spmobile.ui.households.forms.SharedDevelopmentalFormViewModel
-import io.bewsys.spmobile.ui.views.CustomQuestionViews
+import io.bewsys.spmobile.ui.customviews.CustomQuestionViews
 import org.koin.androidx.viewmodel.ext.android.activityViewModel
 
 class FormStepThreeFragment: Fragment(R.layout.fragment_add_household_three_household) {

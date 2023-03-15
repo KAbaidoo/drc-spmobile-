@@ -1,21 +1,14 @@
-package io.bewsys.spmobile.ui.views
+package io.bewsys.spmobile.ui.customviews
 
 import android.content.Context
 import android.content.res.TypedArray
-import android.text.Editable
-import android.text.Layout.Alignment
 import android.util.AttributeSet
-import android.util.Log
 import android.view.Gravity
 import android.view.LayoutInflater
-import android.widget.LinearLayout
 import android.widget.RadioButton
 
 import android.widget.RadioGroup
 import android.widget.TextView
-import androidx.core.view.get
-import androidx.core.view.marginEnd
-import androidx.core.widget.addTextChangedListener
 
 import io.bewsys.spmobile.R
 

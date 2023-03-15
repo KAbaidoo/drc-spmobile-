@@ -22,133 +22,133 @@
             android:padding="16dp">
 
 
-            <io.bewsys.spmobile.ui.views.EditTextQuestion
+            <io.bewsys.spmobile.ui.customviews.EditTextQuestion
                 style="@style/question_style"
                 android:text="@string/household_status" />
 
-            <io.bewsys.spmobile.ui.views.EditTextQuestion
+            <io.bewsys.spmobile.ui.customviews.EditTextQuestion
                 style="@style/question_style"
                 android:text="@string/migration_status" />
 
-            <io.bewsys.spmobile.ui.views.EditTextQuestion
+            <io.bewsys.spmobile.ui.customviews.EditTextQuestion
                 style="@style/question_style"
                 android:text="@string/other_migration_status" />
 
-            <io.bewsys.spmobile.ui.views.EditTextQuestion
+            <io.bewsys.spmobile.ui.customviews.EditTextQuestion
                 style="@style/question_style"
                 android:inputType="number"
                 android:text="@string/duration_displaced_returned_repatriated_refugee" />
 
-            <io.bewsys.spmobile.ui.views.EditTextQuestion
+            <io.bewsys.spmobile.ui.customviews.EditTextQuestion
                 style="@style/question_style"
                 android:inputType="number"
                 android:text="@string/number_of_months_displaced_returned_repatriated_refugee" />
 
-            <io.bewsys.spmobile.ui.views.EditTextQuestion
+            <io.bewsys.spmobile.ui.customviews.EditTextQuestion
                 style="@style/question_style"
                 android:text="@string/unit_of_migration_duration" />
 
-            <io.bewsys.spmobile.ui.views.RadioButtonQuestion
+            <io.bewsys.spmobile.ui.customviews.RadioButtonQuestion
                 style="@style/question_style"
                 android:entries="@array/yes_or_no"
                 android:text="@string/bank_account_or_bankcard_available" />
 
-            <io.bewsys.spmobile.ui.views.RadioButtonQuestion
+            <io.bewsys.spmobile.ui.customviews.RadioButtonQuestion
                 style="@style/question_style"
                 android:entries="@array/yes_or_no"
                 android:text="@string/is_income_regular" />
 
-            <io.bewsys.spmobile.ui.views.RadioButtonQuestion
+            <io.bewsys.spmobile.ui.customviews.RadioButtonQuestion
                 style="@style/question_style"
                 android:entries="@array/yes_or_no"
                 android:text="@string/access_to_cultivable_land" />
 
-            <io.bewsys.spmobile.ui.views.RadioButtonQuestion
+            <io.bewsys.spmobile.ui.customviews.RadioButtonQuestion
                 style="@style/question_style"
                 android:entries="@array/yes_or_no"
                 android:text="@string/owner_of_cultivable_land" />
 
-            <io.bewsys.spmobile.ui.views.RadioButtonQuestion
+            <io.bewsys.spmobile.ui.customviews.RadioButtonQuestion
                 style="@style/question_style"
                 android:entries="@array/yes_or_no"
                 android:text="@string/practice_of_cash_crop_farming_or_commercial_farming" />
 
 
-            <io.bewsys.spmobile.ui.views.RadioButtonQuestion
+            <io.bewsys.spmobile.ui.customviews.RadioButtonQuestion
                 style="@style/question_style"
                 android:entries="@array/yes_or_no"
                 android:text="@string/has_livestock" />
 
-            <io.bewsys.spmobile.ui.views.RadioButtonQuestion
+            <io.bewsys.spmobile.ui.customviews.RadioButtonQuestion
                 style="@style/question_style"
                 android:entries="@array/yes_or_no"
                 android:text="@string/has_household_goods" />
 
-            <io.bewsys.spmobile.ui.views.RadioButtonQuestion
+            <io.bewsys.spmobile.ui.customviews.RadioButtonQuestion
                 style="@style/question_style"
                 android:entries="@array/yes_or_no"
                 android:text="@string/affected_by_conflict" />
 
-            <io.bewsys.spmobile.ui.views.RadioButtonQuestion
+            <io.bewsys.spmobile.ui.customviews.RadioButtonQuestion
                 style="@style/question_style"
                 android:entries="@array/yes_or_no"
                 android:text="@string/affected_by_epidemic" />
 
-            <io.bewsys.spmobile.ui.views.RadioButtonQuestion
+            <io.bewsys.spmobile.ui.customviews.RadioButtonQuestion
                 style="@style/question_style"
                 android:entries="@array/yes_or_no"
                 android:text="@string/affected_by_climate_shock" />
 
-            <io.bewsys.spmobile.ui.views.RadioButtonQuestion
+            <io.bewsys.spmobile.ui.customviews.RadioButtonQuestion
                 style="@style/question_style"
                 android:entries="@array/yes_or_no"
                 android:text="@string/affected_by_other_shock" />
 
-            <io.bewsys.spmobile.ui.views.RadioButtonQuestion
+            <io.bewsys.spmobile.ui.customviews.RadioButtonQuestion
                 style="@style/question_style"
                 android:entries="@array/yes_or_no"
                 android:text="@string/take_children_out_of_school" />
 
-            <io.bewsys.spmobile.ui.views.RadioButtonQuestion
+            <io.bewsys.spmobile.ui.customviews.RadioButtonQuestion
                 style="@style/question_style"
                 android:entries="@array/yes_or_no"
                 android:text="@string/sale_of_production_assets" />
 
-            <io.bewsys.spmobile.ui.views.RadioButtonQuestion
+            <io.bewsys.spmobile.ui.customviews.RadioButtonQuestion
                 style="@style/question_style"
                 android:entries="@array/yes_or_no"
                 android:text="@string/use_of_child_labor" />
 
-            <io.bewsys.spmobile.ui.views.RadioButtonQuestion
+            <io.bewsys.spmobile.ui.customviews.RadioButtonQuestion
                 style="@style/question_style"
                 android:entries="@array/yes_or_no"
                 android:text="@string/use_of_early_marriage" />
 
-            <io.bewsys.spmobile.ui.views.RadioButtonQuestion
+            <io.bewsys.spmobile.ui.customviews.RadioButtonQuestion
                 style="@style/question_style"
                 android:entries="@array/yes_or_no"
                 android:text="@string/give_up_health_care" />
 
-            <io.bewsys.spmobile.ui.views.EditTextQuestion
+            <io.bewsys.spmobile.ui.customviews.EditTextQuestion
                 style="@style/question_style"
                 android:inputType="number"
                 android:text="@string/days_spent_other_coping_strategy" />
 
-            <io.bewsys.spmobile.ui.views.EditTextQuestion
+            <io.bewsys.spmobile.ui.customviews.EditTextQuestion
                 style="@style/question_style"
                 android:inputType="number"
                 android:text="@string/household_monthly_income" />
 
-            <io.bewsys.spmobile.ui.views.EditTextQuestion
+            <io.bewsys.spmobile.ui.customviews.EditTextQuestion
                 style="@style/question_style"
                 android:inputType="number"
                 android:text="@string/minimum_monthly_income_necessary_live_without_difficulties" />
 
-            <io.bewsys.spmobile.ui.views.EditTextQuestion
+            <io.bewsys.spmobile.ui.customviews.EditTextQuestion
                 style="@style/question_style"
                 android:text="@string/household_member_with_benefit_from_social_assistance_program" />
 
-            <io.bewsys.spmobile.ui.views.EditTextQuestion
+            <io.bewsys.spmobile.ui.customviews.EditTextQuestion
                 style="@style/question_style"
                 android:text="@string/name_of_social_assistance_program" />
 

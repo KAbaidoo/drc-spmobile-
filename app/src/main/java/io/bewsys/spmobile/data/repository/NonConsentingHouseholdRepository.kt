@@ -20,6 +20,7 @@ import kotlinx.coroutines.flow.flowOn
 import kotlinx.coroutines.withContext
 
 private const val TAG = "NON_CONSENT_REPOSITORY"
+
 class NonConsentingHouseholdRepository(
     db: Database,
     private val api: NonConsentingHouseholdApi,
@@ -46,14 +47,18 @@ class NonConsentingHouseholdRepository(
                 id,
                 province_id,
                 community_id,
+                territory_id,
+                groupement_id,
                 gps_longitude,
                 gps_latitude,
                 reason,
+                address,
                 other_non_consent_reason,
                 status
             )
         }
     }
+
     suspend fun getLastInsertedRowId(): Long = withContext(Dispatchers.IO) {
         queries.lastInsertRowId().executeAsOne()
     }

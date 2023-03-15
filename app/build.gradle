@@ -9,8 +9,8 @@ plugins {
     id 'org.jetbrains.kotlin.plugin.serialization'
 }
 
-
 android {
+
     namespace 'io.bewsys.spmobile'
     compileSdkVersion rootProject.compileSdkVersion
     buildToolsVersion "30.0.3"
@@ -19,20 +19,24 @@ android {
         applicationId "io.bewsys.spmobile"
         minSdkVersion rootProject.minSdkVersion
         targetSdkVersion rootProject.targetSdkVersion
+
         configurations.all {
             resolutionStrategy { force 'androidx.core:core-ktx:1.6.0' }
         }
+
         versionCode 1
         versionName "1.0"
-
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+
     }
 
     buildTypes {
+
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
+
     }
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_1_8
@@ -49,7 +53,6 @@ android {
 
 dependencies {
     // Default dependencies
-
     implementation "androidx.core:core-ktx:$ktxVersion"
     implementation "androidx.appcompat:appcompat:$appCompatVersion"
     implementation "com.google.android.material:material:$materialVersion"
@@ -59,8 +62,10 @@ dependencies {
     androidTestImplementation "androidx.test.espresso:espresso-core:$espressoVersion"
     testImplementation 'org.jetbrains.kotlinx:kotlinx-coroutines-test:1.6.4'
     testImplementation "org.mockito:mockito-core:$mockitoVersion"
+
     // Optional -- mockito-kotlin
     testImplementation "org.mockito.kotlin:mockito-kotlin:$mockitoKotlinVersion"
+
     // Optional -- Mockk framework
     testImplementation "io.mockk:mockk:$mockkVersion"
 
@@ -69,8 +74,10 @@ dependencies {
 
     //Koin dependency injection
     implementation "io.insert-koin:koin-android:$koin_version"
+
     // Jetpack WorkManager
     implementation "io.insert-koin:koin-androidx-workmanager:$koin_android_version"
+
     // Navigation Graph
     implementation "io.insert-koin:koin-androidx-navigation:$koin_android_version"
 
@@ -78,7 +85,7 @@ dependencies {
     implementation "io.insert-koin:koin-ktor:$koin_ktor"
 
     // SLF4J Logger
-//    implementation "io.insert-koin:koin-logger-slf4j:$koin_ktor"
+    implementation "io.insert-koin:koin-logger-slf4j:$koin_ktor"
 
 //     SQL Delight
     implementation "app.cash.sqldelight:android-driver:$sqldelight_version"
@@ -88,7 +95,6 @@ dependencies {
     implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:$lifecycle_version"
     implementation "androidx.lifecycle:lifecycle-livedata-ktx:$lifecycle_version"
 
-
     // Saved state module for ViewModel
     implementation "androidx.lifecycle:lifecycle-viewmodel-savedstate:$lifecycle_version"
 
@@ -96,11 +102,9 @@ dependencies {
     implementation "androidx.navigation:navigation-fragment-ktx:$navigation_version"
     implementation "androidx.navigation:navigation-ui-ktx:$navigation_version"
 
-
     // Coroutines
     implementation "org.jetbrains.kotlinx:kotlinx-coroutines-core:$coroutinesVersion"
     implementation "org.jetbrains.kotlinx:kotlinx-coroutines-android:$coroutinesVersion"
-
 
     //material cardView
     implementation "androidx.cardview:cardview:$cardviewVersion"
@@ -120,7 +124,6 @@ dependencies {
     implementation "io.ktor:ktor-client-content-negotiation:$ktor_version"
     implementation "io.ktor:ktor-serialization-kotlinx-json:$ktor_version"
 
-
     implementation 'org.jetbrains.kotlinx:kotlinx-serialization-json:1.0.1'
 
 //    workManager
@@ -129,9 +132,7 @@ dependencies {
     //viewPager
     implementation "androidx.viewpager2:viewpager2:$viewpager_version"
 
-
 }
-
 sqldelight {
     databases {
         Database {

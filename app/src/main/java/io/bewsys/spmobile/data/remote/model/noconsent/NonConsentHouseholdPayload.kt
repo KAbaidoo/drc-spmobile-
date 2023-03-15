@@ -8,13 +8,13 @@ data class NonConsentHouseholdPayload(
     @SerialName("id")
     val id: Long? = null,
     @SerialName("province_id")
-    val province_id: Long?,
+    val province_id: String?,
     @SerialName("community_id")
-    val community_id: Long?,
+    val community_id: String?,
     @SerialName("territory_id")
-    val territory_id: Long?,
+    val territory_id: String?,
     @SerialName("groupement_id")
-    val groupement_id: Long?,
+    val groupement_id: String?,
     @SerialName("address")
     val address: String?,
     @SerialName("gps_longitude")

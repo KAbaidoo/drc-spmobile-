@@ -1,19 +1,9 @@
 CREATE TABLE provinceEntity (
-    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    id INTEGER NOT NULL PRIMARY KEY,
     name TEXT,
-    capital TEXT
+    survey_no_code TEXT
 );
 
-INSERT INTO provinceEntity (name, capital) VALUES ('Province 1','capital 1');
-INSERT INTO provinceEntity (name, capital) VALUES ('Province 2','capital 2');
-INSERT INTO provinceEntity (name, capital) VALUES ('Province 3','capital 3');
-INSERT INTO provinceEntity (name, capital) VALUES ('Province 4','capital 4');
-
-
-getByCapital:
-SELECT *
-FROM provinceEntity
-WHERE capital = :capital;
 
 getAllProvinces:
 SELECT *

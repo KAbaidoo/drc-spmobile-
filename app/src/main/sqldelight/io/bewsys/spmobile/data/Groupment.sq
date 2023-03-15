@@ -1,20 +1,30 @@
-CREATE TABLE groupment (
-    id INTEGER PRIMARY KEY AUTOINCREMENT,
+CREATE TABLE groupmentEntity (
+    id INTEGER NOT NULL PRIMARY KEY,
     name TEXT,
-    community_id INTEGER
+    community_id TEXT,
+    survey_no_code TEXT
 );
 
 getByCommunityId:
 SELECT *
-FROM groupment
+FROM groupmentEntity
 WHERE community_id = :community_id;
 
 getAllGroupments:
 SELECT *
-FROM groupment;
+FROM groupmentEntity;
 
 insertGroupment:
 INSERT OR REPLACE
-INTO groupment
-VALUES(?,?,?);
+INTO groupmentEntity
+VALUES(?,?,?,?);
 
+getById:
+SELECT *
+FROM groupmentEntity
+WHERE id = :id;
+
+getByName:
+SELECT *
+FROM groupmentEntity
+WHERE name LIKE ('%'||:query||'%') ;

@@ -131,7 +131,7 @@
     <string name="non_consent_household_form">Non-Consenting Household Form</string>
     <string name="hint_choose">Choose</string>
     <string name="GPS_Longitude">GPS Longitude</string>
-    <string name="GPS_Latitude">GPS_Latitude</string>
+    <string name="GPS_Latitude">GPS Latitude</string>
     <string name="reason">Reason</string>
     <string name="if_other_reason_indicate_here">If other reason, indicate here</string>
     <string name="lat_placeholder">31.42222</string>
@@ -174,7 +174,7 @@
     </string-array>
 
     <string-array name="initial_registration">
-        <item>General</item>
+        <item>general</item>
     </string-array>
 
     <string-array name="provinces">

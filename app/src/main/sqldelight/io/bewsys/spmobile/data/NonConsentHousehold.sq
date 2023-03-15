@@ -1,10 +1,13 @@
 CREATE TABLE nonConsentHouseholdEntity (
     id INTEGER NOT NULL PRIMARY KEY,
-    province_id INTEGER,
-    community_id INTEGER,
+    province_id TEXT,
+    community_id TEXT,
+    territory_id TEXT,
+    groupement_id TEXT,
     gps_longitude TEXT,
     gps_latitude TEXT,
     reason TEXT,
+    address TEXT,
     other_non_consent_reason TEXT,
     status TEXT
 );
@@ -18,9 +21,9 @@ UPDATE nonConsentHouseholdEntity
 SET status = :status WHERE id = :id;
 
 insertNonConsentHousehold:
-INSERT
+INSERT OR REPLACE
 INTO nonConsentHouseholdEntity
-VALUES(?,?,?,?,?,?,?,?);
+VALUES(?,?,?,?,?,?,?,?,?,?,?);
 
 getById:
 SELECT *
@@ -36,6 +39,16 @@ getByProvinceId:
 SELECT *
 FROM nonConsentHouseholdEntity
 WHERE province_id = :province_id;
+
+getByTerritoryId:
+SELECT *
+FROM nonConsentHouseholdEntity
+WHERE territory_id = :community_id;
+
+getByGroupmentId:
+SELECT *
+FROM nonConsentHouseholdEntity
+WHERE groupement_id = :province_id;
 
 getByReason:
 SELECT *
