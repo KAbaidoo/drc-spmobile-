@@ -1,15 +1,24 @@
 package io.bewsys.spmobile.ui.nonconsenting.form
 
+import android.Manifest
+import android.annotation.SuppressLint
+import android.app.Activity
 import android.app.Application
+import android.content.Context
+import android.location.Geocoder
+import android.util.Log
+import androidx.core.content.ContentProviderCompat.requireContext
+import androidx.fragment.app.FragmentActivity
 import androidx.lifecycle.*
 import androidx.work.*
+import com.google.android.gms.location.FusedLocationProviderClient
+import com.google.android.gms.location.LocationServices
+import com.vmadalin.easypermissions.EasyPermissions
 import io.bewsys.spmobile.ADD_NON_CONSENTING_HOUSEHOLD_RESULT_OK
 
 import io.bewsys.spmobile.KEY_DATA_ID
-import io.bewsys.spmobile.data.CommunityEntity
-import io.bewsys.spmobile.data.GroupmentEntity
-import io.bewsys.spmobile.data.ProvinceEntity
-import io.bewsys.spmobile.data.TerritoryEntity
+import io.bewsys.spmobile.PERMISSION_LOCATION_REQUEST_CODE
+
 import io.bewsys.spmobile.data.local.NonConsentHouseholdModel
 import io.bewsys.spmobile.data.repository.NonConsentingHouseholdRepository
 import io.bewsys.spmobile.data.repository.DashboardRepository
@@ -27,6 +36,8 @@ class AddNonConsentingHouseholdViewModel(
 ) : ViewModel() {
     private val workManager = WorkManager.getInstance(application)
 
+    private val addNonConsentingHouseholdChannel = Channel<AddNonConsentingHouseholdEvent>()
+    val addNonConsentingHouseholdEvent = addNonConsentingHouseholdChannel.receiveAsFlow()
 
     private val _provinces = MutableLiveData<List<String>>()
     val provinces: LiveData<List<String>>
@@ -51,9 +62,6 @@ class AddNonConsentingHouseholdViewModel(
     }
 
 
-    private val addNonConsentingHouseholdChannel = Channel<AddNonConsentingHouseholdEvent>()
-    val addNonConsentingHouseholdEvent = addNonConsentingHouseholdChannel.receiveAsFlow()
-
     var reason = state.get<String>("reason") ?: ""
         set(value) {
             field = value
@@ -68,21 +76,28 @@ class AddNonConsentingHouseholdViewModel(
         set(value) {
             field = value
             state["province"] = value
+            getProvinceId()
+            loadTerritories()
         }
     var territory = state.get<String>("territory") ?: ""
         set(value) {
             field = value
             state["territory"] = value
+            getTerritoryId()
+            loadCommunities()
         }
     var community = state.get<String>("community") ?: ""
         set(value) {
             field = value
             state["community"] = value
+            getCommunityId()
+            loadGroupments()
         }
     var groupment = state.get<String>("groupment") ?: ""
         set(value) {
             field = value
             state["groupment"] = value
+            getGroupmentId()
         }
     var address = state.get<String>("address") ?: ""
         set(value) {
@@ -101,23 +116,23 @@ class AddNonConsentingHouseholdViewModel(
             state["lat"] = value
         }
 
-    private var provinceId: String? = state.get<String>("province_id")
+    private var provinceId: String = state.get<String>("province_id")?: "1"
         set(value) {
             field = value
             state["province_id"] = value
         }
-    private var communityId: String? = state.get<String>("community_id")
+    private var communityId: String = state.get<String>("community_id")?: "1"
         set(value) {
             field = value
             state["community_id"] = value
         }
 
-    private var groupmentId: String? = state.get<String>("groupment_id")
+    private var groupmentId: String = state.get<String>("groupment_id")?: "1"
         set(value) {
             field = value
             state["groupment_id"] = value
         }
-    private var territoryId: String? = state.get<String>("territory_id")
+    private var territoryId: String = state.get<String>("territory_id")?: "1"
         set(value) {
             field = value
             state["territory_id"] = value
@@ -126,60 +141,43 @@ class AddNonConsentingHouseholdViewModel(
 
     private fun loadProvinces() {
         viewModelScope.launch {
-            dashboardRepository.getAllProvinces().map {
-                it.map {
-                    it.name!!
-                }
-            }.collect {
+            dashboardRepository.getProvincesList().collectLatest {
                 _provinces.value = it
             }
         }
     }
 
+
+
+
     fun loadTerritories() {
         viewModelScope.launch {
-            provinceId?.let {
-                dashboardRepository.getTerritoriesByProvinceId(it).map {
-                    it.map {
-                        it.name!!
-                    }
-                }.collect {
-                    _territories.value = it
-                }
+            dashboardRepository.getTerritoriesList(provinceId).collectLatest {
+                _territories.value = it
             }
         }
     }
+
+
 
     fun loadCommunities() {
         viewModelScope.launch {
-            territoryId?.let {
-                dashboardRepository.getCommunitiesByTerritoryId(it).map {
-                    it.map {
-                        it.name!!
-                    }
-                }.collect {
-                    _communities.value = it
-                }
+            dashboardRepository.getCommunitiesList(territoryId).collectLatest {
+                _communities.value = it
             }
         }
     }
+
 
     fun loadGroupments() {
         viewModelScope.launch {
-            communityId?.let {
-                dashboardRepository.getGroupmentsByCommunityId(it).map {
-                    it.map {
-                        it.name!!
-                    }
-                }.collect {
-                    _groupments.value = it
-                }
+            dashboardRepository.getGroupmentsList(communityId).collectLatest {
+                _groupments.value = it
             }
         }
     }
 
-
-    private val provinceQuery = state.getStateFlow("province", "").flatMapLatest {
+    val provinceQuery = state.getStateFlow("province", "").flatMapLatest {
         dashboardRepository.getProvinceByName(it)
     }
 
@@ -191,7 +189,7 @@ class AddNonConsentingHouseholdViewModel(
         }
     }
 
-    private val communityQuery = state.getStateFlow("community", "").flatMapLatest {
+    val communityQuery = state.getStateFlow("community", "").flatMapLatest {
         dashboardRepository.getCommunityByName(it)
     }
 
@@ -302,6 +300,8 @@ class AddNonConsentingHouseholdViewModel(
         data class ShowInvalidInputMessage(val msg: String) : AddNonConsentingHouseholdEvent()
         data class NavigateBackWithResults(val results: Int) : AddNonConsentingHouseholdEvent()
     }
+
+
 
 
 }

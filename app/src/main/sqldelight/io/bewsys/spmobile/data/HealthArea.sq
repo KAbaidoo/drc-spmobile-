@@ -13,6 +13,8 @@ getAllHealthAreas:
 SELECT *
 FROM healthAreaEntity;
 
+
+
 insertHealthArea:
 INSERT OR REPLACE
 INTO healthAreaEntity

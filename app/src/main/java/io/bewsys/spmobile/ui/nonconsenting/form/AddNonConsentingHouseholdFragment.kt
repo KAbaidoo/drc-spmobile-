@@ -1,22 +1,47 @@
 package io.bewsys.spmobile.ui.nonconsenting.form
 
+import android.Manifest
+import android.annotation.SuppressLint
+import android.location.Location
+
 import android.os.Bundle
+import android.util.Log
+import android.view.LayoutInflater
 import android.view.View
+import android.view.ViewGroup
 import android.widget.ArrayAdapter
 import android.widget.AutoCompleteTextView
+import android.widget.Toast
+import androidx.core.content.ContentProviderCompat.requireContext
+
+
 import androidx.core.os.bundleOf
 import androidx.core.widget.addTextChangedListener
 import androidx.fragment.app.Fragment
+
 import androidx.fragment.app.setFragmentResult
+import androidx.lifecycle.LiveData
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
+import com.google.android.gms.location.FusedLocationProviderClient
+
+import com.google.android.gms.location.LocationServices
 import com.google.android.material.snackbar.Snackbar
+import com.vmadalin.easypermissions.EasyPermissions
+import com.vmadalin.easypermissions.dialogs.SettingsDialog
+import io.bewsys.spmobile.PERMISSION_LOCATION_REQUEST_CODE
 import io.bewsys.spmobile.R
 import io.bewsys.spmobile.databinding.FragmentAddNonConsentingBinding
+import io.bewsys.spmobile.util.LocationProvider
 import org.koin.androidx.viewmodel.ext.android.viewModel
 import io.bewsys.spmobile.util.exhaustive
+import org.koin.android.ext.android.inject
 
-class AddNonConsentingHouseholdFragment : Fragment(R.layout.fragment_add_non_consenting) {
+
+class AddNonConsentingHouseholdFragment : Fragment(R.layout.fragment_add_non_consenting),
+    EasyPermissions.PermissionCallbacks {
+
+    private var currentLocation: Location? = null
 
     private val provinces = mutableListOf<String>()
     private val communities = mutableListOf<String>()
@@ -24,35 +49,52 @@ class AddNonConsentingHouseholdFragment : Fragment(R.layout.fragment_add_non_con
     private val groupments = mutableListOf<String>()
 
     private val viewModel: AddNonConsentingHouseholdViewModel by viewModel()
+    private val locationProvider: LocationProvider by inject()
+
+
+    @SuppressLint("MissingPermission")
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
         val binding = FragmentAddNonConsentingBinding.bind(view)
+
+        if (hasLocationPermission()) {
+            locationProvider.getLocation().observe(viewLifecycleOwner) {
+                currentLocation = it
+            }
+        } else {
+            requestLocationPermission()
+        }
 
         //TODO Refactor to use Paired PairMediatorLiveData
         viewModel.provinces.observe(viewLifecycleOwner) {
-            provinces.clear()
-            provinces.addAll(it)
+            provinces.apply {
+                clear()
+                addAll(it)
+            }
 
         }
         viewModel.territories.observe(viewLifecycleOwner) {
-            territories.clear()
-            territories.addAll(it)
+            territories.apply {
+                clear()
+                addAll(it)
+            }
         }
 
         viewModel.communities.observe(viewLifecycleOwner) {
-            communities.clear()
-            communities.addAll(it)
+            communities.apply {
+                clear()
+                addAll(it)
+            }
         }
 
         viewModel.groupments.observe(viewLifecycleOwner) {
-            groupments.clear()
-            groupments.addAll(it)
+            groupments.apply {
+                clear()
+                addAll(it)
+            }
         }
 
         val reasons = resources.getStringArray(R.array.reasons)
-//        val groupment = resources.getStringArray(R.array.groupment)
-//        val territories = resources.getStringArray(R.array.territories)
         val dropdownLayout = R.layout.dropdown_item
 
 
@@ -65,8 +107,8 @@ class AddNonConsentingHouseholdFragment : Fragment(R.layout.fragment_add_non_con
             textFieldGroupment.editText?.setText(viewModel.groupment)
             textFieldOtherReason.editText?.setText(viewModel.otherReason)
             textFieldAddress.editText?.setText(viewModel.address)
-            textFieldLon.editText?.setText(viewModel.lon)
-            textFieldLat.editText?.setText(viewModel.lat)
+//            textFieldLon.editText?.setText(viewModel.lon)
+//            textFieldLat.editText?.setText(viewModel.lat)
 
 
             (autoCompleteTextViewReason as? AutoCompleteTextView)?.apply {
@@ -78,27 +120,21 @@ class AddNonConsentingHouseholdFragment : Fragment(R.layout.fragment_add_non_con
                     }
                 )
             }
-
             (autoCompleteTextViewProvince as? AutoCompleteTextView)?.apply {
                 setAdapter(
                     ArrayAdapter(context, dropdownLayout, provinces).also {
                         addTextChangedListener {
                             viewModel.province = it.toString()
-                            viewModel.getProvinceId()
-                            viewModel.loadTerritories()
+
                         }
                     }
                 )
             }
-
             (autoCompleteTextViewCommunity as? AutoCompleteTextView)?.apply {
                 setAdapter(
                     ArrayAdapter(context, dropdownLayout, communities).also {
                         addTextChangedListener {
                             viewModel.community = it.toString()
-                            viewModel.getCommunityId()
-                            viewModel.loadGroupments()
-
                         }
                     }
                 )
@@ -109,8 +145,6 @@ class AddNonConsentingHouseholdFragment : Fragment(R.layout.fragment_add_non_con
                 ).also {
                     addTextChangedListener {
                         viewModel.territory = it.toString()
-                        viewModel.getTerritoryId()
-                        viewModel.loadCommunities()
                     }
                 }
             }
@@ -120,14 +154,13 @@ class AddNonConsentingHouseholdFragment : Fragment(R.layout.fragment_add_non_con
                 ).also {
                     addTextChangedListener {
                         viewModel.groupment = it.toString()
-                        viewModel.getGroupmentId()
+
                     }
                 }
             }
             textFieldOtherReason.editText?.addTextChangedListener {
                 viewModel.reason = it.toString()
             }
-
 
             textFieldOtherReason.editText?.addTextChangedListener {
                 viewModel.otherReason = it.toString()
@@ -136,15 +169,10 @@ class AddNonConsentingHouseholdFragment : Fragment(R.layout.fragment_add_non_con
             textFieldAddress.editText?.addTextChangedListener {
                 viewModel.address = it.toString()
             }
-
             buttonRegister.setOnClickListener {
-
-//                viewModel.lon = textFieldLon.editText?.text.toString()
-//                viewModel.lat = textFieldLat.editText?.text.toString()
-
                 viewModel.onRegisterClicked()
+                getLastKnownLocation()
             }
-
         }
 
         viewLifecycleOwner.lifecycleScope.launchWhenStarted {
@@ -166,6 +194,53 @@ class AddNonConsentingHouseholdFragment : Fragment(R.layout.fragment_add_non_con
             }
         }
 
+
+    }//end of onCreateView
+
+    private fun getLastKnownLocation() {
+        currentLocation?.let {
+            it.longitude
+            Log.d("MainActivity", "lon: ${it.longitude} lat: ${it.latitude}")
+        }
     }
 
+    private fun hasLocationPermission() =
+        EasyPermissions.hasPermissions(
+            requireContext(),
+            Manifest.permission.ACCESS_FINE_LOCATION
+        )
+
+    private fun requestLocationPermission() {
+        EasyPermissions.requestPermissions(
+            this,
+            "This application cannot work without Location Permission.",
+            PERMISSION_LOCATION_REQUEST_CODE,
+            Manifest.permission.ACCESS_FINE_LOCATION
+        )
+    }
+
+    override fun onRequestPermissionsResult(
+        requestCode: Int,
+        permissions: Array<out String>,
+        grantResults: IntArray
+    ) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults)
+        EasyPermissions.onRequestPermissionsResult(requestCode, permissions, grantResults, this)
+    }
+
+    override fun onPermissionsDenied(requestCode: Int, perms: List<String>) {
+        if (EasyPermissions.somePermissionDenied(this, perms.first())) {
+            SettingsDialog.Builder(requireContext()).build().show()
+        } else {
+            requestLocationPermission()
+        }
+    }
+
+    override fun onPermissionsGranted(requestCode: Int, perms: List<String>) {
+        Toast.makeText(
+            requireContext(),
+            "Permission Granted!",
+            Toast.LENGTH_SHORT
+        ).show()
+    }
 }

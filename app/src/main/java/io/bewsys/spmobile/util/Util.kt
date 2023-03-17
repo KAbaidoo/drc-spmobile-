@@ -1,7 +1,19 @@
 package io.bewsys.spmobile.util
 
+import android.Manifest
+import android.content.Context
+import android.content.pm.PackageManager
+import android.location.Geocoder
+import android.util.Log
+import androidx.core.app.ActivityCompat
+import androidx.core.content.ContentProviderCompat.requireContext
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MediatorLiveData
+import com.google.android.gms.location.FusedLocationProviderClient
+import com.vmadalin.easypermissions.EasyPermissions
+import io.bewsys.spmobile.PERMISSION_LOCATION_REQUEST_CODE
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.SupervisorJob
 
 val <T> T.exhaustive: T
     get() = this
@@ -42,5 +54,14 @@ sealed class Resource<out R> {
     object Loading: Resource<Nothing>()
     data class Exception<R>(val throwable: Throwable, val data: R? = null) : Resource<R>()
 }
+
+@Retention(AnnotationRetention.RUNTIME)
+annotation class ApplicationScope
+
+@ApplicationScope
+fun provideApplicationScope()= CoroutineScope(SupervisorJob())
+
+
+
 
 

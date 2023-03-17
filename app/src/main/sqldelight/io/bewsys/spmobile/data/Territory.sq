@@ -14,6 +14,10 @@ getAllTerritoriess:
 SELECT *
 FROM territoryEntity;
 
+getTerritoryCount:
+SELECT COUNT(*)
+FROM territoryEntity;
+
 insertTerritory:
 INSERT OR REPLACE
 INTO territoryEntity

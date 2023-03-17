@@ -132,6 +132,12 @@ dependencies {
     //viewPager
     implementation "androidx.viewpager2:viewpager2:$viewpager_version"
 
+//    easy permission
+    implementation 'com.vmadalin:easypermissions-ktx:1.0.0'
+
+//    play services location
+    implementation 'com.google.android.gms:play-services-location:21.0.1'
+
 }
 sqldelight {
     databases {

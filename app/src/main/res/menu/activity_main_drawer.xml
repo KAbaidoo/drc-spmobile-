@@ -12,10 +12,6 @@
             android:id="@+id/nav_household"
             android:icon="@drawable/menu_household_24"
             android:title="Households" />
-        <item
-            android:id="@+id/nav_targeting"
-            android:icon="@drawable/menu_targeting_24"
-            android:title="Targeting" />
 
         <item
             android:id="@+id/nav_non_consenting"

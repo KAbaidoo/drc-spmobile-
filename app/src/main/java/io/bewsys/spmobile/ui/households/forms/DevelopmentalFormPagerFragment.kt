@@ -40,7 +40,7 @@ class DevelopmentalFormFragment : Fragment(R.layout.fragment_developmental_form)
             TabLayoutMediator(tabLayout,viewPager){
                 tab, position ->
             }.attach()
-//            pager.setPageTransformer(ZoomOutPageTransformer())
+
 
 
             requireActivity().onBackPressedDispatcher.addCallback(object :

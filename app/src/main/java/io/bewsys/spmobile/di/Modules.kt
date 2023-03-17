@@ -1,7 +1,9 @@
 package io.bewsys.spmobile.di
 
+import android.app.Activity
 import app.cash.sqldelight.db.SqlDriver
 import app.cash.sqldelight.driver.android.AndroidSqliteDriver
+import com.google.android.gms.location.LocationServices
 import io.bewsys.spmobile.Database
 import io.bewsys.spmobile.data.repository.*
 import io.bewsys.spmobile.data.prefsstore.PreferencesManager
@@ -16,7 +18,10 @@ import io.bewsys.spmobile.ui.profile.ProfileViewModel
 import io.bewsys.spmobile.ui.targeting.TargetingViewModel
 import io.bewsys.spmobile.ui.MainViewModel
 import io.bewsys.spmobile.ui.login.LoginDialogViewModel
+import io.bewsys.spmobile.util.LocationProvider
+import io.bewsys.spmobile.util.provideApplicationScope
 import io.bewsys.spmobile.work.NonConsentUploadWorker
+import org.koin.android.ext.koin.androidApplication
 
 import org.koin.android.ext.koin.androidContext
 import org.koin.androidx.viewmodel.dsl.viewModel
@@ -29,14 +34,15 @@ val appModule = module {
     single { Database(get()) }
     single { KtorHttpClient(androidContext()).getClient() }
     single { PreferencesManager(androidContext()) }
-
+    single { provideApplicationScope() }
+    single { LocationProvider(androidContext()) }
 
     factory { UserApi(get()) }
     factory { HouseholdApi(get()) }
     factory { NonConsentingHouseholdApi(get()) }
     factory { DashboardApi(get()) }
 
-    factory { DashboardRepository(get(),get(),get()) }
+    factory { DashboardRepository(get(),get(),get(),get()) }
     factory { HouseholdRepository(get(),get(),get()) }
     factory { NonConsentingHouseholdRepository(get(),get(),get()) }
     factory { UserRepository(get(),get()) }
@@ -49,7 +55,7 @@ val appModule = module {
     viewModel { ProfileViewModel(get(),get()) }
     viewModel { TargetingViewModel(get()) }
     viewModel { AddNonConsentingHouseholdViewModel(get(), get(), get(), get())}
-    viewModel { SharedDevelopmentalFormViewModel(get(), get()) }
+    viewModel { SharedDevelopmentalFormViewModel(get(), get(),get(),get()) }
     viewModel { LoginViewModel(get(), get()) }
     viewModel { MainViewModel(get()) }
     viewModel { LoginDialogViewModel(get()) }

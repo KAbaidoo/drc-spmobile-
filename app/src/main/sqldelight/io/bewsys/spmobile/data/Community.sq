@@ -15,6 +15,10 @@ getAllCommunities:
 SELECT *
 FROM communityEntity;
 
+getCommunityCount:
+SELECT COUNT(*)
+FROM communityEntity;
+
 insertCommunity:
 INSERT OR REPLACE
 INTO communityEntity

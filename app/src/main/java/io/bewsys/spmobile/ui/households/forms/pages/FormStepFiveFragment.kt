@@ -19,8 +19,8 @@ class FormStepFiveFragment : Fragment(R.layout.fragment_add_household_five_prope
         val binding = FragmentAddHouseholdFivePropertyBinding.bind(view)
 
         binding.apply {
-
             linearLayout.children.forEach { view ->
+
                 val v = view as CustomQuestionViews
 
                 v.answer = sharedViewModel.getEntry(v.title)
@@ -30,12 +30,14 @@ class FormStepFiveFragment : Fragment(R.layout.fragment_add_household_five_prope
                         sharedViewModel.saveEntry(v.title, it)
                     }
                 }
-
             }
 
             buttonRegister.setOnClickListener {
                 sharedViewModel.onRegisterClicked()
             }
+
+
+
 
         }
     }

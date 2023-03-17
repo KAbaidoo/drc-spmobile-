@@ -4,16 +4,19 @@ import android.app.Application
 import android.os.Build
 
 import androidx.annotation.RequiresApi
+import androidx.lifecycle.*
 
-import androidx.lifecycle.ViewModel
-import androidx.lifecycle.viewModelScope
 import androidx.work.*
 import io.bewsys.spmobile.ADD_HOUSEHOLD_RESULT_OK
 import io.bewsys.spmobile.KEY_DATA_ID
 import io.bewsys.spmobile.data.local.HouseholdModel
+import io.bewsys.spmobile.data.repository.DashboardRepository
 import io.bewsys.spmobile.data.repository.HouseholdRepository
 import io.bewsys.spmobile.work.HouseholdUploadWorker
 import kotlinx.coroutines.channels.Channel
+import kotlinx.coroutines.flow.collectLatest
+import kotlinx.coroutines.flow.flatMapLatest
+import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.flow.receiveAsFlow
 import kotlinx.coroutines.launch
 import java.text.DateFormat
@@ -21,16 +24,173 @@ import java.text.SimpleDateFormat
 import java.time.LocalDate
 import java.time.LocalTime
 import java.time.format.DateTimeFormatter
+import java.util.UUID.randomUUID
 
 
 class SharedDevelopmentalFormViewModel(
     application: Application,
-    private val householdRepository: HouseholdRepository
+    private val state: SavedStateHandle,
+    private val householdRepository: HouseholdRepository,
+    private val dashboardRepository: DashboardRepository
 ) : ViewModel() {
     private val workManager = WorkManager.getInstance(application)
 
     private val addHouseholdEventChannel = Channel<AddDevelopmentalHouseholdEvent>()
     val addDevelopmentalHouseholdEvent = addHouseholdEventChannel.receiveAsFlow()
+
+
+    private val _provinces = MutableLiveData<List<String>>()
+    val provinces: LiveData<List<String>>
+        get() = _provinces
+
+    private val _communities = MutableLiveData<List<String>>()
+    val communities: LiveData<List<String>>
+        get() = _communities
+
+    private val _territories = MutableLiveData<List<String>>()
+    val territories: LiveData<List<String>>
+        get() = _territories
+
+    private val _groupments = MutableLiveData<List<String>>()
+    val groupments: LiveData<List<String>>
+        get() = _groupments
+
+    init {
+        loadProvinces()
+//        loadCommunities()
+    }
+
+    var province = state.get<String>("province") ?: ""
+        set(value) {
+            field = value
+            state["province"] = value
+            getProvinceId()
+            loadTerritories()
+        }
+    var territory = state.get<String>("territory") ?: ""
+        set(value) {
+            field = value
+            state["territory"] = value
+            getTerritoryId()
+            loadCommunities()
+        }
+    var community = state.get<String>("community") ?: ""
+        set(value) {
+            field = value
+            state["community"] = value
+            getCommunityId()
+            loadGroupments()
+        }
+    var groupment = state.get<String>("groupment") ?: ""
+        set(value) {
+            field = value
+            state["groupment"] = value
+            getGroupmentId()
+        }
+
+    private var provinceId: String = state.get<String>("province_id") ?: "1"
+        set(value) {
+            field = value
+            state["province_id"] = value
+        }
+
+    private var communityId: String = state.get<String>("community_id") ?: "1"
+        set(value) {
+            field = value
+            state["community_id"] = value
+        }
+
+    private var groupmentId: String = state.get<String>("groupment_id") ?: "1"
+        set(value) {
+            field = value
+            state["groupment_id"] = value
+        }
+
+    private var territoryId: String = state.get<String>("territory_id") ?: "1"
+        set(value) {
+            field = value
+            state["territory_id"] = value
+        }
+
+    private fun loadProvinces() {
+        viewModelScope.launch {
+            dashboardRepository.getProvincesList().collectLatest {
+                _provinces.value = it
+            }
+        }
+    }
+
+    fun loadTerritories() {
+        viewModelScope.launch {
+            dashboardRepository.getTerritoriesList(provinceId).collectLatest {
+                _territories.value = it
+            }
+        }
+    }
+
+    fun loadCommunities() {
+        viewModelScope.launch {
+            dashboardRepository.getCommunitiesList(territoryId).collectLatest {
+                _communities.value = it
+            }
+        }
+    }
+
+    fun loadGroupments() {
+        viewModelScope.launch {
+            dashboardRepository.getGroupmentsList(communityId).collectLatest {
+                _groupments.value = it
+            }
+        }
+    }
+
+    private val provinceQuery = state.getStateFlow("province", "").flatMapLatest {
+        dashboardRepository.getProvinceByName(it)
+    }
+
+    fun getProvinceId() {
+        viewModelScope.launch {
+            provinceQuery.collect {
+                provinceId = it.firstOrNull()?.id.toString()
+            }
+        }
+    }
+
+    private val communityQuery = state.getStateFlow("community", "").flatMapLatest {
+        dashboardRepository.getCommunityByName(it)
+    }
+
+    fun getCommunityId() {
+        viewModelScope.launch {
+            communityQuery.collect {
+                communityId = it.firstOrNull()?.id.toString()
+            }
+        }
+    }
+
+    private val territoryQuery = state.getStateFlow("territory", "").flatMapLatest {
+        dashboardRepository.getTerritoryByName(it)
+    }
+
+    fun getTerritoryId() {
+        viewModelScope.launch {
+            territoryQuery.collect {
+                territoryId = it.firstOrNull()?.id.toString()
+            }
+        }
+    }
+
+    private val groupmentQuery = state.getStateFlow("groupment", "").flatMapLatest {
+        dashboardRepository.getGroupmentByName(it)
+    }
+
+    fun getGroupmentId() {
+        viewModelScope.launch {
+            groupmentQuery.collect {
+                groupmentId = it.firstOrNull()?.id.toString()
+            }
+        }
+    }
 
 
     private val _entriesMap = mutableMapOf<String, String>()
@@ -146,7 +306,7 @@ class SharedDevelopmentalFormViewModel(
             number_of_rabbit_owned = _entriesMap["number_of_rabbit_owned"]?.toLong() ?: 0,
             number_of_sheep_owned = _entriesMap["number_of_sheep_owned"]?.toLong() ?: 0,
             number_of_motorbike_owned = _entriesMap["number_of_motorbike_owned"]?.toLong() ?: 0,
-            number_of_rooms_used_for_sleeping = _entriesMap["number_of_rooms_used_for_sleeping"]?.toLong() ?: 0,
+            number_of_rooms_used_for_sleeping = _entriesMap["number_of_rooms_used_for_sleeping"]?.toLong()?: 0,
             number_of_wheelbarrow_owned = _entriesMap["number_of_wheelbarrow_owned"]?.toLong() ?: 0,
             number_of_radio_owned = _entriesMap["number_of_radio_owned"]?.toLong() ?: 0,
             number_of_stove_or_oven_owned = _entriesMap["number_of_stove_or_oven_owned"]?.toLong() ?: 0,
@@ -192,7 +352,7 @@ class SharedDevelopmentalFormViewModel(
             method_of_waste_disposal = if (_entriesMap["method_of_waste_disposal"] == "yes") 1 else 0,
             household_migration_status = if (_entriesMap["household_migration_status"] == "yes") 1 else 0,
             place_to_wash_hands = if (_entriesMap["place_to_wash_hands"] == "yes") 1 else 0,
-            survey_no = "kr101111111111111",
+            survey_no = "$provinceId$territoryId$communityId$groupmentId}",
             temp_survey_no = "SQE211",
             main_material_of_exterior_walls = 1,
             occupation_status_of_current_accommodation = 1,
@@ -200,14 +360,14 @@ class SharedDevelopmentalFormViewModel(
             main_soil_material = 1,
             main_source_of_household_drinking_water = 1,
             type_of_household_toilet = 1,
-            province_id = 1,
-            territory_id = 1,
-            community_id = 1,
-            groupment_id = 1,
+            province_id = provinceId,
+            territory_id = territoryId,
+            community_id = communityId,
+            groupment_id = groupmentId,
             cac = 1,
-            area_of_residence = 1,
-            health_area_id = 1,
-            health_zone_id = 1,
+            area_of_residence = "1",
+            health_area_id = "1",
+            health_zone_id = "1",
             respondent_type = 1,
         ).also {
             addHousehold(it)

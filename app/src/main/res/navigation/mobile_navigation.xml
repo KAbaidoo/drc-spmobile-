@@ -23,11 +23,6 @@
             app:destination="@id/developmentalFormFragment" />
     </fragment>
     <fragment
-        android:id="@+id/nav_targeting"
-        android:name="io.bewsys.spmobile.ui.targeting.TargetingFragment"
-        android:label="Targeting"
-        tools:layout="@layout/fragment_targeting" />
-    <fragment
         android:id="@+id/nav_non_consenting"
         android:name="io.bewsys.spmobile.ui.nonconsenting.NonConsentingFragment"
         android:label="Non-consenting Households"

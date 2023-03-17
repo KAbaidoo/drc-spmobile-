@@ -9,6 +9,10 @@ getAllProvinces:
 SELECT *
 FROM provinceEntity;
 
+getProvinceCount:
+SELECT COUNT(*)
+FROM provinceEntity;
+
 insertProvince:
 INSERT OR REPLACE
 INTO provinceEntity

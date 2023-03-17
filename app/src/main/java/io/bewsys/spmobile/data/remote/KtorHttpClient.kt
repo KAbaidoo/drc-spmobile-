@@ -36,7 +36,6 @@ class KtorHttpClient(val context: Context) {
             }
 
 
-
             headers.appendIfNameAbsent(
                 HttpHeaders.ContentType,
                 ContentType.Application.Json.toString()
