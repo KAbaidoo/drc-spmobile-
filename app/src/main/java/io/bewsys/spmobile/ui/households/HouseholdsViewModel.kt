@@ -4,6 +4,7 @@ package io.bewsys.spmobile.ui.households
 import androidx.lifecycle.*
 import io.bewsys.spmobile.ADD_HOUSEHOLD_RESULT_OK
 import io.bewsys.spmobile.data.local.HouseholdModel
+import io.bewsys.spmobile.data.repository.DashboardRepository
 import io.bewsys.spmobile.data.repository.HouseholdRepository
 import kotlinx.coroutines.channels.Channel
 import kotlinx.coroutines.flow.collectLatest
@@ -13,7 +14,8 @@ import kotlinx.coroutines.launch
 
 class HouseholdsViewModel(
     private val state: SavedStateHandle,
-    private val householdRepository: HouseholdRepository
+    private val householdRepository: HouseholdRepository,
+    private val dashboardRepository: DashboardRepository
 ) : ViewModel() {
 
     private val householdsEventChannel = Channel<HouseholdEvent>()
@@ -28,7 +30,7 @@ class HouseholdsViewModel(
         loadHouseholds()
     }
 
-//    Todo: get province and community ids
+    //    Todo: get province and community ids
     private fun loadHouseholds() {
         viewModelScope.launch {
             householdRepository.getAllHouseholds()
@@ -82,6 +84,10 @@ class HouseholdsViewModel(
                             it.health_zone_id,
                             it.health_area_id,
                             it.groupment_id,
+                            it.province_id?.let { id -> dashboardRepository.getProvinceById(id.toLong())?.name } ,
+                            it.community_id?.let { id -> dashboardRepository.getCommunityById(id.toLong())?.name },
+                            it.territory_id?.let { id -> dashboardRepository.getTerritoryById(id.toLong())?.name },
+                            it.groupment_id?.let { id -> dashboardRepository.getGroupmentById(id.toLong())?.name },
                             it.duration_displaced_returned_repatriated_refugee,
                             it.unit_of_migration_duration,
                             it.territory_or_town,

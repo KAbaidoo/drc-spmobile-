@@ -1,24 +1,20 @@
 // Top-level build file where you can add configuration options common to all sub-projects/modules.
-//plugins {
-//    id 'com.android.application' version '7.3.1' apply false
-//    id 'com.android.library' version '7.3.1' apply false
-//    id 'org.jetbrains.kotlin.android' version '1.7.20' apply false
-//}
+
 
 buildscript {
     ext {
         // Sdk and tools
-        minSdkVersion = 21
-        targetSdkVersion = 28
+        minSdkVersion = 24
+        targetSdkVersion = 32
         compileSdkVersion = 32
 
         // App dependencies
-        appCompatVersion = "1.5.1"
+        appCompatVersion = "1.4.1"
         constraintLayoutVersion = "2.1.4"
         coroutinesVersion = "1.6.4"
         espressoVersion = "3.5.1"
         fragmentVersion = "1.5.5"
-        gradleVersion = "7.4.0"
+        gradleVersion = "7.3.1"
 
         // koin dependency injection
         koin_version = "3.3.2"

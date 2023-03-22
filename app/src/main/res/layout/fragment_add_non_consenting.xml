@@ -20,12 +20,12 @@
             android:orientation="vertical">
 
             <TextView
+                style="@style/heading_form_main"
                 android:text="@string/non_consent_household_form"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                style="@style/heading_form_main" />
+                app:layout_constraintTop_toTopOf="parent" />
 
             <TextView
                 android:layout_width="wrap_content"
@@ -47,16 +47,17 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:ellipsize="end"
-
                     android:inputType="none"
                     android:singleLine="true" />
 
             </com.google.android.material.textfield.TextInputLayout>
 
             <TextView
+                android:id="@+id/text_view_other_reason"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
+                android:enabled="false"
                 android:text="@string/if_other_reason_indicate_here"
                 android:textAppearance="@style/TextAppearance.MaterialComponents.Body1" />
 
@@ -65,13 +66,13 @@
                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:enabled="false"
                 android:minHeight="20dp"
                 app:boxStrokeWidth="2dp">
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-
                     android:inputType="text"
                     android:maxLines="3" />
 
@@ -82,8 +83,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
-                android:orientation="horizontal"
-                android:baselineAligned="false">
+                android:baselineAligned="false"
+                android:orientation="horizontal">
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -159,8 +160,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
-                android:orientation="horizontal"
-                android:baselineAligned="false">
+                android:baselineAligned="false"
+                android:orientation="horizontal">
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -258,67 +259,67 @@
             </com.google.android.material.textfield.TextInputLayout>
 
 
-<!--            <LinearLayout-->
-<!--                android:layout_width="match_parent"-->
-<!--                android:layout_height="wrap_content"-->
-<!--                android:layout_marginTop="16dp"-->
-<!--                android:orientation="horizontal"-->
-<!--                android:baselineAligned="false">-->
+            <!--            <LinearLayout-->
+            <!--                android:layout_width="match_parent"-->
+            <!--                android:layout_height="wrap_content"-->
+            <!--                android:layout_marginTop="16dp"-->
+            <!--                android:orientation="horizontal"-->
+            <!--                android:baselineAligned="false">-->
 
-<!--                <LinearLayout-->
-<!--                    android:layout_width="match_parent"-->
-<!--                    android:layout_height="wrap_content"-->
-<!--                    android:orientation="vertical"-->
-<!--                    android:layout_marginEnd="12dp"-->
-<!--                    android:layout_weight="1">-->
-<!--                    <TextView-->
-<!--                        android:layout_width="wrap_content"-->
-<!--                        android:layout_height="wrap_content"-->
-<!--                        android:text="@string/GPS_Longitude"-->
-<!--                        android:textAppearance="@style/TextAppearance.MaterialComponents.Body1" />-->
-<!--                    <com.google.android.material.textfield.TextInputLayout-->
-<!--                        android:id="@+id/text_field_lon"-->
-<!--                        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"-->
-<!--                        android:layout_width="match_parent"-->
-<!--                        android:layout_height="wrap_content"-->
-<!--                        android:enabled="false"-->
-<!--                        android:minHeight="20dp"-->
-<!--                        app:boxStrokeWidth="2dp">-->
-<!--                        <com.google.android.material.textfield.TextInputEditText-->
-<!--                            android:layout_width="match_parent"-->
-<!--                            android:layout_height="wrap_content"-->
-<!--                            />-->
-<!--                    </com.google.android.material.textfield.TextInputLayout>-->
-<!--                </LinearLayout>-->
-<!--               <LinearLayout-->
-<!--                   android:layout_width="match_parent"-->
-<!--                   android:layout_height="wrap_content"-->
-<!--                   android:orientation="vertical"-->
-<!--                   android:layout_weight="1"-->
-<!--                   android:layout_marginStart="12dp">-->
-<!--                   <TextView-->
-<!--                       android:layout_width="wrap_content"-->
-<!--                       android:layout_height="wrap_content"-->
-<!--                       android:text="@string/GPS_Latitude"-->
-<!--                       android:textAppearance="@style/TextAppearance.MaterialComponents.Body1" />-->
-<!--                   <com.google.android.material.textfield.TextInputLayout-->
-<!--                       android:id="@+id/text_field_lat"-->
-<!--                       style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"-->
-<!--                       android:layout_width="match_parent"-->
-<!--                       android:layout_height="wrap_content"-->
-<!--                       android:enabled="false"-->
-<!--                       android:minHeight="20dp"-->
-<!--                       app:boxStrokeWidth="2dp">-->
+            <!--                <LinearLayout-->
+            <!--                    android:layout_width="match_parent"-->
+            <!--                    android:layout_height="wrap_content"-->
+            <!--                    android:orientation="vertical"-->
+            <!--                    android:layout_marginEnd="12dp"-->
+            <!--                    android:layout_weight="1">-->
+            <!--                    <TextView-->
+            <!--                        android:layout_width="wrap_content"-->
+            <!--                        android:layout_height="wrap_content"-->
+            <!--                        android:text="@string/GPS_Longitude"-->
+            <!--                        android:textAppearance="@style/TextAppearance.MaterialComponents.Body1" />-->
+            <!--                    <com.google.android.material.textfield.TextInputLayout-->
+            <!--                        android:id="@+id/text_field_lon"-->
+            <!--                        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"-->
+            <!--                        android:layout_width="match_parent"-->
+            <!--                        android:layout_height="wrap_content"-->
+            <!--                        android:enabled="false"-->
+            <!--                        android:minHeight="20dp"-->
+            <!--                        app:boxStrokeWidth="2dp">-->
+            <!--                        <com.google.android.material.textfield.TextInputEditText-->
+            <!--                            android:layout_width="match_parent"-->
+            <!--                            android:layout_height="wrap_content"-->
+            <!--                            />-->
+            <!--                    </com.google.android.material.textfield.TextInputLayout>-->
+            <!--                </LinearLayout>-->
+            <!--               <LinearLayout-->
+            <!--                   android:layout_width="match_parent"-->
+            <!--                   android:layout_height="wrap_content"-->
+            <!--                   android:orientation="vertical"-->
+            <!--                   android:layout_weight="1"-->
+            <!--                   android:layout_marginStart="12dp">-->
+            <!--                   <TextView-->
+            <!--                       android:layout_width="wrap_content"-->
+            <!--                       android:layout_height="wrap_content"-->
+            <!--                       android:text="@string/GPS_Latitude"-->
+            <!--                       android:textAppearance="@style/TextAppearance.MaterialComponents.Body1" />-->
+            <!--                   <com.google.android.material.textfield.TextInputLayout-->
+            <!--                       android:id="@+id/text_field_lat"-->
+            <!--                       style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"-->
+            <!--                       android:layout_width="match_parent"-->
+            <!--                       android:layout_height="wrap_content"-->
+            <!--                       android:enabled="false"-->
+            <!--                       android:minHeight="20dp"-->
+            <!--                       app:boxStrokeWidth="2dp">-->
 
-<!--                       <com.google.android.material.textfield.TextInputEditText-->
-<!--                           android:layout_width="match_parent"-->
-<!--                           android:layout_height="wrap_content"-->
-<!--                          />-->
-<!--                   </com.google.android.material.textfield.TextInputLayout>-->
-<!--               </LinearLayout>-->
+            <!--                       <com.google.android.material.textfield.TextInputEditText-->
+            <!--                           android:layout_width="match_parent"-->
+            <!--                           android:layout_height="wrap_content"-->
+            <!--                          />-->
+            <!--                   </com.google.android.material.textfield.TextInputLayout>-->
+            <!--               </LinearLayout>-->
 
 
-<!--            </LinearLayout>-->
+            <!--            </LinearLayout>-->
 
             <LinearLayout
                 android:layout_width="match_parent"

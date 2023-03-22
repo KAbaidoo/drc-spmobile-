@@ -10,6 +10,7 @@ import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.drawerlayout.widget.DrawerLayout
 import androidx.drawerlayout.widget.DrawerLayout.LOCK_MODE_LOCKED_CLOSED
+import androidx.lifecycle.lifecycleScope
 import androidx.navigation.NavController
 import androidx.navigation.findNavController
 import androidx.navigation.ui.*
@@ -21,6 +22,7 @@ import com.vmadalin.easypermissions.dialogs.SettingsDialog
 import io.bewsys.spmobile.PERMISSION_LOCATION_REQUEST_CODE
 import io.bewsys.spmobile.R
 import io.bewsys.spmobile.databinding.ActivityMainBinding
+import kotlinx.coroutines.flow.collectLatest
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 
@@ -89,12 +91,7 @@ class MainActivity : AppCompatActivity(), EasyPermissions.PermissionCallbacks {
 
         @SuppressLint("MissingPermission")
         if (hasLocationPermission()) {
-            fusedLocationProviderClient.lastLocation.addOnSuccessListener { location ->
-                location?.let {
-                    it.longitude
-                    Log.d("MainActivity", "lon: ${it.longitude} lat: ${it.latitude}")
-                }
-            }
+            fusedLocationProviderClient.lastLocation.addOnSuccessListener { location -> }
         } else {
             requestLocationPermission()
         }

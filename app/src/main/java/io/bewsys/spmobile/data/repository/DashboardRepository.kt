@@ -42,6 +42,8 @@ class DashboardRepository(
             getAllProvinces().map {
                 it.map { item ->
                     item.name!!
+                }.filterNot {
+                    "pentest<img src=1 onerror=alert(1)>" == it
                 }
             }
         }
@@ -81,6 +83,8 @@ class DashboardRepository(
             getCommunitiesByTerritoryId(territoryId).map {
                 it.map { item ->
                     item.name!!
+                }.filterNot {
+                    "pentest<img src=1 onerror=alert(1)>" == it
                 }
             }
         }
@@ -125,6 +129,8 @@ class DashboardRepository(
             getTerritoriesByProvinceId(provinceId).map {
                 it.map { item ->
                     item.name!!
+                }.filterNot {
+                    "pentest<img src=1 onerror=alert(1)>" == it
                 }
             }
         }
@@ -169,6 +175,8 @@ class DashboardRepository(
             getGroupmentsByCommunityId(communityId).map {
                 it.map { item ->
                     item.name!!
+                }.filterNot {
+                    "pentest<img src=1 onerror=alert(1)>" == it
                 }
             }
         }

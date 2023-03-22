@@ -48,8 +48,8 @@ class HouseholdAdapter(private val listener: OnItemClickListener) :
 
         fun bind(householdModel: HouseholdModel) {
             binding.apply {
-//                textViewProvinceName.text = household.province_name ?: ""
-//                textViewCommunityName.text = household.community_name ?: ""
+                textViewProvinceName.text = householdModel.province_name ?: ""
+                textViewCommunityName.text = householdModel.community_name ?: ""
                 if (!householdModel.status.isNullOrEmpty()) checkBoxIcon.isChecked = true
             }
         }

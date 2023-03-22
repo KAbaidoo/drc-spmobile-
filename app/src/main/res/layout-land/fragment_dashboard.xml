@@ -17,9 +17,10 @@
         android:id="@+id/gridLayout"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:columnCount="2"
+        android:columnCount="3"
         android:padding="24dp"
-        android:rowCount="3">
+        android:rowCount="2">
+
 
         <com.google.android.material.card.MaterialCardView
             android:layout_width="0dp"
@@ -41,6 +42,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:textAlignment="center"
+                    android:text="0"
                     android:textAppearance="@style/TextAppearance.MaterialComponents.Headline6"
                     android:textColor="?android:textColorPrimary" />
 
@@ -75,6 +77,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:textAlignment="center"
+                    android:text="0"
                     android:textAppearance="@style/TextAppearance.MaterialComponents.Headline6"
                     android:textColor="?android:textColorPrimary" />
 

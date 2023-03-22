@@ -61,7 +61,7 @@ class DashboardFragment : Fragment(R.layout.fragment_dashboard) {
                             viewModel.loadProvinceCount()
                             viewModel.loadGroupmentCount()
                             viewModel.loadTerritoriesCount()
-                           viewModel.showDashboardUpdatedSuccessfulMessage()
+                            viewModel.showDashboardUpdatedSuccessfulMessage()
                         }
 
                     }.exhaustive

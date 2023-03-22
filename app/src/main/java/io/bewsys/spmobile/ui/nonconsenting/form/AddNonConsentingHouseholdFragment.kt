@@ -107,15 +107,16 @@ class AddNonConsentingHouseholdFragment : Fragment(R.layout.fragment_add_non_con
             textFieldGroupment.editText?.setText(viewModel.groupment)
             textFieldOtherReason.editText?.setText(viewModel.otherReason)
             textFieldAddress.editText?.setText(viewModel.address)
-//            textFieldLon.editText?.setText(viewModel.lon)
-//            textFieldLat.editText?.setText(viewModel.lat)
 
 
             (autoCompleteTextViewReason as? AutoCompleteTextView)?.apply {
                 setAdapter(
                     ArrayAdapter(context, dropdownLayout, reasons).also {
                         addTextChangedListener {
-                            viewModel.reason = it.toString()
+                            val reason = it.toString()
+                            viewModel.reason = reason
+                            textFieldOtherReason.isEnabled  = reason == "Other"
+                            textViewOtherReason.isEnabled  = reason == "Other"
                         }
                     }
                 )
@@ -198,9 +199,10 @@ class AddNonConsentingHouseholdFragment : Fragment(R.layout.fragment_add_non_con
     }//end of onCreateView
 
     private fun getLastKnownLocation() {
-        currentLocation?.let {
-            it.longitude
-            Log.d("MainActivity", "lon: ${it.longitude} lat: ${it.latitude}")
+        currentLocation?.apply {
+           viewModel.lon = longitude.toString()
+           viewModel.lat = latitude.toString()
+//            Log.d("AddNonConcent", "lon: ${it.longitude} lat: ${it.latitude}")
         }
     }
 

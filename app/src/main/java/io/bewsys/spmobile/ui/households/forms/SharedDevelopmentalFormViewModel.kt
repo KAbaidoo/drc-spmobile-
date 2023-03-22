@@ -25,6 +25,7 @@ import java.time.LocalDate
 import java.time.LocalTime
 import java.time.format.DateTimeFormatter
 import java.util.UUID.randomUUID
+import kotlin.random.Random
 
 
 class SharedDevelopmentalFormViewModel(
@@ -57,9 +58,22 @@ class SharedDevelopmentalFormViewModel(
 
     init {
         loadProvinces()
-//        loadCommunities()
+//        randomId()
     }
 
+    val randomID =  List (8){ Random.nextInt(0,10)}.joinToString(separator = "")
+
+
+    var lon = state.get<String>("lon") ?: ""
+        set(value) {
+            field = value
+            state["lon"] = value
+        }
+    var lat = state.get<String>("lat") ?: ""
+        set(value) {
+            field = value
+            state["lat"] = value
+        }
     var province = state.get<String>("province") ?: ""
         set(value) {
             field = value
@@ -263,8 +277,8 @@ class SharedDevelopmentalFormViewModel(
             use_of_early_marriage = _entriesMap["use_of_early_marriage"] ?: "",
             give_up_health_care = _entriesMap["give_up_health_care"] ?: "",
             days_spent_other_coping_strategy = _entriesMap["days_spent_other_coping_strategy"] ?: "",
-            gps_longitude = _entriesMap["gps_longitude"] ?: "",
-            gps_latitude = _entriesMap["gps_latitude"] ?: "",
+            gps_longitude = lon,
+            gps_latitude = lat,
             start_time = _entriesMap["start_time"] ?: "",
             finish_time = SimpleDateFormat("HH:mm:ss").format(System.currentTimeMillis()),
             address = _entriesMap["address"] ?: "",
@@ -352,7 +366,7 @@ class SharedDevelopmentalFormViewModel(
             method_of_waste_disposal = if (_entriesMap["method_of_waste_disposal"] == "yes") 1 else 0,
             household_migration_status = if (_entriesMap["household_migration_status"] == "yes") 1 else 0,
             place_to_wash_hands = if (_entriesMap["place_to_wash_hands"] == "yes") 1 else 0,
-            survey_no = "$provinceId$territoryId$communityId$groupmentId}",
+            survey_no = "$provinceId$territoryId$communityId$groupmentId$randomID}",
             temp_survey_no = "SQE211",
             main_material_of_exterior_walls = 1,
             occupation_status_of_current_accommodation = 1,
