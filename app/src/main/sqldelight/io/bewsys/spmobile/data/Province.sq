@@ -9,6 +9,10 @@ getAllProvinces:
 SELECT *
 FROM provinceEntity;
 
+getProvinceList:
+SELECT name
+FROM provinceEntity;
+
 getProvinceCount:
 SELECT COUNT(*)
 FROM provinceEntity;

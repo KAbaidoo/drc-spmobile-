@@ -49,7 +49,7 @@ val appModule = module {
 
     worker { NonConsentUploadWorker(androidContext(), get()) }
 
-    viewModel { DashboardViewModel(get()) }
+    viewModel { DashboardViewModel(get(),get()) }
     viewModel { HouseholdsViewModel(get(), get(),get()) }
     viewModel { NonConsentingViewModel(get(), get()) }
     viewModel { ProfileViewModel(get(),get()) }

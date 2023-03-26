@@ -2,8 +2,10 @@ package io.bewsys.spmobile.data.repository
 
 import app.cash.sqldelight.coroutines.asFlow
 import app.cash.sqldelight.coroutines.mapToList
+import app.cash.sqldelight.coroutines.mapToOne
 import io.bewsys.spmobile.Database
 import io.bewsys.spmobile.data.HouseholdEntity
+import io.bewsys.spmobile.data.HouseholdMember
 import io.bewsys.spmobile.data.local.HouseholdModel
 import io.bewsys.spmobile.data.prefsstore.PreferencesManager
 import io.bewsys.spmobile.data.remote.HouseholdApi
@@ -24,15 +26,19 @@ class HouseholdRepository(
     private val api: HouseholdApi,
     private val preferencesManager: PreferencesManager
 ) {
-    private val queries = db.householdQueries
+    private val householdQueries = db.householdQueries
+    private val membersQueries = db.householdMemberQueries
 
     suspend fun getAllHouseholds(): Flow<List<HouseholdEntity>> =
-        queries.getAllHousholds().asFlow().mapToList(context = Dispatchers.Default)
+        householdQueries.getAllHouseholds().asFlow().mapToList(context = Dispatchers.Default)
+
+    val getHouseHoldCount = householdQueries.getHouseholdCount().asFlow().mapToOne(Dispatchers.Default)
+    val getMembersCount = membersQueries.getHouseholdMembersCount().asFlow().mapToOne(Dispatchers.Default)
 
 
     suspend fun getHousehold(id: Long): HouseholdEntity? =
         withContext(Dispatchers.IO) {
-            queries.getById(id).executeAsOneOrNull()
+            householdQueries.getById(id).executeAsOneOrNull()
         }
 
     suspend fun insertHousehold(
@@ -42,7 +48,7 @@ class HouseholdRepository(
         val userPref = preferencesManager.preferencesFlow.first()
 
         householdModel.apply {
-            queries.insertHousehold(
+            householdQueries.insertHousehold(
                 id = null,
                 survey_date = survey_date,
                 respondent_firstname = respondent_firstname,
@@ -207,13 +213,16 @@ class HouseholdRepository(
     }
 
     suspend fun getLastInsertedRowId(): Long = withContext(Dispatchers.IO) {
-        queries.lastInsertRowId().executeAsOne()
-
+        householdQueries.lastInsertRowId().executeAsOne()
     }
 
     suspend fun updateStatus(status: String, id: Long) {
-        queries.updateStatus(status, id)
+        householdQueries.updateStatus(status, id)
     }
+
+
+    suspend fun getAllMemebers(): Flow<List<HouseholdMember>> =
+        membersQueries.getAllHouseholdMembers().asFlow().mapToList(context = Dispatchers.Default)
 
     //    ================================================================
     //   *********************** network calls  ************************

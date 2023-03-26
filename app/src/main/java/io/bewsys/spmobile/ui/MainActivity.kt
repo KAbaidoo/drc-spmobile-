@@ -44,7 +44,7 @@ class MainActivity : AppCompatActivity(), EasyPermissions.PermissionCallbacks {
         setContentView(binding.root)
 
         setSupportActionBar(binding.appBarMain.toolbar)
-
+//
 //        lifecycleScope.launchWhenStarted {
 //            viewModel.userState.collectLatest {
 //                if (it.not()) {

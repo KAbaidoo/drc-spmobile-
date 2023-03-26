@@ -15,6 +15,10 @@ getAllCommunities:
 SELECT *
 FROM communityEntity;
 
+getCommunityList:
+SELECT name
+FROM communityEntity;
+
 getCommunityCount:
 SELECT COUNT(*)
 FROM communityEntity;

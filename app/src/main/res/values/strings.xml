@@ -166,6 +166,7 @@
     <string name="qty">Qty</string>
     <string name="failure_dialog_message">Message</string>
     <string name="failure_dialog_ok">OK</string>
+    <string name="forgot_password">Forgot password</string>
 
     <string-array name="reasons">
         <item>No (refusal)</item>

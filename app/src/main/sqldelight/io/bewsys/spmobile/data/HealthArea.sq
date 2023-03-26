@@ -13,6 +13,9 @@ getAllHealthAreas:
 SELECT *
 FROM healthAreaEntity;
 
+getHealthAreasList:
+SELECT name
+FROM healthAreaEntity;
 
 
 insertHealthArea:

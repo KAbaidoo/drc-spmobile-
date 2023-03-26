@@ -14,6 +14,10 @@ getAllTerritoriess:
 SELECT *
 FROM territoryEntity;
 
+getTerritoryList:
+SELECT name
+FROM territoryEntity;
+
 getTerritoryCount:
 SELECT COUNT(*)
 FROM territoryEntity;

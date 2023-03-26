@@ -24,7 +24,6 @@ class DashboardFragment : Fragment(R.layout.fragment_dashboard) {
         val viewModel: DashboardViewModel by viewModel()
         val binding = FragmentDashboardBinding.bind(view)
 
-
         binding.apply {
             viewModel.provinceAndCommunity.observe(viewLifecycleOwner) {
                 textViewProvinces.text = it.first.toString()
@@ -34,6 +33,13 @@ class DashboardFragment : Fragment(R.layout.fragment_dashboard) {
                 textViewTerritories.text = it.first.toString()
                 textViewGroupements.text = it.second.toString()
             }
+
+            viewModel.householdAndMembers.observe(viewLifecycleOwner) {
+                textViewHouseholds.text   = it.first.toString()
+                tvMembers.text = it.second.toString()
+            }
+
+
 
 
             viewLifecycleOwner.lifecycleScope.launchWhenStarted {
@@ -50,17 +56,9 @@ class DashboardFragment : Fragment(R.layout.fragment_dashboard) {
 
                         is DashboardViewModel.DashboardEvent.Exception, DashboardViewModel.DashboardEvent.Failure-> {
                             progressBar.isVisible = false
-                            viewModel.loadCommunityCount()
-                            viewModel.loadProvinceCount()
-                            viewModel.loadGroupmentCount()
-                            viewModel.loadTerritoriesCount()
                         }
                         is  DashboardViewModel.DashboardEvent.Successful -> {
                             progressBar.isVisible = false
-                            viewModel.loadCommunityCount()
-                            viewModel.loadProvinceCount()
-                            viewModel.loadGroupmentCount()
-                            viewModel.loadTerritoriesCount()
                             viewModel.showDashboardUpdatedSuccessfulMessage()
                         }
 

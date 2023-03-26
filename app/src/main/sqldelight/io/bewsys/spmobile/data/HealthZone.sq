@@ -9,11 +9,15 @@ SELECT *
 FROM healthZoneEntity
 WHERE province_id = :province_id;
 
-getAllHealthAreas:
+getAllHealthZone:
 SELECT *
 FROM healthZoneEntity;
 
-insertHealthArea:
+getHealthZoneList:
+SELECT name
+FROM healthZoneEntity;
+
+insertHealthZone:
 INSERT OR REPLACE
 INTO healthZoneEntity
 VALUES(?,?,?);

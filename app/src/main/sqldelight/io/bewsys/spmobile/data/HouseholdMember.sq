@@ -29,6 +29,10 @@ getAllHouseholdMembers:
 SELECT *
 FROM householdMember;
 
+getHouseholdMembersCount:
+SELECT COUNT(*)
+FROM householdMember;
+
 insertCbtEvaluation:
 INSERT OR REPLACE
 INTO householdMember

@@ -1,7 +1,9 @@
 package io.bewsys.spmobile.data.repository
 
+import android.util.Log
 import app.cash.sqldelight.coroutines.asFlow
 import app.cash.sqldelight.coroutines.mapToList
+import app.cash.sqldelight.coroutines.mapToOne
 import io.bewsys.spmobile.Database
 import io.bewsys.spmobile.data.CommunityEntity
 import io.bewsys.spmobile.data.GroupmentEntity
@@ -14,11 +16,9 @@ import io.bewsys.spmobile.data.remote.model.login.ErrorResponse
 import io.bewsys.spmobile.util.ApplicationScope
 import io.bewsys.spmobile.util.Resource
 import io.ktor.client.call.*
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.*
 import kotlinx.coroutines.flow.*
-import kotlinx.coroutines.launch
-import kotlinx.coroutines.withContext
+
 
 class DashboardRepository(
     db: Database,
@@ -26,6 +26,9 @@ class DashboardRepository(
     private val preferences: PreferencesManager,
     @ApplicationScope private val applicationScope: CoroutineScope
 ) {
+
+
+
     private val provinceQueries = db.provinceQueries
     private val communityQueries = db.communityQueries
     private val territoryQueries = db.territoryQueries
@@ -74,10 +77,6 @@ class DashboardRepository(
             communityQueries.getAllCommunities().asFlow().mapToList(Dispatchers.Default)
         }
 
-//    suspend fun getCommunityCount() = flow<Long> {
-//        communityQueries.getCommunityCount().executeAsOneOrNull()
-//    }.flowOn(Dispatchers.IO)
-
     suspend fun getCommunitiesList(territoryId: String) =
         withContext(Dispatchers.IO) {
             getCommunitiesByTerritoryId(territoryId).map {
@@ -121,9 +120,6 @@ class DashboardRepository(
             territoryQueries.getAllTerritoriess().asFlow().mapToList(Dispatchers.Default)
         }
 
-    //    suspend fun getTerritoryCount() = flow<Long> {
-//        territoryQueries.getTerritoryCount().executeAsOneOrNull()
-//    }.flowOn(Dispatchers.IO)
     suspend fun getTerritoriesList(provinceId: String) =
         withContext(Dispatchers.IO) {
             getTerritoriesByProvinceId(provinceId).map {
@@ -167,9 +163,13 @@ class DashboardRepository(
             groupmentQueries.getAllGroupments().asFlow().mapToList(Dispatchers.Default)
         }
 
-    //    suspend fun getGroupmentCount() = flow<Long> {
-//        groupmentQueries.getGroupmentCount().executeAsOneOrNull()
-//    }.flowOn(Dispatchers.IO)
+    val provinceCountFlow = provinceQueries.getProvinceCount().asFlow().mapToOne(Dispatchers.Default)
+    val territoryCountFlow = territoryQueries.getTerritoryCount().asFlow().mapToOne(Dispatchers.Default)
+    val communityCountFlow = communityQueries.getCommunityCount().asFlow().mapToOne(Dispatchers.Default)
+    val groupementCountFlow = groupmentQueries.getGroupmentCount().asFlow().mapToOne(Dispatchers.Default)
+
+
+
     suspend fun getGroupmentsList(communityId: String) =
         withContext(Dispatchers.IO) {
             getGroupmentsByCommunityId(communityId).map {
@@ -211,6 +211,11 @@ class DashboardRepository(
     /* =================================================================
                              network calls
     =============================================================== */
+//
+//    val territories:List<Territory>? = null
+//    val territories:List<Territory>? = null
+//    val territories:List<Territory>? = null
+//    val territories:List<Territory>? = null
     suspend fun fetchData() = flow {
 
         try {
@@ -244,7 +249,8 @@ class DashboardRepository(
         }
     }
 
-    private suspend fun insertProvinces(provinces: List<Province>)  = applicationScope.launch{
+
+    private suspend fun insertProvinces(provinces: List<Province>) = applicationScope.launch {
         withContext(Dispatchers.IO) {
             provinces.forEach {
                 insertProvince(it)

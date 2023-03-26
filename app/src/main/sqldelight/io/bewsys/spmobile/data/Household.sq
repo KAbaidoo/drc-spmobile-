@@ -159,8 +159,13 @@ CREATE TABLE  householdEntity (
     other_household_activities_in_past_12_months TEXT
     );
 
-getAllHousholds:
+getAllHouseholds:
 SELECT *
+FROM householdEntity;
+
+
+getHouseholdCount:
+SELECT COUNT(*)
 FROM householdEntity;
 
 insertHousehold:
