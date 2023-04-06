@@ -63,7 +63,7 @@
     <string name="respondent_middlename">Respondent Middlename</string>
     <string name="respondent_lastname">Respondent Lastname</string>
     <string name="respondent_dob">Respondent DOB</string>
-    <string name="respondent_family_bond_to_head">Respondent Family bond to head</string>
+    <string name="respondent_family_bond_to_head">Respondent family bond to head</string>
     <string name="respondent_voter_id">Respondent Voter ID</string>
     <string name="respondent_phone_number">Respondent Phone number</string>
     <string name="household">Household</string>
@@ -94,7 +94,7 @@
     <string name="has_household_goods">Has household goods</string>
     <string name="has_livestock">Has livestock</string>
     <string name="practice_of_cash_crop_farming_or_commercial_farming">Practice of cash crop farming or commercial farming</string>
-    <string name="household_head">Household head</string>
+    <string name="household_head">Head</string>
     <string name="mobile_money_phone_number">Mobile money phone number</string>
     <string name="mobile_money_username">Mobile money username</string>
     <string name="comments">Comments</string>
@@ -117,7 +117,7 @@
     <string name="is_head_respondent">Is head respondent</string>
     <string name="address">Address</string>
     <string name="village_or_quartier">Village or quartier</string>
-    <string name="initial_registration_type">Initial registration type</string>
+    <string name="initial_registration_type">Registration type</string>
     <string name="area_of_residence">Area of residence</string>
     <string name="community">Community</string>
     <string name="territory">Territory</string>
@@ -167,6 +167,60 @@
     <string name="failure_dialog_message">Message</string>
     <string name="failure_dialog_ok">OK</string>
     <string name="forgot_password">Forgot password</string>
+    <string name="next">Next</string>
+    <string name="previous">Previous</string>
+    <string name="consent">Do you agree to provide your information to fill out this form?</string>
+    <string name="consent_agreement">The Government of the Republic through the Ministry of Social Affairs (MINAS) has embarked on a series of reforms of the social protection sector for effective management. The present reform aims to broaden the MINAS database of poor and vulnerable people to those of agencies involved in implementing social assistance programs, including agencies of the United Nations System and national and international NGOs, and to allow control of personal data, according to a protocol to be agreed. Ultimately, the process will result in the construction of a Social Register serving as a gateway for the registration and eligibility of vulnerable persons and households for several social assistance programs. It is for this purpose that your consent is requested to provide us with the information contained in this questionnaire in order to enable the Government to improve its social policies. Thank you for giving us part of your time and we guarantee the confidential nature of the data collected as a result of this survey, in accordance with Decree No. 10/05 of February 11 relating to the National Statistical System.</string>
+    <string name="yes">Yes</string>
+    <string name="no">No</string>
+    <string name="general">General</string>
+    <string name="emergency">Emergency</string>
+    <string name="male">Male</string>
+    <string name="female">Female</string>
+    <string name="widowed">Widowed</string>
+    <string name="divorced">Divorced</string>
+    <string name="single">Single</string>
+    <string name="married">Married</string>
+    <string name="village">Village</string>
+    <string name="quartier">Quartier</string>
+    <string name="urban">Urban</string>
+    <string name="urban_rural">Urban-rural</string>
+    <string name="rural">Rural</string>
+    <string name="town">Town</string>
+    <string name="household_head_disability">Household head disability</string>
+    <string name="respondent_age_known">Respondent age known</string>
+    <string name="respondent_age">Respondent age</string>
+    <string name="respondent_sex">Respondent sex</string>
+    <string name="bank_account_or_bank_card_available">Bank account or bank card available</string>
+    <string name="household_member_owner_of_cultivable_land">Household member owner of cultivable land</string>
+    <string name="household_migration_status">Household migration status</string>
+    <string name="resident">Resident</string>
+    <string name="repatriated">Repatriated</string>
+    <string name="unit">Unit</string>
+    <string name="household_member_access_to_cultivable_land">Household member access to cultivable land</string>
+    <string name="number_of_meals_eaten_by_children_6_to_17_yesterday">Number of meals eaten by children 6 to 17 yesterday</string>
+    <string name="number_of_days_in_week_consumed_sugar_or_sweet_products">Number of days in week consumed sugar or sweet products</string>
+    <string name="number_of_days_in_week_consumed_vegetables">Number of days in week consumed vegetables</string>
+    <string name="number_of_days_in_week_consumed_staple_foods">Number of days in week consumed staple foods</string>
+    <string name="number_of_days_in_week_consumed_meat">Number of days in week consumed meat</string>
+    <string name="number_of_days_in_week_consumed_legumes_or_nuts">Number of days in week consumed legumes or nuts</string>
+    <string name="number_of_days_in_week_consumed_fruits">Number of days in week consumed fruits</string>
+    <string name="number_of_days_in_week_consumed_dairy_products">Number of days in week consumed dairy products</string>
+    <string name="number_of_days_in_week_consumed_cooking_oils">Number of days in week consumed cooking oils</string>
+    <string name="number_of_meals_eaten_by_children_2_to_5_yesterday">Number of meals eaten by children 2 to 5 yesterday</string>
+    <string name="number_of_meals_eaten_by_adults_18_plus_yesterday">Number of meals eaten by adults 18 plus yesterday</string>
+    <string name="coping">Coping</string>
+    <string name="number_of_mosquito_nets_owned">Number of mosquito nets owned</string>
+    <string name="number_of_guinea_pig_owned">Number of guinea pig owned</string>
+    <string name="number_of_motorbike_owned">number of motorbike owned</string>
+    <string name="number_of_rooms_used_for_sleeping">Number of rooms used for sleeping</string>
+    <string name="number_of_table_owned">Number of table owned</string>
+    <string name="number_of_sofa_owned">Number of sofa owned</string>
+    <string name="number_of_handset_or_phone_owned">Number of handset or phone owned</string>
+    <string name="number_of_chair_owned">Number of chair owned</string>
+    <string name="number_of_bed_owned">Number of bed owned</string>
+    <string name="number_of_air_conditioner_owned">Number of air conditioner owned</string>
+    <string name="amount_of_cultivable_land_owned">Amount of cultivable land owned</string>
 
     <string-array name="reasons">
         <item>No (refusal)</item>
@@ -174,89 +228,41 @@
         <item>Other</item>
     </string-array>
 
-    <string-array name="initial_registration">
-        <item>general</item>
+    <string-array name="migration_duration_unit">
+        <item>Years</item>
+        <item>Months</item>
+        <item>Days</item>
     </string-array>
 
-    <string-array name="provinces">
-        <item>first province</item>
-        <item>second province</item>
-        <item>third province</item>
+    <string-array name="migration_status">
+        <item>Resident</item>
+        <item>Repatriated</item>
+        <item>Displaced</item>
+        <item>Refugee</item>
+        <item>Returned</item>
+        <item>Other</item>
     </string-array>
 
-    <string-array name="territories">
-        <item>first territory</item>
-        <item>second territory</item>
-        <item>third territory</item>
+    <string-array name="duration_units">
+        <item>Days</item>
+        <item>Months</item>
+        <item>Years</item>
     </string-array>
 
-    <string-array name="community">
-        <item>first community</item>
-        <item>second community</item>
-        <item>third community</item>
-    </string-array>
 
-    <string-array name="groupment">
-        <item>first group</item>
-        <item>second group</item>
-        <item>third groupm</item>
-    </string-array>
+
     <string-array name="language">
         <item>French</item>
         <item>English</item>
     </string-array>
+
     <string-array name="locales">
         <item>en-US</item>
         <item>fr-FR</item>
     </string-array>
-    <string-array name="short_number_list">
-        <item>0</item>
-        <item>1</item>
-        <item>2</item>
-        <item>3</item>
-        <item>4</item>
-        <item>5</item>
-        <item>6</item>
-        <item>7</item>
-    </string-array>
-    <string-array name="long_number_list">
-        <item>0</item>
-        <item>1</item>
-        <item>2</item>
-        <item>3</item>
-        <item>4</item>
-        <item>5</item>
-        <item>6</item>
-        <item>7</item>
-        <item>8</item>
-        <item>9</item>
-        <item>10</item>
-        <item>11</item>
-        <item>12</item>
-        <item>13</item>
-        <item>14</item>
-        <item>15</item>
-        <item>16</item>
-        <item>17</item>
-        <item>18</item>
-        <item>19</item>
-        <item>20</item>
-    </string-array>
 
-    <string-array name="yes_or_no">
-        <item>yes</item>
-        <item>no</item>
-    </string-array>
-    <string-array name="male_or_female">
-        <item>Male</item>
-        <item>Female</item>
-    </string-array>
-    <string-array name="marital_status">
-        <item>Married</item>
-        <item>Single</item>
-        <item>Divorced</item>
-        <item>Widowed</item>
-    </string-array>
+
+
 
 
 

@@ -10,9 +10,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:padding="24dp"
-        android:scrollbars="none"
-        tools:layout_editor_absoluteX="24dp"
-        tools:layout_editor_absoluteY="-101dp">
+        android:scrollbars="none">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -259,67 +257,73 @@
             </com.google.android.material.textfield.TextInputLayout>
 
 
-            <!--            <LinearLayout-->
-            <!--                android:layout_width="match_parent"-->
-            <!--                android:layout_height="wrap_content"-->
-            <!--                android:layout_marginTop="16dp"-->
-            <!--                android:orientation="horizontal"-->
-            <!--                android:baselineAligned="false">-->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:baselineAligned="false"
+                android:orientation="horizontal">
 
-            <!--                <LinearLayout-->
-            <!--                    android:layout_width="match_parent"-->
-            <!--                    android:layout_height="wrap_content"-->
-            <!--                    android:orientation="vertical"-->
-            <!--                    android:layout_marginEnd="12dp"-->
-            <!--                    android:layout_weight="1">-->
-            <!--                    <TextView-->
-            <!--                        android:layout_width="wrap_content"-->
-            <!--                        android:layout_height="wrap_content"-->
-            <!--                        android:text="@string/GPS_Longitude"-->
-            <!--                        android:textAppearance="@style/TextAppearance.MaterialComponents.Body1" />-->
-            <!--                    <com.google.android.material.textfield.TextInputLayout-->
-            <!--                        android:id="@+id/text_field_lon"-->
-            <!--                        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"-->
-            <!--                        android:layout_width="match_parent"-->
-            <!--                        android:layout_height="wrap_content"-->
-            <!--                        android:enabled="false"-->
-            <!--                        android:minHeight="20dp"-->
-            <!--                        app:boxStrokeWidth="2dp">-->
-            <!--                        <com.google.android.material.textfield.TextInputEditText-->
-            <!--                            android:layout_width="match_parent"-->
-            <!--                            android:layout_height="wrap_content"-->
-            <!--                            />-->
-            <!--                    </com.google.android.material.textfield.TextInputLayout>-->
-            <!--                </LinearLayout>-->
-            <!--               <LinearLayout-->
-            <!--                   android:layout_width="match_parent"-->
-            <!--                   android:layout_height="wrap_content"-->
-            <!--                   android:orientation="vertical"-->
-            <!--                   android:layout_weight="1"-->
-            <!--                   android:layout_marginStart="12dp">-->
-            <!--                   <TextView-->
-            <!--                       android:layout_width="wrap_content"-->
-            <!--                       android:layout_height="wrap_content"-->
-            <!--                       android:text="@string/GPS_Latitude"-->
-            <!--                       android:textAppearance="@style/TextAppearance.MaterialComponents.Body1" />-->
-            <!--                   <com.google.android.material.textfield.TextInputLayout-->
-            <!--                       android:id="@+id/text_field_lat"-->
-            <!--                       style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"-->
-            <!--                       android:layout_width="match_parent"-->
-            <!--                       android:layout_height="wrap_content"-->
-            <!--                       android:enabled="false"-->
-            <!--                       android:minHeight="20dp"-->
-            <!--                       app:boxStrokeWidth="2dp">-->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="12dp"
+                    android:layout_weight="1"
+                    android:orientation="vertical">
 
-            <!--                       <com.google.android.material.textfield.TextInputEditText-->
-            <!--                           android:layout_width="match_parent"-->
-            <!--                           android:layout_height="wrap_content"-->
-            <!--                          />-->
-            <!--                   </com.google.android.material.textfield.TextInputLayout>-->
-            <!--               </LinearLayout>-->
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/GPS_Longitude"
+                        android:textAppearance="@style/TextAppearance.MaterialComponents.Body1" />
+
+                    <com.google.android.material.textfield.TextInputLayout
+                        android:id="@+id/text_field_lon"
+                        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:minHeight="20dp"
+                        app:boxStrokeWidth="2dp">
+
+                        <com.google.android.material.textfield.TextInputEditText
+                            android:layout_width="match_parent"
+                            android:enabled="false"
+                            android:text="@string/lon_placeholder"
+                            android:layout_height="wrap_content" />
+                    </com.google.android.material.textfield.TextInputLayout>
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="12dp"
+                    android:layout_weight="1"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/GPS_Latitude"
+                        android:textAppearance="@style/TextAppearance.MaterialComponents.Body1" />
+
+                    <com.google.android.material.textfield.TextInputLayout
+                        android:id="@+id/text_field_lat"
+                        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:minHeight="20dp"
+                        app:boxStrokeWidth="2dp">
+
+                        <com.google.android.material.textfield.TextInputEditText
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="@string/lat_placeholder"
+                            android:enabled="false"/>
+                    </com.google.android.material.textfield.TextInputLayout>
+                </LinearLayout>
 
 
-            <!--            </LinearLayout>-->
+            </LinearLayout>
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -331,7 +335,7 @@
 
                 <com.google.android.material.button.MaterialButton
                     android:id="@+id/button_register"
-                    style="@style/styled_button"
+                    style="@style/Widget.App.ButtonStyle"
                     android:text="@string/button_register" />
             </LinearLayout>
         </LinearLayout>

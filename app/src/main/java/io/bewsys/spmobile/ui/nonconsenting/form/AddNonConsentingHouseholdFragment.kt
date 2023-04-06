@@ -99,14 +99,7 @@ class AddNonConsentingHouseholdFragment : Fragment(R.layout.fragment_add_non_con
 
 
         binding.apply {
-//            Set all text fields from saved state
-            textFieldReason.editText?.setText(viewModel.reason)
-            textFieldProvince.editText?.setText(viewModel.province)
-            textFieldCommunity.editText?.setText(viewModel.community)
-            textFieldTerritory.editText?.setText(viewModel.territory)
-            textFieldGroupment.editText?.setText(viewModel.groupment)
-            textFieldOtherReason.editText?.setText(viewModel.otherReason)
-            textFieldAddress.editText?.setText(viewModel.address)
+
 
 
             (autoCompleteTextViewReason as? AutoCompleteTextView)?.apply {
@@ -159,6 +152,18 @@ class AddNonConsentingHouseholdFragment : Fragment(R.layout.fragment_add_non_con
                     }
                 }
             }
+
+            //            Set all text fields from saved state
+            textFieldReason.editText?.setText(viewModel.reason)
+            textFieldProvince.editText?.setText(viewModel.province)
+            textFieldCommunity.editText?.setText(viewModel.community)
+            textFieldTerritory.editText?.setText(viewModel.territory)
+            textFieldGroupment.editText?.setText(viewModel.groupment)
+            textFieldOtherReason.editText?.setText(viewModel.otherReason)
+            textFieldAddress.editText?.setText(viewModel.address)
+
+
+
             textFieldOtherReason.editText?.addTextChangedListener {
                 viewModel.reason = it.toString()
             }
@@ -202,7 +207,7 @@ class AddNonConsentingHouseholdFragment : Fragment(R.layout.fragment_add_non_con
         currentLocation?.apply {
            viewModel.lon = longitude.toString()
            viewModel.lat = latitude.toString()
-//            Log.d("AddNonConcent", "lon: ${it.longitude} lat: ${it.latitude}")
+//            Log.d("AddNonConcent", "lon: ${viewModel.lon} lat: ${viewModel.lat}")
         }
     }
 

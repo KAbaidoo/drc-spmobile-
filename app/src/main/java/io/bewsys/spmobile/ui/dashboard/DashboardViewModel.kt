@@ -22,19 +22,7 @@ class DashboardViewModel(
     private val dashboardRepository: DashboardRepository,
     private val householdRepository: HouseholdRepository
 ) : ViewModel() {
-   /* private val _provinceCount = MutableLiveData(0)
-    private val _communityCount = MutableLiveData(0)
-    private val _territoriesCount = MutableLiveData(0)
-    private val _groupementsCount = MutableLiveData(0)
-    private val _householdCount = MutableLiveData(0)
-    private val _membersCount = MutableLiveData(0)
 
-
-
-
-    val provinceAndCommunity = PairMediatorLiveData(_provinceCount, _communityCount)
-    val territoryAndGroupement = PairMediatorLiveData(_territoriesCount, _groupementsCount)
-    val householdAndMembers = PairMediatorLiveData(_householdCount, _membersCount) */
 
     private val _dashboardEventChannel = Channel<DashboardEvent>()
     val dashboardEvent = _dashboardEventChannel.receiveAsFlow()
@@ -51,72 +39,6 @@ class DashboardViewModel(
     val territoryAndGroupement = PairMediatorLiveData(territoryCount, groupmentCount)
     val householdAndMembers = PairMediatorLiveData(householdCount, membersCount)
 
-
-
-
-/*
-    init {
-//        loadCommunityCount()
-        loadProvinceCount()
-//        loadGroupmentCount()
-//        loadTerritoriesCount()
-    }
-
-
-    fun loadProvinceCount() = viewModelScope.launch {
-
-        launch {
-            dashboardRepository.getAllProvinces().collectLatest {
-                _provinceCount.value = withContext(Dispatchers.Default) { it.count() }
-            }
-        }
-
-        launch {
-            dashboardRepository.getAllCommunities().collectLatest {
-                _communityCount.value = withContext(Dispatchers.Default) {
-                    it.count()
-                }
-            }
-        }
-        launch {
-            dashboardRepository.getAllTerritories().collectLatest {
-                _territoriesCount.value = withContext(Dispatchers.Default) { it.count() }
-            }
-        }
-        /* launch {
-            dashboardRepository.getAllGroupments().collectLatest {
-                _groupementsCount.value = withContext(Dispatchers.Default) { it.count() }
-                showDashboardUpdatedSuccessfulMessage()
-            }
-
-        } */
-        launch {
-            householdRepository.getAllHouseholds().collectLatest {
-                _householdCount.value = withContext(Dispatchers.Default) { it.count() }
-            }
-        }
-
-        launch {
-            householdRepository.getAllMemebers().collectLatest {
-                _membersCount.value = withContext(Dispatchers.Default) { it.count() }
-            }
-        }
-
-    }
-
-
-    fun loadCommunityCount() = viewModelScope.launch {
-
-    }
-
-    fun loadTerritoriesCount() = viewModelScope.launch {
-
-
-    }
-
-    fun loadGroupmentCount() = viewModelScope.launch {
-
-    } */
 
     fun loadData() = viewModelScope.launch {
         dashboardRepository.fetchData().collectLatest { results ->

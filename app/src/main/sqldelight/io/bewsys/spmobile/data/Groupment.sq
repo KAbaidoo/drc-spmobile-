@@ -36,3 +36,9 @@ getByName:
 SELECT *
 FROM groupmentEntity
 WHERE name LIKE ('%'||:query||'%') ;
+
+
+getNamesByCommId:
+SELECT t1.name
+FROM groupmentEntity AS t1
+WHERE community_id = :community_id;

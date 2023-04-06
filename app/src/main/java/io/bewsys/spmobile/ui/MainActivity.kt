@@ -8,11 +8,13 @@ import android.util.Log
 import android.view.View
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.os.bundleOf
 import androidx.drawerlayout.widget.DrawerLayout
 import androidx.drawerlayout.widget.DrawerLayout.LOCK_MODE_LOCKED_CLOSED
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.NavController
 import androidx.navigation.findNavController
+import androidx.navigation.navArgs
 import androidx.navigation.ui.*
 import com.google.android.gms.location.FusedLocationProviderClient
 import com.google.android.gms.location.LocationServices
@@ -44,6 +46,7 @@ class MainActivity : AppCompatActivity(), EasyPermissions.PermissionCallbacks {
         setContentView(binding.root)
 
         setSupportActionBar(binding.appBarMain.toolbar)
+
 //
 //        lifecycleScope.launchWhenStarted {
 //            viewModel.userState.collectLatest {
@@ -73,7 +76,11 @@ class MainActivity : AppCompatActivity(), EasyPermissions.PermissionCallbacks {
             when (menuItem.id) {
                 R.id.nav_profile -> navController.navigate(R.id.nav_profile)
                 R.id.nav_settings -> navController.navigate(R.id.nav_settings)
-                R.id.nav_login -> navController.navigate(R.id.nav_login)
+
+                R.id.nav_login -> {
+                    navController.navigate(R.id.nav_login)
+
+                }
             }
         }
 

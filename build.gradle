@@ -5,8 +5,8 @@ buildscript {
     ext {
         // Sdk and tools
         minSdkVersion = 24
-        targetSdkVersion = 32
-        compileSdkVersion = 32
+        targetSdkVersion = 31
+        compileSdkVersion = 31
 
         // App dependencies
         appCompatVersion = "1.4.1"
@@ -56,7 +56,7 @@ buildscript {
 
     dependencies {
         classpath "com.android.tools.build:gradle:$gradleVersion"
-        classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlinVersion"
+//        classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlinVersion"
         classpath "androidx.navigation:navigation-safe-args-gradle-plugin:$navigation_version"
         classpath "app.cash.sqldelight:gradle-plugin:$sqldelight_version"
         classpath "org.jetbrains.kotlin:kotlin-serialization:$kotlinVersion"

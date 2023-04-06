@@ -10,7 +10,7 @@ import io.bewsys.spmobile.data.local.HouseholdModel
 import io.bewsys.spmobile.data.prefsstore.PreferencesManager
 import io.bewsys.spmobile.data.remote.HouseholdApi
 import io.bewsys.spmobile.data.remote.model.household.HouseholdPayload
-import io.bewsys.spmobile.data.remote.model.login.ErrorResponse
+import io.bewsys.spmobile.data.remote.model.auth.login.ErrorResponse
 import io.bewsys.spmobile.util.Resource
 import io.ktor.client.call.*
 import kotlinx.coroutines.Dispatchers
@@ -125,7 +125,7 @@ class HouseholdRepository(
                 remote_id = null,
                 cac = cac,
                 team_leader_id = userPref.teamLeaderId,
-                user_id = userPref.id,
+                user_id = userPref.id.toString(),
                 consent = consent,
                 CBT_score = CBT_score,
                 initial_registration_type = initial_registration_type,

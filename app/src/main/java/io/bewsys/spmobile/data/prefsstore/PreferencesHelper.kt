@@ -8,13 +8,14 @@ import io.bewsys.spmobile.data.prefsstore.PreferencesManager.PreferenceKeys.EMAI
 import io.bewsys.spmobile.data.prefsstore.PreferencesManager.PreferenceKeys.ID
 import io.bewsys.spmobile.data.prefsstore.PreferencesManager.PreferenceKeys.IS_LOGGED_IN
 import io.bewsys.spmobile.data.prefsstore.PreferencesManager.PreferenceKeys.NAME
+import io.bewsys.spmobile.data.prefsstore.PreferencesManager.PreferenceKeys.PASSWORD
 import io.bewsys.spmobile.data.prefsstore.PreferencesManager.PreferenceKeys.PHONE_NUMBER
 import io.bewsys.spmobile.data.prefsstore.PreferencesManager.PreferenceKeys.SUPERVISOR_ID
 import io.bewsys.spmobile.data.prefsstore.PreferencesManager.PreferenceKeys.SUPERVISOR_NAME
 import io.bewsys.spmobile.data.prefsstore.PreferencesManager.PreferenceKeys.TEAM_LEADER
 import io.bewsys.spmobile.data.prefsstore.PreferencesManager.PreferenceKeys.TEAM_LEADER_ID
 import io.bewsys.spmobile.data.prefsstore.PreferencesManager.PreferenceKeys.TOKEN
-import io.bewsys.spmobile.data.remote.model.login.User
+import io.bewsys.spmobile.data.remote.model.auth.login.User
 
 import kotlinx.coroutines.flow.catch
 import kotlinx.coroutines.flow.map
@@ -28,6 +29,7 @@ data class UserPreferences(
     val isLoggedIn: Boolean,
     val name: String,
     val email: String,
+    val password: String,
     val id: Long?,
     val phoneNumber: String,
     val teamLeader: String,
@@ -58,6 +60,7 @@ class PreferencesManager(context: Context) {
                 preferences[IS_LOGGED_IN] ?: false
             val name = preferences[NAME] ?: ""
             val email = preferences[EMAIL] ?: ""
+            val password = preferences[PASSWORD] ?: ""
             val id = preferences[ID]
             val phoneNumber = preferences[PHONE_NUMBER] ?: ""
             val teamLeader = preferences[TEAM_LEADER] ?: ""
@@ -69,6 +72,7 @@ class PreferencesManager(context: Context) {
                 isLoggedIn,
                 name,
                 email,
+                password,
                 id,
                 phoneNumber,
                 teamLeader,
@@ -83,6 +87,7 @@ class PreferencesManager(context: Context) {
         dataStore.edit { preferences ->
             preferences[NAME] = user.name.toString()
             preferences[EMAIL] = user.email.toString()
+            preferences[PASSWORD] = user.password.toString()
             preferences[ID] = user.id as Long
             preferences[PHONE_NUMBER] = user.phone_number.toString()
             preferences[TEAM_LEADER] =
@@ -108,11 +113,19 @@ class PreferencesManager(context: Context) {
         }
     }
 
+    suspend fun clearUser() {
+        dataStore.edit {
+            preferences -> preferences.clear()
+
+        }
+    }
+
     private object PreferenceKeys {
         val TOKEN = preferencesKey<String>("token")
         val NAME = preferencesKey<String>("name")
         val PERMISSIONS = preferencesKey<String>("permissions")
         val EMAIL = preferencesKey<String>("email")
+        val PASSWORD = preferencesKey<String>("password")
         val ID = preferencesKey<Long>("id")
         val PHONE_NUMBER = preferencesKey<String>("phone_number")
         val TEAM_LEADER = preferencesKey<String>("team_leader")

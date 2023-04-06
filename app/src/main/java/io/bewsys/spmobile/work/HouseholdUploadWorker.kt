@@ -62,7 +62,7 @@ class HouseholdUploadWorker(
                         user_id,
                         survey_date,
                         initial_registration_type,
-                        respondent_type,
+                        respondent_type.toString(),
                         respondent_firstname,
                         respondent_middlename,
                         respondent_lastname,
@@ -209,7 +209,7 @@ class HouseholdUploadWorker(
                         name_of_social_assistance_program,
                         affected_by_other_shock,
                         temp_survey_no,
-                        remote_id
+                        remote_id.toString()
 
                     )
                 ).collectLatest { response ->

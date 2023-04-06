@@ -10,7 +10,7 @@ SELECT *
 FROM provinceEntity;
 
 getProvinceList:
-SELECT name
+SELECT (name)
 FROM provinceEntity;
 
 getProvinceCount:

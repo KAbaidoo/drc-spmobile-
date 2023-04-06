@@ -74,7 +74,7 @@ class HouseholdsFragment : Fragment(R.layout.fragment_households),HouseholdAdapt
                         if (!isOpen) showActions(binding) else hideActions(binding)
                     }
                     is HouseholdsViewModel.HouseholdEvent.DevelopmentalClicked -> {
-                        val action = HouseholdsFragmentDirections.actionNavHouseholdToDevelopmentalFormFragment()
+                        val action = HouseholdsFragmentDirections.actionNavHouseholdToNavigation()
                         findNavController().navigate(action)
                     }
                     is HouseholdsViewModel.HouseholdEvent.HumanitarianClicked -> {

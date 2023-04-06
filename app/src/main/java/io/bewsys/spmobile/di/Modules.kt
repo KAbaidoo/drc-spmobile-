@@ -1,27 +1,24 @@
 package io.bewsys.spmobile.di
 
-import android.app.Activity
 import app.cash.sqldelight.db.SqlDriver
 import app.cash.sqldelight.driver.android.AndroidSqliteDriver
-import com.google.android.gms.location.LocationServices
 import io.bewsys.spmobile.Database
 import io.bewsys.spmobile.data.repository.*
 import io.bewsys.spmobile.data.prefsstore.PreferencesManager
 import io.bewsys.spmobile.data.remote.*
 import io.bewsys.spmobile.ui.dashboard.DashboardViewModel
 import io.bewsys.spmobile.ui.households.HouseholdsViewModel
-import io.bewsys.spmobile.ui.households.forms.SharedDevelopmentalFormViewModel
-import io.bewsys.spmobile.ui.login.LoginViewModel
+import io.bewsys.spmobile.ui.households.forms.developmentalform.SharedDevelopmentalFormViewModel
+import io.bewsys.spmobile.ui.auth.LoginViewModel
 import io.bewsys.spmobile.ui.nonconsenting.NonConsentingViewModel
 import io.bewsys.spmobile.ui.nonconsenting.form.AddNonConsentingHouseholdViewModel
 import io.bewsys.spmobile.ui.profile.ProfileViewModel
 import io.bewsys.spmobile.ui.targeting.TargetingViewModel
 import io.bewsys.spmobile.ui.MainViewModel
-import io.bewsys.spmobile.ui.login.LoginDialogViewModel
+import io.bewsys.spmobile.ui.auth.LoginDialogViewModel
 import io.bewsys.spmobile.util.LocationProvider
 import io.bewsys.spmobile.util.provideApplicationScope
 import io.bewsys.spmobile.work.NonConsentUploadWorker
-import org.koin.android.ext.koin.androidApplication
 
 import org.koin.android.ext.koin.androidContext
 import org.koin.androidx.viewmodel.dsl.viewModel
@@ -37,7 +34,7 @@ val appModule = module {
     single { provideApplicationScope() }
     single { LocationProvider(androidContext()) }
 
-    factory { UserApi(get()) }
+    factory { AuthApi(get()) }
     factory { HouseholdApi(get()) }
     factory { NonConsentingHouseholdApi(get()) }
     factory { DashboardApi(get()) }
@@ -45,7 +42,7 @@ val appModule = module {
     factory { DashboardRepository(get(),get(),get(),get()) }
     factory { HouseholdRepository(get(),get(),get()) }
     factory { NonConsentingHouseholdRepository(get(),get(),get()) }
-    factory { UserRepository(get(),get()) }
+    factory { AuthRepository(get(),get()) }
 
     worker { NonConsentUploadWorker(androidContext(), get()) }
 

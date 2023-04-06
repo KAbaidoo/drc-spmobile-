@@ -12,14 +12,14 @@
     android:paddingBottom="16dp"
     android:theme="@style/ThemeOverlay.AppCompat.Dark">
 
-    <androidx.appcompat.widget.AppCompatImageView
+    <ImageView
         android:id="@+id/imageView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
         android:contentDescription="@string/navigation_header"
         android:paddingTop="8dp"
-        app:srcCompat="@mipmap/ic_nav_header_round" />
+        app:srcCompat="@drawable/ic_person_48" />
 
     <TextView
         android:layout_width="match_parent"

@@ -133,7 +133,7 @@
 
             <com.google.android.material.button.MaterialButton
                 android:id="@+id/button_update_user_details"
-                style="@style/styled_button"
+                style="@style/Widget.App.ButtonStyle"
                 android:text="@string/update" />
         </LinearLayout>
     </LinearLayout>

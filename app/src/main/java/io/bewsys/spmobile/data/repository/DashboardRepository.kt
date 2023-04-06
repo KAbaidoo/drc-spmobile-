@@ -1,6 +1,5 @@
 package io.bewsys.spmobile.data.repository
 
-import android.util.Log
 import app.cash.sqldelight.coroutines.asFlow
 import app.cash.sqldelight.coroutines.mapToList
 import app.cash.sqldelight.coroutines.mapToOne
@@ -12,7 +11,8 @@ import io.bewsys.spmobile.data.TerritoryEntity
 import io.bewsys.spmobile.data.prefsstore.PreferencesManager
 import io.bewsys.spmobile.data.remote.DashboardApi
 import io.bewsys.spmobile.data.remote.model.dashboard.*
-import io.bewsys.spmobile.data.remote.model.login.ErrorResponse
+import io.bewsys.spmobile.data.remote.model.auth.login.ErrorResponse
+import io.bewsys.spmobile.data.remote.model.auth.logout.LogoutResponse
 import io.bewsys.spmobile.util.ApplicationScope
 import io.bewsys.spmobile.util.Resource
 import io.ktor.client.call.*
@@ -170,7 +170,7 @@ class DashboardRepository(
 
 
 
-    suspend fun getGroupmentsList(communityId: String) =
+   suspend fun getGroupmentsList(communityId: String) =
         withContext(Dispatchers.IO) {
             getGroupmentsByCommunityId(communityId).map {
                 it.map { item ->
@@ -180,6 +180,11 @@ class DashboardRepository(
                 }
             }
         }
+
+//    suspend fun getGroupmentsList(communityId: String) =
+//        withContext(Dispatchers.IO) {
+//            groupmentQueries.getNamesByCommunityId(communityId).asFlow()
+//        }
 
     suspend fun getGroupmentsByCommunityId(communityId: String): Flow<List<GroupmentEntity>> =
         withContext(Dispatchers.IO) {
@@ -211,11 +216,7 @@ class DashboardRepository(
     /* =================================================================
                              network calls
     =============================================================== */
-//
-//    val territories:List<Territory>? = null
-//    val territories:List<Territory>? = null
-//    val territories:List<Territory>? = null
-//    val territories:List<Territory>? = null
+
     suspend fun fetchData() = flow {
 
         try {
@@ -233,7 +234,7 @@ class DashboardRepository(
                 insertProvinces(res.data.provinces)
 
             } else {
-                emit(Resource.Failure<ErrorResponse>(response.body()))
+                emit(Resource.Failure<LogoutResponse>(response.body()))
             }
         } catch (throwable: Throwable) {
             emit(Resource.Exception(throwable, null))

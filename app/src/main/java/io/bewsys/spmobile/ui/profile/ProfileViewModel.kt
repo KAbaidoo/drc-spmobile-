@@ -6,7 +6,7 @@ import androidx.lifecycle.viewModelScope
 
 import io.bewsys.spmobile.UPDATE_USER_RESULT_OK
 import io.bewsys.spmobile.data.remote.model.profile.FailureMessage
-import io.bewsys.spmobile.data.repository.UserRepository
+import io.bewsys.spmobile.data.repository.AuthRepository
 
 import io.bewsys.spmobile.util.Resource
 import kotlinx.coroutines.channels.Channel
@@ -16,7 +16,7 @@ import kotlinx.coroutines.launch
 
 class ProfileViewModel(
     private val state: SavedStateHandle,
-    private val userRepository: UserRepository
+    private val userRepository: AuthRepository
 ) : ViewModel() {
 
 

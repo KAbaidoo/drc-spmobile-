@@ -11,13 +11,6 @@
             app:persistent="true"
             app:title="Primary"
             app:useSimpleSummaryProvider="true" />
-
-        <EditTextPreference
-            app:dialogTitle="Secondary host url"
-            app:key="secondary_host"
-            app:persistent="true"
-            app:title="Secondary"
-            app:useSimpleSummaryProvider="true" />
     </PreferenceCategory>
 
 
