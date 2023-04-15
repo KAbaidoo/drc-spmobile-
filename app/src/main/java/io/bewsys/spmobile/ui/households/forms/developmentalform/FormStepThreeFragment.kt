@@ -1,22 +1,29 @@
 package io.bewsys.spmobile.ui.households.forms.developmentalform
 
 import android.os.Bundle
+import android.util.Log
+import android.view.Menu
+import android.view.MenuInflater
+import android.view.MenuItem
 import android.view.View
+import androidx.core.os.bundleOf
+import androidx.core.view.MenuProvider
 import androidx.core.widget.addTextChangedListener
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.FragmentManager.findFragment
+import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import com.google.android.material.datepicker.MaterialDatePicker
 import io.bewsys.spmobile.R
 import io.bewsys.spmobile.databinding.FragmentAddHouseholdThreeHeadBinding
 import kotlinx.coroutines.flow.collectLatest
+import org.koin.androidx.navigation.koinNavGraphViewModel
 import org.koin.androidx.viewmodel.ext.android.activityViewModel
 import java.text.SimpleDateFormat
 import java.util.*
 
 class FormStepThreeFragment : Fragment(R.layout.fragment_add_household_three_head) {
-    private val viewModel: SharedDevelopmentalFormViewModel by activityViewModel()
+    private val viewModel: SharedDevelopmentalFormViewModel by koinNavGraphViewModel(R.id.form_navigation)
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
@@ -24,14 +31,15 @@ class FormStepThreeFragment : Fragment(R.layout.fragment_add_household_three_hea
 
 
         binding.apply {
+
             val til = listOf(
                 tilHouseholdHeadFirstname,
                 tilHouseholdHeadMiddlename,
                 tilHouseholdHeadLastname,
+                tilHouseholdHeadAge,
+                tilHouseholdHeadDob,
                 tilHouseholdHeadVoterIdCard,
                 tilHouseholdHeadPhoneNumber,
-                tilHouseholdHeadDob,
-                tilHouseholdHeadAge
             )
             val tvs = listOf(
                 tvHeadAge,
@@ -46,7 +54,7 @@ class FormStepThreeFragment : Fragment(R.layout.fragment_add_household_three_hea
                 tvHeadPhoneNumber
             )
             val rbs = listOf(rbFemale, rbMale, rbYesAge, rbNoAge, rbYesDob, rbYesDob, rbNoDob)
-            val tils = listOf(
+            val allTils = listOf(
                 tilHouseholdHeadFirstname,
                 tilHouseholdHeadMiddlename,
                 tilHouseholdHeadLastname,
@@ -57,25 +65,19 @@ class FormStepThreeFragment : Fragment(R.layout.fragment_add_household_three_hea
                 tilHouseholdHeadBirthCertificate,
                 tilHouseholdHeadEducational,
                 tilHouseholdHeadSocioProfessionalCategory,
-
-
-                )
-
-
-
+                tilHouseholdHeadSchoolAttendance,
+                tilHouseholdHeadSectorOfWork,
+                tilHouseholdHeadDisability
+            )
             //           set radio buttons
-
             when (viewModel.headIsRespondent) {
                 rbYesIsRespondent.text -> rgIsHeadRespondent.check(rbYesIsRespondent.id)
                 rbNoIsRespondent.text -> rgIsHeadRespondent.check(rbNoIsRespondent.id)
             }
-            //           set radio buttons
-
             when (viewModel.headAgeKnown) {
                 rbYesAge.text -> rgHeadAgeKnown.check(rbYesAge.id)
                 rbNoAge.text -> rgHeadAgeKnown.check(rbNoAge.id)
             }
-
             when (viewModel.headDOBKnown) {
                 rbYesDob.text -> rgHeadDobKnown.check(rbYesDob.id)
                 rbNoDob.text -> rgHeadDobKnown.check(rbNoDob.id)
@@ -91,7 +93,7 @@ class FormStepThreeFragment : Fragment(R.layout.fragment_add_household_three_hea
                 }
             }
             when (viewModel.headMaritalStatus) {
-                rbMarried.text -> rgHeadMaritalStatus.check(rbMale.id)
+                rbMarried.text -> rgHeadMaritalStatus.check(rbMarried.id)
                 rbDivorced.text -> rgHeadMaritalStatus.check(rbDivorced.id)
                 rbSingle.text -> rgHeadMaritalStatus.check(rbSingle.id)
                 rbWidowed.text -> rgHeadMaritalStatus.check(rbWidowed.id)
@@ -99,10 +101,12 @@ class FormStepThreeFragment : Fragment(R.layout.fragment_add_household_three_hea
 
             //            set text fields
             viewModel.apply {
-                tils.forEachIndexed { index, til ->
-                    til.editText?.setText(fields[index])
+                allTils.forEachIndexed { index, til ->
+                    til.editText?.setText(stepThreeFields[index])
                 }
             }
+            tilHouseholdHeadDob.editText?.setText(viewModel.headDOB)
+
             /*      Set up listeners        */
 //             radio buttons setOnCheckChangelistener
             rgHeadAgeKnown.setOnCheckedChangeListener { _, checkedId ->
@@ -177,7 +181,7 @@ class FormStepThreeFragment : Fragment(R.layout.fragment_add_household_three_hea
                         viewModel.headMaritalStatus = rbDivorced.text.toString()
                     }
                     else -> {
-                        viewModel.headPregnancyStatus = rbWidowed.text.toString()
+                        viewModel.headMaritalStatus = rbWidowed.text.toString()
                     }
                 }
             }
@@ -185,25 +189,66 @@ class FormStepThreeFragment : Fragment(R.layout.fragment_add_household_three_hea
             rgIsHeadRespondent.setOnCheckedChangeListener { _, checkedId ->
                 when (checkedId) {
                     rbYesIsRespondent.id -> {
-                        viewModel.headIsRespondent = rbYesIsRespondent.text as String
+                        viewModel.headIsRespondent = rbYesIsRespondent.text.toString()
 
                         viewModel.apply {
-                            val fieldList = listOf(
-                                respondentFirstName,
-                                respondentMiddleName,
-                                respondentLastName,
-                                respondentVoterId,
-                                respondentPhoneNo,
-                                respondentDOB,
-                                respondentAge
-                            )
-                            til.mapIndexed { index, textInputLayout ->
-                                Pair(textInputLayout, fieldList[index])
-                            }.forEach {
-                                it.first.editText?.setText(it.second)
-                                it.first.isEnabled = false
+
+                            stepThreeFields[0] = respondentFirstName
+                            stepThreeFields[1] = respondentMiddleName
+                            stepThreeFields[2] = respondentLastName
+                            stepThreeFields[3] = respondentAge
+                            stepThreeFields[4] = respondentVoterId
+                            stepThreeFields[5] = respondentPhoneNo
+
+                            headDOB = respondentDOB
+                            headDOBKnown = respondentDOBKnown
+                            headAgeKnown = respondentAgeKnown
+                            headSex = respondentSex
+
+                            when (viewModel.headSex) {
+                                rbMale.text -> rgHouseholdHeadSex.check(rbMale.id)
+                                rbFemale.text -> rgHouseholdHeadSex.check(rbFemale.id)
                             }
-                            if(respondentSex == "Male" ){
+                            when (viewModel.headAgeKnown) {
+                                rbYesAge.text -> rgHeadAgeKnown.check(rbYesAge.id)
+                                rbNoAge.text -> rgHeadAgeKnown.check(rbNoAge.id)
+                            }
+                            when (viewModel.headDOBKnown) {
+                                rbYesDob.text -> rgHeadDobKnown.check(rbYesDob.id)
+                                rbNoDob.text -> rgHeadDobKnown.check(rbNoDob.id)
+                            }
+
+
+                            tilHouseholdHeadFirstname.editText?.apply {
+                                setText(respondentFirstName)
+                                isEnabled = false
+                            }
+                            tilHouseholdHeadMiddlename.editText?.apply {
+                                setText(respondentMiddleName)
+                                isEnabled = false
+                            }
+                            tilHouseholdHeadLastname.editText?.apply {
+                                setText(respondentLastName)
+                                isEnabled = false
+                            }
+                            tilHouseholdHeadAge.editText?.apply {
+                                setText(respondentAge)
+                                isEnabled = false
+                            }
+                            tilHouseholdHeadDob.editText?.apply {
+                                setText(respondentDOB)
+                                isEnabled = false
+                            }
+                            tilHouseholdHeadVoterIdCard.editText?.apply {
+                                setText(respondentVoterId)
+                                isEnabled = false
+                            }
+                            tilHouseholdHeadPhoneNumber.editText?.apply {
+                                setText(respondentPhoneNo)
+                                isEnabled = false
+                            }
+
+                            if (respondentSex == "Male") {
                                 tvHeadPregnancyStatus.isEnabled = false
                                 rgHeadPregnancyStatus.isEnabled = false
                                 rbNoPregnant.isEnabled = false
@@ -225,6 +270,21 @@ class FormStepThreeFragment : Fragment(R.layout.fragment_add_household_three_hea
                     }
                     else -> {
                         viewModel.headIsRespondent = rbNoIsRespondent.text as String
+
+                        viewModel.apply {
+                            stepThreeFields[0] = ""
+                            stepThreeFields[1] = ""
+                            stepThreeFields[2] = ""
+                            stepThreeFields[3] = ""
+                            stepThreeFields[4] = ""
+                            stepThreeFields[5] = ""
+
+                            headDOB = ""
+                            headDOBKnown = ""
+                            headAgeKnown = ""
+                            headSex = ""
+                        }
+
                         til.forEach { til ->
                             til.editText?.text?.clear()
                             til.isEnabled = true
@@ -242,10 +302,10 @@ class FormStepThreeFragment : Fragment(R.layout.fragment_add_household_three_hea
             val datePicker = MaterialDatePicker
                 .Builder
                 .datePicker()
-                .setTitleText("Select date of birth")
+                .setTitleText(getString(R.string.select_dob))
                 .build()
             tilHouseholdHeadDob.editText?.setOnFocusChangeListener { _, hasFocus ->
-                if(hasFocus) datePicker.show(parentFragmentManager, "DATE_PICKER")
+                if (hasFocus) datePicker.show(parentFragmentManager, "DATE_PICKER")
             }
             tilHouseholdHeadDob.editText?.setOnClickListener {
                 datePicker.show(parentFragmentManager, "DATE_PICKER")
@@ -256,79 +316,61 @@ class FormStepThreeFragment : Fragment(R.layout.fragment_add_household_three_hea
                 tilHouseholdHeadDob.editText!!.setText(date)
             }
 
-
-            tilHouseholdHeadFirstname.editText?.addTextChangedListener {
-                viewModel.headFirstName = it.toString()
-                viewModel.stepThreeHasBlankFields()
-            }
-            tilHouseholdHeadLastname.editText?.addTextChangedListener {
-                viewModel.headLastName = it.toString()
-                viewModel.stepThreeHasBlankFields()
-            }
-            tilHouseholdHeadAge.editText?.addTextChangedListener {
-                viewModel.headAge = it.toString()
-                viewModel.stepThreeHasBlankFields()
-            }
-            tilHouseholdHeadDob.editText?.addTextChangedListener {
-                viewModel.headDOB = it.toString()
-                viewModel.stepThreeHasBlankFields()
-            }
-            tilHouseholdHeadVoterIdCard.editText?.addTextChangedListener {
-                viewModel.headVoterId = it.toString()
-                viewModel.stepThreeHasBlankFields()
-            }
-            tilHouseholdHeadPhoneNumber.editText?.addTextChangedListener {
-                viewModel.headPhoneNo = it.toString()
-                viewModel.stepThreeHasBlankFields()
+            allTils.forEachIndexed { index, til ->
+                til.editText?.addTextChangedListener {
+                    viewModel.setStepThreeFields(index, it)
+                    viewModel.stepThreeHasBlankFields()
+                }
             }
 
-            tilHouseholdHeadBirthCertificate.editText?.addTextChangedListener {
-                viewModel.headBirthCert = it.toString()
-                viewModel.stepThreeHasBlankFields()
-            }
-            tilHouseholdHeadEducational.editText?.addTextChangedListener {
-                viewModel.headEduLevel = it.toString()
-                viewModel.stepThreeHasBlankFields()
-            }
-            tilHouseholdHeadSocioProfessionalCategory.editText?.addTextChangedListener {
-                viewModel.headSocioProfessionalCategory = it.toString()
-                viewModel.stepThreeHasBlankFields()
-            }
-
-            tilHouseholdHeadSectorOfWork.editText?.addTextChangedListener {
-                viewModel.headSectorOfWork = it.toString()
-                viewModel.stepThreeHasBlankFields()
-            }
-            tilHouseholdHeadSchoolAttendance.editText?.addTextChangedListener {
-                viewModel.headSchoolAttendance = it.toString()
-                viewModel.stepThreeHasBlankFields()
-            }
-            tilHouseholdHeadDisability.editText?.addTextChangedListener {
-                viewModel.headDisability = it.toString()
-                viewModel.stepThreeHasBlankFields()
-            }
-
-
-
-
-
+            val title = if (viewModel.household != null) getString(R.string.edit_household) else getString(R.string.add_household)
             btnNext.setOnClickListener {
+
                 val action =
-                    FormStepThreeFragmentDirections.actionFormStepThreeFragmentToFormStepFourFragment()
+                    FormStepThreeFragmentDirections.actionFormStepThreeFragmentToFormStepFourFragment(
+                       title =title,
+                       household = viewModel.household
+                    )
                 findNavController().navigate(action)
             }
             btnPrevious.setOnClickListener {
                 val action =
-                    FormStepThreeFragmentDirections.actionFormStepThreeFragmentToFormStepTwoFragment()
+                    FormStepThreeFragmentDirections.actionFormStepThreeFragmentToFormStepTwoFragment(
+                        title =title,
+                        household = viewModel.household
+                    )
                 findNavController().navigate(action)
             }
+
             viewLifecycleOwner.lifecycleScope.launchWhenStarted {
                 viewModel.stepThreeHasBlankFields.collectLatest {
-                    btnNext.isEnabled =   !it
-                }
+                    btnNext.isEnabled = it.not()
 
+                }
             }
 
         }
+        // set up menu
+        val menuHost = requireActivity()
+        menuHost.addMenuProvider(object : MenuProvider {
+            override fun onCreateMenu(menu: Menu, menuInflater: MenuInflater) {
+                menuInflater.inflate(R.menu.fragment_households_menu, menu)
+
+            }
+
+            override fun onMenuItemSelected(menuItem: MenuItem): Boolean {
+                return when (menuItem.itemId) {
+
+                    R.id.action_download_households -> {
+                        val bundle = bundleOf("id" to viewModel.id)
+                        findNavController().navigate(R.id.deleteHouseholdDialogFragment, bundle)
+
+                        true
+                    }
+
+                    else -> false
+                }
+            }
+        }, viewLifecycleOwner, Lifecycle.State.RESUMED)
     }
 }

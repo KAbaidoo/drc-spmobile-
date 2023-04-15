@@ -8,3 +8,4 @@ data class LoginResponse(
     val permissions: List<String>,
     val user: User
 )
+

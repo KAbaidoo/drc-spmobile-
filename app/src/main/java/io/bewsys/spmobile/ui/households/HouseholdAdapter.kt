@@ -1,5 +1,6 @@
 package io.bewsys.spmobile.ui.households
 
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
@@ -40,7 +41,8 @@ class HouseholdAdapter(private val listener: OnItemClickListener) :
                     val position = adapterPosition
                     if (position != RecyclerView.NO_POSITION) {
                         val household = getItem(position)
-//                        listener.onItemClick(nonConsentingHousehold)
+
+                        listener.onItemClick(household)
                     }
                 }
             }

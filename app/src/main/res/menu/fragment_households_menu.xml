@@ -4,8 +4,8 @@
 
     <item
         android:id="@+id/action_download_households"
-        android:icon="@drawable/menu_download_24"
-        android:title="Download households"
+        android:icon="@drawable/fab_close_24"
+        android:title="@string/delete"
         app:showAsAction="never"
         />
 

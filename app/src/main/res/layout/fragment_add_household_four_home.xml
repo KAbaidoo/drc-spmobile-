@@ -21,7 +21,7 @@
 
             <!--     Household       -->
             <TextView
-                style="@style/heading_form_sub"
+                style="@style/Widget.App.Heading.Sub"
                 android:text="@string/household" />
 
 
@@ -348,13 +348,13 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="24dp"
-                android:layout_marginBottom="24dp"
+                android:layout_marginBottom="48dp"
                 android:gravity="end"
                 android:orientation="horizontal">
 
                 <com.google.android.material.button.MaterialButton
                     android:id="@+id/btn_previous"
-                    style="@style/Widget.App.ButtonStyle"
+                    style="@style/Widget.App.Button"
                     android:layout_alignParentStart="true"
                     android:text="@string/previous"
                     app:icon="@drawable/ic_arrow_back_ios_24"
@@ -362,7 +362,7 @@
 
                 <com.google.android.material.button.MaterialButton
                     android:id="@+id/btn_next"
-                    style="@style/Widget.App.ButtonStyle"
+                    style="@style/Widget.App.Button"
                     android:layout_alignParentEnd="true"
                     android:text="@string/next"
                     android:enabled="false"

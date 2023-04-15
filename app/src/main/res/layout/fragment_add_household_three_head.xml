@@ -20,9 +20,8 @@
             android:orientation="vertical">
 
             <TextView
-                style="@style/heading_form_sub"
+                style="@style/Widget.App.Heading.Sub"
                 android:text="@string/household_head" />
-
             <!--            is_head_respondent -->
             <TextView
                 android:layout_width="wrap_content"
@@ -30,8 +29,6 @@
                 android:layout_marginTop="16dp"
                 android:text="@string/is_head_respondent"
                 android:textAppearance="@style/TextAppearance.MaterialComponents.Body1" />
-
-
             <RadioGroup
                 android:id="@+id/rg_is_head_respondent"
                 android:layout_width="match_parent"
@@ -50,8 +47,6 @@
                     android:layout_height="48dp"
                     android:text="@string/no" />
             </RadioGroup>
-
-
             <!--            respondent_firstname-->
             <TextView
                 android:id="@+id/tv_head_first_name"
@@ -60,7 +55,6 @@
                 android:layout_marginTop="16dp"
                 android:text="@string/household_head_firstname"
                 android:textAppearance="@style/TextAppearance.MaterialComponents.Body1" />
-
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/til_household_head_firstname"
                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
@@ -76,7 +70,6 @@
                     android:inputType="text"
                     android:maxLines="1" />
             </com.google.android.material.textfield.TextInputLayout>
-
             <!--            respondent_middlename-->
             <TextView
                 android:id="@+id/tv_head_middle_name"
@@ -85,7 +78,6 @@
                 android:layout_marginTop="16dp"
                 android:text="@string/household_head_middlename"
                 android:textAppearance="@style/TextAppearance.MaterialComponents.Body1" />
-
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/til_household_head_middlename"
                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
@@ -101,7 +93,6 @@
                     android:inputType="text"
                     android:maxLines="1" />
             </com.google.android.material.textfield.TextInputLayout>
-
             <!--            respondent_lastname-->
             <TextView
                 android:id="@+id/tv_head_last_name"
@@ -110,7 +101,6 @@
                 android:layout_marginTop="16dp"
                 android:text="@string/household_head_lastname"
                 android:textAppearance="@style/TextAppearance.MaterialComponents.Body1" />
-
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/til_household_head_lastname"
                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
@@ -126,8 +116,6 @@
                     android:inputType="text"
                     android:maxLines="1" />
             </com.google.android.material.textfield.TextInputLayout>
-
-
             <!--            head_age_known-->
             <TextView
                 android:id="@+id/tv_head_age_known"
@@ -136,7 +124,6 @@
                 android:layout_marginTop="16dp"
                 android:text="@string/head_age_known"
                 android:textAppearance="@style/TextAppearance.MaterialComponents.Body1" />
-
             <RadioGroup
                 android:id="@+id/rg_head_age_known"
                 android:layout_width="match_parent"
@@ -155,7 +142,6 @@
                     android:layout_height="48dp"
                     android:text="@string/no" />
             </RadioGroup>
-
             <!--            head age-->
             <TextView
                 android:id="@+id/tv_head_age"
@@ -164,7 +150,6 @@
                 android:layout_marginTop="16dp"
                 android:text="@string/household_head_age"
                 android:textAppearance="@style/TextAppearance.MaterialComponents.Body1" />
-
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/til_household_head_age"
                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
@@ -189,7 +174,6 @@
                 android:layout_marginTop="16dp"
                 android:text="@string/head_dob_known"
                 android:textAppearance="@style/TextAppearance.MaterialComponents.Body1" />
-
             <RadioGroup
                 android:id="@+id/rg_head_dob_known"
                 android:layout_width="match_parent"
@@ -236,7 +220,6 @@
                     android:maxLines="1" />
 
             </com.google.android.material.textfield.TextInputLayout>
-
             <!--            gender-->
             <TextView
                 android:id="@+id/tv_head_sex"
@@ -264,7 +247,6 @@
                     android:layout_height="48dp"
                     android:text="@string/female" />
             </RadioGroup>
-
             <!--            household_head_pregnancy_status-->
             <TextView
                 android:id="@+id/tv_head_pregnancy_status"
@@ -273,7 +255,6 @@
                 android:layout_marginTop="16dp"
                 android:text="@string/household_head_pregnancy_status"
                 android:textAppearance="@style/TextAppearance.MaterialComponents.Body1" />
-
             <RadioGroup
                 android:id="@+id/rg_head_pregnancy_status"
                 android:layout_width="match_parent"
@@ -331,7 +312,6 @@
                     android:layout_height="48dp"
                     android:text="@string/widowed" />
             </RadioGroup>
-
             <!--            head_voter_id      -->
             <TextView
                 android:id="@+id/tv_head_voter_id"
@@ -358,7 +338,6 @@
 
             </com.google.android.material.textfield.TextInputLayout>
 
-
             <!--            household_head_phone_number      -->
             <TextView
                 android:id="@+id/tv_head_phone_number"
@@ -367,7 +346,6 @@
                 android:layout_marginTop="16dp"
                 android:text="@string/household_head_phone_number"
                 android:textAppearance="@style/TextAppearance.MaterialComponents.Body1" />
-
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/til_household_head_phone_number"
                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
@@ -392,7 +370,6 @@
                 android:layout_marginTop="16dp"
                 android:text="@string/household_head_birth_certificate"
                 android:textAppearance="@style/TextAppearance.MaterialComponents.Body1" />
-
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/til_household_head_birth_certificate"
                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
@@ -416,7 +393,6 @@
                 android:layout_marginTop="16dp"
                 android:text="@string/household_head_educational_level"
                 android:textAppearance="@style/TextAppearance.MaterialComponents.Body1" />
-
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/til_household_head_educational"
                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
@@ -533,13 +509,13 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="24dp"
-                android:layout_marginBottom="24dp"
+                android:layout_marginBottom="48dp"
                 android:gravity="end"
                 android:orientation="horizontal">
 
                 <com.google.android.material.button.MaterialButton
                     android:id="@+id/btn_previous"
-                    style="@style/Widget.App.ButtonStyle"
+                    style="@style/Widget.App.Button"
                     app:icon="@drawable/ic_arrow_back_ios_24"
                     app:iconTint="@color/colorPrimary"
                     android:layout_alignParentStart="true"
@@ -547,7 +523,7 @@
 
                 <com.google.android.material.button.MaterialButton
                     android:id="@+id/btn_next"
-                    style="@style/Widget.App.ButtonStyle"
+                    style="@style/Widget.App.Button"
                     app:icon="@drawable/ic_arrow_forward_ios_24"
                     app:iconTint="@color/colorPrimary"
                     app:iconGravity="end"

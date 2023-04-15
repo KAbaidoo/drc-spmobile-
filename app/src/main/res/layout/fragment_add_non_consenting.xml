@@ -18,7 +18,7 @@
             android:orientation="vertical">
 
             <TextView
-                style="@style/heading_form_main"
+                style="@style/Widget.App.Heading"
                 android:text="@string/non_consent_household_form"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -325,19 +325,35 @@
 
             </LinearLayout>
 
-            <LinearLayout
+
+
+            <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="24dp"
-                android:layout_marginBottom="24dp"
+                android:layout_marginBottom="48dp"
                 android:gravity="end"
                 android:orientation="horizontal">
 
                 <com.google.android.material.button.MaterialButton
+                    android:id="@+id/button_delete"
+                    style="@style/Widget.App.Button"
+                    android:layout_alignParentStart="true"
+                    android:text="@string/delete"
+                    android:visibility="gone"
+                    app:iconTint="@color/colorPrimary" />
+
+                <com.google.android.material.button.MaterialButton
+
+                    style="@style/Widget.App.Button"
+                    android:layout_alignParentEnd="true"
                     android:id="@+id/button_register"
-                    style="@style/Widget.App.ButtonStyle"
-                    android:text="@string/button_register" />
-            </LinearLayout>
+                    android:text="@string/save"
+                    app:iconGravity="end"
+                    app:iconTint="@color/colorPrimary" />
+            </RelativeLayout>
+
+
         </LinearLayout>
     </ScrollView>
 

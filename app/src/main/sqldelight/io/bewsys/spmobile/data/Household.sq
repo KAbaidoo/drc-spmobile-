@@ -1,5 +1,5 @@
 CREATE TABLE  householdEntity (
-    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    id INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
     remote_id TEXT ,
     survey_no TEXT,
     cac TEXT ,
@@ -176,7 +176,7 @@ VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?
 getByRemoteId:
 SELECT *
 FROM householdEntity
-WHERE remote_id = :remote_id;
+WHERE remote_id = :remoteId;
 
 updateStatus:
 UPDATE householdEntity
@@ -185,21 +185,24 @@ SET status = :status WHERE id = :id;
 getById:
 SELECT *
 FROM householdEntity
-WHERE id = :id;
+WHERE id = ?;
 
 getByCommunityId:
 SELECT *
 FROM householdEntity
-WHERE community_id = :community_id;
+WHERE community_id = :communityId;
 
 getByProvinceId:
 SELECT *
 FROM householdEntity
-WHERE province_id = :province_id;
+WHERE province_id = :provinceId;
 
 
 lastInsertRowId:
 SELECT last_insert_rowid();
+
+deleteHousehold:
+DELETE FROM householdEntity WHERE id = ?;
 
 
 

@@ -20,7 +20,7 @@
             android:orientation="vertical">
             <!--     Coping       -->
             <TextView
-                style="@style/heading_form_sub"
+                style="@style/Widget.App.Heading.Sub"
                 android:text="@string/coping" />
 
             <!--            affected_by_conflict  -->
@@ -697,13 +697,13 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="24dp"
-                android:layout_marginBottom="24dp"
+                android:layout_marginBottom="48dp"
                 android:gravity="end"
                 android:orientation="horizontal">
 
                 <com.google.android.material.button.MaterialButton
                     android:id="@+id/btn_previous"
-                    style="@style/Widget.App.ButtonStyle"
+                    style="@style/Widget.App.Button"
                     app:iconTint="@color/colorPrimary"
                     app:icon="@drawable/ic_arrow_back_ios_24"
                     android:layout_alignParentStart="true"
@@ -711,7 +711,7 @@
 
                 <com.google.android.material.button.MaterialButton
                     android:id="@+id/btn_next"
-                    style="@style/Widget.App.ButtonStyle"
+                    style="@style/Widget.App.Button"
                     app:icon="@drawable/ic_arrow_forward_ios_24"
                     app:iconTint="@color/colorPrimary"
                     app:iconGravity="end"

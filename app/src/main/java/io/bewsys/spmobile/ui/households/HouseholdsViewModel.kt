@@ -1,11 +1,14 @@
 package io.bewsys.spmobile.ui.households
 
 
+import android.util.Log
 import androidx.lifecycle.*
 import io.bewsys.spmobile.ADD_HOUSEHOLD_RESULT_OK
 import io.bewsys.spmobile.data.local.HouseholdModel
+import io.bewsys.spmobile.data.local.NonConsentHouseholdModel
 import io.bewsys.spmobile.data.repository.DashboardRepository
 import io.bewsys.spmobile.data.repository.HouseholdRepository
+import io.bewsys.spmobile.ui.nonconsenting.NonConsentingViewModel
 import kotlinx.coroutines.channels.Channel
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.flow.map
@@ -36,6 +39,7 @@ class HouseholdsViewModel(
             householdRepository.getAllHouseholds()
                 .map { households ->
                     households.map {
+
                         HouseholdModel(
                             it.id,
                             it.remote_id,
@@ -199,7 +203,9 @@ class HouseholdsViewModel(
                             it.household_member_with_benefit_from_social_assistance_program,
                             it.name_of_social_assistance_program,
                             it.affected_by_other_shock
+
                         )
+
                     }
                 }.collectLatest {
                     _households.value = it
@@ -236,10 +242,16 @@ class HouseholdsViewModel(
             )
         }
 
+    fun onHousholdSelected(householdModel: HouseholdModel)= viewModelScope.launch {
+        Log.d("ID-tracking: VM", "${householdModel.id}")
+        householdsEventChannel.send(HouseholdEvent.NavigateToEditHouseholdsForm(householdModel))
+    }
+
     sealed class HouseholdEvent {
         object AddRegistrationClicked : HouseholdEvent()
         object DevelopmentalClicked : HouseholdEvent()
         object HumanitarianClicked : HouseholdEvent()
         data class ShowHouseholdSavedConfirmationMessage(val msg: String) : HouseholdEvent()
+        data class NavigateToEditHouseholdsForm(val household: HouseholdModel) : HouseholdEvent()
     }
 }

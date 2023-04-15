@@ -1,6 +1,7 @@
 package io.bewsys.spmobile.data.remote
 
-import io.bewsys.spmobile.data.remote.model.auth.AuthRequest
+import io.bewsys.spmobile.data.remote.model.auth.login.LoginRequest
+import io.bewsys.spmobile.data.remote.model.auth.password.PasswordRequest
 import io.bewsys.spmobile.data.remote.model.profile.UserPayload
 import io.ktor.client.*
 import io.ktor.client.request.*
@@ -9,8 +10,8 @@ import io.ktor.http.*
 
 
 class AuthApi(private val client: HttpClient) {
-    suspend fun login(authRequest: AuthRequest): HttpResponse = client.post("login") {
-        setBody(authRequest)
+    suspend fun login(loginRequest: LoginRequest): HttpResponse = client.post("login") {
+        setBody(loginRequest)
 //        contentType(ContentType.Application.Json)
     }
 
@@ -23,11 +24,17 @@ class AuthApi(private val client: HttpClient) {
             setBody(payload)
         }
 
-    suspend fun logout(authRequest: AuthRequest, accessToken:String): HttpResponse = client.post("logout") {
+    suspend fun logout(loginRequest: LoginRequest, accessToken:String): HttpResponse = client.post("logout") {
         headers {
             append(HttpHeaders.Authorization, "Bearer $accessToken")
         }
-        setBody(authRequest)
+        setBody(loginRequest)
+//        contentType(ContentType.Application.Json)
+    }
+
+
+    suspend fun getPassword(passwordRequest: PasswordRequest): HttpResponse = client.post("forgot-password") {
+        setBody(passwordRequest)
 //        contentType(ContentType.Application.Json)
     }
 }

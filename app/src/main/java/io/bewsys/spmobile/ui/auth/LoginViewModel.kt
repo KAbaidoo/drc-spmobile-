@@ -11,7 +11,9 @@ import kotlinx.coroutines.channels.Channel
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.*
 import kotlinx.coroutines.launch
+
 const val TAG = "LOGIN_VIEW_MODEL"
+
 class LoginViewModel(
     private val state: SavedStateHandle,
     private val authRepository: AuthRepository
@@ -22,10 +24,9 @@ class LoginViewModel(
     }
 
 
-    private fun setLoggedInState()= viewModelScope.launch {
+    private fun setLoggedInState() = viewModelScope.launch {
         authRepository.setLoggedInState(false)
     }
-
 
 
     private val _loginEventChannel = Channel<LoginEvent>()
@@ -44,26 +45,28 @@ class LoginViewModel(
         }
 
 
-    fun login() = viewModelScope.launch {
+    fun loginClicked() = viewModelScope.launch {
         if (email.isBlank() || password.isBlank()) {
             showInvalidInputMessage()
         } else {
             authRepository.login(email, password).collectLatest { results ->
                 when (results) {
                     is Resource.Success -> {
-                        _loginEventChannel.send(LoginEvent.Successful(
-                            LOGIN_RESULT_OK
-                        ))
+                        _loginEventChannel.send(
+                            LoginEvent.Successful(
+                                LOGIN_RESULT_OK
+                            )
+                        )
                     }
                     is Resource.Loading -> {
                         _loginEventChannel.send(LoginEvent.Loading)
                     }
-                    is Resource.Failure ->{
+                    is Resource.Failure -> {
                         val errorResponse = results.error as ErrorResponse
                         _loginEventChannel.send(LoginEvent.Failure(errorResponse.msg))
                     }
                     is Resource.Exception -> {
-                        results.throwable.localizedMessage?.let { errorMsg->
+                        results.throwable.localizedMessage?.let { errorMsg ->
                             LoginEvent.Exception(
                                 errorMsg
                             )
@@ -74,25 +77,27 @@ class LoginViewModel(
         }
     }
 
-    fun logout()= viewModelScope.launch {
+    fun logout() = viewModelScope.launch {
 
         authRepository.logOut().collectLatest { results ->
             when (results) {
                 is Resource.Success -> {
                     val response = results.data as LogoutResponse
-                    _loginEventChannel.send(LoginEvent.ShowMessage(
-                        response.msg
-                    ))
+                    _loginEventChannel.send(
+                        LoginEvent.ShowMessage(
+                            response.msg
+                        )
+                    )
                 }
                 is Resource.Loading -> {
                     _loginEventChannel.send(LoginEvent.Loading)
                 }
-                is Resource.Failure ->{
+                is Resource.Failure -> {
                     val response = results.error as LogoutResponse
                     _loginEventChannel.send(LoginEvent.Failure(response.msg))
                 }
                 is Resource.Exception -> {
-                    results.throwable.localizedMessage?.let { errorMsg->
+                    results.throwable.localizedMessage?.let { errorMsg ->
                         LoginEvent.Exception(
                             errorMsg
                         )
@@ -111,21 +116,34 @@ class LoginViewModel(
         )
     }
 
-    fun showLoggedOutMessage()= viewModelScope.launch{
-        delay(400L)
+
+
+    fun showLoggedOutSnackMessage() {
+        viewModelScope.launch {
+            delay(400L)
+            _loginEventChannel.send(
+                LoginEvent.ShowMessage(
+                    "You logged out!"
+                )
+            )
+        }
+    }
+
+    fun btnForgotPasswordClicked() = viewModelScope.launch {
         _loginEventChannel.send(
-            LoginEvent.ShowMessage(
-                "You logged out!"
+            LoginEvent.ForgotPassword(
+                email
             )
         )
     }
 
     sealed class LoginEvent {
         data class ShowMessage(val msg: String) : LoginEvent()
+        data class ForgotPassword(val email: String) : LoginEvent()
         data class Failure(val errorMsg: String) : LoginEvent()
-        data class Successful(val results:Int) : LoginEvent()
+        data class Successful(val results: Int) : LoginEvent()
         object Loading : LoginEvent()
-        data class Exception (val errorMsg:String ): LoginEvent()
+        data class Exception(val errorMsg: String) : LoginEvent()
     }
 }
 

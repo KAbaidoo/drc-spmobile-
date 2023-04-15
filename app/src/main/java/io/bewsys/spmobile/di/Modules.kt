@@ -15,9 +15,12 @@ import io.bewsys.spmobile.ui.nonconsenting.form.AddNonConsentingHouseholdViewMod
 import io.bewsys.spmobile.ui.profile.ProfileViewModel
 import io.bewsys.spmobile.ui.targeting.TargetingViewModel
 import io.bewsys.spmobile.ui.MainViewModel
+import io.bewsys.spmobile.ui.auth.ForgotPasswordViewModel
 import io.bewsys.spmobile.ui.auth.LoginDialogViewModel
+import io.bewsys.spmobile.ui.households.forms.developmentalform.delete.DeleteHouseholdViewModel
 import io.bewsys.spmobile.util.LocationProvider
 import io.bewsys.spmobile.util.provideApplicationScope
+import io.bewsys.spmobile.work.HouseholdUploadWorker
 import io.bewsys.spmobile.work.NonConsentUploadWorker
 
 import org.koin.android.ext.koin.androidContext
@@ -40,11 +43,12 @@ val appModule = module {
     factory { DashboardApi(get()) }
 
     factory { DashboardRepository(get(),get(),get(),get()) }
-    factory { HouseholdRepository(get(),get(),get()) }
+    factory { HouseholdRepository(get(),get(),get(),get()) }
     factory { NonConsentingHouseholdRepository(get(),get(),get()) }
     factory { AuthRepository(get(),get()) }
 
     worker { NonConsentUploadWorker(androidContext(), get()) }
+    worker { HouseholdUploadWorker(androidContext(), get()) }
 
     viewModel { DashboardViewModel(get(),get()) }
     viewModel { HouseholdsViewModel(get(), get(),get()) }
@@ -56,5 +60,7 @@ val appModule = module {
     viewModel { LoginViewModel(get(), get()) }
     viewModel { MainViewModel(get()) }
     viewModel { LoginDialogViewModel(get()) }
+    viewModel { DeleteHouseholdViewModel(get()) }
+    viewModel { ForgotPasswordViewModel(get(),get()) }
 }
 //HttpClient(Android).engine

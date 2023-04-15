@@ -67,40 +67,36 @@ class AddNonConsentingHouseholdFragment : Fragment(R.layout.fragment_add_non_con
 
         //TODO Refactor to use Paired PairMediatorLiveData
         viewModel.provinces.observe(viewLifecycleOwner) {
-            provinces.apply {
-                clear()
-                addAll(it)
-            }
-
+            provinces.clear()
+            provinces.addAll(it)
         }
         viewModel.territories.observe(viewLifecycleOwner) {
-            territories.apply {
-                clear()
-                addAll(it)
-            }
+            territories.clear()
+            territories.addAll(it)
         }
-
         viewModel.communities.observe(viewLifecycleOwner) {
-            communities.apply {
-                clear()
-                addAll(it)
-            }
+            communities.clear()
+            communities.addAll(it)
         }
-
         viewModel.groupments.observe(viewLifecycleOwner) {
-            groupments.apply {
-                clear()
-                addAll(it)
-            }
+            groupments.clear()
+            groupments.addAll(it)
         }
+        val dropdownLayout = R.layout.dropdown_item
 
         val reasons = resources.getStringArray(R.array.reasons)
-        val dropdownLayout = R.layout.dropdown_item
 
 
         binding.apply {
 
-
+            //            Set all text fields from saved state
+            textFieldReason.editText?.setText(viewModel.reason)
+            textFieldProvince.editText?.setText(viewModel.province)
+            textFieldCommunity.editText?.setText(viewModel.community)
+            textFieldTerritory.editText?.setText(viewModel.territory)
+            textFieldGroupment.editText?.setText(viewModel.groupment)
+            textFieldOtherReason.editText?.setText(viewModel.otherReason)
+            textFieldAddress.editText?.setText(viewModel.address)
 
             (autoCompleteTextViewReason as? AutoCompleteTextView)?.apply {
                 setAdapter(
@@ -108,8 +104,8 @@ class AddNonConsentingHouseholdFragment : Fragment(R.layout.fragment_add_non_con
                         addTextChangedListener {
                             val reason = it.toString()
                             viewModel.reason = reason
-                            textFieldOtherReason.isEnabled  = reason == "Other"
-                            textViewOtherReason.isEnabled  = reason == "Other"
+                            textFieldOtherReason.isEnabled  = reason == getString(R.string.other)
+                            textViewOtherReason.isEnabled  = reason == getString(R.string.other)
                         }
                     }
                 )
@@ -148,19 +144,11 @@ class AddNonConsentingHouseholdFragment : Fragment(R.layout.fragment_add_non_con
                 ).also {
                     addTextChangedListener {
                         viewModel.groupment = it.toString()
-
                     }
                 }
             }
 
-            //            Set all text fields from saved state
-            textFieldReason.editText?.setText(viewModel.reason)
-            textFieldProvince.editText?.setText(viewModel.province)
-            textFieldCommunity.editText?.setText(viewModel.community)
-            textFieldTerritory.editText?.setText(viewModel.territory)
-            textFieldGroupment.editText?.setText(viewModel.groupment)
-            textFieldOtherReason.editText?.setText(viewModel.otherReason)
-            textFieldAddress.editText?.setText(viewModel.address)
+
 
 
 
@@ -174,10 +162,11 @@ class AddNonConsentingHouseholdFragment : Fragment(R.layout.fragment_add_non_con
 
             textFieldAddress.editText?.addTextChangedListener {
                 viewModel.address = it.toString()
+                getLastKnownLocation()
             }
             buttonRegister.setOnClickListener {
-                viewModel.onRegisterClicked()
-                getLastKnownLocation()
+                viewModel.onSaveClicked()
+
             }
         }
 

@@ -47,14 +47,14 @@ class MainActivity : AppCompatActivity(), EasyPermissions.PermissionCallbacks {
 
         setSupportActionBar(binding.appBarMain.toolbar)
 
-//
-//        lifecycleScope.launchWhenStarted {
-//            viewModel.userState.collectLatest {
-//                if (it.not()) {
-//                    navController.navigate(R.id.nav_login)
-//                }
-//            }
-//        }
+
+        lifecycleScope.launchWhenStarted {
+            viewModel.userState.collectLatest {
+                if (it.not()) {
+                    navController.navigate(R.id.nav_login)
+                }
+            }
+        }
 
         val drawerLayout: DrawerLayout = binding.drawerLayout
         val navView: NavigationView = binding.navView
@@ -89,7 +89,6 @@ class MainActivity : AppCompatActivity(), EasyPermissions.PermissionCallbacks {
                 R.id.nav_login -> {
                     drawerLayout.setDrawerLockMode(LOCK_MODE_LOCKED_CLOSED)
                     binding.appBarMain.toolbar.visibility = View.GONE
-
                 }
                 else ->
                     binding.appBarMain.toolbar.visibility = View.VISIBLE

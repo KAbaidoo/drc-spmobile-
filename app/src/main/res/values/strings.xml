@@ -134,9 +134,9 @@
     <string name="GPS_Latitude">GPS Latitude</string>
     <string name="reason">Reason</string>
     <string name="if_other_reason_indicate_here">If other reason, indicate here</string>
-    <string name="lat_placeholder">31.42222</string>
-    <string name="lon_placeholder">37.42222</string>
-    <string name="zero_count">0</string>
+    <string name="lat_placeholder" translatable="false">31.42222</string>
+    <string name="lon_placeholder" translatable="false">37.42222</string>
+    <string name="zero_count" translatable="false">0</string>
     <string name="communities">Communities</string>
     <string name="territories">Territories</string>
     <string name="groupments">Groupments</string>
@@ -150,10 +150,12 @@
     <string name="email">Email</string>
     <string name="password">Password</string>
     <string name="login">Login</string>
-    <string name="add_new_non_consenting_household">Add new Non-consenting household</string>
+    <string name="add_new_non_consenting_household">Add Non-consenting household</string>
+    <string name="add_non_consenting_household">Add Non-consenting household</string>
+    <string name="edit_non_consenting_household">Edit Non-consenting household</string>
     <string name="edit_user_details">Edit user details</string>
-    <string name="john_doe">john doe</string>
-    <string name="user_email_com">user@email.com</string>
+    <string name="john_doe" translatable="false">john doe</string>
+    <string name="user_email_com" translatable="false">user@email.com</string>
     <string name="phone_number">Phone number</string>
     <string name="team_leader">Team leader</string>
     <string name="supervisor">Supervisor</string>
@@ -163,9 +165,9 @@
     <string name="cloud_icon">cloud icon</string>
     <string name="navigation_header">Navigation header</string>
     <string name="username">Username</string>
-    <string name="qty">Qty</string>
+    <string name="qty" translatable="false">Qty</string>
     <string name="failure_dialog_message">Message</string>
-    <string name="failure_dialog_ok">OK</string>
+    <string name="failure_dialog_ok" translatable="false">OK</string>
     <string name="forgot_password">Forgot password</string>
     <string name="next">Next</string>
     <string name="previous">Previous</string>
@@ -221,50 +223,28 @@
     <string name="number_of_bed_owned">Number of bed owned</string>
     <string name="number_of_air_conditioner_owned">Number of air conditioner owned</string>
     <string name="amount_of_cultivable_land_owned">Amount of cultivable land owned</string>
-
-    <string-array name="reasons">
-        <item>No (refusal)</item>
-        <item>Head of household absent</item>
-        <item>Other</item>
-    </string-array>
-
-    <string-array name="migration_duration_unit">
-        <item>Years</item>
-        <item>Months</item>
-        <item>Days</item>
-    </string-array>
-
-    <string-array name="migration_status">
-        <item>Resident</item>
-        <item>Repatriated</item>
-        <item>Displaced</item>
-        <item>Refugee</item>
-        <item>Returned</item>
-        <item>Other</item>
-    </string-array>
-
-    <string-array name="duration_units">
-        <item>Days</item>
-        <item>Months</item>
-        <item>Years</item>
-    </string-array>
-
-
-
-    <string-array name="language">
-        <item>French</item>
-        <item>English</item>
-    </string-array>
-
-    <string-array name="locales">
-        <item>en-US</item>
-        <item>fr-FR</item>
-    </string-array>
-
-
-
-
-
+    <string name="finish">Finish</string>
+    <string name="review">Review</string>
+    <string name="households">Households</string>
+    <string name="members">Members</string>
+    <string name="dashboard">Dashboard</string>
+    <string name="non_consenting">Non-consenting</string>
+    <string name="account">Account</string>
+    <string name="profile">Profile</string>
+    <string name="settings">Settings</string>
+    <string name="logout">Logout</string>
+    <string name="data_consent">Data consent</string>
+    <string name="host_settings">Host settings</string>
+    <string name="non_consenting_households">Non-consenting Households</string>
+    <string name="other">Other</string>
+    <string name="save">Save</string>
+    <string name="delete">Delete</string>
+    <string name="edit_household">Edit Household</string>
+    <string name="add_household">Add Household</string>
+    <string name="select_dob">Select date of birth</string>
+    <string name="cannot_work_without_location_permission">This application cannot work without Location Permission.</string>
+    <string name="permission_granted">Permission Granted!</string>
+    <string name="enter_email">Enter a valid email!</string>
 
 
 </resources>

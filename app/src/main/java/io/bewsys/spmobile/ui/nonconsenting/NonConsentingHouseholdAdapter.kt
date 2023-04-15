@@ -39,8 +39,8 @@ class NonConsentingHouseholdAdapter(private val listener: OnItemClickListener) :
                 root.setOnClickListener {
                     val position = adapterPosition
                     if (position != RecyclerView.NO_POSITION) {
-//                        val nonConsentingHousehold = getItem(position)
-//                        listener.onItemClick(nonConsentingHousehold)
+                        val nonConsentingHousehold = getItem(position)
+                        listener.onItemClick(nonConsentingHousehold)
                     }
                 }
             }

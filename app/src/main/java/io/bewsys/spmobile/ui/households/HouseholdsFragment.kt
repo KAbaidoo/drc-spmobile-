@@ -1,6 +1,7 @@
 package io.bewsys.spmobile.ui.households
 
 import android.os.Bundle
+import android.util.Log
 import android.view.Menu
 import android.view.MenuInflater
 import android.view.MenuItem
@@ -15,23 +16,26 @@ import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.android.material.snackbar.Snackbar
+import io.bewsys.spmobile.FormNavigationDirections
 
 import io.bewsys.spmobile.R
 import io.bewsys.spmobile.data.local.HouseholdModel
 import io.bewsys.spmobile.databinding.FragmentHouseholdsBinding
+import io.bewsys.spmobile.ui.households.forms.developmentalform.FormStepOneFragment
+import io.bewsys.spmobile.ui.households.forms.developmentalform.FormStepOneFragmentDirections
 
 import io.bewsys.spmobile.util.exhaustive
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 
 class HouseholdsFragment : Fragment(R.layout.fragment_households),HouseholdAdapter.OnItemClickListener {
-
+    val viewModel: HouseholdsViewModel by viewModel()
     var isOpen: Boolean = false
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        val viewModel: HouseholdsViewModel by viewModel()
+
         val binding = FragmentHouseholdsBinding.bind(view)
         val householdAdapter = HouseholdAdapter(this)
 
@@ -74,7 +78,10 @@ class HouseholdsFragment : Fragment(R.layout.fragment_households),HouseholdAdapt
                         if (!isOpen) showActions(binding) else hideActions(binding)
                     }
                     is HouseholdsViewModel.HouseholdEvent.DevelopmentalClicked -> {
-                        val action = HouseholdsFragmentDirections.actionNavHouseholdToNavigation()
+                        val action = HouseholdsFragmentDirections.actionNavHouseholdToNavigation(
+                            title = getString(R.string.add_household),
+                            household = null
+                        )
                         findNavController().navigate(action)
                     }
                     is HouseholdsViewModel.HouseholdEvent.HumanitarianClicked -> {
@@ -86,31 +93,38 @@ class HouseholdsFragment : Fragment(R.layout.fragment_households),HouseholdAdapt
                         event.msg,
                         Snackbar.LENGTH_SHORT
                     ).show()
+                    is HouseholdsViewModel.HouseholdEvent.NavigateToEditHouseholdsForm -> {
+                        val action = HouseholdsFragmentDirections.actionNavHouseholdToNavigation(
+                            title = getString(R.string.edit_household),
+                            household = event.household
+                        )
+                        findNavController().navigate(action)
 
+                    }
                 }
             }.exhaustive
         }
 
-
-// set up menu
-        val menuHost = requireActivity()
-        menuHost.addMenuProvider(object : MenuProvider {
-            override fun onCreateMenu(menu: Menu, menuInflater: MenuInflater) {
-                menuInflater.inflate(R.menu.fragment_households_menu, menu)
-
-            }
-
-            override fun onMenuItemSelected(menuItem: MenuItem): Boolean {
-                return when (menuItem.itemId) {
-
-                    R.id.action_download_households -> {
-                        true
-                    }
-
-                    else -> false
-                }
-            }
-        }, viewLifecycleOwner, Lifecycle.State.RESUMED)
+//
+//// set up menu
+//        val menuHost = requireActivity()
+//        menuHost.addMenuProvider(object : MenuProvider {
+//            override fun onCreateMenu(menu: Menu, menuInflater: MenuInflater) {
+//                menuInflater.inflate(R.menu.fragment_households_menu, menu)
+//
+//            }
+//
+//            override fun onMenuItemSelected(menuItem: MenuItem): Boolean {
+//                return when (menuItem.itemId) {
+//
+//                    R.id.action_download_households -> {
+//                        true
+//                    }
+//
+//                    else -> false
+//                }
+//            }
+//        }, viewLifecycleOwner, Lifecycle.State.RESUMED)
 
 
         setFragmentResultListener("add_household_request") { _, bundle ->
@@ -141,6 +155,7 @@ class HouseholdsFragment : Fragment(R.layout.fragment_households),HouseholdAdapt
     }
 
     override fun onItemClick(householdModel: HouseholdModel) {
-        TODO("Not yet implemented")
+        Log.d("ID-tracking: Fragment", "${householdModel.id}")
+        viewModel.onHousholdSelected(householdModel)
     }
 }

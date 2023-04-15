@@ -80,8 +80,13 @@ class NonConsentingViewModel(
             )
         }
 
+    fun onHousholdSelected(nonConsentingHousehold: NonConsentHouseholdModel)= viewModelScope.launch {
+        _nonConsentingEventChannel.send(NonConsentingEvent.NavigateToEditNonConsentingHouseholdsForm(nonConsentingHousehold))
+    }
+
     sealed class NonConsentingEvent {
         object NavigateToNonConsentingHouseholdsForm : NonConsentingEvent()
+        data class NavigateToEditNonConsentingHouseholdsForm(val nonConsentingHousehold: NonConsentHouseholdModel) : NonConsentingEvent()
         data class ShowNonConsentingHouseholdSavedConfirmationMessage(val msg: String) :
             NonConsentingEvent()
     }

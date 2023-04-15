@@ -58,6 +58,28 @@ class NonConsentingHouseholdRepository(
             )
         }
     }
+    suspend fun updateNonConsentingHousehold(id: Long,
+        newNonConsentingHouseholds: NonConsentHouseholdModel
+    ): Unit = withContext(Dispatchers.IO) {
+
+        newNonConsentingHouseholds.apply {
+
+            queries.insertNonConsentHousehold(
+                id,
+                province_id,
+                community_id,
+                territory_id,
+                groupement_id,
+                gps_longitude,
+                gps_latitude,
+                reason,
+                address,
+                other_non_consent_reason,
+                status
+            )
+        }
+    }
+
 
     suspend fun getLastInsertedRowId(): Long = withContext(Dispatchers.IO) {
         queries.lastInsertRowId().executeAsOne()

@@ -16,11 +16,11 @@ import org.koin.androidx.viewmodel.ext.android.viewModel
 
 
 class NonConsentingFragment : Fragment(R.layout.fragment_non_consenting) ,NonConsentingHouseholdAdapter.OnItemClickListener{
-
+    val viewModel: NonConsentingViewModel by viewModel()
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        val viewModel: NonConsentingViewModel by viewModel()
+
         val binding = FragmentNonConsentingBinding.bind(view)
         val nonConsentingHouseholdAdapter = NonConsentingHouseholdAdapter(this)
 
@@ -45,7 +45,10 @@ class NonConsentingFragment : Fragment(R.layout.fragment_non_consenting) ,NonCon
                     is NonConsentingViewModel.NonConsentingEvent.NavigateToNonConsentingHouseholdsForm -> {
 
                         val action =
-                            NonConsentingFragmentDirections.actionNavNonConsentingToNonConsentingFormFragment()
+                            NonConsentingFragmentDirections.actionNavNonConsentingToNonConsentingFormFragment(
+                                title = getString(R.string.add_non_consenting_household),
+                                household = null
+                            )
                         findNavController().navigate(action)
 
                     }
@@ -54,6 +57,15 @@ class NonConsentingFragment : Fragment(R.layout.fragment_non_consenting) ,NonCon
                         event.msg,
                         Snackbar.LENGTH_SHORT
                     ).show()
+                    is NonConsentingViewModel.NonConsentingEvent.NavigateToEditNonConsentingHouseholdsForm ->{
+                        val action =
+                            NonConsentingFragmentDirections.actionNavNonConsentingToNonConsentingFormFragment(
+                                title = getString(R.string.edit_non_consenting_household),
+                                household =  event.nonConsentingHousehold
+                            )
+                        findNavController().navigate(action)
+                    }
+
                 }
             }.exhaustive
         }
@@ -65,6 +77,6 @@ class NonConsentingFragment : Fragment(R.layout.fragment_non_consenting) ,NonCon
     }
 
     override fun onItemClick(nonConsentingHousehold: NonConsentHouseholdModel) {
-        TODO("Not yet implemented")
+        viewModel.onHousholdSelected(nonConsentingHousehold)
     }
 }
