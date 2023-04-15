@@ -4,6 +4,7 @@ import android.Manifest
 import android.content.Context
 import android.content.pm.PackageManager
 import android.location.Geocoder
+import android.os.Build
 import android.util.Log
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContentProviderCompat.requireContext
@@ -14,6 +15,7 @@ import com.vmadalin.easypermissions.EasyPermissions
 import io.bewsys.spmobile.PERMISSION_LOCATION_REQUEST_CODE
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.SupervisorJob
+import java.util.*
 
 val <T> T.exhaustive: T
     get() = this
@@ -37,21 +39,21 @@ class TripleMediatorLiveData<F, S, T>(
 ) : MediatorLiveData<Triple<F?, S?, T?>>() {
     init {
         addSource(firstLiveData) { firstLiveDataValue: F ->
-            value = Triple(firstLiveDataValue,secondLiveData.value , thirdLiveData.value)
+            value = Triple(firstLiveDataValue, secondLiveData.value, thirdLiveData.value)
         }
         addSource(secondLiveData) { secondLiveDataValue: S ->
-            value = Triple(firstLiveData.value ,secondLiveDataValue ,thirdLiveData.value)
+            value = Triple(firstLiveData.value, secondLiveDataValue, thirdLiveData.value)
         }
-        addSource(thirdLiveData) {thirdLiveDataValue: T ->
-            value = Triple(firstLiveData.value , secondLiveData.value , thirdLiveDataValue)
+        addSource(thirdLiveData) { thirdLiveDataValue: T ->
+            value = Triple(firstLiveData.value, secondLiveData.value, thirdLiveDataValue)
         }
     }
 }
 
 sealed class Resource<out R> {
-    data class Success<out R>(val data: R): Resource<R>()
-    data class Failure<out R>(val error: R): Resource<R>()
-    object Loading: Resource<Nothing>()
+    data class Success<out R>(val data: R) : Resource<R>()
+    data class Failure<out R>(val error: R) : Resource<R>()
+    object Loading : Resource<Nothing>()
     data class Exception<R>(val throwable: Throwable, val data: R? = null) : Resource<R>()
 }
 
@@ -59,7 +61,27 @@ sealed class Resource<out R> {
 annotation class ApplicationScope
 
 @ApplicationScope
-fun provideApplicationScope()= CoroutineScope(SupervisorJob())
+fun provideApplicationScope() = CoroutineScope(SupervisorJob())
+
+object LocalizationUtil {
+    fun applyLanguage(context: Context, language: String): Context {
+        val local = Locale(language)
+        val configuration = context.resources.configuration
+        val displayMetrics = context.resources.displayMetrics
+
+        Locale.setDefault(local)
+        return if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
+            configuration.setLocale(local)
+            context.createConfigurationContext(configuration)
+        } else {
+            configuration.locale = local
+            context.resources.updateConfiguration(configuration,displayMetrics)
+            context
+        }
+
+
+    }
+}
 
 
 

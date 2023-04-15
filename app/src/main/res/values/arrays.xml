@@ -28,7 +28,7 @@
         <item>English</item>
     </string-array>
     <string-array name="locales">
-        <item>en-US</item>
-        <item>fr-FR</item>
+        <item>fr</item>
+        <item>en</item>
     </string-array>
 </resources>

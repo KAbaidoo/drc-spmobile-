@@ -237,4 +237,5 @@
     <string name="select_dob">Sélectionnez la date de naissance</string>
     <string name="cannot_work_without_location_permission">Cette application ne peut pas fonctionner sans autorisation de localisation.</string>
     <string name="permission_granted">Permission accordée!</string>
+    <string name="enter_email">Entrer un email valide!</string>
 </resources>

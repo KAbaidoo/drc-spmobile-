@@ -3,11 +3,14 @@ package io.bewsys.spmobile.ui
 
 import android.Manifest
 import android.annotation.SuppressLint
+import android.content.SharedPreferences
 import android.os.Bundle
 import android.util.Log
 import android.view.View
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.app.AppCompatDelegate
+import androidx.core.os.LocaleListCompat
 import androidx.core.os.bundleOf
 import androidx.drawerlayout.widget.DrawerLayout
 import androidx.drawerlayout.widget.DrawerLayout.LOCK_MODE_LOCKED_CLOSED
@@ -16,6 +19,7 @@ import androidx.navigation.NavController
 import androidx.navigation.findNavController
 import androidx.navigation.navArgs
 import androidx.navigation.ui.*
+import androidx.preference.PreferenceManager
 import com.google.android.gms.location.FusedLocationProviderClient
 import com.google.android.gms.location.LocationServices
 import com.google.android.material.navigation.NavigationView
@@ -24,6 +28,7 @@ import com.vmadalin.easypermissions.dialogs.SettingsDialog
 import io.bewsys.spmobile.PERMISSION_LOCATION_REQUEST_CODE
 import io.bewsys.spmobile.R
 import io.bewsys.spmobile.databinding.ActivityMainBinding
+import io.bewsys.spmobile.util.LocalizationUtil
 import kotlinx.coroutines.flow.collectLatest
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
@@ -36,6 +41,8 @@ class MainActivity : AppCompatActivity(), EasyPermissions.PermissionCallbacks {
     private val viewModel: MainViewModel by viewModel()
 
     private lateinit var fusedLocationProviderClient: FusedLocationProviderClient
+
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
