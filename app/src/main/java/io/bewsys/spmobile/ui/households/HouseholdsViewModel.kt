@@ -1,14 +1,11 @@
 package io.bewsys.spmobile.ui.households
 
 
-import android.util.Log
 import androidx.lifecycle.*
 import io.bewsys.spmobile.ADD_HOUSEHOLD_RESULT_OK
 import io.bewsys.spmobile.data.local.HouseholdModel
-import io.bewsys.spmobile.data.local.NonConsentHouseholdModel
 import io.bewsys.spmobile.data.repository.DashboardRepository
 import io.bewsys.spmobile.data.repository.HouseholdRepository
-import io.bewsys.spmobile.ui.nonconsenting.NonConsentingViewModel
 import kotlinx.coroutines.channels.Channel
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.flow.map
@@ -242,9 +239,8 @@ class HouseholdsViewModel(
             )
         }
 
-    fun onHousholdSelected(householdModel: HouseholdModel)= viewModelScope.launch {
-        Log.d("ID-tracking: VM", "${householdModel.id}")
-        householdsEventChannel.send(HouseholdEvent.NavigateToEditHouseholdsForm(householdModel))
+    fun onHouseholdSelected(householdModel: HouseholdModel)= viewModelScope.launch {
+        householdsEventChannel.send(HouseholdEvent.NavigateToHouseholdDetailScreen(householdModel))
     }
 
     sealed class HouseholdEvent {
@@ -252,6 +248,6 @@ class HouseholdsViewModel(
         object DevelopmentalClicked : HouseholdEvent()
         object HumanitarianClicked : HouseholdEvent()
         data class ShowHouseholdSavedConfirmationMessage(val msg: String) : HouseholdEvent()
-        data class NavigateToEditHouseholdsForm(val household: HouseholdModel) : HouseholdEvent()
+        data class NavigateToHouseholdDetailScreen(val householdModel: HouseholdModel) : HouseholdEvent()
     }
 }

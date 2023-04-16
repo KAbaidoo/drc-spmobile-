@@ -17,7 +17,8 @@ import io.bewsys.spmobile.ui.targeting.TargetingViewModel
 import io.bewsys.spmobile.ui.MainViewModel
 import io.bewsys.spmobile.ui.auth.ForgotPasswordViewModel
 import io.bewsys.spmobile.ui.auth.LoginDialogViewModel
-import io.bewsys.spmobile.ui.households.forms.developmentalform.delete.DeleteHouseholdViewModel
+import io.bewsys.spmobile.ui.households.delete.DeleteHouseholdViewModel
+import io.bewsys.spmobile.ui.households.detail.HouseholdDetailViewModel
 import io.bewsys.spmobile.util.LocationProvider
 import io.bewsys.spmobile.util.provideApplicationScope
 import io.bewsys.spmobile.work.HouseholdUploadWorker
@@ -62,5 +63,6 @@ val appModule = module {
     viewModel { LoginDialogViewModel(get()) }
     viewModel { DeleteHouseholdViewModel(get()) }
     viewModel { ForgotPasswordViewModel(get(),get()) }
+    viewModel{HouseholdDetailViewModel(get())}
 }
 //HttpClient(Android).engine

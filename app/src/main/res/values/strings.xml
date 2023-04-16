@@ -245,6 +245,20 @@
     <string name="cannot_work_without_location_permission">This application cannot work without Location Permission.</string>
     <string name="permission_granted">Permission Granted!</string>
     <string name="enter_email">Enter a valid email!</string>
+    <string name="preferences">Preferences</string>
+    <string name="language">Language</string>
+    <string name="advanced">Advanced</string>
+    <string name="help">Help</string>
+    <string name="report_technical_issues">Report technical issues</string>
+    <string name="host">Host</string>
+    <string name="configure_host_server_urls">Configure host server urls</string>
+    <string name="choose_language">Choose language</string>
+    <string name="configure">Configuration</string>
+    <string name="primary_host">Primary host url</string>
+    <string name="primary">Primary</string>
+    <string name="go_to_login">go to login</string>
+    <string name="get_password_link">Get password link</string>
+    <string name="respondent_dob_known">Respondent DOB known</string>
 
 
 </resources>

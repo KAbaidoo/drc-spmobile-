@@ -1,28 +1,19 @@
 package io.bewsys.spmobile.ui.households
 
 import android.os.Bundle
-import android.util.Log
-import android.view.Menu
-import android.view.MenuInflater
-import android.view.MenuItem
 import android.view.View
-import androidx.core.view.MenuProvider
 
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.setFragmentResultListener
 
-import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.android.material.snackbar.Snackbar
-import io.bewsys.spmobile.FormNavigationDirections
 
 import io.bewsys.spmobile.R
 import io.bewsys.spmobile.data.local.HouseholdModel
 import io.bewsys.spmobile.databinding.FragmentHouseholdsBinding
-import io.bewsys.spmobile.ui.households.forms.developmentalform.FormStepOneFragment
-import io.bewsys.spmobile.ui.households.forms.developmentalform.FormStepOneFragmentDirections
 
 import io.bewsys.spmobile.util.exhaustive
 import org.koin.androidx.viewmodel.ext.android.viewModel
@@ -69,8 +60,6 @@ class HouseholdsFragment : Fragment(R.layout.fragment_households),HouseholdAdapt
         }
 
 
-
-
         viewLifecycleOwner.lifecycleScope.launchWhenStarted {
             viewModel.householdsEventEvent.collect { event ->
                 when (event) {
@@ -78,12 +67,11 @@ class HouseholdsFragment : Fragment(R.layout.fragment_households),HouseholdAdapt
                         if (!isOpen) showActions(binding) else hideActions(binding)
                     }
                     is HouseholdsViewModel.HouseholdEvent.DevelopmentalClicked -> {
-                        val action = HouseholdsFragmentDirections.actionNavHouseholdToNavigation(
-                            title = getString(R.string.add_household),
-                            household = null
-                        )
-                        findNavController().navigate(action)
-                    }
+                      val action =HouseholdsFragmentDirections.actionNavHouseholdToFormNavigation(
+                          title = getString(R.string.add_household),
+                          household = null
+                      )
+                        findNavController().navigate(action) }
                     is HouseholdsViewModel.HouseholdEvent.HumanitarianClicked -> {
                         val action = HouseholdsFragmentDirections.actionNavHouseholdToHumanitarianFormFragment()
                         findNavController().navigate(action)
@@ -93,10 +81,9 @@ class HouseholdsFragment : Fragment(R.layout.fragment_households),HouseholdAdapt
                         event.msg,
                         Snackbar.LENGTH_SHORT
                     ).show()
-                    is HouseholdsViewModel.HouseholdEvent.NavigateToEditHouseholdsForm -> {
-                        val action = HouseholdsFragmentDirections.actionNavHouseholdToNavigation(
-                            title = getString(R.string.edit_household),
-                            household = event.household
+                    is HouseholdsViewModel.HouseholdEvent.NavigateToHouseholdDetailScreen -> {
+                        val action = HouseholdsFragmentDirections.actionNavHouseholdToHouseholdDetailFragment(
+                            event.householdModel
                         )
                         findNavController().navigate(action)
 
@@ -155,7 +142,6 @@ class HouseholdsFragment : Fragment(R.layout.fragment_households),HouseholdAdapt
     }
 
     override fun onItemClick(householdModel: HouseholdModel) {
-        Log.d("ID-tracking: Fragment", "${householdModel.id}")
-        viewModel.onHousholdSelected(householdModel)
+        viewModel.onHouseholdSelected(householdModel)
     }
 }

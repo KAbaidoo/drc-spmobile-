@@ -1,4 +1,4 @@
-package io.bewsys.spmobile.ui.households.forms.developmentalform.delete
+package io.bewsys.spmobile.ui.households.delete
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope

@@ -40,9 +40,8 @@ class HouseholdAdapter(private val listener: OnItemClickListener) :
                 root.setOnClickListener {
                     val position = adapterPosition
                     if (position != RecyclerView.NO_POSITION) {
-                        val household = getItem(position)
-
-                        listener.onItemClick(household)
+                        val householdModel = getItem(position)
+                        listener.onItemClick(householdModel)
                     }
                 }
             }
