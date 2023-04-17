@@ -14,8 +14,6 @@ class HouseholdDetailViewModel(
 
 ) : ViewModel() {
     var household: HouseholdModel? = state["household"]
-
-
     var id = household?.id
     var consent = household?.consent ?: ""
     var initialRegistrationType = household?.initial_registration_type ?: ""
@@ -158,6 +156,4 @@ class HouseholdDetailViewModel(
     var airConditionerOwned: String = household?.number_of_air_conditioner_owned ?: ""
     var cultivatedLandOwned: String = household?.amount_of_cultivable_land_owned ?: ""
     var fanOwned: String = household?.number_of_fan_owned ?: ""
-
-
 }
