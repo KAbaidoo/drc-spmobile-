@@ -1,11 +1,12 @@
 package io.bewsys.spmobile.ui.households.detail
 
 
+import android.util.Log
 import androidx.lifecycle.*
-import io.bewsys.spmobile.data.HouseholdEntity
 
 import io.bewsys.spmobile.data.local.HouseholdModel
-import io.bewsys.spmobile.data.repository.HouseholdRepository
+import kotlinx.coroutines.channels.Channel
+import kotlinx.coroutines.flow.receiveAsFlow
 import kotlinx.coroutines.launch
 
 
@@ -13,7 +14,12 @@ class HouseholdDetailViewModel(
     private val state: SavedStateHandle
 
 ) : ViewModel() {
+    private val _detailChannel = Channel<DetailEvent>()
+    val detailChannel get() = _detailChannel.receiveAsFlow()
+
+
     var household: HouseholdModel? = state["household"]
+
     var id = household?.id
     var consent = household?.consent ?: ""
     var initialRegistrationType = household?.initial_registration_type ?: ""
@@ -156,4 +162,28 @@ class HouseholdDetailViewModel(
     var airConditionerOwned: String = household?.number_of_air_conditioner_owned ?: ""
     var cultivatedLandOwned: String = household?.amount_of_cultivable_land_owned ?: ""
     var fanOwned: String = household?.number_of_fan_owned ?: ""
+
+
+    fun onEditFabClicked() {
+        viewModelScope.launch {
+            _detailChannel.send(DetailEvent.FabClicked)
+        }
+    }
+
+    fun onDeleteActionFabClicked() {
+        viewModelScope.launch {
+            _detailChannel.send(DetailEvent.FabDeleteActionClicked(id!!))
+        }
+    }
+
+    fun onEditActionFabClicked() {
+        Log.d("HouseholdViewModel", "Edit Action Fab Clicked")
+    }
+
+    sealed class DetailEvent {
+        object FabClicked : DetailEvent()
+        data class FabEditActionClicked(val id: Long) : DetailEvent()
+        data class FabDeleteActionClicked(val id: Long) : DetailEvent()
+
+    }
 }

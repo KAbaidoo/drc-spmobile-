@@ -259,6 +259,8 @@
     <string name="go_to_login">go to login</string>
     <string name="get_password_link">Get password link</string>
     <string name="respondent_dob_known">Respondent DOB known</string>
+    <string name="edit">Edit</string>
+    <string name="empty" />
 
 
 </resources>

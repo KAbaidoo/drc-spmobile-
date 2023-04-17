@@ -3,6 +3,7 @@ package io.bewsys.spmobile.ui.households
 
 import androidx.lifecycle.*
 import io.bewsys.spmobile.ADD_HOUSEHOLD_RESULT_OK
+import io.bewsys.spmobile.DELETE_HOUSEHOLD_RESULT_OK
 import io.bewsys.spmobile.data.local.HouseholdModel
 import io.bewsys.spmobile.data.repository.DashboardRepository
 import io.bewsys.spmobile.data.repository.HouseholdRepository
@@ -224,17 +225,28 @@ class HouseholdsViewModel(
     }
 
 
-    fun onAddHouseholdResult(result: Int) {
+    fun onHouseholdResult(result: Int) {
         when (result) {
             ADD_HOUSEHOLD_RESULT_OK -> showHouseholdSavedConfirmationMessage()
+            DELETE_HOUSEHOLD_RESULT_OK -> showHouseholdDeletedConfirmationMessage()
         }
     }
 
+
     private fun showHouseholdSavedConfirmationMessage() =
         viewModelScope.launch {
+
             householdsEventChannel.send(
-                HouseholdEvent.ShowHouseholdSavedConfirmationMessage(
+                HouseholdEvent.ShowSnackMessage(
                     "Household saved!"
+                )
+            )
+        }
+    private fun showHouseholdDeletedConfirmationMessage() =
+        viewModelScope.launch {
+            householdsEventChannel.send(
+                HouseholdEvent.ShowSnackMessage(
+                    "Household deleted!"
                 )
             )
         }
@@ -243,11 +255,15 @@ class HouseholdsViewModel(
         householdsEventChannel.send(HouseholdEvent.NavigateToHouseholdDetailScreen(householdModel))
     }
 
+
+
+
     sealed class HouseholdEvent {
         object AddRegistrationClicked : HouseholdEvent()
         object DevelopmentalClicked : HouseholdEvent()
         object HumanitarianClicked : HouseholdEvent()
-        data class ShowHouseholdSavedConfirmationMessage(val msg: String) : HouseholdEvent()
+        data class ShowSnackMessage(val msg: String) : HouseholdEvent()
+
         data class NavigateToHouseholdDetailScreen(val householdModel: HouseholdModel) : HouseholdEvent()
     }
 }

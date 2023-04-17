@@ -36,7 +36,7 @@ class HouseholdsFragment : Fragment(R.layout.fragment_households),HouseholdAdapt
             fabAddRegistration.setOnClickListener {
                 viewModel.onAddRegistrationFabClicked()
             }
-            fabDevelopmental.setOnClickListener {
+            fabDevelopmentalAction.setOnClickListener {
                 viewModel.onDevelopmentalFabClicked()
             }
             textDevelopmentalAction.setOnClickListener {
@@ -76,7 +76,7 @@ class HouseholdsFragment : Fragment(R.layout.fragment_households),HouseholdAdapt
                         val action = HouseholdsFragmentDirections.actionNavHouseholdToHumanitarianFormFragment()
                         findNavController().navigate(action)
                     }
-                    is HouseholdsViewModel.HouseholdEvent.ShowHouseholdSavedConfirmationMessage -> Snackbar.make(
+                    is HouseholdsViewModel.HouseholdEvent.ShowSnackMessage -> Snackbar.make(
                         requireView(),
                         event.msg,
                         Snackbar.LENGTH_SHORT
@@ -116,14 +116,18 @@ class HouseholdsFragment : Fragment(R.layout.fragment_households),HouseholdAdapt
 
         setFragmentResultListener("add_household_request") { _, bundle ->
             val result = bundle.getInt("add_household_result")
-            viewModel.onAddHouseholdResult(result)
+            viewModel.onHouseholdResult(result)
+        }
+        setFragmentResultListener("delete_household_request") { _, bundle ->
+            val result = bundle.getInt("delete_household_result")
+            viewModel.onHouseholdResult(result)
         }
     }
 
     private fun showActions(binding: FragmentHouseholdsBinding) {
         isOpen = true
         binding.fabAddRegistration.setImageResource(R.drawable.fab_close_24)
-        binding.fabDevelopmental.show()
+        binding.fabDevelopmentalAction.show()
         binding.fabHumanitarian.show()
         binding.textAddRegistration.visibility = View.VISIBLE
         binding.textDevelopmentalAction.visibility = View.VISIBLE
@@ -133,7 +137,7 @@ class HouseholdsFragment : Fragment(R.layout.fragment_households),HouseholdAdapt
     private fun hideActions(binding: FragmentHouseholdsBinding) {
         isOpen = false
         binding.fabAddRegistration.setImageResource(R.drawable.menu_add_24)
-        binding.fabDevelopmental.hide()
+        binding.fabDevelopmentalAction.hide()
         binding.fabHumanitarian.hide()
         binding.textAddRegistration.visibility = View.GONE
         binding.textDevelopmentalAction.visibility = View.GONE

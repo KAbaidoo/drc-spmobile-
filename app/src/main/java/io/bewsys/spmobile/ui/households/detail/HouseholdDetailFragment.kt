@@ -1,26 +1,58 @@
 package io.bewsys.spmobile.ui.households.detail
 
 import android.os.Bundle
-import android.util.Log
 import android.view.View
-import android.widget.TextView
-import androidx.core.view.children
+import android.view.View.OnClickListener
+import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.lifecycleScope
+import androidx.navigation.fragment.findNavController
 import io.bewsys.spmobile.R
-import io.bewsys.spmobile.databinding.FragmentAddHouseholdSevenReview1Binding
 import io.bewsys.spmobile.databinding.FragmentHouseholdDetailBinding
+import io.bewsys.spmobile.util.exhaustive
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class HouseholdDetailFragment : Fragment(R.layout.fragment_household_detail) {
     val viewModel: HouseholdDetailViewModel by viewModel()
+    var isOpen: Boolean = false
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         val binding = FragmentHouseholdDetailBinding.bind(view)
 
-
+        hideActions(binding)
 
         binding.apply {
+
+           /* listener = OnClickListener { v ->
+                when (v!!.id) {
+                    fabEdit.id -> {
+                        viewModel.onEditFabClicked()
+                        if (!isOpen) showActions(binding) else hideActions(binding)
+                    }
+                    fabDeleteAction.id, textDeleteAction.id -> viewModel.onDeleteActionFabClicked()
+                    fabEditAction.id, textEditAction.id -> viewModel.onEditActionFabClicked()
+                }
+            }
+*/
+
+              fabEdit.setOnClickListener {
+                  viewModel.onEditFabClicked()
+
+              }
+              fabDeleteAction.setOnClickListener {
+                  viewModel.onDeleteActionFabClicked()
+              }
+              textDeleteAction.setOnClickListener {
+                  viewModel.onDeleteActionFabClicked()
+              }
+              fabEditAction.setOnClickListener {
+                  viewModel.onEditActionFabClicked()
+              }
+              textEditAction.setOnClickListener {
+                  viewModel.onEditActionFabClicked()
+              }
+
             viewModel.apply {
 
                 tvInitialRegistrationType.append(": $initialRegistrationType")
@@ -150,6 +182,42 @@ class HouseholdDetailFragment : Fragment(R.layout.fragment_household_detail) {
                 tvNumberOfAirConditionerOwned.append(": $airConditionerOwned")
             }
         }
+
+        viewLifecycleOwner.lifecycleScope.launchWhenStarted {
+            viewModel.detailChannel.collect{event->
+                when(event){
+                    is HouseholdDetailViewModel.DetailEvent.FabClicked ->{
+                        if (!isOpen) showActions(binding) else hideActions(binding)
+                    }
+                    is HouseholdDetailViewModel.DetailEvent.FabDeleteActionClicked -> {
+                        val bundle = bundleOf("id" to event.id)
+                       findNavController().navigate(R.id.deleteHouseholdDialogFragment,bundle)
+                    }
+                    is HouseholdDetailViewModel.DetailEvent.FabEditActionClicked -> TODO()
+                }.exhaustive
+            }
+        }
+    }// end of onViewCreated
+
+    private fun showActions(binding: FragmentHouseholdDetailBinding) {
+        isOpen = true
+        binding.fabEdit.setImageResource(R.drawable.fab_close_24)
+        binding.fabDeleteAction.show()
+        binding.fabEditAction.show()
+        binding.textEditAction.visibility = View.VISIBLE
+        binding.textDeleteAction.visibility = View.VISIBLE
+        binding.textEditAction.visibility = View.VISIBLE
+    }
+
+    private fun hideActions(binding: FragmentHouseholdDetailBinding) {
+        isOpen = false
+        binding.fabEdit.setImageResource(R.drawable.ic_edit_24)
+        binding.fabDeleteAction.hide()
+        binding.fabEditAction.hide()
+        binding.textEdit.visibility = View.GONE
+        binding.textDeleteAction.visibility = View.GONE
+        binding.textEditAction.visibility = View.GONE
+
     }
 }
 

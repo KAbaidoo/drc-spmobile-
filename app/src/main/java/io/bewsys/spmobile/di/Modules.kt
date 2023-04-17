@@ -61,7 +61,7 @@ val appModule = module {
     viewModel { LoginViewModel(get(), get()) }
     viewModel { MainViewModel(get()) }
     viewModel { LoginDialogViewModel(get()) }
-    viewModel { DeleteHouseholdViewModel(get()) }
+    viewModel { DeleteHouseholdViewModel(get(),get(), get()) }
     viewModel { ForgotPasswordViewModel(get(),get()) }
     viewModel{HouseholdDetailViewModel(get())}
 }

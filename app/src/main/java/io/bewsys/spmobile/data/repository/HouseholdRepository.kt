@@ -386,13 +386,8 @@ class HouseholdRepository(
 
     }
 
-    suspend fun deleteHousehold(id: Long) = applicationScope.launch  {
-        withContext(Dispatchers.IO){
+    suspend fun deleteHousehold(id: Long) = withContext(Dispatchers.IO)  {
                householdQueries.deleteHousehold(id)
-        }
-
-
-
     }
     suspend fun getLastInsertedRowId(): Long = withContext(Dispatchers.IO) {
         householdQueries.lastInsertRowId().executeAsOne()
