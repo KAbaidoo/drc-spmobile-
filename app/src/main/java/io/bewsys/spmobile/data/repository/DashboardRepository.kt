@@ -1,5 +1,6 @@
 package io.bewsys.spmobile.data.repository
 
+
 import app.cash.sqldelight.coroutines.asFlow
 import app.cash.sqldelight.coroutines.mapToList
 import app.cash.sqldelight.coroutines.mapToOne
@@ -11,7 +12,6 @@ import io.bewsys.spmobile.data.TerritoryEntity
 import io.bewsys.spmobile.data.prefsstore.PreferencesManager
 import io.bewsys.spmobile.data.remote.DashboardApi
 import io.bewsys.spmobile.data.remote.model.dashboard.*
-import io.bewsys.spmobile.data.remote.model.auth.login.ErrorResponse
 import io.bewsys.spmobile.data.remote.model.auth.logout.LogoutResponse
 import io.bewsys.spmobile.util.ApplicationScope
 import io.bewsys.spmobile.util.Resource

@@ -19,10 +19,12 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
+import androidx.navigation.fragment.navArgs
 import com.google.android.material.datepicker.MaterialDatePicker
 import com.google.android.material.textfield.TextInputLayout
 import com.vmadalin.easypermissions.EasyPermissions
 import com.vmadalin.easypermissions.dialogs.SettingsDialog
+import io.bewsys.spmobile.FormNavigationArgs
 import io.bewsys.spmobile.PERMISSION_LOCATION_REQUEST_CODE
 import io.bewsys.spmobile.R
 import io.bewsys.spmobile.databinding.FragmentAddHouseholdTwoRespondentBinding
@@ -36,22 +38,25 @@ import java.util.*
 
 class FormStepTwoFragment : Fragment(R.layout.fragment_add_household_two_respondent),
     EasyPermissions.PermissionCallbacks {
+
+
+    private val viewModel: SharedDevelopmentalFormViewModel by koinNavGraphViewModel(R.id.form_navigation)
+
     private val provinces = mutableListOf<String>()
     private val communities = mutableListOf<String>()
     private val territories = mutableListOf<String>()
+
     private val groupments = mutableListOf<String>()
-
     private var til_Lat: TextInputLayout? = null
-    private var til_Lon: TextInputLayout? = null
 
+    private var til_Lon: TextInputLayout? = null
     private var currentLocation: Location? = null
+
     private val locationProvider: LocationProvider by inject()
 
     private var _binding: FragmentAddHouseholdTwoRespondentBinding? = null
 
     private val binding get() = _binding!!
-
-    private val viewModel: SharedDevelopmentalFormViewModel by koinNavGraphViewModel(R.id.form_navigation)
 
 
     override fun onCreateView(
@@ -72,26 +77,27 @@ class FormStepTwoFragment : Fragment(R.layout.fragment_add_household_two_respond
     @SuppressLint("MissingPermission")
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
         _binding = FragmentAddHouseholdTwoRespondentBinding.bind(view)
+
+        fun MutableList<String>.swap(it: List<String>) {
+            this.clear()
+            this.addAll(it)
+        }
+
         viewModel.provinces.observe(viewLifecycleOwner) {
-            provinces.clear()
-            provinces.addAll(it)
+            provinces.swap(it)
         }
         viewModel.territories.observe(viewLifecycleOwner) {
-            territories.clear()
-            territories.addAll(it)
+            territories.swap(it)
         }
         viewModel.communities.observe(viewLifecycleOwner) {
-            communities.clear()
-            communities.addAll(it)
+
+            communities.swap(it)
         }
         viewModel.groupments.observe(viewLifecycleOwner) {
-            groupments.clear()
-            groupments.addAll(it)
+            groupments.swap(it)
         }
         val dropdownLayout = R.layout.dropdown_item
-
 
 
 
@@ -99,13 +105,6 @@ class FormStepTwoFragment : Fragment(R.layout.fragment_add_household_two_respond
         binding.apply {
             til_Lat = tilLat
             til_Lon = tilLon
-
-            viewLifecycleOwner.lifecycleScope.launchWhenStarted {
-                viewModel.stepTwoHasBlankFields.collectLatest {
-                    btnNext.isEnabled = it.not()
-                }
-            }
-
 
             val tils = listOf(
                 tilRespondentFirstname,
@@ -116,14 +115,6 @@ class FormStepTwoFragment : Fragment(R.layout.fragment_add_household_two_respond
                 tilRespondentPhoneNumber,
                 tilAddress,
             )
-
-
-            tils.forEachIndexed { index, til ->
-                til.editText?.setText(viewModel.stepTwoFields[index])
-            }
-            tilRespondentDob.editText?.setText(viewModel.respondentDOB)
-            tilLon.editText?.setText(viewModel.lon)
-            tilLat.editText?.setText(viewModel.lat)
 
             when (viewModel.initialRegistrationType) {
                 rbGeneral.text -> rgInitialRegistrationType.check(rbGeneral.id)
@@ -265,26 +256,31 @@ class FormStepTwoFragment : Fragment(R.layout.fragment_add_household_two_respond
 
             }
 
+
+
             tils.forEachIndexed { index, til ->
-                til.editText?.addTextChangedListener(object : TextWatcher {
-                    override fun beforeTextChanged(
-                        p0: CharSequence?,
-                        p1: Int,
-                        p2: Int,
-                        p3: Int
-                    ) {
-                    }
-
-                    override fun onTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
-                        viewModel.setStepTwoFields(index, p0)
-                        viewModel.stepTwoHasBlankFields()
-                        Log.d("FormStepTwo:", "$p0")
-                    }
-
-                    override fun afterTextChanged(p0: Editable?) {
-                    }
+                til.editText?.addTextChangedListener {
+                    viewModel.setStepTwoFields(index, it)
+                    viewModel.stepTwoHasBlankFields()
                 }
-                )
+
+            }
+
+            tilRespondentFirstname.editText?.setOnFocusChangeListener { view, hasFocus ->
+                if (!hasFocus && viewModel.respondentFirstName.isBlank()) {
+                    tilRespondentFirstname.error = "This field cannot be empty!"
+                } else tilRespondentFirstname.error = null
+            }
+            tilRespondentLastname.editText?.setOnFocusChangeListener { view, hasFocus ->
+                if (!hasFocus && viewModel.respondentLastName.isBlank()) {
+                    tilRespondentLastname.error = "This field cannot be empty!"
+                } else tilRespondentLastname.error = null
+            }
+
+            tilAddress.editText?.setOnFocusChangeListener { view, hasFocus ->
+                if (!hasFocus && viewModel.address.isBlank()) {
+                    tilAddress.error = "This field cannot be empty!"
+                } else tilAddress.error = null
             }
 
 
@@ -309,7 +305,9 @@ class FormStepTwoFragment : Fragment(R.layout.fragment_add_household_two_respond
                 setAdapter(
                     ArrayAdapter(context, dropdownLayout, provinces).also {
                         addTextChangedListener {
+
                             viewModel.province = it.toString()
+                            viewModel.loadTerritoriesWithName(it.toString())
 
                         }
                     }
@@ -320,6 +318,7 @@ class FormStepTwoFragment : Fragment(R.layout.fragment_add_household_two_respond
                     ArrayAdapter(context, dropdownLayout, communities).also {
                         addTextChangedListener {
                             viewModel.community = it.toString()
+                            viewModel.loadGroupmentsWithName(it.toString())
 
                         }
                     }
@@ -330,8 +329,9 @@ class FormStepTwoFragment : Fragment(R.layout.fragment_add_household_two_respond
                     ArrayAdapter(context, dropdownLayout, territories)
                 ).also {
                     addTextChangedListener {
-                        viewModel.territory = it.toString()
 
+                        viewModel.territory = it.toString()
+                        viewModel.loadCommunitiesWithName(it.toString())
                     }
                 }
             }
@@ -340,6 +340,7 @@ class FormStepTwoFragment : Fragment(R.layout.fragment_add_household_two_respond
                     ArrayAdapter(context, dropdownLayout, groupments)
                 ).also {
                     addTextChangedListener {
+
                         viewModel.groupment = it.toString()
                     }
                 }
@@ -348,27 +349,42 @@ class FormStepTwoFragment : Fragment(R.layout.fragment_add_household_two_respond
                 if (viewModel.household != null) getString(R.string.edit_household) else getString(R.string.add_household)
 
             btnNext.setOnClickListener {
-
-                val action =
-                    FormStepTwoFragmentDirections.actionFormStepTwoFragmentToFormStepThreeFragment(
-                        title = title,
-                        household = viewModel.household
-                    )
-                findNavController().navigate(action)
+                val bundle = bundleOf("title" to title)
+                findNavController().navigate(R.id.formStepThreeFragment, bundle)
             }
             btnPrevious.setOnClickListener {
-                val action =
-                    FormStepTwoFragmentDirections.actionFormStepTwoFragmentToFormStepOneFragment(
-                        title = title,
-                        household = viewModel.household
-                    )
-                findNavController().navigate(action)
+
+                val bundle = bundleOf("title" to title)
+                findNavController().navigate(R.id.formStepOneFragment, bundle)
 
             }
 
+            viewModel.apply {
+                tilRespondentFirstname.editText?.setText(respondentFirstName)
+                tilRespondentMiddlename.editText?.setText(respondentMiddleName)
+                tilRespondentLastname.editText?.setText(respondentLastName)
+                tilRespondentAge.editText?.setText(respondentAge)
+                tilRespondentVoterId.editText?.setText(respondentVoterId)
+                tilRespondentPhoneNumber.editText?.setText(respondentPhoneNo)
+                tilAddress.editText?.setText(address)
+            }
+
+            tilRespondentDob.editText?.setText(viewModel.respondentDOB)
+            tilLon.editText?.setText(viewModel.lon)
+            tilLat.editText?.setText(viewModel.lat)
+//            tils.forEachIndexed { index, til ->
+//                til.editText?.setText(viewModel.stepTwoFields[index])
+//            }
+            viewLifecycleOwner.lifecycleScope.launchWhenStarted {
+                viewModel.stepTwoHasBlankFields.collectLatest {
+                    btnNext.isEnabled = it.not()
+                }
+            }
 
         } //end of apply block
 
+
+        getLastKnownLocation()
     }   //end of onCreate
 
     override fun onDestroyView() {
@@ -381,8 +397,8 @@ class FormStepTwoFragment : Fragment(R.layout.fragment_add_household_two_respond
             viewModel.lon = longitude.toString()
             viewModel.lat = latitude.toString()
 
-            til_Lat?.editText?.setText(viewModel.lat)
-            til_Lon?.editText?.setText(viewModel.lon)
+            til_Lat?.editText?.setText(latitude.toString())
+            til_Lon?.editText?.setText(longitude.toString())
         }
     }
 

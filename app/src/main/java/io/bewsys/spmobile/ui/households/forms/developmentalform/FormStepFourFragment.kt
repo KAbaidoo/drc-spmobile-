@@ -45,17 +45,21 @@ class FormStepFourFragment : Fragment(R.layout.fragment_add_household_four_home)
                 tilNameOfSocialAssistanceProgram,
                 tilOtherMigrationStatus,
                 tilDurationDisplacedReturnedRepatriatedRefugee,
+
                 tilHouseholdMonthlyIncome,
                 tilMinimumMonthlyIncomeNecessaryLiveWithoutDifficulties,
                 tilMobileMoneyUsername,
                 tilMobileMoneyPhoneNumber
             )
-            tilMigrationStatus.editText?.setText(viewModel.migrationStatus)
-            tilUnitOfMigrationDuration.editText?.setText(viewModel.unitOfMigrationDuration)
 
-            viewModel.apply {
-                tils.forEachIndexed { index, til ->
-                    til.editText?.setText(stepFourFields[index])
+
+
+
+
+            tils.forEachIndexed { index, til ->
+                til.editText?.addTextChangedListener {
+                    viewModel.setStepFourFields(index, it)
+                    viewModel.stepFourHasBlankFields()
                 }
             }
 
@@ -175,42 +179,27 @@ class FormStepFourFragment : Fragment(R.layout.fragment_add_household_four_home)
 
 
 
-            //            add text change listener text
-            tils.forEachIndexed { index, til ->
-                til.editText?.addTextChangedListener( object : TextWatcher {
-                    override fun beforeTextChanged(
-                        p0: CharSequence?,
-                        p1: Int,
-                        p2: Int,
-                        p3: Int
-                    ) {
-                    }
-                    override fun onTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
-                        viewModel.setStepFourFields(index,p0)
-                        viewModel.stepFourHasBlankFields()
-                    }
-                    override fun afterTextChanged(p0: Editable?) {
-                    }
+            //           set text
+            viewModel.apply {
+                tils.forEachIndexed { index, til ->
+                    til.editText?.setText(stepFourFields[index])
                 }
-                )
             }
-            val title = if (viewModel.household != null) getString(R.string.edit_household) else getString(R.string.add_household)
+            tilMigrationStatus.editText?.setText(viewModel.migrationStatus)
+            tilUnitOfMigrationDuration.editText?.setText(viewModel.unitOfMigrationDuration)
+
+            val title =
+                if (viewModel.household != null) getString(R.string.edit_household) else getString(R.string.add_household)
 
             btnNext.setOnClickListener {
-                val action =
-                    FormStepFourFragmentDirections.actionFormStepFourFragmentToFormStepFiveFragment(
-                        title  =title,
-                        household = viewModel.household
-                    )
-                findNavController().navigate(action)
+                val bundle = bundleOf("title" to title)
+                findNavController().navigate(R.id.formStepFiveFragment,bundle )
             }
             btnPrevious.setOnClickListener {
-                val action =
-                    FormStepFourFragmentDirections.actionFormStepFourFragmentToFormStepThreeFragment(
-                        title  =title,
-                        household = viewModel.household
-                    )
-                findNavController().navigate(action)
+
+                val bundle = bundleOf("title" to title)
+                findNavController().navigate(R.id.formStepThreeFragment,bundle )
+
             }
 
 
@@ -218,7 +207,7 @@ class FormStepFourFragment : Fragment(R.layout.fragment_add_household_four_home)
         }// end of apply block
 
         // set up menu
-        val menuHost = requireActivity()
+      /*  val menuHost = requireActivity()
         menuHost.addMenuProvider(object : MenuProvider {
             override fun onCreateMenu(menu: Menu, menuInflater: MenuInflater) {
                 menuInflater.inflate(R.menu.fragment_households_menu, menu)
@@ -238,6 +227,6 @@ class FormStepFourFragment : Fragment(R.layout.fragment_add_household_four_home)
                     else -> false
                 }
             }
-        }, viewLifecycleOwner, Lifecycle.State.RESUMED)
+        }, viewLifecycleOwner, Lifecycle.State.RESUMED)*/
     }// end of onCreate
 }

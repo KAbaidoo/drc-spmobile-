@@ -261,6 +261,26 @@
     <string name="respondent_dob_known">Respondent DOB known</string>
     <string name="edit">Edit</string>
     <string name="empty" />
+    <string name="member_registration">Member Registration</string>
+    <string name="member_firstname">Member firstname</string>
+    <string name="member_middlename">Member middle name</string>
+    <string name="member_lastname">Member last name</string>
+    <string name="member_age">Member age</string>
+    <string name="member_age_known">Age_known</string>
+    <string name="member_dob">Date of birth</string>
+    <string name="member_dob_known">Dob known</string>
+    <string name="member_sex">member sex</string>
+    <string name="member_pregnancy_status">Pregnancy status</string>
+    <string name="member_marital_status">Marital status</string>
+    <string name="member_voter_id_card">Member voter id card</string>
+    <string name="member_phone_number">Member phone number</string>
+    <string name="member_birth_certificate">Member birth certificste</string>
+    <string name="member_educational_level">Member educational level</string>
+    <string name="member_socio_professional_category">Member socio-professional category</string>
+    <string name="member_school_attendance">Member school attendance</string>
+    <string name="member_sector_of_work">Member sector of work</string>
+    <string name="member_disability">Member disability</string>
+    <string name="is_member_respondent">is member respondent</string>
 
 
 </resources>

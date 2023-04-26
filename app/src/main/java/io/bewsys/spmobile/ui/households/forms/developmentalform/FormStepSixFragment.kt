@@ -28,7 +28,14 @@ class FormStepSixFragment : Fragment(R.layout.fragment_add_household_six_propert
         super.onViewCreated(view, savedInstanceState)
         val binding = FragmentAddHouseholdSixPropertyBinding.bind(view)
 
+
         binding.apply {
+            viewLifecycleOwner.lifecycleScope.launchWhenStarted {
+                viewModel.stepSixHasBlankFields.collectLatest {
+                    btnNext.isEnabled = it.not()
+                }
+
+            }
             val tils = listOf(
                 tilNumberOfMosquitoNetsOwned,
                 tilNumberOfGuineaPigOwned,
@@ -68,11 +75,7 @@ class FormStepSixFragment : Fragment(R.layout.fragment_add_household_six_propert
                 tilAmountOfCultivableLandOwned,
                 tilNumberOfFanOwned
             )
-            viewModel.apply {
-                tils.forEachIndexed { index, til ->
-                    til.editText?.setText(stepSixFields[index])
-                }
-            }
+
 
             when (viewModel.hasLiveStock) {
                 rbYesHasLivestock.text -> rgHasLivestock.check(rbYesHasLivestock.id)
@@ -170,54 +173,32 @@ class FormStepSixFragment : Fragment(R.layout.fragment_add_household_six_propert
                     viewModel.stepSixHasBlankFields()
                 }
             }
-            viewLifecycleOwner.lifecycleScope.launchWhenStarted {
-                viewModel.stepSixHasBlankFields.collectLatest {
-                    btnNext.isEnabled = it.not()
-                }
 
+            viewModel.apply {
+                tils.forEachIndexed { index, til ->
+                    til.editText?.setText(stepSixFields[index])
+                }
             }
-            val title = if (viewModel.household != null) getString(R.string.edit_household) else getString(R.string.add_household)
+
+
+            val title =
+                if (viewModel.household != null) getString(R.string.edit_household) else getString(R.string.add_household)
+
             btnNext.setOnClickListener {
-                val action =
-                    FormStepSixFragmentDirections.actionFormStepSixFragment2ToFormStepSevenFragment(
-                     title = title,
-                     household = viewModel.household
-                    )
-                findNavController().navigate(action)
+                val bundle = bundleOf("title" to title)
+                findNavController().navigate(R.id.formStepSevenFragment )
             }
             btnPrevious.setOnClickListener {
-                val action =
-                    FormStepSixFragmentDirections.actionFormStepSixFragment2ToFormStepFiveFragment(
-                        title = title,
-                        household = viewModel.household
-                    )
-                findNavController().navigate(action)
+
+                val bundle = bundleOf("title" to title)
+                findNavController().navigate(R.id.formStepFiveFragment,bundle )
+
             }
+
 
 
         }
-        // set up menu
-        val menuHost = requireActivity()
-        menuHost.addMenuProvider(object : MenuProvider {
-            override fun onCreateMenu(menu: Menu, menuInflater: MenuInflater) {
-                menuInflater.inflate(R.menu.fragment_households_menu, menu)
 
-            }
-
-            override fun onMenuItemSelected(menuItem: MenuItem): Boolean {
-                return when (menuItem.itemId) {
-
-                    R.id.action_download_households -> {
-                        val bundle = bundleOf("id" to viewModel.id)
-                        findNavController().navigate(R.id.deleteHouseholdDialogFragment, bundle)
-
-                        true
-                    }
-
-                    else -> false
-                }
-            }
-        }, viewLifecycleOwner, Lifecycle.State.RESUMED)
     }
 
 

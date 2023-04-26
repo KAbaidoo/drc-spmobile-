@@ -15,6 +15,7 @@ import org.koin.androidx.viewmodel.ext.android.viewModel
 class HouseholdDetailFragment : Fragment(R.layout.fragment_household_detail) {
     val viewModel: HouseholdDetailViewModel by viewModel()
     var isOpen: Boolean = false
+    lateinit var listener: OnClickListener
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -22,23 +23,12 @@ class HouseholdDetailFragment : Fragment(R.layout.fragment_household_detail) {
 
         hideActions(binding)
 
+
         binding.apply {
 
-           /* listener = OnClickListener { v ->
-                when (v!!.id) {
-                    fabEdit.id -> {
-                        viewModel.onEditFabClicked()
-                        if (!isOpen) showActions(binding) else hideActions(binding)
-                    }
-                    fabDeleteAction.id, textDeleteAction.id -> viewModel.onDeleteActionFabClicked()
-                    fabEditAction.id, textEditAction.id -> viewModel.onEditActionFabClicked()
-                }
-            }
-*/
 
-              fabEdit.setOnClickListener {
+             fabEdit.setOnClickListener {
                   viewModel.onEditFabClicked()
-
               }
               fabDeleteAction.setOnClickListener {
                   viewModel.onDeleteActionFabClicked()
@@ -60,7 +50,6 @@ class HouseholdDetailFragment : Fragment(R.layout.fragment_household_detail) {
                 tvRespondentMiddlename.append(": $respondentMiddleName")
                 tvRespondentLastname.append(": $respondentLastName")
                 tvFamilyBondToHead.append(": $respondentFamilyBondToHead")
-                tvRespondentAge.append(": $respondentAge")
                 tvRespondentDob.append(": $respondentDOB")
                 tvRespondentSex.append(": $respondentSex")
                 tvRespondentVoterId.append(": $respondentVoterId")
@@ -193,7 +182,10 @@ class HouseholdDetailFragment : Fragment(R.layout.fragment_household_detail) {
                         val bundle = bundleOf("id" to event.id)
                        findNavController().navigate(R.id.deleteHouseholdDialogFragment,bundle)
                     }
-                    is HouseholdDetailViewModel.DetailEvent.FabEditActionClicked -> TODO()
+                    is HouseholdDetailViewModel.DetailEvent.FabEditActionClicked -> {
+                        val action = HouseholdDetailFragmentDirections.actionHouseholdDetailFragmentToFormNavigation(getString(R.string.edit_household),event.householdModel)
+                        findNavController().navigate(action)
+                    }
                 }.exhaustive
             }
         }

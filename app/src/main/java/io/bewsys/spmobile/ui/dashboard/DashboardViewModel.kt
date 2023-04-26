@@ -6,6 +6,7 @@ import io.bewsys.spmobile.UPDATE_USER_RESULT_OK
 
 import io.bewsys.spmobile.data.repository.DashboardRepository
 import io.bewsys.spmobile.data.repository.HouseholdRepository
+import io.bewsys.spmobile.data.repository.MemberRepository
 import io.bewsys.spmobile.util.PairMediatorLiveData
 import io.bewsys.spmobile.util.Resource
 import kotlinx.coroutines.Dispatchers
@@ -20,7 +21,8 @@ private const val TAG = "Dashboard"
 
 class DashboardViewModel(
     private val dashboardRepository: DashboardRepository,
-    private val householdRepository: HouseholdRepository
+    private val householdRepository: HouseholdRepository,
+    private val membersRepository: MemberRepository,
 ) : ViewModel() {
 
 
@@ -33,7 +35,7 @@ class DashboardViewModel(
     private val groupmentCount =  dashboardRepository.groupementCountFlow.asLiveData()
 
     private val householdCount =  householdRepository.getHouseHoldCount.asLiveData()
-    private val membersCount =  householdRepository.getMembersCount.asLiveData()
+    private val membersCount =  membersRepository.getMembersCount.asLiveData()
 
     val provinceAndCommunity = PairMediatorLiveData(provinceCount, communityCount)
     val territoryAndGroupement = PairMediatorLiveData(territoryCount, groupmentCount)

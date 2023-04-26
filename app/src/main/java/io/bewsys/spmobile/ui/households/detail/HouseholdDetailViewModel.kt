@@ -25,8 +25,8 @@ class HouseholdDetailViewModel(
     var initialRegistrationType = household?.initial_registration_type ?: ""
     var respondentFirstName = household?.respondent_firstname ?: ""
     var respondentMiddleName = household?.respondent_middlename ?: ""
-    var respondentLastName = household?.respondent_middlename ?: ""
-    var respondentAge = household?.respondent_middlename ?: ""
+    var respondentLastName = household?.respondent_lastname ?: ""
+
     var respondentDOB = household?.respondent_dob ?: ""
     var respondentVoterId = household?.respondent_voter_id ?: ""
     var respondentPhoneNo = household?.respondent_phone_number ?: ""
@@ -177,12 +177,14 @@ class HouseholdDetailViewModel(
     }
 
     fun onEditActionFabClicked() {
-        Log.d("HouseholdViewModel", "Edit Action Fab Clicked")
+        viewModelScope.launch {
+            _detailChannel.send(DetailEvent.FabEditActionClicked(household!!))
+        }
     }
 
     sealed class DetailEvent {
         object FabClicked : DetailEvent()
-        data class FabEditActionClicked(val id: Long) : DetailEvent()
+        data class FabEditActionClicked(val householdModel: HouseholdModel) : DetailEvent()
         data class FabDeleteActionClicked(val id: Long) : DetailEvent()
 
     }

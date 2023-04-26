@@ -35,9 +35,8 @@ class HouseholdsViewModel(
     private fun loadHouseholds() {
         viewModelScope.launch {
             householdRepository.getAllHouseholds()
-                .map { households ->
-                    households.map {
-
+                .map { householdEntity ->
+                    householdEntity.map {
                         HouseholdModel(
                             it.id,
                             it.remote_id,
@@ -88,8 +87,8 @@ class HouseholdsViewModel(
                             it.groupment_id,
                             it.province_id?.let { id -> dashboardRepository.getProvinceById(id.toLong())?.name } ,
                             it.community_id?.let { id -> dashboardRepository.getCommunityById(id.toLong())?.name },
-                            it.territory_id?.let { id -> dashboardRepository.getTerritoryById(id.toLong())?.name },
-                            it.groupment_id?.let { id -> dashboardRepository.getGroupmentById(id.toLong())?.name },
+                           it.territory_id?.let { id -> dashboardRepository.getTerritoryById(id.toLong())?.name },
+                           it.groupment_id?.let { id -> dashboardRepository.getGroupmentById(id.toLong())?.name },
                             it.duration_displaced_returned_repatriated_refugee,
                             it.unit_of_migration_duration,
                             it.territory_or_town,
@@ -201,9 +200,7 @@ class HouseholdsViewModel(
                             it.household_member_with_benefit_from_social_assistance_program,
                             it.name_of_social_assistance_program,
                             it.affected_by_other_shock
-
                         )
-
                     }
                 }.collectLatest {
                     _households.value = it

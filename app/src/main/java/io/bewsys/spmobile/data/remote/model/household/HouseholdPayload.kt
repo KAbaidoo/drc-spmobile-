@@ -4,6 +4,7 @@ import kotlinx.serialization.Serializable
 
 @Serializable
 data class HouseholdPayload(
+
     val survey_no: String?=null,
     val supervisor_id: String?=null,
     val team_leader_id: String?=null,

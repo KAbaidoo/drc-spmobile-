@@ -21,6 +21,7 @@ import io.bewsys.spmobile.ui.households.delete.DeleteHouseholdViewModel
 import io.bewsys.spmobile.ui.households.detail.HouseholdDetailViewModel
 import io.bewsys.spmobile.util.LocationProvider
 import io.bewsys.spmobile.util.provideApplicationScope
+import io.bewsys.spmobile.work.HouseholdUpdateWorker
 import io.bewsys.spmobile.work.HouseholdUploadWorker
 import io.bewsys.spmobile.work.NonConsentUploadWorker
 
@@ -42,16 +43,19 @@ val appModule = module {
     factory { HouseholdApi(get()) }
     factory { NonConsentingHouseholdApi(get()) }
     factory { DashboardApi(get()) }
+    factory { MemberApi(get()) }
 
     factory { DashboardRepository(get(),get(),get(),get()) }
     factory { HouseholdRepository(get(),get(),get(),get()) }
     factory { NonConsentingHouseholdRepository(get(),get(),get()) }
     factory { AuthRepository(get(),get()) }
+    factory { MemberRepository(get(),get(),get(),get()) }
 
     worker { NonConsentUploadWorker(androidContext(), get()) }
     worker { HouseholdUploadWorker(androidContext(), get()) }
+    worker { HouseholdUpdateWorker(androidContext(), get()) }
 
-    viewModel { DashboardViewModel(get(),get()) }
+    viewModel { DashboardViewModel(get(),get(),get()) }
     viewModel { HouseholdsViewModel(get(), get(),get()) }
     viewModel { NonConsentingViewModel(get(), get()) }
     viewModel { ProfileViewModel(get(),get()) }

@@ -107,13 +107,11 @@ class FormStepEightFragment : Fragment(R.layout.fragment_add_household_eight_rev
             }
             val title = if (viewModel.household != null) getString(R.string.edit_household) else getString(R.string.add_household)
             btnPrevious.setOnClickListener {
-                val action =
-                    FormStepEightFragmentDirections.actionFormStepEightFragmentToFormStepSevenFragment(
-                        title = title,
-                        household = viewModel.household
-                    )
-                findNavController().navigate(action)
+                val bundle = bundleOf("title" to title)
+                findNavController().navigate(R.id.formStepSevenFragment )
             }
+
+
 
 
             viewLifecycleOwner.lifecycleScope.launchWhenStarted {
@@ -142,7 +140,7 @@ class FormStepEightFragment : Fragment(R.layout.fragment_add_household_eight_rev
 
         }
         // set up menu
-        val menuHost = requireActivity()
+      /*  val menuHost = requireActivity()
         menuHost.addMenuProvider(object : MenuProvider {
             override fun onCreateMenu(menu: Menu, menuInflater: MenuInflater) {
                 menuInflater.inflate(R.menu.fragment_households_menu, menu)
@@ -162,7 +160,7 @@ class FormStepEightFragment : Fragment(R.layout.fragment_add_household_eight_rev
                     else -> false
                 }
             }
-        }, viewLifecycleOwner, Lifecycle.State.RESUMED)
+        }, viewLifecycleOwner, Lifecycle.State.RESUMED)*/
 
     }
 

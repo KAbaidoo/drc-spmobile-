@@ -5,7 +5,6 @@ import app.cash.sqldelight.coroutines.mapToList
 import app.cash.sqldelight.coroutines.mapToOne
 import io.bewsys.spmobile.Database
 import io.bewsys.spmobile.data.HouseholdEntity
-import io.bewsys.spmobile.data.HouseholdMember
 import io.bewsys.spmobile.data.local.HouseholdModel
 import io.bewsys.spmobile.data.prefsstore.PreferencesManager
 import io.bewsys.spmobile.data.remote.HouseholdApi
@@ -20,7 +19,6 @@ import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.flow.flowOn
-import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 
 
@@ -31,13 +29,13 @@ class HouseholdRepository(
     @ApplicationScope private val applicationScope: CoroutineScope
 ) {
     private val householdQueries = db.householdQueries
-    private val membersQueries = db.householdMemberQueries
+
 
     suspend fun getAllHouseholds(): Flow<List<HouseholdEntity>> =
         householdQueries.getAllHouseholds().asFlow().mapToList(context = Dispatchers.Default)
 
     val getHouseHoldCount = householdQueries.getHouseholdCount().asFlow().mapToOne(Dispatchers.Default)
-    val getMembersCount = membersQueries.getHouseholdMembersCount().asFlow().mapToOne(Dispatchers.Default)
+
 
 
     suspend fun getHousehold(id: Long): HouseholdEntity? =
@@ -215,7 +213,7 @@ class HouseholdRepository(
         }
 
     }
-    suspend fun updateHousehold(id: Long,
+    suspend fun updateHousehold(
                                 householdModel: HouseholdModel
     ): Unit = withContext(Dispatchers.IO) {
 
@@ -398,8 +396,7 @@ class HouseholdRepository(
     }
 
 
-    suspend fun getAllMemebers(): Flow<List<HouseholdMember>> =
-        membersQueries.getAllHouseholdMembers().asFlow().mapToList(context = Dispatchers.Default)
+
 
     //    ================================================================
     //   *********************** network calls  ************************
@@ -408,6 +405,22 @@ class HouseholdRepository(
         try {
             val userPref = preferencesManager.preferencesFlow.first()
             val response = api.uploadHousehold(payload, userPref.token)
+
+            if (response.status.value in 200..299) {
+                emit(Resource.Success<Any>(response.body()))
+            } else {
+                emit(Resource.Failure<ErrorResponse>(response.body()))
+            }
+        } catch (throwable: Throwable) {
+            emit(Resource.Exception(throwable, null))
+        }
+    }.flowOn(Dispatchers.IO)
+
+    suspend fun updateHousehold(payload: HouseholdPayload) = flow {
+
+        try {
+            val userPref = preferencesManager.preferencesFlow.first()
+            val response = api.updateHousehold(payload, userPref.token)
 
             if (response.status.value in 200..299) {
                 emit(Resource.Success<Any>(response.body()))

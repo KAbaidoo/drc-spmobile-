@@ -1,6 +1,7 @@
 package io.bewsys.spmobile.ui.households
 
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 
 import androidx.fragment.app.Fragment
@@ -92,26 +93,7 @@ class HouseholdsFragment : Fragment(R.layout.fragment_households),HouseholdAdapt
             }.exhaustive
         }
 
-//
-//// set up menu
-//        val menuHost = requireActivity()
-//        menuHost.addMenuProvider(object : MenuProvider {
-//            override fun onCreateMenu(menu: Menu, menuInflater: MenuInflater) {
-//                menuInflater.inflate(R.menu.fragment_households_menu, menu)
-//
-//            }
-//
-//            override fun onMenuItemSelected(menuItem: MenuItem): Boolean {
-//                return when (menuItem.itemId) {
-//
-//                    R.id.action_download_households -> {
-//                        true
-//                    }
-//
-//                    else -> false
-//                }
-//            }
-//        }, viewLifecycleOwner, Lifecycle.State.RESUMED)
+
 
 
         setFragmentResultListener("add_household_request") { _, bundle ->
@@ -146,6 +128,7 @@ class HouseholdsFragment : Fragment(R.layout.fragment_households),HouseholdAdapt
     }
 
     override fun onItemClick(householdModel: HouseholdModel) {
+        Log.d("household screen", "${householdModel.id}")
         viewModel.onHouseholdSelected(householdModel)
     }
 }

@@ -107,36 +107,19 @@
         <fragment
             android:id="@+id/formStepTwoFragment"
             android:name="io.bewsys.spmobile.ui.households.forms.developmentalform.FormStepTwoFragment"
-            android:label="Step 2/6"
+            android:label="{title}"
             tools:layout="@layout/fragment_add_household_two_respondent">
-            <action
-                android:id="@+id/action_formStepTwoFragment_to_formStepThreeFragment"
-                app:destination="@id/formStepThreeFragment" />
-            <action
-                android:id="@+id/action_formStepTwoFragment_to_formStepOneFragment"
-                app:destination="@id/formStepOneFragment" />
-            <argument
-                android:name="household"
-                app:argType="io.bewsys.spmobile.data.local.HouseholdModel"
-                app:nullable="true"
-                android:defaultValue="@null" />
+
             <argument
                 android:name="title"
                 app:argType="string" />
+
         </fragment>
         <fragment
             android:id="@+id/formStepOneFragment"
             android:name="io.bewsys.spmobile.ui.households.forms.developmentalform.FormStepOneFragment"
-            android:label="{title} Step 1/6"
+            android:label="{title}"
             tools:layout="@layout/fragment_add_household_one_consent">
-            <action
-                android:id="@+id/action_formStepOneFragment_to_formStepTwoFragment"
-                app:destination="@id/formStepTwoFragment" />
-            <argument
-                android:name="household"
-                app:argType="io.bewsys.spmobile.data.local.HouseholdModel"
-                app:nullable="true"
-                android:defaultValue="@null" />
             <argument
                 android:name="title"
                 app:argType="string" />
@@ -144,19 +127,8 @@
         <fragment
             android:id="@+id/formStepFiveFragment"
             android:name="io.bewsys.spmobile.ui.households.forms.developmentalform.FormStepFiveFragment"
-            android:label="Step 5/6"
+            android:label="{title}"
             tools:layout="@layout/fragment_add_household_five_shock">
-            <action
-                android:id="@+id/action_formStepFiveFragment_to_formStepFourFragment"
-                app:destination="@id/formStepFourFragment" />
-            <action
-                android:id="@+id/action_formStepFiveFragment_to_formStepSixFragment2"
-                app:destination="@id/formStepSixFragment2" />
-            <argument
-                android:name="household"
-                app:argType="io.bewsys.spmobile.data.local.HouseholdModel"
-                app:nullable="true"
-                android:defaultValue="@null" />
             <argument
                 android:name="title"
                 app:argType="string" />
@@ -164,19 +136,9 @@
         <fragment
             android:id="@+id/formStepThreeFragment"
             android:name="io.bewsys.spmobile.ui.households.forms.developmentalform.FormStepThreeFragment"
-            android:label="Step 3/6"
+            android:label="{title}"
             tools:layout="@layout/fragment_add_household_three_head">
-            <action
-                android:id="@+id/action_formStepThreeFragment_to_formStepFourFragment"
-                app:destination="@id/formStepFourFragment" />
-            <action
-                android:id="@+id/action_formStepThreeFragment_to_formStepTwoFragment"
-                app:destination="@id/formStepTwoFragment" />
-            <argument
-                android:name="household"
-                app:argType="io.bewsys.spmobile.data.local.HouseholdModel"
-                app:nullable="true"
-                android:defaultValue="@null" />
+
             <argument
                 android:name="title"
                 app:argType="string" />
@@ -184,19 +146,9 @@
         <fragment
             android:id="@+id/formStepFourFragment"
             android:name="io.bewsys.spmobile.ui.households.forms.developmentalform.FormStepFourFragment"
-            android:label="Step 4/6"
+            android:label="{title}"
             tools:layout="@layout/fragment_add_household_four_home">
-            <action
-                android:id="@+id/action_formStepFourFragment_to_formStepFiveFragment"
-                app:destination="@id/formStepFiveFragment" />
-            <action
-                android:id="@+id/action_formStepFourFragment_to_formStepThreeFragment"
-                app:destination="@id/formStepThreeFragment" />
-            <argument
-                android:name="household"
-                app:argType="io.bewsys.spmobile.data.local.HouseholdModel"
-                app:nullable="true"
-                android:defaultValue="@null" />
+
             <argument
                 android:name="title"
                 app:argType="string" />
@@ -204,18 +156,9 @@
         <fragment
             android:id="@+id/formStepSixFragment2"
             android:name="io.bewsys.spmobile.ui.households.forms.developmentalform.FormStepSixFragment"
-            android:label="Step 6/6" >
-            <action
-                android:id="@+id/action_formStepSixFragment2_to_formStepFiveFragment"
-                app:destination="@id/formStepFiveFragment" />
-            <action
-                android:id="@+id/action_formStepSixFragment2_to_formStepSevenFragment"
-                app:destination="@id/formStepSevenFragment" />
-            <argument
-                android:name="household"
-                app:argType="io.bewsys.spmobile.data.local.HouseholdModel"
-                app:nullable="true"
-                android:defaultValue="@null" />
+            android:label="{title}"
+            tools:layout="@layout/fragment_add_household_six_property">
+
             <argument
                 android:name="title"
                 app:argType="string" />
@@ -225,17 +168,7 @@
             android:name="io.bewsys.spmobile.ui.households.forms.developmentalform.FormStepSevenFragment"
             android:label="@string/review"
             tools:layout="@layout/fragment_add_household_seven_review1" >
-            <action
-                android:id="@+id/action_formStepSevenFragment_to_formStepSixFragment2"
-                app:destination="@id/formStepSixFragment2" />
-            <action
-                android:id="@+id/action_formStepSevenFragment_to_formStepEightFragment"
-                app:destination="@id/formStepEightFragment" />
-            <argument
-                android:name="household"
-                app:argType="io.bewsys.spmobile.data.local.HouseholdModel"
-                app:nullable="true"
-                android:defaultValue="@null" />
+
             <argument
                 android:name="title"
                 app:argType="string" />
@@ -245,14 +178,7 @@
             android:name="io.bewsys.spmobile.ui.households.forms.developmentalform.FormStepEightFragment"
             android:label="@string/review"
             tools:layout="@layout/fragment_add_household_eight_review2" >
-            <action
-                android:id="@+id/action_formStepEightFragment_to_formStepSevenFragment"
-                app:destination="@id/formStepSevenFragment" />
-            <argument
-                android:name="household"
-                app:argType="io.bewsys.spmobile.data.local.HouseholdModel"
-                app:nullable="true"
-                android:defaultValue="@null" />
+
             <argument
                 android:name="title"
                 app:argType="string" />
@@ -290,5 +216,8 @@
         <argument
             android:name="household"
             app:argType="io.bewsys.spmobile.data.local.HouseholdModel" />
+        <action
+            android:id="@+id/action_householdDetailFragment_to_form_navigation"
+            app:destination="@id/form_navigation" />
     </fragment>
 </navigation>

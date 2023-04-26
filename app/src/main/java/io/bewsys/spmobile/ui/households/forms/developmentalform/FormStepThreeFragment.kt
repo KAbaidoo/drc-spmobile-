@@ -99,13 +99,7 @@ class FormStepThreeFragment : Fragment(R.layout.fragment_add_household_three_hea
                 rbWidowed.text -> rgHeadMaritalStatus.check(rbWidowed.id)
             }
 
-            //            set text fields
-            viewModel.apply {
-                allTils.forEachIndexed { index, til ->
-                    til.editText?.setText(stepThreeFields[index])
-                }
-            }
-            tilHouseholdHeadDob.editText?.setText(viewModel.headDOB)
+
 
             /*      Set up listeners        */
 //             radio buttons setOnCheckChangelistener
@@ -323,23 +317,26 @@ class FormStepThreeFragment : Fragment(R.layout.fragment_add_household_three_hea
                 }
             }
 
-            val title = if (viewModel.household != null) getString(R.string.edit_household) else getString(R.string.add_household)
-            btnNext.setOnClickListener {
 
-                val action =
-                    FormStepThreeFragmentDirections.actionFormStepThreeFragmentToFormStepFourFragment(
-                       title =title,
-                       household = viewModel.household
-                    )
-                findNavController().navigate(action)
+            //            set text fields
+            viewModel.apply {
+                allTils.forEachIndexed { index, til ->
+                    til.editText?.setText(stepThreeFields[index])
+                }
+            }
+            tilHouseholdHeadDob.editText?.setText(viewModel.headDOB)
+            val title =
+                if (viewModel.household != null) getString(R.string.edit_household) else getString(R.string.add_household)
+
+            btnNext.setOnClickListener {
+                val bundle = bundleOf("title" to title)
+                findNavController().navigate(R.id.formStepFourFragment,bundle )
             }
             btnPrevious.setOnClickListener {
-                val action =
-                    FormStepThreeFragmentDirections.actionFormStepThreeFragmentToFormStepTwoFragment(
-                        title =title,
-                        household = viewModel.household
-                    )
-                findNavController().navigate(action)
+
+                val bundle = bundleOf("title" to title)
+                findNavController().navigate(R.id.formStepTwoFragment,bundle )
+
             }
 
             viewLifecycleOwner.lifecycleScope.launchWhenStarted {

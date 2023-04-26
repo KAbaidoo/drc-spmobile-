@@ -10,6 +10,7 @@ import android.view.MenuItem
 import android.view.View
 import androidx.core.os.bundleOf
 import androidx.core.view.MenuProvider
+import androidx.core.widget.addTextChangedListener
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
@@ -29,7 +30,34 @@ class FormStepFiveFragment : Fragment(R.layout.fragment_add_household_five_shock
         val binding = FragmentAddHouseholdFiveShockBinding.bind(view)
 
         binding.apply {
-
+            val tils = listOf(
+                tilDaysSpentReduceMealsConsumedCopingStrategy,
+                tilDaysSpentReduceMealsAdultForfeitMealForChildCopingStrategy,
+                tilDaysSpentReduceAmountConsumedCopingStrategy,
+                tilDaysSpentEatLessExpensivelyCopingStrategy,
+                tilDaysSpentDaysWithoutEatingCopingStrategy,
+                tilDaysSpentConsumeWildFoodCopingStrategy,
+                tilDaysSpentBorrowFoodOrRelyOnFamilyHelpCopingStrategy,
+                tilDaysSpentBeggingCopingStrategy,
+                tilDaysSpentOtherCopingStrategy,
+                tilNumberOfMealsEatenByChildren6To17Yesterday,
+                tilNumberOfMealsEatenByChildren2To5Yesterday,
+                tilNumberOfMealsEatenByAdults18PlusYesterday,
+                tilNumberOfDaysInWeekConsumedSugarOrSweetProducts,
+                tilNumberOfDaysInWeekConsumedStapleFoods,
+                tilNumberOfDaysInWeekConsumedVegetables,
+                tilNumberOfDaysInWeekConsumedMeat,
+                tilNumberOfDaysInWeekConsumedLegumesOrNuts,
+                tilNumberOfDaysInWeekConsumedFruits,
+                tilNumberOfDaysInWeekConsumedDairyProducts,
+                tilNumberOfDaysInWeekConsumedCookingOils
+            )
+            tils.forEachIndexed { index, til ->
+                til.editText?.addTextChangedListener {
+                    viewModel.setStepFiveFields(index, it)
+                    viewModel.stepFiveHasBlankFields()
+                }
+            }
 
             when (viewModel.affectedByConflict) {
                 rbYesAffectedByConflict.text -> rgAffectedByConflict.check(rbYesAffectedByConflict.id)
@@ -84,34 +112,9 @@ class FormStepFiveFragment : Fragment(R.layout.fragment_add_household_five_shock
                 )
             }
 
-            val tils = listOf(
-                tilDaysSpentReduceMealsConsumedCopingStrategy,
-                tilDaysSpentReduceMealsAdultForfeitMealForChildCopingStrategy,
-                tilDaysSpentReduceAmountConsumedCopingStrategy,
-                tilDaysSpentEatLessExpensivelyCopingStrategy,
-                tilDaysSpentDaysWithoutEatingCopingStrategy,
-                tilDaysSpentConsumeWildFoodCopingStrategy,
-                tilDaysSpentBorrowFoodOrRelyOnFamilyHelpCopingStrategy,
-                tilDaysSpentBeggingCopingStrategy,
-                tilDaysSpentOtherCopingStrategy,
-                tilNumberOfMealsEatenByChildren6To17Yesterday,
-                tilNumberOfMealsEatenByChildren2To5Yesterday,
-                tilNumberOfMealsEatenByAdults18PlusYesterday,
-                tilNumberOfDaysInWeekConsumedSugarOrSweetProducts,
-                tilNumberOfDaysInWeekConsumedStapleFoods,
-                tilNumberOfDaysInWeekConsumedVegetables,
-                tilNumberOfDaysInWeekConsumedMeat,
-                tilNumberOfDaysInWeekConsumedLegumesOrNuts,
-                tilNumberOfDaysInWeekConsumedFruits,
-                tilNumberOfDaysInWeekConsumedDairyProducts,
-                tilNumberOfDaysInWeekConsumedCookingOils
-            )
 
-            viewModel.apply {
-                tils.forEachIndexed { index, til ->
-                    til.editText?.setText(stepFiveFields[index])
-                }
-            }
+
+
 
             rgAffectedByConflict.setOnCheckedChangeListener { _, checkedId ->
                 when (checkedId) {
@@ -210,75 +213,57 @@ class FormStepFiveFragment : Fragment(R.layout.fragment_add_household_five_shock
                 }
             }
 
-
-
+            viewModel.apply {
                 tils.forEachIndexed { index, til ->
-                    til.editText?.addTextChangedListener( object : TextWatcher{
-                        override fun beforeTextChanged(
-                            p0: CharSequence?,
-                            p1: Int,
-                            p2: Int,
-                            p3: Int
-                        ) {
-                        }
-
-                        override fun onTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
-                            viewModel.setStepFiveFields(index,p0)
-                            viewModel.stepFiveHasBlankFields()
-                        }
-                        override fun afterTextChanged(p0: Editable?) {
-                        }
-                    }
-                    )
+                    til.editText?.setText(stepFiveFields[index])
                 }
+            }
 
 
+
+
+            val title =
+                if (viewModel.household != null) getString(R.string.edit_household) else getString(R.string.add_household)
+
+            btnNext.setOnClickListener {
+                val bundle = bundleOf("title" to title)
+                findNavController().navigate(R.id.formStepSixFragment2,bundle )
+            }
+            btnPrevious.setOnClickListener {
+
+                val bundle = bundleOf("title" to title)
+                findNavController().navigate(R.id.formStepFourFragment,bundle )
+
+            }
             viewLifecycleOwner.lifecycleScope.launchWhenStarted {
                 viewModel.stepFiveHasBlankFields.collectLatest {
                     btnNext.isEnabled = it.not()
                 }
             }
-            val title = if (viewModel.household != null) getString(R.string.edit_household) else getString(R.string.add_household)
-            btnNext.setOnClickListener {
-                val action =
-                    FormStepFiveFragmentDirections.actionFormStepFiveFragmentToFormStepSixFragment2(
-                        title = title,
-                        household = viewModel.household
-                    )
-                findNavController().navigate(action)
-            }
-            btnPrevious.setOnClickListener {
-                val action =
-                    FormStepFiveFragmentDirections.actionFormStepFiveFragmentToFormStepFourFragment(
-                        title = title,
-                        household = viewModel.household
-                    )
-                findNavController().navigate(action)
-            }
 
         }
         // set up menu
-        val menuHost = requireActivity()
-        menuHost.addMenuProvider(object : MenuProvider {
-            override fun onCreateMenu(menu: Menu, menuInflater: MenuInflater) {
-                menuInflater.inflate(R.menu.fragment_households_menu, menu)
-
-            }
-
-            override fun onMenuItemSelected(menuItem: MenuItem): Boolean {
-                return when (menuItem.itemId) {
-
-                    R.id.action_download_households -> {
-                        val bundle = bundleOf("id" to viewModel.id)
-                        findNavController().navigate(R.id.deleteHouseholdDialogFragment, bundle)
-
-                        true
-                    }
-
-                    else -> false
-                }
-            }
-        }, viewLifecycleOwner, Lifecycle.State.RESUMED)
+//        val menuHost = requireActivity()
+//        menuHost.addMenuProvider(object : MenuProvider {
+//            override fun onCreateMenu(menu: Menu, menuInflater: MenuInflater) {
+//                menuInflater.inflate(R.menu.fragment_households_menu, menu)
+//
+//            }
+//
+//            override fun onMenuItemSelected(menuItem: MenuItem): Boolean {
+//                return when (menuItem.itemId) {
+//
+//                    R.id.action_download_households -> {
+//                        val bundle = bundleOf("id" to viewModel.id)
+//                        findNavController().navigate(R.id.deleteHouseholdDialogFragment, bundle)
+//
+//                        true
+//                    }
+//
+//                    else -> false
+//                }
+//            }
+//        }, viewLifecycleOwner, Lifecycle.State.RESUMED)
 
     }
 }

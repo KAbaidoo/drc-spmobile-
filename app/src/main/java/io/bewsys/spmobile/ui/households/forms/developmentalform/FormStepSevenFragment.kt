@@ -9,9 +9,11 @@ import androidx.core.os.bundleOf
 import androidx.core.view.MenuProvider
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Lifecycle
+import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import io.bewsys.spmobile.R
 import io.bewsys.spmobile.databinding.FragmentAddHouseholdSevenReview1Binding
+import kotlinx.coroutines.flow.collectLatest
 import org.koin.androidx.navigation.koinNavGraphViewModel
 import org.koin.androidx.viewmodel.ext.android.activityViewModel
 
@@ -85,25 +87,27 @@ class FormStepSevenFragment : Fragment(R.layout.fragment_add_household_seven_rev
                 tvMobileMoneyUsername.append(": $mobileMoneyUsername")
                 tvMobileMoneyNumber.append(": $mobileMoneyPhoneNumber")
             }
-            val title = if (viewModel.household != null) getString(R.string.edit_household) else getString(R.string.add_household)
+            val title =
+                if (viewModel.household != null) getString(R.string.edit_household) else getString(R.string.add_household)
+
             btnNext.setOnClickListener {
-                val action =
-                    FormStepSevenFragmentDirections.actionFormStepSevenFragmentToFormStepEightFragment(
-                        title = title,
-                        household = viewModel.household
-                    )
-                findNavController().navigate(action)
+                val bundle = bundleOf("title" to title)
+                findNavController().navigate(R.id.formStepEightFragment )
             }
             btnPrevious.setOnClickListener {
-                val action =
-                    FormStepSevenFragmentDirections.actionFormStepSevenFragmentToFormStepSixFragment2(
-                        title = title,
-                        household = viewModel.household
-                    )
-                findNavController().navigate(action)
+
+                val bundle = bundleOf("title" to title)
+                findNavController().navigate(R.id.formStepSixFragment2 )
+
+            }
+            viewLifecycleOwner.lifecycleScope.launchWhenStarted {
+                viewModel.stepSixHasBlankFields.collectLatest {
+                    btnNext.isEnabled = it.not()
+                }
+
             }
         }
-        // set up menu
+       /* // set up menu
         val menuHost = requireActivity()
         menuHost.addMenuProvider(object : MenuProvider {
             override fun onCreateMenu(menu: Menu, menuInflater: MenuInflater) {
@@ -124,7 +128,7 @@ class FormStepSevenFragment : Fragment(R.layout.fragment_add_household_seven_rev
                     else -> false
                 }
             }
-        }, viewLifecycleOwner, Lifecycle.State.RESUMED)
+        }, viewLifecycleOwner, Lifecycle.State.RESUMED)*/
 
     }
 

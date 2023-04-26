@@ -10,7 +10,6 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:paddingStart="24dp"
-        android:paddingTop="24dp"
         android:paddingEnd="24dp"
         android:scrollbars="none">
 
@@ -151,6 +150,30 @@
                     android:text="@string/no" />
             </RadioGroup>
 
+            <!--            respondent_age-->
+            <TextView
+                android:id="@+id/tv_respondent_age"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:text="@string/respondent_age"
+                android:textAppearance="@style/TextAppearance.MaterialComponents.Body1" />
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/til_respondent_age"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:minHeight="20dp"
+                app:boxStrokeWidth="2dp"
+                app:endIconMode="clear_text">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="number"
+                    android:maxLines="1" />
+            </com.google.android.material.textfield.TextInputLayout>
 
             <!--            respondent age known -->
             <TextView
@@ -179,57 +202,7 @@
                     android:text="@string/no" />
             </RadioGroup>
 
-            <!--            respondent_age-->
-            <TextView
-                android:id="@+id/tv_respondent_age"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
-                android:text="@string/respondent_age"
-                android:textAppearance="@style/TextAppearance.MaterialComponents.Body1" />
 
-            <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/til_respondent_age"
-                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:minHeight="20dp"
-                app:boxStrokeWidth="2dp"
-                app:endIconMode="clear_text">
-
-                <com.google.android.material.textfield.TextInputEditText
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:inputType="number"
-                    android:maxLines="1" />
-            </com.google.android.material.textfield.TextInputLayout>
-
-            <!--            respondent_dob_known-->
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
-                android:text="@string/respondent_dob_known"
-                android:textAppearance="@style/TextAppearance.MaterialComponents.Body1" />
-
-            <RadioGroup
-                android:id="@+id/rg_respondent_dob_known"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="vertical">
-
-                <com.google.android.material.radiobutton.MaterialRadioButton
-                    android:id="@+id/rb_yes_dob"
-                    android:layout_width="match_parent"
-                    android:layout_height="40dp"
-                    android:text="Yes" />
-
-                <com.google.android.material.radiobutton.MaterialRadioButton
-                    android:id="@+id/rb_no_dob"
-                    android:layout_width="match_parent"
-                    android:layout_height="40dp"
-                    android:text="@string/no" />
-            </RadioGroup>
             <!--            respondent_dob -->
             <TextView
                 android:id="@+id/tv_respondent_dob"
@@ -258,6 +231,33 @@
                     android:maxLines="1" />
 
             </com.google.android.material.textfield.TextInputLayout>
+            <!--            respondent_dob_known-->
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:text="@string/respondent_dob_known"
+                android:textAppearance="@style/TextAppearance.MaterialComponents.Body1" />
+
+            <RadioGroup
+                android:id="@+id/rg_respondent_dob_known"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <com.google.android.material.radiobutton.MaterialRadioButton
+                    android:id="@+id/rb_yes_dob"
+                    android:layout_width="match_parent"
+                    android:layout_height="40dp"
+                    android:text="Yes" />
+
+                <com.google.android.material.radiobutton.MaterialRadioButton
+                    android:id="@+id/rb_no_dob"
+                    android:layout_width="match_parent"
+                    android:layout_height="40dp"
+                    android:text="@string/no" />
+            </RadioGroup>
+
 
             <!--            gender-->
             <TextView
