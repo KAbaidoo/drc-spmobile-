@@ -8,8 +8,6 @@ import io.ktor.client.statement.*
 import io.ktor.http.*
 
 
-private const val TAG = "HouseholdApi"
-
 class HouseholdApi(private val client: HttpClient) {
 
     suspend fun uploadHousehold(payload: HouseholdPayload, accessToken: String): HttpResponse =
@@ -32,6 +30,9 @@ class HouseholdApi(private val client: HttpClient) {
 
         }
 
+    companion object {
+        private const val TAG = "HouseholdApi"
+    }
 
 }
 

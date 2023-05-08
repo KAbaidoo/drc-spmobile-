@@ -4,12 +4,15 @@ package io.bewsys.spmobile.ui
 import android.Manifest
 import android.annotation.SuppressLint
 import android.content.SharedPreferences
+import android.content.pm.PackageManager
+import android.location.Location
 import android.os.Bundle
 import android.util.Log
 import android.view.View
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.app.AppCompatDelegate
+import androidx.core.app.ActivityCompat
 import androidx.core.os.LocaleListCompat
 import androidx.core.os.bundleOf
 import androidx.drawerlayout.widget.DrawerLayout
@@ -22,14 +25,19 @@ import androidx.navigation.ui.*
 import androidx.preference.PreferenceManager
 import com.google.android.gms.location.FusedLocationProviderClient
 import com.google.android.gms.location.LocationServices
+import com.google.android.gms.location.LocationServices.getFusedLocationProviderClient
 import com.google.android.material.navigation.NavigationView
 import com.vmadalin.easypermissions.EasyPermissions
 import com.vmadalin.easypermissions.dialogs.SettingsDialog
 import io.bewsys.spmobile.PERMISSION_LOCATION_REQUEST_CODE
 import io.bewsys.spmobile.R
 import io.bewsys.spmobile.databinding.ActivityMainBinding
+import io.bewsys.spmobile.ui.nonconsenting.form.AddNonConsentingHouseholdFragment
 import io.bewsys.spmobile.util.LocalizationUtil
+import io.bewsys.spmobile.util.LocationProvider
 import kotlinx.coroutines.flow.collectLatest
+import org.koin.android.ext.android.get
+import org.koin.android.ext.android.inject
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 
@@ -38,16 +46,21 @@ class MainActivity : AppCompatActivity(), EasyPermissions.PermissionCallbacks {
     private lateinit var appBarConfiguration: AppBarConfiguration
     private lateinit var binding: ActivityMainBinding
     private lateinit var navController: NavController
+    private var locationProvider : LocationProvider? = null
+//    private val locationProvider : LocationProvider by inject()
+
+
     private val viewModel: MainViewModel by viewModel()
 
-    private lateinit var fusedLocationProviderClient: FusedLocationProviderClient
+    private var currentLocation: Location? = null
+
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+      locationProvider =  LocationProvider(this)
 
-        fusedLocationProviderClient =
-            LocationServices.getFusedLocationProviderClient(this)
+
 
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
@@ -55,13 +68,13 @@ class MainActivity : AppCompatActivity(), EasyPermissions.PermissionCallbacks {
         setSupportActionBar(binding.appBarMain.toolbar)
 
 
-        lifecycleScope.launchWhenStarted {
-            viewModel.userState.collectLatest {
-                if (it.not()) {
-                    navController.navigate(R.id.nav_login)
-                }
-            }
-        }
+//        lifecycleScope.launchWhenStarted {
+//            viewModel.userState.collectLatest {
+//                if (it.not()) {
+//                    navController.navigate(R.id.nav_login)
+//                }
+//            }
+//        }
 
         val drawerLayout: DrawerLayout = binding.drawerLayout
         val navView: NavigationView = binding.navView
@@ -104,12 +117,22 @@ class MainActivity : AppCompatActivity(), EasyPermissions.PermissionCallbacks {
 
         @SuppressLint("MissingPermission")
         if (hasLocationPermission()) {
-            fusedLocationProviderClient.lastLocation.addOnSuccessListener { location -> }
+            locationProvider?.location?.observe(this) { loc: Location? ->
+                currentLocation = loc
+            }
         } else {
             requestLocationPermission()
         }
 
+
+        getLastKnownLocation()
     } //end of onCreate
+
+    private fun getLastKnownLocation() {
+
+        Log.d(TAG, "lon: ${currentLocation?.longitude} lat: ${currentLocation?.latitude}")
+
+    }
 
     private fun hasLocationPermission() =
         EasyPermissions.hasPermissions(
@@ -120,7 +143,7 @@ class MainActivity : AppCompatActivity(), EasyPermissions.PermissionCallbacks {
     private fun requestLocationPermission() {
         EasyPermissions.requestPermissions(
             this,
-            "This application cannot work without Location Permission.",
+            getString(R.string.cannot_work_without_permission),
             PERMISSION_LOCATION_REQUEST_CODE,
             Manifest.permission.ACCESS_FINE_LOCATION
         )
@@ -146,7 +169,7 @@ class MainActivity : AppCompatActivity(), EasyPermissions.PermissionCallbacks {
     override fun onPermissionsGranted(requestCode: Int, perms: List<String>) {
         Toast.makeText(
             applicationContext,
-            "Permission Granted!",
+            getString(R.string.permission_granted),
             Toast.LENGTH_SHORT
         ).show()
     }
@@ -156,4 +179,7 @@ class MainActivity : AppCompatActivity(), EasyPermissions.PermissionCallbacks {
         return navController.navigateUp(appBarConfiguration) || super.onSupportNavigateUp()
     }
 
+    companion object {
+        private const val TAG = "MainActivity"
+    }
 }

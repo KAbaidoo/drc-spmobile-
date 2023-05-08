@@ -31,13 +31,14 @@ import org.koin.androidx.workmanager.dsl.worker
 import org.koin.dsl.module
 
 val appModule = module {
+//    single { LocationProvider( androidContext()) }
 
     single<SqlDriver> { AndroidSqliteDriver(Database.Schema, androidContext(), "sp.db") }
     single { Database(get()) }
     single { KtorHttpClient(androidContext()).getClient() }
     single { PreferencesManager(androidContext()) }
     single { provideApplicationScope() }
-    single { LocationProvider(androidContext()) }
+
 
     factory { AuthApi(get()) }
     factory { HouseholdApi(get()) }
@@ -46,7 +47,7 @@ val appModule = module {
     factory { MemberApi(get()) }
 
     factory { DashboardRepository(get(),get(),get(),get()) }
-    factory { HouseholdRepository(get(),get(),get(),get()) }
+    factory { HouseholdRepository(get(),get(),get(),get(),get()) }
     factory { NonConsentingHouseholdRepository(get(),get(),get()) }
     factory { AuthRepository(get(),get()) }
     factory { MemberRepository(get(),get(),get(),get()) }
@@ -61,7 +62,7 @@ val appModule = module {
     viewModel { ProfileViewModel(get(),get()) }
     viewModel { TargetingViewModel(get()) }
     viewModel { AddNonConsentingHouseholdViewModel(get(), get(), get(), get())}
-    viewModel { SharedDevelopmentalFormViewModel(get(), get(),get(),get()) }
+    viewModel { SharedDevelopmentalFormViewModel(get(), get(),get(),get(),get()) }
     viewModel { LoginViewModel(get(), get()) }
     viewModel { MainViewModel(get()) }
     viewModel { LoginDialogViewModel(get()) }

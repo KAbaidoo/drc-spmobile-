@@ -6,24 +6,25 @@ import android.location.Location
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.google.android.gms.location.FusedLocationProviderClient
-import com.google.android.gms.location.LocationServices
+import com.google.android.gms.location.LocationServices.getFusedLocationProviderClient
 
-class LocationProvider(val context: Context) {
-    private var location: MutableLiveData<Location> = MutableLiveData()
-    private var getFusedLocationProviderClient: FusedLocationProviderClient? =null
+class LocationProvider(context: Context) {
+    private var getFusedLocationProviderClient: FusedLocationProviderClient? =
+        getFusedLocationProviderClient(context)
 
-    // using singleton pattern to get the locationProviderClient
+    private val _location = MutableLiveData<Location>()
+    val location:LiveData<Location>
+        get() = _location
+
     init {
-        getFusedLocationProviderClient = LocationServices.getFusedLocationProviderClient(context)
+        getLocation()
     }
 
     @SuppressLint("MissingPermission")
-    fun getLocation(): LiveData<Location> {
-
+    private fun getLocation(){
         getFusedLocationProviderClient?.lastLocation
             ?.addOnSuccessListener { loc: Location? ->
-                location.value = loc
+                _location.value = loc
             }
-        return location
     }
 }

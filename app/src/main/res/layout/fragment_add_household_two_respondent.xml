@@ -150,6 +150,32 @@
                     android:text="@string/no" />
             </RadioGroup>
 
+            <!--            respondent age known -->
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:text="@string/respondent_age_known"
+                android:textAppearance="@style/TextAppearance.MaterialComponents.Body1" />
+            <RadioGroup
+                android:id="@+id/rg_respondent_age_known"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <com.google.android.material.radiobutton.MaterialRadioButton
+                    android:id="@+id/rb_yes_age"
+                    android:layout_width="match_parent"
+                    android:layout_height="40dp"
+                    android:text="@string/yes" />
+
+                <com.google.android.material.radiobutton.MaterialRadioButton
+                    android:id="@+id/rb_no_age"
+                    android:layout_width="match_parent"
+                    android:layout_height="40dp"
+                    android:text="@string/no" />
+            </RadioGroup>
+
             <!--            respondent_age-->
             <TextView
                 android:id="@+id/tv_respondent_age"
@@ -175,33 +201,33 @@
                     android:maxLines="1" />
             </com.google.android.material.textfield.TextInputLayout>
 
-            <!--            respondent age known -->
+
+            <!--            respondent_dob_known-->
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
-                android:text="@string/respondent_age_known"
+                android:text="@string/respondent_dob_known"
                 android:textAppearance="@style/TextAppearance.MaterialComponents.Body1" />
 
             <RadioGroup
-                android:id="@+id/rg_respondent_age_known"
+                android:id="@+id/rg_respondent_dob_known"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="vertical">
 
                 <com.google.android.material.radiobutton.MaterialRadioButton
-                    android:id="@+id/rb_yes_age"
+                    android:id="@+id/rb_yes_dob"
                     android:layout_width="match_parent"
                     android:layout_height="40dp"
-                    android:text="@string/yes" />
+                    android:text="Yes" />
 
                 <com.google.android.material.radiobutton.MaterialRadioButton
-                    android:id="@+id/rb_no_age"
+                    android:id="@+id/rb_no_dob"
                     android:layout_width="match_parent"
                     android:layout_height="40dp"
                     android:text="@string/no" />
             </RadioGroup>
-
 
             <!--            respondent_dob -->
             <TextView
@@ -231,32 +257,7 @@
                     android:maxLines="1" />
 
             </com.google.android.material.textfield.TextInputLayout>
-            <!--            respondent_dob_known-->
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
-                android:text="@string/respondent_dob_known"
-                android:textAppearance="@style/TextAppearance.MaterialComponents.Body1" />
 
-            <RadioGroup
-                android:id="@+id/rg_respondent_dob_known"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="vertical">
-
-                <com.google.android.material.radiobutton.MaterialRadioButton
-                    android:id="@+id/rb_yes_dob"
-                    android:layout_width="match_parent"
-                    android:layout_height="40dp"
-                    android:text="Yes" />
-
-                <com.google.android.material.radiobutton.MaterialRadioButton
-                    android:id="@+id/rb_no_dob"
-                    android:layout_width="match_parent"
-                    android:layout_height="40dp"
-                    android:text="@string/no" />
-            </RadioGroup>
 
 
             <!--            gender-->
@@ -492,82 +493,7 @@
 
             </LinearLayout>
 
-            <!-- health area and health zone-->
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
-                android:baselineAligned="false"
-                android:orientation="horizontal">
 
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginEnd="12dp"
-                    android:layout_weight="1"
-                    android:orientation="vertical">
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="@string/health_area"
-                        android:textAppearance="@style/TextAppearance.MaterialComponents.Body1" />
-
-
-                    <com.google.android.material.textfield.TextInputLayout
-                        android:id="@+id/til_health_area"
-                        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense.ExposedDropdownMenu"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:minHeight="20dp"
-                        app:boxStrokeWidth="2dp">
-
-                        <AutoCompleteTextView
-                            android:id="@+id/autoCompleteTextViewHealthArea"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:ellipsize="end"
-                            android:inputType="none"
-                            android:singleLine="true" />
-
-                    </com.google.android.material.textfield.TextInputLayout>
-                </LinearLayout>
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="12dp"
-
-                    android:layout_weight="1"
-                    android:orientation="vertical">
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="@string/health_zone"
-                        android:textAppearance="@style/TextAppearance.MaterialComponents.Body1" />
-
-
-                    <com.google.android.material.textfield.TextInputLayout
-                        android:id="@+id/til_health_zone"
-                        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense.ExposedDropdownMenu"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:minHeight="20dp"
-                        app:boxStrokeWidth="2dp">
-
-                        <AutoCompleteTextView
-                            android:id="@+id/autoCompleteTextViewHealthZone"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:ellipsize="end"
-                            android:inputType="none"
-                            android:singleLine="true" />
-
-                    </com.google.android.material.textfield.TextInputLayout>
-                </LinearLayout>
-
-            </LinearLayout>
 
             <TextView
                 android:layout_width="wrap_content"
@@ -712,7 +638,7 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:editable="false"
-                            android:text="" />
+                            android:text="@string/lon_placeholder" />
                     </com.google.android.material.textfield.TextInputLayout>
                 </LinearLayout>
 
@@ -742,7 +668,7 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:editable="false"
-                            android:text="" />
+                            android:text="@string/lat_placeholder" />
                     </com.google.android.material.textfield.TextInputLayout>
                 </LinearLayout>
 

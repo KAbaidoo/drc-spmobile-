@@ -29,6 +29,7 @@ import io.bewsys.spmobile.PERMISSION_LOCATION_REQUEST_CODE
 import io.bewsys.spmobile.R
 import io.bewsys.spmobile.databinding.FragmentAddHouseholdTwoRespondentBinding
 import io.bewsys.spmobile.util.LocationProvider
+import io.bewsys.spmobile.util.swap
 import kotlinx.coroutines.flow.collectLatest
 import org.koin.android.ext.android.inject
 import org.koin.androidx.navigation.koinNavGraphViewModel
@@ -59,30 +60,23 @@ class FormStepTwoFragment : Fragment(R.layout.fragment_add_household_two_respond
     private val binding get() = _binding!!
 
 
-    override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
+
+
+    @SuppressLint("MissingPermission")
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+        _binding = FragmentAddHouseholdTwoRespondentBinding.bind(view)
+
+
         if (hasLocationPermission()) {
-            locationProvider.getLocation().observe(viewLifecycleOwner) {
+            locationProvider.location.observe(viewLifecycleOwner) {
                 currentLocation = it
             }
         } else {
             requestLocationPermission()
         }
-        return super.onCreateView(inflater, container, savedInstanceState)
-    }
 
-    @SuppressLint("MissingPermission")
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-        _binding = FragmentAddHouseholdTwoRespondentBinding.bind(view)
-
-        fun MutableList<String>.swap(it: List<String>) {
-            this.clear()
-            this.addAll(it)
-        }
 
         viewModel.provinces.observe(viewLifecycleOwner) {
             provinces.swap(it)
@@ -103,6 +97,11 @@ class FormStepTwoFragment : Fragment(R.layout.fragment_add_household_two_respond
 
 
         binding.apply {
+            viewLifecycleOwner.lifecycleScope.launchWhenStarted {
+                viewModel.stepTwoHasBlankFields.collectLatest {
+                    btnNext.isEnabled = it.not()
+                }
+            }
             til_Lat = tilLat
             til_Lon = tilLon
 
@@ -113,42 +112,9 @@ class FormStepTwoFragment : Fragment(R.layout.fragment_add_household_two_respond
                 tilRespondentAge,
                 tilRespondentVoterId,
                 tilRespondentPhoneNumber,
-                tilAddress,
+                tilAddress
             )
 
-            when (viewModel.initialRegistrationType) {
-                rbGeneral.text -> rgInitialRegistrationType.check(rbGeneral.id)
-                rbEmergency.text -> rgInitialRegistrationType.check(rbEmergency.id)
-            }
-            when (viewModel.respondentFamilyBondToHead) {
-                rbYes.text -> rgFamilyBondToHead.check(rbYes.id)
-                rbNo.text -> rgFamilyBondToHead.check(rbNo.id)
-            }
-            when (viewModel.villageOrQuartier) {
-                rbVillage.text -> rgVillageOrQuartier.check(rbVillage.id)
-                rbQuartier.text -> rgVillageOrQuartier.check(rbQuartier.id)
-            }
-            when (viewModel.territoryOrTown) {
-                rbTerritory.text -> rgTerritoryOrTown.check(rbTerritory.id)
-                rbTown.text -> rgTerritoryOrTown.check(rbTown.id)
-            }
-            when (viewModel.areaOfResidence) {
-                rbUrban.text -> rgAreaOfResidence.check(rbUrban.id)
-                rbUrbanRural.text -> rgAreaOfResidence.check(rbUrbanRural.id)
-                rbRural.text -> rgAreaOfResidence.check(rbRural.id)
-            }
-            when (viewModel.respondentAgeKnown) {
-                rbYesAge.text -> rgRespondentAgeKnown.check(rbYesAge.id)
-                rbNoAge.text -> rgRespondentAgeKnown.check(rbNoAge.id)
-            }
-            when (viewModel.respondentDOBKnown) {
-                rbYesDob.text -> rgRespondentDobKnown.check(rbYesDob.id)
-                rbNoDob.text -> rgRespondentDobKnown.check(rbNoDob.id)
-            }
-            when (viewModel.respondentSex) {
-                rbMale.text -> rgRespondentSex.check(rbMale.id)
-                rbFemale.text -> rgRespondentSex.check(rbFemale.id)
-            }
 
 
             rgInitialRegistrationType.setOnCheckedChangeListener { _, checkedId ->
@@ -268,20 +234,18 @@ class FormStepTwoFragment : Fragment(R.layout.fragment_add_household_two_respond
 
             tilRespondentFirstname.editText?.setOnFocusChangeListener { view, hasFocus ->
                 if (!hasFocus && viewModel.respondentFirstName.isBlank()) {
-                    tilRespondentFirstname.error = "This field cannot be empty!"
+                    tilRespondentFirstname.error = getString(R.string.field_cannot_be_empty)
                 } else tilRespondentFirstname.error = null
             }
             tilRespondentLastname.editText?.setOnFocusChangeListener { view, hasFocus ->
                 if (!hasFocus && viewModel.respondentLastName.isBlank()) {
-                    tilRespondentLastname.error = "This field cannot be empty!"
+                    tilRespondentLastname.error = getString(R.string.field_cannot_be_empty)
                 } else tilRespondentLastname.error = null
             }
 
-            tilAddress.editText?.setOnFocusChangeListener { view, hasFocus ->
-                if (!hasFocus && viewModel.address.isBlank()) {
-                    tilAddress.error = "This field cannot be empty!"
-                } else tilAddress.error = null
-            }
+
+
+
 
 
             val datePicker = MaterialDatePicker
@@ -296,7 +260,7 @@ class FormStepTwoFragment : Fragment(R.layout.fragment_add_household_two_respond
                 datePicker.show(parentFragmentManager, "DATE_PICKER")
             }
             datePicker.addOnPositiveButtonClickListener {
-                val sdf = SimpleDateFormat("dd/MM/yyyy", Locale.getDefault())
+                val sdf = SimpleDateFormat("dd-MM-yyyy", Locale.getDefault())
                 val date = sdf.format(it)
                 tilRespondentDob.editText!!.setText(date)
                 viewModel.respondentDOB = date
@@ -342,6 +306,7 @@ class FormStepTwoFragment : Fragment(R.layout.fragment_add_household_two_respond
                     addTextChangedListener {
 
                         viewModel.groupment = it.toString()
+                        viewModel.getGroupmentId(it.toString())
                     }
                 }
             }
@@ -369,17 +334,53 @@ class FormStepTwoFragment : Fragment(R.layout.fragment_add_household_two_respond
                 tilAddress.editText?.setText(address)
             }
 
+
             tilRespondentDob.editText?.setText(viewModel.respondentDOB)
             tilLon.editText?.setText(viewModel.lon)
             tilLat.editText?.setText(viewModel.lat)
 //            tils.forEachIndexed { index, til ->
 //                til.editText?.setText(viewModel.stepTwoFields[index])
 //            }
-            viewLifecycleOwner.lifecycleScope.launchWhenStarted {
-                viewModel.stepTwoHasBlankFields.collectLatest {
-                    btnNext.isEnabled = it.not()
-                }
+            if(viewModel.household == null){
+                rgRespondentDobKnown.check(rbYesDob.id)
+                rgRespondentAgeKnown.check(rbYesAge.id)
             }
+
+            when (viewModel.initialRegistrationType) {
+                rbGeneral.text -> rgInitialRegistrationType.check(rbGeneral.id)
+                rbEmergency.text -> rgInitialRegistrationType.check(rbEmergency.id)
+            }
+            when (viewModel.respondentFamilyBondToHead) {
+                rbYes.text -> rgFamilyBondToHead.check(rbYes.id)
+                rbNo.text -> rgFamilyBondToHead.check(rbNo.id)
+            }
+            when (viewModel.villageOrQuartier) {
+                rbVillage.text -> rgVillageOrQuartier.check(rbVillage.id)
+                rbQuartier.text -> rgVillageOrQuartier.check(rbQuartier.id)
+            }
+            when (viewModel.territoryOrTown) {
+                rbTerritory.text -> rgTerritoryOrTown.check(rbTerritory.id)
+                rbTown.text -> rgTerritoryOrTown.check(rbTown.id)
+            }
+            when (viewModel.areaOfResidence) {
+                rbUrban.text -> rgAreaOfResidence.check(rbUrban.id)
+                rbUrbanRural.text -> rgAreaOfResidence.check(rbUrbanRural.id)
+                rbRural.text -> rgAreaOfResidence.check(rbRural.id)
+            }
+            when (viewModel.respondentAgeKnown) {
+                rbYesAge.text -> rgRespondentAgeKnown.check(rbYesAge.id)
+                rbNoAge.text -> rgRespondentAgeKnown.check(rbNoAge.id)
+            }
+            when (viewModel.respondentDOBKnown) {
+                rbYesDob.text -> rgRespondentDobKnown.check(rbYesDob.id)
+                rbNoDob.text -> rgRespondentDobKnown.check(rbNoDob.id)
+            }
+            when (viewModel.respondentSex) {
+                rbMale.text -> rgRespondentSex.check(rbMale.id)
+                rbFemale.text -> rgRespondentSex.check(rbFemale.id)
+            }
+
+
 
         } //end of apply block
 

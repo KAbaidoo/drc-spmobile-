@@ -560,7 +560,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
-                android:text="@string/number_of_solar_plate_owned"
+                android:text="@string/number_of_sewing_machines_owned"
                 android:textAppearance="@style/TextAppearance.MaterialComponents.Body1" />
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/til_number_of_sewing_machine_owned"

@@ -1,41 +1,50 @@
 package io.bewsys.spmobile.data.repository
 
+import android.util.Log
+import androidx.work.ListenableWorker
 import app.cash.sqldelight.coroutines.asFlow
 import app.cash.sqldelight.coroutines.mapToList
 import app.cash.sqldelight.coroutines.mapToOne
 import io.bewsys.spmobile.Database
 import io.bewsys.spmobile.data.HouseholdEntity
+import io.bewsys.spmobile.data.MemberEntity
 import io.bewsys.spmobile.data.local.HouseholdModel
 import io.bewsys.spmobile.data.prefsstore.PreferencesManager
 import io.bewsys.spmobile.data.remote.HouseholdApi
+import io.bewsys.spmobile.data.remote.MemberApi
 import io.bewsys.spmobile.data.remote.model.household.HouseholdPayload
 import io.bewsys.spmobile.data.remote.model.auth.login.ErrorResponse
+import io.bewsys.spmobile.data.remote.model.household.HouseholdResponse
+import io.bewsys.spmobile.data.remote.model.member.MemberPayload
+import io.bewsys.spmobile.data.remote.model.member.MemberResponse
 import io.bewsys.spmobile.util.ApplicationScope
 import io.bewsys.spmobile.util.Resource
+import io.bewsys.spmobile.work.HouseholdUploadWorker
 import io.ktor.client.call.*
+import io.ktor.client.statement.*
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.flow.Flow
-import kotlinx.coroutines.flow.first
-import kotlinx.coroutines.flow.flow
-import kotlinx.coroutines.flow.flowOn
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.flow.*
 import kotlinx.coroutines.withContext
 
 
 class HouseholdRepository(
     db: Database,
     private val api: HouseholdApi,
+    private val memberApi: MemberApi,
     private val preferencesManager: PreferencesManager,
     @ApplicationScope private val applicationScope: CoroutineScope
 ) {
     private val householdQueries = db.householdQueries
+    private val membersQueries = db.householdMemberQueries
 
 
     suspend fun getAllHouseholds(): Flow<List<HouseholdEntity>> =
         householdQueries.getAllHouseholds().asFlow().mapToList(context = Dispatchers.Default)
 
-    val getHouseHoldCount = householdQueries.getHouseholdCount().asFlow().mapToOne(Dispatchers.Default)
-
+    val getHouseHoldCount =
+        householdQueries.getHouseholdCount().asFlow().mapToOne(Dispatchers.Default)
 
 
     suspend fun getHousehold(id: Long): HouseholdEntity? =
@@ -208,13 +217,15 @@ class HouseholdRepository(
                 days_spent_eat_less_expensively_coping_strategy = days_spent_eat_less_expensively_coping_strategy,
                 days_spent_reduce_amount_consumed_coping_strategy = days_spent_reduce_amount_consumed_coping_strategy,
                 days_spent_reduce_meals_adult_forfeit_meal_for_child_coping_strategy = days_spent_reduce_meals_adult_forfeit_meal_for_child_coping_strategy,
-                days_spent_reduce_meals_consumed_coping_strategy = days_spent_reduce_meals_consumed_coping_strategy
+                days_spent_reduce_meals_consumed_coping_strategy = days_spent_reduce_meals_consumed_coping_strategy,
+                respondent_sex = respondent_sex
             )
         }
 
     }
+
     suspend fun updateHousehold(
-                                householdModel: HouseholdModel
+        householdModel: HouseholdModel
     ): Unit = withContext(Dispatchers.IO) {
 
         val userPref = preferencesManager.preferencesFlow.first()
@@ -378,36 +389,53 @@ class HouseholdRepository(
                 days_spent_eat_less_expensively_coping_strategy = days_spent_eat_less_expensively_coping_strategy,
                 days_spent_reduce_amount_consumed_coping_strategy = days_spent_reduce_amount_consumed_coping_strategy,
                 days_spent_reduce_meals_adult_forfeit_meal_for_child_coping_strategy = days_spent_reduce_meals_adult_forfeit_meal_for_child_coping_strategy,
-                days_spent_reduce_meals_consumed_coping_strategy = days_spent_reduce_meals_consumed_coping_strategy
+                days_spent_reduce_meals_consumed_coping_strategy = days_spent_reduce_meals_consumed_coping_strategy,
+                respondent_sex = respondent_sex
             )
         }
 
     }
 
-    suspend fun deleteHousehold(id: Long) = withContext(Dispatchers.IO)  {
-               householdQueries.deleteHousehold(id)
+    suspend fun deleteHousehold(id: Long) = withContext(Dispatchers.IO) {
+        householdQueries.deleteHousehold(id)
     }
+
     suspend fun getLastInsertedRowId(): Long = withContext(Dispatchers.IO) {
         householdQueries.lastInsertRowId().executeAsOne()
     }
 
-    suspend fun updateStatus(status: String, id: Long) {
-        householdQueries.updateStatus(status, id)
-    }
+//    suspend fun updateStatus(status: String, id: Long, remoteId: String, surveyNo: String) {
+//        householdQueries.updateStatus(status, remoteId = remoteId, surveyNo = surveyNo, id = id)
+//    }
 
 
+//    suspend fun updateStatus(status: String, id: Long, remote_id: String) {
+//        membersQueries.updateStatus(status, remote_id, id)
+//    }
 
 
     //    ================================================================
     //   *********************** network calls  ************************
-    suspend fun uploadHousehold(payload: HouseholdPayload) = flow {
+    suspend fun uploadHousehold(itemId: Long, payload: HouseholdPayload) = flow {
 
         try {
+
             val userPref = preferencesManager.preferencesFlow.first()
+
             val response = api.uploadHousehold(payload, userPref.token)
 
+
             if (response.status.value in 200..299) {
-                emit(Resource.Success<Any>(response.body()))
+
+                val body = response.body<HouseholdResponse>()
+                householdQueries.updateStatus(
+                    "submitted", id = itemId,
+                    remoteId = body.household!!.id.toString(),
+                    surveyNo = body.household.survey_no
+                )
+                uploadMembersItem(itemId.toString(),body.household.id.toString())
+
+                emit(Resource.Success(body))
             } else {
                 emit(Resource.Failure<ErrorResponse>(response.body()))
             }
@@ -423,7 +451,7 @@ class HouseholdRepository(
             val response = api.updateHousehold(payload, userPref.token)
 
             if (response.status.value in 200..299) {
-                emit(Resource.Success<Any>(response.body()))
+                emit(Resource.Success<HouseholdResponse>(response.body()))
             } else {
                 emit(Resource.Failure<ErrorResponse>(response.body()))
             }
@@ -433,6 +461,96 @@ class HouseholdRepository(
     }.flowOn(Dispatchers.IO)
 
 
+    suspend fun getMemberByHouseholdId(householdId: String): Flow<List<MemberEntity>> =
+        membersQueries.getByHouseholdId(householdId).asFlow()
+            .mapToList(context = Dispatchers.Default)
+
+    private suspend fun uploadMembersItem(householdId: String, householdRemoteId:String) {
+
+        return withContext(Dispatchers.IO) {
+
+            getMemberByHouseholdId(householdId).firstOrNull()?.forEach { memberEntity ->
+                memberEntity.apply {
+                    uploadMember(
+                        MemberPayload(
+                            null,
+                            remote_id,
+                            firstname,
+                            middlename,
+                            lastname,
+                            sex,
+                            age,
+                            dob,
+                            age_known,
+                            dob_known,
+                            profile_picture,
+                            if (is_head == "Yes") 1 else 0,
+                            is_member_respondent,
+                            family_bond_id,
+                            marital_status_id,
+                            birth_certificate,
+                            educational_level_id,
+                            school_attendance_id,
+                            pregnancy_status,
+                            disability_id,
+                            socio_professional_category_id,
+                            sector_of_work_id,
+                            household_id,
+                            status
+                        ), householdRemoteId
+                    ).collectLatest { response ->
+                        when (response) {
+                            is Resource.Success -> {
+                            }
+                            is Resource.Exception -> {
+
+                                response.throwable.localizedMessage?.let {
+                                    Log.d(
+                                        "M_TAG", it
+                                    )
+                                }
+
+                            }
+
+                            else -> {
+                                val res = response as ErrorResponse
+                                Log.d("M_TAG", "${res.msg}")
 
 
+                            }
+                        }
+                    }
+                }
+            }
+
+
+        }
+    }
+
+
+
+
+    suspend fun uploadMember(payload: MemberPayload, householdId: String) = flow {
+
+        try {
+            val userPref = preferencesManager.preferencesFlow.first()
+            val response = memberApi.uploadMember(payload, userPref.token, householdId)
+
+
+            if (response.status.value in 200..299) {
+                val body = response.body<MemberResponse>()
+                membersQueries.updateStatus(
+                    status = "submitted",
+                    id = householdId.toLong(),
+                    remoteId = body.member?.id.toString(),
+                )
+
+                emit(Resource.Success<Any>(response.body()))
+            } else {
+                emit(Resource.Failure<ErrorResponse>(response.body()))
+            }
+        } catch (throwable: Throwable) {
+            emit(Resource.Exception(throwable, null))
+        }
+    }.flowOn(Dispatchers.IO)
 }

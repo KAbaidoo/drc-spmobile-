@@ -13,8 +13,8 @@ private const val TAG = "MemberApi"
 
 class MemberApi(private val client: HttpClient) {
 
-    suspend fun uploadMember(payload: MemberPayload, accessToken: String): HttpResponse =
-        client.post("households/${payload.household_id}/members") {
+    suspend fun uploadMember(payload: MemberPayload, accessToken: String,householdId:String): HttpResponse =
+        client.post("households/$householdId/members") {
 
             headers {
                 append(HttpHeaders.Authorization, "Bearer $accessToken")

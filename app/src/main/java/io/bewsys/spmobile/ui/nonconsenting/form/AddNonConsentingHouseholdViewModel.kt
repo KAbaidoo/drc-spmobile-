@@ -18,6 +18,7 @@ import io.bewsys.spmobile.ADD_NON_CONSENTING_HOUSEHOLD_RESULT_OK
 
 import io.bewsys.spmobile.KEY_DATA_ID
 import io.bewsys.spmobile.PERMISSION_LOCATION_REQUEST_CODE
+import io.bewsys.spmobile.data.local.HouseholdModel
 
 import io.bewsys.spmobile.data.local.NonConsentHouseholdModel
 import io.bewsys.spmobile.data.repository.NonConsentingHouseholdRepository
@@ -34,8 +35,11 @@ class AddNonConsentingHouseholdViewModel(
     private val nonConsentingRepository: NonConsentingHouseholdRepository,
     private val dashboardRepository: DashboardRepository
 ) : ViewModel() {
-
-    val household = state.get<NonConsentHouseholdModel>("household")
+    init {
+        loadProvinces()
+    }
+    var household: NonConsentHouseholdModel? = null
+    var id: Long? = null
 
     private val workManager = WorkManager.getInstance(application)
 
@@ -59,215 +63,113 @@ class AddNonConsentingHouseholdViewModel(
         get() = _groupments
 
 
-    init {
-        loadProvinces()
-//        loadCommunities()Ò
-    }
 
-    var id = household?.id ?: null
-    var reason = household?.reason ?: ""
 
-    var otherReason = household?.other_non_consent_reason ?: ""
+    var reason =  ""
+    var otherReason = ""
+    var address = ""
 
-    var province = household?.province_name ?: ""
+
+    var lon = state.get<String>("lon") ?: ""
         set(value) {
             field = value
-            getProvinceId()
-            loadTerritories()
+            state["lon"] = value
         }
-    var territory = household?.territory_name ?: ""
+    var lat = state.get<String>("lat") ?: ""
         set(value) {
             field = value
-            getTerritoryId()
-            loadCommunities()
+            state["lat"] = value
         }
-    var community = household?.community_name ?: ""
+    var province = state.get<String>("province") ?: ""
         set(value) {
             field = value
-            getCommunityId()
-            loadGroupments()
+            state["province"] = value
         }
-    var groupment = household?.groupement_name ?: ""
+    var territory = state.get<String>("territory") ?: ""
         set(value) {
             field = value
-            getGroupmentId()
+            state["territory"] = value
         }
-    var address = household?.address ?: ""
+    var community = state.get<String>("community") ?: ""
+        set(value) {
+            field = value
+            state["community"] = value
+        }
+    var groupment = state.get<String>("groupment") ?: ""
+        set(value) {
+            field = value
+            state["groupment"] = value
+        }
 
-    var lon = household?.gps_longitude ?: ""
+    private var provinceId: String = state.get<String>("province_id") ?: "1"
+        set(value) {
+            field = value
+            state["province_id"] = value
+        }
 
-    var lat = household?.gps_latitude ?: ""
+    private var communityId: String = state.get<String>("community_id") ?: "1"
+        set(value) {
+            field = value
+            state["community_id"] = value
+        }
 
+    private var groupmentId: String = state.get<String>("groupment_id") ?: "1"
+        set(value) {
+            field = value
+            state["groupment_id"] = value
+        }
 
-    private var provinceId: String = household?.province_id ?: "1"
+    private var territoryId: String = state.get<String>("territory_id") ?: "1"
+        set(value) {
+            field = value
+            state["territory_id"] = value
+        }
 
-    private var communityId: String = household?.community_id ?: "1"
-
-    private var groupmentId: String = household?.groupement_id ?: "1"
-
-    private var territoryId: String = household?.territory_id ?: "1"
-
-    /* var reason = state.get<String>("reason") ?: ""
-         set(value) {
-             field = value
-             state["reason"] = value
-         }
-     var otherReason = state.get<String>("otherReason") ?: ""
-         set(value) {
-             field = value
-             state["otherReason"] = value
-         }
-     var province = state.get<String>("province") ?: ""
-         set(value) {
-             field = value
-             state["province"] = value
-             getProvinceId()
-             loadTerritories()
-         }
-     var territory = state.get<String>("territory") ?: ""
-         set(value) {
-             field = value
-             state["territory"] = value
-             getTerritoryId()
-             loadCommunities()
-         }
-     var community = state.get<String>("community") ?: ""
-         set(value) {
-             field = value
-             state["community"] = value
-             getCommunityId()
-             loadGroupments()
-         }
-     var groupment = state.get<String>("groupment") ?: ""
-         set(value) {
-             field = value
-             state["groupment"] = value
-             getGroupmentId()
-         }
-     var address = state.get<String>("address") ?: ""
-         set(value) {
-             field = value
-             state["address"] = value
-         }
-
-     var lon = state.get<String>("lon") ?: ""
-         set(value) {
-             field = value
-             state["lon"] = value
-         }
-     var lat = state.get<String>("lat") ?: ""
-         set(value) {
-             field = value
-             state["lat"] = value
-         }
-
-     private var provinceId: String = state.get<String>("province_id")?: "1"
-         set(value) {
-             field = value
-             state["province_id"] = value
-         }
-     private var communityId: String = state.get<String>("community_id")?: "1"
-         set(value) {
-             field = value
-             state["community_id"] = value
-         }
-
-     private var groupmentId: String = state.get<String>("groupment_id")?: "1"
-         set(value) {
-             field = value
-             state["groupment_id"] = value
-         }
-     private var territoryId: String = state.get<String>("territory_id")?: "1"
-         set(value) {
-             field = value
-             state["territory_id"] = value
-         } */
-
-
-    private fun loadProvinces() {
+    fun loadProvinces() {
         viewModelScope.launch {
             dashboardRepository.getProvincesList().collectLatest {
                 _provinces.value = it
             }
         }
+
     }
 
-
-    fun loadTerritories() {
+    fun loadTerritoriesWithName(provinceName: String) {
         viewModelScope.launch {
-            dashboardRepository.getTerritoriesList(provinceId).collectLatest {
-                _territories.value = it
+            dashboardRepository.getProvinceByName(provinceName).collectLatest{
+                dashboardRepository.getTerritoriesList( it.firstOrNull()?.id.toString()).collectLatest {
+                    _territories.value = it
+                }
             }
+
+        }
+    }
+
+    fun loadCommunitiesWithName(territoryName: String) {
+        viewModelScope.launch {
+            dashboardRepository.getTerritoryByName(territoryName).collectLatest{
+                dashboardRepository.getCommunitiesList( it.firstOrNull()?.id.toString()).collectLatest {
+                    _communities.value = it
+                }
+            }
+
+        }
+    }
+
+    fun loadGroupmentsWithName(communityName: String) {
+        viewModelScope.launch {
+            dashboardRepository.getCommunityByName(communityName).collectLatest{
+                dashboardRepository.getGroupmentsList( it.firstOrNull()?.id.toString()).collectLatest {
+                    _groupments.value = it
+                }
+            }
+
         }
     }
 
 
-    fun loadCommunities() {
-        viewModelScope.launch {
-            dashboardRepository.getCommunitiesList(territoryId).collectLatest {
-                _communities.value = it
-            }
-        }
-    }
 
 
-    fun loadGroupments() {
-        viewModelScope.launch {
-            dashboardRepository.getGroupmentsList(communityId).collectLatest {
-                _groupments.value = it
-            }
-        }
-    }
-
-    val provinceQuery = state.getStateFlow("province", "").flatMapLatest {
-        dashboardRepository.getProvinceByName(it)
-    }
-
-    fun getProvinceId() {
-        viewModelScope.launch {
-            provinceQuery.collect {
-                provinceId = it.firstOrNull()?.id.toString()
-            }
-        }
-    }
-
-    val communityQuery = state.getStateFlow("community", "").flatMapLatest {
-        dashboardRepository.getCommunityByName(it)
-    }
-
-    fun getCommunityId() {
-        viewModelScope.launch {
-            communityQuery.collect {
-                communityId = it.firstOrNull()?.id.toString()
-            }
-        }
-    }
-
-    private val territoryQuery = state.getStateFlow("territory", "").flatMapLatest {
-        dashboardRepository.getTerritoryByName(it)
-    }
-
-    fun getTerritoryId() {
-        viewModelScope.launch {
-            territoryQuery.collect {
-                territoryId = it.firstOrNull()?.id.toString()
-            }
-        }
-    }
-
-    private val groupmentQuery = state.getStateFlow("groupment", "").flatMapLatest {
-        dashboardRepository.getGroupmentByName(it)
-    }
-
-    fun getGroupmentId() {
-        viewModelScope.launch {
-            groupmentQuery.collect {
-                groupmentId = it.firstOrNull()?.id.toString()
-            }
-        }
-    }
-
-    //province.isBlank() || territory.isBlank() || community.isBlank() || groupment.isBlank() ||
     fun onSaveClicked() {
         if (reason.isBlank() || address.isBlank()) {
             showInvalidInputMessage()

@@ -23,7 +23,9 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical">
-            <!--            has_livestock  -->
+
+
+
 
             <TextView
                 style="@style/Widget.App.Heading.Sub"
@@ -31,6 +33,14 @@
                 android:textStyle="bold" />
 
             <!--            registration type -->
+            <!--            registration type -->
+            <TextView
+                android:id="@+id/tv_status"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:text="status"
+                android:textAppearance="@style/TextAppearance.MaterialComponents.Body1" />
             <TextView
                 android:id="@+id/tv_initial_registration_type"
                 android:layout_width="wrap_content"

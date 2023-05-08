@@ -59,9 +59,9 @@
     <string name="number_of_cars_owned">Number of cars owned</string>
     <string name="number_of_guinea_pigs_owned">Number of guinea pigs owned</string>
     <string name="respondent">Respondent</string>
-    <string name="respondent_firstname">Respondent Firstname</string>
+    <string name="respondent_firstname">* Respondent Firstname</string>
     <string name="respondent_middlename">Respondent Middlename</string>
-    <string name="respondent_lastname">Respondent Lastname</string>
+    <string name="respondent_lastname">* Respondent Lastname</string>
     <string name="respondent_dob">Respondent DOB</string>
     <string name="respondent_family_bond_to_head">Respondent family bond to head</string>
     <string name="respondent_voter_id">Respondent Voter ID</string>
@@ -98,14 +98,14 @@
     <string name="mobile_money_phone_number">Mobile money phone number</string>
     <string name="mobile_money_username">Mobile money username</string>
     <string name="comments">Comments</string>
-    <string name="household_head_lastname">Household head Lastname</string>
+    <string name="household_head_lastname">* Household head Lastname</string>
     <string name="household_head_marital_status">Household head marital status</string>
     <string name="household_head_birth_certificate">Household head birth certificate</string>
     <string name="household_head_educational_level">Household head educational level</string>
     <string name="household_head_disability_id">Household head disability id</string>
     <string name="household_head_phone_number">Household head phone number</string>
     <string name="household_head_socio_professional_category">Household head socio professional category</string>
-    <string name="household_head_voter_id_card">Household head voter ID card</string>
+    <string name="household_head_voter_id_card">* Household head voter ID card</string>
     <string name="household_head_dob">Household head DOB</string>
     <string name="head_dob_known">Head DOB known</string>
     <string name="household_head_age">Household head age</string>
@@ -117,14 +117,14 @@
     <string name="is_head_respondent">Is head respondent</string>
     <string name="address">Address</string>
     <string name="village_or_quartier">Village or quartier</string>
-    <string name="initial_registration_type">Registration type</string>
+    <string name="initial_registration_type">* Registration type</string>
     <string name="area_of_residence">Area of residence</string>
     <string name="community">Community</string>
     <string name="territory">Territory</string>
     <string name="health_zone">Health zone</string>
     <string name="household_head_middlename">Household head Middlename</string>
     <string name="household_head_sex">Household head sex</string>
-    <string name="household_head_firstname">Household head Firstname</string>
+    <string name="household_head_firstname">* Household head Firstname</string>
     <string name="province">Province</string>
     <string name="groupment">Groupment</string>
     <string name="health_area">Health area</string>
@@ -172,7 +172,13 @@
     <string name="next">Next</string>
     <string name="previous">Previous</string>
     <string name="consent">Do you agree to provide your information to fill out this form?</string>
-    <string name="consent_agreement">The Government of the Republic through the Ministry of Social Affairs (MINAS) has embarked on a series of reforms of the social protection sector for effective management. The present reform aims to broaden the MINAS database of poor and vulnerable people to those of agencies involved in implementing social assistance programs, including agencies of the United Nations System and national and international NGOs, and to allow control of personal data, according to a protocol to be agreed. Ultimately, the process will result in the construction of a Social Register serving as a gateway for the registration and eligibility of vulnerable persons and households for several social assistance programs. It is for this purpose that your consent is requested to provide us with the information contained in this questionnaire in order to enable the Government to improve its social policies. Thank you for giving us part of your time and we guarantee the confidential nature of the data collected as a result of this survey, in accordance with Decree No. 10/05 of February 11 relating to the National Statistical System.</string>
+    <string name="consent_agreement">The Government of the Republic through the Ministry of  Social Affairs (MINAS) has embarked on a series of reforms of the social protection sector for effective piloting.
+        The purpose of this reform is to broaden the database of poor and vulnerable persons in MINAS to include those of actors implementing social assistance programmes,
+        including agencies of the United Nations system and national and international NGOs, and to allow the control of personal data, according to a protocol to be agreed.
+        Ultimately, the process will lead to the construction of a Social Register serving as a gateway for the registration and eligibility of vulnerable people and households for several programmes in social assistance.
+        It is for this purpose that your consent is requested to provide us with the information contained in this questionnaire in order to enable the Government to improve its social policies.
+        Thank you for giving us a part from your time and we guarantee the confidential nature of the data collected as a result of this survey, in accordance with Decree No. 10/05 of 11 February on the National Statistical System."
+</string>
     <string name="yes">Yes</string>
     <string name="no">No</string>
     <string name="general">General</string>
@@ -222,7 +228,7 @@
     <string name="number_of_chair_owned">Number of chair owned</string>
     <string name="number_of_bed_owned">Number of bed owned</string>
     <string name="number_of_air_conditioner_owned">Number of air conditioner owned</string>
-    <string name="amount_of_cultivable_land_owned">Amount of cultivable land owned</string>
+    <string name="amount_of_cultivable_land_owned">Acres of cultivable land owned</string>
     <string name="finish">Finish</string>
     <string name="review">Review</string>
     <string name="households">Households</string>
@@ -245,12 +251,12 @@
     <string name="cannot_work_without_location_permission">This application cannot work without Location Permission.</string>
     <string name="permission_granted">Permission Granted!</string>
     <string name="enter_email">Enter a valid email!</string>
-    <string name="preferences">Preferences</string>
+    <string name="preferences" translatable="false">Preferences</string>
     <string name="language">Language</string>
     <string name="advanced">Advanced</string>
     <string name="help">Help</string>
     <string name="report_technical_issues">Report technical issues</string>
-    <string name="host">Host</string>
+    <string name="host" translatable="false">Host</string>
     <string name="configure_host_server_urls">Configure host server urls</string>
     <string name="choose_language">Choose language</string>
     <string name="configure">Configuration</string>
@@ -260,27 +266,29 @@
     <string name="get_password_link">Get password link</string>
     <string name="respondent_dob_known">Respondent DOB known</string>
     <string name="edit">Edit</string>
-    <string name="empty" />
+    <string name="empty" translatable="false" />
     <string name="member_registration">Member Registration</string>
-    <string name="member_firstname">Member firstname</string>
-    <string name="member_middlename">Member middle name</string>
-    <string name="member_lastname">Member last name</string>
-    <string name="member_age">Member age</string>
-    <string name="member_age_known">Age_known</string>
+    <string name="member_firstname">First name</string>
+    <string name="member_middlename">Middle name</string>
+    <string name="member_lastname">Last name</string>
+    <string name="member_age">Age</string>
+    <string name="member_age_known">Age known</string>
     <string name="member_dob">Date of birth</string>
-    <string name="member_dob_known">Dob known</string>
-    <string name="member_sex">member sex</string>
+    <string name="member_dob_known">Date of birth known</string>
+    <string name="member_sex">Gender</string>
     <string name="member_pregnancy_status">Pregnancy status</string>
     <string name="member_marital_status">Marital status</string>
-    <string name="member_voter_id_card">Member voter id card</string>
-    <string name="member_phone_number">Member phone number</string>
-    <string name="member_birth_certificate">Member birth certificste</string>
-    <string name="member_educational_level">Member educational level</string>
-    <string name="member_socio_professional_category">Member socio-professional category</string>
-    <string name="member_school_attendance">Member school attendance</string>
-    <string name="member_sector_of_work">Member sector of work</string>
-    <string name="member_disability">Member disability</string>
-    <string name="is_member_respondent">is member respondent</string>
+    <string name="member_voter_id_card">Voter id card</string>
+    <string name="member_phone_number">Phone number</string>
+    <string name="member_birth_certificate">Member\'s birth certificate</string>
+    <string name="member_educational_level">Member\'s educational level</string>
+    <string name="member_socio_professional_category">Member\'s socio-professional category</string>
+    <string name="member_school_attendance">Member\'s school attendance</string>
+    <string name="member_sector_of_work">Member\'s sector of work</string>
+    <string name="member_disability">Member\'s disability</string>
+    <string name="is_member_respondent">Is member the respondent</string>
+    <string name="field_cannot_be_empty">This field cannot be empty!</string>
+    <string name="cannot_work_without_permission">This application cannot work without Location Permission.</string>
 
 
 </resources>

@@ -31,6 +31,11 @@ class FormStepThreeFragment : Fragment(R.layout.fragment_add_household_three_hea
 
 
         binding.apply {
+            viewLifecycleOwner.lifecycleScope.launchWhenStarted {
+                viewModel.stepThreeHasBlankFields.collectLatest {
+                    btnNext.isEnabled = it.not()
+                }
+            }
 
             val til = listOf(
                 tilHouseholdHeadFirstname,
@@ -69,35 +74,7 @@ class FormStepThreeFragment : Fragment(R.layout.fragment_add_household_three_hea
                 tilHouseholdHeadSectorOfWork,
                 tilHouseholdHeadDisability
             )
-            //           set radio buttons
-            when (viewModel.headIsRespondent) {
-                rbYesIsRespondent.text -> rgIsHeadRespondent.check(rbYesIsRespondent.id)
-                rbNoIsRespondent.text -> rgIsHeadRespondent.check(rbNoIsRespondent.id)
-            }
-            when (viewModel.headAgeKnown) {
-                rbYesAge.text -> rgHeadAgeKnown.check(rbYesAge.id)
-                rbNoAge.text -> rgHeadAgeKnown.check(rbNoAge.id)
-            }
-            when (viewModel.headDOBKnown) {
-                rbYesDob.text -> rgHeadDobKnown.check(rbYesDob.id)
-                rbNoDob.text -> rgHeadDobKnown.check(rbNoDob.id)
-            }
-            when (viewModel.headSex) {
-                rbMale.text -> rgHouseholdHeadSex.check(rbMale.id)
-                rbFemale.text -> rgHouseholdHeadSex.check(rbFemale.id)
-            }
-            if (rgHeadPregnancyStatus.isEnabled) {
-                when (viewModel.headPregnancyStatus) {
-                    rbYesPregnant.text -> rgHeadPregnancyStatus.check(rbYesPregnant.id)
-                    rbNoPregnant.text -> rgHeadPregnancyStatus.check(rbNoPregnant.id)
-                }
-            }
-            when (viewModel.headMaritalStatus) {
-                rbMarried.text -> rgHeadMaritalStatus.check(rbMarried.id)
-                rbDivorced.text -> rgHeadMaritalStatus.check(rbDivorced.id)
-                rbSingle.text -> rgHeadMaritalStatus.check(rbSingle.id)
-                rbWidowed.text -> rgHeadMaritalStatus.check(rbWidowed.id)
-            }
+
 
 
 
@@ -199,18 +176,7 @@ class FormStepThreeFragment : Fragment(R.layout.fragment_add_household_three_hea
                             headAgeKnown = respondentAgeKnown
                             headSex = respondentSex
 
-                            when (viewModel.headSex) {
-                                rbMale.text -> rgHouseholdHeadSex.check(rbMale.id)
-                                rbFemale.text -> rgHouseholdHeadSex.check(rbFemale.id)
-                            }
-                            when (viewModel.headAgeKnown) {
-                                rbYesAge.text -> rgHeadAgeKnown.check(rbYesAge.id)
-                                rbNoAge.text -> rgHeadAgeKnown.check(rbNoAge.id)
-                            }
-                            when (viewModel.headDOBKnown) {
-                                rbYesDob.text -> rgHeadDobKnown.check(rbYesDob.id)
-                                rbNoDob.text -> rgHeadDobKnown.check(rbNoDob.id)
-                            }
+
 
 
                             tilHouseholdHeadFirstname.editText?.apply {
@@ -242,7 +208,7 @@ class FormStepThreeFragment : Fragment(R.layout.fragment_add_household_three_hea
                                 isEnabled = false
                             }
 
-                            if (respondentSex == "Male") {
+                            if (respondentSex == getString(R.string.respondent_sex)) {
                                 tvHeadPregnancyStatus.isEnabled = false
                                 rgHeadPregnancyStatus.isEnabled = false
                                 rbNoPregnant.isEnabled = false
@@ -252,6 +218,18 @@ class FormStepThreeFragment : Fragment(R.layout.fragment_add_household_three_hea
                                 rgHeadPregnancyStatus.isEnabled = true
                                 rbNoPregnant.isEnabled = true
                                 rbYesPregnant.isEnabled = true
+                            }
+                            when (viewModel.headSex) {
+                                rbMale.text -> rgHouseholdHeadSex.check(rbMale.id)
+                                rbFemale.text -> rgHouseholdHeadSex.check(rbFemale.id)
+                            }
+                            when (viewModel.headAgeKnown) {
+                                rbYesAge.text -> rgHeadAgeKnown.check(rbYesAge.id)
+                                rbNoAge.text -> rgHeadAgeKnown.check(rbNoAge.id)
+                            }
+                            when (viewModel.headDOBKnown) {
+                                rbYesDob.text -> rgHeadDobKnown.check(rbYesDob.id)
+                                rbNoDob.text -> rgHeadDobKnown.check(rbNoDob.id)
                             }
                         }
 
@@ -305,7 +283,7 @@ class FormStepThreeFragment : Fragment(R.layout.fragment_add_household_three_hea
                 datePicker.show(parentFragmentManager, "DATE_PICKER")
             }
             datePicker.addOnPositiveButtonClickListener {
-                val sdf = SimpleDateFormat("dd/MM/yyyy", Locale.getDefault())
+                val sdf = SimpleDateFormat("dd-MM-yyyy", Locale.getDefault())
                 val date = sdf.format(it)
                 tilHouseholdHeadDob.editText!!.setText(date)
             }
@@ -316,7 +294,56 @@ class FormStepThreeFragment : Fragment(R.layout.fragment_add_household_three_hea
                     viewModel.stepThreeHasBlankFields()
                 }
             }
+            tilHouseholdHeadFirstname.editText?.setOnFocusChangeListener { view, hasFocus ->
+                if (!hasFocus && viewModel.respondentFirstName.isBlank()) {
+                    tilHouseholdHeadFirstname.error = getString(R.string.field_cannot_be_empty)
+                } else tilHouseholdHeadFirstname.error = null
+            }
+            tilHouseholdHeadLastname.editText?.setOnFocusChangeListener { view, hasFocus ->
+                if (!hasFocus && viewModel.respondentLastName.isBlank()) {
+                    tilHouseholdHeadLastname.error = getString(R.string.field_cannot_be_empty)
+                } else tilHouseholdHeadLastname.error = null
+            }
+            tilHouseholdHeadVoterIdCard.editText?.setOnFocusChangeListener { view, hasFocus ->
+                if (!hasFocus && viewModel.headVoterId.isBlank()) {
+                    tilHouseholdHeadVoterIdCard.error = getString(R.string.field_cannot_be_empty)
+                } else tilHouseholdHeadVoterIdCard.error = null
+            }
 
+            if (viewModel.household == null){
+               rgHeadDobKnown.check(rbYesDob.id)
+                rgHeadAgeKnown.check(rbYesAge.id)
+            }
+
+            //           set radio buttons
+            when (viewModel.headIsRespondent) {
+                rbYesIsRespondent.text -> rgIsHeadRespondent.check(rbYesIsRespondent.id)
+                rbNoIsRespondent.text -> rgIsHeadRespondent.check(rbNoIsRespondent.id)
+            }
+            when (viewModel.headAgeKnown) {
+                rbYesAge.text -> rgHeadAgeKnown.check(rbYesAge.id)
+                rbNoAge.text -> rgHeadAgeKnown.check(rbNoAge.id)
+            }
+            when (viewModel.headDOBKnown) {
+                rbYesDob.text -> rgHeadDobKnown.check(rbYesDob.id)
+                rbNoDob.text -> rgHeadDobKnown.check(rbNoDob.id)
+            }
+            when (viewModel.headSex) {
+                rbMale.text -> rgHouseholdHeadSex.check(rbMale.id)
+                rbFemale.text -> rgHouseholdHeadSex.check(rbFemale.id)
+            }
+            if (rgHeadPregnancyStatus.isEnabled) {
+                when (viewModel.headPregnancyStatus) {
+                    rbYesPregnant.text -> rgHeadPregnancyStatus.check(rbYesPregnant.id)
+                    rbNoPregnant.text -> rgHeadPregnancyStatus.check(rbNoPregnant.id)
+                }
+            }
+            when (viewModel.headMaritalStatus) {
+                rbMarried.text -> rgHeadMaritalStatus.check(rbMarried.id)
+                rbDivorced.text -> rgHeadMaritalStatus.check(rbDivorced.id)
+                rbSingle.text -> rgHeadMaritalStatus.check(rbSingle.id)
+                rbWidowed.text -> rgHeadMaritalStatus.check(rbWidowed.id)
+            }
 
             //            set text fields
             viewModel.apply {
@@ -329,8 +356,8 @@ class FormStepThreeFragment : Fragment(R.layout.fragment_add_household_three_hea
                 if (viewModel.household != null) getString(R.string.edit_household) else getString(R.string.add_household)
 
             btnNext.setOnClickListener {
-                val bundle = bundleOf("title" to title)
-                findNavController().navigate(R.id.formStepFourFragment,bundle )
+//                val bundle = bundleOf("title" to title)
+                findNavController().navigate(R.id.formStepThreeBFragment )
             }
             btnPrevious.setOnClickListener {
 
@@ -339,35 +366,9 @@ class FormStepThreeFragment : Fragment(R.layout.fragment_add_household_three_hea
 
             }
 
-            viewLifecycleOwner.lifecycleScope.launchWhenStarted {
-                viewModel.stepThreeHasBlankFields.collectLatest {
-                    btnNext.isEnabled = it.not()
-
-                }
-            }
 
         }
         // set up menu
-        val menuHost = requireActivity()
-        menuHost.addMenuProvider(object : MenuProvider {
-            override fun onCreateMenu(menu: Menu, menuInflater: MenuInflater) {
-                menuInflater.inflate(R.menu.fragment_households_menu, menu)
 
-            }
-
-            override fun onMenuItemSelected(menuItem: MenuItem): Boolean {
-                return when (menuItem.itemId) {
-
-                    R.id.action_download_households -> {
-                        val bundle = bundleOf("id" to viewModel.id)
-                        findNavController().navigate(R.id.deleteHouseholdDialogFragment, bundle)
-
-                        true
-                    }
-
-                    else -> false
-                }
-            }
-        }, viewLifecycleOwner, Lifecycle.State.RESUMED)
     }
 }

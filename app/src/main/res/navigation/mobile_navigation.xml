@@ -186,6 +186,16 @@
         <action
             android:id="@+id/action_global_nav_household"
             app:destination="@id/nav_household" />
+        <fragment
+            android:id="@+id/formStepThreeBFragment"
+            android:name="io.bewsys.spmobile.ui.households.forms.developmentalform.FormStepThreeBFragment"
+            android:label="fragment_add_household_threeb_members"
+            tools:layout="@layout/fragment_add_household_threeb_members" />
+        <fragment
+            android:id="@+id/membersFormFragment"
+            android:name="io.bewsys.spmobile.ui.households.forms.developmentalform.MembersFormFragment"
+            android:label="fragment_members"
+            tools:layout="@layout/fragment_members" />
 
     </navigation>
     <dialog

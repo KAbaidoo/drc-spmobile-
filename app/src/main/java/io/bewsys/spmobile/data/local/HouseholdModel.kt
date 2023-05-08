@@ -22,6 +22,7 @@ data class HouseholdModel(
     val respondent_middlename: String?=null,
     val respondent_lastname: String?=null,
     val respondent_dob: String?=null,
+    val respondent_sex: String?=null,
     val respondent_family_bond_to_head: String?=null,
     val respondent_voter_id: String?=null,
     val respondent_phone_number: String?=null,

@@ -1,23 +1,26 @@
 package io.bewsys.spmobile.work
 
+import android.annotation.SuppressLint
 import android.content.Context
 import android.util.Log
-import androidx.work.CoroutineWorker
-import androidx.work.WorkerParameters
+import androidx.work.*
 import io.bewsys.spmobile.KEY_DATA_ID
 import io.bewsys.spmobile.data.HouseholdEntity
+import io.bewsys.spmobile.data.MemberEntity
+import io.bewsys.spmobile.data.remote.model.auth.login.ErrorResponse
 import io.bewsys.spmobile.data.remote.model.household.HouseholdPayload
+import io.bewsys.spmobile.data.remote.model.member.MemberPayload
+import io.bewsys.spmobile.data.remote.model.member.MemberResponse
 import io.bewsys.spmobile.data.repository.HouseholdRepository
+import io.bewsys.spmobile.data.repository.MemberRepository
 import io.bewsys.spmobile.util.Resource
-import io.ktor.client.utils.EmptyContent.status
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.delay
+import kotlinx.coroutines.*
 import kotlinx.coroutines.flow.collectLatest
-import kotlinx.coroutines.withContext
+import kotlinx.coroutines.flow.firstOrNull
 import org.koin.core.component.KoinComponent
 import org.koin.core.component.inject
 
-private const val TAG = "HouseholdUploadWorker"
+
 
 class HouseholdUploadWorker(
     ctx: Context,
@@ -25,36 +28,35 @@ class HouseholdUploadWorker(
 ) : CoroutineWorker(ctx, params), KoinComponent {
 
     val repository: HouseholdRepository by inject()
+    val memberRepo: MemberRepository by inject()
 
     override suspend fun doWork(): Result {
         val id = inputData.getLong(KEY_DATA_ID, -1)
         return withContext(Dispatchers.IO) {
-
             try {
                 if (id < 0) {
-                    Log.e(TAG, "Invalid input id")
                     throw IllegalArgumentException("Invalid input id")
                 }
                 val item = getItem(id)
-                item?.let { uploadItem(item) }
-
+                uploadItem(item!!)
 
             } catch (throwable: Throwable) {
-                Log.e(TAG, "Error uploading data")
+                Log.e(H_TAG, "Error uploading data")
                 Result.failure()
-            }!!
+            }
 
         }
 
     }
 
 
+    @SuppressLint("RestrictedApi")
     private suspend fun uploadItem(item: HouseholdEntity): Result {
         return withContext(Dispatchers.IO) {
             var result: Result = Result.failure()
 
             item.apply {
-                repository.uploadHousehold(
+                repository.uploadHousehold(item.id,
                     HouseholdPayload(
                         survey_no,
                         supervisor_id,
@@ -66,8 +68,6 @@ class HouseholdUploadWorker(
                         respondent_firstname,
                         respondent_middlename,
                         respondent_lastname,
-                        respondent_dob,
-                        respondent_family_bond_to_head,
                         respondent_voter_id,
                         respondent_phone_number,
                         household_head_firstname,
@@ -89,7 +89,6 @@ class HouseholdUploadWorker(
                         household_head_sector_of_work_id,
                         household_head_pregnancy_status,
                         household_migration_status,
-                        is_head_respondent,
                         area_of_residence,
                         province_id,
                         community_id,
@@ -208,25 +207,26 @@ class HouseholdUploadWorker(
                         household_member_with_benefit_from_social_assistance_program,
                         name_of_social_assistance_program,
                         affected_by_other_shock,
+                        remote_id,
                         temp_survey_no,
-                        remote_id.toString()
-
+                        cac,
                     )
                 ).collectLatest { response ->
                     result = when (response) {
                         is Resource.Success -> {
-                            updateItem(item.id)
-                            Result.success()
+                            Result.Success()
                         }
                         is Resource.Exception -> {
-                            response.throwable.localizedMessage?.let { Log.d(TAG, it) }
+                            response.throwable.localizedMessage?.let { Log.d(H_TAG, it) }
                             Result.failure()
                         }
 
                         else -> {
                             val res = response as Resource.Failure
-                            Log.d(TAG, "${res.error}")
+                            Log.d(H_TAG, "${res.error}")
+
                             Result.failure()
+
                         }
                     }
                 }
@@ -236,13 +236,95 @@ class HouseholdUploadWorker(
     }
 
 
-    private suspend fun updateItem(id: Long) {
-        delay(2000L)
-        repository.updateStatus("submitted", id)
-    }
+
+
+//    private suspend fun updateItem(id: Long, remoteId: String, surveyNo: String){
+////        delay(2000L)
+//        repository.updateStatus("submitted", id, remoteId, surveyNo)
+//    }
 
     private suspend fun getItem(id: Long): HouseholdEntity? =
         repository.getHousehold(id)
 
+//    private suspend fun uploadMembersItem(memberList: List<MemberEntity>,householdId: String): Result {
+//        return withContext(Dispatchers.IO) {
+//            var result: Result = Result.failure()
+//            memberList.forEach { memberEntity->
+//                memberEntity.apply {
+//                    memberRepo.uploadMember(
+//                        MemberPayload(
+//                            null,
+//                            remote_id,
+//                            firstname,
+//                            middlename,
+//                            lastname,
+//                            sex,
+//                            age,
+//                            dob,
+//                            age_known,
+//                            dob_known,
+//                            profile_picture,
+//                            if(is_head == "Yes") 1 else 0,
+//                            is_member_respondent,
+//                            family_bond_id,
+//                            marital_status_id,
+//                            birth_certificate,
+//                            educational_level_id,
+//                            school_attendance_id,
+//                            pregnancy_status,
+//                            disability_id,
+//                            socio_professional_category_id,
+//                            sector_of_work_id,
+//                            household_id,
+//                            status
+//                        ),householdId
+//                    ).collectLatest { response ->
+//                        result = when (response) {
+//                            is Resource.Success -> {
+//
+//                                val memberResponse = response.data as MemberResponse
+//
+//                                memberResponse.member?.let {
+//
+//                                    updateMemberItem(
+//                                        id = memberEntity.id,
+//                                        remoteId = it.id.toString(),
+//                                    )
+//                                }
+//                                Result.success()
+//                            }
+//                            is Resource.Exception -> {
+//
+//                                response.throwable.localizedMessage?.let { Log.d(M_TAG, it) }
+//                                Result.failure()
+//                            }
+//
+//                            else -> {
+//                                val res = response as ErrorResponse
+//                                Log.d(M_TAG, "${res.msg}")
+//
+//                                Result.failure()
+//
+//                            }
+//                        }
+//                    }
+//                }
+//            }
+//
+//            result
+//        }
+//    }
 
+
+//    private suspend fun updateMemberItem(id: Long, remoteId: String) {
+//        delay(2000L)
+//        memberRepo.updateStatus("submitted", id, remoteId)
+//    }
+
+
+
+    companion object{
+        private const val H_TAG = "HouseholdUploadWorker"
+        private const val M_TAG = "MemberUploadWorker"
+    }
 }

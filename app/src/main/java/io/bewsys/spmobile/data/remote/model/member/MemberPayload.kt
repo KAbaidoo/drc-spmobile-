@@ -16,7 +16,7 @@ data class MemberPayload(
     val age_known: String?=null,
     val dob_known: String?=null,
     val profile_picture: String?=null,
-    val is_head: String?=null,
+    val is_head: Long?=null,
     val is_member_respondent: String?=null,
     val family_bond_id: String?=null,
     val marital_status_id: String?=null,

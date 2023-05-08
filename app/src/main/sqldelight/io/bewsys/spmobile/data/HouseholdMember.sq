@@ -7,6 +7,7 @@ CREATE TABLE  memberEntity (
     age TEXT,
     profile_picture TEXT ,
     sex TEXT,
+    dob TEXT,
     date_of_birth TEXT,
     age_known TEXT ,
     dob_known TEXT ,
@@ -36,7 +37,7 @@ FROM memberEntity;
 insertMember:
 INSERT OR REPLACE
 INTO memberEntity
-VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?);
+VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?);
 
 getById:
 SELECT *
@@ -61,4 +62,5 @@ DELETE FROM memberEntity WHERE id = ?;
 
 updateStatus:
 UPDATE memberEntity
-SET status = :status WHERE id = :id;
+SET status = :status ,remote_id = :remoteId WHERE id = :id;
+

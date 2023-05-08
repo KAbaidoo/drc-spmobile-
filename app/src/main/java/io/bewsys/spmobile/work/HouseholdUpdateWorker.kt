@@ -15,7 +15,7 @@ import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.withContext
 import org.koin.core.component.KoinComponent
 import org.koin.core.component.inject
-private const val TAG = "HouseholdUpdateWorker"
+
 
 class HouseholdUpdateWorker(
     ctx: Context,
@@ -64,8 +64,6 @@ class HouseholdUpdateWorker(
                         respondent_firstname,
                         respondent_middlename,
                         respondent_lastname,
-                        respondent_dob,
-                        respondent_family_bond_to_head,
                         respondent_voter_id,
                         respondent_phone_number,
                         household_head_firstname,
@@ -87,7 +85,6 @@ class HouseholdUpdateWorker(
                         household_head_sector_of_work_id,
                         household_head_pregnancy_status,
                         household_migration_status,
-                        is_head_respondent,
                         area_of_residence,
                         province_id,
                         community_id,
@@ -206,14 +203,18 @@ class HouseholdUpdateWorker(
                         household_member_with_benefit_from_social_assistance_program,
                         name_of_social_assistance_program,
                         affected_by_other_shock,
+                        remote_id,
                         temp_survey_no,
-                        remote_id.toString()
-
+                        cac,
                     )
                 ).collectLatest { response ->
                     result = when (response) {
                         is Resource.Success -> {
-                            updateItem(item.id)
+
+//                            val householdResponse = response.data as HouseholdResponse
+//                            householdResponse.household.let {
+//                                updateItem(item.id, remoteId =it.id.toString(), surveyNo = it.survey_no )
+//                            }
                             Result.success()
                         }
                         is Resource.Exception -> {
@@ -234,13 +235,15 @@ class HouseholdUpdateWorker(
     }
 
 
-    private suspend fun updateItem(id: Long) {
-        delay(2000L)
-        repository.updateStatus("submitted", id)
-    }
+//    private suspend fun updateItem(id: Long, remoteId:String,surveyNo:String) {
+//        delay(2000L)
+//        repository.updateStatus("submitted", id, remoteId, surveyNo)
+//    }
 
     private suspend fun getItem(id: Long): HouseholdEntity? =
         repository.getHousehold(id)
-
+companion object{
+    private const val TAG = "HouseholdUpdateWorker"
+}
 
 }

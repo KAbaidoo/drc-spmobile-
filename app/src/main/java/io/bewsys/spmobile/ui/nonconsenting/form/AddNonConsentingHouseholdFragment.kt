@@ -23,25 +23,32 @@ import androidx.fragment.app.setFragmentResult
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
+import androidx.navigation.fragment.navArgs
 import com.google.android.gms.location.FusedLocationProviderClient
 
 import com.google.android.gms.location.LocationServices
 import com.google.android.material.snackbar.Snackbar
 import com.vmadalin.easypermissions.EasyPermissions
 import com.vmadalin.easypermissions.dialogs.SettingsDialog
+import io.bewsys.spmobile.FormNavigationArgs
 import io.bewsys.spmobile.PERMISSION_LOCATION_REQUEST_CODE
 import io.bewsys.spmobile.R
 import io.bewsys.spmobile.databinding.FragmentAddNonConsentingBinding
+import io.bewsys.spmobile.ui.MainActivity
 import io.bewsys.spmobile.util.LocationProvider
 import org.koin.androidx.viewmodel.ext.android.viewModel
 import io.bewsys.spmobile.util.exhaustive
+import io.bewsys.spmobile.util.swap
+import org.koin.android.ext.android.get
 import org.koin.android.ext.android.inject
 
 
 class AddNonConsentingHouseholdFragment : Fragment(R.layout.fragment_add_non_consenting),
     EasyPermissions.PermissionCallbacks {
 
-    private var currentLocation: Location? = null
+    val args: AddNonConsentingHouseholdFragmentArgs by navArgs()
+
+
 
     private val provinces = mutableListOf<String>()
     private val communities = mutableListOf<String>()
@@ -49,8 +56,13 @@ class AddNonConsentingHouseholdFragment : Fragment(R.layout.fragment_add_non_con
     private val groupments = mutableListOf<String>()
 
     private val viewModel: AddNonConsentingHouseholdViewModel by viewModel()
-    private val locationProvider: LocationProvider by inject()
+    private var currentLocation: Location? = null
+    private var locationProvider:LocationProvider?=null
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+         locationProvider =  LocationProvider(requireContext())
 
+    }
 
     @SuppressLint("MissingPermission")
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -58,29 +70,49 @@ class AddNonConsentingHouseholdFragment : Fragment(R.layout.fragment_add_non_con
         val binding = FragmentAddNonConsentingBinding.bind(view)
 
         if (hasLocationPermission()) {
-            locationProvider.getLocation().observe(viewLifecycleOwner) {
-                currentLocation = it
+            locationProvider?.location?.observe(viewLifecycleOwner) { loc: Location? ->
+                currentLocation = loc
             }
         } else {
             requestLocationPermission()
         }
 
-        //TODO Refactor to use Paired PairMediatorLiveData
+        val household = args.household
+        viewModel.household = household
+
+
+        household?.let {
+            viewModel.apply {
+                viewModel.id = household?.id
+
+                address = household?.address.toString()
+                lon = household?.gps_longitude.toString()
+                lat = household?.gps_latitude.toString()
+               reason = household?.reason.toString()
+                otherReason = household?.other_non_consent_reason.toString()
+                province = household?.province_name.toString()
+                territory = household?.territory_name.toString()
+                community = household?.community_name.toString()
+                groupment = household?.groupement_name.toString()
+
+//          init  step five fields
+            }
+        }
+
+
+
         viewModel.provinces.observe(viewLifecycleOwner) {
-            provinces.clear()
-            provinces.addAll(it)
+            provinces.swap(it)
         }
         viewModel.territories.observe(viewLifecycleOwner) {
-            territories.clear()
-            territories.addAll(it)
+            territories.swap(it)
         }
         viewModel.communities.observe(viewLifecycleOwner) {
-            communities.clear()
-            communities.addAll(it)
+
+            communities.swap(it)
         }
         viewModel.groupments.observe(viewLifecycleOwner) {
-            groupments.clear()
-            groupments.addAll(it)
+            groupments.swap(it)
         }
         val dropdownLayout = R.layout.dropdown_item
 
@@ -88,68 +120,6 @@ class AddNonConsentingHouseholdFragment : Fragment(R.layout.fragment_add_non_con
 
 
         binding.apply {
-
-            //            Set all text fields from saved state
-            textFieldReason.editText?.setText(viewModel.reason)
-            textFieldProvince.editText?.setText(viewModel.province)
-            textFieldCommunity.editText?.setText(viewModel.community)
-            textFieldTerritory.editText?.setText(viewModel.territory)
-            textFieldGroupment.editText?.setText(viewModel.groupment)
-            textFieldOtherReason.editText?.setText(viewModel.otherReason)
-            textFieldAddress.editText?.setText(viewModel.address)
-
-            (autoCompleteTextViewReason as? AutoCompleteTextView)?.apply {
-                setAdapter(
-                    ArrayAdapter(context, dropdownLayout, reasons).also {
-                        addTextChangedListener {
-                            val reason = it.toString()
-                            viewModel.reason = reason
-                            textFieldOtherReason.isEnabled  = reason == getString(R.string.other)
-                            textViewOtherReason.isEnabled  = reason == getString(R.string.other)
-                        }
-                    }
-                )
-            }
-            (autoCompleteTextViewProvince as? AutoCompleteTextView)?.apply {
-                setAdapter(
-                    ArrayAdapter(context, dropdownLayout, provinces).also {
-                        addTextChangedListener {
-                            viewModel.province = it.toString()
-
-                        }
-                    }
-                )
-            }
-            (autoCompleteTextViewCommunity as? AutoCompleteTextView)?.apply {
-                setAdapter(
-                    ArrayAdapter(context, dropdownLayout, communities).also {
-                        addTextChangedListener {
-                            viewModel.community = it.toString()
-                        }
-                    }
-                )
-            }
-            (autoCompleteTextViewTerritory as? AutoCompleteTextView)?.apply {
-                setAdapter(
-                    ArrayAdapter(context, dropdownLayout, territories)
-                ).also {
-                    addTextChangedListener {
-                        viewModel.territory = it.toString()
-                    }
-                }
-            }
-            (autoCompleteTextGroupment as? AutoCompleteTextView)?.apply {
-                setAdapter(
-                    ArrayAdapter(context, dropdownLayout, groupments)
-                ).also {
-                    addTextChangedListener {
-                        viewModel.groupment = it.toString()
-                    }
-                }
-            }
-
-
-
 
 
             textFieldOtherReason.editText?.addTextChangedListener {
@@ -168,7 +138,75 @@ class AddNonConsentingHouseholdFragment : Fragment(R.layout.fragment_add_non_con
                 viewModel.onSaveClicked()
 
             }
+            //            Set all text fields from saved state
+            textFieldReason.editText?.setText(viewModel.reason)
+            textFieldProvince.editText?.setText(viewModel.province)
+            textFieldCommunity.editText?.setText(viewModel.community)
+            textFieldTerritory.editText?.setText(viewModel.territory)
+            textFieldGroupment.editText?.setText(viewModel.groupment)
+            textFieldOtherReason.editText?.setText(viewModel.otherReason)
+            textFieldAddress.editText?.setText(viewModel.address)
+
+
+            (autoCompleteTextViewReason as? AutoCompleteTextView)?.apply {
+                setAdapter(
+                    ArrayAdapter(context, dropdownLayout, reasons).also {
+                        addTextChangedListener {
+                            val reason = it.toString()
+                            viewModel.reason = reason
+                            textFieldOtherReason.isEnabled  = reason == getString(R.string.other)
+                            textViewOtherReason.isEnabled  = reason == getString(R.string.other)
+                        }
+                    }
+                )
+            }
+            (autoCompleteTextViewProvince as? AutoCompleteTextView)?.apply {
+                setAdapter(
+                    ArrayAdapter(context, dropdownLayout, provinces).also {
+                        addTextChangedListener {
+
+                            viewModel.province = it.toString()
+                            viewModel.loadTerritoriesWithName(it.toString())
+
+                        }
+                    }
+                )
+            }
+            (autoCompleteTextViewCommunity as? AutoCompleteTextView)?.apply {
+                setAdapter(
+                    ArrayAdapter(context, dropdownLayout, communities).also {
+                        addTextChangedListener {
+                            viewModel.community = it.toString()
+                            viewModel.loadGroupmentsWithName(it.toString())
+
+                        }
+                    }
+                )
+            }
+            (autoCompleteTextViewTerritory as? AutoCompleteTextView)?.apply {
+                setAdapter(
+                    ArrayAdapter(context, dropdownLayout, territories)
+                ).also {
+                    addTextChangedListener {
+
+                        viewModel.territory = it.toString()
+                        viewModel.loadCommunitiesWithName(it.toString())
+                    }
+                }
+            }
+            (autoCompleteTextGroupment as? AutoCompleteTextView)?.apply {
+                setAdapter(
+                    ArrayAdapter(context, dropdownLayout, groupments)
+                ).also {
+                    addTextChangedListener {
+
+                        viewModel.groupment = it.toString()
+                    }
+                }
+            }
+
         }
+
 
         viewLifecycleOwner.lifecycleScope.launchWhenStarted {
             viewModel.addNonConsentingHouseholdEvent.collect { event ->
@@ -189,16 +227,13 @@ class AddNonConsentingHouseholdFragment : Fragment(R.layout.fragment_add_non_con
             }
         }
 
-
+        getLastKnownLocation()
     }//end of onCreateView
 
     private fun getLastKnownLocation() {
-        currentLocation?.apply {
-           viewModel.lon = longitude.toString()
-           viewModel.lat = latitude.toString()
-//            Log.d("AddNonConcent", "lon: ${viewModel.lon} lat: ${viewModel.lat}")
+            Log.d(TAG, "lon: ${currentLocation?.longitude} lat: ${currentLocation?.latitude}")
         }
-    }
+
 
     private fun hasLocationPermission() =
         EasyPermissions.hasPermissions(
@@ -209,7 +244,7 @@ class AddNonConsentingHouseholdFragment : Fragment(R.layout.fragment_add_non_con
     private fun requestLocationPermission() {
         EasyPermissions.requestPermissions(
             this,
-            "This application cannot work without Location Permission.",
+            getString(R.string.cannot_work_without_permission),
             PERMISSION_LOCATION_REQUEST_CODE,
             Manifest.permission.ACCESS_FINE_LOCATION
         )
@@ -235,8 +270,11 @@ class AddNonConsentingHouseholdFragment : Fragment(R.layout.fragment_add_non_con
     override fun onPermissionsGranted(requestCode: Int, perms: List<String>) {
         Toast.makeText(
             requireContext(),
-            "Permission Granted!",
+            getString(R.string.permission_granted),
             Toast.LENGTH_SHORT
         ).show()
+    }
+    companion object {
+        private const val TAG = "AddNonConsentingHousehold"
     }
 }

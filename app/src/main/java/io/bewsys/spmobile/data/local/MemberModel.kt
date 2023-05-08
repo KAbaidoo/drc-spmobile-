@@ -10,7 +10,6 @@ data class MemberModel(
     val firstname: String?=null,
     val middlename: String?=null,
     val lastname: String?=null,
-
     val sex: String?=null,
     val age: String?=null,
     val dob: String?=null,
@@ -28,7 +27,7 @@ data class MemberModel(
     val disability_id: String?=null,
     val socio_professional_category_id: String?=null,
     val sector_of_work_id: String?=null,
-    val household_id: String?=null,
+    var household_id: String?=null,
     val status: String?=null,
 ) : Parcelable
 

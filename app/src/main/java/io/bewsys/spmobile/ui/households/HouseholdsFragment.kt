@@ -35,20 +35,21 @@ class HouseholdsFragment : Fragment(R.layout.fragment_households),HouseholdAdapt
 
         binding.apply {
             fabAddRegistration.setOnClickListener {
-                viewModel.onAddRegistrationFabClicked()
-            }
-            fabDevelopmentalAction.setOnClickListener {
+//                viewModel.onAddRegistrationFabClicked()
                 viewModel.onDevelopmentalFabClicked()
             }
-            textDevelopmentalAction.setOnClickListener {
-                viewModel.onDevelopmentalFabClicked()
-            }
-            fabHumanitarian.setOnClickListener {
-                viewModel.onHumanitarianFabClicked()
-            }
-            textHumanitarianAction.setOnClickListener {
-                viewModel.onHumanitarianFabClicked()
-            }
+//            fabDevelopmentalAction.setOnClickListener {
+//                viewModel.onDevelopmentalFabClicked()
+//            }
+//            textDevelopmentalAction.setOnClickListener {
+//                viewModel.onDevelopmentalFabClicked()
+//            }
+//            fabHumanitarian.setOnClickListener {
+//                viewModel.onHumanitarianFabClicked()
+//            }
+//            textHumanitarianAction.setOnClickListener {
+//                viewModel.onHumanitarianFabClicked()
+//            }
             recyclerViewHouseholds.apply {
                 adapter = householdAdapter
                 layoutManager = LinearLayoutManager(requireContext())
