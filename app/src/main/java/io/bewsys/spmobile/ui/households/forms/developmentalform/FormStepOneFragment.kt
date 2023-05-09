@@ -61,7 +61,7 @@ class FormStepOneFragment : Fragment(R.layout.fragment_add_household_one_consent
                 lat = household?.gps_latitude.toString()
                 villageOrQuartier = household?.village_or_quartier.toString()
                 territoryOrTown = household?.territory_or_town.toString()
-                areaOfResidence = household?.area_of_residence.toString()
+                placeOfResidence = household?.area_of_residence.toString()
                 province = household?.province_name.toString()
                 territory = household?.territory_name.toString()
                 community = household?.community_name.toString()

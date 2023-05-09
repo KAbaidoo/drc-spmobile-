@@ -118,7 +118,7 @@
     <string name="address">Address</string>
     <string name="village_or_quartier">Village or quartier</string>
     <string name="initial_registration_type">* Registration type</string>
-    <string name="area_of_residence">Area of residence</string>
+    <string name="area_of_residence">Place of residence</string>
     <string name="community">Community</string>
     <string name="territory">Territory</string>
     <string name="health_zone">Health zone</string>
@@ -289,6 +289,7 @@
     <string name="is_member_respondent">Is member the respondent</string>
     <string name="field_cannot_be_empty">This field cannot be empty!</string>
     <string name="cannot_work_without_permission">This application cannot work without Location Permission.</string>
+    <string name="dont_know">Don\'t know</string>
 
 
 </resources>

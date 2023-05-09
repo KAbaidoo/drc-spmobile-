@@ -72,15 +72,64 @@ class SharedDevelopmentalFormViewModel(
         }
 
 
-    //      step two
+//    section B: Location of household
+
+   private val sectionBFields = mutableMapOf<Int, String>()
+
+    var placeOfResidence = ""
+        set(value) {
+            field = value
+//            sectionBHasBlankFields()
+        }
+    //    tils
+    var village = ""
+        set(value) {
+            sectionBFields[0] = value
+            field = value
+        }
+        get() = sectionBFields[0] ?: ""
+
+    var addressB = ""
+        set(value) {
+            sectionBFields[1] = value
+            field = value
+        }
+        get() = sectionBFields[1] ?: ""
+
+    var cac = ""
+        set(value) {
+            sectionBFields[2] = value
+            field = value
+        }
+        get() = sectionBFields[2] ?: ""
+    fun setSectionBFields(index: Int, chars: CharSequence?) {
+        sectionBFields[index] = chars.toString()
+    }
+
+    private val _SectionBHasBlank = MutableStateFlow(true)
+    val SectionBHasBlank: StateFlow<Boolean>
+        get() = _SectionBHasBlank
+
+    fun sectionBHasBlankFields() {
+        _SectionBHasBlank.value = hasBlank(
+            addressB,
+            cac,
+            village
+        )
+    }
+
+
+
+
+    //    section two
     val stepTwoFields = mutableMapOf<Int, String>()
 
     //    rb
     var initialRegistrationType = ""
-    set(value){
-        field = value
-        stepTwoHasBlankFields()
-    }
+        set(value) {
+            field = value
+            stepTwoHasBlankFields()
+        }
 
     var respondentFirstName = ""
         set(value) {
@@ -142,7 +191,7 @@ class SharedDevelopmentalFormViewModel(
     //    rb
     var villageOrQuartier = ""
     var territoryOrTown = ""
-    var areaOfResidence = "1"
+
     var respondentSex: String = ""
 
     var lon = state.get<String>("lon") ?: ""
@@ -1213,15 +1262,20 @@ class SharedDevelopmentalFormViewModel(
             community_id = communityId,
             groupment_id = groupmentId,
             temp_survey_no = "",
-            other_occupation_status_of_current_accommodation = _entriesMap["other_occupation_status_of_current_accommodation"] ?: "",
-            other_main_material_of_exterior_walls = _entriesMap["other_main_material_of_exterior_walls"] ?: "",
+            other_occupation_status_of_current_accommodation = _entriesMap["other_occupation_status_of_current_accommodation"]
+                ?: "",
+            other_main_material_of_exterior_walls = _entriesMap["other_main_material_of_exterior_walls"]
+                ?: "",
             other_main_soil_material = _entriesMap["other_main_soil_material"] ?: "",
-            other_type_of_fuel_used_for_household_cooking = _entriesMap["other_type_of_fuel_used_for_household_cooking"] ?: "",
-            other_main_source_of_household_drinking_water = _entriesMap["other_main_source_of_household_drinking_water"] ?: "",
+            other_type_of_fuel_used_for_household_cooking = _entriesMap["other_type_of_fuel_used_for_household_cooking"]
+                ?: "",
+            other_main_source_of_household_drinking_water = _entriesMap["other_main_source_of_household_drinking_water"]
+                ?: "",
             other_type_of_household_toilet = _entriesMap["other_type_of_household_toilet"] ?: "",
             other_method_of_waste_disposal = _entriesMap["other_method_of_waste_disposal"] ?: "",
             other_livestock_owned = _entriesMap["other_livestock_owned"] ?: "",
-            other_household_activities_in_past_12_months = _entriesMap["other_household_activities_in_past_12_months"] ?: "",
+            other_household_activities_in_past_12_months = _entriesMap["other_household_activities_in_past_12_months"]
+                ?: "",
             comments = _entriesMap["comments"] ?: "",
             profile_picture = _entriesMap["profile_picture"] ?: "",
             method_of_waste_disposal = "",
@@ -1234,7 +1288,7 @@ class SharedDevelopmentalFormViewModel(
             main_source_of_household_drinking_water = "",
             type_of_household_toilet = "",
             cac = "",
-            area_of_residence = areaOfResidence,
+            area_of_residence = placeOfResidence,
             health_area_id = healthAreaId,
             health_zone_id = healthZoneId,
             respondent_type = "",
@@ -1477,9 +1531,6 @@ class SharedDevelopmentalFormViewModel(
             memberRepository.insertMembers(it)
         }
     }
-
-
-
 
 
     fun loadMembers() {

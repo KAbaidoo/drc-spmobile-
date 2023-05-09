@@ -4,27 +4,20 @@ import android.Manifest
 import android.annotation.SuppressLint
 import android.location.Location
 import android.os.Bundle
-import android.text.Editable
-import android.text.TextWatcher
-import android.util.Log
 import android.view.*
 import android.widget.ArrayAdapter
 import android.widget.AutoCompleteTextView
 import android.widget.Toast
 import androidx.core.os.bundleOf
-import androidx.core.view.MenuProvider
 
 import androidx.core.widget.addTextChangedListener
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
-import androidx.navigation.fragment.navArgs
 import com.google.android.material.datepicker.MaterialDatePicker
 import com.google.android.material.textfield.TextInputLayout
 import com.vmadalin.easypermissions.EasyPermissions
 import com.vmadalin.easypermissions.dialogs.SettingsDialog
-import io.bewsys.spmobile.FormNavigationArgs
 import io.bewsys.spmobile.PERMISSION_LOCATION_REQUEST_CODE
 import io.bewsys.spmobile.R
 import io.bewsys.spmobile.databinding.FragmentAddHouseholdTwoRespondentBinding
@@ -178,13 +171,13 @@ class FormStepTwoFragment : Fragment(R.layout.fragment_add_household_two_respond
             rgAreaOfResidence.setOnCheckedChangeListener { _, checkedId ->
                 when (checkedId) {
                     rbUrban.id -> {
-                        viewModel.areaOfResidence = rbUrban.text.toString()
+                        viewModel.placeOfResidence = rbUrban.text.toString()
                     }
                     rbUrbanRural.id -> {
-                        viewModel.areaOfResidence = rbUrbanRural.text.toString()
+                        viewModel.placeOfResidence = rbUrbanRural.text.toString()
                     }
                     else -> {
-                        viewModel.areaOfResidence = rbRural.text.toString()
+                        viewModel.placeOfResidence = rbRural.text.toString()
                     }
                 }
 
@@ -362,7 +355,7 @@ class FormStepTwoFragment : Fragment(R.layout.fragment_add_household_two_respond
                 rbTerritory.text -> rgTerritoryOrTown.check(rbTerritory.id)
                 rbTown.text -> rgTerritoryOrTown.check(rbTown.id)
             }
-            when (viewModel.areaOfResidence) {
+            when (viewModel.placeOfResidence) {
                 rbUrban.text -> rgAreaOfResidence.check(rbUrban.id)
                 rbUrbanRural.text -> rgAreaOfResidence.check(rbUrbanRural.id)
                 rbRural.text -> rgAreaOfResidence.check(rbRural.id)
