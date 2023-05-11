@@ -56,7 +56,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
-                android:text="@string/is_member_respondent"
+                android:text="@string/is_member_head"
                 android:textAppearance="@style/TextAppearance.MaterialComponents.Body1" />
 
             <RadioGroup
@@ -152,7 +152,33 @@
                     android:inputType="text"
                     android:maxLines="1" />
             </com.google.android.material.textfield.TextInputLayout>
+            <!--            member_age_known-->
+            <TextView
+                android:id="@+id/tv_member_age_known"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:text="@string/member_age_known"
+                android:textAppearance="@style/TextAppearance.MaterialComponents.Body1" />
 
+            <RadioGroup
+                android:id="@+id/rg_member_age_known"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <com.google.android.material.radiobutton.MaterialRadioButton
+                    android:id="@+id/rb_yes_age"
+                    android:layout_width="match_parent"
+                    android:layout_height="48dp"
+                    android:text="Yes" />
+
+                <com.google.android.material.radiobutton.MaterialRadioButton
+                    android:id="@+id/rb_no_age"
+                    android:layout_width="match_parent"
+                    android:layout_height="48dp"
+                    android:text="@string/no" />
+            </RadioGroup>
             <!--            member age-->
             <TextView
                 android:id="@+id/tv_member_age"
@@ -178,29 +204,29 @@
                     android:maxLines="1" />
             </com.google.android.material.textfield.TextInputLayout>
 
-            <!--            member_age_known-->
+            <!--            member_dob_known-->
             <TextView
-                android:id="@+id/tv_member_age_known"
+                android:id="@+id/tv_member_dob_known"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
-                android:text="@string/member_age_known"
+                android:text="@string/member_dob_known"
                 android:textAppearance="@style/TextAppearance.MaterialComponents.Body1" />
 
             <RadioGroup
-                android:id="@+id/rg_member_age_known"
+                android:id="@+id/rg_member_dob_known"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="vertical">
 
                 <com.google.android.material.radiobutton.MaterialRadioButton
-                    android:id="@+id/rb_yes_age"
+                    android:id="@+id/rb_yes_dob"
                     android:layout_width="match_parent"
                     android:layout_height="48dp"
                     android:text="Yes" />
 
                 <com.google.android.material.radiobutton.MaterialRadioButton
-                    android:id="@+id/rb_no_age"
+                    android:id="@+id/rb_no_dob"
                     android:layout_width="match_parent"
                     android:layout_height="48dp"
                     android:text="@string/no" />
@@ -236,33 +262,7 @@
 
             </com.google.android.material.textfield.TextInputLayout>
 
-            <!--            member_dob_known-->
-            <TextView
-                android:id="@+id/tv_member_dob_known"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
-                android:text="@string/member_dob_known"
-                android:textAppearance="@style/TextAppearance.MaterialComponents.Body1" />
 
-            <RadioGroup
-                android:id="@+id/rg_member_dob_known"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="vertical">
-
-                <com.google.android.material.radiobutton.MaterialRadioButton
-                    android:id="@+id/rb_yes_dob"
-                    android:layout_width="match_parent"
-                    android:layout_height="48dp"
-                    android:text="Yes" />
-
-                <com.google.android.material.radiobutton.MaterialRadioButton
-                    android:id="@+id/rb_no_dob"
-                    android:layout_width="match_parent"
-                    android:layout_height="48dp"
-                    android:text="@string/no" />
-            </RadioGroup>
             <!--            gender-->
             <TextView
                 android:id="@+id/tv_member_sex"
@@ -568,6 +568,7 @@
                     android:layout_alignParentEnd="true"
                     android:text="@string/finish"
                     app:iconGravity="end"
+                    android:enabled="false"
                     app:iconTint="@color/colorPrimary" />
             </RelativeLayout>
         </LinearLayout>

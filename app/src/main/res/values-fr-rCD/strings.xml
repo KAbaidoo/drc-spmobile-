@@ -114,7 +114,7 @@
     <string name="household_head_sector_of_work">Secteur d\'activité du chef de ménage</string>
     <string name="household_head_school_attendance">Fréquentation scolaire du chef de ménage</string>
     <string name="head_age_known">Âge de la tête connu</string>
-    <string name="is_head_respondent">Est-ce que la tête est le répondant ?</string>
+    <string name="is_head_respondent">Le répondant est-il le chef du ménage?</string>
     <string name="address">Adresse</string>
     <string name="village_or_quartier">Village ou quartier</string>
     <string name="initial_registration_type">* Type d\'enregistrement</string>
@@ -165,7 +165,7 @@
     <string name="next">Prochain</string>
     <string name="previous">Précédent</string>
     <string name="consent">Acceptez-vous de fournir vos informations pour remplir ce formulaire?</string>
-    <string name="consent_agreement">Le gouvernement de la République, par le biais du Ministère des Affaires Sociales (MINAS), a entrepris une série de réformes du secteur de la protection sociale pour une gestion efficace. La présente réforme vise à élargir la base de données du MINAS des personnes pauvres et vulnérables à celles des agences impliquées dans la mise en œuvre des programmes d\'assistance sociale, y compris les agences du Système des Nations Unies et les ONG nationales et internationales, et à permettre le contrôle des données personnelles, selon un protocole à convenir. En fin de compte, le processus aboutira à la construction d\'un Registre Social servant de passerelle pour l\'inscription et l\'éligibilité des personnes et des ménages vulnérables à plusieurs programmes d\'assistance sociale. C\'est dans ce but que votre consentement est sollicité pour nous fournir les informations contenues dans ce questionnaire afin de permettre au gouvernement d\'améliorer ses politiques sociales. Nous vous remercions de nous accorder une partie de votre temps et nous vous garantissons la confidentialité des données collectées à la suite de cette enquête, conformément au Décret n° 10/05 du 11 février relatif au Système National de Statistique.</string>
+    <string name="consent_agreement">Le Gouvernement de la République à travers le Ministère des Affaires Sociales (MINAS) s’est engagé dans une série de réformes du secteur de la protection sociale pour un pilotage efficace. La présente réforme vise à élargir la base des données des personnes pauvres et vulnérables du MINAS à celles des acteurs de mise en œuvre des programmes d’assistance sociale, y compris les agences du Système des Nations-unies et les ONG nationales et internationales et permettre le contrôle des données personnelles, selon un protocole à convenir. A terme, le processus aboutira à la construction d’un Registre social servant de passerelle pour l’inscription et l’éligibilité des personnes et ménages vulnérables à plusieurs programmes d’assistance sociale. C\'est à cet effet que votre consentement est sollicité pour nous fournir les informations contenues dans ce questionnaire afin de permettre au Gouvernement d’améliorer ses politiques sociales. Merci de nous accorder une partie</string>
     <string name="yes">Oui</string>
     <string name="no">Non</string>
     <string name="general">Général</string>
@@ -215,7 +215,7 @@
     <string name="number_of_chair_owned">Nombre de chaises possédées</string>
     <string name="number_of_bed_owned">Nombre de lits possédés</string>
     <string name="number_of_air_conditioner_owned">Nombre de climatiseurs possédés</string>
-    <string name="amount_of_cultivable_land_owned">Acres de terres cultivables possédées</string>
+    <string name="amount_of_cultivable_land_owned">Hectares de terres cultivables possédées</string>
     <string name="finish">Terminé</string>
     <string name="review">Révision</string>
     <string name="households">Foyers</string>
@@ -226,7 +226,7 @@
     <string name="profile">Profil</string>
     <string name="settings">Paramètres</string>
     <string name="logout">Déconnexion</string>
-    <string name="data_consent">Consentement de données</string>
+    <string name="data_consent">Consentement</string>
     <string name="host_settings">Paramètres d\'hôte</string>
     <string name="non_consenting_households">Foyers non consentants</string>
     <string name="other">Autre</string>
@@ -273,4 +273,21 @@
     <string name="choose_language">Choisissez la langue</string>
     <string name="field_cannot_be_empty">Ce champ ne peut pas être vide!</string>
     <string name="cannot_work_without_permission">Cette application ne peut pas fonctionner sans autorisation de localisation.</string>
+    <string name="dont_know">Je ne sais pas</string>
+    <string name="family_relationship">Relation familiale</string>
+    <string name="level_of_education">Niveau d\'éducation</string>
+    <string name="occupation">Quelle est votre occupation principale ?</string>
+    <string name="other_occupancy_status">Autre statut d\'occupation</string>
+    <string name="other_fuel_type">Autre type de combustible de cuisson</string>
+    <string name="other_soil_material">Autre matériau principal du sol</string>
+    <string name="other_source_of_drinking_water">Autre source d\'eau potable</string>
+    <string name="other_type_of_toilet">Autre type de toilette</string>
+    <string name="waste_disposal">Comment le ménage élimine-t-il ses déchets ?</string>
+    <string name="place_for_hand_washing">Lieu de lavage des mains</string>
+    <string name="is_owner_of_cultivable_land">Si oui, est-il/elle propriétaire ?</string>
+    <string name="total_number_of_hectares">et nombre total d\'hectares</string>
+    <string name="other_livestock">Autre bétail</string>
+    <string name="other_livestock_qty">Nombre d\'autres animaux</string>
+    <string name="household_goods_number">Si oui, indiquez le nombre dans les cases ci-dessous</string>
+    <string name="is_member_head">Le membre est-il le chef de ménage ?</string>
 </resources>

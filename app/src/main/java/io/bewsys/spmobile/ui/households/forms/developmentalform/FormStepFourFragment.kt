@@ -1,5 +1,6 @@
 package io.bewsys.spmobile.ui.households.forms.developmentalform
 
+import android.annotation.SuppressLint
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
@@ -28,6 +29,7 @@ import org.koin.androidx.viewmodel.ext.android.activityViewModel
 class FormStepFourFragment : Fragment(R.layout.fragment_add_household_four_home) {
     private val viewModel: SharedDevelopmentalFormViewModel by koinNavGraphViewModel(R.id.form_navigation)
 
+    @SuppressLint("SuspiciousIndentation")
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
@@ -37,31 +39,49 @@ class FormStepFourFragment : Fragment(R.layout.fragment_add_household_four_home)
 
             viewLifecycleOwner.lifecycleScope.launchWhenStarted {
                 viewModel.stepFourHasBlankFields.collectLatest {
-                    btnNext.isEnabled =  it.not()
+                    btnNext.isEnabled = it.not()
                 }
             }
             //set text fields
-            val tils = listOf(
-                tilNameOfSocialAssistanceProgram,
-                tilOtherMigrationStatus,
-                tilDurationDisplacedReturnedRepatriatedRefugee,
-
-                tilHouseholdMonthlyIncome,
-                tilMinimumMonthlyIncomeNecessaryLiveWithoutDifficulties,
-                tilMobileMoneyUsername,
-                tilMobileMoneyPhoneNumber
-            )
 
 
-
-
-
-            tils.forEachIndexed { index, til ->
-                til.editText?.addTextChangedListener {
-                    viewModel.setStepFourFields(index, it)
-                    viewModel.stepFourHasBlankFields()
+            viewModel.apply {
+                tilNameOfSocialAssistanceProgram.editText?.addTextChangedListener {
+                    nameOfSocialAssistanceProgram = it.toString()
+                    stepFourHasBlankFields()
                 }
+                tilOtherMigrationStatus.editText?.addTextChangedListener {
+                    otherMigrationStatus = it.toString()
+                    stepFourHasBlankFields()
+                }
+                tilDurationDisplacedReturnedRepatriatedRefugee.editText?.addTextChangedListener {
+                    durationDisplacedReturnedRepatriatedRefugee = it.toString()
+                    stepFourHasBlankFields()
+                }
+                tilHouseholdMonthlyIncome.editText?.addTextChangedListener {
+                    householdMonthlyIncome = it.toString()
+                    stepFourHasBlankFields()
+                }
+                tilMinimumMonthlyIncomeNecessaryLiveWithoutDifficulties.editText?.addTextChangedListener {
+                    minimumMonthlyIncomeNecessaryLiveWithoutDifficulties = it.toString()
+                    stepFourHasBlankFields()
+                }
+                tilMobileMoneyUsername.editText?.addTextChangedListener {
+                    mobileMoneyUsername = it.toString()
+                    stepFourHasBlankFields()
+                }
+                tilMobileMoneyPhoneNumber.editText?.addTextChangedListener {
+                    mobileMoneyPhoneNumber = it.toString()
+                    stepFourHasBlankFields()
+                }
+                tilMigrationStatus.editText?.addTextChangedListener {
+                    migrationStatus = it.toString()
+                    stepFourHasBlankFields()
+                }
+
             }
+
+
 
             when (viewModel.isIncomeRegular) {
                 rbYesIncomeRegular.text -> rgIsIncomeRegular.check(rbYesIncomeRegular.id)
@@ -131,15 +151,14 @@ class FormStepFourFragment : Fragment(R.layout.fragment_add_household_four_home)
                     ArrayAdapter(context, dropdownLayout, migrationStatus).also {
                         addTextChangedListener {
                             val status = it.toString()
-                            if(status == getString(R.string.other)){
-                            viewModel.migrationStatus = status
-                            tilOtherMigrationStatus.isEnabled = true
-                            tvOtherMigrationStatus.isEnabled = true
-                                tvDurationDisplacedReturnedRepatriatedRefugee.isEnabled=false
+                            if (status == getString(R.string.other)) {
+                                viewModel.migrationStatus = status
+                                tilOtherMigrationStatus.isEnabled = true
+                                tvOtherMigrationStatus.isEnabled = true
+                                tvDurationDisplacedReturnedRepatriatedRefugee.isEnabled = false
                                 tilDurationDisplacedReturnedRepatriatedRefugee.isEnabled =
                                     false
-                            }
-                            else{
+                            } else {
                                 tilOtherMigrationStatus.editText?.text?.clear()
                                 tilOtherMigrationStatus.isEnabled = false
                                 tvOtherMigrationStatus.isEnabled = false
@@ -150,9 +169,11 @@ class FormStepFourFragment : Fragment(R.layout.fragment_add_household_four_home)
                                 status != getString(R.string.resident)
                             tilDurationDisplacedReturnedRepatriatedRefugee.isEnabled =
                                 status != getString(R.string.resident)
-                            tilUnitOfMigrationDuration.isEnabled = status != getString(R.string.resident)
-                            actvUnitOfMigrationDuration.isEnabled = status != getString(R.string.resident)
-                            if( status != getString(R.string.resident)){
+                            tilUnitOfMigrationDuration.isEnabled =
+                                status != getString(R.string.resident)
+                            actvUnitOfMigrationDuration.isEnabled =
+                                status != getString(R.string.resident)
+                            if (status != getString(R.string.resident)) {
                                 tilDurationDisplacedReturnedRepatriatedRefugee.editText?.text?.clear()
                                 tilUnitOfMigrationDuration.editText?.text?.clear()
                             }
@@ -177,14 +198,22 @@ class FormStepFourFragment : Fragment(R.layout.fragment_add_household_four_home)
             }
 
 
-
-
             //           set text
             viewModel.apply {
-                tils.forEachIndexed { index, til ->
-                    til.editText?.setText(stepFourFields[index])
-                }
+                tilNameOfSocialAssistanceProgram.editText?.setText(nameOfSocialAssistanceProgram)
+                tilOtherMigrationStatus.editText?.setText(otherMigrationStatus)
+                tilDurationDisplacedReturnedRepatriatedRefugee.editText?.setText(
+                    durationDisplacedReturnedRepatriatedRefugee
+                )
+                tilHouseholdMonthlyIncome.editText?.setText(householdMonthlyIncome)
+                tilMinimumMonthlyIncomeNecessaryLiveWithoutDifficulties.editText?.setText(
+                    minimumMonthlyIncomeNecessaryLiveWithoutDifficulties
+                )
+                tilMobileMoneyUsername.editText?.setText(mobileMoneyUsername)
+                tilMobileMoneyPhoneNumber.editText?.setText(mobileMoneyPhoneNumber)
+
             }
+
             tilMigrationStatus.editText?.setText(viewModel.migrationStatus)
             tilUnitOfMigrationDuration.editText?.setText(viewModel.unitOfMigrationDuration)
 
@@ -193,40 +222,39 @@ class FormStepFourFragment : Fragment(R.layout.fragment_add_household_four_home)
 
             btnNext.setOnClickListener {
                 val bundle = bundleOf("title" to title)
-                findNavController().navigate(R.id.formStepFiveFragment,bundle )
+                findNavController().navigate(R.id.formStepFiveFragment, bundle)
             }
             btnPrevious.setOnClickListener {
 
                 val bundle = bundleOf("title" to title)
-                findNavController().navigate(R.id.formStepThreeFragment,bundle )
+                findNavController().navigate(R.id.formStepThreeFragment, bundle)
 
             }
-
 
 
         }// end of apply block
 
         // set up menu
-      /*  val menuHost = requireActivity()
-        menuHost.addMenuProvider(object : MenuProvider {
-            override fun onCreateMenu(menu: Menu, menuInflater: MenuInflater) {
-                menuInflater.inflate(R.menu.fragment_households_menu, menu)
+        /*  val menuHost = requireActivity()
+          menuHost.addMenuProvider(object : MenuProvider {
+              override fun onCreateMenu(menu: Menu, menuInflater: MenuInflater) {
+                  menuInflater.inflate(R.menu.fragment_households_menu, menu)
 
-            }
+              }
 
-            override fun onMenuItemSelected(menuItem: MenuItem): Boolean {
-                return when (menuItem.itemId) {
+              override fun onMenuItemSelected(menuItem: MenuItem): Boolean {
+                  return when (menuItem.itemId) {
 
-                    R.id.action_download_households -> {
-                        val bundle = bundleOf("id" to viewModel.id)
-                        findNavController().navigate(R.id.deleteHouseholdDialogFragment, bundle)
+                      R.id.action_download_households -> {
+                          val bundle = bundleOf("id" to viewModel.id)
+                          findNavController().navigate(R.id.deleteHouseholdDialogFragment, bundle)
 
-                        true
-                    }
+                          true
+                      }
 
-                    else -> false
-                }
-            }
-        }, viewLifecycleOwner, Lifecycle.State.RESUMED)*/
+                      else -> false
+                  }
+              }
+          }, viewLifecycleOwner, Lifecycle.State.RESUMED)*/
     }// end of onCreate
 }

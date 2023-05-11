@@ -1,10 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.households.forms.developmentalform.FormStepThreeFragment">
+    tools:context=".ui.households.forms.developmentalform.MembersFormFragment">
+
 
     <ScrollView
         android:layout_width="match_parent"
@@ -21,225 +23,54 @@
 
             <TextView
                 style="@style/Widget.App.Heading.Sub"
-                android:text="C. IDENTIFICATION OF HOUSEHOLD" />
-            <TextView
-                style="@style/Widget.App.Heading.Sub"
-                android:text="@string/household_head" />
+                android:text="@string/member_registration" />
 
-            <!--            respondent_firstname-->
+            <!--            is_member_respondent -->
             <TextView
-                android:id="@+id/tv_head_first_name"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
-                android:text="@string/household_head_firstname"
+                android:text="Member is"
                 android:textAppearance="@style/TextAppearance.MaterialComponents.Body1" />
-            <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/til_household_head_firstname"
-                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:minHeight="20dp"
-                app:boxStrokeWidth="2dp"
-                app:endIconMode="clear_text">
 
-                <com.google.android.material.textfield.TextInputEditText
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:inputType="text"
-                    android:maxLines="1" />
-            </com.google.android.material.textfield.TextInputLayout>
-            <!--            respondent_middlename-->
-            <TextView
-                android:id="@+id/tv_head_middle_name"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
-                android:text="@string/household_head_middlename"
-                android:textAppearance="@style/TextAppearance.MaterialComponents.Body1" />
-            <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/til_household_head_middlename"
-                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:minHeight="20dp"
-                app:boxStrokeWidth="2dp"
-                app:endIconMode="clear_text">
-
-                <com.google.android.material.textfield.TextInputEditText
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:inputType="text"
-                    android:maxLines="1" />
-            </com.google.android.material.textfield.TextInputLayout>
-            <!--            respondent_lastname-->
-            <TextView
-                android:id="@+id/tv_head_last_name"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
-                android:text="@string/household_head_lastname"
-                android:textAppearance="@style/TextAppearance.MaterialComponents.Body1" />
-            <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/til_household_head_lastname"
-                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:minHeight="20dp"
-                app:boxStrokeWidth="2dp"
-                app:endIconMode="clear_text">
-
-                <com.google.android.material.textfield.TextInputEditText
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:inputType="text"
-                    android:maxLines="1" />
-            </com.google.android.material.textfield.TextInputLayout>
-
-            <!--            head age-->
-            <TextView
-                android:id="@+id/tv_head_age"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
-                android:text="@string/household_head_age"
-                android:textAppearance="@style/TextAppearance.MaterialComponents.Body1" />
-            <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/til_household_head_age"
-                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:minHeight="20dp"
-                app:boxStrokeWidth="2dp"
-                app:endIconMode="clear_text">
-
-                <com.google.android.material.textfield.TextInputEditText
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:inputType="number"
-                    android:maxLines="1" />
-            </com.google.android.material.textfield.TextInputLayout>
-
-            <!--            gender-->
-            <TextView
-                android:id="@+id/tv_head_sex"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
-                android:text="@string/household_head_sex"
-                android:textAppearance="@style/TextAppearance.MaterialComponents.Body1" />
             <RadioGroup
-                android:id="@+id/rg_household_head_sex"
+                android:id="@+id/rg_is_member_respondent"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="vertical">
 
                 <com.google.android.material.radiobutton.MaterialRadioButton
-                    android:id="@+id/rb_male"
+                    android:id="@+id/rb_respondent"
                     android:layout_width="match_parent"
                     android:layout_height="48dp"
-                    android:text="@string/male" />
+                    android:text="@string/respondent" />
 
                 <com.google.android.material.radiobutton.MaterialRadioButton
-                    android:id="@+id/rb_female"
+                    android:id="@+id/rb_head"
                     android:layout_width="match_parent"
                     android:layout_height="48dp"
-                    android:text="@string/female" />
+                    android:text="@string/household_head" />
+
+                <com.google.android.material.radiobutton.MaterialRadioButton
+                    android:id="@+id/rb_non"
+                    android:layout_width="match_parent"
+                    android:layout_height="48dp"
+                    android:text="N/A" />
             </RadioGroup>
 
 
-
-
-            <!--            head_voter_id      -->
-            <TextView
-                android:id="@+id/tv_head_voter_id"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
-                android:text="@string/household_head_voter_id_card"
-                android:textAppearance="@style/TextAppearance.MaterialComponents.Body1" />
-
-            <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/til_household_head_voter_id_card"
-                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:minHeight="20dp"
-                app:boxStrokeWidth="2dp"
-                app:endIconMode="clear_text">
-
-                <com.google.android.material.textfield.TextInputEditText
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:inputType="text"
-                    android:maxLines="1" />
-
-            </com.google.android.material.textfield.TextInputLayout>
-
-            <!--            household_head_phone_number      -->
-            <TextView
-                android:id="@+id/tv_head_phone_number"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
-                android:text="@string/household_head_phone_number"
-                android:textAppearance="@style/TextAppearance.MaterialComponents.Body1" />
-            <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/til_household_head_phone_number"
-                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:minHeight="20dp"
-                app:boxStrokeWidth="2dp"
-                app:endIconMode="clear_text">
-
-                <com.google.android.material.textfield.TextInputEditText
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:inputType="phone"
-                    android:maxLines="1" />
-            </com.google.android.material.textfield.TextInputLayout>
-
-            <TextView
-                style="@style/Widget.App.Heading.Sub"
-                android:text="@string/respondent" />
-
-            <!--            is_head_respondent -->
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
-                android:text="@string/is_head_respondent"
-                android:textAppearance="@style/TextAppearance.MaterialComponents.Body1" />
-            <RadioGroup
-                android:id="@+id/rg_is_head_respondent"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="vertical">
-
-                <com.google.android.material.radiobutton.MaterialRadioButton
-                    android:id="@+id/rb_yes_is_respondent"
-                    android:layout_width="match_parent"
-                    android:layout_height="48dp"
-                    android:text="@string/yes" />
-
-                <com.google.android.material.radiobutton.MaterialRadioButton
-                    android:id="@+id/rb_no_is_respondent"
-                    android:layout_width="match_parent"
-                    android:layout_height="48dp"
-                    android:text="@string/no" />
-            </RadioGroup>
 
             <!--            respondent_firstname-->
             <TextView
+                android:id="@+id/tv_member_firstname"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
-                android:text="@string/respondent_firstname"
+                android:text="@string/member_firstname"
                 android:textAppearance="@style/TextAppearance.MaterialComponents.Body1" />
 
             <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/til_respondent_firstname"
+                android:id="@+id/til_member_firstname"
                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -256,14 +87,15 @@
 
             <!--            respondent_middlename-->
             <TextView
+                android:id="@+id/tv_member_middle_name"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
-                android:text="@string/respondent_middlename"
+                android:text="@string/member_middlename"
                 android:textAppearance="@style/TextAppearance.MaterialComponents.Body1" />
 
             <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/til_respondent_middlename"
+                android:id="@+id/til_member_middle_name"
                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -277,17 +109,18 @@
                     android:inputType="text"
                     android:maxLines="1" />
             </com.google.android.material.textfield.TextInputLayout>
-
             <!--            respondent_lastname-->
             <TextView
+                android:id="@+id/tv_member_last_name"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
-                android:text="@string/respondent_lastname"
+                android:text="@string/member_lastname"
                 android:textAppearance="@style/TextAppearance.MaterialComponents.Body1" />
 
+
             <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/til_respondent_lastname"
+                android:id="@+id/til_member_lastname"
                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -328,16 +161,130 @@
 
             </com.google.android.material.textfield.TextInputLayout>
 
-            <!--            respondent_voter_id      -->
+            <!--            gender-->
             <TextView
+                android:id="@+id/tv_member_sex"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
-                android:text="@string/respondent_voter_id"
+                android:text="@string/member_sex"
+                android:textAppearance="@style/TextAppearance.MaterialComponents.Body1" />
+
+            <RadioGroup
+                android:id="@+id/rg_member_sex"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <com.google.android.material.radiobutton.MaterialRadioButton
+                    android:id="@+id/rb_male"
+                    android:layout_width="match_parent"
+                    android:layout_height="48dp"
+                    android:text="@string/male" />
+
+                <com.google.android.material.radiobutton.MaterialRadioButton
+                    android:id="@+id/rb_female"
+                    android:layout_width="match_parent"
+                    android:layout_height="48dp"
+                    android:text="@string/female" />
+            </RadioGroup>
+
+
+            <!--            member_dob -->
+            <!--            member_dob_known-->
+            <TextView
+                android:id="@+id/tv_member_dob_known"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:text="@string/member_dob_known"
+                android:textAppearance="@style/TextAppearance.MaterialComponents.Body1" />
+
+            <RadioGroup
+                android:id="@+id/rg_member_dob_known"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <com.google.android.material.radiobutton.MaterialRadioButton
+                    android:id="@+id/rb_yes_dob"
+                    android:layout_width="match_parent"
+                    android:layout_height="48dp"
+                    android:text="Yes" />
+
+                <com.google.android.material.radiobutton.MaterialRadioButton
+                    android:id="@+id/rb_no_dob"
+                    android:layout_width="match_parent"
+                    android:layout_height="48dp"
+                    android:text="@string/no" />
+            </RadioGroup>
+            <TextView
+                android:id="@+id/tv_member_dob"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:text="@string/member_dob"
                 android:textAppearance="@style/TextAppearance.MaterialComponents.Body1" />
 
             <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/til_respondent_voter_id"
+                android:id="@+id/til_member_dob"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:minHeight="20dp"
+                app:boxStrokeWidth="2dp"
+                app:endIconMode="clear_text"
+                app:startIconDrawable="@drawable/ic_calendar_today_24">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:clickable="true"
+                    android:editable="false"
+                    android:focusable="true"
+                    android:maxLines="1" />
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+
+            <!--            member_age_known-->
+            <TextView
+                android:id="@+id/tv_member_age_known"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:text="@string/member_age_known"
+                android:textAppearance="@style/TextAppearance.MaterialComponents.Body1" />
+
+            <RadioGroup
+                android:id="@+id/rg_member_age_known"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <com.google.android.material.radiobutton.MaterialRadioButton
+                    android:id="@+id/rb_yes_age"
+                    android:layout_width="match_parent"
+                    android:layout_height="48dp"
+                    android:text="Yes" />
+
+                <com.google.android.material.radiobutton.MaterialRadioButton
+                    android:id="@+id/rb_no_age"
+                    android:layout_width="match_parent"
+                    android:layout_height="48dp"
+                    android:text="@string/no" />
+            </RadioGroup>
+            <!--            member age-->
+            <TextView
+                android:id="@+id/tv_member_age"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:text="@string/member_age"
+                android:textAppearance="@style/TextAppearance.MaterialComponents.Body1" />
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/til_member_age"
                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -348,46 +295,24 @@
                 <com.google.android.material.textfield.TextInputEditText
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:inputType="text"
-                    android:maxLines="1" />
-
-            </com.google.android.material.textfield.TextInputLayout>
-
-            <!--            respondent_phone_number      -->
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
-                android:text="@string/respondent_phone_number"
-                android:textAppearance="@style/TextAppearance.MaterialComponents.Body1" />
-
-            <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/til_respondent_phone_number"
-                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:minHeight="20dp"
-                app:boxStrokeWidth="2dp"
-                app:endIconMode="clear_text">
-
-                <com.google.android.material.textfield.TextInputEditText
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:inputType="phone"
+                    android:inputType="number"
                     android:maxLines="1" />
             </com.google.android.material.textfield.TextInputLayout>
 
 
-            <!--            household_migration_status       -->
+
+
+
+            <!--            marital status -->
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
-                android:text="@string/household_migration_status"
+                android:text="@string/member_marital_status"
                 android:textAppearance="@style/TextAppearance.MaterialComponents.Body1" />
 
             <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/til_migration_status"
+                android:id="@+id/til_marital_status"
                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense.ExposedDropdownMenu"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -395,7 +320,7 @@
                 app:boxStrokeWidth="2dp">
 
                 <AutoCompleteTextView
-                    android:id="@+id/actv_migration_status"
+                    android:id="@+id/act_marital_status"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:ellipsize="end"
@@ -404,118 +329,215 @@
 
             </com.google.android.material.textfield.TextInputLayout>
 
-            <!--            other_household_migration_status      -->
+
+
+
+            <!--            member_pregnancy_status-->
             <TextView
-                android:id="@+id/tv_other_migration_status"
+                android:id="@+id/tv_member_birth_certificate"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
-                android:text="@string/other_migration_status"
+                android:text="Does he/she have a birth certificate?"
                 android:textAppearance="@style/TextAppearance.MaterialComponents.Body1" />
 
+            <RadioGroup
+                android:id="@+id/rg_birth_certificate"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <com.google.android.material.radiobutton.MaterialRadioButton
+                    android:id="@+id/rb_yes_birth_cert"
+                    android:layout_width="match_parent"
+                    android:layout_height="48dp"
+                    android:text="@string/yes" />
+
+                <com.google.android.material.radiobutton.MaterialRadioButton
+                    android:id="@+id/rb_no_birth_cert"
+                    android:layout_width="match_parent"
+                    android:layout_height="48dp"
+                    android:text="@string/no" />
+            </RadioGroup>
+
+
+            <!--            level of education -->
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:text="@string/level_of_education"
+                android:textAppearance="@style/TextAppearance.MaterialComponents.Body1" />
             <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/til_other_migration_status"
-                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
+                android:id="@+id/til_level_of_education"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense.ExposedDropdownMenu"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:minHeight="20dp"
-                app:boxStrokeWidth="2dp"
-                app:endIconMode="clear_text">
+                app:boxStrokeWidth="2dp">
 
-                <com.google.android.material.textfield.TextInputEditText
+                <AutoCompleteTextView
+                    android:id="@+id/act_level_of_education"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:inputType="text"
-                    android:maxLines="1" />
+                    android:ellipsize="end"
+                    android:inputType="none"
+                    android:singleLine="true" />
 
             </com.google.android.material.textfield.TextInputLayout>
 
-            <!--            duration_displaced_returned_repatriated_refugee-->
+
+            <!--            school attendence -->
             <TextView
-                android:id="@+id/tv_duration_displaced_returned_repatriated_refugee"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
-                android:text="@string/duration_displaced_returned_repatriated_refugee"
+                android:text="@string/member_school_attendance"
                 android:textAppearance="@style/TextAppearance.MaterialComponents.Body1" />
-
-            <LinearLayout
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/til_member_school_attendance"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense.ExposedDropdownMenu"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:baselineAligned="false"
+                android:minHeight="20dp"
+                app:boxStrokeWidth="2dp">
+
+                <AutoCompleteTextView
+                    android:id="@+id/act_member_school_attendance"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:ellipsize="end"
+                    android:inputType="none"
+                    android:singleLine="true" />
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <!--            member_pregnancy_status-->
+            <TextView
+                android:id="@+id/tv_member_pregnancy_status"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:text="@string/member_pregnancy_status"
+                android:textAppearance="@style/TextAppearance.MaterialComponents.Body1" />
+
+            <RadioGroup
+                android:id="@+id/rg_member_pregnancy_status"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <com.google.android.material.radiobutton.MaterialRadioButton
+                    android:id="@+id/rb_yes_pregnant"
+                    android:layout_width="match_parent"
+                    android:layout_height="48dp"
+                    android:text="@string/yes" />
+
+                <com.google.android.material.radiobutton.MaterialRadioButton
+                    android:id="@+id/rb_no_pregnant"
+                    android:layout_width="match_parent"
+                    android:layout_height="48dp"
+                    android:text="@string/no" />
+            </RadioGroup>
+
+
+            <!--            disability -->
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:text="@string/member_disability"
+                android:textAppearance="@style/TextAppearance.MaterialComponents.Body1" />
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/til_member_disability"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense.ExposedDropdownMenu"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:minHeight="20dp"
+                app:boxStrokeWidth="2dp">
+
+                <AutoCompleteTextView
+                    android:id="@+id/act_member_disability"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:ellipsize="end"
+                    android:inputType="none"
+                    android:singleLine="true" />
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <!--            socio-professional category -->
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:text="@string/member_socio_professional_category"
+                android:textAppearance="@style/TextAppearance.MaterialComponents.Body1" />
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/til_socio_professional_category"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense.ExposedDropdownMenu"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:minHeight="20dp"
+                app:boxStrokeWidth="2dp">
+
+                <AutoCompleteTextView
+                    android:id="@+id/act_socio_professional_category"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:ellipsize="end"
+                    android:inputType="none"
+                    android:singleLine="true" />
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <!--            occupation -->
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:text="@string/occupation"
+                android:textAppearance="@style/TextAppearance.MaterialComponents.Body1" />
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/til_occupation"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense.ExposedDropdownMenu"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:minHeight="20dp"
+                app:boxStrokeWidth="2dp">
+
+                <AutoCompleteTextView
+                    android:id="@+id/act_occupation"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:ellipsize="end"
+                    android:inputType="none"
+                    android:singleLine="true" />
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="24dp"
+                android:layout_marginBottom="48dp"
+                android:gravity="end"
                 android:orientation="horizontal">
 
-                <com.google.android.material.textfield.TextInputLayout
-                    android:id="@+id/til_duration_displaced_returned_repatriated_refugee"
-                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginEnd="8dp"
-                    android:layout_weight="0.5"
-                    android:minHeight="20dp"
-                    app:boxStrokeWidth="2dp"
-                    app:endIconMode="clear_text"
-                    tools:ignore="TooManyViews">
-
-                    <com.google.android.material.textfield.TextInputEditText
-
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:inputType="number"
-                        android:maxLines="1" />
-                </com.google.android.material.textfield.TextInputLayout>
-
-                <com.google.android.material.textfield.TextInputLayout
-                    android:id="@+id/til_unit_of_migration_duration"
-                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense.ExposedDropdownMenu"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="8dp"
-                    android:layout_weight="0.5"
-                    android:minHeight="20dp"
-                    app:boxStrokeWidth="2dp">
-
-                    <AutoCompleteTextView
-                        android:id="@+id/actv_unit_of_migration_duration"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:ellipsize="end"
-                        android:hint="@string/unit"
-                        android:inputType="none"
-                        android:singleLine="true" />
-                </com.google.android.material.textfield.TextInputLayout>
-            </LinearLayout>
 
 
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/btn_finish"
+                    style="@style/Widget.App.Button"
+                    android:layout_alignParentEnd="true"
+                    android:text="@string/finish"
+                    app:iconGravity="end"
+                    app:iconTint="@color/colorPrimary" />
+            </RelativeLayout>
         </LinearLayout>
     </ScrollView>
-    <RelativeLayout
-        android:padding="16dp"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:gravity="end"
-        android:elevation="4dp"
-        android:background="@color/cardview_light_background"
-        android:orientation="horizontal"
-        app:layout_constraintBottom_toBottomOf="parent">
 
-        <com.google.android.material.button.MaterialButton
-            android:id="@+id/btn_previous"
-            style="@style/Widget.App.Button"
-            app:icon="@drawable/ic_arrow_back_ios_24"
-            app:iconTint="@color/colorPrimary"
-            android:layout_alignParentStart="true"
-            android:text="@string/previous" />
 
-        <com.google.android.material.button.MaterialButton
-            android:id="@+id/btn_next"
-            style="@style/Widget.App.Button"
-            app:icon="@drawable/ic_arrow_forward_ios_24"
-            app:iconTint="@color/colorPrimary"
-            app:iconGravity="end"
-            android:enabled="false"
-            android:layout_alignParentEnd="true"
-            android:text="@string/next" />
-    </RelativeLayout>
-
-</androidx.constraintlayout.widget.ConstraintLayout>
+</androidx.coordinatorlayout.widget.CoordinatorLayout>

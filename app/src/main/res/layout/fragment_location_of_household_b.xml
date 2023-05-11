@@ -364,35 +364,35 @@
 
             </LinearLayout>
 
-            <!--    buttons     -->
-            <RelativeLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="24dp"
-                android:layout_marginBottom="48dp"
-                android:gravity="end"
-                android:orientation="horizontal">
-
-                <com.google.android.material.button.MaterialButton
-                    android:id="@+id/btn_previous"
-                    style="@style/Widget.App.Button"
-                    app:icon="@drawable/ic_arrow_back_ios_24"
-                    app:iconTint="@color/colorPrimary"
-                    android:layout_alignParentStart="true"
-                    android:text="@string/previous" />
-
-                <com.google.android.material.button.MaterialButton
-                    android:id="@+id/btn_next"
-                    style="@style/Widget.App.Button"
-                    app:icon="@drawable/ic_arrow_forward_ios_24"
-                    app:iconTint="@color/colorPrimary"
-                    app:iconGravity="end"
-                    android:enabled="false"
-                    android:layout_alignParentEnd="true"
-                    android:text="@string/next" />
-            </RelativeLayout>
         </LinearLayout>
     </ScrollView>
+    <RelativeLayout
+        android:padding="16dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="end"
+        android:elevation="4dp"
+        android:background="@color/cardview_light_background"
+        android:orientation="horizontal"
+        app:layout_constraintBottom_toBottomOf="parent">
 
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btn_previous"
+            style="@style/Widget.App.Button"
+            app:icon="@drawable/ic_arrow_back_ios_24"
+            app:iconTint="@color/colorPrimary"
+            android:layout_alignParentStart="true"
+            android:text="@string/previous" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btn_next"
+            style="@style/Widget.App.Button"
+            app:icon="@drawable/ic_arrow_forward_ios_24"
+            app:iconTint="@color/colorPrimary"
+            app:iconGravity="end"
+            android:enabled="false"
+            android:layout_alignParentEnd="true"
+            android:text="@string/next" />
+    </RelativeLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

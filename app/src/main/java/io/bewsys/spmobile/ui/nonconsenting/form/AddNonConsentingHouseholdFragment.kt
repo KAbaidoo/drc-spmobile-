@@ -28,6 +28,7 @@ import com.google.android.gms.location.FusedLocationProviderClient
 
 import com.google.android.gms.location.LocationServices
 import com.google.android.material.snackbar.Snackbar
+import com.google.android.material.textfield.TextInputLayout
 import com.vmadalin.easypermissions.EasyPermissions
 import com.vmadalin.easypermissions.dialogs.SettingsDialog
 import io.bewsys.spmobile.FormNavigationArgs
@@ -48,7 +49,9 @@ class AddNonConsentingHouseholdFragment : Fragment(R.layout.fragment_add_non_con
 
     val args: AddNonConsentingHouseholdFragmentArgs by navArgs()
 
+    private var til_Lat: TextInputLayout? = null
 
+    private var til_Lon: TextInputLayout? = null
 
     private val provinces = mutableListOf<String>()
     private val communities = mutableListOf<String>()
@@ -57,12 +60,9 @@ class AddNonConsentingHouseholdFragment : Fragment(R.layout.fragment_add_non_con
 
     private val viewModel: AddNonConsentingHouseholdViewModel by viewModel()
     private var currentLocation: Location? = null
-    private var locationProvider:LocationProvider?=null
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-         locationProvider =  LocationProvider(requireContext())
 
-    }
+    private val locationProvider: LocationProvider by inject()
+
 
     @SuppressLint("MissingPermission")
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -121,7 +121,8 @@ class AddNonConsentingHouseholdFragment : Fragment(R.layout.fragment_add_non_con
 
         binding.apply {
 
-
+            til_Lat = tilLat
+            til_Lon = tilLon
             textFieldOtherReason.editText?.addTextChangedListener {
                 viewModel.reason = it.toString()
             }
@@ -231,8 +232,15 @@ class AddNonConsentingHouseholdFragment : Fragment(R.layout.fragment_add_non_con
     }//end of onCreateView
 
     private fun getLastKnownLocation() {
-            Log.d(TAG, "lon: ${currentLocation?.longitude} lat: ${currentLocation?.latitude}")
+        currentLocation?.apply {
+            viewModel.lon = longitude.toString()
+            viewModel.lat = latitude.toString()
+
+            til_Lat?.editText?.setText(latitude.toString())
+            til_Lon?.editText?.setText(longitude.toString())
         }
+    }
+
 
 
     private fun hasLocationPermission() =

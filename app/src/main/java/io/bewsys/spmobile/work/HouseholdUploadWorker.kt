@@ -28,7 +28,7 @@ class HouseholdUploadWorker(
 ) : CoroutineWorker(ctx, params), KoinComponent {
 
     val repository: HouseholdRepository by inject()
-    val memberRepo: MemberRepository by inject()
+
 
     override suspend fun doWork(): Result {
         val id = inputData.getLong(KEY_DATA_ID, -1)

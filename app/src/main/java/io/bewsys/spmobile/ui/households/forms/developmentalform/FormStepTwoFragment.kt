@@ -78,7 +78,6 @@ class FormStepTwoFragment : Fragment(R.layout.fragment_add_household_two_respond
             territories.swap(it)
         }
         viewModel.communities.observe(viewLifecycleOwner) {
-
             communities.swap(it)
         }
         viewModel.groupments.observe(viewLifecycleOwner) {
@@ -98,15 +97,7 @@ class FormStepTwoFragment : Fragment(R.layout.fragment_add_household_two_respond
             til_Lat = tilLat
             til_Lon = tilLon
 
-            val tils = listOf(
-                tilRespondentFirstname,
-                tilRespondentMiddlename,
-                tilRespondentLastname,
-                tilRespondentAge,
-                tilRespondentVoterId,
-                tilRespondentPhoneNumber,
-                tilAddress
-            )
+
 
 
 
@@ -114,11 +105,13 @@ class FormStepTwoFragment : Fragment(R.layout.fragment_add_household_two_respond
                 when (checkedId) {
                     rbGeneral.id -> {
                         viewModel.initialRegistrationType = rbGeneral.text as String
+                        viewModel.stepTwoHasBlankFields()
                         getLastKnownLocation()
                     }
                     else -> {
                         viewModel.initialRegistrationType = rbEmergency.text as String
                         getLastKnownLocation()
+                        viewModel.stepTwoHasBlankFields()
 
                     }
                 }
@@ -216,14 +209,37 @@ class FormStepTwoFragment : Fragment(R.layout.fragment_add_household_two_respond
             }
 
 
-
-            tils.forEachIndexed { index, til ->
-                til.editText?.addTextChangedListener {
-                    viewModel.setStepTwoFields(index, it)
-                    viewModel.stepTwoHasBlankFields()
-                }
-
+            tilRespondentFirstname.editText?.addTextChangedListener {
+                viewModel.respondentFirstName = it.toString()
+                viewModel.stepTwoHasBlankFields()
             }
+            tilRespondentMiddlename.editText?.addTextChangedListener {
+                viewModel.respondentMiddleName = it.toString()
+                viewModel.stepTwoHasBlankFields()
+            }
+            tilRespondentLastname.editText?.addTextChangedListener {
+                viewModel.respondentLastName = it.toString()
+                viewModel.stepTwoHasBlankFields()
+            }
+            tilRespondentAge.editText?.addTextChangedListener {
+                viewModel.respondentAge = it.toString()
+                viewModel.stepTwoHasBlankFields()
+            }
+            tilRespondentVoterId.editText?.addTextChangedListener {
+                viewModel.respondentVoterId = it.toString()
+                viewModel.stepTwoHasBlankFields()
+            }
+            tilRespondentPhoneNumber.editText?.addTextChangedListener {
+                viewModel.respondentPhoneNo = it.toString()
+                viewModel.stepTwoHasBlankFields()
+            }
+            tilAddress.editText?.addTextChangedListener {
+                viewModel.address = it.toString()
+                viewModel.stepTwoHasBlankFields()
+            }
+
+
+
 
             tilRespondentFirstname.editText?.setOnFocusChangeListener { view, hasFocus ->
                 if (!hasFocus && viewModel.respondentFirstName.isBlank()) {
@@ -238,9 +254,6 @@ class FormStepTwoFragment : Fragment(R.layout.fragment_add_household_two_respond
 
 
 
-
-
-
             val datePicker = MaterialDatePicker
                 .Builder
                 .datePicker()
@@ -252,6 +265,7 @@ class FormStepTwoFragment : Fragment(R.layout.fragment_add_household_two_respond
             tilRespondentDob.editText?.setOnClickListener {
                 datePicker.show(parentFragmentManager, "DATE_PICKER")
             }
+
             datePicker.addOnPositiveButtonClickListener {
                 val sdf = SimpleDateFormat("dd-MM-yyyy", Locale.getDefault())
                 val date = sdf.format(it)

@@ -102,10 +102,10 @@ class HouseholdDetailFragment : Fragment(R.layout.fragment_household_detail) {
 
 
             tvOtherMigrationStatus.append(": ${household.other_household_migration_status ?: "N/A"}")
-            val duration =
+           /* val duration =
                 if (household.duration_displaced_returned_repatriated_refugee!!.isNullOrBlank()) "N/A" else "${household.duration_displaced_returned_repatriated_refugee} ${household.unit_of_migration_duration}"
 
-            tvDurationDisplacedReturnedRepatriatedRefugee.append(duration)
+            tvDurationDisplacedReturnedRepatriatedRefugee.append(duration)*/
             tvMonthlyIncome.append(": ${household.household_monthly_income}")
             tvMonthlyIncomeNeeded.append(": ${household.minimum_monthly_income_necessary_live_without_difficulties}")
             tvMobileMoneyUsername.append(": ${household.mobile_money_username}")

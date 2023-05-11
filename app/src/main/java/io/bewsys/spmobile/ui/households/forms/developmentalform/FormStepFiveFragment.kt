@@ -30,34 +30,91 @@ class FormStepFiveFragment : Fragment(R.layout.fragment_add_household_five_shock
         val binding = FragmentAddHouseholdFiveShockBinding.bind(view)
 
         binding.apply {
-            val tils = listOf(
-                tilDaysSpentReduceMealsConsumedCopingStrategy,
-                tilDaysSpentReduceMealsAdultForfeitMealForChildCopingStrategy,
-                tilDaysSpentReduceAmountConsumedCopingStrategy,
-                tilDaysSpentEatLessExpensivelyCopingStrategy,
-                tilDaysSpentDaysWithoutEatingCopingStrategy,
-                tilDaysSpentConsumeWildFoodCopingStrategy,
-                tilDaysSpentBorrowFoodOrRelyOnFamilyHelpCopingStrategy,
-                tilDaysSpentBeggingCopingStrategy,
-                tilDaysSpentOtherCopingStrategy,
-                tilNumberOfMealsEatenByChildren6To17Yesterday,
-                tilNumberOfMealsEatenByChildren2To5Yesterday,
-                tilNumberOfMealsEatenByAdults18PlusYesterday,
-                tilNumberOfDaysInWeekConsumedSugarOrSweetProducts,
-                tilNumberOfDaysInWeekConsumedStapleFoods,
-                tilNumberOfDaysInWeekConsumedVegetables,
-                tilNumberOfDaysInWeekConsumedMeat,
-                tilNumberOfDaysInWeekConsumedLegumesOrNuts,
-                tilNumberOfDaysInWeekConsumedFruits,
-                tilNumberOfDaysInWeekConsumedDairyProducts,
-                tilNumberOfDaysInWeekConsumedCookingOils
-            )
-            tils.forEachIndexed { index, til ->
-                til.editText?.addTextChangedListener {
-                    viewModel.setStepFiveFields(index, it)
-                    viewModel.stepFiveHasBlankFields()
+
+            viewModel.apply {
+                tilDaysSpentReduceMealsConsumedCopingStrategy.editText?.addTextChangedListener {
+                    daysReducedMealsConsumed = it.toString()
+                    stepFiveHasBlankFields()
+                }
+                tilDaysSpentReduceMealsAdultForfeitMealForChildCopingStrategy.editText?.addTextChangedListener {
+                    daysReducedMealsAdult = it.toString()
+                    stepFiveHasBlankFields()
+                }
+                tilDaysSpentReduceAmountConsumedCopingStrategy.editText?.addTextChangedListener {
+                    daysReducedAmountConsumed = it.toString()
+                    stepFiveHasBlankFields()
+                }
+                tilDaysSpentEatLessExpensivelyCopingStrategy.editText?.addTextChangedListener {
+                    daysEatLessExpensively = it.toString()
+                    stepFiveHasBlankFields()
+                }
+                tilDaysSpentDaysWithoutEatingCopingStrategy.editText?.addTextChangedListener {
+                    daysWithoutEating = it.toString()
+                    stepFiveHasBlankFields()
+                }
+                tilDaysSpentConsumeWildFoodCopingStrategy.editText?.addTextChangedListener {
+                    daysConsumedWildFood = it.toString()
+                    stepFiveHasBlankFields()
+                }
+                tilDaysSpentBorrowFoodOrRelyOnFamilyHelpCopingStrategy.editText?.addTextChangedListener {
+                    daysBorrowFood = it.toString()
+                    stepFiveHasBlankFields()
+                }
+                tilDaysSpentBeggingCopingStrategy.editText?.addTextChangedListener {
+                    daysBeggingFood = it.toString()
+                    stepFiveHasBlankFields()
+                }
+                tilDaysSpentOtherCopingStrategy.editText?.addTextChangedListener {
+                    daysOtherCoping = it.toString()
+                    stepFiveHasBlankFields()
+                }
+                tilNumberOfMealsEatenByChildren6To17Yesterday.editText?.addTextChangedListener {
+                    numberOfMealsChildren6To17 = it.toString()
+                    stepFiveHasBlankFields()
+                }
+                tilNumberOfMealsEatenByChildren2To5Yesterday.editText?.addTextChangedListener {
+                    numberOfMealsChildren2To5 = it.toString()
+                    stepFiveHasBlankFields()
+                }
+                tilNumberOfMealsEatenByAdults18PlusYesterday.editText?.addTextChangedListener {
+                    numberOfMealsAdults18plus = it.toString()
+                    stepFiveHasBlankFields()
+                }
+                tilNumberOfDaysInWeekConsumedSugarOrSweetProducts.editText?.addTextChangedListener {
+                    daysConsumedSugarOrSweets = it.toString()
+                    stepFiveHasBlankFields()
+                }
+                tilNumberOfDaysInWeekConsumedStapleFoods.editText?.addTextChangedListener {
+                    daysConsumedStapleFoods = it.toString()
+                    stepFiveHasBlankFields()
+                }
+                tilNumberOfDaysInWeekConsumedVegetables.editText?.addTextChangedListener {
+                    daysConsumedVegetables = it.toString()
+                    stepFiveHasBlankFields()
+                }
+                tilNumberOfDaysInWeekConsumedMeat.editText?.addTextChangedListener {
+                    daysConsumedMeat = it.toString()
+                    stepFiveHasBlankFields()
+                }
+                tilNumberOfDaysInWeekConsumedLegumesOrNuts.editText?.addTextChangedListener {
+                    daysConsumedLegumes = it.toString()
+                    stepFiveHasBlankFields()
+                }
+                tilNumberOfDaysInWeekConsumedFruits.editText?.addTextChangedListener {
+                    daysConsumedFruits = it.toString()
+                    stepFiveHasBlankFields()
+                }
+                tilNumberOfDaysInWeekConsumedDairyProducts.editText?.addTextChangedListener {
+                    daysConsumedDiary = it.toString()
+                    stepFiveHasBlankFields()
+                }
+                tilNumberOfDaysInWeekConsumedCookingOils.editText?.addTextChangedListener {
+                    daysConsumedCookingOils = it.toString()
+                    stepFiveHasBlankFields()
                 }
             }
+
+
 
             when (viewModel.affectedByConflict) {
                 rbYesAffectedByConflict.text -> rgAffectedByConflict.check(rbYesAffectedByConflict.id)
@@ -214,12 +271,28 @@ class FormStepFiveFragment : Fragment(R.layout.fragment_add_household_five_shock
             }
 
             viewModel.apply {
-                tils.forEachIndexed { index, til ->
-                    til.editText?.setText(stepFiveFields[index])
-                }
+                tilDaysSpentReduceMealsConsumedCopingStrategy.editText?.setText(daysReducedMealsConsumed)
+                tilDaysSpentReduceMealsAdultForfeitMealForChildCopingStrategy.editText?.setText(daysReducedMealsAdult)
+                tilDaysSpentReduceAmountConsumedCopingStrategy.editText?.setText(daysReducedAmountConsumed)
+                tilDaysSpentEatLessExpensivelyCopingStrategy.editText?.setText(daysEatLessExpensively)
+                tilDaysSpentDaysWithoutEatingCopingStrategy.editText?.setText(daysWithoutEating)
+                tilDaysSpentConsumeWildFoodCopingStrategy.editText?.setText(daysConsumedWildFood)
+                tilDaysSpentBorrowFoodOrRelyOnFamilyHelpCopingStrategy.editText?.setText(daysBorrowFood)
+                tilDaysSpentBeggingCopingStrategy.editText?.setText(daysBeggingFood)
+                tilDaysSpentOtherCopingStrategy.editText?.setText(daysOtherCoping)
+                tilNumberOfMealsEatenByChildren6To17Yesterday.editText?.setText(numberOfMealsChildren6To17)
+                tilNumberOfMealsEatenByChildren2To5Yesterday.editText?.setText(numberOfMealsChildren2To5)
+                tilNumberOfMealsEatenByAdults18PlusYesterday.editText?.setText(numberOfMealsAdults18plus)
+                tilNumberOfDaysInWeekConsumedSugarOrSweetProducts.editText?.setText(daysConsumedSugarOrSweets)
+                tilNumberOfDaysInWeekConsumedStapleFoods.editText?.setText(daysConsumedStapleFoods)
+                tilNumberOfDaysInWeekConsumedVegetables.editText?.setText(daysConsumedVegetables)
+                tilNumberOfDaysInWeekConsumedMeat.editText?.setText(daysConsumedMeat)
+                tilNumberOfDaysInWeekConsumedLegumesOrNuts.editText?.setText(daysConsumedLegumes)
+                tilNumberOfDaysInWeekConsumedFruits.editText?.setText(daysConsumedFruits)
+                tilNumberOfDaysInWeekConsumedDairyProducts.editText?.setText(daysConsumedDiary)
+                tilNumberOfDaysInWeekConsumedCookingOils.editText?.setText(daysConsumedCookingOils)
+
             }
-
-
 
 
             val title =
@@ -227,12 +300,12 @@ class FormStepFiveFragment : Fragment(R.layout.fragment_add_household_five_shock
 
             btnNext.setOnClickListener {
                 val bundle = bundleOf("title" to title)
-                findNavController().navigate(R.id.formStepSixFragment2,bundle )
+                findNavController().navigate(R.id.formStepSixFragment2, bundle)
             }
             btnPrevious.setOnClickListener {
 
                 val bundle = bundleOf("title" to title)
-                findNavController().navigate(R.id.formStepFourFragment,bundle )
+                findNavController().navigate(R.id.formStepFourFragment, bundle)
 
             }
             viewLifecycleOwner.lifecycleScope.launchWhenStarted {
@@ -242,28 +315,7 @@ class FormStepFiveFragment : Fragment(R.layout.fragment_add_household_five_shock
             }
 
         }
-        // set up menu
-//        val menuHost = requireActivity()
-//        menuHost.addMenuProvider(object : MenuProvider {
-//            override fun onCreateMenu(menu: Menu, menuInflater: MenuInflater) {
-//                menuInflater.inflate(R.menu.fragment_households_menu, menu)
-//
-//            }
-//
-//            override fun onMenuItemSelected(menuItem: MenuItem): Boolean {
-//                return when (menuItem.itemId) {
-//
-//                    R.id.action_download_households -> {
-//                        val bundle = bundleOf("id" to viewModel.id)
-//                        findNavController().navigate(R.id.deleteHouseholdDialogFragment, bundle)
-//
-//                        true
-//                    }
-//
-//                    else -> false
-//                }
-//            }
-//        }, viewLifecycleOwner, Lifecycle.State.RESUMED)
+
 
     }
 }

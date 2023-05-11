@@ -76,8 +76,6 @@ class FormStepThreeFragment : Fragment(R.layout.fragment_add_household_three_hea
             )
 
 
-
-
             /*      Set up listeners        */
 //             radio buttons setOnCheckChangelistener
             rgHeadAgeKnown.setOnCheckedChangeListener { _, checkedId ->
@@ -156,116 +154,118 @@ class FormStepThreeFragment : Fragment(R.layout.fragment_add_household_three_hea
                     }
                 }
             }
-            //           respond to respondent is head
-            rgIsHeadRespondent.setOnCheckedChangeListener { _, checkedId ->
-                when (checkedId) {
-                    rbYesIsRespondent.id -> {
-                        viewModel.headIsRespondent = rbYesIsRespondent.text.toString()
 
-                        viewModel.apply {
+            if (viewModel.household == null) {
+                //           respond to respondent is head
+                rgIsHeadRespondent.setOnCheckedChangeListener { _, checkedId ->
+                    when (checkedId) {
+                        rbYesIsRespondent.id -> {
+                            viewModel.headIsRespondent = rbYesIsRespondent.text.toString()
 
-                            stepThreeFields[0] = respondentFirstName
-                            stepThreeFields[1] = respondentMiddleName
-                            stepThreeFields[2] = respondentLastName
-                            stepThreeFields[3] = respondentAge
-                            stepThreeFields[4] = respondentVoterId
-                            stepThreeFields[5] = respondentPhoneNo
+                            viewModel.apply {
 
-                            headDOB = respondentDOB
-                            headDOBKnown = respondentDOBKnown
-                            headAgeKnown = respondentAgeKnown
-                            headSex = respondentSex
+                                headFirstName = respondentFirstName
+                                headMiddleName = respondentMiddleName
+                                headLastName = respondentLastName
+                                headAge = respondentAge
+                                headVoterId = respondentVoterId
+                                headPhoneNo = respondentPhoneNo
+
+                                headDOB = respondentDOB
+                                headDOBKnown = respondentDOBKnown
+                                headAgeKnown = respondentAgeKnown
+                                headSex = respondentSex
 
 
 
 
-                            tilHouseholdHeadFirstname.editText?.apply {
-                                setText(respondentFirstName)
-                                isEnabled = false
-                            }
-                            tilHouseholdHeadMiddlename.editText?.apply {
-                                setText(respondentMiddleName)
-                                isEnabled = false
-                            }
-                            tilHouseholdHeadLastname.editText?.apply {
-                                setText(respondentLastName)
-                                isEnabled = false
-                            }
-                            tilHouseholdHeadAge.editText?.apply {
-                                setText(respondentAge)
-                                isEnabled = false
-                            }
-                            tilHouseholdHeadDob.editText?.apply {
-                                setText(respondentDOB)
-                                isEnabled = false
-                            }
-                            tilHouseholdHeadVoterIdCard.editText?.apply {
-                                setText(respondentVoterId)
-                                isEnabled = false
-                            }
-                            tilHouseholdHeadPhoneNumber.editText?.apply {
-                                setText(respondentPhoneNo)
-                                isEnabled = false
+                                tilHouseholdHeadFirstname.editText?.apply {
+                                    setText(respondentFirstName)
+                                    isEnabled = false
+                                }
+                                tilHouseholdHeadMiddlename.editText?.apply {
+                                    setText(respondentMiddleName)
+                                    isEnabled = false
+                                }
+                                tilHouseholdHeadLastname.editText?.apply {
+                                    setText(respondentLastName)
+                                    isEnabled = false
+                                }
+                                tilHouseholdHeadAge.editText?.apply {
+                                    setText(respondentAge)
+                                    isEnabled = false
+                                }
+                                tilHouseholdHeadDob.editText?.apply {
+                                    setText(respondentDOB)
+                                    isEnabled = false
+                                }
+                                tilHouseholdHeadVoterIdCard.editText?.apply {
+                                    setText(respondentVoterId)
+                                    isEnabled = false
+                                }
+                                tilHouseholdHeadPhoneNumber.editText?.apply {
+                                    setText(respondentPhoneNo)
+                                    isEnabled = false
+                                }
+
+                                if (respondentSex == getString(R.string.respondent_sex)) {
+                                    tvHeadPregnancyStatus.isEnabled = false
+                                    rgHeadPregnancyStatus.isEnabled = false
+                                    rbNoPregnant.isEnabled = false
+                                    rbYesPregnant.isEnabled = false
+                                } else {
+                                    tvHeadPregnancyStatus.isEnabled = true
+                                    rgHeadPregnancyStatus.isEnabled = true
+                                    rbNoPregnant.isEnabled = true
+                                    rbYesPregnant.isEnabled = true
+                                }
+                                when (viewModel.headSex) {
+                                    rbMale.text -> rgHouseholdHeadSex.check(rbMale.id)
+                                    rbFemale.text -> rgHouseholdHeadSex.check(rbFemale.id)
+                                }
+                                when (viewModel.headAgeKnown) {
+                                    rbYesAge.text -> rgHeadAgeKnown.check(rbYesAge.id)
+                                    rbNoAge.text -> rgHeadAgeKnown.check(rbNoAge.id)
+                                }
+                                when (viewModel.headDOBKnown) {
+                                    rbYesDob.text -> rgHeadDobKnown.check(rbYesDob.id)
+                                    rbNoDob.text -> rgHeadDobKnown.check(rbNoDob.id)
+                                }
                             }
 
-                            if (respondentSex == getString(R.string.respondent_sex)) {
-                                tvHeadPregnancyStatus.isEnabled = false
-                                rgHeadPregnancyStatus.isEnabled = false
-                                rbNoPregnant.isEnabled = false
-                                rbYesPregnant.isEnabled = false
-                            } else {
-                                tvHeadPregnancyStatus.isEnabled = true
-                                rgHeadPregnancyStatus.isEnabled = true
-                                rbNoPregnant.isEnabled = true
-                                rbYesPregnant.isEnabled = true
+                            tvs.forEach { tv ->
+                                tv.isEnabled = false
                             }
-                            when (viewModel.headSex) {
-                                rbMale.text -> rgHouseholdHeadSex.check(rbMale.id)
-                                rbFemale.text -> rgHouseholdHeadSex.check(rbFemale.id)
-                            }
-                            when (viewModel.headAgeKnown) {
-                                rbYesAge.text -> rgHeadAgeKnown.check(rbYesAge.id)
-                                rbNoAge.text -> rgHeadAgeKnown.check(rbNoAge.id)
-                            }
-                            when (viewModel.headDOBKnown) {
-                                rbYesDob.text -> rgHeadDobKnown.check(rbYesDob.id)
-                                rbNoDob.text -> rgHeadDobKnown.check(rbNoDob.id)
+                            rbs.forEach { rb ->
+                                rb.isEnabled = false
                             }
                         }
+                        else -> {
+                            viewModel.headIsRespondent = rbNoIsRespondent.text as String
 
-                        tvs.forEach { tv ->
-                            tv.isEnabled = false
-                        }
-                        rbs.forEach { rb ->
-                            rb.isEnabled = false
-                        }
-                    }
-                    else -> {
-                        viewModel.headIsRespondent = rbNoIsRespondent.text as String
+                            viewModel.apply {
+                                headFirstName = ""
+                                headMiddleName = ""
+                                headLastName = ""
+                                headAge = ""
+                                headPhoneNo = ""
+                                headVoterId= ""
+                                headDOB = ""
+                                headDOBKnown = ""
+                                headAgeKnown = ""
+                                headSex = ""
+                            }
 
-                        viewModel.apply {
-                            stepThreeFields[0] = ""
-                            stepThreeFields[1] = ""
-                            stepThreeFields[2] = ""
-                            stepThreeFields[3] = ""
-                            stepThreeFields[4] = ""
-                            stepThreeFields[5] = ""
-
-                            headDOB = ""
-                            headDOBKnown = ""
-                            headAgeKnown = ""
-                            headSex = ""
-                        }
-
-                        til.forEach { til ->
-                            til.editText?.text?.clear()
-                            til.isEnabled = true
-                        }
-                        tvs.forEach { tv ->
-                            tv.isEnabled = true
-                        }
-                        rbs.forEach { rb ->
-                            rb.isEnabled = true
+                            til.forEach { til ->
+                                til.editText?.text?.clear()
+                                til.isEnabled = true
+                            }
+                            tvs.forEach { tv ->
+                                tv.isEnabled = true
+                            }
+                            rbs.forEach { rb ->
+                                rb.isEnabled = true
+                            }
                         }
                     }
                 }
@@ -288,12 +288,65 @@ class FormStepThreeFragment : Fragment(R.layout.fragment_add_household_three_hea
                 tilHouseholdHeadDob.editText!!.setText(date)
             }
 
-            allTils.forEachIndexed { index, til ->
-                til.editText?.addTextChangedListener {
-                    viewModel.setStepThreeFields(index, it)
-                    viewModel.stepThreeHasBlankFields()
-                }
+
+            tilHouseholdHeadFirstname.editText?.addTextChangedListener {
+                viewModel.headFirstName = it.toString()
+                viewModel.stepThreeHasBlankFields()
             }
+            tilHouseholdHeadMiddlename.editText?.addTextChangedListener {
+                viewModel.headMiddleName = it.toString()
+                viewModel.stepThreeHasBlankFields()
+            }
+            tilHouseholdHeadLastname.editText?.addTextChangedListener {
+                viewModel.headLastName = it.toString()
+                viewModel.stepThreeHasBlankFields()
+            }
+            tilHouseholdHeadAge.editText?.addTextChangedListener {
+                viewModel.headAge = it.toString()
+                viewModel.stepThreeHasBlankFields()
+            }
+            tilHouseholdHeadDob.editText?.addTextChangedListener {
+                viewModel.headDOB = it.toString()
+                viewModel.stepThreeHasBlankFields()
+            }
+            tilHouseholdHeadPhoneNumber.editText?.addTextChangedListener {
+                viewModel.headPhoneNo = it.toString()
+                viewModel.stepThreeHasBlankFields()
+            }
+
+            tilHouseholdHeadEducational.editText?.addTextChangedListener {
+                viewModel.headEduLevel = it.toString()
+                viewModel.stepThreeHasBlankFields()
+            }
+            tilHouseholdHeadSocioProfessionalCategory.editText?.addTextChangedListener {
+                viewModel.headSocioProfessionalCategory = it.toString()
+                viewModel.stepThreeHasBlankFields()
+            }
+
+            tilHouseholdHeadDisability.editText?.addTextChangedListener {
+                viewModel.headDisability = it.toString()
+                viewModel.stepThreeHasBlankFields()
+            }
+
+
+            tilHouseholdHeadBirthCertificate.editText?.addTextChangedListener {
+                viewModel.headBirthCert = it.toString()
+                viewModel.stepThreeHasBlankFields()
+            }
+            tilHouseholdHeadSchoolAttendance.editText?.addTextChangedListener {
+                viewModel.headSchoolAttendance = it.toString()
+                viewModel.stepThreeHasBlankFields()
+            }
+            tilHouseholdHeadSectorOfWork.editText?.addTextChangedListener {
+                viewModel.headSectorOfWork = it.toString()
+                viewModel.stepThreeHasBlankFields()
+            }
+
+
+
+
+
+
             tilHouseholdHeadFirstname.editText?.setOnFocusChangeListener { view, hasFocus ->
                 if (!hasFocus && viewModel.respondentFirstName.isBlank()) {
                     tilHouseholdHeadFirstname.error = getString(R.string.field_cannot_be_empty)
@@ -310,8 +363,8 @@ class FormStepThreeFragment : Fragment(R.layout.fragment_add_household_three_hea
                 } else tilHouseholdHeadVoterIdCard.error = null
             }
 
-            if (viewModel.household == null){
-               rgHeadDobKnown.check(rbYesDob.id)
+            if (viewModel.household == null) {
+                rgHeadDobKnown.check(rbYesDob.id)
                 rgHeadAgeKnown.check(rbYesAge.id)
             }
 
@@ -347,22 +400,37 @@ class FormStepThreeFragment : Fragment(R.layout.fragment_add_household_three_hea
 
             //            set text fields
             viewModel.apply {
-                allTils.forEachIndexed { index, til ->
-                    til.editText?.setText(stepThreeFields[index])
-                }
+                tilHouseholdHeadFirstname.editText?.setText(headFirstName)
+                tilHouseholdHeadMiddlename.editText?.setText(headMiddleName)
+                tilHouseholdHeadLastname.editText?.setText(headLastName)
+                tilHouseholdHeadAge.editText?.setText(headAge)
+                tilHouseholdHeadDob.editText?.setText(headDOB)
+                tilHouseholdHeadVoterIdCard.editText?.setText(headVoterId)
+                tilHouseholdHeadPhoneNumber.editText?.setText(headPhoneNo)
+                tilHouseholdHeadBirthCertificate.editText?.setText(headBirthCert)
+                tilHouseholdHeadEducational.editText?.setText(headEduLevel)
+                tilHouseholdHeadSocioProfessionalCategory.editText?.setText(headSocioProfessionalCategory)
+                tilHouseholdHeadSchoolAttendance.editText?.setText(headSchoolAttendance)
+                tilHouseholdHeadSectorOfWork.editText?.setText(headSectorOfWork)
+                tilHouseholdHeadDisability.editText?.setText(headDisability)
             }
+
+
+
+
+
             tilHouseholdHeadDob.editText?.setText(viewModel.headDOB)
             val title =
                 if (viewModel.household != null) getString(R.string.edit_household) else getString(R.string.add_household)
 
             btnNext.setOnClickListener {
-//                val bundle = bundleOf("title" to title)
-                findNavController().navigate(R.id.formStepThreeBFragment )
+                val bundle = bundleOf("title" to title)
+                findNavController().navigate(R.id.formStepThreeBFragment, bundle)
             }
             btnPrevious.setOnClickListener {
 
                 val bundle = bundleOf("title" to title)
-                findNavController().navigate(R.id.formStepTwoFragment,bundle )
+                findNavController().navigate(R.id.formStepTwoFragment, bundle)
 
             }
 

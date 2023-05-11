@@ -47,34 +47,27 @@ class MainActivity : AppCompatActivity(), EasyPermissions.PermissionCallbacks {
     private lateinit var binding: ActivityMainBinding
     private lateinit var navController: NavController
     private var locationProvider : LocationProvider? = null
+
 //    private val locationProvider : LocationProvider by inject()
 
-
     private val viewModel: MainViewModel by viewModel()
-
     private var currentLocation: Location? = null
-
-
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
       locationProvider =  LocationProvider(this)
 
-
-
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
-
         setSupportActionBar(binding.appBarMain.toolbar)
 
-
-//        lifecycleScope.launchWhenStarted {
-//            viewModel.userState.collectLatest {
-//                if (it.not()) {
-//                    navController.navigate(R.id.nav_login)
-//                }
-//            }
-//        }
+        lifecycleScope.launchWhenStarted {
+            viewModel.userState.collectLatest {
+                if (it.not()) {
+                    navController.navigate(R.id.nav_login)
+                }
+            }
+        }
 
         val drawerLayout: DrawerLayout = binding.drawerLayout
         val navView: NavigationView = binding.navView
@@ -118,7 +111,7 @@ class MainActivity : AppCompatActivity(), EasyPermissions.PermissionCallbacks {
         @SuppressLint("MissingPermission")
         if (hasLocationPermission()) {
             locationProvider?.location?.observe(this) { loc: Location? ->
-                currentLocation = loc
+//                currentLocation = loc
             }
         } else {
             requestLocationPermission()
@@ -130,7 +123,7 @@ class MainActivity : AppCompatActivity(), EasyPermissions.PermissionCallbacks {
 
     private fun getLastKnownLocation() {
 
-        Log.d(TAG, "lon: ${currentLocation?.longitude} lat: ${currentLocation?.latitude}")
+//        Log.d(TAG, "lon: ${currentLocation?.longitude} lat: ${currentLocation?.latitude}")
 
     }
 

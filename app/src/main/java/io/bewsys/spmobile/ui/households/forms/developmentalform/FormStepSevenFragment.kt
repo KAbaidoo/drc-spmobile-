@@ -45,8 +45,6 @@ class FormStepSevenFragment : Fragment(R.layout.fragment_add_household_seven_rev
                 tvTerritory.append(": $territory")
                 tvCommunity.append(": $community")
                 tvGroupment.append(": $groupment")
-                tvHealthArea.append(": $healthArea")
-                tvHealthZone.append(": $healthZone")
 
                 tvAddress.append(": $address")
                 tvVillageOrQuartier.append(": $villageOrQuartier")
@@ -70,6 +68,7 @@ class FormStepSevenFragment : Fragment(R.layout.fragment_add_household_seven_rev
                 tvHeadBirthCertificate.append(": $headBirthCert")
                 tvHeadEducationalLevel.append(": $headEduLevel")
                 tvHeadSocioProfessionalCategory.append(": $headSocioProfessionalCategory")
+
                 tvHeadSchoolAttendence.append(": $headSchoolAttendance")
                 tvHeadSectorOfWork.append(": $headSectorOfWork")
                 tvHeadDisability.append(": $headDisability")
@@ -107,28 +106,7 @@ class FormStepSevenFragment : Fragment(R.layout.fragment_add_household_seven_rev
 
             }
         }
-       /* // set up menu
-        val menuHost = requireActivity()
-        menuHost.addMenuProvider(object : MenuProvider {
-            override fun onCreateMenu(menu: Menu, menuInflater: MenuInflater) {
-                menuInflater.inflate(R.menu.fragment_households_menu, menu)
 
-            }
-
-            override fun onMenuItemSelected(menuItem: MenuItem): Boolean {
-                return when (menuItem.itemId) {
-
-                    R.id.action_download_households -> {
-                        val bundle = bundleOf("id" to viewModel.id)
-                        findNavController().navigate(R.id.deleteHouseholdDialogFragment, bundle)
-
-                        true
-                    }
-
-                    else -> false
-                }
-            }
-        }, viewLifecycleOwner, Lifecycle.State.RESUMED)*/
 
     }
 

@@ -1,0 +1,240 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ui.households.forms.developmentalform.FormStepThreeFragment">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:paddingStart="24dp"
+        android:paddingTop="24dp"
+        android:paddingEnd="24dp"
+        android:scrollbars="none">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <TextView
+                style="@style/Widget.App.Heading.Sub"
+                android:text="F. WATER AND SANITATION" />
+
+            <!--          source_of_drinking_water  -->
+            <TextView
+                android:id="@+id/tv_source_of_drinking_water"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:text="What is the main source of drinking water for the household?"
+                android:textAppearance="@style/TextAppearance.MaterialComponents.Body1" />
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/til_source_of_drinking_water"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense.ExposedDropdownMenu"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:minHeight="20dp"
+                app:boxStrokeWidth="2dp">
+
+                <AutoCompleteTextView
+                    android:id="@+id/act_source_of_drinking_water"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:ellipsize="end"
+                    android:inputType="none"
+                    android:singleLine="true" />
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <!--            other drinking_water_source-->
+            <TextView
+                android:id="@+id/tv_other_source_of_drinking_water"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:text="@string/other_source_of_drinking_water"
+                android:textAppearance="@style/TextAppearance.MaterialComponents.Body1" />
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/til_other_source_of_drinking_water"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:minHeight="20dp"
+                app:boxStrokeWidth="2dp"
+                app:endIconMode="clear_text">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="text"
+                    android:maxLines="1" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+
+            <!--            type of toilet -->
+            <TextView
+                android:id="@+id/tv_type_of_toilet"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:text="What type of toilet do members of your household use?"
+                android:textAppearance="@style/TextAppearance.MaterialComponents.Body1" />
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/til_type_of_toilet"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense.ExposedDropdownMenu"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:minHeight="20dp"
+                app:boxStrokeWidth="2dp">
+
+                <AutoCompleteTextView
+                    android:id="@+id/act_type_of_toilet"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:ellipsize="end"
+                    android:inputType="none"
+                    android:singleLine="true" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+
+            <!--            other_type_of_toilet  -->
+            <TextView
+                android:id="@+id/tv_other_type_of_toilet"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:text="@string/other_type_of_toilet"
+                android:textAppearance="@style/TextAppearance.MaterialComponents.Body1" />
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/til_other_type_of_toilet"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:minHeight="20dp"
+                app:boxStrokeWidth="2dp"
+                app:endIconMode="clear_text">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="text"
+                    android:maxLines="1" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+
+
+            <!--            waste disposal -->
+            <TextView
+                android:id="@+id/tv_waste_disposal"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:text="@string/waste_disposal"
+                android:textAppearance="@style/TextAppearance.MaterialComponents.Body1" />
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/til_waste_disposal"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense.ExposedDropdownMenu"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:minHeight="20dp"
+                app:boxStrokeWidth="2dp">
+
+                <AutoCompleteTextView
+                    android:id="@+id/act_waste_disposal"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:ellipsize="end"
+                    android:inputType="none"
+                    android:singleLine="true" />
+
+            </com.google.android.material.textfield.TextInputLayout>
+            <!--           other form of waste disposal  -->
+            <TextView
+                android:id="@+id/tv_other_form_of_disposal"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:text="Other waste disposal method"
+                android:textAppearance="@style/TextAppearance.MaterialComponents.Body1" />
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/til_other_waste_disposal"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:minHeight="20dp"
+                app:boxStrokeWidth="2dp"
+                app:endIconMode="clear_text">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="number"
+                    android:maxLines="1" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+
+
+            <!--            place of hand washing -->
+            <TextView
+                android:id="@+id/tv_place_for_hand_washing"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:text="@string/place_for_hand_washing"
+                android:textAppearance="@style/TextAppearance.MaterialComponents.Body1" />
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/til_place_for_hand_washing"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense.ExposedDropdownMenu"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:minHeight="20dp"
+                app:boxStrokeWidth="2dp">
+
+                <AutoCompleteTextView
+                    android:id="@+id/act_place_for_hand_washing"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:ellipsize="end"
+                    android:inputType="none"
+                    android:singleLine="true" />
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+
+
+        </LinearLayout>
+    </ScrollView>
+    <RelativeLayout
+        android:padding="16dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="end"
+        android:elevation="4dp"
+        android:background="@color/cardview_light_background"
+        android:orientation="horizontal"
+        app:layout_constraintBottom_toBottomOf="parent">
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btn_previous"
+            style="@style/Widget.App.Button"
+            app:icon="@drawable/ic_arrow_back_ios_24"
+            app:iconTint="@color/colorPrimary"
+            android:layout_alignParentStart="true"
+            android:text="@string/previous" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btn_next"
+            style="@style/Widget.App.Button"
+            app:icon="@drawable/ic_arrow_forward_ios_24"
+            app:iconTint="@color/colorPrimary"
+            app:iconGravity="end"
+            android:enabled="false"
+            android:layout_alignParentEnd="true"
+            android:text="@string/next" />
+    </RelativeLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

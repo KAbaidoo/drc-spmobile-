@@ -211,10 +211,6 @@ class HouseholdUpdateWorker(
                     result = when (response) {
                         is Resource.Success -> {
 
-//                            val householdResponse = response.data as HouseholdResponse
-//                            householdResponse.household.let {
-//                                updateItem(item.id, remoteId =it.id.toString(), surveyNo = it.survey_no )
-//                            }
                             Result.success()
                         }
                         is Resource.Exception -> {

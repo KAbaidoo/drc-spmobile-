@@ -31,7 +31,7 @@ import org.koin.androidx.workmanager.dsl.worker
 import org.koin.dsl.module
 
 val appModule = module {
-//    single { LocationProvider( androidContext()) }
+    single { LocationProvider( androidContext()) }
 
     single<SqlDriver> { AndroidSqliteDriver(Database.Schema, androidContext(), "sp.db") }
     single { Database(get()) }
@@ -59,7 +59,7 @@ val appModule = module {
     viewModel { DashboardViewModel(get(),get(),get()) }
     viewModel { HouseholdsViewModel(get(), get(),get()) }
     viewModel { NonConsentingViewModel(get(), get()) }
-    viewModel { ProfileViewModel(get(),get()) }
+    viewModel { ProfileViewModel(get(),get(),get()) }
     viewModel { TargetingViewModel(get()) }
     viewModel { AddNonConsentingHouseholdViewModel(get(), get(), get(), get())}
     viewModel { SharedDevelopmentalFormViewModel(get(), get(),get(),get(),get()) }

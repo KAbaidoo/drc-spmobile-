@@ -73,9 +73,9 @@
     <string name="duration_displaced_returned_repatriated_refugee">Duration displaced returned repatriated refugee</string>
     <string name="number_of_months_displaced_returned_repatriated_refugee">Number of months displaced returned repatriated refugee</string>
     <string name="unit_of_migration_duration">Unit of migration duration</string>
-    <string name="bank_account_or_bankcard_available">Bank account or bankcard available</string>
-    <string name="is_income_regular">Is income regular</string>
-    <string name="access_to_cultivable_land">Access to cultivable land</string>
+    <string name="bank_account_or_bankcard_available">Do you have an account or credit card?</string>
+    <string name="is_income_regular">Is the income regular? </string>
+    <string name="access_to_cultivable_land">Does a member of your household have access to arable land even if it does not belong to them?</string>
     <string name="sale_of_production_assets">Sale of production assets</string>
     <string name="use_of_child_labor">Use of child labor</string>
     <string name="use_of_early_marriage">Use of early marriage</string>
@@ -91,10 +91,10 @@
     <string name="affected_by_other_shock">Affected by other shock</string>
     <string name="affected_by_climate_shock">Affected by climate shock</string>
     <string name="affected_by_conflict">Affected by conflict</string>
-    <string name="has_household_goods">Has household goods</string>
-    <string name="has_livestock">Has livestock</string>
-    <string name="practice_of_cash_crop_farming_or_commercial_farming">Practice of cash crop farming or commercial farming</string>
-    <string name="household_head">Head</string>
+    <string name="has_household_goods">Do you have any of the following items in working order in this household?</string>
+    <string name="has_livestock">Does anyone in your household own livestock?</string>
+    <string name="practice_of_cash_crop_farming_or_commercial_farming">Practice of cash crop farming or commercial farming?</string>
+    <string name="household_head">Household head</string>
     <string name="mobile_money_phone_number">Mobile money phone number</string>
     <string name="mobile_money_username">Mobile money username</string>
     <string name="comments">Comments</string>
@@ -114,7 +114,7 @@
     <string name="household_head_sector_of_work">Household head sector of work</string>
     <string name="household_head_school_attendance">Household head school attendance</string>
     <string name="head_age_known">Head age known</string>
-    <string name="is_head_respondent">Is head respondent</string>
+    <string name="is_head_respondent">Is household head the respondent?</string>
     <string name="address">Address</string>
     <string name="village_or_quartier">Village or quartier</string>
     <string name="initial_registration_type">* Registration type</string>
@@ -199,7 +199,7 @@
     <string name="respondent_age_known">Respondent age known</string>
     <string name="respondent_age">Respondent age</string>
     <string name="respondent_sex">Respondent sex</string>
-    <string name="bank_account_or_bank_card_available">Bank account or bank card available</string>
+    <string name="bank_account_or_bank_card_available">Do you have an account or credit card?</string>
     <string name="household_member_owner_of_cultivable_land">Household member owner of cultivable land</string>
     <string name="household_migration_status">Household migration status</string>
     <string name="resident">Resident</string>
@@ -221,14 +221,14 @@
     <string name="number_of_mosquito_nets_owned">Number of mosquito nets owned</string>
     <string name="number_of_guinea_pig_owned">Number of guinea pig owned</string>
     <string name="number_of_motorbike_owned">number of motorbike owned</string>
-    <string name="number_of_rooms_used_for_sleeping">Number of rooms used for sleeping</string>
+    <string name="number_of_rooms_used_for_sleeping">In this household, how many rooms do you use for sleeping?</string>
     <string name="number_of_table_owned">Number of table owned</string>
     <string name="number_of_sofa_owned">Number of sofa owned</string>
     <string name="number_of_handset_or_phone_owned">Number of handset or phone owned</string>
     <string name="number_of_chair_owned">Number of chair owned</string>
     <string name="number_of_bed_owned">Number of bed owned</string>
     <string name="number_of_air_conditioner_owned">Number of air conditioner owned</string>
-    <string name="amount_of_cultivable_land_owned">Acres of cultivable land owned</string>
+    <string name="amount_of_cultivable_land_owned">Hectares of cultivable land owned</string>
     <string name="finish">Finish</string>
     <string name="review">Review</string>
     <string name="households">Households</string>
@@ -282,7 +282,7 @@
     <string name="member_phone_number">Phone number</string>
     <string name="member_birth_certificate">Member\'s birth certificate</string>
     <string name="member_educational_level">Member\'s educational level</string>
-    <string name="member_socio_professional_category">Member\'s socio-professional category</string>
+    <string name="member_socio_professional_category">In which socio-professional category do you work?</string>
     <string name="member_school_attendance">Member\'s school attendance</string>
     <string name="member_sector_of_work">Member\'s sector of work</string>
     <string name="member_disability">Member\'s disability</string>
@@ -290,6 +290,22 @@
     <string name="field_cannot_be_empty">This field cannot be empty!</string>
     <string name="cannot_work_without_permission">This application cannot work without Location Permission.</string>
     <string name="dont_know">Don\'t know</string>
-
+    <string name="family_relationship">Family relationship</string>
+    <string name="level_of_education">Level of education</string>
+    <string name="occupation">What is your main occupation?</string>
+    <string name="other_occupancy_status">Other occupancy status</string>
+    <string name="other_fuel_type">Other cooking fuel type</string>
+    <string name="other_soil_material">Other main soil material</string>
+    <string name="other_source_of_drinking_water">Other source of drinking water</string>
+    <string name="other_type_of_toilet">Other type of toilet</string>
+    <string name="waste_disposal">How does the household dispose of it\'s waste?</string>
+    <string name="place_for_hand_washing">Place for hand washing</string>
+    <string name="is_owner_of_cultivable_land">If so, is he/she the owner?</string>
+    <string name="total_number_of_hectares">and total number of hectares</string>
+    <string name="other_livestock">Other livestock</string>
+    <string name="other_livestock_qty">Number of other live stock</string>
+    <string name="household_goods_number">If yes, indicate the number in the boxes below</string>
+    <string name="is_member_head">Is member the household head?</string>
+    <string name="household_details">Household Details</string>
 
 </resources>

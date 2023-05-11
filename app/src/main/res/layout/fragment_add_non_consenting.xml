@@ -274,11 +274,11 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="@string/GPS_Longitude"
+                        android:text="@string/empty"
                         android:textAppearance="@style/TextAppearance.MaterialComponents.Body1" />
 
                     <com.google.android.material.textfield.TextInputLayout
-                        android:id="@+id/text_field_lon"
+                        android:id="@+id/til_lon"
                         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
@@ -288,7 +288,7 @@
                         <com.google.android.material.textfield.TextInputEditText
                             android:layout_width="match_parent"
                             android:enabled="false"
-                            android:text="@string/lon_placeholder"
+                            android:text="@string/empty"
                             android:layout_height="wrap_content" />
                     </com.google.android.material.textfield.TextInputLayout>
                 </LinearLayout>
@@ -307,7 +307,7 @@
                         android:textAppearance="@style/TextAppearance.MaterialComponents.Body1" />
 
                     <com.google.android.material.textfield.TextInputLayout
-                        android:id="@+id/text_field_lat"
+                        android:id="@+id/til_lat"
                         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"

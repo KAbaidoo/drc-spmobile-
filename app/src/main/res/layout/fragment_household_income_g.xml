@@ -1,0 +1,168 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ui.households.forms.developmentalform.FormStepThreeFragment">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:paddingStart="24dp"
+        android:paddingTop="24dp"
+        android:paddingEnd="24dp"
+        android:scrollbars="none">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <TextView
+                style="@style/Widget.App.Heading.Sub"
+                android:text="G. INCOME" />
+
+            <!--          minimum income required  -->
+            <TextView
+                android:id="@+id/tv_monthly_income_needed"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:text="What is the minimum amount of monthly income necessary for your household to live without difficulties?"
+                android:textAppearance="@style/TextAppearance.MaterialComponents.Body1" />
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/til_monthly_income_needed"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:minHeight="20dp"
+                app:boxStrokeWidth="2dp"
+                app:endIconMode="clear_text">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="number"
+                    android:maxLines="1" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+
+            <!--          monthly disposable income -->
+            <TextView
+                android:id="@+id/tv_monthly_income"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:text="What is the monthly disposable income of the household?"
+                android:textAppearance="@style/TextAppearance.MaterialComponents.Body1" />
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/til_monthly_income"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:minHeight="20dp"
+                app:boxStrokeWidth="2dp"
+                app:endIconMode="clear_text">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="number"
+                    android:maxLines="1" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <!--            is income regular -->
+            <TextView
+                android:id="@+id/tv_is_income_regular"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:text="@string/is_income_regular"
+                android:textAppearance="@style/TextAppearance.MaterialComponents.Body1" />
+
+            <RadioGroup
+                android:id="@+id/rg_income_regular"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <com.google.android.material.radiobutton.MaterialRadioButton
+                    android:id="@+id/rb_yes_income_regular"
+                    android:layout_width="match_parent"
+                    android:layout_height="48dp"
+                    android:text="@string/yes" />
+
+                <com.google.android.material.radiobutton.MaterialRadioButton
+                    android:id="@+id/rb_no_income_regular"
+                    android:layout_width="match_parent"
+                    android:layout_height="48dp"
+                    android:text="@string/no" />
+            </RadioGroup>
+
+
+            <!--            account or credit card -->
+            <TextView
+                android:id="@+id/tv_bank_account_or_bank_card"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:text="@string/bank_account_or_bankcard_available"
+                android:textAppearance="@style/TextAppearance.MaterialComponents.Body1" />
+
+            <RadioGroup
+                android:id="@+id/rg_bank_account_or_bank_card"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <com.google.android.material.radiobutton.MaterialRadioButton
+                    android:id="@+id/rb_yes_account_or_bank_card"
+                    android:layout_width="match_parent"
+                    android:layout_height="48dp"
+                    android:text="@string/yes" />
+
+                <com.google.android.material.radiobutton.MaterialRadioButton
+                    android:id="@+id/rb_no_account_or_bank_cardr"
+                    android:layout_width="match_parent"
+                    android:layout_height="48dp"
+                    android:text="@string/no" />
+            </RadioGroup>
+
+
+
+
+        </LinearLayout>
+    </ScrollView>
+
+    <RelativeLayout
+        android:padding="16dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:elevation="4dp"
+        android:background="@color/cardview_light_background"
+        android:gravity="end"
+        android:orientation="horizontal"
+        app:layout_constraintBottom_toBottomOf="parent">
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btn_previous"
+            style="@style/Widget.App.Button"
+            app:icon="@drawable/ic_arrow_back_ios_24"
+            app:iconTint="@color/colorPrimary"
+            android:layout_alignParentStart="true"
+            android:text="@string/previous" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btn_next"
+            style="@style/Widget.App.Button"
+            app:icon="@drawable/ic_arrow_forward_ios_24"
+            app:iconTint="@color/colorPrimary"
+            app:iconGravity="end"
+            android:enabled="false"
+            android:layout_alignParentEnd="true"
+            android:text="@string/next" />
+    </RelativeLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>

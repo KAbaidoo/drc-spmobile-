@@ -33,22 +33,12 @@ class MembersFormFragment : Fragment(R.layout.fragment_members) {
 
 
         binding.apply {
-            val tils = listOf(
-                tilMemberFirstname,
-                tilMemberMiddleName,
-                tilMemberLastname,
-                tilMemberAge,
-                tilMemberDob,
-                tilMemberVoterIdCard,
-                tilMemberPhoneNumber,
-                tilMemberBirthCertificate,
-                tilMemberEducational,
-                tilMemberSocioProfessionalCategory,
-                tilMemberSchoolAttendance,
-                tilMemberSectorOfWork,
-                tilMemberDisability
 
-            )
+            viewLifecycleOwner.lifecycleScope.launchWhenStarted {
+                viewModel.memberHasBlankFields.collectLatest {
+                    btnFinish.isEnabled = it.not()
+                }
+            }
 
             rgIsMemberRespondent.setOnCheckedChangeListener { _, checkedId ->
                 when (checkedId) {
@@ -74,9 +64,14 @@ class MembersFormFragment : Fragment(R.layout.fragment_members) {
                 when (checkedId) {
                     rbYesAge.id -> {
                         viewModel.memberAgeKnown = rbYesAge.text as String
+                        tvMemberAge.isEnabled = true
+                        tilMemberAge.isEnabled = true
                     }
                     else -> {
                         viewModel.memberAgeKnown = rbNoAge.text as String
+                        tvMemberAge.isEnabled = false
+                        tilMemberAge.isEnabled = false
+                        tilMemberAge.editText?.text?.clear()
                     }
                 }
             }
@@ -84,9 +79,14 @@ class MembersFormFragment : Fragment(R.layout.fragment_members) {
                 when (checkedId) {
                     rbYesDob.id -> {
                         viewModel.memberDOBKnown = rbYesDob.text as String
+                        tvMemberDob.isEnabled = true
+                        tilMemberDob.isEnabled = true
                     }
                     else -> {
                         viewModel.memberDOBKnown = rbNoDob.text as String
+                        tvMemberDob.isEnabled = false
+                        tilMemberDob.isEnabled = false
+                        tilMemberDob.editText?.text?.clear()
                     }
                 }
             }
@@ -104,9 +104,20 @@ class MembersFormFragment : Fragment(R.layout.fragment_members) {
                 when (checkedId) {
                     rbMale.id -> {
                         viewModel.memberSex = rbMale.text as String
+                        viewModel.memberPregnancyStatus = ""
+                        tvMemberPregnancyStatus.isEnabled = false
+                        rgMemberPregnancyStatus.isEnabled = false
+                        rbYesPregnant.isEnabled = false
+                        rbNoPregnant.isEnabled = false
+                        viewModel.memberHasBlankFields()
                     }
                     else -> {
                         viewModel.memberSex = rbFemale.text as String
+                        tvMemberPregnancyStatus.isEnabled = true
+                        rgMemberPregnancyStatus.isEnabled = true
+                        rbNoPregnant.isEnabled = true
+                        rbYesPregnant.isEnabled = true
+                        viewModel.memberHasBlankFields()
                     }
                 }
             }
@@ -126,12 +137,87 @@ class MembersFormFragment : Fragment(R.layout.fragment_members) {
                     }
                 }
             }
-            tils.forEachIndexed { index, til ->
-                til.editText?.addTextChangedListener {
-                    viewModel.setMemberFields(index, it)
+            val datePicker = MaterialDatePicker
+                .Builder
+                .datePicker()
+                .setTitleText(getString(R.string.select_dob))
+                .build()
+            tilMemberDob.editText?.setOnFocusChangeListener { _, hasFocus ->
+                if (hasFocus) datePicker.show(parentFragmentManager, "DATE_PICKER")
+            }
+            tilMemberDob.editText?.setOnClickListener {
+                datePicker.show(parentFragmentManager, "DATE_PICKER")
+            }
+
+            datePicker.addOnPositiveButtonClickListener {
+                val sdf = SimpleDateFormat("dd-MM-yyyy", Locale.getDefault())
+                val date = sdf.format(it)
+                tilMemberDob.editText!!.setText(date)
+                viewModel.memberDob = date
+            }
+
+            tilMemberFirstname.editText?.setOnFocusChangeListener { view, hasFocus ->
+                if (!hasFocus && viewModel.respondentFirstName.isBlank()) {
+                    tilMemberFirstname.error = getString(R.string.field_cannot_be_empty)
+                } else tilMemberFirstname.error = null
+            }
+            tilMemberLastname.editText?.setOnFocusChangeListener { view, hasFocus ->
+                if (!hasFocus && viewModel.respondentLastName.isBlank()) {
+                    tilMemberLastname.error = getString(R.string.field_cannot_be_empty)
+                } else tilMemberLastname.error = null
+            }
+
+                tilMemberFirstname.editText?.addTextChangedListener {
+                    viewModel.memberFirstname = it.toString()
                     viewModel.memberHasBlankFields()
                 }
-            }
+                tilMemberMiddleName.editText?.addTextChangedListener {
+                    viewModel.memberMiddleName = it.toString()
+                    viewModel.memberHasBlankFields()
+                }
+                tilMemberLastname.editText?.addTextChangedListener {
+                    viewModel.memberLastname = it.toString()
+                    viewModel.memberHasBlankFields()
+                }
+                tilMemberAge.editText?.addTextChangedListener {
+                    viewModel.memberAge = it.toString()
+                    viewModel.memberHasBlankFields()
+                }
+                tilMemberVoterIdCard.editText?.addTextChangedListener {
+                    viewModel.memberVoterIdCard = it.toString()
+                    viewModel.memberHasBlankFields()
+                }
+                tilMemberPhoneNumber.editText?.addTextChangedListener {
+                    viewModel.memberPhoneNumber = it.toString()
+                    viewModel.memberHasBlankFields()
+                }
+                tilMemberBirthCertificate.editText?.addTextChangedListener {
+                    viewModel.memberBirthCertificate = it.toString()
+                    viewModel.memberHasBlankFields()
+                }
+                tilMemberEducational.editText?.addTextChangedListener {
+                    viewModel.memberEducational = it.toString()
+                    viewModel.memberHasBlankFields()
+                }
+                tilMemberSocioProfessionalCategory.editText?.addTextChangedListener {
+                    viewModel.memberSocioProfessionalCategory = it.toString()
+                    viewModel.memberHasBlankFields()
+                }
+                tilMemberSchoolAttendance.editText?.addTextChangedListener {
+                    viewModel.memberSchoolAttendance = it.toString()
+                    viewModel.memberHasBlankFields()
+                }
+                tilMemberSectorOfWork.editText?.addTextChangedListener {
+                    viewModel.memberSectorOfWork = it.toString()
+                    viewModel.memberHasBlankFields()
+                }
+                tilMemberDisability.editText?.addTextChangedListener {
+                    viewModel.memberDisability = it.toString()
+                    viewModel.memberHasBlankFields()
+                }
+
+
+
 
             /*  when (viewModel.isMemberRespondent) {
                   rbYesIsRespondent.text -> rgIsMemberRespondent.check(rbYesIsRespondent.id)
@@ -165,12 +251,12 @@ class MembersFormFragment : Fragment(R.layout.fragment_members) {
               }*/
 
             //            set text fields
-            /*     viewModel.apply {
+            /*    viewModel.apply {
                      tils.forEachIndexed { index, til ->
                          til.editText?.setText(memberFields[index])
+
                      }
-                 }
-      */
+                 }*/
 
 
             val title =

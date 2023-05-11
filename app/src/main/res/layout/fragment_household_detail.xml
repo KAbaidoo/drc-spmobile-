@@ -171,22 +171,7 @@
                 android:text="@string/groupment"
                 android:textAppearance="@style/TextAppearance.MaterialComponents.Body1" />
 
-            <!-- health area and health zone-->
-            <TextView
-                android:id="@+id/tv_health_area"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
-                android:text="@string/health_area"
-                android:textAppearance="@style/TextAppearance.MaterialComponents.Body1" />
 
-            <TextView
-                android:id="@+id/tv_health_zone"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
-                android:text="@string/health_zone"
-                android:textAppearance="@style/TextAppearance.MaterialComponents.Body1" />
 
             <TextView
                 android:id="@+id/tv_address"

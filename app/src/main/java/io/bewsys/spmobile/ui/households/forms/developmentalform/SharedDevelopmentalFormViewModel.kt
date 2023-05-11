@@ -121,69 +121,19 @@ class SharedDevelopmentalFormViewModel(
 
 
 
-    //    section two
-    val stepTwoFields = mutableMapOf<Int, String>()
+
 
     //    rb
     var initialRegistrationType = ""
-        set(value) {
-            field = value
-            stepTwoHasBlankFields()
-        }
 
     var respondentFirstName = ""
-        set(value) {
-            stepTwoFields[0] = value
-            field = value
-        }
-        get() = stepTwoFields[0] ?: ""
-
-
     var respondentMiddleName = ""
-        set(value) {
-            stepTwoFields[1] = value
-            field = value
-        }
-        get() = stepTwoFields[1] ?: ""
-
     var respondentLastName = ""
-        set(value) {
-            stepTwoFields[2] = value
-            field = value
-        }
-        get() = stepTwoFields[2] ?: ""
-
     var respondentAge = ""
-        set(value) {
-            field = value
-            stepTwoFields[3] = value
-
-        }
-        get() = stepTwoFields[3] ?: ""
-
     var respondentDOB = ""
-
     var respondentVoterId = ""
-        set(value) {
-            stepTwoFields[4] = value
-            field = value
-        }
-        get() = stepTwoFields[4] ?: ""
-
     var respondentPhoneNo = ""
-        set(value) {
-            stepTwoFields[5] = value
-            field = value
-        }
-        get() = stepTwoFields[5] ?: ""
-
     var address = ""
-        set(value) {
-            stepTwoFields[6] = value
-            field = value
-        }
-        get() = stepTwoFields[6] ?: ""
-
     var respondentFamilyBondToHead = ""
     var respondentDOBKnown: String = ""
     var respondentAgeKnown: String = ""
@@ -191,63 +141,26 @@ class SharedDevelopmentalFormViewModel(
     //    rb
     var villageOrQuartier = ""
     var territoryOrTown = ""
-
     var respondentSex: String = ""
 
-    var lon = state.get<String>("lon") ?: ""
-        set(value) {
-            field = value
-            state["lon"] = value
-        }
-    var lat = state.get<String>("lat") ?: ""
-        set(value) {
-            field = value
-            state["lat"] = value
-        }
-    var province = state.get<String>("province") ?: ""
-        set(value) {
-            field = value
-            state["province"] = value
+    var lon = ""
 
+    var lat = ""
 
-        }
-    var territory = state.get<String>("territory") ?: ""
-        set(value) {
-            field = value
-            state["territory"] = value
+    var province = ""
 
+    var territory =  ""
 
-        }
-    var community = state.get<String>("community") ?: ""
-        set(value) {
-            field = value
-            state["community"] = value
+    var community =  ""
 
-
-        }
-    var groupment = state.get<String>("groupment") ?: ""
-        set(value) {
-            field = value
-            state["groupment"] = value
-
-        }
+    var groupment = ""
 
     private var provinceId: String = "1"
-
-
     private var communityId: String = "1"
-
-
     private var groupmentId: String = "1"
-
-
     private var territoryId: String = "1"
-
-
     var healthZone = ""
     var healthArea = ""
-
-
     private var healthAreaId = "1"
     private var healthZoneId = "1"
 
@@ -259,7 +172,6 @@ class SharedDevelopmentalFormViewModel(
         }
 
     }
-
     fun getGroupmentId(groupmentName: String) {
         viewModelScope.launch {
             dashboardRepository.getGroupmentByName(groupmentName).collectLatest {
@@ -268,7 +180,6 @@ class SharedDevelopmentalFormViewModel(
             }
         }
     }
-
     fun loadTerritoriesWithName(provinceName: String) {
         viewModelScope.launch {
             dashboardRepository.getProvinceByName(provinceName).collectLatest {
@@ -278,14 +189,11 @@ class SharedDevelopmentalFormViewModel(
                         _territories.value = it
                     }
             }
-
         }
     }
-
     fun loadCommunitiesWithName(territoryName: String) {
         viewModelScope.launch {
             dashboardRepository.getTerritoryByName(territoryName).collectLatest {
-
                 territoryId = it.firstOrNull()?.id.toString()
                 dashboardRepository.getCommunitiesList(territoryId)
                     .collectLatest {
@@ -295,7 +203,6 @@ class SharedDevelopmentalFormViewModel(
 
         }
     }
-
     fun loadGroupmentsWithName(communityName: String) {
         viewModelScope.launch {
             dashboardRepository.getCommunityByName(communityName).collectLatest {
@@ -309,10 +216,35 @@ class SharedDevelopmentalFormViewModel(
         }
     }
 
-
-    fun setStepTwoFields(index: Int, chars: CharSequence?) {
-        stepTwoFields[index] = chars.toString()
+    fun getProvinceById(id:String):String?{
+        var results:String=""
+        viewModelScope.launch {
+            results = dashboardRepository.getProvinceById(id.toLong())?.name.toString()
+        }
+        return results
     }
+    fun getTerritoryById(id:String):String?{
+        var results:String=""
+        viewModelScope.launch {
+            results = dashboardRepository.getTerritoryById(id.toLong())?.name.toString()
+        }
+        return results
+    }
+    fun getCommunityById(id:String):String?{
+        var results:String=""
+        viewModelScope.launch {
+            results = dashboardRepository.getCommunityById(id.toLong())?.name.toString()
+        }
+        return results
+    }
+    fun getGroupmentById(id:String):String?{
+        var results:String=""
+        viewModelScope.launch {
+            results = dashboardRepository.getGroupmentById(id.toLong())?.name.toString()
+        }
+        return results
+    }
+
 
     private val _stepTwoHasBlank = MutableStateFlow(true)
     val stepTwoHasBlankFields: StateFlow<Boolean>
@@ -336,101 +268,24 @@ class SharedDevelopmentalFormViewModel(
 
     //    step three
     //=============================
-    val stepThreeFields = mutableMapOf<Int, String>()
     var headIsRespondent: String = ""
-        set(value) {
-            field = value
-        }
+
     var headFirstName = ""
-        set(value) {
-            stepThreeFields[0] = value
-            field = value
-        }
-        get() = stepThreeFields[0] ?: ""
-
     var headMiddleName = ""
-        set(value) {
-            stepThreeFields[1] = value
-            field = value
-        }
-        get() = stepThreeFields[1] ?: ""
-
     var headLastName = ""
-        set(value) {
-            stepThreeFields[2] = value
-            field = value
-        }
-        get() = stepThreeFields[2] ?: ""
-
     var headAgeKnown = ""
-
     var headAge = ""
-        set(value) {
-            stepThreeFields[3] = value
-            field = value
-        }
-        get() = stepThreeFields[3] ?: ""
-
     var headDOB = ""
-        set(value) {
-            stepThreeFields[4] = value
-            field = value
-        }
-        get() = stepThreeFields[4] ?: ""
-
     var headVoterId = ""
-        set(value) {
-            stepThreeFields[5] = value
-            field = value
-        }
-        get() = stepThreeFields[5] ?: ""
     var headPhoneNo = ""
-        set(value) {
-            stepThreeFields[6] = value
-            field = value
-        }
-        get() = stepThreeFields[6] ?: ""
-
     var headBirthCert = ""
-        set(value) {
-            stepThreeFields[7] = value
-            field = value
-        }
-        get() = stepThreeFields[7] ?: ""
     var headEduLevel = ""
-        set(value) {
-            stepThreeFields[8] = value
-            field = value
-        }
-        get() = stepThreeFields[8] ?: ""
-
     var headSocioProfessionalCategory = ""
-        set(value) {
-            stepThreeFields[9] = value
-            field = value
-        }
-        get() = stepThreeFields[9] ?: ""
     var headSchoolAttendance = ""
-        set(value) {
-            stepThreeFields[10] = value
-            field = value
-        }
-        get() = stepThreeFields[10] ?: ""
     var headSectorOfWork = ""
-        set(value) {
-            stepThreeFields[11] = value
-            field = value
-        }
-        get() = stepThreeFields[11] ?: ""
     var headDisability = ""
-        set(value) {
-            stepThreeFields[12] = value
-            field = value
-        }
-        get() = stepThreeFields[12] ?: ""
-
-
     var headPregnancyStatus = ""
+
     var headMaritalStatus = ""
         set(value) {
             field = value
@@ -442,11 +297,6 @@ class SharedDevelopmentalFormViewModel(
             field = value
             stepThreeHasBlankFields()
         }
-
-
-    fun setStepThreeFields(index: Int, chars: CharSequence?) {
-        stepThreeFields[index] = chars.toString()
-    }
 
     private val _stepThreeHasBlank = MutableStateFlow(true)
     val stepThreeHasBlankFields: StateFlow<Boolean>
@@ -464,71 +314,17 @@ class SharedDevelopmentalFormViewModel(
 //    ============================
     val stepFourFields = mutableMapOf<Int, String>()
     var isIncomeRegular = ""
-        set(value) {
-            field = value
-            stepFourHasBlankFields()
-        }
     var bankCardOrAccount = ""
-        set(value) {
-            field = value
-            stepFourHasBlankFields()
-        }
     var benefitFromSocialAssistanceProgram = ""
-        set(value) {
-            field = value
-            stepFourHasBlankFields()
-        }
     var migrationStatus = ""
     var unitOfMigrationDuration = ""
-
     var nameOfSocialAssistanceProgram = ""
-        get() = stepFourFields[0] ?: ""
-        set(value) {
-            stepFourFields[0] = value
-            field = value
-        }
-
     var otherMigrationStatus = ""
-        get() = stepFourFields[1] ?: ""
-        set(value) {
-            stepFourFields[1] = value
-            field = value
-        }
     var durationDisplacedReturnedRepatriatedRefugee = ""
-        get() = stepFourFields[2] ?: ""
-        set(value) {
-            stepFourFields[2] = value
-            field = value
-        }
     var householdMonthlyIncome = ""
-        get() = stepFourFields[3] ?: ""
-        set(value) {
-            stepFourFields[3] = value
-            field = value
-        }
     var minimumMonthlyIncomeNecessaryLiveWithoutDifficulties = ""
-        get() = stepFourFields[4] ?: ""
-        set(value) {
-            stepFourFields[4] = value
-            field = value
-        }
     var mobileMoneyUsername = ""
-        get() = stepFourFields[5] ?: ""
-        set(value) {
-            stepFourFields[5] = value
-            field = value
-        }
     var mobileMoneyPhoneNumber = ""
-        get() = stepFourFields[6] ?: ""
-        set(value) {
-            stepFourFields[6] = value
-            field = value
-        }
-
-
-    fun setStepFourFields(index: Int, chars: CharSequence?) {
-        stepFourFields[index] = chars.toString()
-    }
 
     private val _stepFourHasBlankFields = MutableStateFlow(true)
     val stepFourHasBlankFields: StateFlow<Boolean>
@@ -545,7 +341,7 @@ class SharedDevelopmentalFormViewModel(
 
     //    Step Five
 
-    val stepFiveFields = mutableMapOf<Int, String>()
+
 
     //      rbs
     var affectedByConflict = ""
@@ -560,131 +356,25 @@ class SharedDevelopmentalFormViewModel(
 
     //    til
     var daysReducedMealsConsumed = ""
-        get() = stepFiveFields[0] ?: ""
-        set(value) {
-            stepFiveFields[0] = value
-            field = value
-        }
     var daysReducedMealsAdult = ""
-        get() = stepFiveFields[1] ?: ""
-        set(value) {
-            stepFiveFields[1] = value
-            field = value
-        }
     var daysReducedAmountConsumed = ""
-        get() = stepFiveFields[2] ?: ""
-        set(value) {
-            stepFiveFields[2] = value
-            field = value
-        }
     var daysEatLessExpensively = ""
-        get() = stepFiveFields[3] ?: ""
-        set(value) {
-            stepFiveFields[3] = value
-            field = value
-        }
     var daysWithoutEating = ""
-        get() = stepFiveFields[4] ?: ""
-        set(value) {
-            stepFiveFields[4] = value
-            field = value
-        }
     var daysConsumedWildFood = ""
-        get() = stepFiveFields[5] ?: ""
-        set(value) {
-            stepFiveFields[5] = value
-            field = value
-        }
     var daysBorrowFood = ""
-        get() = stepFiveFields[6] ?: ""
-        set(value) {
-            stepFiveFields[6] = value
-            field = value
-        }
     var daysBeggingFood = ""
-        get() = stepFiveFields[7] ?: ""
-        set(value) {
-            stepFiveFields[7] = value
-            field = value
-        }
     var daysOtherCoping = ""
-        get() = stepFiveFields[8] ?: ""
-        set(value) {
-            stepFiveFields[8] = value
-            field = value
-        }
     var numberOfMealsChildren6To17 = ""
-        get() = stepFiveFields[9] ?: ""
-        set(value) {
-            stepFiveFields[9] = value
-            field = value
-        }
     var numberOfMealsChildren2To5 = ""
-        get() = stepFiveFields[10] ?: ""
-        set(value) {
-            stepFiveFields[10] = value
-            field = value
-        }
     var numberOfMealsAdults18plus = ""
-        get() = stepFiveFields[11] ?: ""
-        set(value) {
-            stepFiveFields[11] = value
-            field = value
-        }
     var daysConsumedSugarOrSweets = ""
-        get() = stepFiveFields[12] ?: ""
-        set(value) {
-            stepFiveFields[12] = value
-            field = value
-        }
     var daysConsumedStapleFoods = ""
-        get() = stepFiveFields[13] ?: ""
-        set(value) {
-            stepFiveFields[13] = value
-            field = value
-        }
     var daysConsumedVegetables = ""
-        get() = stepFiveFields[14] ?: ""
-        set(value) {
-            stepFiveFields[14] = value
-            field = value
-        }
     var daysConsumedMeat = ""
-        get() = stepFiveFields[15] ?: ""
-        set(value) {
-            stepFiveFields[15] = value
-            field = value
-        }
     var daysConsumedLegumes = ""
-        get() = stepFiveFields[16] ?: ""
-        set(value) {
-            stepFiveFields[16] = value
-            field = value
-        }
     var daysConsumedFruits = ""
-        get() = stepFiveFields[17] ?: ""
-        set(value) {
-            stepFiveFields[17] = value
-            field = value
-        }
     var daysConsumedDiary = ""
-        get() = stepFiveFields[18] ?: ""
-        set(value) {
-            stepFiveFields[18] = value
-            field = value
-        }
     var daysConsumedCookingOils = ""
-        get() = stepFiveFields[19] ?: ""
-        set(value) {
-            stepFiveFields[19] = value
-            field = value
-        }
-
-
-    fun setStepFiveFields(index: Int, p0: CharSequence?) {
-        stepFiveFields[index] = p0.toString()
-    }
-
 
     private val _stepFiveHasBlankFields = MutableStateFlow(true)
     val stepFiveHasBlankFields: StateFlow<Boolean>
@@ -723,235 +413,46 @@ class SharedDevelopmentalFormViewModel(
     var accessToCultivableLand = ""
     var ownerOfCultivableLand = ""
     var cashCropOrCommercialFarming = ""
-
     var mosquitoNets: String = ""
-        get() = stepSixFields[0] ?: ""
-        set(value) {
-            stepSixFields[0] = value
-            field = value
-        }
     var guineaPigsOwned: String = ""
-        get() = stepSixFields[1] ?: ""
-        set(value) {
-            stepSixFields[1] = value
-            field = value
-        }
     var poultryOwned: String = ""
-        get() = stepSixFields[2] ?: ""
-        set(value) {
-            stepSixFields[2] = value
-            field = value
-        }
     var bicycleOwned: String = ""
-        get() = stepSixFields[3] ?: ""
-        set(value) {
-            stepSixFields[3] = value
-            field = value
-        }
     var oilStoveOwned: String = ""
-        get() = stepSixFields[4] ?: ""
-        set(value) {
-            stepSixFields[4] = value
-            field = value
-        }
     var rabbitOwned: String = ""
-        get() = stepSixFields[5] ?: ""
-        set(value) {
-            stepSixFields[5] = value
-            field = value
-        }
     var sheepOwned: String = ""
-        get() = stepSixFields[6] ?: ""
-        set(value) {
-            stepSixFields[6] = value
-            field = value
-        }
     var motorbikeOwned: String = ""
-        get() = stepSixFields[7] ?: ""
-        set(value) {
-            stepSixFields[7] = value
-            field = value
-        }
     var roomsUsedForSleeping: String = ""
-        get() = stepSixFields[8] ?: ""
-        set(value) {
-            stepSixFields[8] = value
-            field = value
-        }
     var wheelBarrowOwned: String = ""
-        get() = stepSixFields[9] ?: ""
-        set(value) {
-            stepSixFields[9] = value
-            field = value
-        }
     var radioOwned: String = ""
-        get() = stepSixFields[10] ?: ""
-        set(value) {
-            stepSixFields[10] = value
-            field = value
-        }
     var stoveOrOvenOwned: String = ""
-        get() = stepSixFields[11] ?: ""
-        set(value) {
-            stepSixFields[11] = value
-            field = value
-        }
     var rickShawOwned: String = ""
-        get() = stepSixFields[12] ?: ""
-        set(value) {
-            stepSixFields[12] = value
-            field = value
-        }
     var solarPlateOwned: String = ""
-        get() = stepSixFields[13] ?: ""
-        set(value) {
-            stepSixFields[13] = value
-            field = value
-        }
     var sewingMachineOwned: String = ""
-        get() = stepSixFields[14] ?: ""
-        set(value) {
-            stepSixFields[14] = value
-            field = value
-        }
     var mattressOwned: String = ""
-        get() = stepSixFields[15] ?: ""
-        set(value) {
-            stepSixFields[15] = value
-            field = value
-        }
     var televisionOwned: String = ""
-        get() = stepSixFields[16] ?: ""
-        set(value) {
-            stepSixFields[16] = value
-            field = value
-        }
     var tableOwned: String = ""
-        get() = stepSixFields[17] ?: ""
-        set(value) {
-            stepSixFields[17] = value
-            field = value
-        }
     var sofaOwned: String = ""
-        get() = stepSixFields[18] ?: ""
-        set(value) {
-            stepSixFields[18] = value
-            field = value
-        }
     var handsetOrPhoneOwned: String = ""
-        get() = stepSixFields[19] ?: ""
-        set(value) {
-            stepSixFields[19] = value
-            field = value
-        }
     var electricIronOwned: String = ""
-        get() = stepSixFields[20] ?: ""
-        set(value) {
-            stepSixFields[20] = value
-            field = value
-        }
     var plowOwned: String = ""
-        get() = stepSixFields[21] ?: ""
-        set(value) {
-            stepSixFields[21] = value
-            field = value
-        }
     var goatOwned: String = ""
-        get() = stepSixFields[22] ?: ""
-        set(value) {
-            stepSixFields[22] = value
-            field = value
-        }
     var fridgeOwned: String = ""
-        get() = stepSixFields[23] ?: ""
-        set(value) {
-            stepSixFields[23] = value
-            field = value
-        }
     var dvdDriverOwned: String = ""
-        get() = stepSixFields[24] ?: ""
-        set(value) {
-            stepSixFields[24] = value
-            field = value
-        }
     var pigsOwned: String = ""
-        get() = stepSixFields[25] ?: ""
-        set(value) {
-            stepSixFields[25] = value
-            field = value
-        }
     var cableTVOwned: String = ""
-        get() = stepSixFields[26] ?: ""
-        set(value) {
-            stepSixFields[26] = value
-            field = value
-        }
     var cowOwned: String = ""
-        get() = stepSixFields[27] ?: ""
-        set(value) {
-            stepSixFields[27] = value
-            field = value
-        }
     var charcoalIron: String = ""
-        get() = stepSixFields[28] ?: ""
-        set(value) {
-            stepSixFields[28] = value
-            field = value
-        }
     var computerOwned: String = ""
-        get() = stepSixFields[29] ?: ""
-        set(value) {
-            stepSixFields[29] = value
-            field = value
-        }
     var chairOwned: String = ""
-        get() = stepSixFields[30] ?: ""
-        set(value) {
-            stepSixFields[30] = value
-            field = value
-        }
     var cartsOwned: String = ""
-        get() = stepSixFields[31] ?: ""
-        set(value) {
-            stepSixFields[31] = value
-            field = value
-        }
     var carsOwned: String = ""
-        get() = stepSixFields[32] ?: ""
-        set(value) {
-            stepSixFields[32] = value
-            field = value
-        }
     var bedOwned: String = ""
-        get() = stepSixFields[33] ?: ""
-        set(value) {
-            stepSixFields[33] = value
-            field = value
-        }
     var airConditionerOwned: String = ""
-        get() = stepSixFields[34] ?: ""
-        set(value) {
-            stepSixFields[34] = value
-            field = value
-        }
     var cultivatedLandOwned: String = ""
-        get() = stepSixFields[35] ?: ""
-        set(value) {
-            stepSixFields[35] = value
-            field = value
-        }
     var fanOwned: String = ""
-        get() = stepSixFields[36] ?: ""
-        set(value) {
-            stepSixFields[36] = value
-            field = value
-        }
 
-    val stepSixFields = mutableMapOf<Int, String>()
-    fun setStepSixFields(index: Int, p0: CharSequence?) {
-        stepSixFields[index] = p0.toString()
-        Log.d("StepSix:", "$p0")
-    }
+
+
 
     private val _stepSixHasBlankFields = MutableStateFlow(true)
     val stepSixHasBlankFields: StateFlow<Boolean>
@@ -1006,112 +507,37 @@ class SharedDevelopmentalFormViewModel(
 
     val randomID = List(8) { Random.nextInt(0, 10) }.joinToString(separator = "")
 
-
-    private val _entriesMap = mutableMapOf<String, String>()
-
-
     var startTime: String = ""
 
     fun setStartTime() {
         startTime = SimpleDateFormat("HH:mm:ss").format(System.currentTimeMillis())
     }
 
-
     val memberFields = mutableMapOf<Int, String>()
 
     //    Member rg
     var isMemberRespondent = ""
     var isMemberHead = ""
-    var memberDOBKnown = ""
-    var memberAgeKnown = ""
+    var memberDOBKnown:String = ""
+    var memberAgeKnown:String = ""
     var memberSex = ""
     var memberPregnancyStatus = ""
     var memberMaritalStatus = ""
-
     // tils
     var memberFirstname = ""
-        get() = memberFields[0] ?: ""
-        set(value) {
-            memberFields[0] = value
-            field = value
-        }
     var memberMiddleName = ""
-        get() = memberFields[1] ?: ""
-        set(value) {
-            memberFields[1] = value
-            field = value
-        }
     var memberLastname = ""
-        get() = memberFields[2] ?: ""
-        set(value) {
-            memberFields[2] = value
-            field = value
-        }
     var memberAge = ""
-        get() = memberFields[3] ?: ""
-        set(value) {
-            memberFields[3] = value
-            field = value
-        }
     var memberDob = ""
-        get() = memberFields[4] ?: ""
-        set(value) {
-            memberFields[4] = value
-            field = value
-        }
     var memberVoterIdCard = ""
-        get() = memberFields[5] ?: ""
-        set(value) {
-            memberFields[5] = value
-            field = value
-        }
     var memberPhoneNumber = ""
-        get() = memberFields[6] ?: ""
-        set(value) {
-            memberFields[6] = value
-            field = value
-        }
     var memberBirthCertificate = ""
-        get() = memberFields[7] ?: ""
-        set(value) {
-            memberFields[7] = value
-            field = value
-        }
     var memberEducational = ""
-        get() = memberFields[8] ?: ""
-        set(value) {
-            memberFields[8] = value
-            field = value
-        }
     var memberSocioProfessionalCategory = ""
-        get() = memberFields[9] ?: ""
-        set(value) {
-            memberFields[9] = value
-            field = value
-        }
     var memberSchoolAttendance = ""
-        get() = memberFields[10] ?: ""
-        set(value) {
-            memberFields[10] = value
-            field = value
-        }
     var memberSectorOfWork = ""
-        get() = memberFields[11] ?: ""
-        set(value) {
-            memberFields[11] = value
-            field = value
-        }
     var memberDisability = ""
-        get() = memberFields[12] ?: ""
-        set(value) {
-            memberFields[12] = value
-            field = value
-        }
 
-
-    fun setMemberFields(index: Int, p0: CharSequence?) {
-        memberFields[index] = p0.toString()
-    }
 
     private val _memberHasBlankFields = MutableStateFlow(true)
     val memberHasBlankFields: StateFlow<Boolean>
@@ -1119,6 +545,9 @@ class SharedDevelopmentalFormViewModel(
 
     fun memberHasBlankFields() {
         _memberHasBlankFields.value = hasBlank(
+            memberSex,
+            memberFirstname,
+            memberLastname
         )
     }
 
@@ -1128,7 +557,6 @@ class SharedDevelopmentalFormViewModel(
 
         } else {
             registerHousehold()
-
         }
     }
 
@@ -1190,7 +618,7 @@ class SharedDevelopmentalFormViewModel(
             mobile_money_username = mobileMoneyUsername,
             mobile_money_phone_number = mobileMoneyPhoneNumber,
             village_or_quartier = villageOrQuartier,
-            other_household_migration_status = migrationStatus,
+            other_household_migration_status = otherMigrationStatus,
             household_member_with_benefit_from_social_assistance_program = benefitFromSocialAssistanceProgram,
             name_of_social_assistance_program = nameOfSocialAssistanceProgram,
             affected_by_other_shock = affectedByOtherShock,
@@ -1257,38 +685,35 @@ class SharedDevelopmentalFormViewModel(
             consent = consent,
             household_migration_status = migrationStatus,
             survey_no = "$provinceId$territoryId$communityId$groupmentId$randomID",
+
             province_id = provinceId,
             territory_id = territoryId,
             community_id = communityId,
             groupment_id = groupmentId,
+
             temp_survey_no = "",
-            other_occupation_status_of_current_accommodation = _entriesMap["other_occupation_status_of_current_accommodation"]
-                ?: "",
-            other_main_material_of_exterior_walls = _entriesMap["other_main_material_of_exterior_walls"]
-                ?: "",
-            other_main_soil_material = _entriesMap["other_main_soil_material"] ?: "",
-            other_type_of_fuel_used_for_household_cooking = _entriesMap["other_type_of_fuel_used_for_household_cooking"]
-                ?: "",
-            other_main_source_of_household_drinking_water = _entriesMap["other_main_source_of_household_drinking_water"]
-                ?: "",
-            other_type_of_household_toilet = _entriesMap["other_type_of_household_toilet"] ?: "",
-            other_method_of_waste_disposal = _entriesMap["other_method_of_waste_disposal"] ?: "",
-            other_livestock_owned = _entriesMap["other_livestock_owned"] ?: "",
-            other_household_activities_in_past_12_months = _entriesMap["other_household_activities_in_past_12_months"]
-                ?: "",
-            comments = _entriesMap["comments"] ?: "",
-            profile_picture = _entriesMap["profile_picture"] ?: "",
+            other_occupation_status_of_current_accommodation ="",
+            other_main_material_of_exterior_walls = "",
+            other_main_soil_material =  "",
+            other_type_of_fuel_used_for_household_cooking = "",
+            other_main_source_of_household_drinking_water = "",
+            other_type_of_household_toilet = "",
+            other_method_of_waste_disposal = "",
+            other_livestock_owned =  "",
+            other_household_activities_in_past_12_months = "",
+            comments =  "",
+            profile_picture = "",
             method_of_waste_disposal = "",
             place_to_wash_hands = "",
-            household_status = _entriesMap["household_status"] ?: "",
+            household_status =  "",
             main_material_of_exterior_walls = "",
             occupation_status_of_current_accommodation = "",
             type_of_fuel_used_for_household_cooking = "",
             main_soil_material = "",
             main_source_of_household_drinking_water = "",
             type_of_household_toilet = "",
-            cac = "",
-            area_of_residence = placeOfResidence,
+            cac = "1",
+            area_of_residence = "1",
             health_area_id = healthAreaId,
             health_zone_id = healthZoneId,
             respondent_type = "",
@@ -1357,7 +782,7 @@ class SharedDevelopmentalFormViewModel(
             mobile_money_username = mobileMoneyUsername,
             mobile_money_phone_number = mobileMoneyPhoneNumber,
             village_or_quartier = villageOrQuartier,
-            other_household_migration_status = migrationStatus,
+            other_household_migration_status = otherMigrationStatus,
             household_member_with_benefit_from_social_assistance_program = benefitFromSocialAssistanceProgram,
             name_of_social_assistance_program = nameOfSocialAssistanceProgram,
             affected_by_other_shock = affectedByOtherShock,
@@ -1429,25 +854,20 @@ class SharedDevelopmentalFormViewModel(
             community_id = communityId,
             groupment_id = groupmentId,
             temp_survey_no = "1",
-            other_occupation_status_of_current_accommodation = _entriesMap["other_occupation_status_of_current_accommodation"]
-                ?: "",
-            other_main_material_of_exterior_walls = _entriesMap["other_main_material_of_exterior_walls"]
-                ?: "",
-            other_main_soil_material = _entriesMap["other_main_soil_material"] ?: "",
-            other_type_of_fuel_used_for_household_cooking = _entriesMap["other_type_of_fuel_used_for_household_cooking"]
-                ?: "",
-            other_main_source_of_household_drinking_water = _entriesMap["other_main_source_of_household_drinking_water"]
-                ?: "",
-            other_type_of_household_toilet = _entriesMap["other_type_of_household_toilet"] ?: "",
-            other_method_of_waste_disposal = _entriesMap["other_method_of_waste_disposal"] ?: "",
-            other_livestock_owned = _entriesMap["other_livestock_owned"] ?: "",
-            other_household_activities_in_past_12_months = _entriesMap["other_household_activities_in_past_12_months"]
-                ?: "",
-            comments = _entriesMap["comments"] ?: "",
-            profile_picture = _entriesMap["profile_picture"] ?: "",
+            other_occupation_status_of_current_accommodation = "",
+            other_main_material_of_exterior_walls = "",
+            other_main_soil_material = "",
+            other_type_of_fuel_used_for_household_cooking = "",
+            other_main_source_of_household_drinking_water ="",
+            other_type_of_household_toilet = "",
+            other_method_of_waste_disposal =  "",
+            other_livestock_owned = "",
+            other_household_activities_in_past_12_months = "",
+            comments = "",
+            profile_picture = "",
             method_of_waste_disposal = "",
             place_to_wash_hands = "",
-            household_status = _entriesMap["household_status"] ?: "",
+            household_status = "",
             main_material_of_exterior_walls = "",
             occupation_status_of_current_accommodation = "",
             type_of_fuel_used_for_household_cooking = "",
@@ -1464,7 +884,6 @@ class SharedDevelopmentalFormViewModel(
             respondent_sex = respondentSex
         ).also {
             updateHousehold(it)
-
         }
     }
 

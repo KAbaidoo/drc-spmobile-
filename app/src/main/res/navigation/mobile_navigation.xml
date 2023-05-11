@@ -187,14 +187,20 @@
             android:id="@+id/action_global_nav_household"
             app:destination="@id/nav_household" />
         <fragment
+
             android:id="@+id/formStepThreeBFragment"
             android:name="io.bewsys.spmobile.ui.households.forms.developmentalform.FormStepThreeBFragment"
-            android:label="fragment_add_household_threeb_members"
-            tools:layout="@layout/fragment_add_household_threeb_members" />
+            android:label="{title}"
+            tools:layout="@layout/fragment_add_household_threeb_members">
+
+            <argument
+                android:name="title"
+                app:argType="string" />
+        </fragment>
         <fragment
             android:id="@+id/membersFormFragment"
             android:name="io.bewsys.spmobile.ui.households.forms.developmentalform.MembersFormFragment"
-            android:label="fragment_members"
+            android:label="Add Member"
             tools:layout="@layout/fragment_members" />
 
     </navigation>
@@ -221,7 +227,7 @@
     <fragment
         android:id="@+id/householdDetailFragment"
         android:name="io.bewsys.spmobile.ui.households.detail.HouseholdDetailFragment"
-        android:label="fragment_household_detail"
+        android:label="@string/household_details"
         tools:layout="@layout/fragment_household_detail" >
         <argument
             android:name="household"
