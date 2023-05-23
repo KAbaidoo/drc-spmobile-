@@ -8,15 +8,17 @@
 
     <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="0dp"
         android:paddingStart="24dp"
-        android:paddingTop="24dp"
         android:paddingEnd="24dp"
-        android:scrollbars="none">
+        android:scrollbars="none"
+        app:layout_constraintBottom_toTopOf="@+id/buttons"
+        app:layout_constraintTop_toTopOf="parent">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginBottom="16dp"
             android:orientation="vertical">
             <!--            has_livestock  -->
             <TextView
@@ -28,16 +30,162 @@
 
             <TextView
                 style="@style/Widget.App.Heading.Sub"
-                android:text="@string/respondent"
+                android:text="@string/geographical_location_of_the_household"
                 android:textStyle="bold" />
 
-            <!--            registration type -->
+            <!--            area of residence -->
             <TextView
-                android:id="@+id/tv_initial_registration_type"
+                android:id="@+id/tv_area_of_residence"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
-                android:text="@string/initial_registration_type"
+                android:text="@string/area_of_residence"
+                android:textAppearance="@style/TextAppearance.MaterialComponents.Body1" />
+            <!-- province and territory-->
+            <TextView
+                android:id="@+id/tv_province"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:text="@string/province"
+                android:textAppearance="@style/TextAppearance.MaterialComponents.Body1" />
+            <TextView
+                android:id="@+id/tv_territory"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:text="@string/territory"
+                android:textAppearance="@style/TextAppearance.MaterialComponents.Body1" />
+            <!-- Community and Groupment -->
+            <TextView
+                android:id="@+id/tv_community"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:text="@string/community"
+                android:textAppearance="@style/TextAppearance.MaterialComponents.Body1" />
+            <TextView
+                android:id="@+id/tv_groupment"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:text="@string/groupment"
+                android:textAppearance="@style/TextAppearance.MaterialComponents.Body1" />
+            <TextView
+                android:id="@+id/tv_health_area"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:text="@string/health_area"
+                android:textAppearance="@style/TextAppearance.MaterialComponents.Body1" />
+            <TextView
+                android:id="@+id/tv_health_zone"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:text="@string/health_zone"
+                android:textAppearance="@style/TextAppearance.MaterialComponents.Body1" />
+
+            <!--            village or quartier-->
+            <TextView
+                android:id="@+id/tv_village_or_quartier"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:text="@string/village_or_quartier"
+                android:textAppearance="@style/TextAppearance.MaterialComponents.Body1" />
+            <TextView
+                android:id="@+id/tv_address"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:text="@string/address"
+                android:textAppearance="@style/TextAppearance.MaterialComponents.Body1" />
+
+            <!--            CAC -->
+            <TextView
+                android:id="@+id/tv_cac"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:text="@string/targeting_committee_cac"
+                android:textAppearance="@style/TextAppearance.MaterialComponents.Body1" />
+            <!--            gps location-->
+            <TextView
+                android:id="@+id/tv_gps_lon"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:text="@string/GPS_Longitude"
+                android:textAppearance="@style/TextAppearance.MaterialComponents.Body1" />
+            <!--                gps             -->
+            <TextView
+                android:id="@+id/tv_gps_lat"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:text="@string/GPS_Latitude"
+                android:textAppearance="@style/TextAppearance.MaterialComponents.Body1" />
+
+            <TextView
+                style="@style/Widget.App.Heading.Sub"
+                android:text="@string/c_identification_of_household" />
+            <!--            respondent_firstname-->
+            <TextView
+                android:id="@+id/tv_head_first_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:text="@string/household_head_firstname"
+                android:textAppearance="@style/TextAppearance.MaterialComponents.Body1" />
+            <!--            respondent_middlename-->
+            <TextView
+                android:id="@+id/tv_head_middle_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:text="@string/household_head_middlename"
+                android:textAppearance="@style/TextAppearance.MaterialComponents.Body1" />
+            <!--            respondent_lastname-->
+            <TextView
+                android:id="@+id/tv_head_last_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:text="@string/household_head_lastname"
+                android:textAppearance="@style/TextAppearance.MaterialComponents.Body1" />
+
+            <TextView
+                android:id="@+id/tv_head_voter_id"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:text="@string/household_head_voter_id_card"
+                android:textAppearance="@style/TextAppearance.MaterialComponents.Body1" />
+            <!--            household_head_phone_number      -->
+            <TextView
+                android:id="@+id/tv_head_phone_number"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:text="@string/household_head_phone_number"
+                android:textAppearance="@style/TextAppearance.MaterialComponents.Body1" />
+            <!--            head_age_known-->
+
+            <TextView
+                android:id="@+id/tv_head_age"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:text="@string/household_head_age"
+                android:textAppearance="@style/TextAppearance.MaterialComponents.Body1" />
+
+            <TextView
+                android:id="@+id/tv_head_sex"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:text="@string/household_head_sex"
                 android:textAppearance="@style/TextAppearance.MaterialComponents.Body1" />
 
 
@@ -77,57 +225,10 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
-                android:text="@string/respondent_family_bond_to_head"
+                android:text="@string/family_relationship"
                 android:textAppearance="@style/TextAppearance.MaterialComponents.Body1" />
 
 
-            <!--            respondent age known -->
-            <TextView
-                android:id="@+id/tv_responent_age_known"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
-                android:text="@string/respondent_age_known"
-                android:textAppearance="@style/TextAppearance.MaterialComponents.Body1" />
-
-
-            <!--            respondent_age-->
-            <TextView
-                android:id="@+id/tv_respondent_age"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
-                android:text="@string/respondent_age"
-                android:textAppearance="@style/TextAppearance.MaterialComponents.Body1" />
-
-
-            <!--            respondent_dob_known-->
-            <TextView
-                android:id="@+id/tv_respondent_dob_known"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
-                android:text="@string/respondent_dob_known"
-                android:textAppearance="@style/TextAppearance.MaterialComponents.Body1" />
-
-            <!--            respondent_dob -->
-            <TextView
-                android:id="@+id/tv_respondent_dob"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
-                android:text="@string/respondent_dob"
-                android:textAppearance="@style/TextAppearance.MaterialComponents.Body1" />
-
-
-            <!--            gender-->
-            <TextView
-                android:id="@+id/tv_respondent_sex"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
-                android:text="@string/respondent_sex"
-                android:textAppearance="@style/TextAppearance.MaterialComponents.Body1" />
 
 
             <!--            respondent_voter_id      -->
@@ -150,295 +251,6 @@
                 android:textAppearance="@style/TextAppearance.MaterialComponents.Body1" />
 
 
-            <!-- province and territory-->
-
-            <TextView
-                android:id="@+id/tv_province"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
-                android:text="@string/province"
-                android:textAppearance="@style/TextAppearance.MaterialComponents.Body1" />
-
-            <TextView
-                android:id="@+id/tv_territory"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
-                android:text="@string/territory"
-                android:textAppearance="@style/TextAppearance.MaterialComponents.Body1" />
-
-            <!-- Community and Groupment -->
-            <TextView
-                android:id="@+id/tv_community"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
-                android:text="@string/community"
-                android:textAppearance="@style/TextAppearance.MaterialComponents.Body1" />
-
-            <TextView
-                android:id="@+id/tv_groupment"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
-                android:text="@string/groupment"
-                android:textAppearance="@style/TextAppearance.MaterialComponents.Body1" />
-
-            <TextView
-                android:id="@+id/tv_address"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
-                android:text="@string/address"
-                android:textAppearance="@style/TextAppearance.MaterialComponents.Body1" />
-
-
-            <!--            village or quartier-->
-            <TextView
-                android:id="@+id/tv_village_or_quartier"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
-                android:text="@string/village_or_quartier"
-                android:textAppearance="@style/TextAppearance.MaterialComponents.Body1" />
-
-            <!--            territory_or_town-->
-            <TextView
-                android:id="@+id/tv_territory_or_town"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
-                android:text="@string/territory_or_town"
-                android:textAppearance="@style/TextAppearance.MaterialComponents.Body1" />
-
-            <!--            area of residence -->
-            <TextView
-                android:id="@+id/tv_area_of_residence"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
-                android:text="@string/area_of_residence"
-                android:textAppearance="@style/TextAppearance.MaterialComponents.Body1" />
-            <!--            gps location-->
-            <TextView
-                android:id="@+id/tv_gps_lon"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
-                android:text="@string/GPS_Longitude"
-                android:textAppearance="@style/TextAppearance.MaterialComponents.Body1" />
-            <!--                gps             -->
-            <TextView
-                android:id="@+id/tv_gps_lat"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
-                android:text="@string/GPS_Latitude"
-                android:textAppearance="@style/TextAppearance.MaterialComponents.Body1" />
-
-            <TextView
-                style="@style/Widget.App.Heading.Sub"
-                android:text="@string/household_head" />
-            <!--            is_head_respondent -->
-            <TextView
-                android:id="@+id/tv_is_head_respondent"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
-                android:text="@string/is_head_respondent"
-                android:textAppearance="@style/TextAppearance.MaterialComponents.Body1" />
-            <!--            respondent_firstname-->
-            <TextView
-                android:id="@+id/tv_head_first_name"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
-                android:text="@string/household_head_firstname"
-                android:textAppearance="@style/TextAppearance.MaterialComponents.Body1" />
-            <!--            respondent_middlename-->
-            <TextView
-                android:id="@+id/tv_head_middle_name"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
-                android:text="@string/household_head_middlename"
-                android:textAppearance="@style/TextAppearance.MaterialComponents.Body1" />
-            <!--            respondent_lastname-->
-            <TextView
-                android:id="@+id/tv_head_last_name"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
-                android:text="@string/household_head_lastname"
-                android:textAppearance="@style/TextAppearance.MaterialComponents.Body1" />
-            <!--            head_age_known-->
-            <TextView
-                android:id="@+id/tv_head_age_known"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
-                android:text="@string/head_age_known"
-                android:textAppearance="@style/TextAppearance.MaterialComponents.Body1" />
-            <!--            head age-->
-            <TextView
-                android:id="@+id/tv_head_age"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
-                android:text="@string/household_head_age"
-                android:textAppearance="@style/TextAppearance.MaterialComponents.Body1" />
-            <!--            head_dob_known-->
-            <TextView
-                android:id="@+id/tv_head_dob_known"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
-                android:text="@string/head_dob_known"
-                android:textAppearance="@style/TextAppearance.MaterialComponents.Body1" />
-            <!--            head_dob -->
-            <TextView
-                android:id="@+id/tv_head_dob"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
-                android:text="@string/household_head_dob"
-                android:textAppearance="@style/TextAppearance.MaterialComponents.Body1" />
-            <!--            gender-->
-            <TextView
-                android:id="@+id/tv_head_sex"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
-                android:text="@string/household_head_sex"
-                android:textAppearance="@style/TextAppearance.MaterialComponents.Body1" />
-            <!--            household_head_pregnancy_status-->
-            <TextView
-                android:id="@+id/tv_head_pregnancy_status"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
-                android:text="@string/household_head_pregnancy_status"
-                android:textAppearance="@style/TextAppearance.MaterialComponents.Body1" />
-            <!--            marital status-->
-            <TextView
-                android:id="@+id/tv_marital_status"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
-                android:text="@string/household_head_marital_status"
-                android:textAppearance="@style/TextAppearance.MaterialComponents.Body1" />
-            <!--            head_voter_id      -->
-            <TextView
-                android:id="@+id/tv_head_voter_id"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
-                android:text="@string/household_head_voter_id_card"
-                android:textAppearance="@style/TextAppearance.MaterialComponents.Body1" />
-            <!--            household_head_phone_number      -->
-            <TextView
-                android:id="@+id/tv_head_phone_number"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
-                android:text="@string/household_head_phone_number"
-                android:textAppearance="@style/TextAppearance.MaterialComponents.Body1" />
-            <!--            household_head_birth_certificate      -->
-            <TextView
-                android:id="@+id/tv_head_birth_certificate"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
-                android:text="@string/household_head_birth_certificate"
-                android:textAppearance="@style/TextAppearance.MaterialComponents.Body1" />
-            <!--            household_head_educational_level      -->
-            <TextView
-                android:id="@+id/tv_head_educational_level"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
-                android:text="@string/household_head_educational_level"
-                android:textAppearance="@style/TextAppearance.MaterialComponents.Body1" />
-
-            <!--            household_head_socio_professional_category     -->
-            <TextView
-                android:id="@+id/tv_head_socio_professional_category"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
-                android:text="@string/household_head_socio_professional_category"
-                android:textAppearance="@style/TextAppearance.MaterialComponents.Body1" />
-            <!--            household_head_school_attendance_id      -->
-            <TextView
-                android:id="@+id/tv_head_school_attendence"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
-                android:text="@string/household_head_school_attendance"
-                android:textAppearance="@style/TextAppearance.MaterialComponents.Body1" />
-
-            <!--            household_head_sector_of_work_id      -->
-            <TextView
-                android:id="@+id/tv_head_sector_of_work"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
-                android:text="@string/household_head_sector_of_work"
-                android:textAppearance="@style/TextAppearance.MaterialComponents.Body1" />
-            <!--            household_head_disability_id      -->
-            <TextView
-                android:id="@+id/tv_head_disability"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
-                android:text="@string/household_head_disability"
-                android:textAppearance="@style/TextAppearance.MaterialComponents.Body1" />
-
-
-            <!--     Household       -->
-            <TextView
-                style="@style/Widget.App.Heading.Sub"
-                android:text="@string/household" />
-
-            <!--            is_income_regular  -->
-            <TextView
-                android:id="@+id/tv_is_income_regular"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
-                android:text="@string/is_income_regular"
-                android:textAppearance="@style/TextAppearance.MaterialComponents.Body1" />
-
-
-            <!--            bank_account_or_bank_card_available -->
-            <TextView
-                android:id="@+id/tv_bank_account_or_bank_card"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
-                android:text="@string/bank_account_or_bank_card_available"
-                android:textAppearance="@style/TextAppearance.MaterialComponents.Body1" />
-
-            <!--            household_member_with_benefit_from_social_assistance_program       -->
-            <TextView
-                android:id="@+id/tv_benefit_from_social_assistance_program"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
-                android:text="@string/household_member_with_benefit_from_social_assistance_program"
-                android:textAppearance="@style/TextAppearance.MaterialComponents.Body1" />
-
-
-            <!--            name_of_social_assistance_program       -->
-            <TextView
-                android:id="@+id/tv_social_assistance_program"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
-                android:text="@string/name_of_social_assistance_program"
-                android:textAppearance="@style/TextAppearance.MaterialComponents.Body1" />
-
 
             <!--            household_migration_status       -->
             <TextView
@@ -448,18 +260,6 @@
                 android:layout_marginTop="16dp"
                 android:text="@string/household_migration_status"
                 android:textAppearance="@style/TextAppearance.MaterialComponents.Body1" />
-
-
-            <!--            other_household_migration_status      -->
-            <TextView
-                android:id="@+id/tv_other_migration_status"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
-                android:text="@string/other_migration_status"
-                android:textAppearance="@style/TextAppearance.MaterialComponents.Body1" />
-
-
             <!--            duration_displaced_returned_repatriated_refugee-->
             <TextView
                 android:id="@+id/tv_duration_displaced_returned_repatriated_refugee"
@@ -469,76 +269,117 @@
                 android:text="@string/duration_displaced_returned_repatriated_refugee"
                 android:textAppearance="@style/TextAppearance.MaterialComponents.Body1" />
 
-
-            <!--            household_monthly_income      -->
+            <!--     Household       -->
             <TextView
-                android:id="@+id/tv_monthly_income"
+                style="@style/Widget.App.Heading.Sub"
+                android:text="@string/d_composition_of_household" />
+
+
+            <!--            bank_account_or_bank_card_available -->
+            <TextView
+                android:id="@+id/tv_members_living_household"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
-                android:text="@string/household_monthly_income"
+                android:text="@string/members_living_in_household"
                 android:textAppearance="@style/TextAppearance.MaterialComponents.Body1" />
 
-
-            <!--            minimum_monthly_income_necessary_live_without_difficulties      -->
-            <TextView
-                android:id="@+id/tv_monthly_income_needed"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
-                android:text="@string/minimum_monthly_income_necessary_live_without_difficulties"
-                android:textAppearance="@style/TextAppearance.MaterialComponents.Body1" />
-
-
-            <!--      mobile_money_username      -->
-            <TextView
-                android:id="@+id/tv_mobile_money_username"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
-                android:text="@string/mobile_money_username"
-                android:textAppearance="@style/TextAppearance.MaterialComponents.Body1" />
-
-
-            <!--      mobile_money_phone_number      -->
-            <TextView
-                android:id="@+id/tv_mobile_money_number"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
-                android:text="@string/mobile_money_phone_number"
-                android:textAppearance="@style/TextAppearance.MaterialComponents.Body1" />
-
-            <!--     button prev next      -->
-            <RelativeLayout
+            <LinearLayout
+                android:id="@+id/ll_list_of_members"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="24dp"
-                android:layout_marginBottom="48dp"
-                android:gravity="end"
-                android:orientation="horizontal">
+                android:orientation="vertical">
 
-                <com.google.android.material.button.MaterialButton
-                    android:id="@+id/btn_previous"
-                    style="@style/Widget.App.Button"
-                    android:layout_alignParentStart="true"
-                    android:text="@string/previous"
-                    app:icon="@drawable/ic_arrow_back_ios_24"
-                    app:iconTint="@color/colorPrimary" />
 
-                <com.google.android.material.button.MaterialButton
-                    android:id="@+id/btn_next"
-                    style="@style/Widget.App.Button"
-                    android:layout_alignParentEnd="true"
-                    android:text="@string/next"
-                    app:icon="@drawable/ic_arrow_forward_ios_24"
-                    app:iconGravity="end"
-                    app:iconTint="@color/colorPrimary" />
-            </RelativeLayout>
+            </LinearLayout>
+            <TextView
+                style="@style/Widget.App.Heading.Sub"
+                android:text="@string/e_housing" />
+
+            <!--           occupancy status  -->
+            <TextView
+                android:id="@+id/tv_other_occupancy_status"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:text="@string/what_is_your_occupancy_or_status"
+                android:textAppearance="@style/TextAppearance.MaterialComponents.Body1" />
+
+
+
+            <!--           main material of exterior walls  -->
+
+            <!--           main soil material  -->
+            <TextView
+                android:id="@+id/tv_exterior_walls"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:text="@string/main_material_of_exterior_walls"
+                android:textAppearance="@style/TextAppearance.MaterialComponents.Body1" />
+
+            <TextView
+                android:id="@+id/tv_soil_material"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:text="@string/main_soil_material"
+                android:textAppearance="@style/TextAppearance.MaterialComponents.Body1" />
+
+            <!--            rooms for sleeping  -->
+            <TextView
+                android:id="@+id/tv_number_of_rooms_used_for_sleeping"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:text="@string/number_of_rooms_used_for_sleeping"
+                android:textAppearance="@style/TextAppearance.MaterialComponents.Body1" />
+
+            <!--            cooking fuel  -->
+            <TextView
+                android:id="@+id/tv_fuel_for_cooking"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:text="@string/what_type_of_fuel_does_your_household_mainly_use_for_cooking"
+                android:textAppearance="@style/TextAppearance.MaterialComponents.Body1" />
+
+
+
+
 
 
         </LinearLayout>
     </ScrollView>
+
+    <RelativeLayout
+        android:id="@+id/buttons"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/cardview_light_background"
+        android:elevation="4dp"
+        android:gravity="end"
+        android:orientation="horizontal"
+        android:padding="12dp"
+        app:layout_constraintBottom_toBottomOf="parent">
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btn_previous"
+            style="@style/Widget.App.Button"
+            android:layout_alignParentStart="true"
+            android:text="@string/previous"
+            app:icon="@drawable/ic_arrow_back_ios_24"
+            app:iconTint="@color/colorPrimary" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btn_next"
+            style="@style/Widget.App.Button"
+            android:layout_alignParentEnd="true"
+            android:text="@string/next"
+            app:icon="@drawable/ic_arrow_forward_ios_24"
+            app:iconGravity="end"
+            app:iconTint="@color/colorPrimary" />
+    </RelativeLayout>
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

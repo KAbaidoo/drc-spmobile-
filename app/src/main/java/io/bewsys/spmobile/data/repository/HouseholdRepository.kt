@@ -1,7 +1,6 @@
 package io.bewsys.spmobile.data.repository
 
 import android.util.Log
-import androidx.work.ListenableWorker
 import app.cash.sqldelight.coroutines.asFlow
 import app.cash.sqldelight.coroutines.mapToList
 import app.cash.sqldelight.coroutines.mapToOne
@@ -18,13 +17,11 @@ import io.bewsys.spmobile.data.remote.model.household.HouseholdResponse
 import io.bewsys.spmobile.data.remote.model.member.MemberPayload
 import io.bewsys.spmobile.data.remote.model.member.MemberResponse
 import io.bewsys.spmobile.util.ApplicationScope
+import io.bewsys.spmobile.util.MapUtil
 import io.bewsys.spmobile.util.Resource
-import io.bewsys.spmobile.work.HouseholdUploadWorker
 import io.ktor.client.call.*
-import io.ktor.client.statement.*
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.*
 import kotlinx.coroutines.withContext
 
@@ -232,7 +229,7 @@ class HouseholdRepository(
 
         householdModel.apply {
             householdQueries.insertHousehold(
-                id = id,
+                id = remote_id?.toLong(),
                 survey_date = survey_date,
                 respondent_firstname = respondent_firstname,
                 respondent_middlename = respondent_middlename,
@@ -305,7 +302,7 @@ class HouseholdRepository(
                 supervisor_id = userPref.supervisorId,
                 temp_survey_no = temp_survey_no,
                 survey_no = survey_no,
-                remote_id = null,
+                remote_id = remote_id,
                 cac = cac,
                 team_leader_id = userPref.teamLeaderId,
                 user_id = userPref.id.toString(),
@@ -424,16 +421,16 @@ class HouseholdRepository(
 
             val response = api.uploadHousehold(payload, userPref.token)
 
-
             if (response.status.value in 200..299) {
 
                 val body = response.body<HouseholdResponse>()
+
                 householdQueries.updateStatus(
                     "submitted", id = itemId,
                     remoteId = body.household!!.id.toString(),
                     surveyNo = body.household.survey_no
                 )
-                uploadMembersItem(itemId.toString(),body.household.id.toString())
+                uploadMembersItem(itemId.toString(), body.household.id.toString())
 
                 emit(Resource.Success(body))
             } else {
@@ -444,14 +441,24 @@ class HouseholdRepository(
         }
     }.flowOn(Dispatchers.IO)
 
-    suspend fun updateHousehold(payload: HouseholdPayload) = flow {
+
+    suspend fun updateHouseholdRemote(itemId: Long, payload: HouseholdPayload) = flow {
 
         try {
             val userPref = preferencesManager.preferencesFlow.first()
             val response = api.updateHousehold(payload, userPref.token)
 
             if (response.status.value in 200..299) {
-                emit(Resource.Success<HouseholdResponse>(response.body()))
+                val body = response.body<HouseholdResponse>()
+
+                householdQueries.updateStatus(
+                    "submitted", id = itemId,
+                    remoteId = body.household!!.id.toString(),
+                    surveyNo = body.household.survey_no
+                )
+                updateMembersItem(itemId.toString())
+
+                emit(Resource.Success(body))
             } else {
                 emit(Resource.Failure<ErrorResponse>(response.body()))
             }
@@ -465,7 +472,7 @@ class HouseholdRepository(
         membersQueries.getByHouseholdId(householdId).asFlow()
             .mapToList(context = Dispatchers.Default)
 
-    private suspend fun uploadMembersItem(householdId: String, householdRemoteId:String) {
+    private suspend fun uploadMembersItem(householdId: String, householdRemoteId: String) {
 
         return withContext(Dispatchers.IO) {
 
@@ -473,7 +480,7 @@ class HouseholdRepository(
                 memberEntity.apply {
                     uploadMember(
                         MemberPayload(
-                            null,
+                            id,
                             remote_id,
                             firstname,
                             middlename,
@@ -481,22 +488,21 @@ class HouseholdRepository(
                             sex,
                             age,
                             dob,
-                            age_known,
-                            dob_known,
+                            MapUtil.mapping[age_known],
+                            MapUtil.mapping[dob_known],
                             profile_picture,
-                            if (is_head == "Yes") 1 else 0,
-                            is_member_respondent,
-                            family_bond_id,
-                            marital_status_id,
-                            birth_certificate,
-                            educational_level_id,
-                            school_attendance_id,
-                            pregnancy_status,
-                            disability_id,
-                            socio_professional_category_id,
-                            sector_of_work_id,
-                            household_id,
-                            status
+                            MapUtil.mapping[is_member_respondent],
+                            MapUtil.mapping[is_head],
+                            MapUtil.mapping[family_bond_id],
+                            MapUtil.mapping[marital_status_id],
+                            MapUtil.mapping[birth_certificate],
+                            MapUtil.mapping[educational_level_id],
+                            MapUtil.mapping[school_attendance_id],
+                            MapUtil.mapping[pregnancy_status],
+                            MapUtil.mapping[disability_id],
+                            MapUtil.mapping[socio_professional_category_id],
+                            MapUtil.mapping[sector_of_work_id],
+                            household_id
                         ), householdRemoteId
                     ).collectLatest { response ->
                         when (response) {
@@ -527,9 +533,6 @@ class HouseholdRepository(
         }
     }
 
-
-
-
     suspend fun uploadMember(payload: MemberPayload, householdId: String) = flow {
 
         try {
@@ -539,11 +542,12 @@ class HouseholdRepository(
 
             if (response.status.value in 200..299) {
                 val body = response.body<MemberResponse>()
-                membersQueries.updateStatus(
-                    status = "submitted",
-                    id = householdId.toLong(),
-                    remoteId = body.member?.id.toString(),
-                )
+//                membersQueries.updateStatus(
+//                    status = "submitted",
+//                    id = payload.id!!,
+//                    householdId = householdId,
+//                    remoteId = body.member?.id.toString(),
+//                )
 
                 emit(Resource.Success<Any>(response.body()))
             } else {
@@ -553,4 +557,90 @@ class HouseholdRepository(
             emit(Resource.Exception(throwable, null))
         }
     }.flowOn(Dispatchers.IO)
+
+    suspend fun updateMember(payload: MemberPayload) = flow {
+
+        try {
+            val userPref = preferencesManager.preferencesFlow.first()
+            val response = memberApi.updateMember(payload, userPref.token)
+
+
+            if (response.status.value in 200..299) {
+                val body = response.body<MemberResponse>()
+
+//                membersQueries.updateStatus(
+//                    status = "submitted",
+//                    id = payload.id!!,
+//                    remoteId = body.member?.id.toString(),
+//                )
+
+                emit(Resource.Success<Any>(response.body()))
+            } else {
+                emit(Resource.Failure<ErrorResponse>(response.body()))
+            }
+        } catch (throwable: Throwable) {
+            emit(Resource.Exception(throwable, null))
+        }
+    }.flowOn(Dispatchers.IO)
+
+    private suspend fun updateMembersItem(householdId: String) {
+
+        return withContext(Dispatchers.IO) {
+
+            getMemberByHouseholdId(householdId).firstOrNull()?.forEach { memberEntity ->
+                memberEntity.apply {
+                    updateMember(
+                        MemberPayload(
+                            if(remote_id.isNullOrEmpty()) null else remote_id.toLong(),
+                            remote_id,
+                            firstname,
+                            middlename,
+                            lastname,
+                            sex,
+                            age,
+                            dob,
+                            MapUtil.mapping[age_known],
+                            MapUtil.mapping[dob_known],
+                            profile_picture,
+                            MapUtil.mapping[is_member_respondent],
+                            MapUtil.mapping[is_head],
+                            MapUtil.mapping[family_bond_id],
+                            MapUtil.mapping[marital_status_id],
+                            MapUtil.mapping[birth_certificate],
+                            MapUtil.mapping[educational_level_id],
+                            MapUtil.mapping[school_attendance_id],
+                            MapUtil.mapping[pregnancy_status],
+                            MapUtil.mapping[disability_id],
+                            MapUtil.mapping[socio_professional_category_id],
+                            MapUtil.mapping[sector_of_work_id],
+                            household_id
+                        )
+                    ).collectLatest { response ->
+                        when (response) {
+                            is Resource.Success -> {
+                            }
+                            is Resource.Exception -> {
+
+                                response.throwable.localizedMessage?.let {
+                                    Log.d(
+                                        "M_TAG", it
+                                    )
+                                }
+
+                            }
+
+                            else -> {
+                                val res = response as ErrorResponse
+                                Log.d("M_TAG", "${res.msg}")
+
+
+                            }
+                        }
+                    }
+                }
+            }
+
+
+        }
+    }
 }

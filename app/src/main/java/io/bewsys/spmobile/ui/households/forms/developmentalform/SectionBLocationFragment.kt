@@ -38,11 +38,13 @@ class SectionBLocationFragment : Fragment(R.layout.fragment_location_of_househol
     private val communities = mutableListOf<String>()
     private val territories = mutableListOf<String>()
     private val groupments = mutableListOf<String>()
+    private val healthZones = mutableListOf<String>()
+    private val healthAreas = mutableListOf<String>()
 
     private var til_Lat: TextInputLayout? = null
     private var til_Lon: TextInputLayout? = null
 
-    private var currentLocation: Location? = null
+    private var  currentLocation: Location?=null
 
     private val locationProvider: LocationProvider by inject()
 
@@ -74,11 +76,16 @@ class SectionBLocationFragment : Fragment(R.layout.fragment_location_of_househol
             territories.swap(it)
         }
         viewModel.communities.observe(viewLifecycleOwner) {
-
             communities.swap(it)
         }
         viewModel.groupments.observe(viewLifecycleOwner) {
             groupments.swap(it)
+        }
+        viewModel.healthZones.observe(viewLifecycleOwner) {
+            healthZones.swap(it)
+        }
+        viewModel.healthAreas.observe(viewLifecycleOwner) {
+            healthAreas.swap(it)
         }
         val dropdownLayout = R.layout.dropdown_item
 
@@ -89,6 +96,18 @@ class SectionBLocationFragment : Fragment(R.layout.fragment_location_of_househol
                     btnNext.isEnabled = it.not()
                 }
             }
+            tilVillageDistrict.editText?.addTextChangedListener {
+                viewModel.villageOrDistrict = it.toString()
+                viewModel.sectionBHasBlankFields()
+            }
+            tilAddress.editText?.addTextChangedListener {
+                viewModel.address = it.toString()
+                viewModel.sectionBHasBlankFields()
+            }
+            tilCac.editText?.addTextChangedListener {
+                viewModel.cac = it.toString()
+                viewModel.sectionBHasBlankFields()
+            }
             til_Lat = tilLat
             til_Lon = tilLon
 
@@ -98,8 +117,38 @@ class SectionBLocationFragment : Fragment(R.layout.fragment_location_of_househol
                 tilCac
             )
 
+            when (viewModel.registrationType) {
+                rbGeneral.text -> rgInitialRegistrationType.check(rbGeneral.id)
+                rbEmergency.text -> rgInitialRegistrationType.check(rbEmergency.id)
+            }
 
+            when (viewModel.placeOfResidence) {
+                rbUrban.text -> rgAreaOfResidence.check(rbUrban.id)
+                rbUrbanRural.text -> rgAreaOfResidence.check(rbUrbanRural.id)
+                rbRural.text -> rgAreaOfResidence.check(rbRural.id)
+            }
+            viewModel.apply {
+                tilVillageDistrict.editText?.setText(villageOrDistrict)
+                tilCac.editText?.setText(cac)
+                tilAddress.editText?.setText(address)
+                tilProvince.editText?.setText(province)
+                tilCommunity.editText?.setText(community)
+                tilTerritory.editText?.setText(territory)
+                tilGroupment.editText?.setText(groupment)
+                tilHealthArea.editText?.setText(healthArea)
+                tilHealthZone.editText?.setText(healthZone)
+            }
 
+            rgInitialRegistrationType.setOnCheckedChangeListener { _, checkedId ->
+                when (checkedId) {
+                    rbGeneral.id -> {
+                        viewModel.registrationType = rbGeneral.text.toString()
+                    }
+                    else -> {
+                        viewModel.registrationType = rbEmergency.text.toString()
+                    }
+                }
+            }
 
             rgAreaOfResidence.setOnCheckedChangeListener { _, checkedId ->
                 when (checkedId) {
@@ -118,17 +167,8 @@ class SectionBLocationFragment : Fragment(R.layout.fragment_location_of_househol
 
 
 
-
-            tils.forEachIndexed { index, til ->
-                til.editText?.addTextChangedListener {
-                    viewModel.setSectionBFields(index, it)
-                    viewModel.sectionBHasBlankFields()
-                }
-
-            }
-
             tilAddress.editText?.setOnFocusChangeListener { view, hasFocus ->
-                if (!hasFocus && viewModel.addressB.isBlank()) {
+                if (!hasFocus && viewModel.address.isBlank()) {
                     tilAddress.error = getString(R.string.field_cannot_be_empty)
                 } else tilAddress.error = null
             }
@@ -138,10 +178,11 @@ class SectionBLocationFragment : Fragment(R.layout.fragment_location_of_househol
                 } else tilCac.error = null
             }
             tilVillageDistrict.editText?.setOnFocusChangeListener { view, hasFocus ->
-                if (!hasFocus && viewModel.village.isBlank()) {
+                if (!hasFocus && viewModel.villageOrDistrict.isBlank()) {
                     tilVillageDistrict.error = getString(R.string.field_cannot_be_empty)
                 } else tilVillageDistrict.error = null
             }
+
 
 
 
@@ -153,16 +194,19 @@ class SectionBLocationFragment : Fragment(R.layout.fragment_location_of_househol
                             viewModel.province = it.toString()
                             viewModel.loadTerritoriesWithName(it.toString())
 
+                            getLastKnownLocation()
                         }
                     }
                 )
             }
             (autoCompleteTextViewCommunity as? AutoCompleteTextView)?.apply {
                 setAdapter(
-                    ArrayAdapter(context, dropdownLayout, communities).also {
+                    ArrayAdapter(context, dropdownLayout, communities)
+                        .also {
                         addTextChangedListener {
                             viewModel.community = it.toString()
                             viewModel.loadGroupmentsWithName(it.toString())
+                            getLastKnownLocation()
 
                         }
                     }
@@ -187,6 +231,30 @@ class SectionBLocationFragment : Fragment(R.layout.fragment_location_of_househol
 
                         viewModel.groupment = it.toString()
                         viewModel.getGroupmentId(it.toString())
+
+                    }
+                }
+            }
+            (actHealthZone as? AutoCompleteTextView)?.apply {
+                setAdapter(
+                    ArrayAdapter(context, dropdownLayout, healthZones)
+                ).also {
+                    addTextChangedListener {
+
+                        viewModel.healthZone = it.toString()
+                        viewModel.loadHealthAreasWithName(it.toString())
+
+                    }
+                }
+            }
+            (actHealthArea as? AutoCompleteTextView)?.apply {
+                setAdapter(
+                    ArrayAdapter(context, dropdownLayout, healthAreas)
+                ).also {
+                    addTextChangedListener {
+                        viewModel.healthArea = it.toString()
+                        viewModel.getHealthAreaId(it.toString())
+                        getLastKnownLocation()
                     }
                 }
             }
@@ -195,33 +263,19 @@ class SectionBLocationFragment : Fragment(R.layout.fragment_location_of_househol
 
             btnNext.setOnClickListener {
                 val bundle = bundleOf("title" to title)
-                findNavController().navigate(R.id.formStepThreeFragment, bundle)
+                findNavController().navigate(R.id.sectionCIdentificationFragment, bundle)
             }
             btnPrevious.setOnClickListener {
-
                 val bundle = bundleOf("title" to title)
                 findNavController().navigate(R.id.formStepOneFragment, bundle)
 
             }
 
-            viewModel.apply {
-                tilVillageDistrict.editText?.setText(village)
-                tilCac.editText?.setText(cac)
-                tilAddress.editText?.setText(address)
-            }
-
-
-
-            when (viewModel.placeOfResidence) {
-                rbUrban.text -> rgAreaOfResidence.check(rbUrban.id)
-                rbUrbanRural.text -> rgAreaOfResidence.check(rbUrbanRural.id)
-                rbRural.text -> rgAreaOfResidence.check(rbRural.id)
-            }
 
 
         } //end of apply block
 
-
+        viewModel.sectionBHasBlankFields()
         getLastKnownLocation()
     }   //end of onCreate
 
@@ -231,12 +285,13 @@ class SectionBLocationFragment : Fragment(R.layout.fragment_location_of_househol
     }
 
     private fun getLastKnownLocation() {
-        currentLocation?.apply {
-            viewModel.lon = longitude.toString()
-            viewModel.lat = latitude.toString()
 
-            til_Lat?.editText?.setText(latitude.toString())
-            til_Lon?.editText?.setText(longitude.toString())
+        currentLocation?.let {
+            viewModel.lon = it.longitude.toString()
+            viewModel.lat = it.latitude.toString()
+
+            til_Lat?.editText?.setText( it.longitude.toString())
+            til_Lon?.editText?.setText(it.latitude.toString())
         }
     }
 
@@ -279,5 +334,4 @@ class SectionBLocationFragment : Fragment(R.layout.fragment_location_of_househol
             Toast.LENGTH_SHORT
         ).show()
     }
-
-}
+   }

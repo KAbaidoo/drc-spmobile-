@@ -4,26 +4,26 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.households.forms.developmentalform.FormStepThreeFragment">
+    tools:context=".ui.households.forms.developmentalform.SectionHAssetsFragment">
 
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:paddingStart="24dp"
-        android:paddingTop="24dp"
         android:paddingEnd="24dp"
         android:scrollbars="none"
+        app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintBottom_toTopOf="@+id/buttons">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-
+            android:layout_marginBottom="100dp"
             android:orientation="vertical">
 
             <TextView
                 style="@style/Widget.App.Heading.Sub"
-                android:text="H. HOUSEHOLD ASSETS" />
+                android:text="@string/h_household_assets" />
 
 
             <!--            access to cultivable land -->
@@ -77,7 +77,7 @@
                     android:text="@string/yes" />
 
                 <com.google.android.material.radiobutton.MaterialRadioButton
-                    android:id="@+id/rb_owner_of_cultivable_land"
+                    android:id="@+id/rb_no_owner_of_cultivable_land"
                     android:layout_width="match_parent"
                     android:layout_height="48dp"
                     android:text="@string/no" />
@@ -94,13 +94,12 @@
                 android:textAppearance="@style/TextAppearance.MaterialComponents.Body1" />
 
             <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/til_monthly_income_needed"
+                android:id="@+id/til_amount_of_cultivable_land_owned"
                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:minHeight="20dp"
-                app:boxStrokeWidth="2dp"
-                app:endIconMode="clear_text">
+                app:boxStrokeWidth="2dp">
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:layout_width="match_parent"
@@ -165,13 +164,13 @@
                     android:text="@string/no" />
             </RadioGroup>
 
-            <!--            number of livestock  -->
+            <!--            household goods  -->
             <TextView
-                android:id="@+id/tv_number_of_livestock"
+                android:id="@+id/tv_livestock_indicate_qty"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
-                android:text="If yes, indicate the number in the boxes below."
+                android:text="@string/if_yes_indicate_the_number_in_the_boxes_below"
                 android:textAppearance="@style/TextAppearance.MaterialComponents.Body1" />
 
             <GridLayout
@@ -194,7 +193,7 @@
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
-                        android:text="Goat"
+                        android:text="@string/goat"
                         android:textAppearance="@style/TextAppearance.MaterialComponents.Body1" />
 
                     <com.google.android.material.textfield.TextInputLayout
@@ -203,8 +202,7 @@
                         android:layout_width="48dp"
                         android:layout_height="wrap_content"
                         android:minHeight="20dp"
-                        app:boxStrokeWidth="2dp"
-                        app:endIconMode="clear_text">
+                        app:boxStrokeWidth="2dp">
 
                         <com.google.android.material.textfield.TextInputEditText
                             android:layout_width="match_parent"
@@ -226,7 +224,7 @@
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
-                        android:text="Sheep"
+                        android:text="@string/sheep"
                         android:textAppearance="@style/TextAppearance.MaterialComponents.Body1" />
 
                     <com.google.android.material.textfield.TextInputLayout
@@ -235,8 +233,7 @@
                         android:layout_width="48dp"
                         android:layout_height="wrap_content"
                         android:minHeight="20dp"
-                        app:boxStrokeWidth="2dp"
-                        app:endIconMode="clear_text">
+                        app:boxStrokeWidth="2dp">
 
                         <com.google.android.material.textfield.TextInputEditText
                             android:layout_width="match_parent"
@@ -258,7 +255,7 @@
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
-                        android:text="Cow"
+                        android:text="@string/cow"
                         android:textAppearance="@style/TextAppearance.MaterialComponents.Body1" />
 
                     <com.google.android.material.textfield.TextInputLayout
@@ -267,8 +264,7 @@
                         android:layout_width="48dp"
                         android:layout_height="wrap_content"
                         android:minHeight="20dp"
-                        app:boxStrokeWidth="2dp"
-                        app:endIconMode="clear_text">
+                        app:boxStrokeWidth="2dp">
 
                         <com.google.android.material.textfield.TextInputEditText
                             android:layout_width="match_parent"
@@ -290,7 +286,7 @@
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
-                        android:text="Rabbit"
+                        android:text="@string/rabbit"
                         android:textAppearance="@style/TextAppearance.MaterialComponents.Body1" />
 
                     <com.google.android.material.textfield.TextInputLayout
@@ -299,8 +295,7 @@
                         android:layout_width="48dp"
                         android:layout_height="wrap_content"
                         android:minHeight="20dp"
-                        app:boxStrokeWidth="2dp"
-                        app:endIconMode="clear_text">
+                        app:boxStrokeWidth="2dp">
 
                         <com.google.android.material.textfield.TextInputEditText
                             android:layout_width="match_parent"
@@ -326,7 +321,7 @@
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
-                        android:text="Pigs"
+                        android:text="@string/pigs"
                         android:textAppearance="@style/TextAppearance.MaterialComponents.Body1" />
 
                     <com.google.android.material.textfield.TextInputLayout
@@ -335,8 +330,7 @@
                         android:layout_width="48dp"
                         android:layout_height="wrap_content"
                         android:minHeight="20dp"
-                        app:boxStrokeWidth="2dp"
-                        app:endIconMode="clear_text">
+                        app:boxStrokeWidth="2dp">
 
                         <com.google.android.material.textfield.TextInputEditText
                             android:layout_width="match_parent"
@@ -360,7 +354,7 @@
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
-                        android:text="Poultry"
+                        android:text="@string/poultry"
                         android:textAppearance="@style/TextAppearance.MaterialComponents.Body1" />
 
                     <com.google.android.material.textfield.TextInputLayout
@@ -369,8 +363,7 @@
                         android:layout_width="48dp"
                         android:layout_height="wrap_content"
                         android:minHeight="20dp"
-                        app:boxStrokeWidth="2dp"
-                        app:endIconMode="clear_text">
+                        app:boxStrokeWidth="2dp">
 
                         <com.google.android.material.textfield.TextInputEditText
                             android:layout_width="match_parent"
@@ -393,7 +386,7 @@
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
-                        android:text="Guinea pig"
+                        android:text="@string/guinea_pig"
                         android:textAppearance="@style/TextAppearance.MaterialComponents.Body1" />
 
                     <com.google.android.material.textfield.TextInputLayout
@@ -402,8 +395,7 @@
                         android:layout_width="48dp"
                         android:layout_height="wrap_content"
                         android:minHeight="20dp"
-                        app:boxStrokeWidth="2dp"
-                        app:endIconMode="clear_text">
+                        app:boxStrokeWidth="2dp">
 
                         <com.google.android.material.textfield.TextInputEditText
                             android:layout_width="match_parent"
@@ -427,7 +419,7 @@
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
-                        android:text="Other"
+                        android:text="@string/other"
                         android:textAppearance="@style/TextAppearance.MaterialComponents.Body1" />
 
                     <com.google.android.material.textfield.TextInputLayout
@@ -436,8 +428,7 @@
                         android:layout_width="48dp"
                         android:layout_height="wrap_content"
                         android:minHeight="20dp"
-                        app:boxStrokeWidth="2dp"
-                        app:endIconMode="clear_text">
+                        app:boxStrokeWidth="2dp">
 
                         <com.google.android.material.textfield.TextInputEditText
                             android:layout_width="match_parent"
@@ -465,8 +456,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:minHeight="20dp"
-                app:boxStrokeWidth="2dp"
-                app:endIconMode="clear_text">
+                app:boxStrokeWidth="2dp">
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:layout_width="match_parent"
@@ -475,30 +465,7 @@
                     android:maxLines="1" />
             </com.google.android.material.textfield.TextInputLayout>
 
-<!--            &lt;!&ndash;          other livestock qty  &ndash;&gt;-->
-<!--            <TextView-->
-<!--                android:id="@+id/tv_other_livestock_qty"-->
-<!--                android:layout_width="wrap_content"-->
-<!--                android:layout_height="wrap_content"-->
-<!--                android:layout_marginTop="16dp"-->
-<!--                android:text="@string/other_livestock_qty"-->
-<!--                android:textAppearance="@style/TextAppearance.MaterialComponents.Body1" />-->
 
-<!--            <com.google.android.material.textfield.TextInputLayout-->
-<!--                android:id="@+id/til_other_livestock_qty"-->
-<!--                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"-->
-<!--                android:layout_width="match_parent"-->
-<!--                android:layout_height="wrap_content"-->
-<!--                android:minHeight="20dp"-->
-<!--                app:boxStrokeWidth="2dp"-->
-<!--                app:endIconMode="clear_text">-->
-
-<!--                <com.google.android.material.textfield.TextInputEditText-->
-<!--                    android:layout_width="match_parent"-->
-<!--                    android:layout_height="wrap_content"-->
-<!--                    android:inputType="number"-->
-<!--                    android:maxLines="1" />-->
-<!--            </com.google.android.material.textfield.TextInputLayout>-->
 
             <!--          has household goods  -->
             <TextView
@@ -538,6 +505,7 @@
                 android:id="@+id/gridLayout2"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
+
                 android:layout_marginTop="8dp"
                 android:columnCount="2"
                 >
@@ -554,7 +522,7 @@
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
-                        android:text="Car"
+                        android:text="@string/car"
                         android:textAppearance="@style/TextAppearance.MaterialComponents.Body1" />
 
                     <com.google.android.material.textfield.TextInputLayout
@@ -563,8 +531,7 @@
                         android:layout_width="48dp"
                         android:layout_height="wrap_content"
                         android:minHeight="20dp"
-                        app:boxStrokeWidth="2dp"
-                        app:endIconMode="clear_text">
+                        app:boxStrokeWidth="2dp">
 
                         <com.google.android.material.textfield.TextInputEditText
                             android:layout_width="match_parent"
@@ -586,7 +553,7 @@
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
-                        android:text="Motorcycle"
+                        android:text="@string/motorcycle"
                         android:textAppearance="@style/TextAppearance.MaterialComponents.Body1" />
 
                     <com.google.android.material.textfield.TextInputLayout
@@ -595,8 +562,37 @@
                         android:layout_width="48dp"
                         android:layout_height="wrap_content"
                         android:minHeight="20dp"
-                        app:boxStrokeWidth="2dp"
-                        app:endIconMode="clear_text">
+                        app:boxStrokeWidth="2dp">
+
+                        <com.google.android.material.textfield.TextInputEditText
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:inputType="number"
+                            android:maxLines="1" />
+                    </com.google.android.material.textfield.TextInputLayout>
+                </LinearLayout>
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_columnWeight="1"
+                    android:layout_marginEnd="20dp"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:id="@+id/tv_number_of_bicycle_owned"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="@string/number_of_bicycle_owned"
+                        android:textAppearance="@style/TextAppearance.MaterialComponents.Body1" />
+
+                    <com.google.android.material.textfield.TextInputLayout
+                        android:id="@+id/til_bicycle"
+                        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
+                        android:layout_width="48dp"
+                        android:layout_height="wrap_content"
+                        android:minHeight="20dp"
+                        app:boxStrokeWidth="2dp">
 
                         <com.google.android.material.textfield.TextInputEditText
                             android:layout_width="match_parent"
@@ -618,7 +614,7 @@
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
-                        android:text="Chart"
+                        android:text="@string/cart"
                         android:textAppearance="@style/TextAppearance.MaterialComponents.Body1" />
 
                     <com.google.android.material.textfield.TextInputLayout
@@ -627,8 +623,7 @@
                         android:layout_width="48dp"
                         android:layout_height="wrap_content"
                         android:minHeight="20dp"
-                        app:boxStrokeWidth="2dp"
-                        app:endIconMode="clear_text">
+                        app:boxStrokeWidth="2dp">
 
                         <com.google.android.material.textfield.TextInputEditText
                             android:layout_width="match_parent"
@@ -650,8 +645,9 @@
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
-                        android:text="Plow"
-                        android:textAppearance="@style/TextAppearance.MaterialComponents.Body1" />
+                        android:text="@string/plow"
+                        android:textAppearance="@style/TextAppearance.MaterialComponents.Body1"
+                        tools:ignore="TooManyViews" />
 
                     <com.google.android.material.textfield.TextInputLayout
                         android:id="@+id/til_plow"
@@ -659,8 +655,7 @@
                         android:layout_width="48dp"
                         android:layout_height="wrap_content"
                         android:minHeight="20dp"
-                        app:boxStrokeWidth="2dp"
-                        app:endIconMode="clear_text">
+                        app:boxStrokeWidth="2dp">
 
                         <com.google.android.material.textfield.TextInputEditText
                             android:layout_width="match_parent"
@@ -671,8 +666,6 @@
 
 
                 </LinearLayout>
-
-
 
                 <LinearLayout
                     android:layout_width="0dp"
@@ -686,7 +679,7 @@
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
-                        android:text="Pigs"
+                        android:text="@string/wheel_barrow"
                         android:textAppearance="@style/TextAppearance.MaterialComponents.Body1" />
 
                     <com.google.android.material.textfield.TextInputLayout
@@ -695,8 +688,7 @@
                         android:layout_width="48dp"
                         android:layout_height="wrap_content"
                         android:minHeight="20dp"
-                        app:boxStrokeWidth="2dp"
-                        app:endIconMode="clear_text">
+                        app:boxStrokeWidth="2dp">
 
                         <com.google.android.material.textfield.TextInputEditText
                             android:layout_width="match_parent"
@@ -720,7 +712,7 @@
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
-                        android:text="Rickshaw"
+                        android:text="@string/rickshaw"
                         android:textAppearance="@style/TextAppearance.MaterialComponents.Body1" />
 
                     <com.google.android.material.textfield.TextInputLayout
@@ -729,8 +721,7 @@
                         android:layout_width="48dp"
                         android:layout_height="wrap_content"
                         android:minHeight="20dp"
-                        app:boxStrokeWidth="2dp"
-                        app:endIconMode="clear_text">
+                        app:boxStrokeWidth="2dp">
 
                         <com.google.android.material.textfield.TextInputEditText
                             android:layout_width="match_parent"
@@ -741,6 +732,7 @@
 
 
                 </LinearLayout>
+
                 <LinearLayout
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
@@ -753,7 +745,7 @@
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
-                        android:text="Mattresses"
+                        android:text="@string/mattresses"
                         android:textAppearance="@style/TextAppearance.MaterialComponents.Body1" />
 
                     <com.google.android.material.textfield.TextInputLayout
@@ -763,7 +755,109 @@
                         android:layout_height="wrap_content"
                         android:minHeight="20dp"
                         app:boxStrokeWidth="2dp"
-                        app:endIconMode="clear_text">
+                        >
+
+                        <com.google.android.material.textfield.TextInputEditText
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:inputType="number"
+                            android:maxLines="1" />
+                    </com.google.android.material.textfield.TextInputLayout>
+
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_columnWeight="1"
+                    android:layout_marginEnd="20dp"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:id="@+id/tv_refrigerator"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="@string/refrigerator"
+                        android:textAppearance="@style/TextAppearance.MaterialComponents.Body1" />
+
+                    <com.google.android.material.textfield.TextInputLayout
+                        android:id="@+id/til_refrigerator"
+                        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
+                        android:layout_width="48dp"
+                        android:layout_height="wrap_content"
+                        android:minHeight="20dp"
+                        app:boxStrokeWidth="2dp"
+                        >
+
+                        <com.google.android.material.textfield.TextInputEditText
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:inputType="number"
+                            android:maxLines="1" />
+                    </com.google.android.material.textfield.TextInputLayout>
+
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_columnWeight="1"
+                    android:layout_marginEnd="20dp"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:id="@+id/tv_aircon"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="@string/air_conditioner"
+                        android:textAppearance="@style/TextAppearance.MaterialComponents.Body1" />
+
+                    <com.google.android.material.textfield.TextInputLayout
+                        android:id="@+id/til_aircon"
+                        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
+                        android:layout_width="48dp"
+                        android:layout_height="wrap_content"
+                        android:minHeight="20dp"
+                        app:boxStrokeWidth="2dp"
+                        >
+
+                        <com.google.android.material.textfield.TextInputEditText
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:inputType="number"
+                            android:maxLines="1" />
+                    </com.google.android.material.textfield.TextInputLayout>
+
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_columnWeight="1"
+                    android:layout_marginEnd="20dp"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:id="@+id/tv_fan"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="@string/fan"
+                        android:textAppearance="@style/TextAppearance.MaterialComponents.Body1" />
+
+                    <com.google.android.material.textfield.TextInputLayout
+                        android:id="@+id/til_fan"
+                        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
+                        android:layout_width="48dp"
+                        android:layout_height="wrap_content"
+                        android:minHeight="20dp"
+                        app:boxStrokeWidth="2dp"
+                        >
 
                         <com.google.android.material.textfield.TextInputEditText
                             android:layout_width="match_parent"
@@ -776,6 +870,551 @@
                 </LinearLayout>
 
 
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_columnWeight="1"
+                    android:layout_marginEnd="20dp"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:id="@+id/tv_radio"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="@string/radio"
+                        android:textAppearance="@style/TextAppearance.MaterialComponents.Body1" />
+
+                    <com.google.android.material.textfield.TextInputLayout
+                        android:id="@+id/til_radio"
+                        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
+                        android:layout_width="48dp"
+                        android:layout_height="wrap_content"
+                        android:minHeight="20dp"
+                        app:boxStrokeWidth="2dp"
+                        >
+
+                        <com.google.android.material.textfield.TextInputEditText
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:inputType="number"
+                            android:maxLines="1" />
+                    </com.google.android.material.textfield.TextInputLayout>
+
+
+                </LinearLayout>
+
+                <LinearLayout
+
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_columnWeight="1"
+                    android:layout_marginEnd="20dp"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:id="@+id/tv_television"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="@string/television"
+                        android:textAppearance="@style/TextAppearance.MaterialComponents.Body1" />
+
+                    <com.google.android.material.textfield.TextInputLayout
+                        android:id="@+id/til_television"
+                        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
+                        android:layout_width="48dp"
+                        android:layout_height="wrap_content"
+                        android:minHeight="20dp"
+                        app:boxStrokeWidth="2dp"
+                        >
+
+                        <com.google.android.material.textfield.TextInputEditText
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:inputType="number"
+                            android:maxLines="1" />
+                    </com.google.android.material.textfield.TextInputLayout>
+
+
+                </LinearLayout>
+
+                <!--     cable tv -->
+                <LinearLayout
+
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_columnWeight="1"
+                    android:layout_marginEnd="20dp"
+                    android:orientation="horizontal"
+                   android:gravity="center_vertical">
+
+                    <TextView
+                        android:id="@+id/tv_cable_tv"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="@string/canal_dtt_cable_tv"
+                        android:textAppearance="@style/TextAppearance.MaterialComponents.Body1" />
+
+                    <com.google.android.material.textfield.TextInputLayout
+                        android:id="@+id/til_cable_tv"
+                        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
+                        android:layout_width="48dp"
+                        android:layout_height="wrap_content"
+                        android:minHeight="20dp"
+                        app:boxStrokeWidth="2dp"
+                        >
+
+                        <com.google.android.material.textfield.TextInputEditText
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:inputType="number"
+                            android:maxLines="1" />
+                    </com.google.android.material.textfield.TextInputLayout>
+
+
+                </LinearLayout>
+
+                <!--    DVD player -->
+                <LinearLayout
+
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_columnWeight="1"
+                    android:layout_marginEnd="20dp"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:id="@+id/tv_dvd_player"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="@string/dvd_player"
+                        android:textAppearance="@style/TextAppearance.MaterialComponents.Body1" />
+
+                    <com.google.android.material.textfield.TextInputLayout
+                        android:id="@+id/til_dvd_player"
+                        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
+                        android:layout_width="48dp"
+                        android:layout_height="wrap_content"
+                        android:minHeight="20dp"
+                        app:boxStrokeWidth="2dp">
+
+                        <com.google.android.material.textfield.TextInputEditText
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:inputType="number"
+                            android:maxLines="1" />
+                    </com.google.android.material.textfield.TextInputLayout>
+
+
+                </LinearLayout>
+
+                <!--    Mobile phone -->
+                <LinearLayout
+
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_columnWeight="1"
+                    android:layout_marginEnd="20dp"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:id="@+id/tv_mobile_phone"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="@string/mobile_phone"
+                        android:textAppearance="@style/TextAppearance.MaterialComponents.Body1" />
+
+                    <com.google.android.material.textfield.TextInputLayout
+                        android:id="@+id/til_mobile_phone"
+                        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
+                        android:layout_width="48dp"
+                        android:layout_height="wrap_content"
+                        android:minHeight="20dp"
+                        app:boxStrokeWidth="2dp">
+
+                        <com.google.android.material.textfield.TextInputEditText
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:inputType="number"
+                            android:maxLines="1" />
+                    </com.google.android.material.textfield.TextInputLayout>
+
+
+                </LinearLayout>
+
+                <!--    Computer  -->
+                <LinearLayout
+
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_columnWeight="1"
+                    android:layout_marginEnd="20dp"
+                    android:orientation="horizontal">
+                    <TextView
+                        android:id="@+id/tv_computer"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="@string/computer"
+                        android:textAppearance="@style/TextAppearance.MaterialComponents.Body1" />
+                    <com.google.android.material.textfield.TextInputLayout
+                        android:id="@+id/til_computer"
+                        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
+                        android:layout_width="48dp"
+                        android:layout_height="wrap_content"
+                        android:minHeight="20dp"
+                        app:boxStrokeWidth="2dp">
+
+                        <com.google.android.material.textfield.TextInputEditText
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:inputType="number"
+                            android:maxLines="1" />
+                    </com.google.android.material.textfield.TextInputLayout>
+                </LinearLayout>
+
+                <!--    Stove/Oven  -->
+                <LinearLayout
+
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_columnWeight="1"
+                    android:layout_marginEnd="20dp"
+                    android:orientation="horizontal">
+                    <TextView
+                        android:id="@+id/tv_stove_or_oven"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="@string/stove_oven"
+                        android:textAppearance="@style/TextAppearance.MaterialComponents.Body1" />
+                    <com.google.android.material.textfield.TextInputLayout
+                        android:id="@+id/til_stove_or_oven"
+                        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
+                        android:layout_width="48dp"
+                        android:layout_height="wrap_content"
+                        android:minHeight="20dp"
+                        app:boxStrokeWidth="2dp">
+
+                        <com.google.android.material.textfield.TextInputEditText
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:inputType="number"
+                            android:maxLines="1" />
+                    </com.google.android.material.textfield.TextInputLayout>
+                </LinearLayout>
+
+                <!--    Oil stove  -->
+                <LinearLayout
+
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_columnWeight="1"
+                    android:layout_marginEnd="20dp"
+                    android:orientation="horizontal">
+                    <TextView
+                        android:id="@+id/tv_oil_stove"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="@string/oil_stove"
+                        android:textAppearance="@style/TextAppearance.MaterialComponents.Body1" />
+                    <com.google.android.material.textfield.TextInputLayout
+                        android:id="@+id/til_oil_stove"
+                        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
+                        android:layout_width="48dp"
+                        android:layout_height="wrap_content"
+                        android:minHeight="20dp"
+                        app:boxStrokeWidth="2dp">
+
+                        <com.google.android.material.textfield.TextInputEditText
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:inputType="number"
+                            android:maxLines="1" />
+                    </com.google.android.material.textfield.TextInputLayout>
+                </LinearLayout>
+
+                <!--    Sun plate  -->
+                <LinearLayout
+
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_columnWeight="1"
+                    android:layout_marginEnd="20dp"
+                    android:orientation="horizontal">
+                    <TextView
+                        android:id="@+id/tv_sun_plate"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="@string/sun_plate"
+                        android:textAppearance="@style/TextAppearance.MaterialComponents.Body1" />
+                    <com.google.android.material.textfield.TextInputLayout
+                        android:id="@+id/til_sun_plate"
+                        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
+                        android:layout_width="48dp"
+                        android:layout_height="wrap_content"
+                        android:minHeight="20dp"
+                        app:boxStrokeWidth="2dp">
+
+                        <com.google.android.material.textfield.TextInputEditText
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:inputType="number"
+                            android:maxLines="1" />
+                    </com.google.android.material.textfield.TextInputLayout>
+                </LinearLayout>
+
+                <!--    sewing machine  -->
+                <LinearLayout
+
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_columnWeight="1"
+                    android:gravity="center_vertical"
+                    android:layout_marginEnd="20dp"
+                    android:orientation="horizontal">
+                    <TextView
+                        android:id="@+id/tv_sewing_machine"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="@string/sewing_machine"
+                        android:textAppearance="@style/TextAppearance.MaterialComponents.Body1" />
+                    <com.google.android.material.textfield.TextInputLayout
+                        android:id="@+id/til_sewing_machine"
+                        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
+                        android:layout_width="48dp"
+                        android:layout_height="wrap_content"
+                        android:minHeight="20dp"
+                        app:boxStrokeWidth="2dp">
+
+                        <com.google.android.material.textfield.TextInputEditText
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:inputType="number"
+                            android:maxLines="1" />
+                    </com.google.android.material.textfield.TextInputLayout>
+                </LinearLayout>
+
+                <!--    electric iron  -->
+                <LinearLayout
+
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_columnWeight="1"
+                    android:layout_marginEnd="20dp"
+                    android:orientation="horizontal">
+                    <TextView
+                        android:id="@+id/tv_electric_iron"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="@string/electric_iron"
+                        android:textAppearance="@style/TextAppearance.MaterialComponents.Body1" />
+                    <com.google.android.material.textfield.TextInputLayout
+                        android:id="@+id/til_electric_iron"
+                        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
+                        android:layout_width="48dp"
+                        android:layout_height="wrap_content"
+                        android:minHeight="20dp"
+                        app:boxStrokeWidth="2dp">
+
+                        <com.google.android.material.textfield.TextInputEditText
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:inputType="number"
+                            android:maxLines="1" />
+                    </com.google.android.material.textfield.TextInputLayout>
+                </LinearLayout>
+
+                <!--    Coal iron  -->
+                <LinearLayout
+
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_columnWeight="1"
+                    android:layout_marginEnd="20dp"
+                    android:orientation="horizontal">
+                    <TextView
+                        android:id="@+id/tv_coal_iron"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="@string/coal_iron"
+                        android:textAppearance="@style/TextAppearance.MaterialComponents.Body1" />
+                    <com.google.android.material.textfield.TextInputLayout
+                        android:id="@+id/til_coal_iron"
+                        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
+                        android:layout_width="48dp"
+                        android:layout_height="wrap_content"
+                        android:minHeight="20dp"
+                        app:boxStrokeWidth="2dp">
+
+                        <com.google.android.material.textfield.TextInputEditText
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:inputType="number"
+                            android:maxLines="1" />
+                    </com.google.android.material.textfield.TextInputLayout>
+                </LinearLayout>
+
+                <!--    Bed  -->
+                <LinearLayout
+
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_columnWeight="1"
+                    android:layout_marginEnd="20dp"
+                    android:orientation="horizontal">
+                    <TextView
+                        android:id="@+id/tv_bed"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="@string/bed"
+                        android:textAppearance="@style/TextAppearance.MaterialComponents.Body1" />
+                    <com.google.android.material.textfield.TextInputLayout
+                        android:id="@+id/til_bed"
+                        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
+                        android:layout_width="48dp"
+                        android:layout_height="wrap_content"
+                        android:minHeight="20dp"
+                        app:boxStrokeWidth="2dp">
+
+                        <com.google.android.material.textfield.TextInputEditText
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:inputType="number"
+                            android:maxLines="1" />
+                    </com.google.android.material.textfield.TextInputLayout>
+                </LinearLayout>
+
+                <!--    Table  -->
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_columnWeight="1"
+                    android:layout_marginEnd="20dp"
+                    android:orientation="horizontal">
+                    <TextView
+                        android:id="@+id/tv_table"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="@string/table"
+                        android:textAppearance="@style/TextAppearance.MaterialComponents.Body1" />
+                    <com.google.android.material.textfield.TextInputLayout
+                        android:id="@+id/til_table"
+                        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
+                        android:layout_width="48dp"
+                        android:layout_height="wrap_content"
+                        android:minHeight="20dp"
+                        app:boxStrokeWidth="2dp">
+
+                        <com.google.android.material.textfield.TextInputEditText
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:inputType="number"
+                            android:maxLines="1" />
+                    </com.google.android.material.textfield.TextInputLayout>
+                </LinearLayout>
+
+                <!--    Chair  -->
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_columnWeight="1"
+                    android:layout_marginEnd="20dp"
+                    android:orientation="horizontal">
+                    <TextView
+                        android:id="@+id/tv_chair"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="@string/chair"
+                        android:textAppearance="@style/TextAppearance.MaterialComponents.Body1" />
+                    <com.google.android.material.textfield.TextInputLayout
+                        android:id="@+id/til_chair"
+                        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
+                        android:layout_width="48dp"
+                        android:layout_height="wrap_content"
+                        android:minHeight="20dp"
+                        app:boxStrokeWidth="2dp">
+
+                        <com.google.android.material.textfield.TextInputEditText
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:inputType="number"
+                            android:maxLines="1" />
+                    </com.google.android.material.textfield.TextInputLayout>
+                </LinearLayout>
+                <!--    Canoe  -->
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_columnWeight="1"
+                    android:layout_marginEnd="20dp"
+                    android:orientation="horizontal">
+                    <TextView
+                        android:id="@+id/tv_canoe"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="@string/canoe"
+                        android:textAppearance="@style/TextAppearance.MaterialComponents.Body1" />
+                    <com.google.android.material.textfield.TextInputLayout
+                        android:id="@+id/til_canoe"
+                        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
+                        android:layout_width="48dp"
+                        android:layout_height="wrap_content"
+                        android:minHeight="20dp"
+                        app:boxStrokeWidth="2dp">
+
+                        <com.google.android.material.textfield.TextInputEditText
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:inputType="number"
+                            android:maxLines="1" />
+                    </com.google.android.material.textfield.TextInputLayout>
+                </LinearLayout>
+
+                <!--    Mosquito net  -->
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_columnWeight="1"
+                    android:layout_marginEnd="20dp"
+                    android:orientation="horizontal">
+                    <TextView
+                        android:id="@+id/tv_mosquito_net"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="@string/mosquito"
+                        android:textAppearance="@style/TextAppearance.MaterialComponents.Body1" />
+                    <com.google.android.material.textfield.TextInputLayout
+                        android:id="@+id/til_mosquito_net"
+                        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
+                        android:layout_width="48dp"
+                        android:layout_height="wrap_content"
+                        android:minHeight="20dp"
+                        app:boxStrokeWidth="2dp">
+
+                        <com.google.android.material.textfield.TextInputEditText
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:inputType="number"
+                            android:maxLines="1" />
+                    </com.google.android.material.textfield.TextInputLayout>
+                </LinearLayout>
+
+
             </GridLayout>
 
 
@@ -784,11 +1423,13 @@
 
     <RelativeLayout
         android:id="@+id/buttons"
+        android:padding="12dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:gravity="end"
+        android:elevation="4dp"
+        android:background="@color/cardview_light_background"
         android:orientation="horizontal"
-        android:padding="16dp"
         app:layout_constraintBottom_toBottomOf="parent">
 
         <com.google.android.material.button.MaterialButton

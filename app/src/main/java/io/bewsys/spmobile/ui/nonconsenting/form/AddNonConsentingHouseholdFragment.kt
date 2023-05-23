@@ -88,7 +88,7 @@ class AddNonConsentingHouseholdFragment : Fragment(R.layout.fragment_add_non_con
                 address = household?.address.toString()
                 lon = household?.gps_longitude.toString()
                 lat = household?.gps_latitude.toString()
-               reason = household?.reason.toString()
+                reason = household?.reason.toString()
                 otherReason = household?.other_non_consent_reason.toString()
                 province = household?.province_name.toString()
                 territory = household?.territory_name.toString()
@@ -155,8 +155,8 @@ class AddNonConsentingHouseholdFragment : Fragment(R.layout.fragment_add_non_con
                         addTextChangedListener {
                             val reason = it.toString()
                             viewModel.reason = reason
-                            textFieldOtherReason.isEnabled  = reason == getString(R.string.other)
-                            textViewOtherReason.isEnabled  = reason == getString(R.string.other)
+                            textFieldOtherReason.isEnabled = reason == getString(R.string.other)
+                            textViewOtherReason.isEnabled = reason == getString(R.string.other)
                         }
                     }
                 )
@@ -168,6 +168,7 @@ class AddNonConsentingHouseholdFragment : Fragment(R.layout.fragment_add_non_con
 
                             viewModel.province = it.toString()
                             viewModel.loadTerritoriesWithName(it.toString())
+                            getLastKnownLocation()
 
                         }
                     }
@@ -175,15 +176,17 @@ class AddNonConsentingHouseholdFragment : Fragment(R.layout.fragment_add_non_con
             }
             (autoCompleteTextViewCommunity as? AutoCompleteTextView)?.apply {
                 setAdapter(
-                    ArrayAdapter(context, dropdownLayout, communities).also {
-                        addTextChangedListener {
-                            viewModel.community = it.toString()
-                            viewModel.loadGroupmentsWithName(it.toString())
+                    ArrayAdapter(context, dropdownLayout, communities)
+                        .also {
+                            addTextChangedListener {
+                                viewModel.community = it.toString()
+                                viewModel.loadGroupmentsWithName(it.toString())
 
+                            }
                         }
-                    }
                 )
             }
+
             (autoCompleteTextViewTerritory as? AutoCompleteTextView)?.apply {
                 setAdapter(
                     ArrayAdapter(context, dropdownLayout, territories)
@@ -202,29 +205,30 @@ class AddNonConsentingHouseholdFragment : Fragment(R.layout.fragment_add_non_con
                     addTextChangedListener {
 
                         viewModel.groupment = it.toString()
+                        viewModel.getGroupmentId(it.toString())
+                        getLastKnownLocation()
                     }
                 }
             }
 
-        }
 
+            viewLifecycleOwner.lifecycleScope.launchWhenStarted {
+                viewModel.addNonConsentingHouseholdEvent.collect { event ->
+                    when (event) {
+                        is AddNonConsentingHouseholdViewModel.AddNonConsentingHouseholdEvent.ShowInvalidInputMessage ->
 
-        viewLifecycleOwner.lifecycleScope.launchWhenStarted {
-            viewModel.addNonConsentingHouseholdEvent.collect { event ->
-                when (event) {
-                    is AddNonConsentingHouseholdViewModel.AddNonConsentingHouseholdEvent.ShowInvalidInputMessage ->
+                            Snackbar.make(requireView(), event.msg, Snackbar.LENGTH_LONG).show()
 
-                        Snackbar.make(requireView(), event.msg, Snackbar.LENGTH_LONG).show()
+                        is AddNonConsentingHouseholdViewModel.AddNonConsentingHouseholdEvent.NavigateBackWithResults -> {
 
-                    is AddNonConsentingHouseholdViewModel.AddNonConsentingHouseholdEvent.NavigateBackWithResults -> {
-
-                        setFragmentResult(
-                            "add_non_consenting_household_request",
-                            bundleOf("add_non_consenting_household_result" to event.results)
-                        )
-                        findNavController().popBackStack()
-                    }
-                }.exhaustive
+                            setFragmentResult(
+                                "add_non_consenting_household_request",
+                                bundleOf("add_non_consenting_household_result" to event.results)
+                            )
+                            findNavController().popBackStack()
+                        }
+                    }.exhaustive
+                }
             }
         }
 
@@ -232,12 +236,12 @@ class AddNonConsentingHouseholdFragment : Fragment(R.layout.fragment_add_non_con
     }//end of onCreateView
 
     private fun getLastKnownLocation() {
-        currentLocation?.apply {
-            viewModel.lon = longitude.toString()
-            viewModel.lat = latitude.toString()
+        currentLocation?.let {
+            viewModel.lon = it.longitude.toString()
+            viewModel.lat = it.latitude.toString()
 
-            til_Lat?.editText?.setText(latitude.toString())
-            til_Lon?.editText?.setText(longitude.toString())
+            til_Lat?.editText?.setText( it.longitude.toString())
+            til_Lon?.editText?.setText(it.latitude.toString())
         }
     }
 
@@ -282,6 +286,7 @@ class AddNonConsentingHouseholdFragment : Fragment(R.layout.fragment_add_non_con
             Toast.LENGTH_SHORT
         ).show()
     }
+
     companion object {
         private const val TAG = "AddNonConsentingHousehold"
     }

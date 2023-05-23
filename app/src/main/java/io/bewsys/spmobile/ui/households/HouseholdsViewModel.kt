@@ -88,6 +88,8 @@ class HouseholdsViewModel(
                             community_name = it.community_id?.let { id -> dashboardRepository.getCommunityById(id.toLong())?.name },
                             territory_name = it.territory_id?.let { id -> dashboardRepository.getTerritoryById(id.toLong())?.name },
                             groupement_name = it.groupment_id?.let { id -> dashboardRepository.getGroupmentById(id.toLong())?.name },
+                            health_area_name = it.health_area_id?.let { id -> dashboardRepository.getHealthAreaById(id.toLong())?.name },
+                            health_zone_name = it.health_zone_id?.let { id -> dashboardRepository.getHealthZoneById(id.toLong())?.name },
                             duration_displaced_returned_repatriated_refugee = it.duration_displaced_returned_repatriated_refugee,
                             unit_of_migration_duration = it.unit_of_migration_duration,
                             territory_or_town = it.territory_or_town,

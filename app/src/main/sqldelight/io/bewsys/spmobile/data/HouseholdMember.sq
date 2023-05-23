@@ -62,5 +62,5 @@ DELETE FROM memberEntity WHERE id = ?;
 
 updateStatus:
 UPDATE memberEntity
-SET status = :status ,remote_id = :remoteId WHERE id = :id;
+SET status = :status ,remote_id = :remoteId,household_id =: householdId WHERE id = :id;
 

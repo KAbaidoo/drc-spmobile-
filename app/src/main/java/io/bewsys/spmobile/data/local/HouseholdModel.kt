@@ -60,6 +60,8 @@ data class HouseholdModel(
     val community_name: String? =null,
     val territory_name: String?=null,
     val groupement_name: String? =null,
+    val health_zone_name: String?=null,
+    val health_area_name: String?=null,
     val duration_displaced_returned_repatriated_refugee: String?=null,
     val unit_of_migration_duration: String?=null,
     val territory_or_town: String?=null,

@@ -9,12 +9,14 @@ import android.location.Location
 import android.os.Bundle
 import android.util.Log
 import android.view.View
+import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.app.AppCompatDelegate
 import androidx.core.app.ActivityCompat
 import androidx.core.os.LocaleListCompat
 import androidx.core.os.bundleOf
+import androidx.core.view.get
 import androidx.drawerlayout.widget.DrawerLayout
 import androidx.drawerlayout.widget.DrawerLayout.LOCK_MODE_LOCKED_CLOSED
 import androidx.lifecycle.lifecycleScope
@@ -32,34 +34,41 @@ import com.vmadalin.easypermissions.dialogs.SettingsDialog
 import io.bewsys.spmobile.PERMISSION_LOCATION_REQUEST_CODE
 import io.bewsys.spmobile.R
 import io.bewsys.spmobile.databinding.ActivityMainBinding
+import io.bewsys.spmobile.databinding.NavHeaderMainBinding
 import io.bewsys.spmobile.ui.nonconsenting.form.AddNonConsentingHouseholdFragment
 import io.bewsys.spmobile.util.LocalizationUtil
 import io.bewsys.spmobile.util.LocationProvider
+import io.bewsys.spmobile.util.MapUtil
 import kotlinx.coroutines.flow.collectLatest
+import kotlinx.coroutines.flow.take
 import org.koin.android.ext.android.get
 import org.koin.android.ext.android.inject
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 
-class MainActivity : AppCompatActivity(), EasyPermissions.PermissionCallbacks {
+class MainActivity : AppCompatActivity() {
 
     private lateinit var appBarConfiguration: AppBarConfiguration
     private lateinit var binding: ActivityMainBinding
     private lateinit var navController: NavController
-    private var locationProvider : LocationProvider? = null
-
-//    private val locationProvider : LocationProvider by inject()
 
     private val viewModel: MainViewModel by viewModel()
-    private var currentLocation: Location? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-      locationProvider =  LocationProvider(this)
+
+
+
 
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
         setSupportActionBar(binding.appBarMain.toolbar)
+
+
+
+        val navigationView:NavigationView = findViewById(R.id.nav_view)
+        val header: View = navigationView.getHeaderView(0)
+        val tv: TextView = header.findViewById(R.id.tv_username)
 
         lifecycleScope.launchWhenStarted {
             viewModel.userState.collectLatest {
@@ -67,7 +76,21 @@ class MainActivity : AppCompatActivity(), EasyPermissions.PermissionCallbacks {
                     navController.navigate(R.id.nav_login)
                 }
             }
+
+
         }
+        lifecycleScope.launchWhenStarted {
+            viewModel.getUser().collectLatest {
+                tv.text = it.name ?: "username"
+            }
+        }
+
+
+
+
+
+
+
 
         val drawerLayout: DrawerLayout = binding.drawerLayout
         val navView: NavigationView = binding.navView
@@ -83,7 +106,6 @@ class MainActivity : AppCompatActivity(), EasyPermissions.PermissionCallbacks {
         )
         setupActionBarWithNavController(navController, appBarConfiguration)
         navView.setupWithNavController(navController)
-
 
         navView.setOnClickListener { menuItem ->
             when (menuItem.id) {
@@ -108,64 +130,10 @@ class MainActivity : AppCompatActivity(), EasyPermissions.PermissionCallbacks {
             }
         }
 
-        @SuppressLint("MissingPermission")
-        if (hasLocationPermission()) {
-            locationProvider?.location?.observe(this) { loc: Location? ->
-//                currentLocation = loc
-            }
-        } else {
-            requestLocationPermission()
-        }
-
-
-        getLastKnownLocation()
     } //end of onCreate
 
-    private fun getLastKnownLocation() {
 
-//        Log.d(TAG, "lon: ${currentLocation?.longitude} lat: ${currentLocation?.latitude}")
 
-    }
-
-    private fun hasLocationPermission() =
-        EasyPermissions.hasPermissions(
-            applicationContext,
-            Manifest.permission.ACCESS_FINE_LOCATION
-        )
-
-    private fun requestLocationPermission() {
-        EasyPermissions.requestPermissions(
-            this,
-            getString(R.string.cannot_work_without_permission),
-            PERMISSION_LOCATION_REQUEST_CODE,
-            Manifest.permission.ACCESS_FINE_LOCATION
-        )
-    }
-
-    override fun onRequestPermissionsResult(
-        requestCode: Int,
-        permissions: Array<out String>,
-        grantResults: IntArray
-    ) {
-        super.onRequestPermissionsResult(requestCode, permissions, grantResults)
-        EasyPermissions.onRequestPermissionsResult(requestCode, permissions, grantResults, this)
-    }
-
-    override fun onPermissionsDenied(requestCode: Int, perms: List<String>) {
-        if (EasyPermissions.somePermissionDenied(this, perms.first())) {
-            SettingsDialog.Builder(applicationContext).build().show()
-        } else {
-            requestLocationPermission()
-        }
-    }
-
-    override fun onPermissionsGranted(requestCode: Int, perms: List<String>) {
-        Toast.makeText(
-            applicationContext,
-            getString(R.string.permission_granted),
-            Toast.LENGTH_SHORT
-        ).show()
-    }
 
     override fun onSupportNavigateUp(): Boolean {
         val navController = findNavController(R.id.nav_host_fragment)

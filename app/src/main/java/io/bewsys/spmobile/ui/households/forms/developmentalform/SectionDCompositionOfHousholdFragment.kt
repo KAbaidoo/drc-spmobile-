@@ -7,40 +7,31 @@ import android.view.MenuInflater
 import android.view.MenuItem
 import android.view.View
 import androidx.core.os.bundleOf
-import androidx.core.view.MenuProvider
-import androidx.core.widget.addTextChangedListener
+
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.Lifecycle
-import androidx.lifecycle.lifecycleScope
+
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.google.android.material.datepicker.MaterialDatePicker
-import io.bewsys.spmobile.R
-import io.bewsys.spmobile.databinding.FragmentAddHouseholdThreeHeadBinding
-import io.bewsys.spmobile.databinding.FragmentAddHouseholdThreebMembersBinding
-import io.bewsys.spmobile.ui.nonconsenting.NonConsentingHouseholdAdapter
-import kotlinx.coroutines.flow.collectLatest
-import org.koin.androidx.navigation.koinNavGraphViewModel
-import org.koin.androidx.viewmodel.ext.android.activityViewModel
-import java.text.SimpleDateFormat
-import java.util.*
 
-class FormStepThreeBFragment : Fragment(R.layout.fragment_add_household_threeb_members) {
+import io.bewsys.spmobile.R
+
+import io.bewsys.spmobile.databinding.FragmentCompositionOfHouseholdDBinding
+
+import org.koin.androidx.navigation.koinNavGraphViewModel
+
+
+class SectionDCompositionOfHousholdFragment : Fragment(R.layout.fragment_composition_of_household_d) {
     private val viewModel: SharedDevelopmentalFormViewModel by koinNavGraphViewModel(R.id.form_navigation)
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        val binding = FragmentAddHouseholdThreebMembersBinding.bind(view)
+        val binding = FragmentCompositionOfHouseholdDBinding.bind(view)
 
         val membersAdapter = MembersAdapter()
 
        binding.apply {
-           viewLifecycleOwner.lifecycleScope.launchWhenStarted {
-               viewModel.stepThreeHasBlankFields.collectLatest {
-                   btnNext.isEnabled = it.not()
-               }
-           }
+
            recyclerViewMembers.apply {
                adapter = membersAdapter
                layoutManager = LinearLayoutManager(requireContext())
@@ -52,19 +43,19 @@ class FormStepThreeBFragment : Fragment(R.layout.fragment_add_household_threeb_m
            }
 
          btnAddMembers.setOnClickListener {
-             findNavController().navigate(R.id.membersFormFragment)
+             findNavController().navigate(R.id.sectionDAddMemberFragment)
          }
             val title =
                 if (viewModel.household != null) getString(R.string.edit_household) else getString(R.string.add_household)
 
             btnNext.setOnClickListener {
                 val bundle = bundleOf("title" to title)
-                findNavController().navigate(R.id.formStepFourFragment,bundle )
+                findNavController().navigate(R.id.sectionEHousingFragment,bundle )
             }
             btnPrevious.setOnClickListener {
 
                 val bundle = bundleOf("title" to title)
-                findNavController().navigate(R.id.formStepThreeFragment,bundle )
+                findNavController().navigate(R.id.sectionCIdentificationFragment,bundle )
 
             }
 

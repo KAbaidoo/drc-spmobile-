@@ -50,7 +50,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:padding="4dp"
-                    android:text="@string/province"
+                    android:text="@string/provinces"
                     android:textAlignment="center"
                     android:textAppearance="@style/TextAppearance.MaterialComponents.Body2"
                     android:textColor="?android:textColorPrimary" />

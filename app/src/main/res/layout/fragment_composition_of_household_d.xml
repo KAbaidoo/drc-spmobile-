@@ -4,19 +4,16 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:paddingStart="24dp"
-    android:paddingTop="16dp"
-    android:paddingEnd="24dp"
-    tools:context=".ui.households.forms.developmentalform.FormStepThreeBFragment">
+    tools:context=".ui.households.forms.developmentalform.SectionDCompositionOfHousholdFragment">
 
 
     <com.google.android.material.button.MaterialButton
         android:id="@+id/btn_add_members"
         style="@style/Widget.App.Button"
-        android:layout_marginBottom="24dp"
-        android:layout_marginTop="16dp"
         android:layout_alignParentStart="true"
-        android:text="add member"
+        android:layout_marginTop="16dp"
+        android:layout_marginBottom="16dp"
+        android:text="@string/add_member"
         app:icon="@drawable/menu_add_24"
         app:iconTint="@color/colorPrimary"
         app:layout_constraintBottom_toTopOf="@+id/relativeLayout2"
@@ -26,17 +23,19 @@
     <TextView
         android:id="@+id/title"
         style="@style/Widget.App.Heading.Sub"
-        android:text="D. COMPOSITION OF HOUSEHOLD"
-
+        android:paddingStart="16dp"
+        android:paddingEnd="16dp"
+        android:text="@string/d_composition_of_household"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"/>
+        app:layout_constraintTop_toTopOf="parent" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recycler_view_members"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_marginTop="16dp"
+        android:padding="16dp"
         app:layout_constraintBottom_toTopOf="@+id/btn_add_members"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -46,12 +45,12 @@
         android:id="@+id/relativeLayout2"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="24dp"
+        android:background="@color/cardview_light_background"
+        android:elevation="4dp"
         android:gravity="end"
         android:orientation="horizontal"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent">
+        android:padding="12dp"
+        app:layout_constraintBottom_toBottomOf="parent">
 
         <com.google.android.material.button.MaterialButton
             android:id="@+id/btn_previous"
@@ -65,7 +64,6 @@
             android:id="@+id/btn_next"
             style="@style/Widget.App.Button"
             android:layout_alignParentEnd="true"
-            android:enabled="false"
             android:text="@string/next"
             app:icon="@drawable/ic_arrow_forward_ios_24"
             app:iconGravity="end"

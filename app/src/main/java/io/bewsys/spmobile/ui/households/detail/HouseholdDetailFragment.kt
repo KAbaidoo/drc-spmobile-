@@ -61,7 +61,6 @@ class HouseholdDetailFragment : Fragment(R.layout.fragment_household_detail) {
             tvRespondentSex.append(": ${household.respondent_sex}")
             tvRespondentVoterId.append(": ${household.respondent_voter_id}")
             tvRespondentPhoneNumber.append(": ${household.respondent_phone_number}")
-
             tvProvince.append(": ${household.province_name}")
             tvTerritory.append(": ${household.territory_name}")
             tvCommunity.append(": ${household.community_name}")

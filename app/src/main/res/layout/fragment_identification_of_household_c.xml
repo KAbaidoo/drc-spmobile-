@@ -4,15 +4,16 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.households.forms.developmentalform.FormStepThreeFragment">
+    tools:context=".ui.households.forms.developmentalform.SectionCIdentificationFragment">
 
     <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="0dp"
         android:paddingStart="24dp"
-        android:paddingTop="24dp"
         android:paddingEnd="24dp"
-        android:scrollbars="none">
+        android:scrollbars="none"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toTopOf="@+id/buttons">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -21,10 +22,8 @@
 
             <TextView
                 style="@style/Widget.App.Heading.Sub"
-                android:text="C. IDENTIFICATION OF HOUSEHOLD" />
-            <TextView
-                style="@style/Widget.App.Heading.Sub"
-                android:text="@string/household_head" />
+                android:text="@string/c_identification_of_household" />
+
 
             <!--            respondent_firstname-->
             <TextView
@@ -96,6 +95,57 @@
                     android:maxLines="1" />
             </com.google.android.material.textfield.TextInputLayout>
 
+            <!--            head_voter_id      -->
+            <TextView
+                android:id="@+id/tv_head_voter_id"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:text="@string/household_head_voter_id_card"
+                android:textAppearance="@style/TextAppearance.MaterialComponents.Body1" />
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/til_household_head_voter_id_card"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:minHeight="20dp"
+                app:boxStrokeWidth="2dp"
+                app:endIconMode="clear_text">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="text"
+                    android:maxLines="1" />
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+
+            <!--            household_head_phone_number      -->
+            <TextView
+                android:id="@+id/tv_head_phone_number"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:text="@string/household_head_phone_number"
+                android:textAppearance="@style/TextAppearance.MaterialComponents.Body1" />
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/til_household_head_phone_number"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:minHeight="20dp"
+                app:boxStrokeWidth="2dp"
+                app:endIconMode="clear_text">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="phone"
+                    android:maxLines="1" />
+            </com.google.android.material.textfield.TextInputLayout>
+
             <!--            head age-->
             <TextView
                 android:id="@+id/tv_head_age"
@@ -150,59 +200,10 @@
 
 
 
-            <!--            head_voter_id      -->
-            <TextView
-                android:id="@+id/tv_head_voter_id"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
-                android:text="@string/household_head_voter_id_card"
-                android:textAppearance="@style/TextAppearance.MaterialComponents.Body1" />
 
-            <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/til_household_head_voter_id_card"
-                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:minHeight="20dp"
-                app:boxStrokeWidth="2dp"
-                app:endIconMode="clear_text">
 
-                <com.google.android.material.textfield.TextInputEditText
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:inputType="text"
-                    android:maxLines="1" />
 
-            </com.google.android.material.textfield.TextInputLayout>
 
-            <!--            household_head_phone_number      -->
-            <TextView
-                android:id="@+id/tv_head_phone_number"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
-                android:text="@string/household_head_phone_number"
-                android:textAppearance="@style/TextAppearance.MaterialComponents.Body1" />
-            <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/til_household_head_phone_number"
-                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:minHeight="20dp"
-                app:boxStrokeWidth="2dp"
-                app:endIconMode="clear_text">
-
-                <com.google.android.material.textfield.TextInputEditText
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:inputType="phone"
-                    android:maxLines="1" />
-            </com.google.android.material.textfield.TextInputLayout>
-
-            <TextView
-                style="@style/Widget.App.Heading.Sub"
-                android:text="@string/respondent" />
 
             <!--            is_head_respondent -->
             <TextView
@@ -404,6 +405,7 @@
 
             </com.google.android.material.textfield.TextInputLayout>
 
+
             <!--            other_household_migration_status      -->
             <TextView
                 android:id="@+id/tv_other_migration_status"
@@ -429,7 +431,6 @@
                     android:maxLines="1" />
 
             </com.google.android.material.textfield.TextInputLayout>
-
             <!--            duration_displaced_returned_repatriated_refugee-->
             <TextView
                 android:id="@+id/tv_duration_displaced_returned_repatriated_refugee"
@@ -438,7 +439,6 @@
                 android:layout_marginTop="16dp"
                 android:text="@string/duration_displaced_returned_repatriated_refugee"
                 android:textAppearance="@style/TextAppearance.MaterialComponents.Body1" />
-
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -472,6 +472,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginStart="8dp"
                     android:layout_weight="0.5"
+                    android:layout_marginBottom="16dp"
                     android:minHeight="20dp"
                     app:boxStrokeWidth="2dp">
 
@@ -487,10 +488,14 @@
             </LinearLayout>
 
 
+
+
+
         </LinearLayout>
     </ScrollView>
     <RelativeLayout
-        android:padding="16dp"
+        android:id="@+id/buttons"
+        android:padding="12dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:gravity="end"

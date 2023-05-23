@@ -38,6 +38,7 @@ class AddNonConsentingHouseholdViewModel(
     init {
         loadProvinces()
     }
+
     var household: NonConsentHouseholdModel? = null
     var id: Long? = null
 
@@ -63,67 +64,58 @@ class AddNonConsentingHouseholdViewModel(
         get() = _groupments
 
 
-
-
-    var reason =  ""
+    var reason = ""
     var otherReason = ""
     var address = ""
 
 
-    var lon = state.get<String>("lon") ?: ""
+    var lon: String? = ""
         set(value) {
-            field = value
             state["lon"] = value
-        }
-    var lat = state.get<String>("lat") ?: ""
-        set(value) {
             field = value
-            state["lat"] = value
         }
-    var province = state.get<String>("province") ?: ""
-        set(value) {
-            field = value
-            state["province"] = value
-        }
-    var territory = state.get<String>("territory") ?: ""
-        set(value) {
-            field = value
-            state["territory"] = value
-        }
-    var community = state.get<String>("community") ?: ""
-        set(value) {
-            field = value
-            state["community"] = value
-        }
-    var groupment = state.get<String>("groupment") ?: ""
-        set(value) {
-            field = value
-            state["groupment"] = value
-        }
+        get() = state["lon"]
 
-    private var provinceId: String = state.get<String>("province_id") ?: "1"
+    var lat: String? = ""
+        set(value) {
+            state["lat"] = value
+            field = value
+        }
+        get() = state["lat"]
+
+    var province = ""
+    var territory = ""
+    var community = ""
+    var groupment = ""
+
+
+    private var provinceId: String? = "1"
         set(value) {
             field = value
             state["province_id"] = value
         }
+        get() = state["province_id"]
 
-    private var communityId: String = state.get<String>("community_id") ?: "1"
+    private var communityId: String? = "1"
         set(value) {
             field = value
             state["community_id"] = value
         }
+        get() = state["community_id"]
 
-    private var groupmentId: String = state.get<String>("groupment_id") ?: "1"
+    private var groupmentId: String? = "1"
         set(value) {
             field = value
             state["groupment_id"] = value
         }
+        get() = state["groupment_id"]
 
-    private var territoryId: String = state.get<String>("territory_id") ?: "1"
+    private var territoryId: String? = "1"
         set(value) {
             field = value
             state["territory_id"] = value
         }
+        get() = state["territory_id"]
 
     fun loadProvinces() {
         viewModelScope.launch {
@@ -134,23 +126,45 @@ class AddNonConsentingHouseholdViewModel(
 
     }
 
+    fun getGroupmentId(groupmentName: String) {
+        viewModelScope.launch {
+            dashboardRepository.getGroupmentByName(groupmentName).collectLatest { list ->
+                list.firstOrNull()?.apply {
+                    groupmentId = id.toString()
+
+                }
+
+
+            }
+        }
+    }
+
     fun loadTerritoriesWithName(provinceName: String) {
         viewModelScope.launch {
-            dashboardRepository.getProvinceByName(provinceName).collectLatest{
-                dashboardRepository.getTerritoriesList( it.firstOrNull()?.id.toString()).collectLatest {
-                    _territories.value = it
-                }
-            }
+            dashboardRepository.getProvinceByName(provinceName).collectLatest {
+                it.firstOrNull()?.apply {
+                    provinceId = id.toString()
 
+                }
+                dashboardRepository.getTerritoriesList(provinceId!!)
+                    .collectLatest {
+                        _territories.value = it
+                    }
+            }
         }
     }
 
     fun loadCommunitiesWithName(territoryName: String) {
         viewModelScope.launch {
-            dashboardRepository.getTerritoryByName(territoryName).collectLatest{
-                dashboardRepository.getCommunitiesList( it.firstOrNull()?.id.toString()).collectLatest {
-                    _communities.value = it
+            dashboardRepository.getTerritoryByName(territoryName).collectLatest {
+                it.firstOrNull()?.apply {
+                    territoryId = id.toString()
+
                 }
+                dashboardRepository.getCommunitiesList(territoryId!!)
+                    .collectLatest {
+                        _communities.value = it
+                    }
             }
 
         }
@@ -158,16 +172,19 @@ class AddNonConsentingHouseholdViewModel(
 
     fun loadGroupmentsWithName(communityName: String) {
         viewModelScope.launch {
-            dashboardRepository.getCommunityByName(communityName).collectLatest{
-                dashboardRepository.getGroupmentsList( it.firstOrNull()?.id.toString()).collectLatest {
-                    _groupments.value = it
+            dashboardRepository.getCommunityByName(communityName).collectLatest {
+                it.firstOrNull()?.apply {
+                    communityId = id.toString()
+
                 }
+                dashboardRepository.getGroupmentsList(communityId!!)
+                    .collectLatest {
+                        _groupments.value = it
+                    }
             }
 
         }
     }
-
-
 
 
     fun onSaveClicked() {
@@ -219,7 +236,7 @@ class AddNonConsentingHouseholdViewModel(
             address = address,
             other_non_consent_reason = otherReason,
         ).also {
-            id?.let { id -> updateNonConsentingHousehold(id,it) }
+            id?.let { id -> updateNonConsentingHousehold(id, it) }
         }
     }
 
@@ -241,10 +258,14 @@ class AddNonConsentingHouseholdViewModel(
 
         }
 
-    private fun updateNonConsentingHousehold(id: Long, newNonConsentingHousehold: NonConsentHouseholdModel) =
+    private fun updateNonConsentingHousehold(
+        id: Long,
+        newNonConsentingHousehold: NonConsentHouseholdModel
+    ) =
         viewModelScope.launch {
 
-            nonConsentingRepository.updateNonConsentingHousehold(id,
+            nonConsentingRepository.updateNonConsentingHousehold(
+                id,
                 newNonConsentingHousehold
             )
 
@@ -269,7 +290,6 @@ class AddNonConsentingHouseholdViewModel(
             .setInputData(createInputDataForId(itemId))
             .build()
         workManager.enqueue(uploadRequest)
-
     }
 
     private fun createInputDataForId(id: Long): Data {

@@ -23,7 +23,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="4dp"
-                android:text="@string/member_firstname"
+                android:text="@string/member_firstname_label"
                 android:textAppearance="@style/TextAppearance.MaterialComponents.Caption" />
 
             <TextView
@@ -46,7 +46,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="4dp"
-                android:text="@string/member_lastname"
+                android:text="@string/member_lastname_label"
                 android:textAppearance="@style/TextAppearance.AppCompat.Caption" />
 
             <TextView

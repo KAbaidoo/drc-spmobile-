@@ -23,6 +23,16 @@ class MemberApi(private val client: HttpClient) {
 
         }
 
+    suspend fun updateMember(payload: MemberPayload, accessToken: String): HttpResponse =
+        client.post("members/${payload.remote_id}") {
+
+            headers {
+                append(HttpHeaders.Authorization, "Bearer $accessToken")
+            }
+            setBody(payload)
+
+        }
+
 
 }
 

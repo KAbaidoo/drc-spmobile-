@@ -1,15 +1,11 @@
 package io.bewsys.spmobile.data.repository
 
 
-
 import app.cash.sqldelight.coroutines.asFlow
 import app.cash.sqldelight.coroutines.mapToList
 import app.cash.sqldelight.coroutines.mapToOne
 import io.bewsys.spmobile.Database
-import io.bewsys.spmobile.data.CommunityEntity
-import io.bewsys.spmobile.data.GroupmentEntity
-import io.bewsys.spmobile.data.ProvinceEntity
-import io.bewsys.spmobile.data.TerritoryEntity
+import io.bewsys.spmobile.data.*
 import io.bewsys.spmobile.data.prefsstore.PreferencesManager
 import io.bewsys.spmobile.data.remote.DashboardApi
 import io.bewsys.spmobile.data.remote.model.dashboard.*
@@ -29,11 +25,12 @@ class DashboardRepository(
 ) {
 
 
-
     private val provinceQueries = db.provinceQueries
     private val communityQueries = db.communityQueries
     private val territoryQueries = db.territoryQueries
     private val groupmentQueries = db.groupmentQueries
+    private val healthAreaQueries = db.healthAreaQueries
+    private val healthZoneQueries = db.healthZoneQueries
 
     suspend fun getAllProvinces(): Flow<List<ProvinceEntity>> =
         withContext(Dispatchers.IO) {
@@ -52,20 +49,15 @@ class DashboardRepository(
             }
         }
 
-    suspend fun insertProvince(province: Province): Unit = withContext(Dispatchers.IO) {
-        province.apply {
-            provinceQueries.insertProvince(
-                id,
-                name,
-                survey_no_code
-            )
-        }
-    }
+
 
     suspend fun getProvinceByName(query: String): Flow<List<ProvinceEntity>> =
         withContext(Dispatchers.IO) {
             provinceQueries.getByName(query).asFlow().mapToList(Dispatchers.Default)
         }
+
+
+
 
     suspend fun getProvinceById(id: Long): ProvinceEntity? = withContext(Dispatchers.IO) {
         provinceQueries.getById(id).executeAsOneOrNull()
@@ -164,14 +156,17 @@ class DashboardRepository(
             groupmentQueries.getAllGroupments().asFlow().mapToList(Dispatchers.Default)
         }
 
-    val provinceCountFlow = provinceQueries.getProvinceCount().asFlow().mapToOne(Dispatchers.Default)
-    val territoryCountFlow = territoryQueries.getTerritoryCount().asFlow().mapToOne(Dispatchers.Default)
-    val communityCountFlow = communityQueries.getCommunityCount().asFlow().mapToOne(Dispatchers.Default)
-    val groupementCountFlow = groupmentQueries.getGroupmentCount().asFlow().mapToOne(Dispatchers.Default)
+    val provinceCountFlow =
+        provinceQueries.getProvinceCount().asFlow().mapToOne(Dispatchers.Default)
+    val territoryCountFlow =
+        territoryQueries.getTerritoryCount().asFlow().mapToOne(Dispatchers.Default)
+    val communityCountFlow =
+        communityQueries.getCommunityCount().asFlow().mapToOne(Dispatchers.Default)
+    val groupementCountFlow =
+        groupmentQueries.getGroupmentCount().asFlow().mapToOne(Dispatchers.Default)
 
 
-
-   suspend fun getGroupmentsList(communityId: String) =
+    suspend fun getGroupmentsList(communityId: String) =
         withContext(Dispatchers.IO) {
             getGroupmentsByCommunityId(communityId).map {
                 it.map { item ->
@@ -182,10 +177,47 @@ class DashboardRepository(
             }
         }
 
-//    suspend fun getGroupmentsList(communityId: String) =
-//        withContext(Dispatchers.IO) {
-//            groupmentQueries.getNamesByCommunityId(communityId).asFlow()
-//        }
+    suspend fun getHealthZoneByName(query: String): Flow<List<HealthZoneEntity>> =
+        withContext(Dispatchers.IO) {
+            healthZoneQueries.getByName(query).asFlow().mapToList(Dispatchers.Default)
+        }
+
+    suspend fun getHealthZonesList(provinceId: String) = withContext(Dispatchers.IO) {
+        getHealthZonesByProvinceId(provinceId).map {
+            it.map { item ->
+                item.name!!
+            }.filterNot {
+                "pentest<img src=1 onerror=alert(1)>" == it
+            }
+        }
+    }
+
+    suspend fun getHealthZonesByProvinceId(provinceId: String): Flow<List<HealthZoneEntity>> =
+        withContext(Dispatchers.IO) {
+            healthZoneQueries.getByProvinceId(provinceId).asFlow().mapToList(Dispatchers.Default)
+        }
+
+    suspend fun getHealthAreasList(healthZoneId: String) = withContext(Dispatchers.IO) {
+        getHealthAreasById(healthZoneId).map {
+            it.map { item ->
+                item.name!!
+            }.filterNot {
+                "pentest<img src=1 onerror=alert(1)>" == it
+            }
+        }
+    }
+
+    suspend fun getHealthAreasById(healthZoneId: String): Flow<List<HealthAreaEntity>> =
+        withContext(Dispatchers.IO) {
+            healthAreaQueries.getByHealthZoneId(healthZoneId).asFlow()
+                .mapToList(Dispatchers.Default)
+        }
+
+    suspend fun getHealthAreaByName(query: String): Flow<List<HealthAreaEntity>> =
+        withContext(Dispatchers.IO) {
+            healthAreaQueries.getByName(query).asFlow().mapToList(Dispatchers.Default)
+        }
+
 
     suspend fun getGroupmentsByCommunityId(communityId: String): Flow<List<GroupmentEntity>> =
         withContext(Dispatchers.IO) {
@@ -212,6 +244,12 @@ class DashboardRepository(
     suspend fun getGroupmentById(id: Long): GroupmentEntity? = withContext(Dispatchers.IO) {
         groupmentQueries.getById(id).executeAsOneOrNull()
     }
+    suspend fun getHealthAreaById(id: Long): HealthAreaEntity? = withContext(Dispatchers.IO) {
+        healthAreaQueries.getById(id).executeAsOneOrNull()
+    }
+    suspend fun getHealthZoneById(id: Long): HealthZoneEntity? = withContext(Dispatchers.IO) {
+        healthZoneQueries.getById(id).executeAsOneOrNull()
+    }
 
 
     /* =================================================================
@@ -229,10 +267,13 @@ class DashboardRepository(
                 val res = Resource.Success<DashboardResponse>(response.body())
                 emit(res)
 
+
                 insertTerritories(res.data.territories)
                 insertCommunities(res.data.communities)
                 insertGroupments(res.data.groupments)
                 insertProvinces(res.data.provinces)
+                insertHealthAreas(res.data.healthAreas)
+                insertHealthZones(res.data.healthZones)
 
             } else {
                 emit(Resource.Failure<LogoutResponse>(response.body()))
@@ -243,37 +284,131 @@ class DashboardRepository(
     }.flowOn(Dispatchers.IO)
 
 
-    private suspend fun insertCommunities(communities: List<Community>) = applicationScope.launch {
+//    private suspend fun insertCommunities(communities: List<Community>) = applicationScope.launch {
+//        withContext(Dispatchers.IO) {
+//            communities.forEach {
+//                insertCommunity(it)
+//            }
+//        }
+//    }
+    private suspend fun  insertCommunities(communities: List<Community>)  = applicationScope.launch {
         withContext(Dispatchers.IO) {
-            communities.forEach {
-                insertCommunity(it)
+            communityQueries.transaction {
+                communities.forEach { communitiy ->
+                    communitiy.apply {
+                        communityQueries.insertCommunity(
+                            id,
+                            name,territory_id,survey_no_code
+                        )
+                    }
+                }
             }
         }
     }
+
+
+//    private suspend fun insertProvinces(provinces: List<Province>) = applicationScope.launch {
+//        withContext(Dispatchers.IO) {
+//            provinces.forEach {
+//                insertProvince(it)
+//            }
+//        }
+//    }
 
 
     private suspend fun insertProvinces(provinces: List<Province>) = applicationScope.launch {
         withContext(Dispatchers.IO) {
-            provinces.forEach {
-                insertProvince(it)
+            provinceQueries.transaction {
+                provinces.forEach { province ->
+                    province.apply {
+                        provinceQueries.insertProvince(
+                            id,
+                            name,survey_no_code
+                        )
+                    }
+                }
             }
         }
     }
+
+//    private suspend fun insertGroupments(groupments: List<Groupment>) = applicationScope.launch {
+//        withContext(Dispatchers.IO) {
+//            groupments.forEach {
+//                insertGroupment(it)
+//            }
+//        }
+//    }
 
     private suspend fun insertGroupments(groupments: List<Groupment>) = applicationScope.launch {
         withContext(Dispatchers.IO) {
-            groupments.forEach {
-                insertGroupment(it)
+            groupmentQueries.transaction {
+                groupments.forEach { groupment ->
+                    groupment.apply {
+                        groupmentQueries.insertGroupment(
+                            id,
+                            name,community_id,survey_no_code
+                        )
+                    }
+                }
             }
         }
     }
 
+//    private suspend fun insertTerritories(territories: List<Territory>) = applicationScope.launch {
+//        withContext(Dispatchers.IO) {
+//            territories.forEach {
+//                insertTerritory(it)
+//            }
+//        }
+//    }
+
     private suspend fun insertTerritories(territories: List<Territory>) = applicationScope.launch {
         withContext(Dispatchers.IO) {
-            territories.forEach {
-                insertTerritory(it)
+            territoryQueries.transaction {
+                territories.forEach { territory ->
+                    territory.apply {
+                        territoryQueries.insertTerritory(
+                            id,
+                            name, province_id,
+                            survey_no_code
+                        )
+                    }
+                }
             }
         }
     }
+
+    private suspend fun insertHealthAreas(healthAreas: List<HealthArea>) = applicationScope.launch {
+        withContext(Dispatchers.IO) {
+            healthAreaQueries.transaction {
+                healthAreas.forEach { healthArea ->
+                    healthArea.apply {
+                        healthAreaQueries.insertHealthArea(
+                            id,
+                            name,
+                            health_zone_id
+                        )
+                    }
+                }
+            }
+        }
+    }
+
+    private suspend fun insertHealthZones(healthZones: List<HealthZone>) = applicationScope.launch {
+        withContext(Dispatchers.IO) {
+            healthAreaQueries.transaction {
+                healthZones.forEach { healthZone ->
+                    healthZone.apply {
+                        healthZoneQueries.insertHealthZone(
+                            id,
+                            name,
+                            province_id
+                        )
+                    }
+                }
+            }
+        }
+    }
+
 
 }

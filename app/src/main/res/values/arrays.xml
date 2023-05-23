@@ -113,6 +113,7 @@
         <item>No concerns</item>
     </string-array>
 
+
     <string-array name="cooking_fuel">
         <item>Electricity</item>
         <item>Liquefied Propane Gas (LPG)</item>
@@ -199,6 +200,11 @@
         <item>Compost or manure</item>
         <item>Other</item>
     </string-array>
+    <string-array name="duration_units">
+        <item>Years</item>
+        <item>Months</item>
+        <item>Days</item>
+    </string-array>
 
     <string-array name="place_of_hand_washing">
         <item>Fixed place (Washbasin/tap): water and soap available</item>
@@ -211,11 +217,6 @@
         <item>No venue</item>
     </string-array>
 
-    <string-array name="duration_units">
-        <item>Days</item>
-        <item>Months</item>
-        <item>Years</item>
-    </string-array>
     <string-array name="language">
         <item>French</item>
         <item>English</item>

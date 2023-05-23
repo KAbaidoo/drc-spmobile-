@@ -4,15 +4,16 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.households.forms.developmentalform.FormStepThreeFragment">
+    tools:context=".ui.households.forms.developmentalform.SectionGIncomeFragment">
 
     <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="0dp"
         android:paddingStart="24dp"
-        android:paddingTop="24dp"
         android:paddingEnd="24dp"
-        android:scrollbars="none">
+        android:scrollbars="none"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/buttons">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -21,7 +22,7 @@
 
             <TextView
                 style="@style/Widget.App.Heading.Sub"
-                android:text="G. INCOME" />
+                android:text="@string/g_income" />
 
             <!--          minimum income required  -->
             <TextView
@@ -29,7 +30,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
-                android:text="What is the minimum amount of monthly income necessary for your household to live without difficulties?"
+                android:text="@string/what_is_the_minimum_amount_of_monthly_income_necessary_for_your_household_to_live_without_difficulties"
                 android:textAppearance="@style/TextAppearance.MaterialComponents.Body1" />
 
             <com.google.android.material.textfield.TextInputLayout
@@ -55,7 +56,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
-                android:text="What is the monthly disposable income of the household?"
+                android:text="@string/what_is_the_monthly_disposable_income_of_the_household"
                 android:textAppearance="@style/TextAppearance.MaterialComponents.Body1" />
 
             <com.google.android.material.textfield.TextInputLayout
@@ -87,6 +88,7 @@
                 android:id="@+id/rg_income_regular"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginBottom="16dp"
                 android:orientation="vertical">
 
                 <com.google.android.material.radiobutton.MaterialRadioButton
@@ -108,7 +110,7 @@
                 android:id="@+id/tv_bank_account_or_bank_card"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
+
                 android:text="@string/bank_account_or_bankcard_available"
                 android:textAppearance="@style/TextAppearance.MaterialComponents.Body1" />
 
@@ -116,6 +118,7 @@
                 android:id="@+id/rg_bank_account_or_bank_card"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginBottom="16dp"
                 android:orientation="vertical">
 
                 <com.google.android.material.radiobutton.MaterialRadioButton
@@ -131,6 +134,56 @@
                     android:text="@string/no" />
             </RadioGroup>
 
+            <!--      mobile_money_username      -->
+            <TextView
+
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/mobile_money_username"
+                android:textAppearance="@style/TextAppearance.MaterialComponents.Body1" />
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/til_mobile_money_username"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:minHeight="20dp"
+                app:endIconMode="clear_text"
+                app:boxStrokeWidth="2dp">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="text"
+                    android:maxLines="1" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <!--      mobile_money_phone_number      -->
+            <TextView
+
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:text="@string/mobile_money_phone_number"
+                android:textAppearance="@style/TextAppearance.MaterialComponents.Body1" />
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/til_mobile_money_phone_number"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="16dp"
+                app:endIconMode="clear_text"
+                android:minHeight="20dp"
+                app:boxStrokeWidth="2dp">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="number"
+                    android:maxLines="1" />
+            </com.google.android.material.textfield.TextInputLayout>
+
 
 
 
@@ -138,12 +191,13 @@
     </ScrollView>
 
     <RelativeLayout
-        android:padding="16dp"
+        android:id="@+id/buttons"
+        android:padding="12dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:gravity="end"
         android:elevation="4dp"
         android:background="@color/cardview_light_background"
-        android:gravity="end"
         android:orientation="horizontal"
         app:layout_constraintBottom_toBottomOf="parent">
 

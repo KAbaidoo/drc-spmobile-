@@ -1,40 +1,19 @@
 package io.bewsys.spmobile.util
 
-import android.content.Context
-import io.bewsys.spmobile.R
-
-
-/*class Mapping(context: Context) {
-    var mapping: Map<String, Any>? = null
-
-    fun createMap(context: Context) {
-        context.apply {
-            mapping = mapOf(
-                getString(R.string.male) to "M",
-                getString(R.string.female) to "F",
-                getString(R.string.urban) to 1,
-                getString(R.string.rural) to 2,
-                getString(R.string.urban_rural) to 3,
-                getString(R.string.resident) to 3,
-                getString(R.string.repatriated) to 3,
-                getString(R.string.urban_rural) to 3,
-                getString(R.string.urban_rural) to 3,
-
-
-            )
-
-        }
-    }
-
-}*/
 
 object MapUtil {
-    val mapping = mapOf<String, Any>(
-        "Male" to "M",
-        "Female" to "F",
+    val mapping = mapOf<String, Int>(
+//        "Male" to "M",
+//        "Female" to "F",
+
         "Urban" to 1,
         "Rural" to 2,
-        "Urban-rural" to 3,
+        "Urbano - rural" to 3,
+
+        "Urbain" to 1,
+        "Rural" to 2,
+        "Urbano - rural" to 3,
+
         "Resident" to 1,
         "Repatriated" to 2,
         "Displaced" to 3,
@@ -53,7 +32,7 @@ object MapUtil {
         "Nephew/Niece by marriage" to 10,
         "Other relative" to 11,
         "Adopted child/Cared for" to 12,
-        "Unrelated" to 12,
+        "Unrelated" to 13,
         "Don't know" to 98,
 
         "Bachelor" to 1,
@@ -64,8 +43,7 @@ object MapUtil {
         "Common-law union" to 6,
 
         "Yes" to 1,
-        "No" to 2,
-        "Don't know" to 3,
+        "No" to 0,
 
         "Pre-school" to 1,
         "Primary" to 2,
@@ -74,7 +52,7 @@ object MapUtil {
         "Technical/Vocational training" to 5,
         "None" to 6,
         "Not concerned" to 7,
-        "Don't know" to 8,
+        "Don't know level of education" to 8,
 
         "Pre-school" to 0,
         "1st year" to 1,
@@ -101,6 +79,7 @@ object MapUtil {
         "Multiple disabilities" to 6,
         "None" to 8,
 
+
         "Senior Management/Executive" to 1,
         "Employee/Skilled or semi-skilled worker" to 2,
         "Manual worker/unskilled worker" to 3,
@@ -111,13 +90,20 @@ object MapUtil {
         "Unemployed" to 96,
         "Inactive" to 97,
 
+
+        "Formal sector (public or private)" to 1,
+        "Non-agricultural infromal" to 2,
+        "Agricultural informal" to 3,
+        "No concerns" to 97,
+
+
         "Owner" to 1,
         "Housed by relative/friend" to 2,
         "Tenant" to 3,
         "Housed by employer" to 4,
         "Site guard" to 5,
         "Sub-housed" to 6,
-        "Other" to 96,
+
 
         "No wall" to 1,
         "Bamboo/Cane/Palm/Trunk" to 2,
@@ -161,18 +147,226 @@ object MapUtil {
         "No meal prepared in the household" to 12,
 
 
+        "Tap in the dwelling" to 1,
+        "Faucet in the yard/plot" to 2,
+        "Public tap/standpipe" to 3,
+        "Tap at the neighbor's house" to 4,
+        "Pump wells or boreholes" to 5,
+        "Protected well" to 6,
+        "Unprotected well" to 7,
+        "Protected source" to 8,
+        "Unprotected source" to 9,
+        "Rainwater" to 10,
+        "Tanker" to 11,
+        "Cart with small tank/barrel" to 12,
+        "Surface water (ver/dam/lake/pond/canal)" to 13,
+        "Bottled water" to 14,
 
 
+        "Flushing/flushing" to 1,
+        "Flush connected to a  sewer/septic tank/cesspool system" to 2,
+        "Cesspool<" to 3,
+        "Composting toilets" to 4,
+        "Bucket/tinette" to 5,
+        "Suspended toilets/latrines" to 6,
+        "No toilets/nature" to 7,
 
 
+        "Private or public organized service" to 1,
+        "Incineration" to 2,
+        "Landfill" to 3,
+        "Public highway" to 4,
+        "Watercourses" to 5,
+        "Wild dump" to 6,
+        "Compost or manure" to 7,
 
 
+        "Fixed place (Washbasin/tap): water and soap available" to 1,
+        "Fixed place (Washbasin/Faucet): water available and no soap" to 2,
+        "Fixed place (Washbasin/Faucet): water not available and soap available" to 3,
+        "Mobile device (water and soap available)" to 4,
+        "Mobile device (water available and no soap)" to 5,
+        "Mobile device (water not available and soap available)" to 6,
+        "No permission" to 7,
+        "No venue" to 8,
+
+        "Résident" to 1,
+        "Rapatrié" to 2,
+        "Déplacé" to 3,
+        "Réfugié" to 4,
+        "Renvoyé" to 5,
+
+        "Chef de ménage" to 1,
+        "Femme ou mari" to 2,
+        "Fils/fille" to 3,
+        "Gendre/belle-fille" to 4,
+        "Petit fils/fille" to 5,
+        "Père/mère" to 6,
+        "Beaux parents" to 7,
+        "Frère/sœur" to 8,
+        "Neveu/nièce" to 9,
+        "Neveu/nièce par alliance" to 10,
+        "Autres parents" to 11,
+        "Enfant adopté/gardé/de la femme/du mari" to 12,
+        "Sans parenté" to 13,
+        "Ne sait pas" to 98,
+
+        "Célibataire" to 1,
+        "Marié(e) monogame" to 2,
+        "Marié(e) polygame" to 3,
+        "Veuf/veuve" to 4,
+        "Divorcé(e)/séparé(e)" to 5,
+        "Union libre" to 6,
+
+        "Oui" to 1,
+        "Non" to 2,
 
 
+        "Pré-scolaire" to 1,
+        "Primaire" to 2,
+        "Secondaire" to 3,
+        "Supérieur" to 4,
+        "Formation technique ou professionelle" to 5,
+        "Aucun" to 6,
+        "Non concerné;" to 7,
+        "Ne sait pas niveau d'instruction" to 8,
 
 
+        "Pré-scolaire" to 0,
+        "1ère année" to 1,
+        "2e année" to 2,
+        "3e année" to 3,
+        "4e année" to 4,
+        "5e année" to 5,
+        "6e année" to 6,
+        "7e année" to 7,
+        "8e année" to 8,
+        "Secondaire" to 10,
+        "Supérieur" to 11,
+        "Abandon scolaire" to 12,
+        "Non concerné" to 13,
+        "Etudes terminées" to 97,
+        "Ne sait pas" to 98,
 
 
+        "Moteur" to 1,
+        "Visuel" to 2,
+        "Auditif" to 3,
+        "Mental" to 4,
+        "Maladie chronique" to 5,
+        "Handicaps multiples" to 6,
+        "Aucune" to 8,
+
+
+        "Cadre supérieur / Cadre de direction" to 1,
+        "Employé/travailleur qualifié ou semi-qualifié" to 2,
+        "Ouvrier/travailleur non qualifie" to 3,
+        "Employeur / Patron" to 4,
+        "Indépendant" to 5,
+        "Aide familiale" to 6,
+        "Apprentis payé ou non payé" to 7,
+        "Chomeur" to 96,
+        "Inactif" to 97,
+
+
+        "Secteur formel (public ou privé)" to 1,
+        "Informel non agricole" to 2,
+        "Informel agricole" to 3,
+        "Non concerne" to 97,
+
+
+        "Propriétaire" to 1,
+        "Logé par un parent/ami" to 2,
+        "Locataire" to 3,
+        "Logé par l'employeur" to 4,
+        "Garde-chantier" to 5,
+        "Sous-logé" to 6,
+
+        "Pas de mur" to 1,
+        "Bambou/Cane/Palme/Tronc" to 2,
+        "Terre" to 3,
+        "Bambou avec boue" to 4,
+        "Pierres avec boue" to 5,
+        "Adobe non recouvert;" to 6,
+        "Contre-plaqué" to 7,
+        "Carton" to 8,
+        "Bois de recuperation" to 9,
+        "Ciment" to 10,
+        "Pierres avec chaux/ciment" to 11,
+        "Briques" to 12,
+        "Blocs de ciment" to 13,
+        "Adobe recouvert" to 14,
+        "Planche en bois/shingles" to 15,
+
+
+        "Terre/Sable" to 1,
+        "Bouse" to 2,
+        "Planches en bois" to 3,
+        "Palmes/bambou" to 4,
+        "Parquet ou bois ciré" to 5,
+        "Bandes de vynille/asphalte" to 6,
+        "Carrelage" to 7,
+        "Ciment" to 8,
+        "Moquette" to 9,
+
+
+        "Electricité" to 1,
+        "Gaz Propane Liquéfié (GPL)" to 2,
+        "Gaz naturel" to 3,
+        "Biogaz" to 4,
+        "Kerosene" to 5,
+        "Charbon/lignite" to 6,
+        "Charbon de bois" to 7,
+        "Bois" to 8,
+        "Paille/branchages/herbes" to 9,
+        "Résidus agricoles" to 10,
+        "Bouse" to 11,
+        "Pas de repas préparé dans le menage" to 12,
+
+
+        "Robinet dans le logement" to 1,
+        "Robinet dans la cour/parcelle" to 2,
+        "Robinet public/brone fontaine" to 3,
+        "Robinet chez le voisin" to 4,
+        "Puits à pompe ou forage" to 5,
+        "Puits protégé" to 6,
+        "Puits non protégé" to 7,
+        "Source protégée" to 8,
+        "Source non protégée" to 9,
+        "Eau de pluie" to 10,
+        "Camion citerne" to 11,
+        "Charrette avec petite citerne/tonneau" to 12,
+        "Eau de surface (fleuve/barrage/lac/mare/canal irrigation)" to 13,
+        "Eau en bouteille" to 14,
+
+
+        "Chasse d'eau/chasse manuelle" to 1,
+        "Chasse d'eau connectée à un systeme d'egout/fosse septique/fosse d'aisances" to 2,
+        "Fosse d'aisances" to 3,
+        "Toilettes à compostage" to 4,
+        "Seau/Tinette" to 5,
+        "Toilettes/latrines suspendues" to 6,
+        "Pas de toilettes/nature" to 7,
+
+
+        "Service organisé privé ou public" to 1,
+        "Incinération" to 2,
+        "Enfouissement" to 3,
+        "Enfouissement" to 4,
+        "Cours d'eau" to 5,
+        "Depotoire sauvage" to 6,
+        "Compost ou fumier" to 7,
+
+
+        "Lieu fixe (Lavabo/Robinet): eau et savon disponible" to 1,
+        "Lieu fixe (Lavabo/Robinet): eau disponible et pas de savon" to 2,
+        "Lieu fixe (Lavabo/Robinet): eau non disponible et savon disponible" to 3,
+        "Dispositif mobile (eau et savon disponibles)" to 4,
+        "Dispositif mobile (eau disponible et pas de savon)" to 5,
+        "Dispositif mobile (eau non disponible et savon disponible)" to 6,
+        "Pas de permission" to 7,
+        "Pas de lieu" to 8,
 
         )
 }
+

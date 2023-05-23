@@ -33,7 +33,7 @@ class FormStepOneFragment : Fragment(R.layout.fragment_add_household_one_consent
         _binding = FragmentAddHouseholdOneConsentBinding.bind(view)
 
 
-        val household:HouseholdModel? = args.household
+        val household: HouseholdModel? = args.household
         viewModel.household = household
 
         binding.apply {
@@ -44,42 +44,53 @@ class FormStepOneFragment : Fragment(R.layout.fragment_add_household_one_consent
             }
         }
 
+
+
         household?.let {
             viewModel.apply {
                 viewModel.id = household?.id
                 consent = household?.consent ?: ""
-                initialRegistrationType = household?.initial_registration_type ?: ""
+                remoteId = household?.remote_id ?: ""
+                registrationType = household?.initial_registration_type ?: ""
                 respondentFirstName = household?.respondent_firstname ?: ""
                 respondentMiddleName = household?.respondent_middlename ?: ""
                 respondentLastName = household?.respondent_lastname ?: ""
                 respondentSex = household?.respondent_sex ?: ""
                 respondentFamilyBondToHead = household?.respondent_family_bond_to_head ?: ""
                 respondentDOB = household?.respondent_dob ?: ""
-                respondentAgeKnown = household?.respondent_age_known?: ""
+                respondentAgeKnown = household?.respondent_age_known ?: ""
                 respondentDOB = household?.respondent_dob_known ?: ""
                 respondentAge = household?.respondent_age ?: ""
                 respondentSex = household?.respondent_sex ?: ""
-                respondentVoterId = household?.respondent_voter_id ?: ""
+                respondentVoterId = household.respondent_voter_id ?: ""
                 respondentPhoneNo = household?.respondent_phone_number ?: ""
+
                 address = household?.address ?: ""
+                cac = household?.cac ?: ""
 
 
                 lon = household?.gps_longitude ?: ""
                 lat = household?.gps_latitude ?: ""
 
-                villageOrQuartier = household?.village_or_quartier ?: ""
-                territoryOrTown = household?.territory_or_town ?: ""
-                placeOfResidence = household?.area_of_residence ?: ""
-                province = household.province_id?.let{getProvinceById(it)} ?: ""
-                territory = household.province_id?.let{getTerritoryById(it)} ?: ""
-                community = household.province_id?.let{getCommunityById(it)} ?: ""
-                groupment = household.province_id?.let{getGroupmentById(it)} ?: ""
 
-                address = household.address ?: ""
-                villageOrQuartier = household.village_or_quartier ?: ""
+                province = household.province_name ?: ""
+                territory = household.territory_name ?: ""
+                community = household.community_name ?: ""
+                groupment = household.groupement_name ?: ""
+                healthArea = household.health_area_name ?: ""
+                healthZone = household.health_zone_name ?: ""
+
+                cookingFuel = household.type_of_fuel_used_for_household_cooking ?: ""
+                soilMaterial = household.main_soil_material ?: ""
+                exteriorWalls = household.main_material_of_exterior_walls ?: ""
+
+
+                villageOrDistrict = household.village_or_quartier ?: ""
                 territoryOrTown = household.territory_or_town ?: ""
                 placeOfResidence = household.area_of_residence ?: ""
+                hasLiveStock = household.has_livestock ?: ""
 
+                occupancyStatus = household.occupation_status_of_current_accommodation?:""
 
                 migrationStatus = household?.household_migration_status ?: ""
                 unitOfMigrationDuration = household?.unit_of_migration_duration ?: ""
@@ -97,7 +108,8 @@ class FormStepOneFragment : Fragment(R.layout.fragment_add_household_one_consent
                 headPhoneNo = household?.household_head_phone_number ?: ""
                 headBirthCert = household?.household_head_birth_certificate ?: ""
                 headEduLevel = household?.household_head_educational_level_id ?: ""
-                headSocioProfessionalCategory = household?.household_head_socio_professional_category_id ?: ""
+                headSocioProfessionalCategory =
+                    household?.household_head_socio_professional_category_id ?: ""
                 headSchoolAttendance = household?.household_head_school_attendance_id ?: ""
                 headSectorOfWork = household?.household_head_sector_of_work_id ?: ""
                 headDisability = household?.household_head_disability_id ?: ""
@@ -106,12 +118,15 @@ class FormStepOneFragment : Fragment(R.layout.fragment_add_household_one_consent
 
                 isIncomeRegular = household?.is_income_regular ?: ""
                 bankCardOrAccount = household?.bank_account_or_bank_card_available ?: ""
-                benefitFromSocialAssistanceProgram = household?.household_member_with_benefit_from_social_assistance_program ?: ""
+                benefitFromSocialAssistanceProgram =
+                    household?.household_member_with_benefit_from_social_assistance_program ?: ""
 
                 nameOfSocialAssistanceProgram = household?.name_of_social_assistance_program ?: ""
-                durationDisplacedReturnedRepatriatedRefugee = household?.duration_displaced_returned_repatriated_refugee ?: ""
+                durationDisplacedReturnedRepatriatedRefugee =
+                    household?.duration_displaced_returned_repatriated_refugee ?: ""
                 householdMonthlyIncome = household?.household_monthly_income ?: ""
-                minimumMonthlyIncomeNecessaryLiveWithoutDifficulties = household?.minimum_monthly_income_necessary_live_without_difficulties ?: ""
+                minimumMonthlyIncomeNecessaryLiveWithoutDifficulties =
+                    household?.minimum_monthly_income_necessary_live_without_difficulties ?: ""
                 mobileMoneyUsername = household?.mobile_money_username ?: ""
                 mobileMoneyPhoneNumber = household?.mobile_money_phone_number ?: ""
 
@@ -125,32 +140,45 @@ class FormStepOneFragment : Fragment(R.layout.fragment_add_household_one_consent
                 gaveUpHealthCare = household?.give_up_health_care ?: ""
                 saleOfProductionAssets = household?.sale_of_production_assets ?: ""
 
-                daysReducedAmountConsumed = household?.days_spent_reduce_amount_consumed_coping_strategy ?: ""
-                daysReducedMealsAdult = household?.days_spent_reduce_meals_adult_forfeit_meal_for_child_coping_strategy ?: ""
-                daysReducedMealsConsumed = household?.days_spent_reduce_meals_consumed_coping_strategy ?: ""
-                daysEatLessExpensively = household?.days_spent_eat_less_expensively_coping_strategy ?: ""
+                daysReducedAmountConsumed =
+                    household?.days_spent_reduce_amount_consumed_coping_strategy ?: ""
+                daysReducedMealsAdult =
+                    household?.days_spent_reduce_meals_adult_forfeit_meal_for_child_coping_strategy
+                        ?: ""
+                daysReducedMealsConsumed =
+                    household?.days_spent_reduce_meals_consumed_coping_strategy ?: ""
+                daysEatLessExpensively =
+                    household?.days_spent_eat_less_expensively_coping_strategy ?: ""
                 daysWithoutEating = household?.days_spent_days_without_eating_coping_strategy ?: ""
                 daysConsumedWildFood = household?.days_spent_consume_wild_food_coping_strategy ?: ""
-                daysBorrowFood = household?.days_spent_borrow_food_or_rely_on_family_help_coping_strategy ?: ""
+                daysBorrowFood =
+                    household?.days_spent_borrow_food_or_rely_on_family_help_coping_strategy ?: ""
                 daysOtherCoping = household?.days_spent_other_coping_strategy ?: ""
-                numberOfMealsChildren2To5 = household?.number_of_meals_eaten_by_children_2_to_5_yesterday ?: ""
-                numberOfMealsAdults18plus = household?.number_of_meals_eaten_by_adults_18_plus_yesterday ?: ""
-                daysConsumedSugarOrSweets = household?.number_of_days_in_week_consumed_sugar_or_sweet_products ?: ""
-                daysConsumedStapleFoods = household?.number_of_days_in_week_consumed_staple_foods ?: ""
+                numberOfMealsChildren2To5 =
+                    household?.number_of_meals_eaten_by_children_2_to_5_yesterday ?: ""
+                numberOfMealsAdults18plus =
+                    household?.number_of_meals_eaten_by_adults_18_plus_yesterday ?: ""
+                daysConsumedSugarOrSweets =
+                    household?.number_of_days_in_week_consumed_sugar_or_sweet_products ?: ""
+                daysConsumedStapleFoods =
+                    household?.number_of_days_in_week_consumed_staple_foods ?: ""
                 daysConsumedVegetables = household?.number_of_days_in_week_consumed_vegetables ?: ""
                 daysBeggingFood = household?.days_spent_begging_coping_strategy ?: ""
 
                 daysConsumedMeat = household?.days_spent_consume_wild_food_coping_strategy ?: ""
-                daysConsumedLegumes = household?.number_of_days_in_week_consumed_legumes_or_nuts ?: ""
+                daysConsumedLegumes =
+                    household?.number_of_days_in_week_consumed_legumes_or_nuts ?: ""
                 daysConsumedFruits = household?.number_of_days_in_week_consumed_fruits ?: ""
                 daysConsumedDiary = household?.number_of_days_in_week_consumed_dairy_products ?: ""
-                daysConsumedCookingOils = household?.number_of_days_in_week_consumed_cooking_oils ?: ""
+                daysConsumedCookingOils =
+                    household?.number_of_days_in_week_consumed_cooking_oils ?: ""
 
-                hasLiveStock = household?.has_livestock ?: ""
+
                 hasHouseholdGoods = household?.has_household_goods ?: ""
                 accessToCultivableLand = household?.household_member_access_to_cultivable_land ?: ""
                 ownerOfCultivableLand = household?.household_member_owner_of_cultivable_land ?: ""
-                cashCropOrCommercialFarming = household?.practice_of_cash_crop_farming_or_commercial_farming ?: ""
+                cashCropOrCommercialFarming =
+                    household?.practice_of_cash_crop_farming_or_commercial_farming ?: ""
                 mosquitoNets = household?.number_of_mosquito_nets_owned ?: ""
                 guineaPigsOwned = household?.number_of_guinea_pig_owned ?: ""
                 poultryOwned = household?.number_of_poultry_owned ?: ""
@@ -249,7 +277,7 @@ class FormStepOneFragment : Fragment(R.layout.fragment_add_household_one_consent
                         R.string.add_household
                     )
                 val bundle = bundleOf("title" to title)
-                findNavController().navigate(R.id.formStepTwoFragment, bundle)
+                findNavController().navigate(R.id.sectionBLocationFragment, bundle)
             }
 
 

@@ -24,3 +24,4 @@ fun MutableList<String>.swap(it: List<String>) {
     this.clear()
     this.addAll(it)
 }
+

@@ -2,7 +2,6 @@ package io.bewsys.spmobile.ui.households.forms.developmentalform
 
 import android.annotation.SuppressLint
 import android.app.Application
-import android.util.Log
 
 import androidx.lifecycle.*
 
@@ -32,6 +31,7 @@ class SharedDevelopmentalFormViewModel(
     private val memberRepository: MemberRepository
 ) : ViewModel() {
 
+
     var household: HouseholdModel? = null
     var id: Long? = null
 
@@ -56,6 +56,14 @@ class SharedDevelopmentalFormViewModel(
     val groupments: LiveData<List<String>>
         get() = _groupments
 
+    private val _healthZones = MutableLiveData<List<String>>()
+    val healthZones: LiveData<List<String>>
+        get() = _healthZones
+
+    private val _healthAreas = MutableLiveData<List<String>>()
+    val healthAreas: LiveData<List<String>>
+        get() = _healthAreas
+
     init {
         loadProvinces()
     }
@@ -70,62 +78,40 @@ class SharedDevelopmentalFormViewModel(
             field = value
             _yesConsent.value = value
         }
+    var province = ""
+    var territory = ""
+    var community = ""
+    var groupment = ""
+    var healthZone = ""
+    var healthArea = ""
 
+    var remoteId: String? = state["remoteId"] ?: ""
+        set(value) {
+            state["remoteId"] = value
+            field = value
+        }
 
-//    section B: Location of household
+    var canoeOwned: String? = ""
+    var otherLivestockQty: String = ""
+    var placeForHandWashing: String = ""
+    var wasteDisposal: String = ""
+    var typeOfToilet: String = ""
+    var sourceOfDrinkingWater: String = ""
+    var otherWasteDisposal: String = ""
+    var otherTypeOfToilet: String = ""
+    var otherSourceOfDrinkingWater: String = ""
+    var occupancyStatus: String = ""
+    var exteriorWalls: String = ""
+    var soilMaterial: String = ""
+    var cookingFuel: String = ""
+    var otherCookingFuelType: String = ""
+    var otherMaterialExterial: String = ""
+    var otherSoilMaterial: String = ""
+    var otherOccupancyStatus: String = ""
 
-   private val sectionBFields = mutableMapOf<Int, String>()
-
+    //    section B: Location of household
     var placeOfResidence = ""
-        set(value) {
-            field = value
-//            sectionBHasBlankFields()
-        }
-    //    tils
-    var village = ""
-        set(value) {
-            sectionBFields[0] = value
-            field = value
-        }
-        get() = sectionBFields[0] ?: ""
-
-    var addressB = ""
-        set(value) {
-            sectionBFields[1] = value
-            field = value
-        }
-        get() = sectionBFields[1] ?: ""
-
-    var cac = ""
-        set(value) {
-            sectionBFields[2] = value
-            field = value
-        }
-        get() = sectionBFields[2] ?: ""
-    fun setSectionBFields(index: Int, chars: CharSequence?) {
-        sectionBFields[index] = chars.toString()
-    }
-
-    private val _SectionBHasBlank = MutableStateFlow(true)
-    val SectionBHasBlank: StateFlow<Boolean>
-        get() = _SectionBHasBlank
-
-    fun sectionBHasBlankFields() {
-        _SectionBHasBlank.value = hasBlank(
-            addressB,
-            cac,
-            village
-        )
-    }
-
-
-
-
-
-
-    //    rb
-    var initialRegistrationType = ""
-
+    var registrationType = ""
     var respondentFirstName = ""
     var respondentMiddleName = ""
     var respondentLastName = ""
@@ -134,35 +120,36 @@ class SharedDevelopmentalFormViewModel(
     var respondentVoterId = ""
     var respondentPhoneNo = ""
     var address = ""
+    var cac: String = ""
     var respondentFamilyBondToHead = ""
     var respondentDOBKnown: String = ""
     var respondentAgeKnown: String = ""
-
-    //    rb
-    var villageOrQuartier = ""
+    var villageOrDistrict = ""
     var territoryOrTown = ""
     var respondentSex: String = ""
 
-    var lon = ""
+    var lon: String? = state["lon"] ?: ""
+        set(value) {
+            state["lon"] = value
+            field = value
+        }
+    var lat: String? = state["lat"] ?: ""
+        set(value) {
+            state["lat"] = value
+            field = value
+        }
 
-    var lat = ""
+    var provinceId: String = "1"
+    var communityId: String = "1"
+    var groupmentId: String = "1"
+    var territoryId: String = "1"
+    var healthAreaId = "1"
+    var healthZoneId = "1"
 
-    var province = ""
-
-    var territory =  ""
-
-    var community =  ""
-
-    var groupment = ""
-
-    private var provinceId: String = "1"
-    private var communityId: String = "1"
-    private var groupmentId: String = "1"
-    private var territoryId: String = "1"
-    var healthZone = ""
-    var healthArea = ""
-    private var healthAreaId = "1"
-    private var healthZoneId = "1"
+    var provinceCode = ""
+    var territoryCode = ""
+    var communityCode = ""
+    var groupmentCode = ""
 
     fun loadProvinces() {
         viewModelScope.launch {
@@ -170,31 +157,45 @@ class SharedDevelopmentalFormViewModel(
                 _provinces.value = it
             }
         }
-
     }
+
     fun getGroupmentId(groupmentName: String) {
         viewModelScope.launch {
-            dashboardRepository.getGroupmentByName(groupmentName).collectLatest {
-                groupmentId = it.firstOrNull()?.id.toString()
+            dashboardRepository.getGroupmentByName(groupmentName).collectLatest { list ->
+                list.firstOrNull()?.apply {
+                    groupmentId = id.toString()
+                    groupmentCode = survey_no_code.toString()
+                }
+
 
             }
         }
     }
+
     fun loadTerritoriesWithName(provinceName: String) {
         viewModelScope.launch {
             dashboardRepository.getProvinceByName(provinceName).collectLatest {
-                provinceId = it.firstOrNull()?.id.toString()
+                it.firstOrNull()?.apply {
+                    provinceId = id.toString()
+                    provinceCode = survey_no_code.toString()
+                    loadHealthZonesWithProvinceId()
+                }
                 dashboardRepository.getTerritoriesList(provinceId)
                     .collectLatest {
                         _territories.value = it
                     }
+
             }
         }
     }
+
     fun loadCommunitiesWithName(territoryName: String) {
         viewModelScope.launch {
             dashboardRepository.getTerritoryByName(territoryName).collectLatest {
-                territoryId = it.firstOrNull()?.id.toString()
+                it.firstOrNull()?.apply {
+                    territoryId = id.toString()
+                    territoryCode = survey_no_code.toString()
+                }
                 dashboardRepository.getCommunitiesList(territoryId)
                     .collectLatest {
                         _communities.value = it
@@ -203,10 +204,14 @@ class SharedDevelopmentalFormViewModel(
 
         }
     }
+
     fun loadGroupmentsWithName(communityName: String) {
         viewModelScope.launch {
             dashboardRepository.getCommunityByName(communityName).collectLatest {
-                communityId = it.firstOrNull()?.id.toString()
+                it.firstOrNull()?.apply {
+                    communityId = id.toString()
+                    communityCode = survey_no_code.toString()
+                }
                 dashboardRepository.getGroupmentsList(communityId)
                     .collectLatest {
                         _groupments.value = it
@@ -216,65 +221,47 @@ class SharedDevelopmentalFormViewModel(
         }
     }
 
-    fun getProvinceById(id:String):String?{
-        var results:String=""
+    fun loadHealthZonesWithProvinceId() {
         viewModelScope.launch {
-            results = dashboardRepository.getProvinceById(id.toLong())?.name.toString()
+            dashboardRepository.getHealthZonesList(provinceId)
+                .collectLatest {
+                    _healthZones.value = it
+                }
         }
-        return results
-    }
-    fun getTerritoryById(id:String):String?{
-        var results:String=""
-        viewModelScope.launch {
-            results = dashboardRepository.getTerritoryById(id.toLong())?.name.toString()
-        }
-        return results
-    }
-    fun getCommunityById(id:String):String?{
-        var results:String=""
-        viewModelScope.launch {
-            results = dashboardRepository.getCommunityById(id.toLong())?.name.toString()
-        }
-        return results
-    }
-    fun getGroupmentById(id:String):String?{
-        var results:String=""
-        viewModelScope.launch {
-            results = dashboardRepository.getGroupmentById(id.toLong())?.name.toString()
-        }
-        return results
     }
 
+    fun loadHealthAreasWithName(healthZoneName: String) {
+        viewModelScope.launch {
+            dashboardRepository.getHealthZoneByName(healthZoneName).collectLatest {
+                healthZoneId = it.firstOrNull()?.id.toString()
 
-    private val _stepTwoHasBlank = MutableStateFlow(true)
-    val stepTwoHasBlankFields: StateFlow<Boolean>
-        get() = _stepTwoHasBlank
+                dashboardRepository.getHealthAreasList(healthZoneId)
+                    .collectLatest {
+                        _healthAreas.value = it
+                    }
+            }
 
-    fun stepTwoHasBlankFields() {
-        _stepTwoHasBlank.value = hasBlank(
-            initialRegistrationType,
-            respondentFirstName,
-            respondentLastName,
-//            province,
-//            community,
-//            territory,
-//            groupment
-            //            address,
-//            respondentVoterId,
-//            respondentPhoneNo
-        )
+        }
+    }
+
+    fun getHealthAreaId(healthAreaName: String) {
+        viewModelScope.launch {
+            dashboardRepository.getHealthAreaByName(healthAreaName).collectLatest {
+                healthAreaId = it.firstOrNull()?.id.toString()
+
+            }
+        }
     }
 
 
     //    step three
     //=============================
     var headIsRespondent: String = ""
-
     var headFirstName = ""
     var headMiddleName = ""
     var headLastName = ""
     var headAgeKnown = ""
-    var headAge = ""
+    var headAge: String? = ""
     var headDOB = ""
     var headVoterId = ""
     var headPhoneNo = ""
@@ -285,34 +272,14 @@ class SharedDevelopmentalFormViewModel(
     var headSectorOfWork = ""
     var headDisability = ""
     var headPregnancyStatus = ""
-
     var headMaritalStatus = ""
-        set(value) {
-            field = value
-            stepThreeHasBlankFields()
-        }
     var headDOBKnown = ""
     var headSex = ""
-        set(value) {
-            field = value
-            stepThreeHasBlankFields()
-        }
-
-    private val _stepThreeHasBlank = MutableStateFlow(true)
-    val stepThreeHasBlankFields: StateFlow<Boolean>
-        get() = _stepThreeHasBlank
-
-    fun stepThreeHasBlankFields() {
-        _stepThreeHasBlank.value = hasBlank(
-            headFirstName,
-            headLastName
-        )
-    }
 
 
     //    step four household
 //    ============================
-    val stepFourFields = mutableMapOf<Int, String>()
+
     var isIncomeRegular = ""
     var bankCardOrAccount = ""
     var benefitFromSocialAssistanceProgram = ""
@@ -325,25 +292,6 @@ class SharedDevelopmentalFormViewModel(
     var minimumMonthlyIncomeNecessaryLiveWithoutDifficulties = ""
     var mobileMoneyUsername = ""
     var mobileMoneyPhoneNumber = ""
-
-    private val _stepFourHasBlankFields = MutableStateFlow(true)
-    val stepFourHasBlankFields: StateFlow<Boolean>
-        get() = _stepFourHasBlankFields
-
-    fun stepFourHasBlankFields() {
-        _stepFourHasBlankFields.value = hasBlank(
-//            householdMonthlyIncome,
-//            minimumMonthlyIncomeNecessaryLiveWithoutDifficulties,
-//            mobileMoneyUsername,
-//            mobileMoneyPhoneNumber
-        )
-    }
-
-    //    Step Five
-
-
-
-    //      rbs
     var affectedByConflict = ""
     var affectedByEpidemic = ""
     var affectedByClimateShock = ""
@@ -353,8 +301,6 @@ class SharedDevelopmentalFormViewModel(
     var useOfEarlyMarriage = ""
     var gaveUpHealthCare = ""
     var saleOfProductionAssets = ""
-
-    //    til
     var daysReducedMealsConsumed = ""
     var daysReducedMealsAdult = ""
     var daysReducedAmountConsumed = ""
@@ -375,36 +321,6 @@ class SharedDevelopmentalFormViewModel(
     var daysConsumedFruits = ""
     var daysConsumedDiary = ""
     var daysConsumedCookingOils = ""
-
-    private val _stepFiveHasBlankFields = MutableStateFlow(true)
-    val stepFiveHasBlankFields: StateFlow<Boolean>
-        get() = _stepFiveHasBlankFields
-
-    fun stepFiveHasBlankFields() {
-        _stepFiveHasBlankFields.value = hasBlank(
-//            daysReducedMealsConsumed,
-//            daysReducedMealsAdult,
-//            daysReducedAmountConsumed,
-//            daysEatLessExpensively,
-//            daysWithoutEating,
-//            daysConsumedWildFood,
-//            daysBorrowFood,
-//            daysBeggingFood,
-//            daysOtherCoping,
-//            numberOfMealsChildren6To17,
-//            numberOfMealsChildren2To5,
-//            numberOfMealsAdults18plus,
-//            daysConsumedSugarOrSweets,
-//            daysConsumedStapleFoods,
-//            daysConsumedVegetables,
-//            daysConsumedMeat,
-//            daysConsumedLegumes,
-//            daysConsumedFruits,
-//            daysConsumedDiary,
-//            daysConsumedCookingOils
-        )
-
-    }
 
 
     /*      Form Six    */
@@ -449,58 +365,94 @@ class SharedDevelopmentalFormViewModel(
     var bedOwned: String = ""
     var airConditionerOwned: String = ""
     var cultivatedLandOwned: String = ""
+
+
     var fanOwned: String = ""
 
 
+    private val _SectionBHasBlank = MutableStateFlow(true)
+    val SectionBHasBlank: StateFlow<Boolean>
+        get() = _SectionBHasBlank
+
+    fun sectionBHasBlankFields() {
+        _SectionBHasBlank.value = hasBlank(
+            address,
+            cac,
+            villageOrDistrict
+        )
+    }
 
 
-    private val _stepSixHasBlankFields = MutableStateFlow(true)
-    val stepSixHasBlankFields: StateFlow<Boolean>
-        get() = _stepSixHasBlankFields
+    //    section C: Identification
+    private val _SectionCHasBlank = MutableStateFlow(true)
+    val SectionCHasBlank: StateFlow<Boolean>
+        get() = _SectionCHasBlank
 
-    fun stepSixHasBlankFields() {
-        _stepSixHasBlankFields.value = hasBlank(
-//            hasLiveStock,
-//            hasHouseholdGoods,
-//            accessToCultivableLand,
-//            ownerOfCultivableLand,
-//            cashCropOrCommercialFarming,
-//            mosquitoNets,
-//            guineaPigsOwned,
-//            poultryOwned,
-//            bicycleOwned,
-//            oilStoveOwned,
-//            rabbitOwned,
-//            sheepOwned,
-//            motorbikeOwned,
-//            roomsUsedForSleeping,
-//            wheelBarrowOwned,
-//            radioOwned,
-//            stoveOrOvenOwned,
-//            rickShawOwned,
-//            solarPlateOwned,
-//            sewingMachineOwned,
-//            mattressOwned,
-//            televisionOwned,
-//            tableOwned,
-//            sofaOwned,
-//            handsetOrPhoneOwned,
-//            electricIronOwned,
-//            plowOwned,
-//            goatOwned,
-//            fridgeOwned,
-//            dvdDriverOwned,
-//            pigsOwned,
-//            cableTVOwned,
-//            cowOwned,
-//            charcoalIron,
-//            computerOwned,
-//            chairOwned,
-//            cartsOwned,
-//            carsOwned,
-//            bedOwned,
-//            airConditionerOwned,
-//            cultivatedLandOwned
+    fun sectionCHasBlankFields() {
+        _SectionCHasBlank.value = hasBlank(
+            headFirstName,
+            headLastName,
+            respondentFirstName,
+            respondentLastName
+
+        )
+    }
+
+    private val _SectionEHasBlank = MutableStateFlow(true)
+    val SectionEHasBlank: StateFlow<Boolean>
+        get() = _SectionEHasBlank
+
+    fun sectionEHasBlankFields() {
+        _SectionEHasBlank.value = hasBlank(
+            occupancyStatus,
+            roomsUsedForSleeping
+
+        )
+    }
+
+    private val _SectionFHasBlank = MutableStateFlow(true)
+    val SectionFHasBlank: StateFlow<Boolean>
+        get() = _SectionFHasBlank
+
+    fun sectionFHasBlankFields() {
+        _SectionFHasBlank.value = hasBlank(
+            sourceOfDrinkingWater,
+            typeOfToilet,
+            wasteDisposal,
+            placeForHandWashing
+
+        )
+    }
+
+    private val _SectionGHasBlank = MutableStateFlow(true)
+    val SectionGHasBlank: StateFlow<Boolean>
+        get() = _SectionGHasBlank
+
+    fun sectionGHasBlankFields() {
+        _SectionGHasBlank.value = hasBlank(
+            minimumMonthlyIncomeNecessaryLiveWithoutDifficulties,
+            householdMonthlyIncome
+
+        )
+    }
+
+    private val _SectionHHasBlank = MutableStateFlow(true)
+    val SectionHHasBlank: StateFlow<Boolean>
+        get() = _SectionHHasBlank
+
+    fun sectionHHasBlankFields() {
+        _SectionHHasBlank.value = hasBlank(
+            accessToCultivableLand
+        )
+    }
+
+    private val _SectionIHasBlank = MutableStateFlow(true)
+    val SectionIHasBlank: StateFlow<Boolean>
+        get() = _SectionIHasBlank
+
+    fun sectionIHasBlankFields() {
+        _SectionIHasBlank.value = hasBlank(
+            benefitFromSocialAssistanceProgram
         )
     }
 
@@ -513,43 +465,7 @@ class SharedDevelopmentalFormViewModel(
         startTime = SimpleDateFormat("HH:mm:ss").format(System.currentTimeMillis())
     }
 
-    val memberFields = mutableMapOf<Int, String>()
 
-    //    Member rg
-    var isMemberRespondent = ""
-    var isMemberHead = ""
-    var memberDOBKnown:String = ""
-    var memberAgeKnown:String = ""
-    var memberSex = ""
-    var memberPregnancyStatus = ""
-    var memberMaritalStatus = ""
-    // tils
-    var memberFirstname = ""
-    var memberMiddleName = ""
-    var memberLastname = ""
-    var memberAge = ""
-    var memberDob = ""
-    var memberVoterIdCard = ""
-    var memberPhoneNumber = ""
-    var memberBirthCertificate = ""
-    var memberEducational = ""
-    var memberSocioProfessionalCategory = ""
-    var memberSchoolAttendance = ""
-    var memberSectorOfWork = ""
-    var memberDisability = ""
-
-
-    private val _memberHasBlankFields = MutableStateFlow(true)
-    val memberHasBlankFields: StateFlow<Boolean>
-        get() = _memberHasBlankFields
-
-    fun memberHasBlankFields() {
-        _memberHasBlankFields.value = hasBlank(
-            memberSex,
-            memberFirstname,
-            memberLastname
-        )
-    }
 
     fun onRegisterClicked() {
         if (household != null) {
@@ -564,8 +480,9 @@ class SharedDevelopmentalFormViewModel(
     @SuppressLint("SimpleDateFormat")
     fun registerHousehold() {
         HouseholdModel(
+
             survey_date = SimpleDateFormat("yyyy-MM-dd' 'HH:mm:ss").format(System.currentTimeMillis()),
-            initial_registration_type = initialRegistrationType,
+            initial_registration_type = registrationType,
             respondent_firstname = respondentFirstName,
             respondent_middlename = respondentMiddleName,
             respondent_lastname = respondentLastName,
@@ -617,7 +534,7 @@ class SharedDevelopmentalFormViewModel(
             address = address,
             mobile_money_username = mobileMoneyUsername,
             mobile_money_phone_number = mobileMoneyPhoneNumber,
-            village_or_quartier = villageOrQuartier,
+            village_or_quartier = villageOrDistrict,
             other_household_migration_status = otherMigrationStatus,
             household_member_with_benefit_from_social_assistance_program = benefitFromSocialAssistanceProgram,
             name_of_social_assistance_program = nameOfSocialAssistanceProgram,
@@ -684,7 +601,8 @@ class SharedDevelopmentalFormViewModel(
             household_monthly_income = householdMonthlyIncome,
             consent = consent,
             household_migration_status = migrationStatus,
-            survey_no = "$provinceId$territoryId$communityId$groupmentId$randomID",
+
+            survey_no = "$provinceCode$territoryCode$communityCode$groupmentCode$randomID",
 
             province_id = provinceId,
             territory_id = territoryId,
@@ -692,28 +610,28 @@ class SharedDevelopmentalFormViewModel(
             groupment_id = groupmentId,
 
             temp_survey_no = "",
-            other_occupation_status_of_current_accommodation ="",
-            other_main_material_of_exterior_walls = "",
-            other_main_soil_material =  "",
-            other_type_of_fuel_used_for_household_cooking = "",
-            other_main_source_of_household_drinking_water = "",
-            other_type_of_household_toilet = "",
-            other_method_of_waste_disposal = "",
-            other_livestock_owned =  "",
+            other_occupation_status_of_current_accommodation = otherOccupancyStatus,
+            other_main_material_of_exterior_walls = otherMaterialExterial,
+            other_main_soil_material = otherSoilMaterial,
+            other_type_of_fuel_used_for_household_cooking = otherCookingFuelType,
+            other_main_source_of_household_drinking_water = otherSourceOfDrinkingWater,
+            other_type_of_household_toilet = otherTypeOfToilet,
+            other_method_of_waste_disposal = otherWasteDisposal,
+            other_livestock_owned = otherLivestockQty,
             other_household_activities_in_past_12_months = "",
-            comments =  "",
+            comments = "",
             profile_picture = "",
-            method_of_waste_disposal = "",
-            place_to_wash_hands = "",
-            household_status =  "",
-            main_material_of_exterior_walls = "",
-            occupation_status_of_current_accommodation = "",
-            type_of_fuel_used_for_household_cooking = "",
-            main_soil_material = "",
-            main_source_of_household_drinking_water = "",
-            type_of_household_toilet = "",
-            cac = "1",
-            area_of_residence = "1",
+            method_of_waste_disposal = wasteDisposal,
+            place_to_wash_hands = placeForHandWashing,
+            household_status = "",
+            main_material_of_exterior_walls = exteriorWalls,
+            occupation_status_of_current_accommodation = occupancyStatus,
+            type_of_fuel_used_for_household_cooking = cookingFuel,
+            main_soil_material = soilMaterial,
+            main_source_of_household_drinking_water = sourceOfDrinkingWater,
+            type_of_household_toilet = typeOfToilet,
+            cac = cac,
+            area_of_residence = placeOfResidence,
             health_area_id = healthAreaId,
             health_zone_id = healthZoneId,
             respondent_type = "",
@@ -730,10 +648,11 @@ class SharedDevelopmentalFormViewModel(
         HouseholdModel(
             id = id,
             survey_date = SimpleDateFormat("yyyy-MM-dd' 'HH:mm:ss").format(System.currentTimeMillis()),
-            initial_registration_type = initialRegistrationType,
+            initial_registration_type = registrationType,
             respondent_firstname = respondentFirstName,
             respondent_middlename = respondentMiddleName,
             respondent_lastname = respondentLastName,
+            respondent_dob = respondentDOB,
             respondent_family_bond_to_head = respondentFamilyBondToHead,
             respondent_voter_id = respondentVoterId,
             respondent_phone_number = respondentPhoneNo,
@@ -781,7 +700,7 @@ class SharedDevelopmentalFormViewModel(
             address = address,
             mobile_money_username = mobileMoneyUsername,
             mobile_money_phone_number = mobileMoneyPhoneNumber,
-            village_or_quartier = villageOrQuartier,
+            village_or_quartier = villageOrDistrict,
             other_household_migration_status = otherMigrationStatus,
             household_member_with_benefit_from_social_assistance_program = benefitFromSocialAssistanceProgram,
             name_of_social_assistance_program = nameOfSocialAssistanceProgram,
@@ -848,41 +767,43 @@ class SharedDevelopmentalFormViewModel(
             household_monthly_income = householdMonthlyIncome,
             consent = consent,
             household_migration_status = migrationStatus,
-            survey_no = "$provinceId$territoryId$communityId$groupmentId$randomID",
+            survey_no = "$provinceCode$territoryCode$communityCode$groupmentCode$randomID",
+
             province_id = provinceId,
             territory_id = territoryId,
             community_id = communityId,
             groupment_id = groupmentId,
-            temp_survey_no = "1",
-            other_occupation_status_of_current_accommodation = "",
-            other_main_material_of_exterior_walls = "",
-            other_main_soil_material = "",
-            other_type_of_fuel_used_for_household_cooking = "",
-            other_main_source_of_household_drinking_water ="",
-            other_type_of_household_toilet = "",
-            other_method_of_waste_disposal =  "",
-            other_livestock_owned = "",
+            temp_survey_no = "",
+            other_occupation_status_of_current_accommodation = otherOccupancyStatus,
+            other_main_material_of_exterior_walls = otherMaterialExterial,
+            other_main_soil_material = otherSoilMaterial,
+            other_type_of_fuel_used_for_household_cooking = otherCookingFuelType,
+            other_main_source_of_household_drinking_water = otherSourceOfDrinkingWater,
+            other_type_of_household_toilet = otherTypeOfToilet,
+            other_method_of_waste_disposal = otherWasteDisposal,
+            other_livestock_owned = otherLivestockQty,
             other_household_activities_in_past_12_months = "",
             comments = "",
-            profile_picture = "",
-            method_of_waste_disposal = "",
-            place_to_wash_hands = "",
+            profile_picture = null,
+            method_of_waste_disposal = wasteDisposal,
+            place_to_wash_hands = placeForHandWashing,
             household_status = "",
-            main_material_of_exterior_walls = "",
-            occupation_status_of_current_accommodation = "",
-            type_of_fuel_used_for_household_cooking = "",
-            main_soil_material = "",
-            main_source_of_household_drinking_water = "",
-            type_of_household_toilet = "",
-            cac = "1",
-            status = null,
-            remote_id = "1",
-            area_of_residence = "1",
-            health_area_id = "1",
-            health_zone_id = "1",
+            main_material_of_exterior_walls = exteriorWalls,
+            occupation_status_of_current_accommodation = occupancyStatus,
+            type_of_fuel_used_for_household_cooking = cookingFuel,
+            main_soil_material = soilMaterial,
+            main_source_of_household_drinking_water = sourceOfDrinkingWater,
+            type_of_household_toilet = typeOfToilet,
+            cac = cac,
+            area_of_residence = placeOfResidence,
+            health_area_id = healthAreaId,
+            health_zone_id = healthZoneId,
             respondent_type = "",
-            respondent_sex = respondentSex
+            status = null,
+            respondent_sex = respondentSex,
+            remote_id = remoteId
         ).also {
+
             updateHousehold(it)
         }
     }
@@ -895,7 +816,6 @@ class SharedDevelopmentalFormViewModel(
 
         saveMembers(lastInsertRowId)
 
-
         uploadHousehold(lastInsertRowId)
 
         addHouseholdEventChannel.send(
@@ -905,6 +825,49 @@ class SharedDevelopmentalFormViewModel(
         )
     }
 
+
+
+    //    Member rg
+    var isMemberRespondent = ""
+    var isMemberHead = ""
+    var memberDOBKnown: String = ""
+    var memberAgeKnown: String = ""
+    var memberSex = ""
+    var memberPregnancyStatus = ""
+    var memberMaritalStatus = ""
+
+    // tils
+    var memberFirstname = ""
+    var memberMiddleName = ""
+    var memberLastname = ""
+    var memberAge = ""
+    var memberDob = ""
+    var memberVoterIdCard = ""
+    var memberPhoneNumber = ""
+    var memberBirthCertificate = ""
+    var memberEducational = ""
+    var memberSocioProfessionalCategory = ""
+    var memberSchoolAttendance = ""
+    var memberSectorOfWork = ""
+    var memberDisability = ""
+    var memberRelationship: String = ""
+    var memberOccupation: String = ""
+
+
+    private val _memberHasBlankFields = MutableStateFlow(true)
+    val memberHasBlankFields: StateFlow<Boolean>
+        get() = _memberHasBlankFields
+
+    fun memberHasBlankFields() {
+        _memberHasBlankFields.value = hasBlank(
+            memberSex,
+            memberFirstname,
+            memberLastname,
+            memberRelationship,
+            memberSchoolAttendance,
+
+        )
+    }
     private val _members = MutableLiveData<List<MemberModel>>()
     val members: LiveData<List<MemberModel>>
         get() = _members
@@ -933,12 +896,37 @@ class SharedDevelopmentalFormViewModel(
             socio_professional_category_id = memberSocioProfessionalCategory,
             sector_of_work_id = memberSectorOfWork,
             remote_id = "",
-            family_bond_id = "",
+            family_bond_id = memberRelationship,
             profile_picture = "",
             household_id = "",
         )
         memberList.add(member)
         _members.value = memberList
+
+    }
+
+    fun clearMemberFields() {
+
+        memberFirstname = ""
+        memberMiddleName = ""
+        memberSex = ""
+        memberAge = ""
+        memberDob = ""
+        memberAgeKnown = ""
+        memberDOBKnown = ""
+        isMemberRespondent = ""
+        isMemberHead = ""
+        memberMaritalStatus = ""
+        memberBirthCertificate = ""
+        memberEducational = ""
+        memberPregnancyStatus = ""
+        memberSchoolAttendance = ""
+        memberDisability = ""
+        memberSocioProfessionalCategory = ""
+        memberSectorOfWork = ""
+        memberRelationship = ""
+
+
     }
 
     private fun saveMembers(householdEntityId: Long) = viewModelScope.launch {
@@ -1003,6 +991,15 @@ class SharedDevelopmentalFormViewModel(
         )
     }
 
+//    fun uploadHousehold(itemID: Long) = viewModelScope.launch {
+//        val itemDeferrable = async { getItem(itemID) }
+//        val item = itemDeferrable.await()
+//
+//        uploadItem(item!!)
+//
+//    }
+
+
     private fun uploadHousehold(itemId: Long) = viewModelScope.launch {
         val constraints = Constraints.Builder()
             .setRequiredNetworkType(NetworkType.CONNECTED)
@@ -1048,5 +1045,9 @@ class SharedDevelopmentalFormViewModel(
         data class ShowInvalidInputMessage(val msg: String) : AddDevelopmentalHouseholdEvent()
         data class NavigateBackWithResults(val results: Int) : AddDevelopmentalHouseholdEvent()
 //        data class NavigateBack(val results: Int) : AddDevelopmentalHouseholdEvent()
+    }
+
+    companion object {
+        private const val TAG = "SharedVM"
     }
 }

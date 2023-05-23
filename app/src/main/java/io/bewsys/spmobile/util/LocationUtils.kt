@@ -20,6 +20,10 @@ class LocationProvider(context: Context) {
         getLocation()
     }
 
+
+
+
+
     @SuppressLint("MissingPermission")
     private fun getLocation(){
         getFusedLocationProviderClient?.lastLocation
