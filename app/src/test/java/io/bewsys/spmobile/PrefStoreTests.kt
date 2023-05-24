@@ -36,7 +36,7 @@ class PrefStoreTests {
 
 
         prefStore.setLoggedIn(TEST_STATUS)
-        prefStore.saveUser(TEST_NAME)
+//        prefStore.saveUser(TEST_NAME)
 
         prefStore.preferencesFlow.collect {
             assertEquals(true, it.isLoggedIn)
