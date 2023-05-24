@@ -33,8 +33,8 @@ class KtorHttpClient(val context: Context) {
 
              context.getPreferences("primary_host")?.let{
 
-               val baseUrl = it.ifBlank { "http://mis.bewsys.dev/api/" }
-                url(baseUrl)
+               val baseUrl = it.ifBlank { "http://mis.bewsys.dev" }
+                url("$baseUrl/api/")
             }
 
 
