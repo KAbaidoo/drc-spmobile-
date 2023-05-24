@@ -3,6 +3,7 @@ package io.bewsys.spmobile.ui
 
 import android.Manifest
 import android.annotation.SuppressLint
+import android.content.Context
 import android.content.SharedPreferences
 import android.content.pm.PackageManager
 import android.location.Location
@@ -24,6 +25,7 @@ import androidx.navigation.NavController
 import androidx.navigation.findNavController
 import androidx.navigation.navArgs
 import androidx.navigation.ui.*
+import androidx.preference.Preference
 import androidx.preference.PreferenceManager
 import com.google.android.gms.location.FusedLocationProviderClient
 import com.google.android.gms.location.LocationServices
@@ -39,6 +41,7 @@ import io.bewsys.spmobile.ui.nonconsenting.form.AddNonConsentingHouseholdFragmen
 import io.bewsys.spmobile.util.LocalizationUtil
 import io.bewsys.spmobile.util.LocationProvider
 import io.bewsys.spmobile.util.MapUtil
+import io.bewsys.spmobile.util.getPreferences
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.flow.take
 import org.koin.android.ext.android.get
@@ -65,30 +68,22 @@ class MainActivity : AppCompatActivity() {
         setSupportActionBar(binding.appBarMain.toolbar)
 
 
-
-        val navigationView:NavigationView = findViewById(R.id.nav_view)
+        val navigationView: NavigationView = findViewById(R.id.nav_view)
         val header: View = navigationView.getHeaderView(0)
         val tv: TextView = header.findViewById(R.id.tv_username)
 
-        lifecycleScope.launchWhenStarted {
-            viewModel.userState.collectLatest {
-                if (it.not()) {
-                    navController.navigate(R.id.nav_login)
-                }
-            }
-
-
-        }
+//        lifecycleScope.launchWhenStarted {
+//            viewModel.userState.collectLatest {
+//                if (it.not()) {
+//                    navController.navigate(R.id.nav_login)
+//                }
+//            }
+//        }
         lifecycleScope.launchWhenStarted {
             viewModel.getUser().collectLatest {
                 tv.text = it.name ?: "username"
             }
         }
-
-
-
-
-
 
 
 
@@ -125,14 +120,13 @@ class MainActivity : AppCompatActivity() {
                     drawerLayout.setDrawerLockMode(LOCK_MODE_LOCKED_CLOSED)
                     binding.appBarMain.toolbar.visibility = View.GONE
                 }
+
                 else ->
                     binding.appBarMain.toolbar.visibility = View.VISIBLE
             }
         }
 
     } //end of onCreate
-
-
 
 
     override fun onSupportNavigateUp(): Boolean {
