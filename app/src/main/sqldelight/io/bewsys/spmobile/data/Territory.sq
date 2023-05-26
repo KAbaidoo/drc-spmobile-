@@ -35,4 +35,4 @@ WHERE id = :id;
 getByName:
 SELECT *
 FROM territoryEntity
-WHERE name LIKE ('%'||:query||'%') ;
+WHERE name = :query ;

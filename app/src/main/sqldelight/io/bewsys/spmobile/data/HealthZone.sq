@@ -30,4 +30,4 @@ WHERE id = :id;
 getByName:
 SELECT *
 FROM healthZoneEntity
-WHERE name LIKE ('%'||:query||'%') ;
+WHERE name = :query ;

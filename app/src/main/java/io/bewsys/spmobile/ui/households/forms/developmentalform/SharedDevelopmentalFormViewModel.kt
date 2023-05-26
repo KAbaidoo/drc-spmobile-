@@ -2,6 +2,7 @@ package io.bewsys.spmobile.ui.households.forms.developmentalform
 
 import android.annotation.SuppressLint
 import android.app.Application
+import android.util.Log
 
 import androidx.lifecycle.*
 
@@ -165,6 +166,7 @@ class SharedDevelopmentalFormViewModel(
                 list.firstOrNull()?.apply {
                     groupmentId = id.toString()
                     groupmentCode = survey_no_code.toString()
+
                 }
 
 
@@ -175,10 +177,14 @@ class SharedDevelopmentalFormViewModel(
     fun loadTerritoriesWithName(provinceName: String) {
         viewModelScope.launch {
             dashboardRepository.getProvinceByName(provinceName).collectLatest {
+
                 it.firstOrNull()?.apply {
+
                     provinceId = id.toString()
                     provinceCode = survey_no_code.toString()
                     loadHealthZonesWithProvinceId()
+
+
                 }
                 dashboardRepository.getTerritoriesList(provinceId)
                     .collectLatest {
@@ -194,7 +200,9 @@ class SharedDevelopmentalFormViewModel(
             dashboardRepository.getTerritoryByName(territoryName).collectLatest {
                 it.firstOrNull()?.apply {
                     territoryId = id.toString()
+
                     territoryCode = survey_no_code.toString()
+
                 }
                 dashboardRepository.getCommunitiesList(territoryId)
                     .collectLatest {
@@ -208,9 +216,13 @@ class SharedDevelopmentalFormViewModel(
     fun loadGroupmentsWithName(communityName: String) {
         viewModelScope.launch {
             dashboardRepository.getCommunityByName(communityName).collectLatest {
+
+
                 it.firstOrNull()?.apply {
                     communityId = id.toString()
                     communityCode = survey_no_code.toString()
+
+
                 }
                 dashboardRepository.getGroupmentsList(communityId)
                     .collectLatest {
@@ -906,7 +918,6 @@ class SharedDevelopmentalFormViewModel(
     }
 
     fun clearMemberFields() {
-
         memberFirstname = ""
         memberMiddleName = ""
         memberSex = ""

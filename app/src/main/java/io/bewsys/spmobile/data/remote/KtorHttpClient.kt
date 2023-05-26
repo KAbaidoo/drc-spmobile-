@@ -29,12 +29,11 @@ class KtorHttpClient(val context: Context) {
     fun getClient() = HttpClient(Android) {
 
         defaultRequest {
-//            url("http://mis.bewsys.dev/api/")
+//            url("https://rsu.cd/api/")
 
              context.getPreferences("primary_host")?.let{
-
-               val baseUrl = it.ifBlank { "http://mis.bewsys.dev"}
-                url("$baseUrl/api/")
+               val baseUrl = it.ifBlank { "https://rsu.cd".trim()}
+                url("$baseUrl/api/".trim())
             }
 
 
