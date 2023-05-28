@@ -24,10 +24,10 @@
             app:title="@string/host"
             app:summary="@string/configure_host_server_urls"/>
 
-        <Preference
-            app:key="help"
-            app:summary="@string/report_technical_issues"
-            app:title="@string/help" />
+<!--        <Preference-->
+<!--            app:key="help"-->
+<!--            app:summary="@string/report_technical_issues"-->
+<!--            app:title="@string/help" />-->
 
     </PreferenceCategory>
 

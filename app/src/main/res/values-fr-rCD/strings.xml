@@ -251,6 +251,7 @@
     <string name="advanced">Avancé</string>
     <string name="help">Aider</string>
     <string name="report_technical_issues">Signaler des problèmes techniques</string>
+    <string name="host">Hôte</string>
     <string name="configure_host_server_urls">Configurer les URL du serveur hôte</string>
     <string name="configure">Configuration</string>
     <string name="primary_host">URL de l\'hôte principal</string>
@@ -328,7 +329,7 @@
     <string name="cow">Vache</string>
     <string name="sheep">Mouton</string>
     <string name="goat">Chèvre</string>
-    <string name="canoe">Canoë</string>
+    <string name="canoe">Canapé</string>
     <string name="chair">Chaise</string>
     <string name="table">Tableau</string>
     <string name="bed">Lit</string>
@@ -355,7 +356,7 @@
     <string name="does_he_she_have_a_birth_certificate"><b>D.8</b> Possède t-il/elle un acte de naissance?</string>
     <string name="targeting_committee_cac"><b>B.10</b> Comite ciblage/Cellule d\'Animation Communautaire (CAC):*</string>
     <string name="e_housing">E. LOGEMENT</string>
-    <string name="what_is_your_occupancy_or_status"><b>E.1</b> Quel est votre statut a occupation de l\'actuel logement?</string>
+    <string name="what_is_your_occupancy_or_status"><b>E.1</b> Quel est votre statut d\'occupation de l\'actuel logement?</string>
     <string name="main_soil_material"><b>E.3</b> Matériau principal du sol</string>
     <string name="what_type_of_fuel_does_your_household_mainly_use_for_cooking"><b>E.5</b> Quel type de combustible votre ménage utilise-t-il principalement pour cuisiner?</string>
     <string name="main_material_of_exterior_walls"><b>E.2</b> Principal matériau des murs extérieurs</string>

@@ -18,13 +18,16 @@ class SettingsFragment : PreferenceFragmentCompat(),
     PreferenceFragmentCompat.OnPreferenceStartFragmentCallback {
 
     val listener = SharedPreferences.OnSharedPreferenceChangeListener { sharedPreferences, key ->
-        if (key == "language") {
-            val language = sharedPreferences.getString("language", "")
+        when (key) {
+            "language" -> { val language = sharedPreferences.getString("language", "")
 
-            if (language != null) {
-                val appLocale: LocaleListCompat = LocaleListCompat.forLanguageTags(language)
-                AppCompatDelegate.setApplicationLocales(appLocale)
-            }
+                if (language != null) {
+                    val appLocale: LocaleListCompat = LocaleListCompat.forLanguageTags(language)
+                    AppCompatDelegate.setApplicationLocales(appLocale)
+                }}
+
+
+            "primary_host" -> findNavController(this).navigate(R.id.nav_login)
         }
 
 
@@ -49,14 +52,14 @@ class SettingsFragment : PreferenceFragmentCompat(),
     override fun onCreatePreferences(savedInstanceState: Bundle?, rootKey: String?) {
         setPreferencesFromResource(R.xml.settings_main, rootKey)
 
-        val help = preferenceManager.findPreference<Preference>("help")
-        help?.setOnPreferenceClickListener {
-            Log.d("Settings", "Clicked!")
-
-            openHelpPage()
-
-            true
-        }
+//        val help = preferenceManager.findPreference<Preference>("help")
+//        help?.setOnPreferenceClickListener {
+//            Log.d("Settings", "Clicked!")
+//
+//            openHelpPage()
+//
+//            true
+//        }
 
     }
 
