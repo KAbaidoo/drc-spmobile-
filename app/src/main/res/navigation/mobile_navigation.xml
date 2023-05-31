@@ -204,7 +204,16 @@
             android:id="@+id/sectionDAddMemberFragment"
             android:name="io.bewsys.spmobile.ui.households.forms.developmentalform.SectionDAddMemberFragment"
             android:label="@string/add_member"
-            tools:layout="@layout/fragment_add_members_d" />
+            tools:layout="@layout/fragment_add_members_d" >
+            <argument
+                android:name="photo_uri"
+                app:argType="string"
+                app:nullable="true"
+                android:defaultValue="null" />
+            <action
+                android:id="@+id/action_sectionDAddMemberFragment_to_cameraFragment"
+                app:destination="@id/cameraFragment" />
+        </fragment>
         <fragment
             android:id="@+id/sectionDCompositionOfHousholdFragment"
             android:name="io.bewsys.spmobile.ui.households.forms.developmentalform.SectionDCompositionOfHousholdFragment"
@@ -214,6 +223,11 @@
                 android:name="title"
                 app:argType="string" />
         </fragment>
+        <fragment
+            android:id="@+id/cameraFragment"
+            android:name="io.bewsys.spmobile.ui.households.forms.developmentalform.CameraFragment"
+            android:label="@string/camera_preview"
+            tools:layout="@layout/fragment_camera_preview" />
 
     </navigation>
     <dialog

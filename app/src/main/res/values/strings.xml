@@ -135,8 +135,8 @@
     <string name="health_area"><b>B.7</b> Health area</string>
     <string name="non_consent_household_form">Non-Consenting Household Form</string>
     <string name="hint_choose">Choose</string>
-    <string name="GPS_Longitude"><b>B.11</b> GPS Longitude</string>
-    <string name="GPS_Latitude"><b>B.12</b> GPS Latitude</string>
+    <string name="GPS_Longitude"><b>B.11</b> GPS Lon</string>
+    <string name="GPS_Latitude"><b>B.12</b> GPS Lat</string>
     <string name="reason"><b>B.1</b> Reason</string>
     <string name="if_other_reason_indicate_here">If other reason, indicate here</string>
     <string name="zero_count" translatable="false">0</string>
@@ -380,4 +380,8 @@
     <string name="member_relationship"><b>D.3</b> Relationship to family</string>
     <string name="members_living_in_household"><b>D.1</b> Please give me the names of the people who usually live in your household, starting with the head of household.</string>
     <string name="help_email_address" translatable="false">Loris.Mansiamina@cd.ey.com</string>
+    <string name="take_photo">Capture</string>
+    <string name="upload">Upload</string>
+    <string name="camera_preview">Camera Preview</string>
+
 </resources>

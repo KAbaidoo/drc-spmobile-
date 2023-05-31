@@ -2,10 +2,16 @@ package io.bewsys.spmobile.ui.households
 
 import android.os.Bundle
 import android.util.Log
+import android.view.Menu
+import android.view.MenuInflater
+import android.view.MenuItem
 import android.view.View
+import androidx.core.view.MenuProvider
+import androidx.core.view.isVisible
 
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.setFragmentResultListener
+import androidx.lifecycle.Lifecycle
 
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
@@ -35,27 +41,15 @@ class HouseholdsFragment : Fragment(R.layout.fragment_households),HouseholdAdapt
 
         binding.apply {
             fabAddRegistration.setOnClickListener {
-//                viewModel.onAddRegistrationFabClicked()
                 viewModel.onDevelopmentalFabClicked()
             }
-//            fabDevelopmentalAction.setOnClickListener {
-//                viewModel.onDevelopmentalFabClicked()
-//            }
-//            textDevelopmentalAction.setOnClickListener {
-//                viewModel.onDevelopmentalFabClicked()
-//            }
-//            fabHumanitarian.setOnClickListener {
-//                viewModel.onHumanitarianFabClicked()
-//            }
-//            textHumanitarianAction.setOnClickListener {
-//                viewModel.onHumanitarianFabClicked()
-//            }
+
             recyclerViewHouseholds.apply {
                 adapter = householdAdapter
                 layoutManager = LinearLayoutManager(requireContext())
                 setHasFixedSize(true)
             }
-        }
+
 
         viewModel.households.observe(viewLifecycleOwner){
             householdAdapter.submitList(it)
@@ -90,10 +84,52 @@ class HouseholdsFragment : Fragment(R.layout.fragment_households),HouseholdAdapt
                         findNavController().navigate(action)
 
                     }
+//
+                    is HouseholdsViewModel.HouseholdEvent.Exception -> {
+                        progressBar.isVisible = false
+                        val action  = HouseholdsFragmentDirections.actionGlobalLoginDialogFragment(event.errMsg)
+                        findNavController().navigate(action)
+                    }
+                    is HouseholdsViewModel.HouseholdEvent.Failure -> {
+                        progressBar.isVisible = false
+                        val action  = HouseholdsFragmentDirections.actionGlobalLoginDialogFragment(event.errMsg)
+                        findNavController().navigate(action)
+                    }
+
+                    is HouseholdsViewModel.HouseholdEvent.Loading -> progressBar.isVisible = true
+
+                    is HouseholdsViewModel.HouseholdEvent.Successful ->{
+                        progressBar.isVisible = false
+                        val action  = HouseholdsFragmentDirections.actionGlobalLoginDialogFragment(event.errMsg)
+                        findNavController().navigate(action)
+                    }
                 }
             }.exhaustive
         }
 
+        }
+// set up menu
+        val menuHost = requireActivity()
+        menuHost.addMenuProvider(object : MenuProvider {
+            override fun onCreateMenu(menu: Menu, menuInflater: MenuInflater) {
+                menuInflater.inflate(R.menu.fragment_households_menu, menu)
+
+            }
+
+            override fun onMenuItemSelected(menuItem: MenuItem): Boolean {
+                return when (menuItem.itemId) {
+
+                    R.id.action_upload_households -> {
+                        Log.d(TAG, "Upload clicked")
+
+                        viewModel.onUploadMenuItemClicked()
+                        true
+                    }
+
+                    else -> false
+                }
+            }
+        }, viewLifecycleOwner, Lifecycle.State.RESUMED)
 
 
 
@@ -129,7 +165,13 @@ class HouseholdsFragment : Fragment(R.layout.fragment_households),HouseholdAdapt
     }
 
     override fun onItemClick(householdModel: HouseholdModel) {
-        Log.d("household screen", "${householdModel.id}")
+
         viewModel.onHouseholdSelected(householdModel)
     }
+    companion object{
+        const val TAG = "HouseholdsFragment"
+
+    }
+
+
 }

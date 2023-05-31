@@ -1,9 +1,11 @@
 package io.bewsys.spmobile.data.remote.model.household
 
+import io.bewsys.spmobile.data.remote.model.member.MemberPayload
 import kotlinx.serialization.Serializable
 
 @Serializable
 data class HouseholdPayload(
+    val id: Long?=null,
     val remote_id: String?=null,
     val survey_no: String,
     val temp_survey_no: String?= null,
@@ -24,7 +26,7 @@ data class HouseholdPayload(
     val cac: String? = null,
     val gps_longitude: String? = null,
     val gps_latitude: String? = null,
-    val number_of_members: Int? = null,
+    var number_of_members: Int? = null,
     val household_head_firstname: String? = null,
     val household_head_lastname: String? = null,
     val household_head_middlename: String? = null,
@@ -146,6 +148,7 @@ data class HouseholdPayload(
     val other_household_activities_in_past_12_months: String? = null,
     val comments: String? = null,
     val household_status: String? = null,
+    var members: List<MemberPayload>? = null,
 //    val profile_picture: String? = null,
     )
 

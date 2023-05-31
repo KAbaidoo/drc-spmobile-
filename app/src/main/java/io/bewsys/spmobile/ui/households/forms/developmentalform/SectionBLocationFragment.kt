@@ -44,7 +44,7 @@ class SectionBLocationFragment : Fragment(R.layout.fragment_location_of_househol
     private var til_Lat: TextInputLayout? = null
     private var til_Lon: TextInputLayout? = null
 
-    private var  currentLocation: Location?=null
+    private var currentLocation: Location? = null
 
     private val locationProvider: LocationProvider by inject()
 
@@ -144,6 +144,7 @@ class SectionBLocationFragment : Fragment(R.layout.fragment_location_of_househol
                     rbGeneral.id -> {
                         viewModel.registrationType = rbGeneral.text.toString()
                     }
+
                     else -> {
                         viewModel.registrationType = rbEmergency.text.toString()
                     }
@@ -155,9 +156,11 @@ class SectionBLocationFragment : Fragment(R.layout.fragment_location_of_househol
                     rbUrban.id -> {
                         viewModel.placeOfResidence = rbUrban.text.toString()
                     }
+
                     rbUrbanRural.id -> {
                         viewModel.placeOfResidence = rbUrbanRural.text.toString()
                     }
+
                     else -> {
                         viewModel.placeOfResidence = rbRural.text.toString()
                     }
@@ -203,13 +206,13 @@ class SectionBLocationFragment : Fragment(R.layout.fragment_location_of_househol
                 setAdapter(
                     ArrayAdapter(context, dropdownLayout, communities)
                         .also {
-                        addTextChangedListener {
-                            viewModel.community = it.toString()
-                            viewModel.loadGroupmentsWithName(it.toString())
-                            getLastKnownLocation()
+                            addTextChangedListener {
+                                viewModel.community = it.toString()
+                                viewModel.loadGroupmentsWithName(it.toString())
+                                getLastKnownLocation()
 
+                            }
                         }
-                    }
                 )
             }
             (autoCompleteTextViewTerritory as? AutoCompleteTextView)?.apply {
@@ -272,7 +275,6 @@ class SectionBLocationFragment : Fragment(R.layout.fragment_location_of_househol
             }
 
 
-
         } //end of apply block
 
         viewModel.sectionBHasBlankFields()
@@ -290,7 +292,7 @@ class SectionBLocationFragment : Fragment(R.layout.fragment_location_of_househol
             viewModel.lon = it.longitude.toString()
             viewModel.lat = it.latitude.toString()
 
-            til_Lat?.editText?.setText( it.longitude.toString())
+            til_Lat?.editText?.setText(it.longitude.toString())
             til_Lon?.editText?.setText(it.latitude.toString())
         }
     }
@@ -334,4 +336,4 @@ class SectionBLocationFragment : Fragment(R.layout.fragment_location_of_househol
             Toast.LENGTH_SHORT
         ).show()
     }
-   }
+}

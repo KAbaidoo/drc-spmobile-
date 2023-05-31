@@ -44,38 +44,43 @@ class MemberRepository(
     suspend fun insertMembers(
         membersList: List<MemberModel>
     ): Unit = withContext(Dispatchers.IO) {
-        membersList.forEach { memberModel ->
-            memberModel.also {
-                membersQueries.insertMember(
-                    null,
-                    remote_id = it.remote_id,
-                    firstname = it.firstname,
-                    lastname = it.lastname,
-                    middlename = it.middlename,
-                    age = it.age,
-                    profile_picture = it.profile_picture,
-                    sex = it.sex,
-                    dob = it.dob,
-                    date_of_birth = it.dob,
-                    age_known = it.age_known,
-                    dob_known = it.dob_known,
-                    is_head = it.is_head,
-                    is_member_respondent = it.is_member_respondent,
-                    family_bond_id = it.family_bond_id,
-                    marital_status_id = it.marital_status_id,
-                    birth_certificate = it.birth_certificate,
-                    educational_level_id = it.educational_level_id,
-                    school_attendance_id = it.school_attendance_id,
-                    pregnancy_status = it.pregnancy_status,
-                    disability_id = it.disability_id,
-                    socio_professional_category_id = it.socio_professional_category_id,
-                    sector_of_work_id = it.sector_of_work_id,
-                    household_id = it.household_id,
-                    status = it.status
-                )
-            }
+        membersQueries.transaction {
+            membersList.forEach { memberModel ->
+                memberModel.apply {
+                    membersQueries.insertMember(
+                        null,
+                        remote_id = remote_id,
+                        firstname = firstname,
+                        lastname = lastname,
+                        middlename = middlename,
+                        age = age,
+                        profile_picture = profile_picture,
+                        sex = sex,
+                        dob = dob,
+                        date_of_birth = dob,
+                        age_known = age_known,
+                        dob_known = dob_known,
+                        is_head = is_head,
+                        is_member_respondent = is_member_respondent,
+                        family_bond_id = family_bond_id,
+                        marital_status_id = marital_status_id,
+                        birth_certificate = birth_certificate,
+                        educational_level_id = educational_level_id,
+                        school_attendance_id =  school_attendance_id,
+                        pregnancy_status = pregnancy_status,
+                        disability_id = disability_id,
+                        socio_professional_category_id = socio_professional_category_id,
+                        sector_of_work_id = sector_of_work_id,
+                        household_id = household_id,
+                        status = status
+                    )
+                }
 
+            }
         }
+
+
+
     }
 
 

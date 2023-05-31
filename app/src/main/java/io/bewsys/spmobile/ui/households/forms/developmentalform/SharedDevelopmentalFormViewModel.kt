@@ -273,7 +273,7 @@ class SharedDevelopmentalFormViewModel(
     var headMiddleName = ""
     var headLastName = ""
     var headAgeKnown = ""
-    var headAge: String? = ""
+    var headAge = ""
     var headDOB = ""
     var headVoterId = ""
     var headPhoneNo = ""
@@ -377,8 +377,6 @@ class SharedDevelopmentalFormViewModel(
     var bedOwned: String = ""
     var airConditionerOwned: String = ""
     var cultivatedLandOwned: String = ""
-
-
     var fanOwned: String = ""
 
 
@@ -390,7 +388,10 @@ class SharedDevelopmentalFormViewModel(
         _SectionBHasBlank.value = hasBlank(
             address,
             cac,
-            villageOrDistrict
+            villageOrDistrict,
+            placeOfResidence,
+            registrationType
+
         )
     }
 
@@ -404,8 +405,10 @@ class SharedDevelopmentalFormViewModel(
         _SectionCHasBlank.value = hasBlank(
             headFirstName,
             headLastName,
+            headAge,
             respondentFirstName,
-            respondentLastName
+            respondentLastName,
+            migrationStatus
 
         )
     }
@@ -417,8 +420,10 @@ class SharedDevelopmentalFormViewModel(
     fun sectionEHasBlankFields() {
         _SectionEHasBlank.value = hasBlank(
             occupancyStatus,
-            roomsUsedForSleeping
-
+            roomsUsedForSleeping,
+            exteriorWalls,
+            soilMaterial,
+            cookingFuel
         )
     }
 
@@ -432,7 +437,6 @@ class SharedDevelopmentalFormViewModel(
             typeOfToilet,
             wasteDisposal,
             placeForHandWashing
-
         )
     }
 
@@ -476,7 +480,6 @@ class SharedDevelopmentalFormViewModel(
     fun setStartTime() {
         startTime = SimpleDateFormat("HH:mm:ss").format(System.currentTimeMillis())
     }
-
 
 
     fun onRegisterClicked() {
@@ -838,7 +841,6 @@ class SharedDevelopmentalFormViewModel(
     }
 
 
-
     //    Member rg
     var isMemberRespondent = ""
     var isMemberHead = ""
@@ -854,13 +856,12 @@ class SharedDevelopmentalFormViewModel(
     var memberLastname = ""
     var memberAge = ""
     var memberDob = ""
-    var memberVoterIdCard = ""
-    var memberPhoneNumber = ""
+
+    var photoUri = ""
     var memberBirthCertificate = ""
     var memberEducational = ""
     var memberSocioProfessionalCategory = ""
     var memberSchoolAttendance = ""
-    var memberSectorOfWork = ""
     var memberDisability = ""
     var memberRelationship: String = ""
     var memberOccupation: String = ""
@@ -873,13 +874,22 @@ class SharedDevelopmentalFormViewModel(
     fun memberHasBlankFields() {
         _memberHasBlankFields.value = hasBlank(
             memberSex,
+            memberAge,
             memberFirstname,
             memberLastname,
-            memberRelationship,
             memberSchoolAttendance,
+            memberDob,
+            memberBirthCertificate,
+            memberEducational,
+            memberSchoolAttendance,
+            memberDisability,
+            memberSocioProfessionalCategory,
+            memberRelationship,
+            memberOccupation
 
         )
     }
+
     private val _members = MutableLiveData<List<MemberModel>>()
     val members: LiveData<List<MemberModel>>
         get() = _members
@@ -906,10 +916,10 @@ class SharedDevelopmentalFormViewModel(
             school_attendance_id = memberSchoolAttendance,
             disability_id = memberDisability,
             socio_professional_category_id = memberSocioProfessionalCategory,
-            sector_of_work_id = memberSectorOfWork,
+            sector_of_work_id = memberOccupation,
             remote_id = "",
             family_bond_id = memberRelationship,
-            profile_picture = "",
+            profile_picture = photoUri,
             household_id = "",
         )
         memberList.add(member)
@@ -920,6 +930,7 @@ class SharedDevelopmentalFormViewModel(
     fun clearMemberFields() {
         memberFirstname = ""
         memberMiddleName = ""
+        memberLastname = ""
         memberSex = ""
         memberAge = ""
         memberDob = ""
@@ -934,10 +945,9 @@ class SharedDevelopmentalFormViewModel(
         memberSchoolAttendance = ""
         memberDisability = ""
         memberSocioProfessionalCategory = ""
-        memberSectorOfWork = ""
+        memberOccupation = ""
         memberRelationship = ""
-
-
+        photoUri = ""
     }
 
     private fun saveMembers(householdEntityId: Long) = viewModelScope.launch {
@@ -984,6 +994,9 @@ class SharedDevelopmentalFormViewModel(
                 }
             }.collectLatest {
                 _members.value = it
+                it.forEach {
+                    Log.d(TAG, "${it.profile_picture}")
+                }
             }
         }
     }
@@ -1001,14 +1014,6 @@ class SharedDevelopmentalFormViewModel(
             )
         )
     }
-
-//    fun uploadHousehold(itemID: Long) = viewModelScope.launch {
-//        val itemDeferrable = async { getItem(itemID) }
-//        val item = itemDeferrable.await()
-//
-//        uploadItem(item!!)
-//
-//    }
 
 
     private fun uploadHousehold(itemId: Long) = viewModelScope.launch {

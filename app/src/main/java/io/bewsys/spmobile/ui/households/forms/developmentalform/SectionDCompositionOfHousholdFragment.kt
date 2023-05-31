@@ -45,6 +45,7 @@ class SectionDCompositionOfHousholdFragment : Fragment(R.layout.fragment_composi
          btnAddMembers.setOnClickListener {
              findNavController().navigate(R.id.sectionDAddMemberFragment)
          }
+
             val title =
                 if (viewModel.household != null) getString(R.string.edit_household) else getString(R.string.add_household)
 

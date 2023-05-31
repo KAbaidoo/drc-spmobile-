@@ -18,7 +18,6 @@
         <item>Déplacé</item>
         <item>Réfugié</item>
         <item>Renvoyé</item>
-        <item>Autres</item>
     </string-array>
 
     <string-array name="marital_status">
@@ -105,7 +104,7 @@
         <item>Logé par l\'employeur</item>
         <item>Garde-chantier</item>
         <item>Sous-logé</item>
-        <item>Autre \u0028précisez\u0029</item>
+        <item>Autre</item>
     </string-array>
 
     <string-array name="occupation">
@@ -141,7 +140,7 @@
         <item>Carrelage</item>
         <item>Ciment</item>
         <item>Moquette</item>
-        <item>Autre \u0028précisez\u0029</item>
+        <item>Autre</item>
     </string-array>
 
     <string-array name="exterior_walls">
@@ -160,7 +159,7 @@
         <item>Blocs de ciment</item>
         <item>Adobe recouvert</item>
         <item>Planche en bois/shingles</item>
-        <item>Autre \u0028precisez\u0029</item>
+        <item>Autre</item>
     </string-array>
 
     <string-array name="source_of_drinking_water">
@@ -178,7 +177,7 @@
         <item>Charrette avec petite citerne/tonneau</item>
         <item>Eau de surface \u0028fleuve/barrage/lac/mare/canal irrigation\u0029</item>
         <item>Eau en bouteille</item>
-        <item>Autre \u0028precisez\u0029</item>
+        <item>Autre</item>
     </string-array>
 
     <string-array name="type_of_toilet">
@@ -189,7 +188,7 @@
         <item>Seau/Tinette</item>
         <item>Toilettes/latrines suspendues</item>
         <item>Pas de toilettes/nature</item>
-        <item>Autre \u0028précisez\u0029</item>
+        <item>Autre</item>
     </string-array>
 
     <string-array name="waste_disposal_methods">
@@ -200,7 +199,7 @@
         <item>Cours d\'eau</item>
         <item>Depotoire sauvage</item>
         <item>Compost ou fumier</item>
-        <item>Autres \u0028précisez\u0029</item>
+        <item>Autre</item>
     </string-array>
 
     <string-array name="place_of_hand_washing">

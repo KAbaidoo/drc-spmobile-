@@ -1,28 +1,48 @@
 package io.bewsys.spmobile.ui.households.forms.developmentalform
 
+import android.content.Context
+import android.net.Uri
+import android.os.Build
 import android.os.Bundle
+import android.util.Log
 
 import android.view.View
+import android.webkit.MimeTypeMap
 import android.widget.ArrayAdapter
 import android.widget.AutoCompleteTextView
+import androidx.annotation.RequiresApi
+import androidx.core.os.bundleOf
 
 import androidx.core.view.isVisible
 import androidx.core.widget.addTextChangedListener
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.setFragmentResultListener
 
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
+import androidx.navigation.fragment.navArgs
+import com.bumptech.glide.Glide
+import com.bumptech.glide.request.RequestOptions
 import com.google.android.material.datepicker.MaterialDatePicker
 import io.bewsys.spmobile.R
 import io.bewsys.spmobile.databinding.FragmentAddMembersDBinding
+import io.bewsys.spmobile.util.RealPathUtil.getRealPathFromURI
 import kotlinx.coroutines.flow.collectLatest
 import org.koin.androidx.navigation.koinNavGraphViewModel
+import java.io.File
+import java.io.FileOutputStream
+import java.io.IOException
+import java.io.InputStream
+import java.io.OutputStream
 import java.text.SimpleDateFormat
 import java.util.*
 
 class SectionDAddMemberFragment : Fragment(R.layout.fragment_add_members_d) {
     private val viewModel: SharedDevelopmentalFormViewModel by koinNavGraphViewModel(R.id.form_navigation)
 
+//    val args: SectionDAddMemberFragmentArgs by navArgs()
+
+    //
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -31,6 +51,38 @@ class SectionDAddMemberFragment : Fragment(R.layout.fragment_add_members_d) {
         val dropdownLayout = R.layout.dropdown_item
 
         binding.apply {
+
+            Glide.with(photoViewButton)
+                .load(R.drawable.baseline_add_a_photo_24)
+                .apply(RequestOptions.centerCropTransform())
+                .into(photoViewButton)
+
+            setFragmentResultListener("photo_capture_request") { _, bundle ->
+                val result = bundle.getString("photo_capture_results")
+
+                Glide.with(photoViewButton)
+                    .load(result)
+                    .fallback(R.drawable.baseline_add_a_photo_24)
+                    .apply(RequestOptions.centerCropTransform())
+                    .into(photoViewButton)
+
+                viewModel.photoUri  = fileFromContentUri(requireContext(), Uri.parse(result)).absolutePath
+
+//                Log.d(TAG,"${ viewModel.photoUri}")
+            }
+
+
+
+
+
+
+
+
+            photoViewButton.setOnClickListener {
+                val action = SectionDAddMemberFragmentDirections.actionSectionDAddMemberFragmentToCameraFragment()
+                findNavController().navigate(action)
+            }
+
 
             viewLifecycleOwner.lifecycleScope.launchWhenStarted {
                 viewModel.memberHasBlankFields.collectLatest {
@@ -50,19 +102,19 @@ class SectionDAddMemberFragment : Fragment(R.layout.fragment_add_members_d) {
                 when (checkedId) {
                     rbHead.id -> {
                         viewModel.apply {
-                            isMemberHead= getString(R.string.yes)
+                            isMemberHead = getString(R.string.yes)
                             isMemberRespondent = getString(R.string.no)
 
-                            memberFirstname = headFirstName?: ""
-                            memberMiddleName = headMiddleName?: ""
-                            memberLastname = headLastName?: ""
-                            memberSex =headSex?: ""
-                            memberAge =headAge ?: ""
+                            memberFirstname = headFirstName ?: ""
+                            memberMiddleName = headMiddleName ?: ""
+                            memberLastname = headLastName ?: ""
+                            memberSex = headSex ?: ""
+                            memberAge = headAge ?: ""
 
                             tilMemberFirstname.editText?.setText(headFirstName)
                             tilMemberMiddleName.editText?.setText(headMiddleName)
                             tilMemberLastname.editText?.setText(headLastName)
-                            tilMemberAge.editText?.setText(headAge?: "")
+                            tilMemberAge.editText?.setText(headAge ?: "")
 
                             tils.forEach {
                                 it.isEnabled = false
@@ -76,16 +128,17 @@ class SectionDAddMemberFragment : Fragment(R.layout.fragment_add_members_d) {
 
                         }
                     }
+
                     rbRespondent.id -> {
                         viewModel.apply {
-                            isMemberRespondent  = getString(R.string.yes)
-                          isMemberHead = getString(R.string.no)
+                            isMemberRespondent = getString(R.string.yes)
+                            isMemberHead = getString(R.string.no)
 
                             memberFirstname = respondentFirstName
                             memberMiddleName = respondentMiddleName
                             memberLastname = respondentLastName
-                            memberSex =respondentSex
-                            memberAge =respondentAge
+                            memberSex = respondentSex
+                            memberAge = respondentAge
 
                             when (viewModel.memberSex) {
                                 rbMale.text -> rgMemberSex.check(rbMale.id)
@@ -100,17 +153,19 @@ class SectionDAddMemberFragment : Fragment(R.layout.fragment_add_members_d) {
                             tils.forEach {
                                 it.isEnabled = false
                             }
+                            tilMemberAge.isEnabled = true
 
                         }
 
                     }
+
                     else -> {
                         viewModel.apply {
                             memberFirstname = ""
                             memberMiddleName = ""
                             memberLastname = ""
-                            memberSex =""
-                            memberAge =""
+                            memberSex = ""
+                            memberAge = ""
 
                             tils.forEach {
                                 it.isEnabled = true
@@ -132,6 +187,7 @@ class SectionDAddMemberFragment : Fragment(R.layout.fragment_add_members_d) {
                         tvMemberAge.isEnabled = true
                         tilMemberAge.isEnabled = true
                     }
+
                     else -> {
                         viewModel.memberAgeKnown = rbNoAge.text as String
                         tilMemberAge.editText?.text?.clear()
@@ -148,6 +204,7 @@ class SectionDAddMemberFragment : Fragment(R.layout.fragment_add_members_d) {
                         tvMemberDob.isEnabled = true
                         tilMemberDob.isEnabled = true
                     }
+
                     else -> {
                         viewModel.memberDOBKnown = rbNoDob.text as String
                         tilMemberDob.editText?.text?.clear()
@@ -169,6 +226,7 @@ class SectionDAddMemberFragment : Fragment(R.layout.fragment_add_members_d) {
                         rbNoPregnant.isVisible = false
                         viewModel.memberHasBlankFields()
                     }
+
                     else -> {
                         viewModel.memberSex = rbFemale.text as String
                         tvMemberPregnancyStatus.isVisible = true
@@ -184,6 +242,7 @@ class SectionDAddMemberFragment : Fragment(R.layout.fragment_add_members_d) {
                     rbYesPregnant.id -> {
                         viewModel.memberPregnancyStatus = rbYesPregnant.text as String
                     }
+
                     else -> {
                         viewModel.memberPregnancyStatus = rbNoPregnant.text as String
                     }
@@ -194,12 +253,12 @@ class SectionDAddMemberFragment : Fragment(R.layout.fragment_add_members_d) {
                     rbYesBirthCert.id -> {
                         viewModel.memberBirthCertificate = rbYesBirthCert.text as String
                     }
+
                     else -> {
                         viewModel.memberBirthCertificate = rbNoBirthCert.text as String
                     }
                 }
             }
-
 
 
             val datePicker = MaterialDatePicker
@@ -215,7 +274,7 @@ class SectionDAddMemberFragment : Fragment(R.layout.fragment_add_members_d) {
             }
 
             datePicker.addOnPositiveButtonClickListener {
-                val sdf = SimpleDateFormat("dd-MM-yyyy", Locale.getDefault())
+                val sdf = SimpleDateFormat("yyyy-MM-dd", Locale.getDefault())
                 val date = sdf.format(it)
                 tilMemberDob.editText!!.setText(date)
                 viewModel.memberDob = date
@@ -271,7 +330,7 @@ class SectionDAddMemberFragment : Fragment(R.layout.fragment_add_members_d) {
                         addTextChangedListener {
 
                             viewModel.memberMaritalStatus = it.toString()
-
+                            viewModel.memberHasBlankFields()
                         }
                     }
                 )
@@ -283,7 +342,7 @@ class SectionDAddMemberFragment : Fragment(R.layout.fragment_add_members_d) {
                         addTextChangedListener {
 
                             viewModel.memberEducational = it.toString()
-
+                            viewModel.memberHasBlankFields()
                         }
                     }
                 )
@@ -307,18 +366,19 @@ class SectionDAddMemberFragment : Fragment(R.layout.fragment_add_members_d) {
                         addTextChangedListener {
 
                             viewModel.memberDisability = it.toString()
-
+                            viewModel.memberHasBlankFields()
                         }
                     }
                 )
             }
-            val socioProfessionalCategory = resources.getStringArray(R.array.socio_professional_category)
+            val socioProfessionalCategory =
+                resources.getStringArray(R.array.socio_professional_category)
             (actSocioProfessionalCategory as? AutoCompleteTextView)?.apply {
                 setAdapter(
                     ArrayAdapter(context, dropdownLayout, socioProfessionalCategory).also {
                         addTextChangedListener {
                             viewModel.memberSocioProfessionalCategory = it.toString()
-
+                            viewModel.memberHasBlankFields()
                         }
                     }
                 )
@@ -329,7 +389,7 @@ class SectionDAddMemberFragment : Fragment(R.layout.fragment_add_members_d) {
                     ArrayAdapter(context, dropdownLayout, occupation).also {
                         addTextChangedListener {
                             viewModel.memberOccupation = it.toString()
-
+                            viewModel.memberHasBlankFields()
                         }
                     }
                 )
@@ -342,15 +402,6 @@ class SectionDAddMemberFragment : Fragment(R.layout.fragment_add_members_d) {
             rgMemberDobKnown.check(rbYesDob.id)
 
 
-            /* when (viewModel.isMemberRespondent) {
-                  rbYesIsRespondent.text -> rgIsMemberRespondent.check(rbYesIsRespondent.id)
-                  rbNoIsRespondent.text -> rgIsMemberRespondent.check(rbNoIsRespondent.id)
-              }
-              when (viewModel.isMemberHead) {
-                  rbYesIsHead.text -> rgIsMemberHead.check(rbYesIsHead.id)
-                  rbNoIsHead.text -> rgIsMemberHead.check(rbNoIsHead.id)
-              }*/
-
 
 
 
@@ -362,8 +413,51 @@ class SectionDAddMemberFragment : Fragment(R.layout.fragment_add_members_d) {
 
 
         }
+
         // set up menu
 
         viewModel.memberHasBlankFields()
+    }
+
+    private fun getFileExtension(context: Context, uri: Uri): String? {
+        val fileType: String? = context.contentResolver.getType(uri)
+        return MimeTypeMap.getSingleton().getExtensionFromMimeType(fileType)
+    }
+
+    private fun fileFromContentUri(context: Context, contentUri: Uri): File {
+        // Preparing Temp file name
+        val fileExtension = getFileExtension(context, contentUri)
+        val fileName = contentUri.lastPathSegment + if (fileExtension != null) ".$fileExtension" else ""
+
+        // Creating Temp file
+        val tempFile = File(context.cacheDir, fileName)
+        tempFile.createNewFile()
+
+        try {
+            val oStream = FileOutputStream(tempFile)
+            val inputStream = context.contentResolver.openInputStream(contentUri)
+
+            inputStream?.let {
+                copy(inputStream, oStream)
+            }
+
+            oStream.flush()
+        } catch (e: Exception) {
+            e.printStackTrace()
+        }
+
+        return tempFile
+    }
+    @Throws(IOException::class)
+    private fun copy(source: InputStream, target: OutputStream) {
+        val buf = ByteArray(8192)
+        var length: Int
+        while (source.read(buf).also { length = it } > 0) {
+            target.write(buf, 0, length)
+        }
+    }
+
+    companion object {
+        const val TAG = "AddMemberFragment"
     }
 }

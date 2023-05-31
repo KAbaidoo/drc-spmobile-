@@ -3,9 +3,9 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <item
-        android:id="@+id/action_download_households"
-        android:icon="@drawable/fab_close_24"
-        android:title="@string/delete"
+        android:id="@+id/action_upload_households"
+        android:icon="@drawable/cloud_upload_24"
+        android:title="@string/upload"
         app:showAsAction="never"
         />
 

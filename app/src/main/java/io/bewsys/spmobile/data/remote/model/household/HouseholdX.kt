@@ -34,7 +34,7 @@ data class HouseholdX(
     val head_dob_known: String,
     val health_area_id: String,
     val health_zone_id: String,
-    val household_head: String?,
+    val household_head: Head?,
     val household_head_age: Long?,
     val household_head_dob: String?,
     val household_head_firstname: String?,
@@ -148,5 +148,6 @@ data class HouseholdX(
     val updated_at: String?,
     val use_of_child_labor: String?,
     val use_of_early_marriage: String?,
-    val village_or_quartier: String?
+    val village_or_quartier: String?,
+
 )

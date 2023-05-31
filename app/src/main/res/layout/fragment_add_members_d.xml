@@ -13,9 +13,9 @@
         android:layout_height="0dp"
         android:paddingStart="16dp"
         android:paddingEnd="16dp"
+        android:scrollbars="none"
         app:layout_constraintBottom_toTopOf="@+id/buttons"
-        app:layout_constraintTop_toTopOf="parent"
-        android:scrollbars="none">
+        app:layout_constraintTop_toTopOf="parent">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -23,9 +23,17 @@
             android:layout_marginBottom="16dp"
             android:orientation="vertical">
 
+
             <TextView
                 style="@style/Widget.App.Heading.Sub"
                 android:text="@string/member_registration" />
+
+            <ImageButton
+                android:id="@+id/photo_view_button"
+                android:layout_width="200dp"
+                android:layout_height="200dp"
+                android:layout_gravity="center_horizontal"/>
+
 
             <!--            is_member_respondent -->
             <TextView
@@ -39,25 +47,28 @@
                 android:id="@+id/rg_is_head_or_respondent"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="vertical">
+                android:orientation="horizontal">
 
                 <com.google.android.material.radiobutton.MaterialRadioButton
                     android:id="@+id/rb_respondent"
-                    android:layout_width="match_parent"
+                    android:layout_width="wrap_content"
                     android:layout_height="48dp"
+                    android:layout_marginEnd="8dp"
                     android:text="@string/respondent" />
 
                 <com.google.android.material.radiobutton.MaterialRadioButton
                     android:id="@+id/rb_head"
-                    android:layout_width="match_parent"
+                    android:layout_width="wrap_content"
                     android:layout_height="48dp"
+                    android:layout_marginEnd="8dp"
                     android:text="@string/household_head" />
 
                 <com.google.android.material.radiobutton.MaterialRadioButton
                     android:id="@+id/rb_not_applicable"
-                    android:layout_width="match_parent"
-                    android:checked="true"
+                    android:layout_width="wrap_content"
                     android:layout_height="48dp"
+                    android:checked="true"
+
                     android:text="@string/n_a" />
             </RadioGroup>
 
@@ -93,6 +104,7 @@
                 android:layout_marginTop="16dp"
                 android:text="@string/member_middlename"
                 android:textAppearance="@style/TextAppearance.MaterialComponents.Body1" />
+
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/til_member_middle_name"
                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
@@ -139,6 +151,7 @@
                 android:layout_marginTop="16dp"
                 android:text="@string/member_relationship"
                 android:textAppearance="@style/TextAppearance.MaterialComponents.Body1" />
+
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/til_relationship"
                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense.ExposedDropdownMenu"
@@ -194,6 +207,7 @@
                 android:layout_marginTop="16dp"
                 android:text="@string/member_dob_known"
                 android:textAppearance="@style/TextAppearance.MaterialComponents.Body1" />
+
             <RadioGroup
                 android:id="@+id/rg_member_dob_known"
                 android:layout_width="match_parent"
@@ -212,6 +226,7 @@
                     android:layout_height="48dp"
                     android:text="@string/no" />
             </RadioGroup>
+
             <TextView
                 android:id="@+id/tv_member_dob"
                 android:layout_width="wrap_content"
@@ -247,6 +262,7 @@
                 android:layout_marginTop="16dp"
                 android:text="@string/member_age_known"
                 android:textAppearance="@style/TextAppearance.MaterialComponents.Body1" />
+
             <RadioGroup
                 android:id="@+id/rg_member_age_known"
                 android:layout_width="match_parent"
@@ -273,6 +289,7 @@
                 android:layout_marginTop="16dp"
                 android:text="@string/member_age"
                 android:textAppearance="@style/TextAppearance.MaterialComponents.Body1" />
+
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/til_member_age"
                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
@@ -296,6 +313,7 @@
                 android:layout_marginTop="16dp"
                 android:text="@string/member_marital_status"
                 android:textAppearance="@style/TextAppearance.MaterialComponents.Body1" />
+
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/til_marital_status"
                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense.ExposedDropdownMenu"
@@ -322,6 +340,7 @@
                 android:layout_marginTop="16dp"
                 android:text="@string/does_he_she_have_a_birth_certificate"
                 android:textAppearance="@style/TextAppearance.MaterialComponents.Body1" />
+
             <RadioGroup
                 android:id="@+id/rg_birth_certificate"
                 android:layout_width="match_parent"
@@ -348,6 +367,7 @@
                 android:layout_marginTop="16dp"
                 android:text="@string/level_of_education"
                 android:textAppearance="@style/TextAppearance.MaterialComponents.Body1" />
+
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/til_level_of_education"
                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense.ExposedDropdownMenu"
@@ -373,6 +393,7 @@
                 android:layout_marginTop="16dp"
                 android:text="@string/member_school_attendance"
                 android:textAppearance="@style/TextAppearance.MaterialComponents.Body1" />
+
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/til_member_school_attendance"
                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense.ExposedDropdownMenu"
@@ -399,11 +420,12 @@
                 android:layout_height="wrap_content"
                 android:text="@string/member_pregnancy_status"
                 android:textAppearance="@style/TextAppearance.MaterialComponents.Body1" />
+
             <RadioGroup
                 android:id="@+id/rg_member_pregnancy_status"
                 android:layout_width="match_parent"
-                android:layout_marginBottom="16dp"
                 android:layout_height="wrap_content"
+                android:layout_marginBottom="16dp"
                 android:orientation="vertical">
 
                 <com.google.android.material.radiobutton.MaterialRadioButton
@@ -417,6 +439,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="48dp"
                     android:text="@string/no" />
+
                 <com.google.android.material.radiobutton.MaterialRadioButton
                     android:id="@+id/rb_dont_know"
                     android:layout_width="match_parent"
@@ -431,6 +454,7 @@
                 android:layout_height="wrap_content"
                 android:text="@string/member_disability"
                 android:textAppearance="@style/TextAppearance.MaterialComponents.Body1" />
+
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/til_member_disability"
                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense.ExposedDropdownMenu"
@@ -456,6 +480,7 @@
                 android:layout_marginTop="16dp"
                 android:text="@string/member_socio_professional_category"
                 android:textAppearance="@style/TextAppearance.MaterialComponents.Body1" />
+
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/til_socio_professional_category"
                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense.ExposedDropdownMenu"
@@ -481,6 +506,7 @@
                 android:layout_marginTop="16dp"
                 android:text="@string/occupation"
                 android:textAppearance="@style/TextAppearance.MaterialComponents.Body1" />
+
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/til_occupation"
                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense.ExposedDropdownMenu"
@@ -500,19 +526,18 @@
             </com.google.android.material.textfield.TextInputLayout>
 
 
-
-
         </LinearLayout>
     </ScrollView>
+
     <RelativeLayout
         android:id="@+id/buttons"
-        android:padding="12dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:gravity="end"
-        android:elevation="4dp"
         android:background="@color/cardview_light_background"
+        android:elevation="4dp"
+        android:gravity="end"
         android:orientation="horizontal"
+        android:padding="12dp"
         app:layout_constraintBottom_toBottomOf="parent">
 
         <com.google.android.material.button.MaterialButton

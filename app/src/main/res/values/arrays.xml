@@ -16,7 +16,7 @@
         <item>Displaced</item>
         <item>Refugee</item>
         <item>Returned</item>
-        <item>Other</item>
+
     </string-array>
 
     <string-array name="marital_status">
@@ -158,7 +158,7 @@
         <item>Cement blocks</item>
         <item>Adobe covered</item>
         <item>Wooden board/Shingles</item>
-        <item>Other</item>
+        <item>Other material</item>
     </string-array>
 
     <string-array name="source_of_drinking_water">

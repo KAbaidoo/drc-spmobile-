@@ -1,30 +1,19 @@
 package io.bewsys.spmobile.ui.households.forms.developmentalform
 
-import android.Manifest
 import android.annotation.SuppressLint
-import android.location.Location
 import android.os.Bundle
 import android.view.*
 import android.widget.ArrayAdapter
 import android.widget.AutoCompleteTextView
-import android.widget.Toast
 import androidx.core.os.bundleOf
 
 import androidx.core.widget.addTextChangedListener
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
-import com.google.android.material.textfield.TextInputLayout
-import com.vmadalin.easypermissions.EasyPermissions
-import com.vmadalin.easypermissions.dialogs.SettingsDialog
-import io.bewsys.spmobile.PERMISSION_LOCATION_REQUEST_CODE
 import io.bewsys.spmobile.R
 import io.bewsys.spmobile.databinding.FragmentIdentificationOfHouseholdCBinding
-import io.bewsys.spmobile.databinding.FragmentLocationOfHouseholdBBinding
-import io.bewsys.spmobile.util.LocationProvider
-import io.bewsys.spmobile.util.swap
 import kotlinx.coroutines.flow.collectLatest
-import org.koin.android.ext.android.inject
 import org.koin.androidx.navigation.koinNavGraphViewModel
 
 import java.util.*
@@ -134,6 +123,12 @@ class SectionCIdentificationFragment : Fragment(R.layout.fragment_identification
                 if (!hasFocus && viewModel.respondentFirstName.isBlank()) {
                     tilRespondentFirstname.error = getString(R.string.field_cannot_be_empty)
                 } else tilRespondentFirstname.error = null
+            }
+
+            tilHouseholdHeadAge.editText?.setOnFocusChangeListener { view, hasFocus ->
+                if (!hasFocus && viewModel.headAge.isBlank()) {
+                    tilHouseholdHeadAge.error = getString(R.string.field_cannot_be_empty)
+                } else tilHouseholdHeadAge.error = null
             }
             tilRespondentMiddlename.editText?.addTextChangedListener {
                 viewModel.respondentMiddleName = it.toString()

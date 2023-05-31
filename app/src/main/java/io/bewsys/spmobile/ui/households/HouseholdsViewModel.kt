@@ -5,8 +5,11 @@ import androidx.lifecycle.*
 import io.bewsys.spmobile.ADD_HOUSEHOLD_RESULT_OK
 import io.bewsys.spmobile.DELETE_HOUSEHOLD_RESULT_OK
 import io.bewsys.spmobile.data.local.HouseholdModel
+import io.bewsys.spmobile.data.remote.model.auth.login.ErrorResponse
+import io.bewsys.spmobile.data.remote.model.household.BulkUploadResponse
 import io.bewsys.spmobile.data.repository.DashboardRepository
 import io.bewsys.spmobile.data.repository.HouseholdRepository
+import io.bewsys.spmobile.util.Resource
 import kotlinx.coroutines.channels.Channel
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.flow.map
@@ -16,11 +19,12 @@ import kotlinx.coroutines.launch
 class HouseholdsViewModel(
     private val state: SavedStateHandle,
     private val householdRepository: HouseholdRepository,
-    private val dashboardRepository: DashboardRepository
-) : ViewModel() {
+    private val dashboardRepository: DashboardRepository,
 
-    private val householdsEventChannel = Channel<HouseholdEvent>()
-    val householdsEventEvent = householdsEventChannel.receiveAsFlow()
+    ) : ViewModel() {
+
+    private val _householdsEventChannel = Channel<HouseholdEvent>()
+    val householdsEventEvent = _householdsEventChannel.receiveAsFlow()
 
     private val _households = MutableLiveData<List<HouseholdModel>>()
     val households: LiveData<List<HouseholdModel>>
@@ -29,7 +33,9 @@ class HouseholdsViewModel(
 
     init {
         loadHouseholds()
+
     }
+
 
     //    Todo: get province and community ids
     private fun loadHouseholds() {
@@ -84,12 +90,36 @@ class HouseholdsViewModel(
                             health_area_id = it.health_zone_id,
                             health_zone_id = it.health_area_id,
                             groupment_id = it.groupment_id,
-                            province_name = it.province_id?.let { id -> dashboardRepository.getProvinceById(id.toLong())?.name },
-                            community_name = it.community_id?.let { id -> dashboardRepository.getCommunityById(id.toLong())?.name },
-                            territory_name = it.territory_id?.let { id -> dashboardRepository.getTerritoryById(id.toLong())?.name },
-                            groupement_name = it.groupment_id?.let { id -> dashboardRepository.getGroupmentById(id.toLong())?.name },
-                            health_area_name = it.health_area_id?.let { id -> dashboardRepository.getHealthAreaById(id.toLong())?.name },
-                            health_zone_name = it.health_zone_id?.let { id -> dashboardRepository.getHealthZoneById(id.toLong())?.name },
+                            province_name = it.province_id?.let { id ->
+                                dashboardRepository.getProvinceById(
+                                    id.toLong()
+                                )?.name
+                            },
+                            community_name = it.community_id?.let { id ->
+                                dashboardRepository.getCommunityById(
+                                    id.toLong()
+                                )?.name
+                            },
+                            territory_name = it.territory_id?.let { id ->
+                                dashboardRepository.getTerritoryById(
+                                    id.toLong()
+                                )?.name
+                            },
+                            groupement_name = it.groupment_id?.let { id ->
+                                dashboardRepository.getGroupmentById(
+                                    id.toLong()
+                                )?.name
+                            },
+                            health_area_name = it.health_area_id?.let { id ->
+                                dashboardRepository.getHealthAreaById(
+                                    id.toLong()
+                                )?.name
+                            },
+                            health_zone_name = it.health_zone_id?.let { id ->
+                                dashboardRepository.getHealthZoneById(
+                                    id.toLong()
+                                )?.name
+                            },
                             duration_displaced_returned_repatriated_refugee = it.duration_displaced_returned_repatriated_refugee,
                             unit_of_migration_duration = it.unit_of_migration_duration,
                             territory_or_town = it.territory_or_town,
@@ -205,7 +235,7 @@ class HouseholdsViewModel(
                             respondent_voter_id = it.respondent_voter_id,
 
 
-                        )
+                            )
                     }
                 }.collectLatest {
                     _households.value = it
@@ -214,16 +244,18 @@ class HouseholdsViewModel(
     }
 
 
-    fun onAddRegistrationFabClicked() = viewModelScope.launch {
-        householdsEventChannel.send(HouseholdEvent.AddRegistrationClicked)
-    }
 
-    fun onHumanitarianFabClicked() = viewModelScope.launch {
-        householdsEventChannel.send(HouseholdEvent.HumanitarianClicked)
-    }
+
+//    fun onAddRegistrationFabClicked() = viewModelScope.launch {
+//        householdsEventChannel.send(HouseholdEvent.AddRegistrationClicked)
+//    }
+//
+//    fun onHumanitarianFabClicked() = viewModelScope.launch {
+//        householdsEventChannel.send(HouseholdEvent.HumanitarianClicked)
+//    }
 
     fun onDevelopmentalFabClicked() = viewModelScope.launch {
-        householdsEventChannel.send(HouseholdEvent.DevelopmentalClicked)
+        _householdsEventChannel.send(HouseholdEvent.DevelopmentalClicked)
     }
 
 
@@ -238,7 +270,7 @@ class HouseholdsViewModel(
     private fun showHouseholdSavedConfirmationMessage() =
         viewModelScope.launch {
 
-            householdsEventChannel.send(
+            _householdsEventChannel.send(
                 HouseholdEvent.ShowSnackMessage(
                     "Household saved!"
                 )
@@ -247,7 +279,7 @@ class HouseholdsViewModel(
 
     private fun showHouseholdDeletedConfirmationMessage() =
         viewModelScope.launch {
-            householdsEventChannel.send(
+            _householdsEventChannel.send(
                 HouseholdEvent.ShowSnackMessage(
                     "Household deleted!"
                 )
@@ -255,7 +287,41 @@ class HouseholdsViewModel(
         }
 
     fun onHouseholdSelected(householdModel: HouseholdModel) = viewModelScope.launch {
-        householdsEventChannel.send(HouseholdEvent.NavigateToHouseholdDetailScreen(householdModel))
+        _householdsEventChannel.send(HouseholdEvent.NavigateToHouseholdDetailScreen(householdModel))
+    }
+    fun onUploadMenuItemClicked() = viewModelScope.launch {
+//        householdRepository.uploadBulkHouseholds()
+        loadState()
+    }
+    private fun loadState() = viewModelScope.launch {
+        householdRepository.bulkUploadHouseholdsFlow().collectLatest { results ->
+
+            when (results) {
+                is Resource.Loading -> _householdsEventChannel.send(HouseholdEvent.Loading)
+                is Resource.Success -> {
+                    val data = results.data as BulkUploadResponse
+                    val msg =
+                        "${data.data?.households?.size} households and ${data.data?.members?.size} members uploaded!"
+                    _householdsEventChannel.send(HouseholdEvent.Successful(msg))
+                }
+
+                is Resource.Failure -> {
+                    val msg = results.error as ErrorResponse
+                    _householdsEventChannel.send(HouseholdEvent.Failure(msg.msg))
+                }
+
+                is Resource.Exception -> {
+                    results.throwable.localizedMessage?.let { errorMsg ->
+                        HouseholdEvent.Exception(
+                            errorMsg
+                        )
+                    }?.let { _householdsEventChannel.send(it) }
+                }
+
+            }
+
+        }
+
     }
 
 
@@ -265,7 +331,14 @@ class HouseholdsViewModel(
         object HumanitarianClicked : HouseholdEvent()
         data class ShowSnackMessage(val msg: String) : HouseholdEvent()
 
+        data class Exception(val errMsg: String) : HouseholdEvent()
+        data class Successful(val errMsg: String) : HouseholdEvent()
+        data class Failure(val errMsg: String) : HouseholdEvent()
+        object Loading : HouseholdEvent()
+
         data class NavigateToHouseholdDetailScreen(val householdModel: HouseholdModel) :
             HouseholdEvent()
     }
+
+
 }

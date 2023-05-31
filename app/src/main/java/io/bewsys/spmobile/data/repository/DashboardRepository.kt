@@ -24,7 +24,6 @@ class DashboardRepository(
     @ApplicationScope private val applicationScope: CoroutineScope
 ) {
 
-
     private val provinceQueries = db.provinceQueries
     private val communityQueries = db.communityQueries
     private val territoryQueries = db.territoryQueries
