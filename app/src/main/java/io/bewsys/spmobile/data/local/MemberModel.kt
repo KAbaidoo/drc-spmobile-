@@ -1,6 +1,9 @@
 package io.bewsys.spmobile.data.local
 
 import android.os.Parcelable
+import io.bewsys.spmobile.data.MemberEntity
+import io.bewsys.spmobile.data.remote.model.member.MemberPayload
+import io.bewsys.spmobile.util.MapUtil
 import kotlinx.parcelize.Parcelize
 
 @Parcelize
@@ -31,3 +34,28 @@ data class MemberModel(
     val status: String?=null,
 ) : Parcelable
 
+fun MemberEntity.toPayLoad()= MemberPayload(
+    id = this.id,
+    remote_id = this.remote_id,
+    firstname = this.firstname,
+    middlename = this.middlename,
+    lastname = this.lastname,
+    sex = MapUtil.stringMapping[this.sex],
+    age = if (this.age.isNullOrEmpty()) null else this.age.toInt(),
+    date_of_birth = this.dob,
+    age_known = MapUtil.intMappings[this.age_known] ?: 0,
+    dob_known = MapUtil.intMappings[this.dob_known] ?: 0,
+    profile_picture = this.profile_picture,
+    is_member_respondent = MapUtil.intMappings[this.is_member_respondent] ?: 0,
+    is_head = MapUtil.intMappings[this.is_head] ?: 0,
+    family_bond_id = MapUtil.intMappings[this.family_bond_id],
+    marital_status_id = MapUtil.intMappings[this.marital_status_id] ?: 20,
+    birth_certificate = MapUtil.intMappings[this.birth_certificate],
+    educational_level_id = MapUtil.intMappings[this.educational_level_id] ?: 31,
+    school_attendance_id = MapUtil.intMappings[this.school_attendance_id] ?: 46,
+    pregnancy_status = MapUtil.intMappings[this.pregnancy_status],
+    disability_id = MapUtil.intMappings[this.disability_id] ?: 55,
+    socio_professional_category_id = MapUtil.intMappings[this.socio_professional_category_id] ?: 174,
+    sector_of_work_id = MapUtil.intMappings[this.sector_of_work_id] ?: 175,
+    household_id = this.household_id
+)

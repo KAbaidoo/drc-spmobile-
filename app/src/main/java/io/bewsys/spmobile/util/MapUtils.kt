@@ -2,7 +2,7 @@ package io.bewsys.spmobile.util
 
 
 object MapUtil {
-    val mapping = mapOf<String, Int>(
+    val intMappings = mapOf<String, Int>(
 //        "Male" to "M",
 //        "Female" to "F",
 
@@ -73,7 +73,7 @@ object MapUtil {
         "Studies completed" to 47,
         "Don\'t know" to 48,
 
-    //   disability
+        //   disability
         "Motor" to 49,
         "Visual" to 50,
         "Auditory" to 51,
@@ -82,7 +82,7 @@ object MapUtil {
         "Multiple disabilities" to 54,
         "None" to 55,
 
-    //socio-professional category
+        //socio-professional category
         "Senior Management/Executive" to 56,
         "Employee/Skilled or semi-skilled worker" to 57,
         "Manual worker/unskilled worker" to 58,
@@ -168,8 +168,8 @@ object MapUtil {
 
 //toilet
         "Flushing/flushing" to 130,
-        "Flush connected to a  sewer/septic tank/cesspool system" to 131,
-        "Cesspool<" to 132,
+        "Flush connected to a sewer/septic tank/cesspool system" to 131,
+        "Cesspool" to 132,
         "Composting toilets" to 133,
         "Bucket/tinette" to 134,
         "Suspended toilets/latrines" to 135,
@@ -316,7 +316,6 @@ object MapUtil {
         "Planche en bois/shingles" to 90,
 
 
-
 // soil material
         "Terre/Sable" to 92,
         "Bouse" to 93,
@@ -369,7 +368,6 @@ object MapUtil {
         "Seau/Tinette" to 134,
         "Toilettes/latrines suspendues" to 135,
         "Pas de toilettes/nature" to 136,
-        "Autre" to 161,
 
 //        waster disposal
         "Service organisé privé ou public" to 137,
@@ -390,6 +388,22 @@ object MapUtil {
         "Dispositif mobile (eau non disponible et savon disponible)" to 150,
         "Pas de permission" to 151,
         "Pas de lieu" to 152,
-        )
+    )
+
+    val stringMapping: Map<String, String> = mapOf(
+        "Male" to "M",
+        "Female" to "F",
+        "Homme" to "M",
+        "Femme" to "F",
+
+        "Yes" to "yes",
+        "No" to "no",
+        "Oui" to "yes",
+        "Non" to "no",
+
+
+
+
+    )
 }
 

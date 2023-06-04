@@ -48,7 +48,10 @@ class HouseholdApi(private val client: HttpClient) {
             setBody(
                formdata
             )
-            Log.d(TAG,"$formdata")
+
+
+
+
 
         }
 

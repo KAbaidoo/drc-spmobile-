@@ -651,7 +651,7 @@ class SharedDevelopmentalFormViewModel(
             health_zone_id = healthZoneId,
             respondent_type = "",
             remote_id = "",
-            status = null,
+            status = "",
             respondent_sex = respondentSex
         ).also {
             addHousehold(it)
@@ -814,7 +814,7 @@ class SharedDevelopmentalFormViewModel(
             health_area_id = healthAreaId,
             health_zone_id = healthZoneId,
             respondent_type = "",
-            status = null,
+            status = "",
             respondent_sex = respondentSex,
             remote_id = remoteId
         ).also {
@@ -831,7 +831,7 @@ class SharedDevelopmentalFormViewModel(
 
         saveMembers(lastInsertRowId)
 
-        uploadHousehold(lastInsertRowId)
+//        uploadHousehold(lastInsertRowId)
 
         addHouseholdEventChannel.send(
             AddDevelopmentalHouseholdEvent.NavigateBackWithResults(

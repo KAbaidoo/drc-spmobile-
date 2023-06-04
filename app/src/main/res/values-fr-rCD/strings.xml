@@ -362,7 +362,7 @@
     <string name="main_material_of_exterior_walls"><b>E.2</b> Principal matériau des murs extérieurs</string>
     <string name="f_water_and_sanitation">F. EAU ET ASSAINISSEMENT</string>
     <string name="what_is_the_main_source_of_drinking_water_for_the_household"><b>F.1</b> D\'où provient principalement l\'eau que boivent les membres de votre ménage?</string>
-    <string name="what_type_of_toilet_do_members_of_your_household_use"><b>E.2</b> Quel type de toilettes les membres de votre ménage utilisent-ils ?</string>
+    <string name="what_type_of_toilet_do_members_of_your_household_use"><b>F.2</b> Quel type de toilettes les membres de votre ménage utilisent-ils ?</string>
     <string name="other_waste_disposal_method">Autre méthode d\'élimination des déchets</string>
     <string name="member_relationship"><b>D.3</b> Lien de parenté:</string>
     <string name="members_living_in_household"><b>D.1</b> S\'il vous plait, donnez-moi les noms des personnes qui vivent habituellement dans votre ménage, en commençant par le chef de ménage</string>

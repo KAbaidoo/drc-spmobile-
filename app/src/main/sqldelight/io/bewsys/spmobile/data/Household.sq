@@ -188,6 +188,10 @@ SELECT *
 FROM householdEntity
 WHERE id = ?;
 
+updateBulkStatus:
+UPDATE householdEntity
+SET status = :status, remote_id = :remoteId WHERE id = :id;
+
 getByCommunityId:
 SELECT *
 FROM householdEntity

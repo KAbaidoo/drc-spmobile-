@@ -375,7 +375,7 @@
     <string name="main_material_of_exterior_walls"><b>E.2</b> Main material of exterior walls</string>
     <string name="f_water_and_sanitation">F. WATER AND SANITATION</string>
     <string name="what_is_the_main_source_of_drinking_water_for_the_household"><b>F.1</b> What is the main source of drinking water for the household?</string>
-    <string name="what_type_of_toilet_do_members_of_your_household_use"><b>E.2</b> What type of toilet do members of your household use?</string>
+    <string name="what_type_of_toilet_do_members_of_your_household_use"><b>F.2</b> What type of toilet do members of your household use?</string>
     <string name="other_waste_disposal_method">Other waste disposal method</string>
     <string name="member_relationship"><b>D.3</b> Relationship to family</string>
     <string name="members_living_in_household"><b>D.1</b> Please give me the names of the people who usually live in your household, starting with the head of household.</string>

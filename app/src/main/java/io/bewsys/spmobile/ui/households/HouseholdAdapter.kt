@@ -51,7 +51,7 @@ class HouseholdAdapter(private val listener: OnItemClickListener) :
             binding.apply {
                 textViewProvinceName.text = householdModel.province_name ?: ""
                 textViewCommunityName.text = householdModel.community_name ?: ""
-                if (!householdModel.remote_id.isNullOrEmpty()) checkBoxIcon.isChecked = true
+                 checkBoxIcon.isChecked = householdModel.status == "submitted"
             }
         }
     }

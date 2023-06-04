@@ -103,10 +103,12 @@ class SectionBLocationFragment : Fragment(R.layout.fragment_location_of_househol
             tilAddress.editText?.addTextChangedListener {
                 viewModel.address = it.toString()
                 viewModel.sectionBHasBlankFields()
+                getLastKnownLocation()
             }
             tilCac.editText?.addTextChangedListener {
                 viewModel.cac = it.toString()
                 viewModel.sectionBHasBlankFields()
+                getLastKnownLocation()
             }
             til_Lat = tilLat
             til_Lon = tilLon
@@ -119,6 +121,7 @@ class SectionBLocationFragment : Fragment(R.layout.fragment_location_of_househol
 
             when (viewModel.registrationType) {
                 rbGeneral.text -> rgInitialRegistrationType.check(rbGeneral.id)
+
                 rbEmergency.text -> rgInitialRegistrationType.check(rbEmergency.id)
             }
 
@@ -143,10 +146,12 @@ class SectionBLocationFragment : Fragment(R.layout.fragment_location_of_househol
                 when (checkedId) {
                     rbGeneral.id -> {
                         viewModel.registrationType = rbGeneral.text.toString()
+                        getLastKnownLocation()
                     }
 
                     else -> {
                         viewModel.registrationType = rbEmergency.text.toString()
+                        getLastKnownLocation()
                     }
                 }
             }
@@ -155,10 +160,12 @@ class SectionBLocationFragment : Fragment(R.layout.fragment_location_of_househol
                 when (checkedId) {
                     rbUrban.id -> {
                         viewModel.placeOfResidence = rbUrban.text.toString()
+                        getLastKnownLocation()
                     }
 
                     rbUrbanRural.id -> {
                         viewModel.placeOfResidence = rbUrbanRural.text.toString()
+                        getLastKnownLocation()
                     }
 
                     else -> {
@@ -284,6 +291,7 @@ class SectionBLocationFragment : Fragment(R.layout.fragment_location_of_househol
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
+        locationProvider.removeLocationUpdates()
     }
 
     private fun getLastKnownLocation() {
@@ -292,8 +300,8 @@ class SectionBLocationFragment : Fragment(R.layout.fragment_location_of_househol
             viewModel.lon = it.longitude.toString()
             viewModel.lat = it.latitude.toString()
 
-            til_Lat?.editText?.setText(it.longitude.toString())
-            til_Lon?.editText?.setText(it.latitude.toString())
+            til_Lat?.editText?.setText(it.longitude.toString().subSequence(0,7))
+            til_Lon?.editText?.setText(it.latitude.toString().subSequence(0,7))
         }
     }
 

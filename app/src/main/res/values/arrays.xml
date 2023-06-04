@@ -181,7 +181,7 @@
 
     <string-array name="type_of_toilet">
         <item>Flushing/flushing</item>
-        <item>Flush connected to a  sewer/septic tank/cesspool system</item>
+        <item>Flush connected to a sewer/septic tank/cesspool system</item>
         <item>Cesspool</item>
         <item>Composting toilets</item>
         <item>Bucket/tinette</item>
