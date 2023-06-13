@@ -146,7 +146,6 @@ class AddNonConsentingHouseholdFragment : Fragment(R.layout.fragment_add_non_con
             }
             buttonRegister.setOnClickListener {
                 viewModel.onSaveClicked()
-
             }
             //            Set all text fields from saved state
             textFieldReason.editText?.setText(viewModel.reason)

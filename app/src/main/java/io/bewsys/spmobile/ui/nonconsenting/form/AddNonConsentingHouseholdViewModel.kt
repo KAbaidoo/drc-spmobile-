@@ -6,6 +6,7 @@ import android.app.Activity
 import android.app.Application
 import android.content.Context
 import android.location.Geocoder
+import android.provider.Settings
 import android.util.Log
 import androidx.core.content.ContentProviderCompat.requireContext
 import androidx.fragment.app.FragmentActivity
@@ -30,7 +31,6 @@ import kotlinx.coroutines.launch
 
 
 class AddNonConsentingHouseholdViewModel(
-    application: Application,
     private val state: SavedStateHandle,
     private val nonConsentingRepository: NonConsentingHouseholdRepository,
     private val dashboardRepository: DashboardRepository
@@ -42,7 +42,7 @@ class AddNonConsentingHouseholdViewModel(
     var household: NonConsentHouseholdModel? = null
     var id: Long? = null
 
-    private val workManager = WorkManager.getInstance(application)
+
 
     private val addNonConsentingHouseholdChannel = Channel<AddNonConsentingHouseholdEvent>()
     val addNonConsentingHouseholdEvent = addNonConsentingHouseholdChannel.receiveAsFlow()
@@ -246,9 +246,6 @@ class AddNonConsentingHouseholdViewModel(
             nonConsentingRepository.insertNonConsentingHousehold(
                 newNonConsentingHousehold
             )
-
-            uploadNonConsentingHousehold(nonConsentingRepository.getLastInsertedRowId())
-
 //            lastly
             addNonConsentingHouseholdChannel.send(
                 AddNonConsentingHouseholdEvent.NavigateBackWithResults(
@@ -269,7 +266,7 @@ class AddNonConsentingHouseholdViewModel(
                 newNonConsentingHousehold
             )
 
-            uploadNonConsentingHousehold(nonConsentingRepository.getLastInsertedRowId())
+//            uploadNonConsentingHousehold(nonConsentingRepository.getLastInsertedRowId())
 
 //            lastly
             addNonConsentingHouseholdChannel.send(
@@ -280,23 +277,8 @@ class AddNonConsentingHouseholdViewModel(
 
         }
 
-    private fun uploadNonConsentingHousehold(itemId: Long) = viewModelScope.launch {
-        val constraints = Constraints.Builder()
-            .setRequiredNetworkType(NetworkType.CONNECTED)
-            .build()
 
-        val uploadRequest = OneTimeWorkRequestBuilder<NonConsentUploadWorker>()
-            .setConstraints(constraints)
-            .setInputData(createInputDataForId(itemId))
-            .build()
-        workManager.enqueue(uploadRequest)
-    }
-
-    private fun createInputDataForId(id: Long): Data {
-        val builder = Data.Builder()
-        builder.putLong(KEY_DATA_ID, id)
-        return builder.build()
-    }
+   
 
     private fun showInvalidInputMessage() = viewModelScope.launch {
         addNonConsentingHouseholdChannel.send(

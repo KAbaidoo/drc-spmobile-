@@ -1,16 +1,23 @@
 package io.bewsys.spmobile.ui.nonconsenting
 
 
+import android.app.Application
 import androidx.lifecycle.*
+import androidx.work.Constraints
+import androidx.work.NetworkType
+import androidx.work.OneTimeWorkRequestBuilder
+import androidx.work.WorkManager
 import io.bewsys.spmobile.ADD_NON_CONSENTING_HOUSEHOLD_RESULT_OK
 import io.bewsys.spmobile.data.local.NonConsentHouseholdModel
 import io.bewsys.spmobile.data.repository.NonConsentingHouseholdRepository
 import io.bewsys.spmobile.data.repository.DashboardRepository
+import io.bewsys.spmobile.work.NonConsentUploadWorker
 import kotlinx.coroutines.channels.Channel
 import kotlinx.coroutines.flow.*
 import kotlinx.coroutines.launch
 
 class NonConsentingViewModel(
+    application: Application,
     private val nonConsentingHouseholdRepository: NonConsentingHouseholdRepository,
     private val dashboardRepository: DashboardRepository
 ) : ViewModel() {
@@ -22,7 +29,7 @@ class NonConsentingViewModel(
     val nonConsentingHouseholds: LiveData<List<NonConsentHouseholdModel>>
         get() = _nonConsentingHouseholds
 
-
+    private val workManager = WorkManager.getInstance(application)
     init {
         loadNonConsentingHouseholds()
     }
@@ -82,6 +89,18 @@ class NonConsentingViewModel(
 
     fun onHousholdSelected(nonConsentingHousehold: NonConsentHouseholdModel)= viewModelScope.launch {
         _nonConsentingEventChannel.send(NonConsentingEvent.NavigateToEditNonConsentingHouseholdsForm(nonConsentingHousehold))
+    }
+
+
+    private fun uploadNonConsentingHouseholds() = viewModelScope.launch {
+        val constraints = Constraints.Builder()
+            .setRequiredNetworkType(NetworkType.CONNECTED)
+            .build()
+
+        val uploadRequest = OneTimeWorkRequestBuilder<NonConsentUploadWorker>()
+            .setConstraints(constraints)
+            .build()
+        workManager.enqueue(uploadRequest)
     }
 
     sealed class NonConsentingEvent {

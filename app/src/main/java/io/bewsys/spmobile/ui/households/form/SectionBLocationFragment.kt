@@ -1,4 +1,4 @@
-package io.bewsys.spmobile.ui.households.forms.developmentalform
+package io.bewsys.spmobile.ui.households.form
 
 import android.Manifest
 import android.annotation.SuppressLint

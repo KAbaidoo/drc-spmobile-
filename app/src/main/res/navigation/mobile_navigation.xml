@@ -16,9 +16,6 @@
         android:label="@string/households"
         tools:layout="@layout/fragment_households" >
         <action
-            android:id="@+id/action_nav_household_to_humanitarianFormFragment"
-            app:destination="@id/humanitarianFormFragment" />
-        <action
             android:id="@+id/action_nav_household_to_form_navigation"
             app:destination="@id/form_navigation" />
         <action
@@ -53,11 +50,6 @@
             app:nullable="true"
             android:defaultValue="@null" />
     </fragment>
-    <fragment
-        android:id="@+id/humanitarianFormFragment"
-        android:name="io.bewsys.spmobile.ui.households.forms.HumanitarianFormFragment"
-        android:label="Add humanitarian registration"
-        tools:layout="@layout/fragment_humanitarian_form" />
     <fragment
         android:id="@+id/nav_settings"
         android:name="io.bewsys.spmobile.ui.settings.SettingsFragment"
@@ -106,7 +98,7 @@
             app:argType="string" />
         <fragment
             android:id="@+id/formStepOneFragment"
-            android:name="io.bewsys.spmobile.ui.households.forms.developmentalform.FormStepOneFragment"
+            android:name="io.bewsys.spmobile.ui.households.form.FormStepOneFragment"
             android:label="{title}"
             tools:layout="@layout/fragment_add_household_one_consent">
             <argument
@@ -115,7 +107,7 @@
         </fragment>
         <fragment
             android:id="@+id/formStepSevenFragment"
-            android:name="io.bewsys.spmobile.ui.households.forms.developmentalform.FormStepSevenFragment"
+            android:name="io.bewsys.spmobile.ui.households.form.FormStepSevenFragment"
             android:label="@string/review"
             tools:layout="@layout/fragment_add_household_seven_review1" >
 
@@ -125,7 +117,7 @@
         </fragment>
         <fragment
             android:id="@+id/formStepEightFragment"
-            android:name="io.bewsys.spmobile.ui.households.forms.developmentalform.FormStepEightFragment"
+            android:name="io.bewsys.spmobile.ui.households.form.FormStepEightFragment"
             android:label="@string/review"
             tools:layout="@layout/fragment_add_household_eight_review2" >
 
@@ -138,7 +130,7 @@
             app:destination="@id/nav_household" />
         <fragment
             android:id="@+id/sectionBLocationFragment"
-            android:name="io.bewsys.spmobile.ui.households.forms.developmentalform.SectionBLocationFragment"
+            android:name="io.bewsys.spmobile.ui.households.form.SectionBLocationFragment"
             android:label="{title}"
             tools:layout="@layout/fragment_location_of_household_b" >
             <argument
@@ -147,7 +139,7 @@
         </fragment>
         <fragment
             android:id="@+id/sectionCIdentificationFragment"
-            android:name="io.bewsys.spmobile.ui.households.forms.developmentalform.SectionCIdentificationFragment"
+            android:name="io.bewsys.spmobile.ui.households.form.SectionCIdentificationFragment"
             android:label="{title}"
             tools:layout="@layout/fragment_identification_of_household_c" >
 
@@ -157,7 +149,7 @@
         </fragment>
         <fragment
             android:id="@+id/sectionEHousingFragment"
-            android:name="io.bewsys.spmobile.ui.households.forms.developmentalform.SectionEHousingFragment"
+            android:name="io.bewsys.spmobile.ui.households.form.SectionEHousingFragment"
             android:label="{title}"
             tools:layout="@layout/fragment_housing_e">
             <argument
@@ -166,7 +158,7 @@
         </fragment>
         <fragment
             android:id="@+id/sectionFWaterAndSanitationFragment"
-            android:name="io.bewsys.spmobile.ui.households.forms.developmentalform.SectionFWaterAndSanitationFragment"
+            android:name="io.bewsys.spmobile.ui.households.form.SectionFWaterAndSanitationFragment"
             android:label="{title}"
             tools:layout="@layout/fragment_water_and_sanitation_f">
             <argument
@@ -175,7 +167,7 @@
         </fragment>
         <fragment
             android:id="@+id/sectionGIncomeFragment"
-            android:name="io.bewsys.spmobile.ui.households.forms.developmentalform.SectionGIncomeFragment"
+            android:name="io.bewsys.spmobile.ui.households.form.SectionGIncomeFragment"
             android:label="{title}"
             tools:layout="@layout/fragment_household_income_g">
             <argument
@@ -184,7 +176,7 @@
         </fragment>
         <fragment
             android:id="@+id/sectionHAssetsIncomeFragment"
-            android:name="io.bewsys.spmobile.ui.households.forms.developmentalform.SectionHAssetsFragment"
+            android:name="io.bewsys.spmobile.ui.households.form.SectionHAssetsFragment"
             android:label="{title}"
             tools:layout="@layout/fragment_household_assets_h">
             <argument
@@ -193,7 +185,7 @@
         </fragment>
         <fragment
             android:id="@+id/sectionIVulnerabilityFragment"
-            android:name="io.bewsys.spmobile.ui.households.forms.developmentalform.SectionIVulnerabilityFragment"
+            android:name="io.bewsys.spmobile.ui.households.form.SectionIVulnerabilityFragment"
             android:label="{title}"
             tools:layout="@layout/fragment_vulnerability_i" >
             <argument
@@ -202,7 +194,7 @@
         </fragment>
         <fragment
             android:id="@+id/sectionDAddMemberFragment"
-            android:name="io.bewsys.spmobile.ui.households.forms.developmentalform.SectionDAddMemberFragment"
+            android:name="io.bewsys.spmobile.ui.households.form.SectionDAddMemberFragment"
             android:label="@string/add_member"
             tools:layout="@layout/fragment_add_members_d" >
             <argument
@@ -216,7 +208,7 @@
         </fragment>
         <fragment
             android:id="@+id/sectionDCompositionOfHousholdFragment"
-            android:name="io.bewsys.spmobile.ui.households.forms.developmentalform.SectionDCompositionOfHousholdFragment"
+            android:name="io.bewsys.spmobile.ui.households.form.SectionDCompositionOfHousholdFragment"
             android:label="{title}"
             tools:layout="@layout/fragment_composition_of_household_d" >
             <argument
@@ -225,7 +217,7 @@
         </fragment>
         <fragment
             android:id="@+id/cameraFragment"
-            android:name="io.bewsys.spmobile.ui.households.forms.developmentalform.CameraFragment"
+            android:name="io.bewsys.spmobile.ui.households.form.CameraFragment"
             android:label="@string/camera_preview"
             tools:layout="@layout/fragment_camera_preview" />
 

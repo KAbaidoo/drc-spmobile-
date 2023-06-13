@@ -8,7 +8,7 @@ import io.bewsys.spmobile.data.prefsstore.PreferencesManager
 import io.bewsys.spmobile.data.remote.*
 import io.bewsys.spmobile.ui.dashboard.DashboardViewModel
 import io.bewsys.spmobile.ui.households.HouseholdsViewModel
-import io.bewsys.spmobile.ui.households.forms.developmentalform.SharedDevelopmentalFormViewModel
+import io.bewsys.spmobile.ui.households.form.SharedDevelopmentalFormViewModel
 import io.bewsys.spmobile.ui.auth.LoginViewModel
 import io.bewsys.spmobile.ui.nonconsenting.NonConsentingViewModel
 import io.bewsys.spmobile.ui.nonconsenting.form.AddNonConsentingHouseholdViewModel
@@ -58,10 +58,10 @@ val appModule = module {
 
     viewModel { DashboardViewModel(get(),get(),get()) }
     viewModel { HouseholdsViewModel(get(), get(),get()) }
-    viewModel { NonConsentingViewModel(get(), get()) }
+    viewModel { NonConsentingViewModel(get(), get(),get()) }
     viewModel { ProfileViewModel(get(),get(),get()) }
     viewModel { TargetingViewModel(get()) }
-    viewModel { AddNonConsentingHouseholdViewModel(get(), get(), get(), get())}
+    viewModel { AddNonConsentingHouseholdViewModel(get(), get(), get())}
     viewModel { SharedDevelopmentalFormViewModel(get(), get(),get(),get(),get()) }
     viewModel { LoginViewModel(get(), get()) }
     viewModel { MainViewModel(get()) }

@@ -1,9 +1,15 @@
 package io.bewsys.spmobile.ui.nonconsenting
 
 import android.os.Bundle
+import android.util.Log
+import android.view.Menu
+import android.view.MenuInflater
+import android.view.MenuItem
 import android.view.View
+import androidx.core.view.MenuProvider
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.setFragmentResultListener
+import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -11,6 +17,7 @@ import com.google.android.material.snackbar.Snackbar
 import io.bewsys.spmobile.R
 import io.bewsys.spmobile.data.local.NonConsentHouseholdModel
 import io.bewsys.spmobile.databinding.FragmentNonConsentingBinding
+import io.bewsys.spmobile.ui.households.HouseholdsFragment
 import io.bewsys.spmobile.util.exhaustive
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
@@ -69,6 +76,28 @@ class NonConsentingFragment : Fragment(R.layout.fragment_non_consenting) ,NonCon
                 }
             }.exhaustive
         }
+        // set up menu
+        val menuHost = requireActivity()
+        menuHost.addMenuProvider(object : MenuProvider {
+            override fun onCreateMenu(menu: Menu, menuInflater: MenuInflater) {
+                menuInflater.inflate(R.menu.fragment_households_menu, menu)
+
+            }
+
+            override fun onMenuItemSelected(menuItem: MenuItem): Boolean {
+                return when (menuItem.itemId) {
+
+                    R.id.action_upload_households -> {
+//                        Log.d(HouseholdsFragment.TAG, "Upload clicked")
+
+//                        viewModel.onUploadMenuItemClicked()
+                        true
+                    }
+
+                    else -> false
+                }
+            }
+        }, viewLifecycleOwner, Lifecycle.State.RESUMED)
 
         setFragmentResultListener("add_non_consenting_household_request") { _, bundle ->
             val result = bundle.getInt("add_non_consenting_household_result")

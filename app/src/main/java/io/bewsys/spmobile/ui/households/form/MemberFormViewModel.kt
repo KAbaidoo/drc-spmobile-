@@ -1,4 +1,4 @@
-package io.bewsys.spmobile.ui.households.forms.developmentalform
+package io.bewsys.spmobile.ui.households.form
 
 
 import androidx.lifecycle.*
@@ -81,7 +81,11 @@ class MemberFormViewModel(
         }
 
     fun onHousholdSelected(nonConsentingHousehold: NonConsentHouseholdModel)= viewModelScope.launch {
-        _nonConsentingEventChannel.send(NonConsentingEvent.NavigateToEditNonConsentingHouseholdsForm(nonConsentingHousehold))
+        _nonConsentingEventChannel.send(
+            NonConsentingEvent.NavigateToEditNonConsentingHouseholdsForm(
+                nonConsentingHousehold
+            )
+        )
     }
 
     sealed class NonConsentingEvent {
