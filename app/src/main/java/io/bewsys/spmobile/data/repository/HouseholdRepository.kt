@@ -244,7 +244,7 @@ class HouseholdRepository(
 
         householdModel.apply {
             householdQueries.insertHousehold(
-                id = remote_id?.toLong(),
+                id = id,
                 survey_date = survey_date,
                 respondent_firstname = respondent_firstname,
                 respondent_middlename = respondent_middlename,
@@ -469,7 +469,7 @@ class HouseholdRepository(
                     remoteId = body.household!!.id.toString(),
                     surveyNo = body.household.survey_no
                 )
-                updateMembersItem(itemId.toString())
+//                updateMembersItem(itemId.toString())
 
                 emit(Resource.Success(body))
             } else {

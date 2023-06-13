@@ -2,16 +2,12 @@ package io.bewsys.spmobile.ui.households.forms.developmentalform
 
 import android.content.Context
 import android.net.Uri
-import android.os.Build
 import android.os.Bundle
-import android.util.Log
 
 import android.view.View
 import android.webkit.MimeTypeMap
 import android.widget.ArrayAdapter
 import android.widget.AutoCompleteTextView
-import androidx.annotation.RequiresApi
-import androidx.core.os.bundleOf
 
 import androidx.core.view.isVisible
 import androidx.core.widget.addTextChangedListener
@@ -20,13 +16,11 @@ import androidx.fragment.app.setFragmentResultListener
 
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
-import androidx.navigation.fragment.navArgs
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
 import com.google.android.material.datepicker.MaterialDatePicker
 import io.bewsys.spmobile.R
 import io.bewsys.spmobile.databinding.FragmentAddMembersDBinding
-import io.bewsys.spmobile.util.RealPathUtil.getRealPathFromURI
 import kotlinx.coroutines.flow.collectLatest
 import org.koin.androidx.navigation.koinNavGraphViewModel
 import java.io.File

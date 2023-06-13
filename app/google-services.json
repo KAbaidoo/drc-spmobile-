@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "1096518451564",
+    "project_id": "drc-mobile-v2",
+    "storage_bucket": "drc-mobile-v2.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1096518451564:android:7cc4bb20ba8632b0223349",
+        "android_client_info": {
+          "package_name": "io.bewsys.spmobile"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1096518451564-5g7tprae0b4c8g9f1dr62vfk5pkon8f9.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDxosxONVe3xjBmQEaNdYo9APZ0xXfEe70"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1096518451564-5g7tprae0b4c8g9f1dr62vfk5pkon8f9.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

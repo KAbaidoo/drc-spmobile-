@@ -26,7 +26,8 @@ import io.bewsys.spmobile.util.exhaustive
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 
-class HouseholdsFragment : Fragment(R.layout.fragment_households),HouseholdAdapter.OnItemClickListener {
+class HouseholdsFragment : Fragment(R.layout.fragment_households),
+    HouseholdAdapter.OnItemClickListener {
     val viewModel: HouseholdsViewModel by viewModel()
     var isOpen: Boolean = false
 
@@ -42,6 +43,7 @@ class HouseholdsFragment : Fragment(R.layout.fragment_households),HouseholdAdapt
         binding.apply {
             fabAddRegistration.setOnClickListener {
                 viewModel.onDevelopmentalFabClicked()
+
             }
 
             recyclerViewHouseholds.apply {
@@ -51,61 +53,80 @@ class HouseholdsFragment : Fragment(R.layout.fragment_households),HouseholdAdapt
             }
 
 
-        viewModel.households.observe(viewLifecycleOwner){
-            householdAdapter.submitList(it)
-        }
+            viewModel.households.observe(viewLifecycleOwner) {
+                householdAdapter.submitList(it)
+            }
 
 
-        viewLifecycleOwner.lifecycleScope.launchWhenStarted {
-            viewModel.householdsEventEvent.collect { event ->
-                when (event) {
-                    is HouseholdsViewModel.HouseholdEvent.AddRegistrationClicked -> {
-                        if (!isOpen) showActions(binding) else hideActions(binding)
-                    }
-                    is HouseholdsViewModel.HouseholdEvent.DevelopmentalClicked -> {
-                      val action =HouseholdsFragmentDirections.actionNavHouseholdToFormNavigation(
-                          title = getString(R.string.add_household),
-                          household = null
-                      )
-                        findNavController().navigate(action) }
-                    is HouseholdsViewModel.HouseholdEvent.HumanitarianClicked -> {
-                        val action = HouseholdsFragmentDirections.actionNavHouseholdToHumanitarianFormFragment()
-                        findNavController().navigate(action)
-                    }
-                    is HouseholdsViewModel.HouseholdEvent.ShowSnackMessage -> Snackbar.make(
-                        requireView(),
-                        event.msg,
-                        Snackbar.LENGTH_SHORT
-                    ).show()
-                    is HouseholdsViewModel.HouseholdEvent.NavigateToHouseholdDetailScreen -> {
-                        val action = HouseholdsFragmentDirections.actionNavHouseholdToHouseholdDetailFragment(
-                            event.householdModel
-                        )
-                        findNavController().navigate(action)
+            viewLifecycleOwner.lifecycleScope.launchWhenStarted {
+                viewModel.householdsEventEvent.collect { event ->
+                    when (event) {
+                        is HouseholdsViewModel.HouseholdEvent.AddRegistrationClicked -> {
+                            if (!isOpen) showActions(binding) else hideActions(binding)
+                        }
 
-                    }
+                        is HouseholdsViewModel.HouseholdEvent.DevelopmentalClicked -> {
+                            val action =
+                                HouseholdsFragmentDirections.actionNavHouseholdToFormNavigation(
+                                    title = getString(R.string.add_household),
+                                    household = null
+                                )
+                            findNavController().navigate(action)
+                        }
+
+                        is HouseholdsViewModel.HouseholdEvent.HumanitarianClicked -> {
+                            val action =
+                                HouseholdsFragmentDirections.actionNavHouseholdToHumanitarianFormFragment()
+                            findNavController().navigate(action)
+                        }
+
+                        is HouseholdsViewModel.HouseholdEvent.ShowSnackMessage -> Snackbar.make(
+                            requireView(),
+                            event.msg,
+                            Snackbar.LENGTH_SHORT
+                        ).show()
+
+                        is HouseholdsViewModel.HouseholdEvent.NavigateToHouseholdDetailScreen -> {
+                            val action =
+                                HouseholdsFragmentDirections.actionNavHouseholdToHouseholdDetailFragment(
+                                    event.householdModel
+                                )
+                            findNavController().navigate(action)
+
+                        }
 //
-                    is HouseholdsViewModel.HouseholdEvent.Exception -> {
-                        progressBar.isVisible = false
-                        val action  = HouseholdsFragmentDirections.actionGlobalLoginDialogFragment(event.errMsg)
-                        findNavController().navigate(action)
-                    }
-                    is HouseholdsViewModel.HouseholdEvent.Failure -> {
-                        progressBar.isVisible = false
-                        val action  = HouseholdsFragmentDirections.actionGlobalLoginDialogFragment(event.errMsg)
-                        findNavController().navigate(action)
-                    }
+                        is HouseholdsViewModel.HouseholdEvent.Exception -> {
+                            progressBar.isVisible = false
+                            val action =
+                                HouseholdsFragmentDirections.actionGlobalLoginDialogFragment(event.errMsg)
+                            findNavController().navigate(action)
+                        }
 
-                    is HouseholdsViewModel.HouseholdEvent.Loading -> progressBar.isVisible = true
+                        is HouseholdsViewModel.HouseholdEvent.Failure -> {
+                            progressBar.isVisible = false
+                            val action =
+                                HouseholdsFragmentDirections.actionGlobalLoginDialogFragment(event.errMsg)
+                            findNavController().navigate(action)
+                        }
 
-                    is HouseholdsViewModel.HouseholdEvent.Successful ->{
-                        progressBar.isVisible = false
-                        val action  = HouseholdsFragmentDirections.actionGlobalLoginDialogFragment(event.errMsg)
-                        findNavController().navigate(action)
+                        is HouseholdsViewModel.HouseholdEvent.Loading -> progressBar.isVisible =
+                            true
+
+                        is HouseholdsViewModel.HouseholdEvent.Successful -> {
+                            progressBar.isVisible = false
+
+                            val msg = getString(
+                                R.string.upload_success_message,
+                                "${event.households}",
+                                "${event.members}"
+                            )
+                            val action =
+                                HouseholdsFragmentDirections.actionGlobalLoginDialogFragment(msg)
+                            findNavController().navigate(action)
+                        }
                     }
-                }
-            }.exhaustive
-        }
+                }.exhaustive
+            }
 
         }
 // set up menu
@@ -168,7 +189,8 @@ class HouseholdsFragment : Fragment(R.layout.fragment_households),HouseholdAdapt
 
         viewModel.onHouseholdSelected(householdModel)
     }
-    companion object{
+
+    companion object {
         const val TAG = "HouseholdsFragment"
 
     }

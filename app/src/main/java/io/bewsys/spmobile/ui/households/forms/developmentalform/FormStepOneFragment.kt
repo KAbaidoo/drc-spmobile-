@@ -48,7 +48,9 @@ class FormStepOneFragment : Fragment(R.layout.fragment_add_household_one_consent
 
         household?.let {
             viewModel.apply {
-                viewModel.id = household?.id
+                id = household?.id
+                remoteId = household?.remote_id ?: ""
+                status = household?.status ?: ""
                 consent = household?.consent ?: ""
                 remoteId = household?.remote_id ?: ""
                 registrationType = household?.initial_registration_type ?: ""
@@ -65,12 +67,12 @@ class FormStepOneFragment : Fragment(R.layout.fragment_add_household_one_consent
                 respondentVoterId = household.respondent_voter_id ?: ""
                 respondentPhoneNo = household?.respondent_phone_number ?: ""
 
-                address = household?.address ?: ""
-                cac = household?.cac ?: ""
+                address = household.address ?: ""
+                cac = household.cac ?: ""
 
 
-                lon = household?.gps_longitude ?: ""
-                lat = household?.gps_latitude ?: ""
+                lon = household.gps_longitude ?: ""
+                lat = household.gps_latitude ?: ""
 
 
                 province = household.province_name ?: ""
@@ -79,6 +81,13 @@ class FormStepOneFragment : Fragment(R.layout.fragment_add_household_one_consent
                 groupment = household.groupement_name ?: ""
                 healthArea = household.health_area_name ?: ""
                 healthZone = household.health_zone_name ?: ""
+
+                 provinceId = household.province_id.toString()
+                 communityId = household.community_id.toString()
+                 groupmentId = household.groupment_id.toString()
+                 territoryId = household.territory_id.toString()
+                 healthAreaId = household.health_area_id.toString()
+                 healthZoneId = household.health_zone_id.toString()
 
                 cookingFuel = household.type_of_fuel_used_for_household_cooking ?: ""
                 soilMaterial = household.main_soil_material ?: ""
@@ -90,7 +99,7 @@ class FormStepOneFragment : Fragment(R.layout.fragment_add_household_one_consent
                 placeOfResidence = household.area_of_residence ?: ""
                 hasLiveStock = household.has_livestock ?: ""
 
-                occupancyStatus = household.occupation_status_of_current_accommodation?:""
+                occupancyStatus = household.occupation_status_of_current_accommodation ?: ""
 
                 migrationStatus = household?.household_migration_status ?: ""
                 unitOfMigrationDuration = household?.unit_of_migration_duration ?: ""
@@ -220,6 +229,16 @@ class FormStepOneFragment : Fragment(R.layout.fragment_add_household_one_consent
                 cultivatedLandOwned = household?.amount_of_cultivable_land_owned ?: ""
                 fanOwned = household?.number_of_fan_owned ?: ""
 
+//                form f
+                sourceOfDrinkingWater = household?.main_source_of_household_drinking_water ?: ""
+                otherSourceOfDrinkingWater =
+                    household?.other_main_source_of_household_drinking_water ?: ""
+                typeOfToilet = household?.type_of_household_toilet ?: ""
+                otherTypeOfToilet = household?.other_type_of_household_toilet ?: ""
+                wasteDisposal = household?.method_of_waste_disposal ?: ""
+                otherWasteDisposal = household?.other_method_of_waste_disposal ?: ""
+                placeForHandWashing = household?.place_to_wash_hands ?: ""
+
 
 //          init  step five fields
             }
@@ -264,6 +283,7 @@ class FormStepOneFragment : Fragment(R.layout.fragment_add_household_one_consent
                     rbYes.id -> {
                         viewModel.consent = rbYes.text.toString()
                     }
+
                     else -> {
                         viewModel.consent = rbNo.text.toString()
                     }

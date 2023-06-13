@@ -71,13 +71,13 @@ class MainActivity : AppCompatActivity()  {
         val header: View = navigationView.getHeaderView(0)
         val tv: TextView = header.findViewById(R.id.tv_username)
 
-        lifecycleScope.launchWhenStarted {
-            viewModel.userState.collectLatest {
-                if (it.not()) {
-                    navController.navigate(R.id.nav_login)
-                }
-            }
-        }
+//        lifecycleScope.launchWhenStarted {
+//            viewModel.userState.collectLatest {
+//                if (it.not()) {
+//                    navController.navigate(R.id.nav_login)
+//                }
+//            }
+//        }
         lifecycleScope.launchWhenStarted {
             viewModel.getUser().collectLatest {
                 tv.text = it.name ?: "username"

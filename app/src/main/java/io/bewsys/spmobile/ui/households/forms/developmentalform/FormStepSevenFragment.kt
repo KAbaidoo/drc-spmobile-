@@ -6,11 +6,9 @@ import android.widget.TextView
 import androidx.core.os.bundleOf
 import androidx.core.view.setPadding
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import io.bewsys.spmobile.R
 import io.bewsys.spmobile.databinding.FragmentAddHouseholdSevenReview1Binding
-import kotlinx.coroutines.flow.collectLatest
 import org.koin.androidx.navigation.koinNavGraphViewModel
 
 class FormStepSevenFragment : Fragment(R.layout.fragment_add_household_seven_review1) {

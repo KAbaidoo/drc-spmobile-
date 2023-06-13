@@ -369,5 +369,6 @@
     <string name="take_photo">Capture</string>
     <string name="upload">Télécharger</string>
     <string name="camera_preview">Aperçu de la caméra</string>
+    <string name="upload_success_message">%s ménages et %s membres téléchargé!</string>
 
 </resources>

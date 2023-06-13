@@ -7,7 +7,6 @@ import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import io.bewsys.spmobile.data.local.MemberModel
 import io.bewsys.spmobile.databinding.ItemMemberBinding
-import io.bewsys.spmobile.databinding.ItemNonConsentingHouseholdBinding
 
 
 class MembersAdapter() :

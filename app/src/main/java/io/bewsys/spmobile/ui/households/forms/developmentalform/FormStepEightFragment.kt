@@ -1,23 +1,16 @@
 package io.bewsys.spmobile.ui.households.forms.developmentalform
 
 import android.os.Bundle
-import android.view.Menu
-import android.view.MenuInflater
-import android.view.MenuItem
 import android.view.View
 import androidx.core.os.bundleOf
-import androidx.core.view.MenuProvider
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.setFragmentResult
-import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import com.google.android.material.snackbar.Snackbar
 import io.bewsys.spmobile.R
 import io.bewsys.spmobile.databinding.FragmentAddHouseholdEightReview2Binding
-import kotlinx.coroutines.flow.collectLatest
 import org.koin.androidx.navigation.koinNavGraphViewModel
-import org.koin.androidx.viewmodel.ext.android.activityViewModel
 
 class FormStepEightFragment : Fragment(R.layout.fragment_add_household_eight_review2) {
     private val viewModel: SharedDevelopmentalFormViewModel by koinNavGraphViewModel(R.id.form_navigation)
@@ -34,7 +27,6 @@ class FormStepEightFragment : Fragment(R.layout.fragment_add_household_eight_rev
                 tvTypeOfToilet.append(": $typeOfToilet")
                 tvWasteDisposal.append(": $wasteDisposal")
                 tvPlaceForHandWashing.append(": $placeForHandWashing")
-
 
                 tvMonthlyIncomeNeeded.append(": $minimumMonthlyIncomeNecessaryLiveWithoutDifficulties")
                 tvMonthlyIncome.append(": $householdMonthlyIncome")

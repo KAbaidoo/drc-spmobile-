@@ -383,5 +383,6 @@
     <string name="take_photo">Capture</string>
     <string name="upload">Upload</string>
     <string name="camera_preview">Camera Preview</string>
+    <string name="upload_success_message">%s households and %s members uploaded!</string>
 
 </resources>

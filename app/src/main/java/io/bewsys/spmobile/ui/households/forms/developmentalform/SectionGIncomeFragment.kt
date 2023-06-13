@@ -1,10 +1,7 @@
 package io.bewsys.spmobile.ui.households.forms.developmentalform
 
-import android.annotation.SuppressLint
 import android.os.Bundle
 import android.view.*
-import android.widget.ArrayAdapter
-import android.widget.AutoCompleteTextView
 import androidx.core.os.bundleOf
 
 import androidx.core.widget.addTextChangedListener
@@ -13,12 +10,8 @@ import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import io.bewsys.spmobile.R
 import io.bewsys.spmobile.databinding.FragmentHouseholdIncomeGBinding
-import io.bewsys.spmobile.databinding.FragmentHousingEBinding
-import io.bewsys.spmobile.databinding.FragmentWaterAndSanitationFBinding
 import kotlinx.coroutines.flow.collectLatest
 import org.koin.androidx.navigation.koinNavGraphViewModel
-
-import java.util.*
 
 class SectionGIncomeFragment : Fragment(R.layout.fragment_household_income_g) {
 

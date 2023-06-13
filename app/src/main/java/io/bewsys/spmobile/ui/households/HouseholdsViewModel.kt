@@ -300,9 +300,8 @@ class HouseholdsViewModel(
                 is Resource.Loading -> _householdsEventChannel.send(HouseholdEvent.Loading)
                 is Resource.Success -> {
                     val data = results.data as BulkUploadResponse
-                    val msg =
-                        "${data.data?.households?.size} households and ${data.data?.members?.size} members uploaded!"
-                    _householdsEventChannel.send(HouseholdEvent.Successful(msg))
+
+                    _householdsEventChannel.send(HouseholdEvent.Successful(households = data.data?.households?.size!!, members = data.data?.members?.size!!))
                 }
 
                 is Resource.Failure -> {
@@ -332,7 +331,7 @@ class HouseholdsViewModel(
         data class ShowSnackMessage(val msg: String) : HouseholdEvent()
 
         data class Exception(val errMsg: String) : HouseholdEvent()
-        data class Successful(val errMsg: String) : HouseholdEvent()
+        data class Successful(val households: Int, val members:Int) : HouseholdEvent()
         data class Failure(val errMsg: String) : HouseholdEvent()
         object Loading : HouseholdEvent()
 

@@ -7,6 +7,9 @@ plugins {
     id 'app.cash.sqldelight'
     id 'kotlin-parcelize'
     id 'org.jetbrains.kotlin.plugin.serialization'
+
+    id 'com.google.firebase.crashlytics'
+    id 'com.google.gms.google-services'
 }
 
 android {
@@ -19,14 +22,6 @@ android {
         applicationId "io.bewsys.spmobile"
         minSdkVersion rootProject.minSdkVersion
         targetSdkVersion rootProject.targetSdkVersion
-
-//        configurations.all {
-//            resolutionStrategy {
-////                force 'androidx.core:core-ktx:1.6.0'
-//                force 'androidx.appcompat:appcompat-resources:1.4.1'
-//                force 'androidx.appcompat:appcompat:1.4.1'
-//            }
-//        }
 
         versionCode 1
         versionName "1.0"
@@ -59,6 +54,16 @@ android {
 
 dependencies {
     // Default dependencies
+
+    // Import the BoM for the Firebase platform
+    implementation platform('com.google.firebase:firebase-bom:32.1.0')
+
+    // Add the dependencies for the Crashlytics and Analytics libraries
+    // When using the BoM, you don't specify versions in Firebase library dependencies
+    implementation 'com.google.firebase:firebase-crashlytics-ktx'
+    implementation 'com.google.firebase:firebase-analytics-ktx'
+
+
     implementation "androidx.core:core-ktx:$ktxVersion"
     implementation "androidx.appcompat:appcompat:$appCompatVersion"
     implementation "androidx.appcompat:appcompat-resources:$appCompatVersion"

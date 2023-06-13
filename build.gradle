@@ -59,6 +59,9 @@ buildscript {
         classpath "androidx.navigation:navigation-safe-args-gradle-plugin:$navigation_version"
         classpath "app.cash.sqldelight:gradle-plugin:$sqldelight_version"
         classpath "org.jetbrains.kotlin:kotlin-serialization:$kotlinVersion"
+        // Add the dependency for the Crashlytics Gradle plugin
+        classpath 'com.google.firebase:firebase-crashlytics-gradle:2.9.5'
+        classpath 'com.google.gms:google-services:4.3.15'
     }
 }
 

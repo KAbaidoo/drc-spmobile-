@@ -23,7 +23,6 @@ import io.bewsys.spmobile.databinding.FragmentLocationOfHouseholdBBinding
 import io.bewsys.spmobile.util.LocationProvider
 import io.bewsys.spmobile.util.swap
 import kotlinx.coroutines.flow.collectLatest
-import org.koin.android.ext.android.inject
 import org.koin.androidx.navigation.koinNavGraphViewModel
 
 import java.util.*
@@ -46,12 +45,18 @@ class SectionBLocationFragment : Fragment(R.layout.fragment_location_of_househol
 
     private var currentLocation: Location? = null
 
-    private val locationProvider: LocationProvider by inject()
-
     private var _binding: FragmentLocationOfHouseholdBBinding? = null
-
+    private var locationProvider: LocationProvider ? = null
     private val binding get() = _binding!!
 
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? {
+        locationProvider = LocationProvider(requireActivity())
+        return super.onCreateView(inflater, container, savedInstanceState)
+    }
 
     @SuppressLint("MissingPermission")
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -59,15 +64,13 @@ class SectionBLocationFragment : Fragment(R.layout.fragment_location_of_househol
 
         _binding = FragmentLocationOfHouseholdBBinding.bind(view)
 
-
         if (hasLocationPermission()) {
-            locationProvider.location.observe(viewLifecycleOwner) {
+            locationProvider?.getLocation {
                 currentLocation = it
             }
         } else {
             requestLocationPermission()
         }
-
 
         viewModel.provinces.observe(viewLifecycleOwner) {
             provinces.swap(it)
@@ -112,12 +115,6 @@ class SectionBLocationFragment : Fragment(R.layout.fragment_location_of_househol
             }
             til_Lat = tilLat
             til_Lon = tilLon
-
-            val tils = listOf(
-                tilVillageDistrict,
-                tilAddress,
-                tilCac
-            )
 
             when (viewModel.registrationType) {
                 rbGeneral.text -> rgInitialRegistrationType.check(rbGeneral.id)
@@ -172,9 +169,7 @@ class SectionBLocationFragment : Fragment(R.layout.fragment_location_of_househol
                         viewModel.placeOfResidence = rbRural.text.toString()
                     }
                 }
-
             }
-
 
 
             tilAddress.editText?.setOnFocusChangeListener { view, hasFocus ->
@@ -194,8 +189,6 @@ class SectionBLocationFragment : Fragment(R.layout.fragment_location_of_househol
             }
 
 
-
-
             (autoCompleteTextViewProvince as? AutoCompleteTextView)?.apply {
                 setAdapter(
                     ArrayAdapter(context, dropdownLayout, provinces).also {
@@ -209,6 +202,7 @@ class SectionBLocationFragment : Fragment(R.layout.fragment_location_of_househol
                     }
                 )
             }
+
             (autoCompleteTextViewCommunity as? AutoCompleteTextView)?.apply {
                 setAdapter(
                     ArrayAdapter(context, dropdownLayout, communities)
@@ -222,6 +216,7 @@ class SectionBLocationFragment : Fragment(R.layout.fragment_location_of_househol
                         }
                 )
             }
+
             (autoCompleteTextViewTerritory as? AutoCompleteTextView)?.apply {
                 setAdapter(
                     ArrayAdapter(context, dropdownLayout, territories)
@@ -233,6 +228,7 @@ class SectionBLocationFragment : Fragment(R.layout.fragment_location_of_househol
                     }
                 }
             }
+
             (autoCompleteTextGroupment as? AutoCompleteTextView)?.apply {
                 setAdapter(
                     ArrayAdapter(context, dropdownLayout, groupments)
@@ -245,6 +241,7 @@ class SectionBLocationFragment : Fragment(R.layout.fragment_location_of_househol
                     }
                 }
             }
+
             (actHealthZone as? AutoCompleteTextView)?.apply {
                 setAdapter(
                     ArrayAdapter(context, dropdownLayout, healthZones)
@@ -252,22 +249,24 @@ class SectionBLocationFragment : Fragment(R.layout.fragment_location_of_househol
                     addTextChangedListener {
 
                         viewModel.healthZone = it.toString()
-                        viewModel.loadHealthAreasWithName(it.toString())
+                        viewModel.loadHealthAreasWithName()
 
                     }
                 }
             }
+
             (actHealthArea as? AutoCompleteTextView)?.apply {
                 setAdapter(
                     ArrayAdapter(context, dropdownLayout, healthAreas)
                 ).also {
                     addTextChangedListener {
                         viewModel.healthArea = it.toString()
-                        viewModel.getHealthAreaId(it.toString())
+                        viewModel.getHealthAreaId()
                         getLastKnownLocation()
                     }
                 }
             }
+
             val title =
                 if (viewModel.household != null) getString(R.string.edit_household) else getString(R.string.add_household)
 
@@ -291,7 +290,9 @@ class SectionBLocationFragment : Fragment(R.layout.fragment_location_of_househol
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
-        locationProvider.removeLocationUpdates()
+
+        locationProvider?.removeLocationUpdates()
+
     }
 
     private fun getLastKnownLocation() {

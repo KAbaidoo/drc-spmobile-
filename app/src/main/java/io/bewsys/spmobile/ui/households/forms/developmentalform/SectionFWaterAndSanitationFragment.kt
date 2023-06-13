@@ -1,6 +1,5 @@
 package io.bewsys.spmobile.ui.households.forms.developmentalform
 
-import android.annotation.SuppressLint
 import android.os.Bundle
 import android.view.*
 import android.widget.ArrayAdapter
@@ -12,12 +11,9 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import io.bewsys.spmobile.R
-import io.bewsys.spmobile.databinding.FragmentHousingEBinding
 import io.bewsys.spmobile.databinding.FragmentWaterAndSanitationFBinding
 import kotlinx.coroutines.flow.collectLatest
 import org.koin.androidx.navigation.koinNavGraphViewModel
-
-import java.util.*
 
 class SectionFWaterAndSanitationFragment : Fragment(R.layout.fragment_water_and_sanitation_f) {
 

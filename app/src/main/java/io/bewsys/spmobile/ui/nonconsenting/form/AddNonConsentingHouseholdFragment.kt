@@ -61,21 +61,30 @@ class AddNonConsentingHouseholdFragment : Fragment(R.layout.fragment_add_non_con
     private val viewModel: AddNonConsentingHouseholdViewModel by viewModel()
     private var currentLocation: Location? = null
 
-    private val locationProvider: LocationProvider by inject()
+    private var locationProvider: LocationProvider? = null
 
-
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? {
+        locationProvider = LocationProvider((requireActivity()))
+        return super.onCreateView(inflater, container, savedInstanceState)
+    }
     @SuppressLint("MissingPermission")
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         val binding = FragmentAddNonConsentingBinding.bind(view)
 
         if (hasLocationPermission()) {
-            locationProvider?.location?.observe(viewLifecycleOwner) { loc: Location? ->
+            locationProvider?.getLocation{ loc: Location? ->
                 currentLocation = loc
             }
         } else {
             requestLocationPermission()
         }
+
+        getLastKnownLocation()
 
         val household = args.household
         viewModel.household = household
@@ -232,7 +241,7 @@ class AddNonConsentingHouseholdFragment : Fragment(R.layout.fragment_add_non_con
             }
         }
 
-        getLastKnownLocation()
+
     }//end of onCreateView
 
     private fun getLastKnownLocation() {
@@ -240,8 +249,8 @@ class AddNonConsentingHouseholdFragment : Fragment(R.layout.fragment_add_non_con
             viewModel.lon = it.longitude.toString()
             viewModel.lat = it.latitude.toString()
 
-            til_Lat?.editText?.setText( it.longitude.toString())
-            til_Lon?.editText?.setText(it.latitude.toString())
+            til_Lat?.editText?.setText( it.longitude.toString().subSequence(0,7))
+            til_Lon?.editText?.setText(it.latitude.toString().subSequence(0,7))
         }
     }
 

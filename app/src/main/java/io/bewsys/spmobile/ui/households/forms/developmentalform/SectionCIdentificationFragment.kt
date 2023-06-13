@@ -284,7 +284,7 @@ class SectionCIdentificationFragment : Fragment(R.layout.fragment_identification
                 tilHouseholdHeadMiddlename.editText?.setText(headMiddleName)
                 tilHouseholdHeadLastname.editText?.setText(headLastName)
                 tilHouseholdHeadAge.editText?.setText(headAge)
-                tilRespondentVoterId.editText?.setText(headVoterId)
+                tilHouseholdHeadVoterIdCard.editText?.setText(headVoterId)
                 tilHouseholdHeadPhoneNumber.editText?.setText(headPhoneNo)
 
                 tilRespondentFirstname.editText?.setText(respondentFirstName)

@@ -32,9 +32,14 @@ class SharedDevelopmentalFormViewModel(
     private val memberRepository: MemberRepository
 ) : ViewModel() {
 
-
+    //    private val _location = MutableLiveData<Location>()
+//    val location: LiveData<Location>
+//        get() = _location
+//
     var household: HouseholdModel? = null
     var id: Long? = null
+    var remoteId = ""
+    var status = ""
 
     private val workManager = WorkManager.getInstance(application)
 
@@ -85,12 +90,6 @@ class SharedDevelopmentalFormViewModel(
     var groupment = ""
     var healthZone = ""
     var healthArea = ""
-
-    var remoteId: String? = state["remoteId"] ?: ""
-        set(value) {
-            state["remoteId"] = value
-            field = value
-        }
 
     var canoeOwned: String? = ""
     var otherLivestockQty: String = ""
@@ -242,9 +241,9 @@ class SharedDevelopmentalFormViewModel(
         }
     }
 
-    fun loadHealthAreasWithName(healthZoneName: String) {
+    fun loadHealthAreasWithName() {
         viewModelScope.launch {
-            dashboardRepository.getHealthZoneByName(healthZoneName).collectLatest {
+            dashboardRepository.getHealthZoneByName(healthZone).collectLatest {
                 healthZoneId = it.firstOrNull()?.id.toString()
 
                 dashboardRepository.getHealthAreasList(healthZoneId)
@@ -256,11 +255,10 @@ class SharedDevelopmentalFormViewModel(
         }
     }
 
-    fun getHealthAreaId(healthAreaName: String) {
+    fun getHealthAreaId() {
         viewModelScope.launch {
-            dashboardRepository.getHealthAreaByName(healthAreaName).collectLatest {
+            dashboardRepository.getHealthAreaByName(healthArea).collectLatest {
                 healthAreaId = it.firstOrNull()?.id.toString()
-
             }
         }
     }
@@ -814,7 +812,7 @@ class SharedDevelopmentalFormViewModel(
             health_area_id = healthAreaId,
             health_zone_id = healthZoneId,
             respondent_type = "",
-            status = "",
+            status = status,
             respondent_sex = respondentSex,
             remote_id = remoteId
         ).also {
@@ -1002,11 +1000,13 @@ class SharedDevelopmentalFormViewModel(
     }
 
     private fun updateHousehold(newHouseholdModel: HouseholdModel) = viewModelScope.launch {
-//        householdRepository.insertHousehold(newHouseholdModel)
+
         householdRepository.updateHousehold(newHouseholdModel)
 
-        //update household with work manager
-        id?.let { updateHousehold(it) }
+//        //update household with work manager
+//        if (newHouseholdModel.status == "submitted") {
+//            updateHousehold(id!!)
+//        }
 
         addHouseholdEventChannel.send(
             AddDevelopmentalHouseholdEvent.NavigateBackWithResults(
