@@ -65,6 +65,9 @@ annotation class ApplicationScope
 fun provideApplicationScope() = CoroutineScope(SupervisorJob())
 
 
+fun String.isValidPhoneNumber() = this.length == 9
+
+
 object RealPathUtil {
     fun getRealPath(context: Context, fileUri: Uri): String? {
         val realPath: String?

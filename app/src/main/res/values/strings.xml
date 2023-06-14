@@ -116,23 +116,23 @@
     <string name="household_head_school_attendance">Household head school attendance</string>
     <string name="head_age_known">Head age known</string>
     <string name="is_head_respondent">Is household head the respondent?</string>
-    <string name="address"><b>B.9</b> Address*</string>
+    <string name="address"><b>B.9</b> Address *</string>
     <string name="village_or_quartier"><b>B.8</b> Village or quartier *</string>
     <string name="initial_registration_type">Registration type *</string>
     <string name="area_of_residence"><b>B.1</b> Place of residence</string>
-    <string name="community"><b>B.4</b> Community</string>
+    <string name="community"><b>B.4</b> Community *</string>
     <string name="community_label"> Community</string>
-    <string name="territory"><b>B.3</b> Territory</string>
+    <string name="territory"><b>B.3</b> Territory *</string>
     <string name="territory_label"> Territory</string>
-    <string name="health_zone"><b>B.6</b> Health zone</string>
+    <string name="health_zone"><b>B.6</b> Health zone *</string>
     <string name="household_head_middlename"><b>C.1.2</b> Household head Middlename</string>
     <string name="household_head_sex"><b>C.5</b> Household head sex</string>
     <string name="household_head_firstname"><b>C.1.1</b> Household head Firstname \*</string>
-    <string name="province"><b>B.2</b> Province</string>
+    <string name="province"><b>B.2</b> Province *</string>
     <string name="province_label"> Province</string>
-    <string name="groupment"><b>B.5</b> Groupment</string>
+    <string name="groupment"><b>B.5</b> Groupment *</string>
     <string name="groupment_label"> Groupment</string>
-    <string name="health_area"><b>B.7</b> Health area</string>
+    <string name="health_area"><b>B.7</b> Health area *</string>
     <string name="non_consent_household_form">Non-Consenting Household Form</string>
     <string name="hint_choose">Choose</string>
     <string name="GPS_Longitude"><b>B.11</b> GPS Lon</string>
@@ -384,5 +384,6 @@
     <string name="upload">Upload</string>
     <string name="camera_preview">Camera Preview</string>
     <string name="upload_success_message">%s households and %s members uploaded!</string>
+    <string name="phone_number_helper_text">Enter only 9 digits</string>
 
 </resources>

@@ -74,11 +74,6 @@ class HouseholdsFragment : Fragment(R.layout.fragment_households),
                             findNavController().navigate(action)
                         }
 
-                        is HouseholdsViewModel.HouseholdEvent.HumanitarianClicked -> {
-                            val action =
-                                HouseholdsFragmentDirections.actionNavHouseholdToHumanitarianFormFragment()
-                            findNavController().navigate(action)
-                        }
 
                         is HouseholdsViewModel.HouseholdEvent.ShowSnackMessage -> Snackbar.make(
                             requireView(),

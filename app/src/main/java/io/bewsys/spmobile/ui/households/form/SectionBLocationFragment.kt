@@ -193,10 +193,11 @@ class SectionBLocationFragment : Fragment(R.layout.fragment_location_of_househol
                 setAdapter(
                     ArrayAdapter(context, dropdownLayout, provinces).also {
                         addTextChangedListener {
-
-                            viewModel.province = it.toString()
-                            viewModel.loadTerritoriesWithName(it.toString())
-
+                            viewModel.apply {
+                                province = it.toString()
+                                loadTerritoriesWithName(it.toString())
+                                sectionBHasBlankFields()
+                            }
                             getLastKnownLocation()
                         }
                     }
@@ -208,8 +209,11 @@ class SectionBLocationFragment : Fragment(R.layout.fragment_location_of_househol
                     ArrayAdapter(context, dropdownLayout, communities)
                         .also {
                             addTextChangedListener {
-                                viewModel.community = it.toString()
-                                viewModel.loadGroupmentsWithName(it.toString())
+                                viewModel.apply {
+                                    community = it.toString()
+                                    loadGroupmentsWithName(it.toString())
+                                    sectionBHasBlankFields()
+                                }
                                 getLastKnownLocation()
 
                             }
@@ -222,9 +226,11 @@ class SectionBLocationFragment : Fragment(R.layout.fragment_location_of_househol
                     ArrayAdapter(context, dropdownLayout, territories)
                 ).also {
                     addTextChangedListener {
-
-                        viewModel.territory = it.toString()
-                        viewModel.loadCommunitiesWithName(it.toString())
+                        viewModel.apply {
+                            territory = it.toString()
+                            loadCommunitiesWithName(it.toString())
+                            sectionBHasBlankFields()
+                        }
                     }
                 }
             }
@@ -234,11 +240,13 @@ class SectionBLocationFragment : Fragment(R.layout.fragment_location_of_househol
                     ArrayAdapter(context, dropdownLayout, groupments)
                 ).also {
                     addTextChangedListener {
-
-                        viewModel.groupment = it.toString()
-                        viewModel.getGroupmentId(it.toString())
-
+                        viewModel.apply {
+                            groupment = it.toString()
+                            getGroupmentId(it.toString())
+                            sectionBHasBlankFields()
+                        }
                     }
+                    getLastKnownLocation()
                 }
             }
 
@@ -247,9 +255,11 @@ class SectionBLocationFragment : Fragment(R.layout.fragment_location_of_househol
                     ArrayAdapter(context, dropdownLayout, healthZones)
                 ).also {
                     addTextChangedListener {
-
-                        viewModel.healthZone = it.toString()
-                        viewModel.loadHealthAreasWithName()
+                        viewModel.apply {
+                            healthZone = it.toString()
+                            loadHealthAreasWithName()
+                            sectionBHasBlankFields()
+                        }
 
                     }
                 }
@@ -260,9 +270,12 @@ class SectionBLocationFragment : Fragment(R.layout.fragment_location_of_househol
                     ArrayAdapter(context, dropdownLayout, healthAreas)
                 ).also {
                     addTextChangedListener {
-                        viewModel.healthArea = it.toString()
-                        viewModel.getHealthAreaId()
-                        getLastKnownLocation()
+                        viewModel.apply {
+                            healthArea = it.toString()
+                            getHealthAreaId()
+                            sectionBHasBlankFields()
+                        }
+
                     }
                 }
             }

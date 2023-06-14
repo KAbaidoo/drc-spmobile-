@@ -388,8 +388,13 @@ class SharedDevelopmentalFormViewModel(
             cac,
             villageOrDistrict,
             placeOfResidence,
-            registrationType
-
+            registrationType,
+            province,
+            territory,
+            community,
+            groupment,
+            healthArea,
+            healthZone
         )
     }
 

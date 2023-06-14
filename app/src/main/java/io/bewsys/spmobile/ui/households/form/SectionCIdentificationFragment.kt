@@ -13,6 +13,7 @@ import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import io.bewsys.spmobile.R
 import io.bewsys.spmobile.databinding.FragmentIdentificationOfHouseholdCBinding
+import io.bewsys.spmobile.util.isValidPhoneNumber
 import kotlinx.coroutines.flow.collectLatest
 import org.koin.androidx.navigation.koinNavGraphViewModel
 
@@ -60,6 +61,7 @@ class SectionCIdentificationFragment : Fragment(R.layout.fragment_identification
                         viewModel.headSex = rbMale.text.toString()
                         viewModel.sectionCHasBlankFields()
                     }
+
                     else -> {
                         viewModel.headSex = rbFemale.text.toString()
                         viewModel.sectionCHasBlankFields()
@@ -74,7 +76,6 @@ class SectionCIdentificationFragment : Fragment(R.layout.fragment_identification
                 tilRespondentVoterId,
                 tilRespondentPhoneNumber
             )
-
 
 
 //            head
@@ -112,6 +113,11 @@ class SectionCIdentificationFragment : Fragment(R.layout.fragment_identification
             tilHouseholdHeadPhoneNumber.editText?.addTextChangedListener {
                 viewModel.headPhoneNo = it.toString()
                 viewModel.sectionCHasBlankFields()
+
+//                if (it.toString().isValidPhoneNumber()) {
+//                    tilHouseholdHeadPhoneNumber.setEndIconDrawable(R.drawable.ic_check_circle_20)
+//                }
+
             }
 
 //            respondent
@@ -148,6 +154,8 @@ class SectionCIdentificationFragment : Fragment(R.layout.fragment_identification
                 viewModel.respondentVoterId = it.toString()
                 viewModel.sectionCHasBlankFields()
             }
+
+
             tilRespondentPhoneNumber.editText?.addTextChangedListener {
                 viewModel.respondentPhoneNo = it.toString()
                 viewModel.sectionCHasBlankFields()
@@ -161,7 +169,7 @@ class SectionCIdentificationFragment : Fragment(R.layout.fragment_identification
                 viewModel.unitOfMigrationDuration = it.toString()
                 viewModel.sectionCHasBlankFields()
             }
-            tilDurationDisplacedReturnedRepatriatedRefugee.editText?.addTextChangedListener{
+            tilDurationDisplacedReturnedRepatriatedRefugee.editText?.addTextChangedListener {
                 viewModel.durationDisplacedReturnedRepatriatedRefugee = it.toString()
                 viewModel.sectionCHasBlankFields()
             }
@@ -189,6 +197,7 @@ class SectionCIdentificationFragment : Fragment(R.layout.fragment_identification
 
                         viewModel.sectionCHasBlankFields()
                     }
+
                     else -> {
                         viewModel.headIsRespondent = rbNoIsRespondent.text.toString()
                         viewModel.apply {
@@ -293,7 +302,6 @@ class SectionCIdentificationFragment : Fragment(R.layout.fragment_identification
                 tilRespondentVoterId.editText?.setText(respondentVoterId)
                 tilRespondentPhoneNumber.editText?.setText(respondentPhoneNo)
                 tilOtherMigrationStatus.editText?.setText(otherMigrationStatus)
-
 
 
             }

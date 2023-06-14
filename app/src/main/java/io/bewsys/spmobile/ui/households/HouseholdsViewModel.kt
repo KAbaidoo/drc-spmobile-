@@ -327,7 +327,7 @@ class HouseholdsViewModel(
     sealed class HouseholdEvent {
         object AddRegistrationClicked : HouseholdEvent()
         object DevelopmentalClicked : HouseholdEvent()
-        object HumanitarianClicked : HouseholdEvent()
+
         data class ShowSnackMessage(val msg: String) : HouseholdEvent()
 
         data class Exception(val errMsg: String) : HouseholdEvent()
