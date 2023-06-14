@@ -81,9 +81,9 @@ class NonConsentingHouseholdRepository(
     }
 
 
-//    suspend fun getLastInsertedRowId(): Long = withContext(Dispatchers.IO) {
-//        queries.lastInsertRowId().executeAsOne()
-//    }
+    suspend fun getLastInsertedRowId(): Long = withContext(Dispatchers.IO) {
+        queries.lastInsertRowId().executeAsOne()
+    }
 
     suspend fun updateStatus(status: String, id: Long) {
         queries.updateNonConsentHousehold(status, id)

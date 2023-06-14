@@ -140,10 +140,12 @@ class SectionCIdentificationFragment : Fragment(R.layout.fragment_identification
                 viewModel.respondentMiddleName = it.toString()
                 viewModel.sectionCHasBlankFields()
             }
+
             tilRespondentLastname.editText?.addTextChangedListener {
                 viewModel.respondentLastName = it.toString()
                 viewModel.sectionCHasBlankFields()
             }
+
             tilRespondentLastname.editText?.setOnFocusChangeListener { view, hasFocus ->
                 if (!hasFocus && viewModel.respondentLastName.isBlank()) {
                     tilRespondentLastname.error = getString(R.string.field_cannot_be_empty)

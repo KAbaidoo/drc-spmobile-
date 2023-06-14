@@ -77,27 +77,27 @@ class NonConsentingFragment : Fragment(R.layout.fragment_non_consenting) ,NonCon
             }.exhaustive
         }
         // set up menu
-        val menuHost = requireActivity()
-        menuHost.addMenuProvider(object : MenuProvider {
-            override fun onCreateMenu(menu: Menu, menuInflater: MenuInflater) {
-                menuInflater.inflate(R.menu.fragment_households_menu, menu)
-
-            }
-
-            override fun onMenuItemSelected(menuItem: MenuItem): Boolean {
-                return when (menuItem.itemId) {
-
-                    R.id.action_upload_households -> {
-//                        Log.d(HouseholdsFragment.TAG, "Upload clicked")
-
-//                        viewModel.onUploadMenuItemClicked()
-                        true
-                    }
-
-                    else -> false
-                }
-            }
-        }, viewLifecycleOwner, Lifecycle.State.RESUMED)
+//        val menuHost = requireActivity()
+//        menuHost.addMenuProvider(object : MenuProvider {
+//            override fun onCreateMenu(menu: Menu, menuInflater: MenuInflater) {
+//                menuInflater.inflate(R.menu.fragment_households_menu, menu)
+//
+//            }
+//
+//            override fun onMenuItemSelected(menuItem: MenuItem): Boolean {
+//                return when (menuItem.itemId) {
+//
+//                    R.id.action_upload_households -> {
+////                        Log.d(HouseholdsFragment.TAG, "Upload clicked")
+//
+////                        viewModel.onUploadMenuItemClicked()
+//                        true
+//                    }
+//
+//                    else -> false
+//                }
+//            }
+//        }, viewLifecycleOwner, Lifecycle.State.RESUMED)
 
         setFragmentResultListener("add_non_consenting_household_request") { _, bundle ->
             val result = bundle.getInt("add_non_consenting_household_result")

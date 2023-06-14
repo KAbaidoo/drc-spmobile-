@@ -385,5 +385,6 @@
     <string name="camera_preview">Camera Preview</string>
     <string name="upload_success_message">%s households and %s members uploaded!</string>
     <string name="phone_number_helper_text">Enter only 9 digits</string>
+    <string name="voter_id_helper_text">Enter only 11 digits</string>
 
 </resources>

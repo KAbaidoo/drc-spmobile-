@@ -111,7 +111,12 @@
                 android:layout_height="wrap_content"
                 android:minHeight="20dp"
                 app:boxStrokeWidth="2dp"
-                app:endIconMode="clear_text">
+                app:counterEnabled="true"
+                app:counterMaxLength="11"
+                app:helperTextEnabled="true"
+                app:helperText="@string/voter_id_helper_text"
+                app:endIconMode="clear_text"
+               >
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:layout_width="match_parent"
@@ -138,6 +143,7 @@
                 android:minHeight="20dp"
                 app:counterEnabled="true"
                 app:counterMaxLength="9"
+                app:boxStrokeWidth="2dp"
                 app:helperTextEnabled="true"
                 app:helperText="@string/phone_number_helper_text"
                 app:endIconMode="clear_text">
@@ -347,6 +353,11 @@
                 android:layout_height="wrap_content"
                 android:minHeight="20dp"
                 app:boxStrokeWidth="2dp"
+
+                app:counterEnabled="true"
+                app:counterMaxLength="11"
+                app:helperTextEnabled="true"
+                app:helperText="@string/voter_id_helper_text"
                 app:endIconMode="clear_text">
 
                 <com.google.android.material.textfield.TextInputEditText
@@ -374,6 +385,7 @@
                 app:boxStrokeWidth="2dp"
                 app:counterEnabled="true"
                 app:counterMaxLength="9"
+
                 app:helperTextEnabled="true"
                 app:helperText="@string/phone_number_helper_text"
                 app:endIconMode="clear_text">

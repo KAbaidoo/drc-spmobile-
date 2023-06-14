@@ -3,7 +3,7 @@
     <string-array name="reasons">
         <item>Non \u0028Refus\u0029</item>
         <item>Chef de ménage absent</item>
-        <item>Other</item>
+        <item>Autre</item>
     </string-array>
 
     <string-array name="migration_duration_unit">

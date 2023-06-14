@@ -32,12 +32,14 @@ import kotlinx.coroutines.launch
 
 class AddNonConsentingHouseholdViewModel(
     private val state: SavedStateHandle,
+    application: Application,
     private val nonConsentingRepository: NonConsentingHouseholdRepository,
     private val dashboardRepository: DashboardRepository
 ) : ViewModel() {
     init {
         loadProvinces()
     }
+    private val workManager = WorkManager.getInstance(application)
 
     var household: NonConsentHouseholdModel? = null
     var id: Long? = null
@@ -246,7 +248,10 @@ class AddNonConsentingHouseholdViewModel(
             nonConsentingRepository.insertNonConsentingHousehold(
                 newNonConsentingHousehold
             )
+
+            uploadNonConsentingHousehold(nonConsentingRepository.getLastInsertedRowId())
 //            lastly
+
             addNonConsentingHouseholdChannel.send(
                 AddNonConsentingHouseholdEvent.NavigateBackWithResults(
                     ADD_NON_CONSENTING_HOUSEHOLD_RESULT_OK
@@ -266,7 +271,7 @@ class AddNonConsentingHouseholdViewModel(
                 newNonConsentingHousehold
             )
 
-//            uploadNonConsentingHousehold(nonConsentingRepository.getLastInsertedRowId())
+            uploadNonConsentingHousehold(nonConsentingRepository.getLastInsertedRowId())
 
 //            lastly
             addNonConsentingHouseholdChannel.send(
@@ -278,7 +283,17 @@ class AddNonConsentingHouseholdViewModel(
         }
 
 
-   
+    private fun uploadNonConsentingHousehold(itemId: Long) = viewModelScope.launch {
+        val constraints = Constraints.Builder()
+            .setRequiredNetworkType(NetworkType.CONNECTED)
+            .build()
+
+        val uploadRequest = OneTimeWorkRequestBuilder<NonConsentUploadWorker>()
+            .setConstraints(constraints)
+            .build()
+        workManager.enqueue(uploadRequest)
+    }
+
 
     private fun showInvalidInputMessage() = viewModelScope.launch {
         addNonConsentingHouseholdChannel.send(

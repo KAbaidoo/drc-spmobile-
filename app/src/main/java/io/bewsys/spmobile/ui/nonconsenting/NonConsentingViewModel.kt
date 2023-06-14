@@ -17,7 +17,6 @@ import kotlinx.coroutines.flow.*
 import kotlinx.coroutines.launch
 
 class NonConsentingViewModel(
-    application: Application,
     private val nonConsentingHouseholdRepository: NonConsentingHouseholdRepository,
     private val dashboardRepository: DashboardRepository
 ) : ViewModel() {
@@ -29,7 +28,7 @@ class NonConsentingViewModel(
     val nonConsentingHouseholds: LiveData<List<NonConsentHouseholdModel>>
         get() = _nonConsentingHouseholds
 
-    private val workManager = WorkManager.getInstance(application)
+
     init {
         loadNonConsentingHouseholds()
     }
@@ -92,16 +91,7 @@ class NonConsentingViewModel(
     }
 
 
-    private fun uploadNonConsentingHouseholds() = viewModelScope.launch {
-        val constraints = Constraints.Builder()
-            .setRequiredNetworkType(NetworkType.CONNECTED)
-            .build()
 
-        val uploadRequest = OneTimeWorkRequestBuilder<NonConsentUploadWorker>()
-            .setConstraints(constraints)
-            .build()
-        workManager.enqueue(uploadRequest)
-    }
 
     sealed class NonConsentingEvent {
         object NavigateToNonConsentingHouseholdsForm : NonConsentingEvent()
