@@ -242,6 +242,7 @@ class AddNonConsentingHouseholdViewModel(
         }
     }
 
+
     private fun addNonConsentingHousehold(newNonConsentingHousehold: NonConsentHouseholdModel) =
         viewModelScope.launch {
 
@@ -249,9 +250,9 @@ class AddNonConsentingHouseholdViewModel(
                 newNonConsentingHousehold
             )
 
-            uploadNonConsentingHousehold(nonConsentingRepository.getLastInsertedRowId())
-//            lastly
+//            uploadNonConsentingHousehold(nonConsentingRepository.getLastInsertedRowId())
 
+//            lastly
             addNonConsentingHouseholdChannel.send(
                 AddNonConsentingHouseholdEvent.NavigateBackWithResults(
                     ADD_NON_CONSENTING_HOUSEHOLD_RESULT_OK
@@ -260,18 +261,14 @@ class AddNonConsentingHouseholdViewModel(
 
         }
 
-    private fun updateNonConsentingHousehold(
-        id: Long,
-        newNonConsentingHousehold: NonConsentHouseholdModel
-    ) =
+    private fun updateNonConsentingHousehold(id: Long, newNonConsentingHousehold: NonConsentHouseholdModel) =
         viewModelScope.launch {
 
-            nonConsentingRepository.updateNonConsentingHousehold(
-                id,
+            nonConsentingRepository.updateNonConsentingHousehold(id,
                 newNonConsentingHousehold
             )
 
-            uploadNonConsentingHousehold(nonConsentingRepository.getLastInsertedRowId())
+//            uploadNonConsentingHousehold(nonConsentingRepository.getLastInsertedRowId())
 
 //            lastly
             addNonConsentingHouseholdChannel.send(
@@ -281,7 +278,6 @@ class AddNonConsentingHouseholdViewModel(
             )
 
         }
-
 
     private fun uploadNonConsentingHousehold(itemId: Long) = viewModelScope.launch {
         val constraints = Constraints.Builder()
@@ -290,10 +286,17 @@ class AddNonConsentingHouseholdViewModel(
 
         val uploadRequest = OneTimeWorkRequestBuilder<NonConsentUploadWorker>()
             .setConstraints(constraints)
+            .setInputData(createInputDataForId(itemId))
             .build()
         workManager.enqueue(uploadRequest)
+
     }
 
+    private fun createInputDataForId(id: Long): Data {
+        val builder = Data.Builder()
+        builder.putLong(KEY_DATA_ID, id)
+        return builder.build()
+    }
 
     private fun showInvalidInputMessage() = viewModelScope.launch {
         addNonConsentingHouseholdChannel.send(

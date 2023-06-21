@@ -8,7 +8,10 @@ import android.content.SharedPreferences
 import android.content.pm.PackageManager
 import android.location.Location
 import android.os.Bundle
+import android.os.Handler
+import android.os.Looper
 import android.util.Log
+import android.view.MotionEvent
 import android.view.View
 import android.widget.TextView
 import android.widget.Toast
@@ -48,17 +51,38 @@ import org.koin.android.ext.android.inject
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 
-class MainActivity : AppCompatActivity()  {
+class MainActivity : AppCompatActivity() {
 
 
     private lateinit var appBarConfiguration: AppBarConfiguration
     private lateinit var binding: ActivityMainBinding
     private lateinit var navController: NavController
 
+    //============================
+
+    private lateinit var mHandler: Handler
+    private lateinit var mRunnable: Runnable
+    private var mTime: Long = 1_800_000
+
     private val viewModel: MainViewModel by viewModel()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
+        // Initializing the handler and the runnable
+        mHandler = Handler(Looper.getMainLooper())
+
+        mRunnable = Runnable {
+
+            navController.navigate(R.id.nav_login)
+
+            Toast.makeText(
+                applicationContext,
+                "User inactive for ${mTime / 60_000} mins!",
+                Toast.LENGTH_SHORT
+            ).show()
+        }
+
 
 
 
@@ -71,19 +95,18 @@ class MainActivity : AppCompatActivity()  {
         val header: View = navigationView.getHeaderView(0)
         val tv: TextView = header.findViewById(R.id.tv_username)
 
-//        lifecycleScope.launchWhenStarted {
-//            viewModel.userState.collectLatest {
-//                if (it.not()) {
-//                    navController.navigate(R.id.nav_login)
-//                }
-//            }
-//        }
+        lifecycleScope.launchWhenStarted {
+            viewModel.userState.collectLatest {
+                if (it.not()) {
+                    navController.navigate(R.id.nav_login)
+                }
+            }
+        }
         lifecycleScope.launchWhenStarted {
             viewModel.getUser().collectLatest {
                 tv.text = it.name ?: "username"
             }
         }
-
 
 
         val drawerLayout: DrawerLayout = binding.drawerLayout
@@ -125,7 +148,8 @@ class MainActivity : AppCompatActivity()  {
             }
         }
 
-
+        // Start the handler
+        startHandler()
     } //end of onCreate
 
 
@@ -134,16 +158,31 @@ class MainActivity : AppCompatActivity()  {
         return navController.navigateUp(appBarConfiguration) || super.onSupportNavigateUp()
     }
 
+
+    override fun dispatchTouchEvent(ev: MotionEvent?): Boolean {
+
+        // Removes the handler callbacks (if any)
+        stopHandler()
+
+        // Runs the handler (for the specified time)
+        // If any touch or motion is detected before
+        // the specified time, this override function is again called
+        startHandler()
+        return super.dispatchTouchEvent(ev)
+    }
+
+    // start handler function
+    private fun startHandler() {
+        mHandler.postDelayed(mRunnable, mTime)
+    }
+
+    // stop handler function
+    private fun stopHandler() {
+        mHandler.removeCallbacks(mRunnable)
+    }
+
     companion object {
         private const val TAG = "MainActivity"
     }
-
-
-
-
-
-
-
-
 
 }

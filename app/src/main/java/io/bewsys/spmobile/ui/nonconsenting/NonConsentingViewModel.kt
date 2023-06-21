@@ -9,8 +9,12 @@ import androidx.work.OneTimeWorkRequestBuilder
 import androidx.work.WorkManager
 import io.bewsys.spmobile.ADD_NON_CONSENTING_HOUSEHOLD_RESULT_OK
 import io.bewsys.spmobile.data.local.NonConsentHouseholdModel
+import io.bewsys.spmobile.data.remote.model.auth.login.ErrorResponse
+import io.bewsys.spmobile.data.remote.model.household.BulkUploadResponse
 import io.bewsys.spmobile.data.repository.NonConsentingHouseholdRepository
 import io.bewsys.spmobile.data.repository.DashboardRepository
+import io.bewsys.spmobile.ui.households.HouseholdsViewModel
+import io.bewsys.spmobile.util.Resource
 import io.bewsys.spmobile.work.NonConsentUploadWorker
 import kotlinx.coroutines.channels.Channel
 import kotlinx.coroutines.flow.*
@@ -90,6 +94,38 @@ class NonConsentingViewModel(
         _nonConsentingEventChannel.send(NonConsentingEvent.NavigateToEditNonConsentingHouseholdsForm(nonConsentingHousehold))
     }
 
+    fun onUploadMenuItemClicked() = viewModelScope.launch {
+//        householdRepository.uploadBulkHouseholds()
+        loadState()
+    }
+
+    private fun loadState() = viewModelScope.launch {
+        nonConsentingHouseholdRepository.bulkUploadNonConsentHouseholdsFlow().collectLatest { results ->
+
+            when (results) {
+                is Resource.Loading -> _nonConsentingEventChannel.send(NonConsentingEvent.Loading)
+                is Resource.Success -> {
+                    _nonConsentingEventChannel.send(NonConsentingEvent.Successful(msg = "Upload successful"))
+                }
+
+                is Resource.Failure -> {
+                    val msg = results.error as ErrorResponse
+                    _nonConsentingEventChannel.send(NonConsentingEvent.Failure(msg.msg))
+                }
+
+                is Resource.Exception -> {
+                    results.throwable.localizedMessage?.let { errorMsg ->
+                        NonConsentingEvent.Exception(
+                            errorMsg
+                        )
+                    }?.let { _nonConsentingEventChannel.send(it) }
+                }
+
+            }
+
+        }
+
+    }
 
 
 
@@ -98,5 +134,10 @@ class NonConsentingViewModel(
         data class NavigateToEditNonConsentingHouseholdsForm(val nonConsentingHousehold: NonConsentHouseholdModel) : NonConsentingEvent()
         data class ShowNonConsentingHouseholdSavedConfirmationMessage(val msg: String) :
             NonConsentingEvent()
+
+        data class Exception(val errMsg: String) : NonConsentingEvent()
+        data class Successful(val msg: String) : NonConsentingEvent()
+        data class Failure(val errMsg: String) : NonConsentingEvent()
+        object Loading : NonConsentingEvent()
     }
 }

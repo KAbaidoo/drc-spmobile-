@@ -309,13 +309,18 @@ class SectionBLocationFragment : Fragment(R.layout.fragment_location_of_househol
     }
 
     private fun getLastKnownLocation() {
-
         currentLocation?.let {
-            viewModel.lon = it.longitude.toString()
-            viewModel.lat = it.latitude.toString()
+           val lon = it.longitude.toString()
+            val lat = it.latitude.toString()
 
-            til_Lat?.editText?.setText(it.longitude.toString().subSequence(0,7))
-            til_Lon?.editText?.setText(it.latitude.toString().subSequence(0,7))
+            viewModel.lon = lon
+            viewModel.lat = lat
+
+            val trimmedLon = if(lon.length > 7) lon.subSequence(0,7) else lon
+            val trimmedLat = if(lat.length > 7) lon.subSequence(0,7) else lat
+
+            til_Lat?.editText?.setText(trimmedLon)
+            til_Lon?.editText?.setText(trimmedLat)
         }
     }
 

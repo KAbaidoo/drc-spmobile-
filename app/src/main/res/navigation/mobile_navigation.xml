@@ -87,7 +87,7 @@
     <action android:id="@+id/action_global_loginDialogFragment" app:destination="@id/loginDialogFragment" />
 
     <navigation android:id="@+id/form_navigation"
-        app:startDestination="@id/sectionCIdentificationFragment">
+        app:startDestination="@id/formStepOneFragment">
         <argument
             android:name="household"
             app:argType="io.bewsys.spmobile.data.local.HouseholdModel"

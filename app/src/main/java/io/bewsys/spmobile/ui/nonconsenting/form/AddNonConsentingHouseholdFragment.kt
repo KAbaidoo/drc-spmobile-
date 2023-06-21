@@ -71,20 +71,21 @@ class AddNonConsentingHouseholdFragment : Fragment(R.layout.fragment_add_non_con
         locationProvider = LocationProvider((requireActivity()))
         return super.onCreateView(inflater, container, savedInstanceState)
     }
+
     @SuppressLint("MissingPermission")
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         val binding = FragmentAddNonConsentingBinding.bind(view)
 
         if (hasLocationPermission()) {
-            locationProvider?.getLocation{ loc: Location? ->
+            locationProvider?.getLocation { loc: Location? ->
                 currentLocation = loc
             }
         } else {
             requestLocationPermission()
         }
 
-        getLastKnownLocation()
+
 
         val household = args.household
         viewModel.household = household
@@ -175,7 +176,7 @@ class AddNonConsentingHouseholdFragment : Fragment(R.layout.fragment_add_non_con
                         addTextChangedListener {
 
                             viewModel.province = it.toString()
-                            viewModel.loadTerritoriesWithName(it.toString())
+                            viewModel.loadTerritoriesWithName(it.toString() ?:"")
                             getLastKnownLocation()
 
                         }
@@ -239,20 +240,25 @@ class AddNonConsentingHouseholdFragment : Fragment(R.layout.fragment_add_non_con
                 }
             }
         }
-
+        getLastKnownLocation()
 
     }//end of onCreateView
 
     private fun getLastKnownLocation() {
         currentLocation?.let {
-            viewModel.lon = it.longitude.toString()
-            viewModel.lat = it.latitude.toString()
+            val lon = it.longitude.toString()
+            val lat = it.latitude.toString()
 
-            til_Lat?.editText?.setText( it.longitude.toString().subSequence(0,7))
-            til_Lon?.editText?.setText(it.latitude.toString().subSequence(0,7))
+            viewModel.lon = lon
+            viewModel.lat = lat
+
+            val trimmedLon = if(lon.length > 7) lon.subSequence(0,7) else lon
+            val trimmedLat = if(lat.length > 7) lon.subSequence(0,7) else lat
+
+            til_Lat?.editText?.setText(trimmedLon)
+            til_Lon?.editText?.setText(trimmedLat)
         }
     }
-
 
 
     private fun hasLocationPermission() =

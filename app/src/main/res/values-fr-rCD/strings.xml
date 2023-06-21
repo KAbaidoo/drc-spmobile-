@@ -62,7 +62,7 @@
     <string name="respondent">Répondant</string>
     <string name="respondent_firstname"><b>C.6.1</b> Prénom du répondant *</string>
     <string name="respondent_middlename"><b>C.6.2</b> Deuxième prénom du répondant</string>
-    <string name="respondent_lastname"><b>C.6.3</b> Nom de famille du répondant *</string>
+    <string name="respondent_lastname"><b>C.6.2</b> Nom de famille du répondant *</string>
     <string name="respondent_dob">Date de naissance du répondant</string>
     <string name="respondent_family_bond_to_head">Lien familial du répondant avec le chef de ménage</string>
     <string name="respondent_voter_id"><b>C.8</b> N°carte d\'électeur du REPONDANT:</string>
@@ -99,7 +99,7 @@
     <string name="mobile_money_phone_number"><b>G.5</b> Numéro de téléphone mobile money</string>
     <string name="mobile_money_username"><b>G.5</b> Nom d\'utilisateur mobile money</string>
     <string name="comments">Commentaires</string>
-    <string name="household_head_lastname"><b>C.1.3</b> Nom de famille du chef de ménage *</string>
+    <string name="household_head_lastname"><b>C.1.2</b> Post-Nom de famille du chef de ménage *</string>
     <string name="household_head_marital_status">État matrimonial du chef de ménage</string>
     <string name="household_head_birth_certificate">Certificat de naissance du chef de ménage</string>
     <string name="household_head_educational_level">Niveau d\'éducation du chef de ménage</string>
@@ -264,7 +264,7 @@
     <string name="member_firstname"><b>D.1.1</b> Prénom *</string>
     <string name="member_firstname_label"> Prénom</string>
     <string name="member_middlename"><b>D.1.2</b> Deuxième nom</string>
-    <string name="member_lastname"><b>D.1.3</b> Nom *</string>
+    <string name="member_lastname"><b>D.1.2</b> Nom *</string>
     <string name="member_lastname_label"> Nom</string>
     <string name="member_age"><b>D.6</b> Âge</string>
     <string name="member_age_known">Âge connu</string>
@@ -354,7 +354,7 @@
     <string name="member_is">Le membre est</string>
     <string name="c_identification_of_household">C. IDENTIFICATION DU MÉNAGE</string>
     <string name="does_he_she_have_a_birth_certificate"><b>D.8</b> Possède t-il/elle un acte de naissance?</string>
-    <string name="targeting_committee_cac"><b>B.10</b> Comite ciblage/Cellule d\'Animation Communautaire (CAC):*</string>
+    <string name="targeting_committee_cac"><b>B.10</b> Comite ciblage/Cellule d\'Animation Communautaire (CAC):</string>
     <string name="e_housing">E. LOGEMENT</string>
     <string name="what_is_your_occupancy_or_status"><b>E.1</b> Quel est votre statut d\'occupation de l\'actuel logement?</string>
     <string name="main_soil_material"><b>E.3</b> Matériau principal du sol</string>
@@ -370,5 +370,8 @@
     <string name="upload">Télécharger</string>
     <string name="camera_preview">Aperçu de la caméra</string>
     <string name="upload_success_message">%s ménages et %s membres téléchargé!</string>
+    <string name="phone_number_helper_text">Entrez seulement 9 chiffres</string>
+    <string name="voter_id_helper_text">Entrez seulement 11 chiffres</string>
+    <string name="member">Membre</string>
 
 </resources>

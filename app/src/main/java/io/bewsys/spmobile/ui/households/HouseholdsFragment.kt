@@ -181,7 +181,6 @@ class HouseholdsFragment : Fragment(R.layout.fragment_households),
     }
 
     override fun onItemClick(householdModel: HouseholdModel) {
-
         viewModel.onHouseholdSelected(householdModel)
     }
 

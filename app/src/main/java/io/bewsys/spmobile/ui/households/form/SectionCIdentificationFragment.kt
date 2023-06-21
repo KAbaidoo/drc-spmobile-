@@ -71,7 +71,7 @@ class SectionCIdentificationFragment : Fragment(R.layout.fragment_identification
 
             val tils = listOf(
                 tilRespondentFirstname,
-                tilRespondentMiddlename,
+//                tilRespondentMiddlename,
                 tilRespondentLastname,
                 tilRespondentVoterId,
                 tilRespondentPhoneNumber
@@ -89,10 +89,10 @@ class SectionCIdentificationFragment : Fragment(R.layout.fragment_identification
                 } else tilHouseholdHeadFirstname.error = null
             }
 
-            tilHouseholdHeadMiddlename.editText?.addTextChangedListener {
-                viewModel.headMiddleName = it.toString()
-                viewModel.sectionCHasBlankFields()
-            }
+//            tilHouseholdHeadMiddlename.editText?.addTextChangedListener {
+//                viewModel.headMiddleName = it.toString()
+//                viewModel.sectionCHasBlankFields()
+//            }
             tilHouseholdHeadLastname.editText?.addTextChangedListener {
                 viewModel.headLastName = it.toString()
                 viewModel.sectionCHasBlankFields()
@@ -136,10 +136,10 @@ class SectionCIdentificationFragment : Fragment(R.layout.fragment_identification
                     tilHouseholdHeadAge.error = getString(R.string.field_cannot_be_empty)
                 } else tilHouseholdHeadAge.error = null
             }
-            tilRespondentMiddlename.editText?.addTextChangedListener {
-                viewModel.respondentMiddleName = it.toString()
-                viewModel.sectionCHasBlankFields()
-            }
+//            tilRespondentMiddlename.editText?.addTextChangedListener {
+//                viewModel.respondentMiddleName = it.toString()
+//                viewModel.sectionCHasBlankFields()
+//            }
 
             tilRespondentLastname.editText?.addTextChangedListener {
                 viewModel.respondentLastName = it.toString()
@@ -185,13 +185,13 @@ class SectionCIdentificationFragment : Fragment(R.layout.fragment_identification
                         viewModel.headIsRespondent = rbYesIsRespondent.text.toString()
                         viewModel.apply {
                             respondentFirstName = headFirstName
-                            respondentMiddleName = headMiddleName
+//                            respondentMiddleName = headMiddleName
                             respondentLastName = headLastName
                             respondentPhoneNo = headPhoneNo
                             respondentVoterId = headVoterId
 
                             tilRespondentFirstname.editText?.setText(headFirstName)
-                            tilRespondentMiddlename.editText?.setText(headMiddleName)
+//                            tilRespondentMiddlename.editText?.setText(headMiddleName)
                             tilRespondentLastname.editText?.setText(headLastName)
                             tilRespondentVoterId.editText?.setText(headVoterId)
                             tilRespondentPhoneNumber.editText?.setText(headPhoneNo)
@@ -204,7 +204,7 @@ class SectionCIdentificationFragment : Fragment(R.layout.fragment_identification
                         viewModel.headIsRespondent = rbNoIsRespondent.text.toString()
                         viewModel.apply {
                             respondentFirstName = ""
-                            respondentMiddleName = ""
+//                            respondentMiddleName = ""
                             respondentLastName = ""
                             respondentPhoneNo = ""
                             respondentVoterId = ""
@@ -292,14 +292,14 @@ class SectionCIdentificationFragment : Fragment(R.layout.fragment_identification
 
             viewModel.apply {
                 tilHouseholdHeadFirstname.editText?.setText(headFirstName)
-                tilHouseholdHeadMiddlename.editText?.setText(headMiddleName)
+//                tilHouseholdHeadMiddlename.editText?.setText(headMiddleName)
                 tilHouseholdHeadLastname.editText?.setText(headLastName)
                 tilHouseholdHeadAge.editText?.setText(headAge)
                 tilHouseholdHeadVoterIdCard.editText?.setText(headVoterId)
                 tilHouseholdHeadPhoneNumber.editText?.setText(headPhoneNo)
 
                 tilRespondentFirstname.editText?.setText(respondentFirstName)
-                tilRespondentMiddlename.editText?.setText(respondentMiddleName)
+//                tilRespondentMiddlename.editText?.setText(respondentMiddleName)
                 tilRespondentLastname.editText?.setText(respondentLastName)
                 tilRespondentVoterId.editText?.setText(respondentVoterId)
                 tilRespondentPhoneNumber.editText?.setText(respondentPhoneNo)

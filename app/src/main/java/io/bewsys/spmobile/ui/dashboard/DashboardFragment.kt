@@ -1,6 +1,7 @@
 package io.bewsys.spmobile.ui.dashboard
 
 import android.os.Bundle
+import android.view.MotionEvent
 
 import android.view.View
 import androidx.core.view.isVisible
@@ -17,6 +18,7 @@ import org.koin.androidx.viewmodel.ext.android.viewModel
 private const val TAG = "DashboardFragment"
 
 class DashboardFragment : Fragment(R.layout.fragment_dashboard) {
+
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -71,6 +73,8 @@ class DashboardFragment : Fragment(R.layout.fragment_dashboard) {
             val result = bundle.getInt("user_result")
             viewModel.onResult(result)
         }
+
+
 
 
     }

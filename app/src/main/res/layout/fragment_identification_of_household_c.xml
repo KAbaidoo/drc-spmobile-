@@ -49,28 +49,28 @@
                     android:maxLines="1" />
             </com.google.android.material.textfield.TextInputLayout>
             <!--            respondent_middlename-->
-            <TextView
-                android:id="@+id/tv_head_middle_name"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
-                android:text="@string/household_head_middlename"
-                android:textAppearance="@style/TextAppearance.MaterialComponents.Body1" />
-            <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/til_household_head_middlename"
-                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:minHeight="20dp"
-                app:boxStrokeWidth="2dp"
-                app:endIconMode="clear_text">
+<!--            <TextView-->
+<!--                android:id="@+id/tv_head_middle_name"-->
+<!--                android:layout_width="wrap_content"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:layout_marginTop="16dp"-->
+<!--                android:text="@string/household_head_middlename"-->
+<!--                android:textAppearance="@style/TextAppearance.MaterialComponents.Body1" />-->
+<!--            <com.google.android.material.textfield.TextInputLayout-->
+<!--                android:id="@+id/til_household_head_middlename"-->
+<!--                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"-->
+<!--                android:layout_width="match_parent"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:minHeight="20dp"-->
+<!--                app:boxStrokeWidth="2dp"-->
+<!--                app:endIconMode="clear_text">-->
 
-                <com.google.android.material.textfield.TextInputEditText
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:inputType="text"
-                    android:maxLines="1" />
-            </com.google.android.material.textfield.TextInputLayout>
+<!--                <com.google.android.material.textfield.TextInputEditText-->
+<!--                    android:layout_width="match_parent"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:inputType="text"-->
+<!--                    android:maxLines="1" />-->
+<!--            </com.google.android.material.textfield.TextInputLayout>-->
             <!--            respondent_lastname-->
             <TextView
                 android:id="@+id/tv_head_last_name"
@@ -265,28 +265,28 @@
             </com.google.android.material.textfield.TextInputLayout>
 
             <!--            respondent_middlename-->
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
-                android:text="@string/respondent_middlename"
-                android:textAppearance="@style/TextAppearance.MaterialComponents.Body1" />
+<!--            <TextView-->
+<!--                android:layout_width="wrap_content"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:layout_marginTop="16dp"-->
+<!--                android:text="@string/respondent_middlename"-->
+<!--                android:textAppearance="@style/TextAppearance.MaterialComponents.Body1" />-->
 
-            <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/til_respondent_middlename"
-                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:minHeight="20dp"
-                app:boxStrokeWidth="2dp"
-                app:endIconMode="clear_text">
+<!--            <com.google.android.material.textfield.TextInputLayout-->
+<!--                android:id="@+id/til_respondent_middlename"-->
+<!--                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"-->
+<!--                android:layout_width="match_parent"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:minHeight="20dp"-->
+<!--                app:boxStrokeWidth="2dp"-->
+<!--                app:endIconMode="clear_text">-->
 
-                <com.google.android.material.textfield.TextInputEditText
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:inputType="text"
-                    android:maxLines="1" />
-            </com.google.android.material.textfield.TextInputLayout>
+<!--                <com.google.android.material.textfield.TextInputEditText-->
+<!--                    android:layout_width="match_parent"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:inputType="text"-->
+<!--                    android:maxLines="1" />-->
+<!--            </com.google.android.material.textfield.TextInputLayout>-->
 
             <!--            respondent_lastname-->
             <TextView

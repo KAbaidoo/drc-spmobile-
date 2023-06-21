@@ -69,7 +69,7 @@
                     android:layout_height="48dp"
                     android:checked="true"
 
-                    android:text="@string/n_a" />
+                    android:text="@string/member" />
             </RadioGroup>
 
             <!--            member firstname-->
@@ -96,30 +96,31 @@
                     android:inputType="text"
                     android:maxLines="1" />
             </com.google.android.material.textfield.TextInputLayout>
-            <!--           _middlename-->
-            <TextView
-                android:id="@+id/tv_member_middle_name"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
-                android:text="@string/member_middlename"
-                android:textAppearance="@style/TextAppearance.MaterialComponents.Body1" />
+<!--            &lt;!&ndash;           _middlename&ndash;&gt;-->
+<!--            <TextView-->
+<!--                android:id="@+id/tv_member_middle_name"-->
+<!--                android:layout_width="wrap_content"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:layout_marginTop="16dp"-->
+<!--                android:text="@string/member_middlename"-->
+<!--                android:textAppearance="@style/TextAppearance.MaterialComponents.Body1" />-->
 
-            <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/til_member_middle_name"
-                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:minHeight="20dp"
-                app:boxStrokeWidth="2dp"
-                app:endIconMode="clear_text">
+<!--            <com.google.android.material.textfield.TextInputLayout-->
+<!--                android:id="@+id/til_member_middle_name"-->
+<!--                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"-->
+<!--                android:layout_width="match_parent"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:minHeight="20dp"-->
+<!--                app:boxStrokeWidth="2dp"-->
+<!--                app:endIconMode="clear_text">-->
 
-                <com.google.android.material.textfield.TextInputEditText
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:inputType="text"
-                    android:maxLines="1" />
-            </com.google.android.material.textfield.TextInputLayout>
+<!--                <com.google.android.material.textfield.TextInputEditText-->
+<!--                    android:layout_width="match_parent"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:inputType="text"-->
+<!--                    android:maxLines="1" />-->
+<!--            </com.google.android.material.textfield.TextInputLayout>-->
+<!--            -->
             <!--            respondent_lastname-->
             <TextView
                 android:id="@+id/tv_member_last_name"

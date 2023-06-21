@@ -385,7 +385,6 @@ class SharedDevelopmentalFormViewModel(
     fun sectionBHasBlankFields() {
         _SectionBHasBlank.value = hasBlank(
             address,
-            cac,
             villageOrDistrict,
             placeOfResidence,
             registrationType,
@@ -668,7 +667,7 @@ class SharedDevelopmentalFormViewModel(
             survey_date = SimpleDateFormat("yyyy-MM-dd' 'HH:mm:ss").format(System.currentTimeMillis()),
             initial_registration_type = registrationType,
             respondent_firstname = respondentFirstName,
-            respondent_middlename = respondentMiddleName,
+            respondent_middlename = "",
             respondent_lastname = respondentLastName,
             respondent_dob = respondentDOB,
             respondent_family_bond_to_head = respondentFamilyBondToHead,
@@ -676,7 +675,7 @@ class SharedDevelopmentalFormViewModel(
             respondent_phone_number = respondentPhoneNo,
             household_head_firstname = headFirstName,
             household_head_lastname = headLastName,
-            household_head_middlename = headMiddleName,
+            household_head_middlename = "",
             household_head_dob = headDOB,
             household_head_sex = headSex,
             head_age_known = headAgeKnown,
@@ -903,7 +902,7 @@ class SharedDevelopmentalFormViewModel(
         val member = MemberModel(
             id = null,
             firstname = memberFirstname,
-            middlename = memberMiddleName,
+            middlename = "",
             lastname = memberLastname,
             sex = memberSex,
             age = memberAge,

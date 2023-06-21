@@ -300,7 +300,6 @@ class HouseholdsViewModel(
                 is Resource.Loading -> _householdsEventChannel.send(HouseholdEvent.Loading)
                 is Resource.Success -> {
                     val data = results.data as BulkUploadResponse
-
                     _householdsEventChannel.send(HouseholdEvent.Successful(households = data.data?.households?.size!!, members = data.data?.members?.size!!))
                 }
 

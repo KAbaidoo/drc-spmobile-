@@ -8,6 +8,7 @@ import android.content.Intent
 import android.location.Location
 import android.location.LocationListener
 import android.location.LocationManager
+import android.os.Bundle
 import android.os.IBinder
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
@@ -70,10 +71,21 @@ class LocationProvider(context: Context) : Service(), LocationListener {
 
     }
 
+    override fun onProviderEnabled(provider: String) {
+        super.onProviderEnabled(provider)
+    }
+
+    override fun onProviderDisabled(provider: String) {
+        super.onProviderDisabled(provider)
+    }
+
     override fun onBind(p0: Intent?): IBinder? {
         return null
     }
 
+    override fun onStatusChanged(provider: String?, status: Int, extras: Bundle?) {
+        super.onStatusChanged(provider, status, extras)
+    }
 
     companion object {
         const val MIN_DISTANCE_CHANGE_FOR_UPDATES = 10F
