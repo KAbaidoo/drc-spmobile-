@@ -26,28 +26,15 @@ import androidx.drawerlayout.widget.DrawerLayout.LOCK_MODE_LOCKED_CLOSED
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.NavController
 import androidx.navigation.findNavController
-import androidx.navigation.navArgs
 import androidx.navigation.ui.*
-import androidx.preference.Preference
-import androidx.preference.PreferenceManager
-import com.google.android.gms.location.FusedLocationProviderClient
-import com.google.android.gms.location.LocationServices
-import com.google.android.gms.location.LocationServices.getFusedLocationProviderClient
+
 import com.google.android.material.navigation.NavigationView
-import com.vmadalin.easypermissions.EasyPermissions
-import com.vmadalin.easypermissions.dialogs.SettingsDialog
-import io.bewsys.spmobile.PERMISSION_LOCATION_REQUEST_CODE
+
 import io.bewsys.spmobile.R
 import io.bewsys.spmobile.databinding.ActivityMainBinding
-import io.bewsys.spmobile.databinding.NavHeaderMainBinding
-import io.bewsys.spmobile.ui.nonconsenting.form.AddNonConsentingHouseholdFragment
-import io.bewsys.spmobile.util.LocationProvider
-import io.bewsys.spmobile.util.MapUtil
-import io.bewsys.spmobile.util.getPreferences
+
 import kotlinx.coroutines.flow.collectLatest
-import kotlinx.coroutines.flow.take
-import org.koin.android.ext.android.get
-import org.koin.android.ext.android.inject
+
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 

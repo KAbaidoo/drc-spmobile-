@@ -35,7 +35,7 @@ object MapUtil {
         "Don\'t know" to 19,
 
 //        marital status
-        "Bachelor" to 20,
+        "Single" to 20,
         "Married monogamously" to 21,
         "Married polygamous" to 22,
         "Widow /widower" to 23,

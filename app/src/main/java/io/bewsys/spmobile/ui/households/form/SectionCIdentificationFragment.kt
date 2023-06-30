@@ -71,7 +71,7 @@ class SectionCIdentificationFragment : Fragment(R.layout.fragment_identification
 
             val tils = listOf(
                 tilRespondentFirstname,
-//                tilRespondentMiddlename,
+                tilRespondentMiddlename,
                 tilRespondentLastname,
                 tilRespondentVoterId,
                 tilRespondentPhoneNumber
@@ -89,10 +89,10 @@ class SectionCIdentificationFragment : Fragment(R.layout.fragment_identification
                 } else tilHouseholdHeadFirstname.error = null
             }
 
-//            tilHouseholdHeadMiddlename.editText?.addTextChangedListener {
-//                viewModel.headMiddleName = it.toString()
-//                viewModel.sectionCHasBlankFields()
-//            }
+            tilHouseholdHeadMiddlename.editText?.addTextChangedListener {
+                viewModel.headMiddleName = it.toString()
+                viewModel.sectionCHasBlankFields()
+            }
             tilHouseholdHeadLastname.editText?.addTextChangedListener {
                 viewModel.headLastName = it.toString()
                 viewModel.sectionCHasBlankFields()
@@ -136,10 +136,10 @@ class SectionCIdentificationFragment : Fragment(R.layout.fragment_identification
                     tilHouseholdHeadAge.error = getString(R.string.field_cannot_be_empty)
                 } else tilHouseholdHeadAge.error = null
             }
-//            tilRespondentMiddlename.editText?.addTextChangedListener {
-//                viewModel.respondentMiddleName = it.toString()
-//                viewModel.sectionCHasBlankFields()
-//            }
+            tilRespondentMiddlename.editText?.addTextChangedListener {
+                viewModel.respondentMiddleName = it.toString()
+                viewModel.sectionCHasBlankFields()
+            }
 
             tilRespondentLastname.editText?.addTextChangedListener {
                 viewModel.respondentLastName = it.toString()
@@ -204,7 +204,7 @@ class SectionCIdentificationFragment : Fragment(R.layout.fragment_identification
                         viewModel.headIsRespondent = rbNoIsRespondent.text.toString()
                         viewModel.apply {
                             respondentFirstName = ""
-//                            respondentMiddleName = ""
+                            respondentMiddleName = ""
                             respondentLastName = ""
                             respondentPhoneNo = ""
                             respondentVoterId = ""

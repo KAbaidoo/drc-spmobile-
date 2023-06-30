@@ -98,7 +98,7 @@
     <string name="household_head">Chef de menage</string>
     <string name="mobile_money_phone_number"><b>G.5</b> Numéro de téléphone mobile money</string>
     <string name="mobile_money_username"><b>G.5</b> Nom d\'utilisateur mobile money</string>
-    <string name="comments">Commentaires</string>
+    <string name="comments">I.9.7. Commentaires</string>
     <string name="household_head_lastname"><b>C.1.2</b> Post-Nom de famille du chef de ménage *</string>
     <string name="household_head_marital_status">État matrimonial du chef de ménage</string>
     <string name="household_head_birth_certificate">Certificat de naissance du chef de ménage</string>
@@ -139,7 +139,7 @@
     <string name="GPS_Latitude"><b>B.12</b> GPS-Lat</string>
     <string name="reason"><b>B.1</b> Raison</string>
     <string name="if_other_reason_indicate_here">Si autre raison, indiquez ici</string>
-    <string name="communities">Communautés</string>
+    <string name="communities">Communes</string>
     <string name="territories">Territoires</string>
     <string name="groupments">Groupements</string>
     <string name="provinces">Province</string>
@@ -261,10 +261,10 @@
     <string name="respondent_dob_known">Date de naissance du répondant connue</string>
     <string name="edit">Modifier</string>
     <string name="member_registration">Inscription des membres</string>
-    <string name="member_firstname"><b>D.1.1</b> Prénom *</string>
+    <string name="member_firstname"><b>D.1.3</b> Prénom *</string>
     <string name="member_firstname_label"> Prénom</string>
-    <string name="member_middlename"><b>D.1.2</b> Deuxième nom</string>
-    <string name="member_lastname"><b>D.1.2</b> Nom *</string>
+    <string name="member_middlename"><b>D.1.2</b> Post nom</string>
+    <string name="member_lastname"><b>D.1.1</b> Nom *</string>
     <string name="member_lastname_label"> Nom</string>
     <string name="member_age"><b>D.6</b> Âge</string>
     <string name="member_age_known">Âge connu</string>
@@ -373,5 +373,6 @@
     <string name="phone_number_helper_text">Entrez seulement 9 chiffres</string>
     <string name="voter_id_helper_text">Entrez seulement 11 chiffres</string>
     <string name="member">Membre</string>
+
 
 </resources>

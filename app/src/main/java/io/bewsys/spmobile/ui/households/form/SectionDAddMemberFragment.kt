@@ -85,7 +85,7 @@ class SectionDAddMemberFragment : Fragment(R.layout.fragment_add_members_d) {
 
             val tils = listOf(
                 tilMemberFirstname,
-//                tilMemberMiddleName,
+                tilMemberMiddleName,
                 tilMemberLastname,
                 tilMemberAge
             )
@@ -105,7 +105,7 @@ class SectionDAddMemberFragment : Fragment(R.layout.fragment_add_members_d) {
                             memberAge = headAge ?: ""
 
                             tilMemberFirstname.editText?.setText(headFirstName)
-//                            tilMemberMiddleName.editText?.setText(headMiddleName)
+                            tilMemberMiddleName.editText?.setText(headMiddleName)
                             tilMemberLastname.editText?.setText(headLastName)
                             tilMemberAge.editText?.setText(headAge ?: "")
 
@@ -139,7 +139,7 @@ class SectionDAddMemberFragment : Fragment(R.layout.fragment_add_members_d) {
                             }
 
                             tilMemberFirstname.editText?.setText(respondentFirstName)
-//                            tilMemberMiddleName.editText?.setText(respondentMiddleName)
+                            tilMemberMiddleName.editText?.setText(respondentMiddleName)
                             tilMemberLastname.editText?.setText(respondentLastName)
                             tilMemberAge.editText?.setText(respondentAge)
 
@@ -291,10 +291,10 @@ class SectionDAddMemberFragment : Fragment(R.layout.fragment_add_members_d) {
                 viewModel.memberFirstname = it.toString()
                 viewModel.memberHasBlankFields()
             }
-//            tilMemberMiddleName.editText?.addTextChangedListener {
-//                viewModel.memberMiddleName = it.toString()
-//                viewModel.memberHasBlankFields()
-//            }
+            tilMemberMiddleName.editText?.addTextChangedListener {
+                viewModel.memberMiddleName = it.toString()
+                viewModel.memberHasBlankFields()
+            }
             tilMemberLastname.editText?.addTextChangedListener {
                 viewModel.memberLastname = it.toString()
                 viewModel.memberHasBlankFields()

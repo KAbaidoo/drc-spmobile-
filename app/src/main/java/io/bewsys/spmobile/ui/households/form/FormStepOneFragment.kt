@@ -238,6 +238,7 @@ class FormStepOneFragment : Fragment(R.layout.fragment_add_household_one_consent
                 wasteDisposal = household?.method_of_waste_disposal ?: ""
                 otherWasteDisposal = household?.other_method_of_waste_disposal ?: ""
                 placeForHandWashing = household?.place_to_wash_hands ?: ""
+                comments = household?.comments ?: ""
 
 
 //          init  step five fields

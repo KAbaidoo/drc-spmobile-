@@ -62,8 +62,9 @@ class LoginViewModel(
                         _loginEventChannel.send(LoginEvent.Loading)
                     }
                     is Resource.Failure -> {
-                        val errorResponse = results.error as ErrorResponse
-                        _loginEventChannel.send(LoginEvent.Failure(errorResponse.msg))
+//                        val errorResponse = results.error
+
+                        _loginEventChannel.send(LoginEvent.Failure(results.error.toString()))
                     }
                     is Resource.Exception -> {
                         results.throwable.localizedMessage?.let { errorMsg ->

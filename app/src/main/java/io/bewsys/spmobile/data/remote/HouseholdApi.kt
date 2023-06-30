@@ -49,10 +49,6 @@ class HouseholdApi(private val client: HttpClient) {
                formdata
             )
 
-
-
-
-
         }
 
     companion object {

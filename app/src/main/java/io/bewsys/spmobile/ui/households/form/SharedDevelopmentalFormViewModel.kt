@@ -122,7 +122,6 @@ class SharedDevelopmentalFormViewModel(
     var address = ""
     var cac: String = ""
     var respondentFamilyBondToHead = ""
-    var respondentDOBKnown: String = ""
     var respondentAgeKnown: String = ""
     var villageOrDistrict = ""
     var territoryOrTown = ""
@@ -376,6 +375,7 @@ class SharedDevelopmentalFormViewModel(
     var airConditionerOwned: String = ""
     var cultivatedLandOwned: String = ""
     var fanOwned: String = ""
+    var comments: String = ""
 
 
     private val _SectionBHasBlank = MutableStateFlow(true)
@@ -636,7 +636,7 @@ class SharedDevelopmentalFormViewModel(
             other_method_of_waste_disposal = otherWasteDisposal,
             other_livestock_owned = otherLivestockQty,
             other_household_activities_in_past_12_months = "",
-            comments = "",
+            comments = comments,
             profile_picture = "",
             method_of_waste_disposal = wasteDisposal,
             place_to_wash_hands = placeForHandWashing,
@@ -655,6 +655,7 @@ class SharedDevelopmentalFormViewModel(
             remote_id = "",
             status = "",
             respondent_sex = respondentSex
+
         ).also {
             addHousehold(it)
         }
@@ -675,7 +676,7 @@ class SharedDevelopmentalFormViewModel(
             respondent_phone_number = respondentPhoneNo,
             household_head_firstname = headFirstName,
             household_head_lastname = headLastName,
-            household_head_middlename = "",
+            household_head_middlename = headMiddleName,
             household_head_dob = headDOB,
             household_head_sex = headSex,
             head_age_known = headAgeKnown,
@@ -800,7 +801,7 @@ class SharedDevelopmentalFormViewModel(
             other_method_of_waste_disposal = otherWasteDisposal,
             other_livestock_owned = otherLivestockQty,
             other_household_activities_in_past_12_months = "",
-            comments = "",
+            comments = comments,
             profile_picture = null,
             method_of_waste_disposal = wasteDisposal,
             place_to_wash_hands = placeForHandWashing,
@@ -902,7 +903,7 @@ class SharedDevelopmentalFormViewModel(
         val member = MemberModel(
             id = null,
             firstname = memberFirstname,
-            middlename = "",
+            middlename = memberMiddleName,
             lastname = memberLastname,
             sex = memberSex,
             age = memberAge,

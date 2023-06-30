@@ -36,13 +36,11 @@ class KtorHttpClient(val context: Context) {
                 url("$baseUrl/api/".trim())
             }
 
-
             headers.appendIfNameAbsent(
                 HttpHeaders.ContentType,
                 ContentType.Application.Json.toString()
             )
             accept(ContentType.Application.Json)
-
         }
 
         install(ContentNegotiation) {
