@@ -91,7 +91,7 @@ class SharedDevelopmentalFormViewModel(
     var healthZone = ""
     var healthArea = ""
 
-    var canoeOwned: String? = ""
+    var canoeOwned: String? = "0"
     var otherLivestockQty: String = ""
     var placeForHandWashing: String = ""
     var wasteDisposal: String = ""
@@ -477,12 +477,13 @@ class SharedDevelopmentalFormViewModel(
     }
 
 
-    val randomID = List(8) { Random.nextInt(0, 10) }.joinToString(separator = "")
+    var randomID =""
 
     var startTime: String = ""
 
     fun setStartTime() {
         startTime = SimpleDateFormat("HH:mm:ss").format(System.currentTimeMillis())
+        randomID = List(8) { Random.nextInt(0, 10) }.joinToString(separator = "")
     }
 
 

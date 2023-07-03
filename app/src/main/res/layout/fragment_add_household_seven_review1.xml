@@ -29,6 +29,14 @@
                 android:textAppearance="@style/TextAppearance.MaterialComponents.Headline4" />
 
             <TextView
+                android:id="@+id/tv_survey_no"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:text="@string/survey_no"
+                android:textAppearance="@style/TextAppearance.MaterialComponents.Headline6" />
+
+            <TextView
                 style="@style/Widget.App.Heading.Sub"
                 android:text="@string/geographical_location_of_the_household"
                 android:textStyle="bold" />

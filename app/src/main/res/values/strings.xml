@@ -388,5 +388,6 @@
     <string name="phone_number_helper_text">Enter only 9 digits</string>
     <string name="voter_id_helper_text">Enter only 11 digits</string>
     <string name="member">Member</string>
+    <string name="survey_no">Survey no: </string>
 
 </resources>

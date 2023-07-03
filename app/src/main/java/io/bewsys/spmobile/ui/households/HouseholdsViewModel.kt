@@ -235,6 +235,8 @@ class HouseholdsViewModel(
                             respondent_voter_id = it.respondent_voter_id,
 
 
+
+
                             )
                     }
                 }.collectLatest {

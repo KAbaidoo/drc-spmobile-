@@ -22,6 +22,7 @@ class FormStepSevenFragment : Fragment(R.layout.fragment_add_household_seven_rev
         binding.apply {
             viewModel.apply {
 
+                tvSurveyNo.append(" $provinceCode$territoryCode$communityCode$groupmentCode$randomID")
                 tvAreaOfResidence.append(": $placeOfResidence")
                 tvProvince.append(": $province")
                 tvTerritory.append(": $territory")
@@ -59,13 +60,6 @@ class FormStepSevenFragment : Fragment(R.layout.fragment_add_household_seven_rev
                 tvSoilMaterial.append(": $soilMaterial")
                 tvNumberOfRoomsUsedForSleeping.append(": $roomsUsedForSleeping")
                 tvFuelForCooking.append(": $cookingFuel")
-
-
-
-
-
-
-
 
 
                 memberList.forEachIndexed { index, member ->

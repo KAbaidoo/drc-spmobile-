@@ -50,6 +50,7 @@ class HouseholdDetailFragment : Fragment(R.layout.fragment_household_detail) {
                 viewModel.onEditActionFabClicked()
             }
 
+            tvSurveyNo.append(": ${household.survey_no}")
             tvAreaOfResidence.append(": ${household.area_of_residence}")
             tvProvince.append(": ${household.province_name}")
             tvTerritory.append(": ${household.territory_name}")
