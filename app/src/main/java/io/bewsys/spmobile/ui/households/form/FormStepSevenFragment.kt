@@ -21,6 +21,7 @@ class FormStepSevenFragment : Fragment(R.layout.fragment_add_household_seven_rev
 
         binding.apply {
             viewModel.apply {
+
                 tvAreaOfResidence.append(": $placeOfResidence")
                 tvProvince.append(": $province")
                 tvTerritory.append(": $territory")

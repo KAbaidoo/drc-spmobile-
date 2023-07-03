@@ -54,6 +54,7 @@
                     android:text="@string/emergency" />
 
             </RadioGroup>
+
             <!--            place of residence -->
             <TextView
                 android:layout_width="wrap_content"

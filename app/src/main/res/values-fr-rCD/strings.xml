@@ -70,20 +70,20 @@
     <string name="household">Ménage</string>
     <string name="household_status">Statut du ménage</string>
     <string name="migration_status">Statut de migration</string>
-    <string name="other_migration_status"><b>C.10.1</b> Autre statut de migratoire</string>
+    <string name="other_migration_status"><b>C.10.1</b> Autre statut de migratoire *</string>
     <string name="duration_displaced_returned_repatriated_refugee"><b>C.11</b> Si déplacé, renvoyé, rapatrié, réfugié, depuis combien de temps?</string>
     <string name="number_of_months_displaced_returned_repatriated_refugee">Nombre de mois de déplacement, retour, rapatriement ou réfugié</string>
     <string name="unit_of_migration_duration">Unité de durée de migration</string>
     <string name="bank_account_or_bankcard_available"><b>G.4</b> Possédez vous un compte ou carte bancaire </string>
     <string name="is_income_regular"><b>G.3</b> Le revenu est-il régulier?</string>
-    <string name="access_to_cultivable_land"><b>H.1</b> Est-ce qu\'un membre de votre ménage a-t-il accès à des terres cultivables même si cela ne lui appartient pas?</string>
+    <string name="access_to_cultivable_land"><b>H.1</b> Est-ce qu\'un membre de votre ménage a-t-il accès à des terres cultivables même si cela ne lui appartient pas? *</string>
     <string name="sale_of_production_assets">I.9.2 Vente des actifs de production</string>
     <string name="use_of_child_labor">I.9.3 Recours au travail des enfants</string>
     <string name="use_of_early_marriage">I.9.4 Recours au mariage précoce</string>
     <string name="affected_by_epidemic">Touché par une épidémie</string>
     <string name="owner_of_cultivable_land">Propriétaire de terres cultivables</string>
     <string name="name_of_social_assistance_program"><b>I.6</b> Si oui, il s\'agit de quel programme?</string>
-    <string name="household_member_with_benefit_from_social_assistance_program"><b>I.5</b> Y a-t-il au moins un membre de votre ménage qui bénéficie actuellement d\'un programme d\'assistance sociale (gouvernment, ONG,…)?</string>
+    <string name="household_member_with_benefit_from_social_assistance_program"><b>I.5</b> Y a-t-il au moins un membre de votre ménage qui bénéficie actuellement d\'un programme d\'assistance sociale (gouvernment, ONG,…)? *</string>
     <string name="minimum_monthly_income_necessary_live_without_difficulties">Revenu mensuel minimum nécessaire pour vivre sans difficultés</string>
     <string name="household_monthly_income">Revenu mensuel du ménage</string>
     <string name="days_spent_other_coping_strategy">I.8.9 Autre (precisez)</string>
@@ -109,13 +109,13 @@
     <string name="household_head_voter_id_card"><b>C.2</b> N° carte d\'électeur: *</string>
     <string name="household_head_dob">Date de naissance du chef de ménage</string>
     <string name="head_dob_known">Date de naissance de la tête connue</string>
-    <string name="household_head_age"><b>C.4</b> Age du chef de ménage</string>
+    <string name="household_head_age"><b>C.4</b> Age du chef de ménage *</string>
     <string name="territory_or_town">Territoire ou ville</string>
     <string name="household_head_pregnancy_status">Statut de grossesse du chef de ménage</string>
     <string name="household_head_sector_of_work">Secteur d\'activité du chef de ménage</string>
     <string name="household_head_school_attendance">Fréquentation scolaire du chef de ménage</string>
     <string name="head_age_known">Âge de la tête connu</string>
-    <string name="is_head_respondent">Le répondant est-il le chef du ménage?</string>
+    <string name="is_head_respondent"><b>C.6</b> Le répondant est-il le chef du ménage? *</string>
     <string name="address"><b>B.9</b> Addresse (milieu urbain): *</string>
     <string name="village_or_quartier"><b>B.8</b> Village/Quartier: *</string>
     <string name="initial_registration_type">Type d\'enregistrement *</string>
@@ -126,7 +126,7 @@
     <string name="territory_label"> Territoire /ville:</string>
     <string name="health_zone"><b>B.6</b> Zone de santé *</string>
     <string name="household_head_middlename"><b>C.1.2</b> Deuxième prénom du chef de ménage</string>
-    <string name="household_head_sex"><b>C.5</b> Sexe du chef de ménage</string>
+    <string name="household_head_sex"><b>C.5</b> Sexe du chef de ménage *</string>
     <string name="household_head_firstname"><b>C.1.1</b> Prénom du chef de ménage *</string>
     <string name="province"><b>B.2</b> Province: *</string>
     <string name="province_label"> Province:</string>
@@ -137,7 +137,7 @@
     <string name="hint_choose">Sélectionner</string>
     <string name="GPS_Longitude"><b>B.11</b> GPS-Lon</string>
     <string name="GPS_Latitude"><b>B.12</b> GPS-Lat</string>
-    <string name="reason"><b>B.1</b> Raison</string>
+    <string name="reason"><b>B.1</b> Raison *</string>
     <string name="if_other_reason_indicate_here">Si autre raison, indiquez ici</string>
     <string name="communities">Communes</string>
     <string name="territories">Territoires</string>
@@ -214,7 +214,7 @@
     <string name="number_of_mosquito_nets_owned">Nombre de moustiquaires possédées</string>
     <string name="number_of_guinea_pig_owned">Nombre de cochons d\'Inde possédés</string>
     <string name="number_of_motorbike_owned">Nombre de motos possédées</string>
-    <string name="number_of_rooms_used_for_sleeping"><b>E.4</b> Dans ce ménage, combien de pièces utilisez-vous pour dormir?</string>
+    <string name="number_of_rooms_used_for_sleeping"><b>E.4</b> Dans ce ménage, combien de pièces utilisez-vous pour dormir? *</string>
     <string name="number_of_table_owned">Nombre de tables possédées</string>
     <string name="number_of_sofa_owned">Nombre de canapés possédés</string>
     <string name="number_of_handset_or_phone_owned">Nombre de téléphones portables possédés</string>
@@ -291,8 +291,8 @@
     <string name="other_soil_material">Autre matériau principal du sol</string>
     <string name="other_source_of_drinking_water">Autre source d\'eau potable</string>
     <string name="other_type_of_toilet">Autre type de toilette</string>
-    <string name="waste_disposal"><b>F.3</b> Comment le ménage se débarrasse-t-il des ordures ménagères?</string>
-    <string name="place_for_hand_washing"><b>F.4</b> Lieu de lavage des mains</string>
+    <string name="waste_disposal"><b>F.3</b> Comment le ménage se débarrasse-t-il des ordures ménagères? *</string>
+    <string name="place_for_hand_washing"><b>F.4</b> Lieu de lavage des mains *</string>
     <string name="is_owner_of_cultivable_land">Si oui, est-il/elle propriétaire ?</string>
     <string name="total_number_of_hectares">et nombre total d\'hectares</string>
     <string name="other_livestock">Autre bétail</string>
@@ -312,8 +312,8 @@
     <string name="d_composition_of_household">D. COMPOSITION DU MÉNAGE </string>
     <string name="other_material_exterior_walls">Autre matériau des murs extérieurs</string>
     <string name="g_income">G. REVENUS </string>
-    <string name="what_is_the_minimum_amount_of_monthly_income_necessary_for_your_household_to_live_without_difficulties"><b>G.1</b> Quel est le montant minimum de revenu mensuel nécessaire permettant  à votre ménage de vivre sans difficultés?</string>
-    <string name="what_is_the_monthly_disposable_income_of_the_household"><b>G.2</b> Quel est le revenu mensuel disponible du menage ?</string>
+    <string name="what_is_the_minimum_amount_of_monthly_income_necessary_for_your_household_to_live_without_difficulties"><b>G.1</b> Quel est le montant minimum de revenu mensuel nécessaire permettant  à votre ménage de vivre sans difficultés? *</string>
+    <string name="what_is_the_monthly_disposable_income_of_the_household"><b>G.2</b> Quel est le revenu mensuel disponible du menage? *</string>
     <string name="h_household_assets">H. ACTIFS DU MÉNAGE</string>
     <string name="if_yes_indicate_the_number_in_the_boxes_below">Si oui, indiquez le nombre dans les cases ci-dessous</string>
     <string name="rickshaw">Pousse-pousse</string>
@@ -356,13 +356,13 @@
     <string name="does_he_she_have_a_birth_certificate"><b>D.8</b> Possède t-il/elle un acte de naissance?</string>
     <string name="targeting_committee_cac"><b>B.10</b> Comite ciblage/Cellule d\'Animation Communautaire (CAC):</string>
     <string name="e_housing">E. LOGEMENT</string>
-    <string name="what_is_your_occupancy_or_status"><b>E.1</b> Quel est votre statut d\'occupation de l\'actuel logement?</string>
-    <string name="main_soil_material"><b>E.3</b> Matériau principal du sol</string>
-    <string name="what_type_of_fuel_does_your_household_mainly_use_for_cooking"><b>E.5</b> Quel type de combustible votre ménage utilise-t-il principalement pour cuisiner?</string>
-    <string name="main_material_of_exterior_walls"><b>E.2</b> Principal matériau des murs extérieurs</string>
+    <string name="what_is_your_occupancy_or_status"><b>E.1</b> Quel est votre statut d\'occupation de l\'actuel logement? *</string>
+    <string name="main_soil_material"><b>E.3</b> Matériau principal du sol *</string>
+    <string name="what_type_of_fuel_does_your_household_mainly_use_for_cooking"><b>E.5</b> Quel type de combustible votre ménage utilise-t-il principalement pour cuisiner? *</string>
+    <string name="main_material_of_exterior_walls"><b>E.2</b> Principal matériau des murs extérieurs *</string>
     <string name="f_water_and_sanitation">F. EAU ET ASSAINISSEMENT</string>
-    <string name="what_is_the_main_source_of_drinking_water_for_the_household"><b>F.1</b> D\'où provient principalement l\'eau que boivent les membres de votre ménage?</string>
-    <string name="what_type_of_toilet_do_members_of_your_household_use"><b>F.2</b> Quel type de toilettes les membres de votre ménage utilisent-ils ?</string>
+    <string name="what_is_the_main_source_of_drinking_water_for_the_household"><b>F.1</b> D\'où provient principalement l\'eau que boivent les membres de votre ménage? *</string>
+    <string name="what_type_of_toilet_do_members_of_your_household_use"><b>F.2</b> Quel type de toilettes les membres de votre ménage utilisent-ils ? *</string>
     <string name="other_waste_disposal_method">Autre méthode d\'élimination des déchets</string>
     <string name="member_relationship"><b>D.3</b> Lien de parenté:</string>
     <string name="members_living_in_household"><b>D.1</b> S\'il vous plait, donnez-moi les noms des personnes qui vivent habituellement dans votre ménage, en commençant par le chef de ménage</string>
@@ -373,6 +373,4 @@
     <string name="phone_number_helper_text">Entrez seulement 9 chiffres</string>
     <string name="voter_id_helper_text">Entrez seulement 11 chiffres</string>
     <string name="member">Membre</string>
-
-
 </resources>

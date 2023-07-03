@@ -185,13 +185,13 @@ class SectionCIdentificationFragment : Fragment(R.layout.fragment_identification
                         viewModel.headIsRespondent = rbYesIsRespondent.text.toString()
                         viewModel.apply {
                             respondentFirstName = headFirstName
-//                            respondentMiddleName = headMiddleName
+                            respondentMiddleName = headMiddleName
                             respondentLastName = headLastName
                             respondentPhoneNo = headPhoneNo
                             respondentVoterId = headVoterId
 
                             tilRespondentFirstname.editText?.setText(headFirstName)
-//                            tilRespondentMiddlename.editText?.setText(headMiddleName)
+                            tilRespondentMiddlename.editText?.setText(headMiddleName)
                             tilRespondentLastname.editText?.setText(headLastName)
                             tilRespondentVoterId.editText?.setText(headVoterId)
                             tilRespondentPhoneNumber.editText?.setText(headPhoneNo)
@@ -292,14 +292,14 @@ class SectionCIdentificationFragment : Fragment(R.layout.fragment_identification
 
             viewModel.apply {
                 tilHouseholdHeadFirstname.editText?.setText(headFirstName)
-//                tilHouseholdHeadMiddlename.editText?.setText(headMiddleName)
+                tilHouseholdHeadMiddlename.editText?.setText(headMiddleName)
                 tilHouseholdHeadLastname.editText?.setText(headLastName)
                 tilHouseholdHeadAge.editText?.setText(headAge)
                 tilHouseholdHeadVoterIdCard.editText?.setText(headVoterId)
                 tilHouseholdHeadPhoneNumber.editText?.setText(headPhoneNo)
 
                 tilRespondentFirstname.editText?.setText(respondentFirstName)
-//                tilRespondentMiddlename.editText?.setText(respondentMiddleName)
+                tilRespondentMiddlename.editText?.setText(respondentMiddleName)
                 tilRespondentLastname.editText?.setText(respondentLastName)
                 tilRespondentVoterId.editText?.setText(respondentVoterId)
                 tilRespondentPhoneNumber.editText?.setText(respondentPhoneNo)

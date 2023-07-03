@@ -24,7 +24,6 @@
                 style="@style/Widget.App.Heading.Sub"
                 android:text="@string/c_identification_of_household" />
 
-
             <!--            respondent_firstname-->
             <TextView
                 android:id="@+id/tv_head_first_name"

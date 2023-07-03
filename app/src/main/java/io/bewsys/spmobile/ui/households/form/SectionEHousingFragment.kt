@@ -87,11 +87,8 @@ class SectionEHousingFragment : Fragment(R.layout.fragment_housing_e) {
                 setAdapter(
                     ArrayAdapter(context, dropdownLayout, occupancyStatus).also {
                         addTextChangedListener {
-
                             viewModel.occupancyStatus = it.toString()
                            viewModel.sectionEHasBlankFields()
-
-
                         }
                     }
                 )
