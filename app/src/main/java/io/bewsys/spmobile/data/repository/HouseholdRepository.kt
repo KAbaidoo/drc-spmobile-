@@ -32,8 +32,7 @@ import io.ktor.utils.io.core.buildPacket
 import io.ktor.utils.io.core.writeFully
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.async
-import kotlinx.coroutines.coroutineScope
+
 import kotlinx.coroutines.flow.*
 import kotlinx.coroutines.withContext
 import kotlinx.serialization.encodeToString
@@ -580,10 +579,10 @@ class HouseholdRepository(
                             middlename = middlename,
                             lastname = lastname,
                             sex = sex,
-                            age = if (age.isNullOrEmpty()) null else age.toInt(),
+                            age = age,
                             date_of_birth = dob,
-                            age_known = MapUtil.intMappings[age_known] ?: 0,
-                            dob_known = MapUtil.intMappings[dob_known] ?: 0,
+                            age_known = age_known?.lowercase()?:"",
+                            dob_known = dob_known?.lowercase()?:"",
                             profile_picture = profile_picture,
                             is_member_respondent = MapUtil.intMappings[is_member_respondent] ?: 0,
                             is_head = MapUtil.intMappings[is_head] ?: 0,

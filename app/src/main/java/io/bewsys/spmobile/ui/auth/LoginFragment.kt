@@ -15,6 +15,7 @@ import androidx.lifecycle.repeatOnLifecycle
 
 import androidx.navigation.fragment.findNavController
 import com.google.android.material.snackbar.Snackbar
+import io.bewsys.spmobile.BuildConfig
 
 
 import io.bewsys.spmobile.R
@@ -47,6 +48,8 @@ class LoginFragment : Fragment(R.layout.fragment_login) {
 
 
         binding.apply {
+            versionName.text = getString(R.string.version_name, BuildConfig.VERSION_NAME)
+
             textFieldEmail.editText?.setText(viewModel.email)
             textFieldPassword.editText?.setText(viewModel.password)
 

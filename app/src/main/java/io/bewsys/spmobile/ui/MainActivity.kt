@@ -29,6 +29,7 @@ import androidx.navigation.findNavController
 import androidx.navigation.ui.*
 
 import com.google.android.material.navigation.NavigationView
+import io.bewsys.spmobile.BuildConfig
 
 import io.bewsys.spmobile.R
 import io.bewsys.spmobile.databinding.ActivityMainBinding
@@ -49,12 +50,14 @@ class MainActivity : AppCompatActivity() {
 
     private lateinit var mHandler: Handler
     private lateinit var mRunnable: Runnable
-    private var mTime: Long = 1_800_000
+    private var mTime: Long = BuildConfig.SESSION_TIMEOUT
+
 
     private val viewModel: MainViewModel by viewModel()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
 
         // Initializing the handler and the runnable
         mHandler = Handler(Looper.getMainLooper())

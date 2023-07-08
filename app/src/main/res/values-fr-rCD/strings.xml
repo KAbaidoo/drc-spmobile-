@@ -61,7 +61,7 @@
     <string name="number_of_guinea_pigs_owned">Nombre de cobayes possédés</string>
     <string name="respondent">Répondant</string>
     <string name="respondent_firstname"><b>C.6.1</b> Prénom du répondant *</string>
-    <string name="respondent_middlename"><b>C.6.2</b> Deuxième prénom du répondant</string>
+    <string name="respondent_middlename"><b>C.6.2</b> Post nom du répondant</string>
     <string name="respondent_lastname"><b>C.6.2</b> Nom de famille du répondant *</string>
     <string name="respondent_dob">Date de naissance du répondant</string>
     <string name="respondent_family_bond_to_head">Lien familial du répondant avec le chef de ménage</string>
@@ -99,7 +99,7 @@
     <string name="mobile_money_phone_number"><b>G.5</b> Numéro de téléphone mobile money</string>
     <string name="mobile_money_username"><b>G.5</b> Nom d\'utilisateur mobile money</string>
     <string name="comments">I.9.7. Commentaires</string>
-    <string name="household_head_lastname"><b>C.1.2</b> Post-Nom de famille du chef de ménage *</string>
+    <string name="household_head_lastname"><b>C.1.2</b> Nom de famille du chef de ménage *</string>
     <string name="household_head_marital_status">État matrimonial du chef de ménage</string>
     <string name="household_head_birth_certificate">Certificat de naissance du chef de ménage</string>
     <string name="household_head_educational_level">Niveau d\'éducation du chef de ménage</string>
@@ -125,7 +125,7 @@
     <string name="territory"><b>B.3</b> Territoire /ville: *</string>
     <string name="territory_label"> Territoire /ville:</string>
     <string name="health_zone"><b>B.6</b> Zone de santé *</string>
-    <string name="household_head_middlename"><b>C.1.2</b> Deuxième prénom du chef de ménage</string>
+    <string name="household_head_middlename"><b>C.1.2</b> Post nom du chef de ménage</string>
     <string name="household_head_sex"><b>C.5</b> Sexe du chef de ménage *</string>
     <string name="household_head_firstname"><b>C.1.1</b> Prénom du chef de ménage *</string>
     <string name="province"><b>B.2</b> Province: *</string>
