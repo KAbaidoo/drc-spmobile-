@@ -5,7 +5,7 @@ import kotlinx.serialization.Transient
 
 @Serializable
 data class HealthZone(
-    val id: Int,
+    val id: Long,
     val name: String,
     val province_id: String,
 

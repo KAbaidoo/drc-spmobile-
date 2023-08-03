@@ -5,7 +5,13 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".ui.households.HouseholdsFragment">
-
+    <ProgressBar
+        android:id="@+id/progress_bar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:visibility="invisible"
+       android:layout_gravity="center"
+        tools:visibility="visible" />
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
@@ -20,12 +26,12 @@
             android:layout_height="wrap_content"
             android:layout_marginEnd="8dp"
             android:text="@string/developmental"
-            app:layout_constraintBottom_toBottomOf="@+id/fab_developmental"
-            app:layout_constraintEnd_toStartOf="@+id/fab_developmental"
-            app:layout_constraintTop_toTopOf="@+id/fab_developmental" />
+            app:layout_constraintBottom_toBottomOf="@+id/fab_developmental_action"
+            app:layout_constraintEnd_toStartOf="@+id/fab_developmental_action"
+            app:layout_constraintTop_toTopOf="@+id/fab_developmental_action" />
 
         <com.google.android.material.floatingactionbutton.FloatingActionButton
-            android:id="@+id/fab_developmental"
+            android:id="@+id/fab_developmental_action"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_margin="16dp"

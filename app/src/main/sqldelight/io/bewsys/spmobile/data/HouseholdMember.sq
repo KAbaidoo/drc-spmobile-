@@ -1,51 +1,66 @@
-CREATE TABLE  householdMember (
+CREATE TABLE  memberEntity (
     id INTEGER PRIMARY KEY AUTOINCREMENT,
-    remote_id INTEGER,
+    remote_id TEXT,
     firstname TEXT,
     lastname TEXT,
     middlename TEXT,
     age TEXT,
     profile_picture TEXT ,
     sex TEXT,
+    dob TEXT,
     date_of_birth TEXT,
     age_known TEXT ,
     dob_known TEXT ,
-    is_head INTEGER DEFAULT 0 NOT NULL ,
-    is_member_respondent INTEGER DEFAULT 0 NOT NULL,
-    family_bond_id INTEGER,
-    marital_status_id INTEGER,
-    birth_certificate INTEGER,
-    educational_level_id INTEGER,
-    school_attendance_id INTEGER,
+    is_head TEXT ,
+    is_member_respondent TEXT,
+    family_bond_id TEXT,
+    marital_status_id TEXT,
+    birth_certificate TEXT,
+    educational_level_id TEXT,
+    school_attendance_id TEXT,
     pregnancy_status TEXT,
-    disability_id INTEGER,
-    socio_professional_category_id INTEGER,
-    sector_of_work_id INTEGER,
-    household_id INTEGER,
+    disability_id TEXT,
+    socio_professional_category_id TEXT,
+    sector_of_work_id TEXT,
+    household_id TEXT,
     status TEXT
     );
 
 getAllHouseholdMembers:
 SELECT *
-FROM householdMember;
+FROM memberEntity;
 
 getHouseholdMembersCount:
 SELECT COUNT(*)
-FROM householdMember;
+FROM memberEntity;
 
-insertCbtEvaluation:
+insertMember:
 INSERT OR REPLACE
-INTO householdMember
-VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?);
+INTO memberEntity
+VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?);
+
+getById:
+SELECT *
+FROM memberEntity
+WHERE id = :id;
 
 getByRemoteId:
 SELECT *
-FROM householdMember
+FROM memberEntity
 WHERE remote_id = :remote_id;
 
 getByHouseholdId:
 SELECT *
-FROM householdMember
+FROM memberEntity
 WHERE household_id = :household_id;
 
+lastInsertRowId:
+SELECT last_insert_rowid();
+
+deleteMember:
+DELETE FROM memberEntity WHERE id = ?;
+
+updateStatus:
+UPDATE memberEntity
+SET status = :status ,remote_id = :remoteId,household_id =: householdId WHERE id = :id;
 

@@ -5,29 +5,29 @@
     tools:context=".ui.settings.SettingsFragment">
     <PreferenceCategory
         app:key="preferences_category"
-        app:title="Preferences">
+        app:title="@string/preferences">
         <ListPreference
             app:defaultValue="1"
-            app:dialogTitle="Choose language"
+            app:dialogTitle="@string/choose_language"
             app:entries="@array/language"
             app:entryValues="@array/locales"
             app:key="language"
             app:useSimpleSummaryProvider="true"
-            app:title="Language" />
+            app:title="@string/language" />
 
     </PreferenceCategory>
     <PreferenceCategory
         app:key="advanced_category"
-        app:title="Advanced">
+        app:title="@string/advanced">
         <Preference
             app:fragment="io.bewsys.spmobile.ui.settings.HostSettingsFragment"
-            app:title="Host"
-            app:summary="Configure host server urls"/>
+            app:title="@string/host"
+            app:summary="@string/configure_host_server_urls"/>
 
-        <Preference
-            app:key="help"
-            app:summary="Report technical issues"
-            app:title="Help" />
+<!--        <Preference-->
+<!--            app:key="help"-->
+<!--            app:summary="@string/report_technical_issues"-->
+<!--            app:title="@string/help" />-->
 
     </PreferenceCategory>
 

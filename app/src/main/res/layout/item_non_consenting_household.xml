@@ -26,7 +26,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="4dp"
-                android:text="@string/province"
+                android:text="@string/province_label"
                 android:textAppearance="@style/TextAppearance.MaterialComponents.Caption" />
 
             <TextView
@@ -49,7 +49,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="4dp"
-                android:text="@string/community"
+                android:text="@string/community_label"
                 android:textAppearance="@style/TextAppearance.AppCompat.Caption" />
 
             <TextView

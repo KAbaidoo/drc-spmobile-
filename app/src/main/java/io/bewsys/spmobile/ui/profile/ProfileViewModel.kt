@@ -1,25 +1,30 @@
 package io.bewsys.spmobile.ui.profile
 
+import android.app.Application
 import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import androidx.work.*
+import io.bewsys.spmobile.KEY_DATA_ID
 
 import io.bewsys.spmobile.UPDATE_USER_RESULT_OK
 import io.bewsys.spmobile.data.remote.model.profile.FailureMessage
 import io.bewsys.spmobile.data.repository.AuthRepository
 
 import io.bewsys.spmobile.util.Resource
+import io.bewsys.spmobile.work.NonConsentUploadWorker
 import kotlinx.coroutines.channels.Channel
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.flow.receiveAsFlow
 import kotlinx.coroutines.launch
 
 class ProfileViewModel(
+    application: Application,
     private val state: SavedStateHandle,
     private val userRepository: AuthRepository
 ) : ViewModel() {
 
-
+    private val workManager = WorkManager.getInstance(application)
 
     var phoneNumber = state.get<String>("phone_number") ?: ""
         set(value) {
@@ -73,7 +78,23 @@ class ProfileViewModel(
     }
 
 
+    private fun uploadNonConsentingHousehold(itemId: Long) = viewModelScope.launch {
+        val constraints = Constraints.Builder()
+            .setRequiredNetworkType(NetworkType.CONNECTED)
+            .build()
 
+        val uploadRequest = OneTimeWorkRequestBuilder<NonConsentUploadWorker>()
+            .setConstraints(constraints)
+            .setInputData(createInputDataForId(itemId))
+            .build()
+        workManager.enqueue(uploadRequest)
+
+    }
+    private fun createInputDataForId(id: Long): Data {
+        val builder = Data.Builder()
+        builder.putLong(KEY_DATA_ID, id)
+        return builder.build()
+    }
     sealed class UserProfileEvent {
         data class ShowMessage(val msg: String) : UserProfileEvent()
         data class Failure(val errorMsg: String) : UserProfileEvent()

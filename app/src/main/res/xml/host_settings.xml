@@ -4,12 +4,12 @@
     xmlns:tools="http://schemas.android.com/tools"
     tools:context=".ui.settings.SettingsFragment">
     <PreferenceCategory
-        app:title="Configuration">
+        app:title="@string/configure">
         <EditTextPreference
-            app:dialogTitle="Primary host url"
+            app:dialogTitle="@string/primary_host"
             app:key="primary_host"
             app:persistent="true"
-            app:title="Primary"
+            app:title="@string/primary"
             app:useSimpleSummaryProvider="true" />
     </PreferenceCategory>
 

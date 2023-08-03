@@ -5,16 +5,16 @@ buildscript {
     ext {
         // Sdk and tools
         minSdkVersion = 24
-        targetSdkVersion = 31
-        compileSdkVersion = 31
+        targetSdkVersion = 33
+        compileSdkVersion = 33
 
         // App dependencies
-        appCompatVersion = "1.4.1"
+        appCompatVersion = "1.6.1"
         constraintLayoutVersion = "2.1.4"
         coroutinesVersion = "1.6.4"
         espressoVersion = "3.5.1"
         fragmentVersion = "1.5.5"
-        gradleVersion = "7.3.1"
+        gradleVersion = '7.4.2'
 
         // koin dependency injection
         koin_version = "3.3.2"
@@ -44,7 +44,7 @@ buildscript {
 //        ktor http client
         ktor_version = "2.2.3"
 
-        work_version= "2.7.1"
+        work_version= "2.8.1"
         viewpager_version = "1.0.0"
     }
 
@@ -56,10 +56,12 @@ buildscript {
 
     dependencies {
         classpath "com.android.tools.build:gradle:$gradleVersion"
-//        classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlinVersion"
         classpath "androidx.navigation:navigation-safe-args-gradle-plugin:$navigation_version"
         classpath "app.cash.sqldelight:gradle-plugin:$sqldelight_version"
         classpath "org.jetbrains.kotlin:kotlin-serialization:$kotlinVersion"
+        // Add the dependency for the Crashlytics Gradle plugin
+        classpath 'com.google.firebase:firebase-crashlytics-gradle:2.9.5'
+        classpath 'com.google.gms:google-services:4.3.15'
     }
 }
 

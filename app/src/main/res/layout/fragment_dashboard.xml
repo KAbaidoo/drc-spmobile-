@@ -48,7 +48,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:padding="4dp"
-                        android:text="@string/province"
+                        android:text="@string/provinces"
                         android:textAlignment="center"
                         android:textAppearance="@style/TextAppearance.MaterialComponents.Body2"
                         android:textColor="?android:textColorPrimary" />
@@ -187,7 +187,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:padding="4dp"
-                        android:text="Households"
+                        android:text="@string/households"
                         android:textAlignment="center"
                         android:textAppearance="@style/TextAppearance.MaterialComponents.Body2"
                         android:textColor="?android:textColorPrimary" />
@@ -224,7 +224,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:padding="4dp"
-                        android:text="Members"
+                        android:text="@string/members"
                         android:textAlignment="center"
                         android:textAppearance="@style/TextAppearance.MaterialComponents.Body2"
                         android:textColor="?android:textColorPrimary" />

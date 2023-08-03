@@ -8,24 +8,24 @@
     <fragment
         android:id="@+id/nav_dashboard"
         android:name="io.bewsys.spmobile.ui.dashboard.DashboardFragment"
-        android:label="Dashboard"
+        android:label="@string/dashboard"
         tools:layout="@layout/fragment_dashboard" />
     <fragment
         android:id="@+id/nav_household"
         android:name="io.bewsys.spmobile.ui.households.HouseholdsFragment"
-        android:label="Households"
+        android:label="@string/households"
         tools:layout="@layout/fragment_households" >
         <action
-            android:id="@+id/action_nav_household_to_humanitarianFormFragment"
-            app:destination="@id/humanitarianFormFragment" />
-        <action
-            android:id="@+id/action_nav_household_to_navigation"
+            android:id="@+id/action_nav_household_to_form_navigation"
             app:destination="@id/form_navigation" />
+        <action
+            android:id="@+id/action_nav_household_to_householdDetailFragment"
+            app:destination="@id/householdDetailFragment" />
     </fragment>
     <fragment
         android:id="@+id/nav_non_consenting"
         android:name="io.bewsys.spmobile.ui.nonconsenting.NonConsentingFragment"
-        android:label="Non-consenting Households"
+        android:label="@string/non_consenting_households"
         tools:layout="@layout/fragment_non_consenting" >
         <action
             android:id="@+id/action_nav_non_consenting_to_nonConsentingFormFragment"
@@ -34,22 +34,26 @@
     <fragment
         android:id="@+id/nav_profile"
         android:name="io.bewsys.spmobile.ui.profile.ProfileFragment"
-        android:label="Profile"
+        android:label="@string/profile"
         tools:layout="@layout/fragment_profile" />
     <fragment
         android:id="@+id/nonConsentingFormFragment"
         android:name="io.bewsys.spmobile.ui.nonconsenting.form.AddNonConsentingHouseholdFragment"
-        android:label="Add non-consenting household"
-        tools:layout="@layout/fragment_add_non_consenting" />
-    <fragment
-        android:id="@+id/humanitarianFormFragment"
-        android:name="io.bewsys.spmobile.ui.households.forms.HumanitarianFormFragment"
-        android:label="Add humanitarian registration"
-        tools:layout="@layout/fragment_humanitarian_form" />
+        android:label="{title}"
+        tools:layout="@layout/fragment_add_non_consenting" >
+        <argument
+            android:name="title"
+            app:argType="string" />
+        <argument
+            android:name="household"
+            app:argType="io.bewsys.spmobile.data.local.NonConsentHouseholdModel"
+            app:nullable="true"
+            android:defaultValue="@null" />
+    </fragment>
     <fragment
         android:id="@+id/nav_settings"
         android:name="io.bewsys.spmobile.ui.settings.SettingsFragment"
-        android:label="Settings" >
+        android:label="@string/settings" >
         <action
             android:id="@+id/action_nav_settings_to_hostSettingsFragment"
             app:destination="@id/hostSettingsFragment" />
@@ -57,88 +61,197 @@
     <fragment
         android:id="@+id/hostSettingsFragment"
         android:name="io.bewsys.spmobile.ui.settings.HostSettingsFragment"
-        android:label="Host settings" />
+        android:label="@string/host_settings" />
     <fragment
         android:id="@+id/nav_login"
         android:name="io.bewsys.spmobile.ui.auth.LoginFragment"
-        android:label="Login"
-        tools:layout="@layout/fragment_login" />
+        android:label="@string/login"
+        tools:layout="@layout/fragment_login" >
+        <action
+            android:id="@+id/action_nav_login_to_forgotPasswordFragment"
+            app:destination="@id/forgotPasswordFragment" />
+        <argument
+            android:name="email"
+            app:argType="string"
+            app:nullable="true" />
+    </fragment>
     <dialog
         android:id="@+id/loginDialogFragment"
         android:name="io.bewsys.spmobile.ui.auth.LoginDialogFragment"
         android:label="LoginDialogFragment" >
         <argument
-            android:name="errorMessage"
+            android:name="message"
             app:argType="string"
             android:defaultValue="Login failed!" />
     </dialog>
     <action android:id="@+id/action_global_loginDialogFragment" app:destination="@id/loginDialogFragment" />
+
     <navigation android:id="@+id/form_navigation"
         app:startDestination="@id/formStepOneFragment">
-        <fragment
-            android:id="@+id/formStepTwoFragment"
-            android:name="io.bewsys.spmobile.ui.households.forms.developmentalform.FormStepTwoFragment"
-            android:label="fragment_add_household_two_head"
-            tools:layout="@layout/fragment_add_household_two_respondent">
-            <action
-                android:id="@+id/action_formStepTwoFragment_to_formStepThreeFragment"
-                app:destination="@id/formStepThreeFragment" />
-            <action
-                android:id="@+id/action_formStepTwoFragment_to_formStepOneFragment"
-                app:destination="@id/formStepOneFragment" />
-        </fragment>
+        <argument
+            android:name="household"
+            app:argType="io.bewsys.spmobile.data.local.HouseholdModel"
+            app:nullable="true"
+            android:defaultValue="@null" />
+        <argument
+            android:name="title"
+            app:argType="string" />
         <fragment
             android:id="@+id/formStepOneFragment"
-            android:name="io.bewsys.spmobile.ui.households.forms.developmentalform.FormStepOneFragment"
-            android:label="fragment_add_household_one_respondent"
+            android:name="io.bewsys.spmobile.ui.households.form.FormStepOneFragment"
+            android:label="{title}"
             tools:layout="@layout/fragment_add_household_one_consent">
-            <action
-                android:id="@+id/action_formStepOneFragment_to_formStepTwoFragment"
-                app:destination="@id/formStepTwoFragment" />
+            <argument
+                android:name="title"
+                app:argType="string" />
         </fragment>
         <fragment
-            android:id="@+id/formStepFiveFragment"
-            android:name="io.bewsys.spmobile.ui.households.forms.developmentalform.FormStepFiveFragment"
-            android:label="fragment_add_household_five_property"
-            tools:layout="@layout/fragment_add_household_five_shock">
-            <action
-                android:id="@+id/action_formStepFiveFragment_to_formStepFourFragment"
-                app:destination="@id/formStepFourFragment" />
-            <action
-                android:id="@+id/action_formStepFiveFragment_to_formStepSixFragment2"
-                app:destination="@id/formStepSixFragment2" />
+            android:id="@+id/formStepSevenFragment"
+            android:name="io.bewsys.spmobile.ui.households.form.FormStepSevenFragment"
+            android:label="@string/review"
+            tools:layout="@layout/fragment_add_household_seven_review1" >
+
+            <argument
+                android:name="title"
+                app:argType="string" />
         </fragment>
         <fragment
-            android:id="@+id/formStepThreeFragment"
-            android:name="io.bewsys.spmobile.ui.households.forms.developmentalform.FormStepThreeFragment"
-            android:label="fragment_add_household_three_household"
-            tools:layout="@layout/fragment_add_household_three_head">
-            <action
-                android:id="@+id/action_formStepThreeFragment_to_formStepFourFragment"
-                app:destination="@id/formStepFourFragment" />
-            <action
-                android:id="@+id/action_formStepThreeFragment_to_formStepTwoFragment"
-                app:destination="@id/formStepTwoFragment" />
+            android:id="@+id/formStepEightFragment"
+            android:name="io.bewsys.spmobile.ui.households.form.FormStepEightFragment"
+            android:label="@string/review"
+            tools:layout="@layout/fragment_add_household_eight_review2" >
+
+            <argument
+                android:name="title"
+                app:argType="string" />
+        </fragment>
+        <action
+            android:id="@+id/action_global_nav_household"
+            app:destination="@id/nav_household" />
+        <fragment
+            android:id="@+id/sectionBLocationFragment"
+            android:name="io.bewsys.spmobile.ui.households.form.SectionBLocationFragment"
+            android:label="{title}"
+            tools:layout="@layout/fragment_location_of_household_b" >
+            <argument
+                android:name="title"
+                app:argType="string" />
         </fragment>
         <fragment
-            android:id="@+id/formStepFourFragment"
-            android:name="io.bewsys.spmobile.ui.households.forms.developmentalform.FormStepFourFragment"
-            android:label="fragment_add_household_four_home"
-            tools:layout="@layout/fragment_add_household_four_home">
-            <action
-                android:id="@+id/action_formStepFourFragment_to_formStepFiveFragment"
-                app:destination="@id/formStepFiveFragment" />
-            <action
-                android:id="@+id/action_formStepFourFragment_to_formStepThreeFragment"
-                app:destination="@id/formStepThreeFragment" />
+            android:id="@+id/sectionCIdentificationFragment"
+            android:name="io.bewsys.spmobile.ui.households.form.SectionCIdentificationFragment"
+            android:label="{title}"
+            tools:layout="@layout/fragment_identification_of_household_c" >
+
+            <argument
+                android:name="title"
+                app:argType="string" />
         </fragment>
         <fragment
-            android:id="@+id/formStepSixFragment2"
-            android:name="io.bewsys.spmobile.ui.households.forms.developmentalform.FormStepSixFragment"
-            android:label="FormStepSixFragment" >
-            <action
-                android:id="@+id/action_formStepSixFragment2_to_formStepFiveFragment"
-                app:destination="@id/formStepFiveFragment" />
+            android:id="@+id/sectionEHousingFragment"
+            android:name="io.bewsys.spmobile.ui.households.form.SectionEHousingFragment"
+            android:label="{title}"
+            tools:layout="@layout/fragment_housing_e">
+            <argument
+                android:name="title"
+                app:argType="string" />
         </fragment>
+        <fragment
+            android:id="@+id/sectionFWaterAndSanitationFragment"
+            android:name="io.bewsys.spmobile.ui.households.form.SectionFWaterAndSanitationFragment"
+            android:label="{title}"
+            tools:layout="@layout/fragment_water_and_sanitation_f">
+            <argument
+                android:name="title"
+                app:argType="string" />
+        </fragment>
+        <fragment
+            android:id="@+id/sectionGIncomeFragment"
+            android:name="io.bewsys.spmobile.ui.households.form.SectionGIncomeFragment"
+            android:label="{title}"
+            tools:layout="@layout/fragment_household_income_g">
+            <argument
+                android:name="title"
+                app:argType="string" />
+        </fragment>
+        <fragment
+            android:id="@+id/sectionHAssetsIncomeFragment"
+            android:name="io.bewsys.spmobile.ui.households.form.SectionHAssetsFragment"
+            android:label="{title}"
+            tools:layout="@layout/fragment_household_assets_h">
+            <argument
+                android:name="title"
+                app:argType="string" />
+        </fragment>
+        <fragment
+            android:id="@+id/sectionIVulnerabilityFragment"
+            android:name="io.bewsys.spmobile.ui.households.form.SectionIVulnerabilityFragment"
+            android:label="{title}"
+            tools:layout="@layout/fragment_vulnerability_i" >
+            <argument
+                android:name="title"
+                app:argType="string" />
+        </fragment>
+        <fragment
+            android:id="@+id/sectionDAddMemberFragment"
+            android:name="io.bewsys.spmobile.ui.households.form.SectionDAddMemberFragment"
+            android:label="@string/add_member"
+            tools:layout="@layout/fragment_add_members_d" >
+            <argument
+                android:name="photo_uri"
+                app:argType="string"
+                app:nullable="true"
+                android:defaultValue="null" />
+            <action
+                android:id="@+id/action_sectionDAddMemberFragment_to_cameraFragment"
+                app:destination="@id/cameraFragment" />
+        </fragment>
+        <fragment
+            android:id="@+id/sectionDCompositionOfHousholdFragment"
+            android:name="io.bewsys.spmobile.ui.households.form.SectionDCompositionOfHousholdFragment"
+            android:label="{title}"
+            tools:layout="@layout/fragment_composition_of_household_d" >
+            <argument
+                android:name="title"
+                app:argType="string" />
+        </fragment>
+        <fragment
+            android:id="@+id/cameraFragment"
+            android:name="io.bewsys.spmobile.ui.households.form.CameraFragment"
+            android:label="@string/camera_preview"
+            tools:layout="@layout/fragment_camera_preview" />
+
     </navigation>
+    <dialog
+        android:id="@+id/deleteHouseholdDialogFragment"
+        android:name="io.bewsys.spmobile.ui.households.delete.DeleteHouseholdDialogFragment"
+        android:label="DeleteHouseholdDialogFragment" >
+        <argument
+            android:name="id"
+            app:argType="long" />
+    </dialog><action android:id="@+id/action_global_deleteHouseholdDialogFragment" app:destination="@id/deleteHouseholdDialogFragment"/>
+    <fragment
+        android:id="@+id/forgotPasswordFragment"
+        android:name="io.bewsys.spmobile.ui.auth.ForgotPasswordFragment"
+        android:label="Forgot password"
+        tools:layout="@layout/fragment_forgot_password" >
+        <argument
+            android:name="email"
+            app:argType="string" />
+        <action
+            android:id="@+id/action_forgotPasswordFragment_to_nav_login"
+            app:destination="@id/nav_login" />
+    </fragment>
+    <fragment
+        android:id="@+id/householdDetailFragment"
+        android:name="io.bewsys.spmobile.ui.households.detail.HouseholdDetailFragment"
+        android:label="@string/household_details"
+        tools:layout="@layout/fragment_household_detail" >
+        <argument
+            android:name="household"
+            app:argType="io.bewsys.spmobile.data.local.HouseholdModel" />
+        <action
+            android:id="@+id/action_householdDetailFragment_to_form_navigation"
+            app:destination="@id/form_navigation" />
+    </fragment>
 </navigation>

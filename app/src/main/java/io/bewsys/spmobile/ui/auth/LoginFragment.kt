@@ -15,6 +15,7 @@ import androidx.lifecycle.repeatOnLifecycle
 
 import androidx.navigation.fragment.findNavController
 import com.google.android.material.snackbar.Snackbar
+import io.bewsys.spmobile.BuildConfig
 
 
 import io.bewsys.spmobile.R
@@ -45,7 +46,10 @@ class LoginFragment : Fragment(R.layout.fragment_login) {
         val binding = FragmentLoginBinding.bind(view)
 
 
+
         binding.apply {
+            versionName.text = getString(R.string.version_name, BuildConfig.VERSION_NAME)
+
             textFieldEmail.editText?.setText(viewModel.email)
             textFieldPassword.editText?.setText(viewModel.password)
 
@@ -54,11 +58,6 @@ class LoginFragment : Fragment(R.layout.fragment_login) {
             }
             textFieldPassword.editText?.addTextChangedListener {
                 viewModel.password = it.toString()
-            }
-
-
-            buttonLogin.setOnClickListener {
-                viewModel.login()
             }
 
             viewLifecycleOwner.lifecycleScope.launch {
@@ -95,14 +94,24 @@ class LoginFragment : Fragment(R.layout.fragment_login) {
                                 findNavController().navigate(action)
 
                             }
+                            is LoginViewModel.LoginEvent.ForgotPassword -> {
+                             val action =  LoginFragmentDirections.actionNavLoginToForgotPasswordFragment(event.email)
+                               findNavController().navigate(action)
+                            }
                         }
                     }
                 }
             }
 
+            buttonLogin.setOnClickListener {
+                viewModel.loginClicked()
+            }
+            btnForgotPassword.setOnClickListener {
+                viewModel.btnForgotPasswordClicked()
+            }
         }
 
-            viewModel.showLoggedOutMessage()
+        viewModel.showLoggedOutSnackMessage()
 
     }
 

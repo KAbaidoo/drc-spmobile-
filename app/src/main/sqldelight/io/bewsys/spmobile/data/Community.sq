@@ -36,4 +36,4 @@ WHERE id = :id;
 getByName:
 SELECT *
 FROM communityEntity
-WHERE name LIKE ('%'||:query||'%') ;
+WHERE name = :query ;

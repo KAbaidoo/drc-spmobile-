@@ -30,4 +30,4 @@ WHERE id = :id;
 getByName:
 SELECT *
 FROM provinceEntity
-WHERE name LIKE ('%'||:query||'%') ;
+WHERE name = :query ;

@@ -26,3 +26,8 @@ getById:
 SELECT *
 FROM healthZoneEntity
 WHERE id = :id;
+
+getByName:
+SELECT *
+FROM healthZoneEntity
+WHERE name = :query ;

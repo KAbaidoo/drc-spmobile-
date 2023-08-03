@@ -3,58 +3,101 @@ package io.bewsys.spmobile.ui
 
 import android.Manifest
 import android.annotation.SuppressLint
+import android.content.Context
+import android.content.SharedPreferences
+import android.content.pm.PackageManager
+import android.location.Location
 import android.os.Bundle
+import android.os.Handler
+import android.os.Looper
 import android.util.Log
+import android.view.MotionEvent
 import android.view.View
+import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.app.AppCompatDelegate
+import androidx.core.app.ActivityCompat
+import androidx.core.os.LocaleListCompat
 import androidx.core.os.bundleOf
+import androidx.core.view.get
 import androidx.drawerlayout.widget.DrawerLayout
 import androidx.drawerlayout.widget.DrawerLayout.LOCK_MODE_LOCKED_CLOSED
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.NavController
 import androidx.navigation.findNavController
-import androidx.navigation.navArgs
 import androidx.navigation.ui.*
-import com.google.android.gms.location.FusedLocationProviderClient
-import com.google.android.gms.location.LocationServices
+
 import com.google.android.material.navigation.NavigationView
-import com.vmadalin.easypermissions.EasyPermissions
-import com.vmadalin.easypermissions.dialogs.SettingsDialog
-import io.bewsys.spmobile.PERMISSION_LOCATION_REQUEST_CODE
+import io.bewsys.spmobile.BuildConfig
+
 import io.bewsys.spmobile.R
 import io.bewsys.spmobile.databinding.ActivityMainBinding
+
 import kotlinx.coroutines.flow.collectLatest
+
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 
-class MainActivity : AppCompatActivity(), EasyPermissions.PermissionCallbacks {
+class MainActivity : AppCompatActivity() {
+
 
     private lateinit var appBarConfiguration: AppBarConfiguration
     private lateinit var binding: ActivityMainBinding
     private lateinit var navController: NavController
+
+    //============================
+
+    private lateinit var mHandler: Handler
+    private lateinit var mRunnable: Runnable
+    private var mTime: Long = BuildConfig.SESSION_TIMEOUT
+
+
     private val viewModel: MainViewModel by viewModel()
 
-    private lateinit var fusedLocationProviderClient: FusedLocationProviderClient
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        fusedLocationProviderClient =
-            LocationServices.getFusedLocationProviderClient(this)
+
+        // Initializing the handler and the runnable
+        mHandler = Handler(Looper.getMainLooper())
+
+        mRunnable = Runnable {
+
+            navController.navigate(R.id.nav_login)
+
+            Toast.makeText(
+                applicationContext,
+                "User inactive for ${mTime / 60_000} mins!",
+                Toast.LENGTH_SHORT
+            ).show()
+        }
+
+
+
 
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
-
         setSupportActionBar(binding.appBarMain.toolbar)
 
-//
-//        lifecycleScope.launchWhenStarted {
-//            viewModel.userState.collectLatest {
-//                if (it.not()) {
-//                    navController.navigate(R.id.nav_login)
-//                }
-//            }
-//        }
+
+        val navigationView: NavigationView = findViewById(R.id.nav_view)
+        val header: View = navigationView.getHeaderView(0)
+        val tv: TextView = header.findViewById(R.id.tv_username)
+
+        lifecycleScope.launchWhenStarted {
+            viewModel.userState.collectLatest {
+                if (it.not()) {
+                    navController.navigate(R.id.nav_login)
+                }
+            }
+        }
+        lifecycleScope.launchWhenStarted {
+            viewModel.getUser().collectLatest {
+                tv.text = it.name ?: "username"
+            }
+        }
+
 
         val drawerLayout: DrawerLayout = binding.drawerLayout
         val navView: NavigationView = binding.navView
@@ -70,7 +113,6 @@ class MainActivity : AppCompatActivity(), EasyPermissions.PermissionCallbacks {
         )
         setupActionBarWithNavController(navController, appBarConfiguration)
         navView.setupWithNavController(navController)
-
 
         navView.setOnClickListener { menuItem ->
             when (menuItem.id) {
@@ -89,65 +131,48 @@ class MainActivity : AppCompatActivity(), EasyPermissions.PermissionCallbacks {
                 R.id.nav_login -> {
                     drawerLayout.setDrawerLockMode(LOCK_MODE_LOCKED_CLOSED)
                     binding.appBarMain.toolbar.visibility = View.GONE
-
                 }
+
                 else ->
                     binding.appBarMain.toolbar.visibility = View.VISIBLE
             }
         }
 
-        @SuppressLint("MissingPermission")
-        if (hasLocationPermission()) {
-            fusedLocationProviderClient.lastLocation.addOnSuccessListener { location -> }
-        } else {
-            requestLocationPermission()
-        }
-
+        // Start the handler
+        startHandler()
     } //end of onCreate
 
-    private fun hasLocationPermission() =
-        EasyPermissions.hasPermissions(
-            applicationContext,
-            Manifest.permission.ACCESS_FINE_LOCATION
-        )
-
-    private fun requestLocationPermission() {
-        EasyPermissions.requestPermissions(
-            this,
-            "This application cannot work without Location Permission.",
-            PERMISSION_LOCATION_REQUEST_CODE,
-            Manifest.permission.ACCESS_FINE_LOCATION
-        )
-    }
-
-    override fun onRequestPermissionsResult(
-        requestCode: Int,
-        permissions: Array<out String>,
-        grantResults: IntArray
-    ) {
-        super.onRequestPermissionsResult(requestCode, permissions, grantResults)
-        EasyPermissions.onRequestPermissionsResult(requestCode, permissions, grantResults, this)
-    }
-
-    override fun onPermissionsDenied(requestCode: Int, perms: List<String>) {
-        if (EasyPermissions.somePermissionDenied(this, perms.first())) {
-            SettingsDialog.Builder(applicationContext).build().show()
-        } else {
-            requestLocationPermission()
-        }
-    }
-
-    override fun onPermissionsGranted(requestCode: Int, perms: List<String>) {
-        Toast.makeText(
-            applicationContext,
-            "Permission Granted!",
-            Toast.LENGTH_SHORT
-        ).show()
-    }
 
     override fun onSupportNavigateUp(): Boolean {
         val navController = findNavController(R.id.nav_host_fragment)
         return navController.navigateUp(appBarConfiguration) || super.onSupportNavigateUp()
+    }
+
+
+    override fun dispatchTouchEvent(ev: MotionEvent?): Boolean {
+
+        // Removes the handler callbacks (if any)
+        stopHandler()
+
+        // Runs the handler (for the specified time)
+        // If any touch or motion is detected before
+        // the specified time, this override function is again called
+        startHandler()
+        return super.dispatchTouchEvent(ev)
+    }
+
+    // start handler function
+    private fun startHandler() {
+        mHandler.postDelayed(mRunnable, mTime)
+    }
+
+    // stop handler function
+    private fun stopHandler() {
+        mHandler.removeCallbacks(mRunnable)
+    }
+
+    companion object {
+        private const val TAG = "MainActivity"
     }
 
 }

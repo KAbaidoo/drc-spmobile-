@@ -17,6 +17,11 @@ getHealthAreasList:
 SELECT name
 FROM healthAreaEntity;
 
+getByName:
+SELECT *
+FROM healthAreaEntity
+WHERE name = :query ;
+
 
 insertHealthArea:
 INSERT OR REPLACE
@@ -27,3 +32,4 @@ getById:
 SELECT *
 FROM healthAreaEntity
 WHERE id = :id;
+

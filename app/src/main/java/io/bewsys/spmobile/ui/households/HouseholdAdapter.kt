@@ -1,5 +1,6 @@
 package io.bewsys.spmobile.ui.households
 
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
@@ -39,8 +40,8 @@ class HouseholdAdapter(private val listener: OnItemClickListener) :
                 root.setOnClickListener {
                     val position = adapterPosition
                     if (position != RecyclerView.NO_POSITION) {
-                        val household = getItem(position)
-//                        listener.onItemClick(nonConsentingHousehold)
+                        val householdModel = getItem(position)
+                        listener.onItemClick(householdModel)
                     }
                 }
             }
@@ -50,7 +51,7 @@ class HouseholdAdapter(private val listener: OnItemClickListener) :
             binding.apply {
                 textViewProvinceName.text = householdModel.province_name ?: ""
                 textViewCommunityName.text = householdModel.community_name ?: ""
-                if (!householdModel.status.isNullOrEmpty()) checkBoxIcon.isChecked = true
+                 checkBoxIcon.isChecked = householdModel.status == "submitted"
             }
         }
     }

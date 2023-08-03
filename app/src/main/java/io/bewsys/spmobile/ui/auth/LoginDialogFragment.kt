@@ -19,6 +19,7 @@ class LoginDialogFragment : DialogFragment() {
         AlertDialog.Builder(requireContext())
             .setTitle(getString(R.string.failure_dialog_message))
             .setPositiveButton(getString(R.string.failure_dialog_ok)) { _, _ ->
+
             }
             .setMessage(viewModel.message)
             .create()

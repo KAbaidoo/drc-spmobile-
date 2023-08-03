@@ -1,0 +1,233 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="reasons">
+        <item>Non \u0028Refus\u0029</item>
+        <item>Chef de ménage absent</item>
+        <item>Autre</item>
+    </string-array>
+
+    <string-array name="migration_duration_unit">
+        <item>Ans</item>
+        <item>Mois</item>
+        <item>Jours</item>
+    </string-array>
+
+    <string-array name="migration_status">
+        <item>Résident</item>
+        <item>Rapatrié</item>
+        <item>Déplacé</item>
+        <item>Réfugié</item>
+        <item>Renvoyé</item>
+    </string-array>
+
+    <string-array name="marital_status">
+        <item>Célibataire</item>
+        <item>Marié\u0028e\u0029 monogame</item>
+        <item>Marié\u0028e\u0029 polygame</item>
+        <item>Veuf/veuve</item>
+        <item>Divorcé\u0028e\u0029/séparé\u0028e\u0029</item>
+        <item>Union libre</item>
+    </string-array>
+
+    <string-array name="relationship">
+        <item>Chef de ménage</item>
+        <item>Femme ou mari</item>
+        <item>Fils/fille</item>
+        <item>Gendre/belle-fille</item>
+        <item>Petit fils/fille</item>
+        <item>Père/mère</item>
+        <item>Beaux parents</item>
+        <item>Frère/sœur</item>
+        <item>Neveu/nièce</item>
+        <item>Neveu/nièce par alliance</item>
+        <item>Autres parents</item>
+        <item>Enfant adopté/gardé/de la femme/du mari</item>
+        <item>Sans parenté</item>
+        <item>Ne sait pas</item>
+    </string-array>
+
+    <string-array name="school_attendance">
+        <item>Pré-scolaire</item>
+        <item>1ère année</item>
+        <item>2e année</item>
+        <item>3e année</item>
+        <item>4e année</item>
+        <item>5e année</item>
+        <item>6e année</item>
+        <item>7e année</item>
+        <item>8e année</item>
+        <item>Secondaire</item>
+        <item>Supérieur</item>
+        <item>Abandon scolaire</item>
+        <item>Non concerné</item>
+        <item>Etudes terminées</item>
+        <item>Ne sait pas</item>
+    </string-array>
+
+    <string-array name="level_of_education">
+        <item>Pré-scolaire</item>
+        <item>Primaire</item>
+        <item>Secondaire</item>
+        <item>Supérieur</item>
+        <item>Formation technique ou professionelle</item>
+        <item>Aucun</item>
+        <item>Non concerné;</item>
+        <item>Ne sait pas</item>
+    </string-array>
+
+    <string-array name="disability">
+        <item>Moteur</item>
+        <item>Visuel</item>
+        <item>Auditif</item>
+        <item>Mental</item>
+        <item>Maladie chronique</item>
+        <item>Handicaps multiples</item>
+        <item>Aucune</item>
+    </string-array>
+
+    <string-array name="socio_professional_category">
+        <item>Cadre supérieur / Cadre de direction</item>
+        <item>Employé/travailleur qualifié ou semi-qualifié</item>
+        <item>Ouvrier/travailleur non qualifie</item>
+        <item>Employeur / Patron</item>
+        <item>Indépendant</item>
+        <item>Aide familiale</item>
+        <item>Apprentis payé ou non payé</item>
+        <item>Chomeur</item>
+        <item>Inactif</item>
+    </string-array>
+
+    <string-array name="occupancy">
+        <item>Propriétaire</item>
+        <item>Logé par un parent/ami</item>
+        <item>Locataire</item>
+        <item>Logé par l\'employeur</item>
+        <item>Garde-chantier</item>
+        <item>Sous-logé</item>
+        <item>Autre</item>
+    </string-array>
+
+    <string-array name="occupation">
+        <item>Secteur formel \u0028public ou privé\u0029</item>
+        <item>Informel non agricole</item>
+        <item>Informel agricole</item>
+        <item>Non concerne</item>
+    </string-array>
+
+    <string-array name="cooking_fuel">
+        <item>Electricité</item>
+        <item>Gaz Propane Liquéfié \u0028GPL\u0029</item>
+        <item>Gaz naturel</item>
+        <item>Biogaz</item>
+        <item>Kerosene</item>
+        <item>Charbon/lignite</item>
+        <item>Charbon de bois</item>
+        <item>Bois</item>
+        <item>Paille/branchages/herbes</item>
+        <item>Résidus agricoles</item>
+        <item>Bouse</item>
+        <item>Pas de repas préparé dans le menage</item>
+        <item>Autre \u0028precisez\u0029</item>
+    </string-array>
+
+    <string-array name="soil_material">
+        <item>Terre/Sable</item>
+        <item>Bouse</item>
+        <item>Planches en bois</item>
+        <item>Palmes/bambou</item>
+        <item>Parquet ou bois ciré</item>
+        <item>Bandes de vynille/asphalte</item>
+        <item>Carrelage</item>
+        <item>Ciment</item>
+        <item>Moquette</item>
+        <item>Autre</item>
+    </string-array>
+
+    <string-array name="exterior_walls">
+        <item>Pas de mur</item>
+        <item>Bambou/Cane/Palme/Tronc</item>
+        <item>Terre</item>
+        <item>Bambou avec boue</item>
+        <item>Pierres avec boue</item>
+        <item>Adobe non recouvert;</item>
+        <item>Contre-plaqué</item>
+        <item>Carton</item>
+        <item>Bois de recuperation</item>
+        <item>Ciment</item>
+        <item>Pierres avec chaux/ciment</item>
+        <item>Briques</item>
+        <item>Blocs de ciment</item>
+        <item>Adobe recouvert</item>
+        <item>Planche en bois/shingles</item>
+        <item>Autre</item>
+    </string-array>
+
+    <string-array name="source_of_drinking_water">
+        <item>Robinet dans le logement</item>
+        <item>Robinet dans la cour/parcelle</item>
+        <item>Robinet public/brone fontaine</item>
+        <item>Robinet chez le voisin</item>
+        <item>Puits à pompe ou forage</item>
+        <item>Puits protégé</item>
+        <item>Puits non protégé</item>
+        <item>Source protégée</item>
+        <item>Source non protégée</item>
+        <item>Eau de pluie</item>
+        <item>Camion citerne</item>
+        <item>Charrette avec petite citerne/tonneau</item>
+        <item>Eau de surface \u0028fleuve/barrage/lac/mare/canal irrigation\u0029</item>
+        <item>Eau en bouteille</item>
+        <item>Autre</item>
+    </string-array>
+
+    <string-array name="type_of_toilet">
+        <item>Chasse d\'eau/chasse manuelle</item>
+        <item>Chasse d\'eau connectée à un systeme d\'egout/fosse septique/fosse d\'aisances</item>
+        <item>Fosse d\'aisances</item>
+        <item>Toilettes à compostage</item>
+        <item>Seau/Tinette</item>
+        <item>Toilettes/latrines suspendues</item>
+        <item>Pas de toilettes/nature</item>
+        <item>Autre</item>
+    </string-array>
+
+    <string-array name="waste_disposal_methods">
+        <item>Service organisé privé ou public</item>
+        <item>Incinération</item>
+        <item>Enfouissement</item>
+        <item>Enfouissement</item>
+        <item>Cours d\'eau</item>
+        <item>Depotoire sauvage</item>
+        <item>Compost ou fumier</item>
+        <item>Autre</item>
+    </string-array>
+
+    <string-array name="place_of_hand_washing">
+        <item>Lieu fixe \u0028Lavabo/Robinet\u0029: eau et savon disponible</item>
+        <item>Lieu fixe \u0028Lavabo/Robinet\u0029: eau disponible et pas de savon</item>
+        <item>Lieu fixe \u0028Lavabo/Robinet\u0029: eau non disponible et savon disponible</item>
+        <item>Dispositif mobile \u0028eau et savon disponibles\u0029</item>
+        <item>Dispositif mobile \u0028eau disponible et pas de savon\u0029</item>
+        <item>Dispositif mobile \u0028eau non disponible et savon disponible\u0029</item>
+        <item>Pas de permission</item>
+        <item>Pas de lieu</item>
+    </string-array>
+
+    <string-array name="duration_units">
+        <item>Ans</item>
+        <item>Mois</item>
+        <item>Jours</item>
+    </string-array>
+
+
+
+    <string-array name="language">
+        <item>French</item>
+        <item>English</item>
+    </string-array>
+
+    <string-array name="locales">
+        <item>fr</item>
+        <item>en</item>
+    </string-array>
+</resources>

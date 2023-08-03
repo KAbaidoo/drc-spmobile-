@@ -32,7 +32,6 @@ class NonConsentUploadWorker(
 
             try {
                 if (id < 0) {
-                    Log.e(TAG, "Invalid input id")
                     throw IllegalArgumentException("Invalid input id")
                 }
                 val item = getItem(id)

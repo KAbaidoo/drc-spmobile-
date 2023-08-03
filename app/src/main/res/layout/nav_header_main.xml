@@ -12,16 +12,17 @@
     android:paddingBottom="16dp"
     android:theme="@style/ThemeOverlay.AppCompat.Dark">
 
-    <ImageView
-        android:id="@+id/imageView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center_horizontal"
-        android:contentDescription="@string/navigation_header"
-        android:paddingTop="8dp"
-        app:srcCompat="@drawable/ic_person_48" />
+<!--    <ImageView-->
+<!--        android:id="@+id/imageView"-->
+<!--        android:layout_width="wrap_content"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:layout_gravity="center_horizontal"-->
+<!--        android:contentDescription="@string/navigation_header"-->
+<!--        android:paddingTop="8dp"-->
+<!--        app:srcCompat="@drawable/ic_person_48" />-->
 
     <TextView
+        android:id="@+id/tv_username"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:padding="8dp"

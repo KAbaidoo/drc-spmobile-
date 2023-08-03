@@ -1,0 +1,228 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="reasons">
+        <item>No (refusal)</item>
+        <item>Head of household absent</item>
+        <item>Other</item>
+    </string-array>
+    <string-array name="migration_duration_unit">
+        <item>Years</item>
+        <item>Months</item>
+        <item>Days</item>
+    </string-array>
+    <string-array name="migration_status">
+        <item>Resident</item>
+        <item>Repatriated</item>
+        <item>Displaced</item>
+        <item>Refugee</item>
+        <item>Returned</item>
+
+    </string-array>
+
+    <string-array name="marital_status">
+        <item>Single</item>
+        <item>Married monogamously</item>
+        <item>Married polygamous</item>
+        <item>Widow /widower</item>
+        <item>Divorce/separated</item>
+        <item>Common-law union</item>
+    </string-array>
+
+    <string-array name="relationship">
+        <item>Head of household</item>
+        <item>Wife or Husband</item>
+        <item>Son/Daughter</item>
+        <item>Son-in-law/Daughter-in-law</item>
+        <item>Grandson/Granddaughter</item>
+        <item>Father/Mother</item>
+        <item>Parents-in-law</item>
+        <item>Brother/Sister</item>
+        <item>Nephew/Niece</item>
+        <item>Nephew/Niece by marriage</item>
+        <item>Other relative</item>
+        <item>Adopted child/Cared for</item>
+        <item>Unrelated</item>
+        <item>Don\'t know</item>
+    </string-array>
+
+    <string-array name="school_attendance">
+        <item>Pre-school</item>
+        <item>1st year</item>
+        <item>Grade 2</item>
+        <item>Grade 3</item>
+        <item>Grade 4</item>
+        <item>Grade 5</item>
+        <item>Grade 6</item>
+        <item>Grade 7</item>
+        <item>Grade 8</item>
+        <item>Secondary</item>
+        <item>Superior</item>
+        <item>School dropout</item>
+        <item>Not concerned</item>
+        <item>Studies completed</item>
+        <item>Don\'t know</item>
+
+    </string-array>
+    <string-array name="level_of_education">
+        <item>Pre-school</item>
+        <item>Primary</item>
+        <item>Secondary</item>
+        <item>Superior</item>
+        <item>Technical/Vocational training</item>
+        <item>None</item>
+        <item>Not concerned</item>
+        <item>Don\'t know</item>
+    </string-array>
+
+    <string-array name="disability">
+        <item>Motor</item>
+        <item>Visual</item>
+        <item>Auditory</item>
+        <item>Mental</item>
+        <item>Chronic disease</item>
+        <item>Multiple disabilities</item>
+        <item>None</item>
+    </string-array>
+
+    <string-array name="socio_professional_category">
+        <item>Senior Management/Executive</item>
+        <item>Employee/Skilled or semi-skilled worker</item>
+        <item>Manual worker/unskilled worker</item>
+        <item>Employer</item>
+        <item>Self-employed</item>
+        <item>Family helper</item>
+        <item>Paid or unpaid apprentice</item>
+        <item>Unemployed</item>
+        <item>Inactive</item>
+    </string-array>
+
+    <string-array name="occupancy">
+        <item>Owner</item>
+        <item>Housed by relative/friend</item>
+        <item>Tenant</item>
+        <item>Housed by employer</item>
+        <item>Site guard</item>
+        <item>Sub-housed</item>
+        <item>Other</item>
+    </string-array>
+
+    <string-array name="occupation">
+        <item>Formal sector (public or private)</item>
+        <item>Non-agricultural informal</item>
+        <item>Agricultural informal</item>
+        <item>No concerns</item>
+    </string-array>
+
+
+    <string-array name="cooking_fuel">
+        <item>Electricity</item>
+        <item>Liquefied Propane Gas (LPG)</item>
+        <item>Natural gas</item>
+        <item>Biogas</item>
+        <item>Kerosene</item>
+        <item>Coal/Ignite</item>
+        <item>Charcoal</item>
+        <item>Wood</item>
+        <item>Straw/Branches/Grass</item>
+        <item>Agricultural residues</item>
+        <item>Dung</item>
+        <item>No meal prepared in the household</item>
+        <item>Other</item>
+    </string-array>
+    <string-array name="soil_material">
+        <item>Earth/Sand</item>
+        <item>Dung</item>
+        <item>Wooden boards</item>
+        <item>Fins/bamboo</item>
+        <item>Parquet or waxed wood</item>
+        <item>Vynille/Asphalt strips</item>
+        <item>Tiling</item>
+        <item>Cement</item>
+        <item>Carpet</item>
+        <item>Other</item>
+    </string-array>
+
+    <string-array name="exterior_walls">
+        <item>No wall</item>
+        <item>Bamboo/Cane/Palm/Trunk</item>
+        <item>Earth</item>
+        <item>Bamboo with mud</item>
+        <item>Stones with mud</item>
+        <item>Adobe not covered</item>
+        <item>Plywood</item>
+        <item>Cardboard</item>
+        <item>Salvage timber</item>
+        <item>Cement</item>
+        <item>Stones with lime/cement timber</item>
+        <item>Bricks</item>
+        <item>Cement blocks</item>
+        <item>Adobe covered</item>
+        <item>Wooden board/Shingles</item>
+        <item>Other material</item>
+    </string-array>
+
+    <string-array name="source_of_drinking_water">
+        <item>Tap in the dwelling</item>
+        <item>Faucet in the yard/plot</item>
+        <item>Public tap/standpipe</item>
+        <item>Tap at the neighbor\'s house</item>
+        <item>Pump wells or boreholes</item>
+        <item>Protected well</item>
+        <item>Unprotected well</item>
+        <item>Protected source</item>
+        <item>Unprotected source</item>
+        <item>Rainwater</item>
+        <item>Tanker</item>
+        <item>Cart with small tank/barrel</item>
+        <item>Surface water (ver/dam/lake/pond/canal)</item>
+        <item>Bottled water</item>
+        <item>Other</item>
+    </string-array>
+
+    <string-array name="type_of_toilet">
+        <item>Flushing/flushing</item>
+        <item>Flush connected to a sewer/septic tank/cesspool system</item>
+        <item>Cesspool</item>
+        <item>Composting toilets</item>
+        <item>Bucket/tinette</item>
+        <item>Suspended toilets/latrines</item>
+        <item>No toilets/nature</item>
+        <item>Other</item>
+    </string-array>
+
+    <string-array name="waste_disposal_methods">
+        <item>Private or public organized service</item>
+        <item>Incineration</item>
+        <item>Landfill</item>
+        <item>Public highway</item>
+        <item>Watercourses</item>
+        <item>Wild dump</item>
+        <item>Compost or manure</item>
+        <item>Other</item>
+    </string-array>
+    <string-array name="duration_units">
+        <item>Years</item>
+        <item>Months</item>
+        <item>Days</item>
+    </string-array>
+
+    <string-array name="place_of_hand_washing">
+        <item>Fixed place (Washbasin/tap): water and soap available</item>
+        <item>Fixed place (Washbasin/Faucet): water available and no soap</item>
+        <item>Fixed place (Washbasin/Faucet): water not available and soap available;</item>
+        <item>Mobile device (water and soap available)</item>
+        <item>Mobile device (water available and no soap);</item>
+        <item>Mobile device (water not available and soap available)</item>
+        <item>No permission</item>
+        <item>No venue</item>
+    </string-array>
+
+    <string-array name="language">
+        <item>French</item>
+        <item>English</item>
+    </string-array>
+    <string-array name="locales">
+        <item>fr</item>
+        <item>en</item>
+    </string-array>
+</resources>

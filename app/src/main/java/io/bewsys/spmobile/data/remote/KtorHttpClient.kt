@@ -29,19 +29,16 @@ class KtorHttpClient(val context: Context) {
     fun getClient() = HttpClient(Android) {
 
         defaultRequest {
-            url("http://mis.bewsys.dev/api/")
-
              context.getPreferences("primary_host")?.let{
-                url(it)
+               val baseUrl = it.ifBlank { "https://rsu.cd".trim()}
+                url("$baseUrl/api/".trim())
             }
-
 
             headers.appendIfNameAbsent(
                 HttpHeaders.ContentType,
                 ContentType.Application.Json.toString()
             )
             accept(ContentType.Application.Json)
-
         }
 
         install(ContentNegotiation) {

@@ -6,6 +6,7 @@ import android.app.Activity
 import android.app.Application
 import android.content.Context
 import android.location.Geocoder
+import android.provider.Settings
 import android.util.Log
 import androidx.core.content.ContentProviderCompat.requireContext
 import androidx.fragment.app.FragmentActivity
@@ -18,6 +19,7 @@ import io.bewsys.spmobile.ADD_NON_CONSENTING_HOUSEHOLD_RESULT_OK
 
 import io.bewsys.spmobile.KEY_DATA_ID
 import io.bewsys.spmobile.PERMISSION_LOCATION_REQUEST_CODE
+import io.bewsys.spmobile.data.local.HouseholdModel
 
 import io.bewsys.spmobile.data.local.NonConsentHouseholdModel
 import io.bewsys.spmobile.data.repository.NonConsentingHouseholdRepository
@@ -29,12 +31,20 @@ import kotlinx.coroutines.launch
 
 
 class AddNonConsentingHouseholdViewModel(
-    application: Application,
     private val state: SavedStateHandle,
+    application: Application,
     private val nonConsentingRepository: NonConsentingHouseholdRepository,
     private val dashboardRepository: DashboardRepository
 ) : ViewModel() {
+    init {
+        loadProvinces()
+    }
     private val workManager = WorkManager.getInstance(application)
+
+    var household: NonConsentHouseholdModel? = null
+    var id: Long? = null
+
+
 
     private val addNonConsentingHouseholdChannel = Channel<AddNonConsentingHouseholdEvent>()
     val addNonConsentingHouseholdEvent = addNonConsentingHouseholdChannel.receiveAsFlow()
@@ -56,199 +66,182 @@ class AddNonConsentingHouseholdViewModel(
         get() = _groupments
 
 
-    init {
-        loadProvinces()
-//        loadCommunities()
-    }
+    var reason = ""
+    var otherReason = ""
+    var address = ""
 
 
-    var reason = state.get<String>("reason") ?: ""
+    var lon: String? = ""
         set(value) {
-            field = value
-            state["reason"] = value
-        }
-    var otherReason = state.get<String>("otherReason") ?: ""
-        set(value) {
-            field = value
-            state["otherReason"] = value
-        }
-    var province = state.get<String>("province") ?: ""
-        set(value) {
-            field = value
-            state["province"] = value
-            getProvinceId()
-            loadTerritories()
-        }
-    var territory = state.get<String>("territory") ?: ""
-        set(value) {
-            field = value
-            state["territory"] = value
-            getTerritoryId()
-            loadCommunities()
-        }
-    var community = state.get<String>("community") ?: ""
-        set(value) {
-            field = value
-            state["community"] = value
-            getCommunityId()
-            loadGroupments()
-        }
-    var groupment = state.get<String>("groupment") ?: ""
-        set(value) {
-            field = value
-            state["groupment"] = value
-            getGroupmentId()
-        }
-    var address = state.get<String>("address") ?: ""
-        set(value) {
-            field = value
-            state["address"] = value
-        }
-
-    var lon = state.get<String>("lon") ?: ""
-        set(value) {
-            field = value
             state["lon"] = value
-        }
-    var lat = state.get<String>("lat") ?: ""
-        set(value) {
             field = value
-            state["lat"] = value
         }
+        get() = state["lon"]
 
-    private var provinceId: String = state.get<String>("province_id")?: "1"
+    var lat: String? = ""
+        set(value) {
+            state["lat"] = value
+            field = value
+        }
+        get() = state["lat"]
+
+    var province = ""
+    var territory = ""
+    var community = ""
+    var groupment = ""
+
+
+    private var provinceId: String? = "1"
         set(value) {
             field = value
             state["province_id"] = value
         }
-    private var communityId: String = state.get<String>("community_id")?: "1"
+        get() = state["province_id"]
+
+    private var communityId: String? = "1"
         set(value) {
             field = value
             state["community_id"] = value
         }
+        get() = state["community_id"]
 
-    private var groupmentId: String = state.get<String>("groupment_id")?: "1"
+    private var groupmentId: String? = "1"
         set(value) {
             field = value
             state["groupment_id"] = value
         }
-    private var territoryId: String = state.get<String>("territory_id")?: "1"
+        get() = state["groupment_id"]
+
+    private var territoryId: String? = "1"
         set(value) {
             field = value
             state["territory_id"] = value
         }
+        get() = state["territory_id"]
 
-
-    private fun loadProvinces() {
+    fun loadProvinces() {
         viewModelScope.launch {
             dashboardRepository.getProvincesList().collectLatest {
                 _provinces.value = it
             }
         }
+
     }
 
-
-
-
-    fun loadTerritories() {
+    fun getGroupmentId(groupmentName: String) {
         viewModelScope.launch {
-            dashboardRepository.getTerritoriesList(provinceId).collectLatest {
-                _territories.value = it
+            dashboardRepository.getGroupmentByName(groupmentName).collectLatest { list ->
+                list.firstOrNull()?.apply {
+                    groupmentId = id.toString()
+
+                }
+
+
             }
         }
     }
 
-
-
-    fun loadCommunities() {
+    fun loadTerritoriesWithName(provinceName: String) {
         viewModelScope.launch {
-            dashboardRepository.getCommunitiesList(territoryId).collectLatest {
-                _communities.value = it
+            dashboardRepository.getProvinceByName(provinceName).collectLatest {
+                it.firstOrNull()?.apply {
+                    provinceId = id.toString()
+
+                }
+                dashboardRepository.getTerritoriesList(provinceId!!)
+                    .collectLatest {
+                        _territories.value = it
+                    }
             }
         }
     }
 
-
-    fun loadGroupments() {
+    fun loadCommunitiesWithName(territoryName: String) {
         viewModelScope.launch {
-            dashboardRepository.getGroupmentsList(communityId).collectLatest {
-                _groupments.value = it
+            dashboardRepository.getTerritoryByName(territoryName).collectLatest {
+                it.firstOrNull()?.apply {
+                    territoryId = id.toString()
+
+                }
+                dashboardRepository.getCommunitiesList(territoryId!!)
+                    .collectLatest {
+                        _communities.value = it
+                    }
             }
+
         }
     }
 
-    val provinceQuery = state.getStateFlow("province", "").flatMapLatest {
-        dashboardRepository.getProvinceByName(it)
-    }
-
-    fun getProvinceId() {
+    fun loadGroupmentsWithName(communityName: String) {
         viewModelScope.launch {
-            provinceQuery.collect {
-                provinceId = it.firstOrNull()?.id.toString()
+            dashboardRepository.getCommunityByName(communityName).collectLatest {
+                it.firstOrNull()?.apply {
+                    communityId = id.toString()
+
+                }
+                dashboardRepository.getGroupmentsList(communityId!!)
+                    .collectLatest {
+                        _groupments.value = it
+                    }
             }
+
         }
     }
 
-    val communityQuery = state.getStateFlow("community", "").flatMapLatest {
-        dashboardRepository.getCommunityByName(it)
-    }
 
-    fun getCommunityId() {
-        viewModelScope.launch {
-            communityQuery.collect {
-                communityId = it.firstOrNull()?.id.toString()
-            }
-        }
-    }
-
-    private val territoryQuery = state.getStateFlow("territory", "").flatMapLatest {
-        dashboardRepository.getTerritoryByName(it)
-    }
-
-    fun getTerritoryId() {
-        viewModelScope.launch {
-            territoryQuery.collect {
-                territoryId = it.firstOrNull()?.id.toString()
-            }
-        }
-    }
-
-    private val groupmentQuery = state.getStateFlow("groupment", "").flatMapLatest {
-        dashboardRepository.getGroupmentByName(it)
-    }
-
-    fun getGroupmentId() {
-        viewModelScope.launch {
-            groupmentQuery.collect {
-                groupmentId = it.firstOrNull()?.id.toString()
-            }
-        }
-    }
-
-    fun onRegisterClicked() {
-        if (reason.isBlank() || province.isBlank() || territory.isBlank() || community.isBlank() || groupment.isBlank() || address.isBlank()) {
+    fun onSaveClicked() {
+        if (reason.isBlank() || address.isBlank()) {
             showInvalidInputMessage()
             return
+        }
+
+        if (household != null) {
+            updateHousehold()
         } else {
-            NonConsentHouseholdModel(
-                province_id = provinceId,
-                community_id = communityId,
-                territory_id = territoryId,
-                groupement_id = groupmentId,
-                province_name = province,
-                community_name = community,
-                territory_name = territory,
-                groupement_name = groupment,
-                gps_latitude = lat,
-                gps_longitude = lon,
-                reason = reason,
-                address = address,
-                other_non_consent_reason = otherReason,
-            ).also {
-                addNonConsentingHousehold(it)
-            }
+            registerHousehold()
         }
     }
+
+    private fun registerHousehold() {
+        NonConsentHouseholdModel(
+            province_id = provinceId,
+            community_id = communityId,
+            territory_id = territoryId,
+            groupement_id = groupmentId,
+            province_name = province,
+            community_name = community,
+            territory_name = territory,
+            groupement_name = groupment,
+            gps_latitude = lat,
+            gps_longitude = lon,
+            reason = reason,
+            address = address,
+            other_non_consent_reason = otherReason,
+        ).also {
+            addNonConsentingHousehold(it)
+        }
+    }
+
+    private fun updateHousehold() {
+        NonConsentHouseholdModel(
+            province_id = provinceId,
+            community_id = communityId,
+            territory_id = territoryId,
+            groupement_id = groupmentId,
+            province_name = province,
+            community_name = community,
+            territory_name = territory,
+            groupement_name = groupment,
+            gps_latitude = lat,
+            gps_longitude = lon,
+            reason = reason,
+            address = address,
+            other_non_consent_reason = otherReason,
+        ).also {
+            id?.let { id -> updateNonConsentingHousehold(id, it) }
+        }
+    }
+
 
     private fun addNonConsentingHousehold(newNonConsentingHousehold: NonConsentHouseholdModel) =
         viewModelScope.launch {
@@ -257,7 +250,25 @@ class AddNonConsentingHouseholdViewModel(
                 newNonConsentingHousehold
             )
 
-            uploadNonConsentingHousehold(nonConsentingRepository.getLastInsertedRowId())
+//            uploadNonConsentingHousehold(nonConsentingRepository.getLastInsertedRowId())
+
+//            lastly
+            addNonConsentingHouseholdChannel.send(
+                AddNonConsentingHouseholdEvent.NavigateBackWithResults(
+                    ADD_NON_CONSENTING_HOUSEHOLD_RESULT_OK
+                )
+            )
+
+        }
+
+    private fun updateNonConsentingHousehold(id: Long, newNonConsentingHousehold: NonConsentHouseholdModel) =
+        viewModelScope.launch {
+
+            nonConsentingRepository.updateNonConsentingHousehold(id,
+                newNonConsentingHousehold
+            )
+
+//            uploadNonConsentingHousehold(nonConsentingRepository.getLastInsertedRowId())
 
 //            lastly
             addNonConsentingHouseholdChannel.send(
@@ -300,8 +311,6 @@ class AddNonConsentingHouseholdViewModel(
         data class ShowInvalidInputMessage(val msg: String) : AddNonConsentingHouseholdEvent()
         data class NavigateBackWithResults(val results: Int) : AddNonConsentingHouseholdEvent()
     }
-
-
 
 
 }

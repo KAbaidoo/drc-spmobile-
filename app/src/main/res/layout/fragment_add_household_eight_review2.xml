@@ -1,0 +1,615 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ui.households.form.FormStepEightFragment">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:paddingStart="24dp"
+        android:paddingEnd="24dp"
+        android:scrollbars="none"
+        app:layout_constraintBottom_toTopOf="@+id/buttons"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="16dp"
+            android:orientation="vertical">
+
+
+            <TextView
+                style="@style/Widget.App.Heading.Sub"
+                android:text="@string/f_water_and_sanitation" />
+
+            <!--            main source of drinking water  -->
+            <TextView
+                android:id="@+id/tv_source_of_drinking_water"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:text="@string/what_is_the_main_source_of_drinking_water_for_the_household"
+                android:textAppearance="@style/TextAppearance.MaterialComponents.Body1" />
+
+            <!--            toilet type       -->
+            <TextView
+                android:id="@+id/tv_type_of_toilet"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:text="@string/what_type_of_toilet_do_members_of_your_household_use"
+                android:textAppearance="@style/TextAppearance.MaterialComponents.Body1" />
+
+            <!--            how does the household dispose of waste  -->
+            <TextView
+                android:id="@+id/tv_waste_disposal"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:text="@string/waste_disposal"
+                android:textAppearance="@style/TextAppearance.MaterialComponents.Body1" />
+
+            <!--            place for hand washing  -->
+            <TextView
+                android:id="@+id/tv_place_for_hand_washing"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:text="@string/place_for_hand_washing"
+                android:textAppearance="@style/TextAppearance.MaterialComponents.Body1" />
+
+            <TextView
+                style="@style/Widget.App.Heading.Sub"
+                android:text="@string/g_income" />
+
+            <!--            minimum needed income     -->
+            <TextView
+                android:id="@+id/tv_monthly_income_needed"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:text="@string/what_is_the_minimum_amount_of_monthly_income_necessary_for_your_household_to_live_without_difficulties"
+                android:textAppearance="@style/TextAppearance.MaterialComponents.Body1" />
+
+            <!--          household income       -->
+            <TextView
+                android:id="@+id/tv_monthly_income"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:text="@string/what_is_the_monthly_disposable_income_of_the_household"
+                android:textAppearance="@style/TextAppearance.MaterialComponents.Body1" />
+
+            <!--           is income regular?      -->
+            <TextView
+                android:id="@+id/tv_is_income_regular"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:text="@string/is_income_regular"
+                android:textAppearance="@style/TextAppearance.MaterialComponents.Body1" />
+
+            <!--      credit card or account?      -->
+            <TextView
+                android:id="@+id/tv_bank_account_or_bank_card"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:text="@string/bank_account_or_bankcard_available"
+                android:textAppearance="@style/TextAppearance.MaterialComponents.Body1" />
+
+            <!--      Mobile money username      -->
+            <TextView
+                android:id="@+id/tv_mobile_money_username"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:text="@string/mobile_money_username"
+                android:textAppearance="@style/TextAppearance.MaterialComponents.Body1" />
+
+
+            <!--      mobile money number     -->
+            <TextView
+                android:id="@+id/tv_mobile_money_number"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:text="@string/mobile_money_phone_number"
+                android:textAppearance="@style/TextAppearance.MaterialComponents.Body1" />
+
+            <TextView
+                style="@style/Widget.App.Heading.Sub"
+                android:text="@string/h_household_assets" />
+
+            <!--      owner of cultivable land      -->
+            <TextView
+                android:id="@+id/tv_access_to_cultivable_land"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:text="@string/access_to_cultivable_land"
+                android:textAppearance="@style/TextAppearance.MaterialComponents.Body1" />
+
+            <!--      Practice of cash crop farming      -->
+            <TextView
+                android:id="@+id/tv_practice_of_cash_crop_farming_or_commercial_farming"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:text="@string/practice_of_cash_crop_farming_or_commercial_farming"
+                android:textAppearance="@style/TextAppearance.MaterialComponents.Body1" />
+
+            <!--      has livestock      -->
+            <TextView
+                android:id="@+id/tv_has_livestock"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:text="@string/has_livestock"
+                android:textAppearance="@style/TextAppearance.MaterialComponents.Body1" />
+
+            <!--      has household goods      -->
+            <TextView
+                android:id="@+id/tv_has_household_goods"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:text="@string/has_household_goods"
+                android:textAppearance="@style/TextAppearance.MaterialComponents.Body1" />
+
+            <TextView
+                style="@style/Widget.App.Heading.Sub"
+                android:text="@string/vulnerability_of_household" />
+            <!--      how many meals adults 18 plus      -->
+            <TextView
+                android:id="@+id/tv_number_of_meals_eaten_by_adults_18_plus_yesterday"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:text="@string/meals_eaten_by_adults_18_plus_yesterday"
+                android:textAppearance="@style/TextAppearance.MaterialComponents.Body1" />
+
+            <!--      meals 6 to 17       -->
+            <TextView
+                android:id="@+id/tv_number_of_meals_eaten_by_children_6_to_17_yesterday"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:text="@string/meals_eaten_by_children_6_to_17_yesterday"
+                android:textAppearance="@style/TextAppearance.MaterialComponents.Body1" />
+
+
+            <!--      meals children 2 to 5      -->
+            <TextView
+                android:id="@+id/tv_number_of_meals_eaten_by_children_2_to_5_yesterday"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:text="@string/meals_eaten_by_children_2_to_5_yesterday"
+                android:textAppearance="@style/TextAppearance.MaterialComponents.Body1" />
+
+            <!--      meals eaten in the past 7 days      -->
+            <TextView
+                android:id="@+id/tv_days"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:text="@string/how_many_days_did_members_eat_the_ff"
+                android:textAppearance="@style/TextAppearance.MaterialComponents.Body1" />
+
+            <GridLayout
+
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginTop="16dp"
+                android:columnCount="2">
+                <!--      number_of_days_in_week_consumed_staple_foods      -->
+                <TextView
+                    android:id="@+id/tv_number_of_days_in_week_consumed_staple_foods"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_columnWeight="1"
+                    android:layout_marginEnd="4dp"
+                    android:layout_marginBottom="8dp"
+                    android:gravity="center_vertical"
+                    android:text="@string/number_of_days_in_week_consumed_staple_foods"
+                    android:textAppearance="@style/TextAppearance.MaterialComponents.Body1" />
+
+                <!--      number_of_days_in_week_consumed_legumes_or_nuts      -->
+                <TextView
+                    android:id="@+id/tv_number_of_days_in_week_consumed_legumes_or_nuts"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_columnWeight="1"
+                    android:layout_marginEnd="4dp"
+                    android:layout_marginBottom="8dp"
+                    android:gravity="center_vertical"
+                    android:text="@string/number_of_days_in_week_consumed_legumes_or_nuts"
+                    android:textAppearance="@style/TextAppearance.MaterialComponents.Body1" />
+
+                <!--      number_of_days_in_week_consumed_legumes_or_nuts      -->
+                <TextView
+                    android:id="@+id/tv_number_of_days_in_week_consumed_dairy_products"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_columnWeight="1"
+                    android:layout_marginEnd="4dp"
+                    android:layout_marginBottom="8dp"
+                    android:text="@string/number_of_days_in_week_consumed_dairy_products"
+                    android:textAppearance="@style/TextAppearance.MaterialComponents.Body1" />
+                <!--      number_of_days_in_week_consumed_sugar_or_sweet_products      -->
+                <TextView
+                    android:id="@+id/tv_number_of_days_in_week_consumed_sugar_or_sweet_products"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_columnWeight="1"
+                    android:layout_marginEnd="4dp"
+                    android:layout_marginBottom="8dp"
+                    android:text="@string/number_of_days_in_week_consumed_sugar_or_sweet_products"
+                    android:textAppearance="@style/TextAppearance.MaterialComponents.Body1" />
+
+                <!--      consumed_vegetables      -->
+                <TextView
+                    android:id="@+id/tv_number_of_days_in_week_consumed_vegetables"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+
+                    android:layout_columnWeight="1"
+                    android:layout_marginEnd="4dp"
+                    android:layout_marginBottom="8dp"
+                    android:gravity="center_vertical"
+                    android:text="@string/number_of_days_in_week_consumed_vegetables"
+                    android:textAppearance="@style/TextAppearance.MaterialComponents.Body1" />
+
+
+                <!--      number_of_days_in_week_consumed_meat      -->
+                <TextView
+                    android:id="@+id/tv_number_of_days_in_week_consumed_meat"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_columnWeight="1"
+                    android:layout_marginEnd="4dp"
+                    android:layout_marginBottom="8dp"
+                    android:gravity="center_vertical"
+
+                    android:text="@string/number_of_days_in_week_consumed_meat"
+                    android:textAppearance="@style/TextAppearance.MaterialComponents.Body1" />
+
+
+                <!--      number_of_days_in_week_consumed_fruits      -->
+                <TextView
+                    android:id="@+id/tv_number_of_days_in_week_consumed_fruits"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_columnWeight="1"
+
+                    android:layout_marginEnd="4dp"
+                    android:layout_marginBottom="8dp"
+                    android:gravity="center_vertical"
+                    android:text="@string/number_of_days_in_week_consumed_fruits"
+                    android:textAppearance="@style/TextAppearance.MaterialComponents.Body1" />
+
+                <!--      number_of_days_in_week_consumed_cooking_oils      -->
+                <TextView
+                    android:id="@+id/tv_number_of_days_in_week_consumed_cooking_oils"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_columnWeight="1"
+                    android:layout_marginEnd="4dp"
+                    android:layout_marginBottom="8dp"
+                    android:gravity="center_vertical"
+                    android:text="@string/number_of_days_in_week_consumed_cooking_oils"
+                    android:textAppearance="@style/TextAppearance.MaterialComponents.Body1" />
+
+            </GridLayout>
+
+
+            <!--      member with social assistance program      -->
+            <TextView
+                android:id="@+id/tv_social_assistance_program"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:text="@string/household_member_with_benefit_from_social_assistance_program"
+                android:textAppearance="@style/TextAppearance.MaterialComponents.Body1" />
+            <!--      name of social assistance program      -->
+            <TextView
+                android:id="@+id/tv_name_of_social_assistance_program"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:text="@string/name_of_social_assistance_program"
+                android:textAppearance="@style/TextAppearance.MaterialComponents.Body1" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="16dp"
+                android:text="@string/affected_by_shock"
+                android:textAppearance="@style/TextAppearance.MaterialComponents.Body1" />
+
+            <GridLayout
+                android:id="@+id/gridLayout2"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginBottom="16dp"
+                android:columnCount="2">
+
+                <!--    conflict  -->
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_columnWeight="1"
+                    android:layout_marginEnd="4dp"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:id="@+id/tv_conflict"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="8dp"
+                        android:layout_weight="1"
+                        android:text="@string/conflict"
+                        android:textAppearance="@style/TextAppearance.MaterialComponents.Body1" />
+
+                </LinearLayout>
+
+                <!--    epidemic  -->
+                <LinearLayout
+
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_columnWeight="1"
+                    android:layout_marginEnd="4dp"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:id="@+id/tv_epidemic"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="8dp"
+                        android:layout_weight="1"
+                        android:text="@string/epidemic"
+                        android:textAppearance="@style/TextAppearance.MaterialComponents.Body1" />
+
+
+                </LinearLayout>
+
+                <!--    climatic shock  -->
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_columnWeight="1"
+                    android:layout_marginEnd="4dp"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:id="@+id/tv_affected_by_climate_shock"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="8dp"
+                        android:layout_weight="1"
+                        android:text="@string/affected_by_climate_shock"
+                        android:textAppearance="@style/TextAppearance.MaterialComponents.Body1" />
+
+
+                </LinearLayout>
+
+                <!--    climatic shock  -->
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_columnWeight="1"
+                    android:layout_marginEnd="4dp"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:id="@+id/tv_affected_by_other_shock"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="@string/affected_by_other_shock"
+                        android:textAppearance="@style/TextAppearance.MaterialComponents.Body1" />
+
+
+                </LinearLayout>
+            </GridLayout>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="4dp"
+                android:layout_marginBottom="8dp"
+                android:gravity="center_vertical"
+                android:text="@string/how_many_days_did_resort_to_coping"
+                android:textAppearance="@style/TextAppearance.MaterialComponents.Body1" />
+
+            <TextView
+                android:id="@+id/tv_days_spent_reduce_amount_consumed_coping_strategy"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="8dp"
+                android:text="@string/days_spent_reduce_amount_consumed_coping_strategy"
+                android:textAlignment="viewStart"
+                android:textAppearance="@style/TextAppearance.MaterialComponents.Body1" />
+
+            <TextView
+                android:id="@+id/tv_days_spent_reduce_meals_consumed_coping_strategy"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="8dp"
+                android:text="@string/days_spent_reduce_meals_consumed_coping_strategy"
+                android:textAlignment="viewStart"
+                android:textAppearance="@style/TextAppearance.MaterialComponents.Body1" />
+
+            <TextView
+                android:id="@+id/tv_days_spent_eat_less_expensively_coping_strategy"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="8dp"
+                android:text="@string/days_spent_eat_less_expensively_coping_strategy"
+                android:textAlignment="viewStart"
+                android:textAppearance="@style/TextAppearance.MaterialComponents.Body1" />
+
+            <TextView
+                android:id="@+id/tv_days_spent_reduce_meals_adult_forfeit_meal_for_child_coping_strategy"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="8dp"
+                android:text="@string/days_spent_reduce_meals_adult_forfeit_meal_for_child_coping_strategy"
+                android:textAlignment="viewStart"
+                android:textAppearance="@style/TextAppearance.MaterialComponents.Body1" />
+
+            <TextView
+                android:id="@+id/tv_days_spent_borrow_food_or_rely_on_family_help_coping_strategy"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="8dp"
+                android:text="@string/days_spent_borrow_food_or_rely_on_family_help_coping_strategy"
+                android:textAlignment="viewStart"
+                android:textAppearance="@style/TextAppearance.MaterialComponents.Body1" />
+
+            <TextView
+                android:id="@+id/tv_days_spent_days_without_eating_coping_strategy"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="8dp"
+                android:text="@string/days_spent_days_without_eating_coping_strategy"
+                android:textAlignment="viewStart"
+                android:textAppearance="@style/TextAppearance.MaterialComponents.Body1" />
+
+            <TextView
+                android:id="@+id/tv_days_spent_begging_coping_strategy"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="8dp"
+                android:text="@string/days_spent_begging_coping_strategy"
+                android:textAlignment="viewStart"
+                android:textAppearance="@style/TextAppearance.MaterialComponents.Body1" />
+
+            <TextView
+                android:id="@+id/tv_days_spent_consume_wild_food_coping_strategy"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="8dp"
+                android:text="@string/days_spent_consume_wild_food_coping_strategy"
+                android:textAlignment="viewStart"
+                android:textAppearance="@style/TextAppearance.MaterialComponents.Body1" />
+
+            <TextView
+                android:id="@+id/tv_days_spent_other_food_coping_strategy"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="8dp"
+                android:text="@string/days_spent_other_coping_strategy"
+                android:textAlignment="viewStart"
+                android:textAppearance="@style/TextAppearance.MaterialComponents.Body1" />
+
+
+            <TextView
+
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="4dp"
+                android:layout_marginBottom="8dp"
+                android:gravity="center_vertical"
+                android:text="@string/coping_actions"
+                android:textAppearance="@style/TextAppearance.MaterialComponents.Body1" />
+
+            <TextView
+                android:id="@+id/tv_take_children_out_of_school"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="8dp"
+                android:text="@string/take_children_out_of_school"
+                android:textAlignment="viewStart"
+                android:textAppearance="@style/TextAppearance.MaterialComponents.Body1" />
+
+            <TextView
+                android:id="@+id/tv_sale_of_production_assets"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="8dp"
+                android:text="@string/sale_of_production_assets"
+                android:textAlignment="viewStart"
+                android:textAppearance="@style/TextAppearance.MaterialComponents.Body1" />
+
+            <TextView
+                android:id="@+id/tv_use_of_child_labor"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="8dp"
+                android:text="@string/use_of_child_labor"
+                android:textAlignment="viewStart"
+                android:textAppearance="@style/TextAppearance.MaterialComponents.Body1" />
+
+            <TextView
+                android:id="@+id/tv_use_of_early_marriage"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="8dp"
+                android:text="@string/use_of_early_marriage"
+                android:textAlignment="viewStart"
+                android:textAppearance="@style/TextAppearance.MaterialComponents.Body1" />
+
+            <TextView
+                android:id="@+id/tv_give_up_health_care"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="8dp"
+                android:text="@string/give_up_health_care"
+                android:textAlignment="viewStart"
+                android:textAppearance="@style/TextAppearance.MaterialComponents.Body1" />
+
+            <TextView
+                android:id="@+id/tv_days_spent_other_coping_strategy"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="8dp"
+                android:text="@string/days_spent_other_coping_strategy"
+                android:textAlignment="viewStart"
+                android:textAppearance="@style/TextAppearance.MaterialComponents.Body1" />
+
+        </LinearLayout>
+
+    </ScrollView>
+
+    <RelativeLayout
+        android:id="@+id/buttons"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/cardview_light_background"
+        android:elevation="4dp"
+        android:gravity="end"
+        android:orientation="horizontal"
+        android:padding="12dp"
+        app:layout_constraintBottom_toBottomOf="parent">
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btn_previous"
+            style="@style/Widget.App.Button"
+            android:layout_alignParentStart="true"
+            android:text="@string/previous"
+            app:icon="@drawable/ic_arrow_back_ios_24"
+            app:iconTint="@color/colorPrimary" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btn_next"
+            style="@style/Widget.App.Button"
+            android:layout_alignParentEnd="true"
+            android:text="@string/finish"
+            app:icon="@drawable/ic_arrow_forward_ios_24"
+            app:iconGravity="end"
+            app:iconTint="@color/colorPrimary" />
+    </RelativeLayout>
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>
