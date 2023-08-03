@@ -38,7 +38,7 @@ class KtorHttpClient(val context: Context) {
                 HttpHeaders.ContentType,
                 ContentType.Application.Json.toString()
             )
-            accept(ContentType.Application.Json)
+//            accept(ContentType.Application.Json)
         }
 
         install(ContentNegotiation) {

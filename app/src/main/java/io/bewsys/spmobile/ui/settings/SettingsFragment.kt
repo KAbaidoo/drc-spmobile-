@@ -8,7 +8,7 @@ import android.util.Log
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatDelegate
 import androidx.core.os.LocaleListCompat
-import androidx.navigation.fragment.NavHostFragment.Companion.findNavController
+import androidx.navigation.fragment.findNavController
 import androidx.preference.Preference
 import androidx.preference.PreferenceFragmentCompat
 import androidx.preference.PreferenceManager
@@ -27,7 +27,7 @@ class SettingsFragment : PreferenceFragmentCompat(),
                 }}
 
 
-            "primary_host" -> findNavController(this).navigate(R.id.nav_login)
+            "primary_host" -> findNavController().navigate(R.id.nav_login)
         }
 
 
@@ -70,7 +70,7 @@ class SettingsFragment : PreferenceFragmentCompat(),
 
 
         val action = SettingsFragmentDirections.actionNavSettingsToHostSettingsFragment()
-        findNavController(this).navigate(action)
+        findNavController().navigate(action)
         return true
     }
 
