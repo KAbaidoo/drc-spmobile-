@@ -18,6 +18,11 @@ getGroupmentList:
 SELECT name
 FROM groupmentEntity;
 
+groupments:
+SELECT *
+FROM groupmentEntity
+LIMIT :limit OFFSET :offset;
+
 getGroupmentCount:
 SELECT COUNT(*)
 FROM groupmentEntity;

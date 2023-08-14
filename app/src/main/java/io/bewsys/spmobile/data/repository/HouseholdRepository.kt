@@ -1,9 +1,10 @@
 package io.bewsys.spmobile.data.repository
 
 import android.util.Log
-import app.cash.sqldelight.coroutines.asFlow
-import app.cash.sqldelight.coroutines.mapToList
-import app.cash.sqldelight.coroutines.mapToOne
+import com.squareup.sqldelight.runtime.coroutines.asFlow
+import com.squareup.sqldelight.runtime.coroutines.mapToList
+import com.squareup.sqldelight.runtime.coroutines.mapToOne
+
 import io.bewsys.spmobile.Database
 import io.bewsys.spmobile.data.HouseholdEntity
 import io.bewsys.spmobile.data.MemberEntity

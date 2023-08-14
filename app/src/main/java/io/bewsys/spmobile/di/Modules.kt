@@ -1,7 +1,7 @@
 package io.bewsys.spmobile.di
 
-import app.cash.sqldelight.db.SqlDriver
-import app.cash.sqldelight.driver.android.AndroidSqliteDriver
+import com.squareup.sqldelight.android.AndroidSqliteDriver
+import com.squareup.sqldelight.db.SqlDriver
 import io.bewsys.spmobile.Database
 import io.bewsys.spmobile.data.repository.*
 import io.bewsys.spmobile.data.prefsstore.PreferencesManager
@@ -17,6 +17,7 @@ import io.bewsys.spmobile.ui.targeting.TargetingViewModel
 import io.bewsys.spmobile.ui.MainViewModel
 import io.bewsys.spmobile.ui.auth.ForgotPasswordViewModel
 import io.bewsys.spmobile.ui.auth.LoginDialogViewModel
+import io.bewsys.spmobile.ui.dashboard.DashboardDetailViewModel
 import io.bewsys.spmobile.ui.households.delete.DeleteHouseholdViewModel
 import io.bewsys.spmobile.ui.households.detail.HouseholdDetailViewModel
 import io.bewsys.spmobile.util.LocationProvider
@@ -33,12 +34,13 @@ import org.koin.dsl.module
 val appModule = module {
     single { LocationProvider( androidContext()) }
 
-    single<SqlDriver> { AndroidSqliteDriver(Database.Schema, androidContext(), "sp.db") }
-    single { Database(get()) }
+
     single { KtorHttpClient(androidContext()).getClient() }
     single { PreferencesManager(androidContext()) }
     single { provideApplicationScope() }
 
+    single<SqlDriver> { AndroidSqliteDriver(Database.Schema, androidContext(), "sp.db") }
+    single { Database(get()) }
 
     factory { AuthApi(get()) }
     factory { HouseholdApi(get()) }
@@ -69,5 +71,6 @@ val appModule = module {
     viewModel { DeleteHouseholdViewModel(get(),get(), get()) }
     viewModel { ForgotPasswordViewModel(get(),get()) }
     viewModel{HouseholdDetailViewModel(get())}
+    viewModel{ DashboardDetailViewModel(get()) }
 }
 //HttpClient(Android).engine

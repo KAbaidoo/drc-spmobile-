@@ -41,6 +41,7 @@ class ForgotPasswordFragment : Fragment(R.layout.fragment_forgot_password) {
         val binding = FragmentForgotPasswordBinding.bind(view)
 
 
+
         binding.apply {
             textFieldEmail.editText?.setText(viewModel.email)
 

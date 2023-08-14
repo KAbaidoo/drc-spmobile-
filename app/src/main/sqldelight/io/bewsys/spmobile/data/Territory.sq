@@ -18,6 +18,11 @@ getTerritoryList:
 SELECT name
 FROM territoryEntity;
 
+territories:
+SELECT *
+FROM territoryEntity
+LIMIT :limit OFFSET :offset;
+
 getTerritoryCount:
 SELECT COUNT(*)
 FROM territoryEntity;

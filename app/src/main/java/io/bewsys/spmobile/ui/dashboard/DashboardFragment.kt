@@ -1,6 +1,7 @@
 package io.bewsys.spmobile.ui.dashboard
 
 import android.os.Bundle
+import android.util.Log
 import android.view.MotionEvent
 
 import android.view.View
@@ -8,14 +9,23 @@ import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.setFragmentResultListener
 import androidx.lifecycle.lifecycleScope
+import androidx.navigation.fragment.findNavController
 import com.google.android.material.snackbar.Snackbar
+import io.bewsys.spmobile.COMMUNITIES
+import io.bewsys.spmobile.GROUPMENTS
+import io.bewsys.spmobile.HOUSEHOLDS
+import io.bewsys.spmobile.MEMEBERS
+import io.bewsys.spmobile.PROVINCES
 import io.bewsys.spmobile.R
+import io.bewsys.spmobile.TERRITORIES
 import io.bewsys.spmobile.databinding.FragmentDashboardBinding
 import io.bewsys.spmobile.util.exhaustive
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 
 private const val TAG = "DashboardFragment"
+
+
 
 class DashboardFragment : Fragment(R.layout.fragment_dashboard) {
 
@@ -66,6 +76,29 @@ class DashboardFragment : Fragment(R.layout.fragment_dashboard) {
 
                     }.exhaustive
                 }
+            }
+
+            communitiesCard?.setOnClickListener {
+
+              findNavController().navigate(R.id.communities_detail_fragment)
+
+            }
+            provincesCard?.setOnClickListener {
+                findNavController().navigate(R.id.provinces_detail_fragment)
+            }
+
+            groupementsCard?.setOnClickListener {
+                findNavController().navigate(R.id.groupments_detail_fragment)
+            }
+            territoriesCard?.setOnClickListener {
+                findNavController().navigate(R.id.territories_detail_fragment)
+            }
+
+            householdsCard?.setOnClickListener {
+                findNavController().navigate(R.id.householdListDetailFragment)
+            }
+            membersCard?.setOnClickListener {
+                findNavController().navigate(R.id.membersDetailFragment)
             }
         }
 

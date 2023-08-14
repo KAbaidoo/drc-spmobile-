@@ -30,6 +30,12 @@ getAllHouseholdMembers:
 SELECT *
 FROM memberEntity;
 
+
+members:
+SELECT *
+FROM memberEntity
+LIMIT :limit OFFSET :offset;
+
 getHouseholdMembersCount:
 SELECT COUNT(*)
 FROM memberEntity;

@@ -15,9 +15,10 @@ getAllCommunities:
 SELECT *
 FROM communityEntity;
 
-getCommunityList:
-SELECT name
-FROM communityEntity;
+communities:
+SELECT *
+FROM communityEntity
+LIMIT :limit OFFSET :offset;
 
 getCommunityCount:
 SELECT COUNT(*)
@@ -37,3 +38,5 @@ getByName:
 SELECT *
 FROM communityEntity
 WHERE name = :query ;
+
+

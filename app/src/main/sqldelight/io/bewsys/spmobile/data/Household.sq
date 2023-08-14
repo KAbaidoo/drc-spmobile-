@@ -164,6 +164,11 @@ getAllHouseholds:
 SELECT *
 FROM householdEntity;
 
+households:
+SELECT *
+FROM householdEntity
+LIMIT :limit OFFSET :offset;
+
 
 getHouseholdCount:
 SELECT COUNT(*)

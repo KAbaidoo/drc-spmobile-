@@ -1,6 +1,7 @@
 package io.bewsys.spmobile.ui.dashboard
 
 import androidx.lifecycle.*
+import androidx.paging.cachedIn
 import io.bewsys.spmobile.LOGIN_RESULT_OK
 import io.bewsys.spmobile.UPDATE_USER_RESULT_OK
 
@@ -40,6 +41,11 @@ class DashboardViewModel(
     val provinceAndCommunity = PairMediatorLiveData(provinceCount, communityCount)
     val territoryAndGroupement = PairMediatorLiveData(territoryCount, groupmentCount)
     val householdAndMembers = PairMediatorLiveData(householdCount, membersCount)
+
+
+
+
+
 
 
     fun loadData() = viewModelScope.launch {
