@@ -5,6 +5,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.navigation.NavDirections
 import androidx.navigation.fragment.findNavController
 import androidx.viewbinding.ViewBinding
 import com.google.android.material.snackbar.Snackbar
@@ -20,7 +21,7 @@ import com.google.android.material.snackbar.Snackbar
     val binding: VB get() = _binding!!
 
     // Make it open, so it can be overridden in child fragments
-    open fun VB.initialize() {}
+    abstract fun VB.initialize()
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -42,6 +43,10 @@ import com.google.android.material.snackbar.Snackbar
     open fun navigateTo(destination: Int) {
         findNavController().navigate(destination)
     }
+
+     open fun navigateTo(action: NavDirections) {
+         findNavController().navigate(action)
+     }
 
 
     override fun onDestroyView() {

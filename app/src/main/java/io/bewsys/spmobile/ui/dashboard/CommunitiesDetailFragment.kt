@@ -36,7 +36,7 @@ class CommunitiesDetailFragment : Fragment(R.layout.fragment_communities_detail)
         binding.apply {
             progressBar.isVisible = true
 
-            recyclerViewCommunities.apply {
+            recyclerView.apply {
                 adapter = mAdapter
                 layoutManager = LinearLayoutManager(requireContext())
                 setHasFixedSize(true)

@@ -24,5 +24,4 @@ data class DashboardResponse(
     @Transient
     val targets: List<String>?=null
 
-
 )

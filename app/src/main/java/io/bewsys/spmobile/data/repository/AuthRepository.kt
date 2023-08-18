@@ -8,6 +8,7 @@ import io.bewsys.spmobile.data.remote.model.auth.login.ErrorResponse
 import io.bewsys.spmobile.data.remote.model.auth.login.GenericErrorResponse
 import io.bewsys.spmobile.data.remote.model.auth.login.LoginRequest
 import io.bewsys.spmobile.data.remote.model.auth.login.LoginResponse
+import io.bewsys.spmobile.data.remote.model.auth.login.LoginResponseX
 import io.bewsys.spmobile.data.remote.model.auth.logout.LogoutResponse
 import io.bewsys.spmobile.data.remote.model.auth.password.PasswordRequest
 import io.bewsys.spmobile.data.remote.model.auth.password.PasswordResponse
@@ -46,7 +47,7 @@ class AuthRepository(
 
             when (response.status.value) {
                 in 200..299 -> {
-                    val res = Resource.Success<LoginResponse>(response.body())
+                    val res = Resource.Success<LoginResponseX>(response.body())
                     preferencesManager.setLoggedIn(true)
                     preferencesManager.saveToken(res.data.access_token)
                     preferencesManager.saveUser(res.data.user)
@@ -67,9 +68,6 @@ class AuthRepository(
 
             }
 
-//            } else {
-//                emit(Resource.Failure<ErrorResponse>(response.body()))
-//            }
         } catch (throwable: Throwable) {
             emit(Resource.Exception(throwable, null))
 
@@ -124,7 +122,7 @@ class AuthRepository(
 
                         val res = Resource.Success<UserResponse>(it.body())
                         emit(res)
-                        preferencesManager.saveUser(res.data.user)
+                        preferencesManager.saveUpdateUser(res.data.user)
 
                     } else {
                         emit(Resource.Failure<FailureMessage>(it.body()))

@@ -37,7 +37,7 @@ class TerritoriesDetailFragment : Fragment(R.layout.fragment_territories_detail)
         binding.apply {
             progressBar.isVisible = true
 
-            recyclerViewCommunities.apply {
+            recyclerView.apply {
                 adapter = mAdapter
                 layoutManager = LinearLayoutManager(requireContext())
                 setHasFixedSize(true)

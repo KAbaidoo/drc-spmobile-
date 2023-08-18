@@ -390,5 +390,6 @@
     <string name="member">Member</string>
     <string name="survey_no">Survey no: </string>
     <string name="version_name">v%s</string>
+    <string name="password_sent_to_email">password sent to email</string>
 
 </resources>

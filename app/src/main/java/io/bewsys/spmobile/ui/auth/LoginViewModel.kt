@@ -62,7 +62,6 @@ class LoginViewModel(
                         _loginEventChannel.send(LoginEvent.Loading)
                     }
                     is Resource.Failure -> {
-//                        val errorResponse = results.error
 
                         _loginEventChannel.send(LoginEvent.Failure(results.error.toString()))
                     }

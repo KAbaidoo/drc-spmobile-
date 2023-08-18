@@ -95,7 +95,7 @@ class DashboardFragment : Fragment(R.layout.fragment_dashboard) {
             }
 
             householdsCard?.setOnClickListener {
-                findNavController().navigate(R.id.householdListDetailFragment)
+                findNavController().navigate(R.id.nav_household)
             }
             membersCard?.setOnClickListener {
                 findNavController().navigate(R.id.membersDetailFragment)
