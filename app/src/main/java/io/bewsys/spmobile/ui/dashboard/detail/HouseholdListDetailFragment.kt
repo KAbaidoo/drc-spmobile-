@@ -1,4 +1,4 @@
-package io.bewsys.spmobile.ui.dashboard
+package io.bewsys.spmobile.ui.dashboard.detail
 
 import android.os.Bundle
 import android.view.View
@@ -11,7 +11,6 @@ import androidx.recyclerview.widget.LinearLayoutManager
 
 import io.bewsys.spmobile.R
 import io.bewsys.spmobile.databinding.FragmentGroupmentsDetailBinding
-import io.bewsys.spmobile.ui.dashboard.adaptors.CommunityListAdapter
 import io.bewsys.spmobile.ui.dashboard.adaptors.HouseholdListAdapter
 
 import kotlinx.coroutines.launch

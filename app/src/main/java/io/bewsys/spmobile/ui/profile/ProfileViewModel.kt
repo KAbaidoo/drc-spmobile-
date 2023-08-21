@@ -10,6 +10,7 @@ import io.bewsys.spmobile.KEY_DATA_ID
 import io.bewsys.spmobile.UPDATE_USER_RESULT_OK
 import io.bewsys.spmobile.data.remote.model.profile.FailureMessage
 import io.bewsys.spmobile.data.repository.AuthRepository
+import io.bewsys.spmobile.ui.common.BaseViewModel
 
 import io.bewsys.spmobile.util.Resource
 import io.bewsys.spmobile.work.NonConsentUploadWorker
@@ -22,7 +23,7 @@ class ProfileViewModel(
     application: Application,
     private val state: SavedStateHandle,
     private val userRepository: AuthRepository
-) : ViewModel() {
+) : BaseViewModel<Unit>() {
 
     private val workManager = WorkManager.getInstance(application)
 
@@ -34,8 +35,6 @@ class ProfileViewModel(
 
     val userProfile = userRepository.userPrefs
 
-    private val _userProfileEventChannel = Channel<UserProfileEvent>()
-    val userProfileEvent = _userProfileEventChannel.receiveAsFlow()
 
     fun updateButtonClicked() = viewModelScope.launch {
 
@@ -46,62 +45,36 @@ class ProfileViewModel(
             userRepository.updateUser(phoneNumber).collectLatest { results ->
                 when (results) {
                     is Resource.Success -> {
-                        _userProfileEventChannel.send(
-                            UserProfileEvent.Successful(
+                        _eventChannel.send(
+                            Event.Successful(
                                 UPDATE_USER_RESULT_OK
                         ))
                     }
                     is Resource.Loading -> {
-                        _userProfileEventChannel.send( UserProfileEvent.Loading)
+                        _eventChannel.send( Event.Loading)
                     }
                     is Resource.Failure ->{
                         val failureMessage = results.error as FailureMessage
-                        _userProfileEventChannel.send( UserProfileEvent.Failure(failureMessage.msg))
+                        _eventChannel.send( Event.Error(failureMessage.msg))
                     }
                     is Resource.Exception -> {
                         results.throwable.localizedMessage?.let { errorMsg->
-                            UserProfileEvent.Exception(
+                            Event.Error(
                                 errorMsg
                             )
-                        }?.let { _userProfileEventChannel.send(it) }
+                        }?.let { _eventChannel.send(it) }
                     }
                 }
             }
         }
     }
     private fun showInvalidInputMessage() = viewModelScope.launch {
-        _userProfileEventChannel.send(
-            UserProfileEvent.ShowMessage(
+        _eventChannel.send(
+            Event.ShowSnackBar(
                 "One or more fields empty!"
             )
         )
     }
 
-
-    private fun uploadNonConsentingHousehold(itemId: Long) = viewModelScope.launch {
-        val constraints = Constraints.Builder()
-            .setRequiredNetworkType(NetworkType.CONNECTED)
-            .build()
-
-        val uploadRequest = OneTimeWorkRequestBuilder<NonConsentUploadWorker>()
-            .setConstraints(constraints)
-            .setInputData(createInputDataForId(itemId))
-            .build()
-        workManager.enqueue(uploadRequest)
-
-    }
-    private fun createInputDataForId(id: Long): Data {
-        val builder = Data.Builder()
-        builder.putLong(KEY_DATA_ID, id)
-        return builder.build()
-    }
-    sealed class UserProfileEvent {
-        data class ShowMessage(val msg: String) : UserProfileEvent()
-        data class Failure(val errorMsg: String) : UserProfileEvent()
-        data class Successful(val results:Int) : UserProfileEvent()
-
-        object Loading : UserProfileEvent()
-        data class Exception (val errorMsg:String ): UserProfileEvent()
-    }
 
 }

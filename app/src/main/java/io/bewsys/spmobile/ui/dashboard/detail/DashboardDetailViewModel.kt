@@ -1,4 +1,4 @@
-package io.bewsys.spmobile.ui.dashboard
+package io.bewsys.spmobile.ui.dashboard.detail
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope

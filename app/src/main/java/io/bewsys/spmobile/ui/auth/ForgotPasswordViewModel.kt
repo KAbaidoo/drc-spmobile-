@@ -1,25 +1,20 @@
 package io.bewsys.spmobile.ui.auth
 
 import androidx.lifecycle.*
-import io.bewsys.spmobile.LOGIN_RESULT_OK
+import io.bewsys.spmobile.FORGOT_PASSWORD_RESULT_OK
 import io.bewsys.spmobile.data.remote.model.auth.login.ErrorResponse
-import io.bewsys.spmobile.data.remote.model.auth.password.PasswordResponse
 import io.bewsys.spmobile.data.repository.AuthRepository
-import io.bewsys.spmobile.data.repository.HouseholdRepository
+import io.bewsys.spmobile.ui.common.BaseViewModel
 
 import io.bewsys.spmobile.util.Resource
-import kotlinx.coroutines.channels.Channel
 import kotlinx.coroutines.flow.*
 import kotlinx.coroutines.launch
 
 class ForgotPasswordViewModel(
     private val state: SavedStateHandle,
     private val repository: AuthRepository
-) : ViewModel() {
+) : BaseViewModel<Unit>() {
 
-
-    private val _PasswordEventChannel = Channel<ForgotPassword>()
-    val PasswordEventChannel = _PasswordEventChannel.receiveAsFlow()
 
     var email = state.get<String>("email") ?: ""
         set(value) {
@@ -32,22 +27,28 @@ class ForgotPasswordViewModel(
         repository.getPasswordLink(email).collectLatest { results ->
             when (results) {
                 is Resource.Success -> {
-                    val msg = results.data as PasswordResponse
-                    _PasswordEventChannel.send(ForgotPassword.Successful(msg.status))
+                    _eventChannel.send(
+                        Event.Successful(
+                            FORGOT_PASSWORD_RESULT_OK
+                        )
+                    )
                 }
+
                 is Resource.Loading -> {
-                    _PasswordEventChannel.send(ForgotPassword.Loading)
+                    _eventChannel.send(Event.Loading)
                 }
+
                 is Resource.Failure -> {
                     val errorResponse = results.error as ErrorResponse
-                    _PasswordEventChannel.send(ForgotPassword.Failure(errorResponse.msg))
+                    _eventChannel.send(Event.Error(errorResponse.msg))
                 }
+
                 is Resource.Exception -> {
                     results.throwable.localizedMessage?.let { errorMsg ->
-                        ForgotPassword.Exception(
+                        Event.Error(
                             errorMsg
                         )
-                    }?.let { _PasswordEventChannel.send(it) }
+                    }?.let { _eventChannel.send(it) }
                 }
             }
 
@@ -55,27 +56,11 @@ class ForgotPasswordViewModel(
     }
 
 
-    fun showInvalidInputMessage(msg: String) = viewModelScope.launch {
-        _PasswordEventChannel.send(
-            ForgotPassword.ShowSnackMessage(msg)
-        )
-    }
-
-    fun goToLoginClicked()= viewModelScope.launch {
-        _PasswordEventChannel.send(
-            ForgotPassword.NavigateToLoginFragment(email)
-        )
-    }
 
 
-    sealed class ForgotPassword {
-        data class ShowSnackMessage(val msg: String) : ForgotPassword()
-        data class Failure(val errorMsg: String) : ForgotPassword()
-        data class Successful(val msg: String) : ForgotPassword()
-        data class NavigateToLoginFragment(val email: String) : ForgotPassword()
-        object Loading : ForgotPassword()
-        data class Exception(val errorMsg: String) : ForgotPassword()
-    }
+
+
+
 }
 
 

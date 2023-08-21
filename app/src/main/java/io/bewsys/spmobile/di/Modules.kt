@@ -17,7 +17,7 @@ import io.bewsys.spmobile.ui.targeting.TargetingViewModel
 import io.bewsys.spmobile.ui.MainViewModel
 import io.bewsys.spmobile.ui.auth.ForgotPasswordViewModel
 import io.bewsys.spmobile.ui.auth.LoginDialogViewModel
-import io.bewsys.spmobile.ui.dashboard.DashboardDetailViewModel
+import io.bewsys.spmobile.ui.dashboard.detail.DashboardDetailViewModel
 import io.bewsys.spmobile.ui.households.delete.DeleteHouseholdViewModel
 import io.bewsys.spmobile.ui.households.detail.HouseholdDetailViewModel
 import io.bewsys.spmobile.util.LocationProvider

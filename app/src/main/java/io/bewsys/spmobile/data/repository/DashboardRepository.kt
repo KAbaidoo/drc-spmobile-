@@ -246,11 +246,6 @@ class DashboardRepository(
         territoryQueries.getById(id).executeAsOneOrNull()
     }
 
-    //                  Groupment
-    suspend fun getAllGroupments(): Flow<List<GroupmentEntity>> =
-        withContext(Dispatchers.IO) {
-            groupmentQueries.getAllGroupments().asFlow().mapToList(Dispatchers.Default)
-        }
 
     val provinceCountFlow =
         provinceQueries.getProvinceCount().asFlow().mapToOne(Dispatchers.Default)
@@ -353,7 +348,6 @@ class DashboardRepository(
             if (response.status.value in 200..299) {
                 val res = Resource.Success<DashboardResponse>(response.body())
                 emit(res)
-
 
                 insertTerritories(res.data.territories)
                 insertCommunities(res.data.communities)

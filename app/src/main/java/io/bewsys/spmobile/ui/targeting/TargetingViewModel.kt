@@ -15,6 +15,4 @@ class TargetingViewModel(private val preferencesManager: PreferencesManager) : V
         preferencesManager.setLoggedIn(false)
     }
 
-
-
 }

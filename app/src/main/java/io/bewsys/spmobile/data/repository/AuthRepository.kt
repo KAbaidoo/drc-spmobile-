@@ -42,7 +42,6 @@ class AuthRepository(
             emit(Resource.Loading)
 
             val response = userApi.login(LoginRequest(email, password))
-//            if (response.status.value in 200..299) {
 
 
             when (response.status.value) {

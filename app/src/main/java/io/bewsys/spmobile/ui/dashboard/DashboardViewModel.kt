@@ -68,6 +68,7 @@ class DashboardViewModel(
         }
     }
 
+
     fun onResult(result: Int) {
         when (result) {
             UPDATE_USER_RESULT_OK -> showUpdateSuccessfulMessage()

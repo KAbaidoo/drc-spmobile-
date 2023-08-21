@@ -9,9 +9,10 @@ import androidx.navigation.NavDirections
 import androidx.navigation.fragment.findNavController
 import androidx.viewbinding.ViewBinding
 import com.google.android.material.snackbar.Snackbar
+import io.bewsys.spmobile.ui.MainActivity
 
 
- abstract class BaseFragment<VB : ViewBinding>(private val inflateMethod: (LayoutInflater, ViewGroup?, Boolean) -> VB) :
+abstract class BaseFragment<VB : ViewBinding>(private val inflateMethod: (LayoutInflater, ViewGroup?, Boolean) -> VB) :
     Fragment() {
 
     private var _binding: VB? = null
@@ -44,9 +45,25 @@ import com.google.android.material.snackbar.Snackbar
         findNavController().navigate(destination)
     }
 
-     open fun navigateTo(action: NavDirections) {
-         findNavController().navigate(action)
-     }
+    open fun navigateTo(action: NavDirections) {
+        findNavController().navigate(action)
+    }
+
+    open fun navigateBack() {
+        findNavController().popBackStack()
+    }
+
+    open fun showProgressBar(visible: Boolean) {
+        activity?.let {
+            (it as MainActivity).showProgressBar(visible)
+        }
+    }
+
+    open fun hideKeyboard() {
+        activity?.let {
+            (it as MainActivity).hideSoftKeyboard()
+        }
+    }
 
 
     override fun onDestroyView() {

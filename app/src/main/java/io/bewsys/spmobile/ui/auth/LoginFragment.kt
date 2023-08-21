@@ -20,13 +20,17 @@ import io.bewsys.spmobile.BuildConfig
 
 import io.bewsys.spmobile.R
 import io.bewsys.spmobile.databinding.FragmentLoginBinding
+import io.bewsys.spmobile.ui.common.BaseFragment
+import io.bewsys.spmobile.ui.common.BaseViewModel
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 
-class LoginFragment : Fragment(R.layout.fragment_login) {
+class LoginFragment : BaseFragment<FragmentLoginBinding>(FragmentLoginBinding::inflate) {
 
+
+    val viewModel: LoginViewModel by viewModel()
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
@@ -39,81 +43,66 @@ class LoginFragment : Fragment(R.layout.fragment_login) {
         })
     }
 
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-
-        val viewModel: LoginViewModel by viewModel()
-        val binding = FragmentLoginBinding.bind(view)
 
 
+    override fun FragmentLoginBinding.initialize()  {
+        versionName.text = getString(R.string.version_name, BuildConfig.VERSION_NAME)
 
-        binding.apply {
-            versionName.text = getString(R.string.version_name, BuildConfig.VERSION_NAME)
+        textFieldEmail.editText?.setText(viewModel.email)
+        textFieldPassword.editText?.setText(viewModel.password)
 
-            textFieldEmail.editText?.setText(viewModel.email)
-            textFieldPassword.editText?.setText(viewModel.password)
+        textFieldEmail.editText?.addTextChangedListener {
+            viewModel.email = it.toString()
+        }
+        textFieldPassword.editText?.addTextChangedListener {
+            viewModel.password = it.toString()
+        }
 
-            textFieldEmail.editText?.addTextChangedListener {
-                viewModel.email = it.toString()
-            }
-            textFieldPassword.editText?.addTextChangedListener {
-                viewModel.password = it.toString()
-            }
+        viewLifecycleOwner.lifecycleScope.launch {
+            viewLifecycleOwner.lifecycle.repeatOnLifecycle(Lifecycle.State.STARTED) {
+                viewModel.events.collectLatest { event ->
+                    when (event) {
+                        is BaseViewModel.Event.Loading ->  showProgressBar(true)
 
-            viewLifecycleOwner.lifecycleScope.launch {
-                viewLifecycleOwner.lifecycle.repeatOnLifecycle(Lifecycle.State.STARTED) {
-                    viewModel.loginEvent.collectLatest { event ->
-                        when (event) {
-                            is LoginViewModel.LoginEvent.Loading -> progressBar.isVisible = true
-
-                            is LoginViewModel.LoginEvent.Successful -> {
-                                progressBar.isVisible = false
-                                setFragmentResult(
-                                    "user_request",
-                                    bundleOf("user_result" to event.results)
-                                )
-                                findNavController().navigate(R.id.nav_dashboard)
-                            }
-                            is LoginViewModel.LoginEvent.ShowMessage -> {
-                                Snackbar.make(requireView(), event.msg, Snackbar.LENGTH_LONG)
-                                    .show()
-                                progressBar.isVisible = false
-                            }
-
-                            is LoginViewModel.LoginEvent.Exception -> {
-                                progressBar.isVisible = false
-                                val action =
-                                    LoginFragmentDirections.actionGlobalLoginDialogFragment(event.errorMsg)
-                                findNavController().navigate(action)
-                            }
-                            is LoginViewModel.LoginEvent.Failure -> {
-                                progressBar.isVisible = false
-
-                                val action =
-                                    LoginFragmentDirections.actionGlobalLoginDialogFragment(event.errorMsg)
-                                findNavController().navigate(action)
-
-                            }
-                            is LoginViewModel.LoginEvent.ForgotPassword -> {
-                             val action =  LoginFragmentDirections.actionNavLoginToForgotPasswordFragment(event.email)
-                               findNavController().navigate(action)
-                            }
+                        is BaseViewModel.Event.Successful -> {
+                            showProgressBar(false)
+                            setFragmentResult(
+                                "user_request",
+                                bundleOf("user_result" to event.result)
+                            )
+                            navigateTo(R.id.nav_dashboard)
                         }
+                        is BaseViewModel.Event.ShowSnackBar -> {
+                            Snackbar.make(requireView(), event.msg, Snackbar.LENGTH_LONG)
+                                .show()
+                            showProgressBar(false)
+                        }
+
+
+                        is BaseViewModel.Event.Error -> {
+                            showProgressBar(false)
+
+                            val action =
+                                LoginFragmentDirections.actionGlobalLoginDialogFragment(event.errorMsg)
+                            navigateTo(action)
+
+                        }
+
                     }
                 }
             }
-
-            buttonLogin.setOnClickListener {
-                viewModel.loginClicked()
-            }
-            btnForgotPassword.setOnClickListener {
-                viewModel.btnForgotPasswordClicked()
-            }
         }
 
+        buttonLogin.setOnClickListener {
+            viewModel.loginClicked()
+        }
+        btnForgotPassword.setOnClickListener {
+            val action =  LoginFragmentDirections.actionNavLoginToForgotPasswordFragment(
+                email = viewModel.email
+            )
+            navigateTo(action)
+        }
         viewModel.showLoggedOutSnackMessage()
 
-    }
-
-
+    }// end of initialize
 }

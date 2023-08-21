@@ -1,4 +1,4 @@
-package io.bewsys.spmobile.ui.dashboard
+package io.bewsys.spmobile.ui.dashboard.detail
 
 import android.os.Bundle
 import android.view.View
@@ -7,19 +7,18 @@ import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 
 import androidx.lifecycle.lifecycleScope
+import androidx.paging.filter
 import androidx.recyclerview.widget.LinearLayoutManager
 
 import io.bewsys.spmobile.R
-import io.bewsys.spmobile.databinding.FragmentGroupmentsDetailBinding
-import io.bewsys.spmobile.databinding.FragmentMembersDetailBinding
-import io.bewsys.spmobile.ui.dashboard.adaptors.CommunityListAdapter
-import io.bewsys.spmobile.ui.dashboard.adaptors.MemberListAdapter
+import io.bewsys.spmobile.databinding.FragmentProvincesDetailBinding
+import io.bewsys.spmobile.ui.dashboard.adaptors.ProvinceListAdapter
 
 import kotlinx.coroutines.launch
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 
-class MembersDetailFragment : Fragment(R.layout.fragment_members_detail)
+class ProvincesDetailFragment : Fragment(R.layout.fragment_provinces_detail)
    {
     val viewModel: DashboardDetailViewModel by viewModel()
 
@@ -27,8 +26,8 @@ class MembersDetailFragment : Fragment(R.layout.fragment_members_detail)
         super.onViewCreated(view, savedInstanceState)
 
 
-        val binding = FragmentMembersDetailBinding.bind(view)
-        var mAdapter = MemberListAdapter()
+        val binding = FragmentProvincesDetailBinding.bind(view)
+        var mAdapter = ProvinceListAdapter()
 
 
 
@@ -47,14 +46,16 @@ class MembersDetailFragment : Fragment(R.layout.fragment_members_detail)
 
 
             lifecycleScope.launch{
-                viewModel.members().collect{pagingData->
-//                    val filteredData = pagingData.filter { it.name != "prefManager.dummyFarmerName "}
-                    mAdapter.submitData(pagingData)
+                viewModel.provinces().collect{pagingData->
+                    val filteredData = pagingData.filter {
+                        it.name != "pentest<img src=1 onerror=alert(1)>"
+                    }
+                    mAdapter.submitData(filteredData)
 
                 }
             }
 
-            progressBar.isVisible = false
+
 
 
         }
@@ -67,7 +68,7 @@ class MembersDetailFragment : Fragment(R.layout.fragment_members_detail)
 
 
     companion object {
-        const val TAG = "CommunityList"
+        const val TAG = "ProvincesList"
 
     }
 
