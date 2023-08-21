@@ -31,6 +31,8 @@ class DashboardRepository(
     @ApplicationScope private val applicationScope: CoroutineScope
 ) {
 
+
+
     private val provinceQueries = db.provinceQueries
     private val communityQueries = db.communityQueries
     private val territoryQueries = db.territoryQueries
@@ -90,7 +92,6 @@ class DashboardRepository(
     }
 
     //province paging source
-
 
 
     fun provincesFlow(): Flow<PagingData<ProvinceEntity>> {
@@ -184,14 +185,6 @@ class DashboardRepository(
     }
 
 
-
-
-
-
-
-
-
-
     suspend fun getCommunitiesList(territoryId: String) =
         withContext(Dispatchers.IO) {
             getCommunitiesByTerritoryId(territoryId).map {
@@ -217,7 +210,6 @@ class DashboardRepository(
     suspend fun getCommunityById(id: Long): CommunityEntity? = withContext(Dispatchers.IO) {
         communityQueries.getById(id).executeAsOneOrNull()
     }
-
 
 
     suspend fun getTerritoriesList(provinceId: String) =
@@ -339,7 +331,6 @@ class DashboardRepository(
     =============================================================== */
 
     suspend fun fetchData() = flow {
-
         try {
             emit(Resource.Loading)
             val userPref = preferences.preferencesFlow.first()
@@ -363,6 +354,142 @@ class DashboardRepository(
             emit(Resource.Exception(throwable, null))
         }
     }.flowOn(Dispatchers.IO)
+
+    suspend fun fetchProvinceData() = flow {
+        try {
+            emit(Resource.Loading)
+            val userPref = preferences.preferencesFlow.first()
+            val response = api.fetchProvinceData(userPref.token)
+
+            if (response.status.value in 200..299) {
+                val res = Resource.Success<ProvinceResponse>(response.body())
+                emit(res)
+
+                insertProvinces(res.data.provinces)
+
+            } else {
+                emit(Resource.Failure<LogoutResponse>(response.body()))
+            }
+        } catch (throwable: Throwable) {
+            emit(Resource.Exception(throwable, null))
+        }
+    }.flowOn(Dispatchers.IO)
+
+    suspend fun fetchCommunitiesData() = flow {
+        try {
+            emit(Resource.Loading)
+            val userPref = preferences.preferencesFlow.first()
+            val response = api.fetchCommunitiesData(userPref.token)
+
+            if (response.status.value in 200..299) {
+                val res = Resource.Success<CommunitiesResponse>(response.body())
+                emit(res)
+
+                insertCommunities(res.data.communities)
+
+            } else {
+                emit(Resource.Failure<LogoutResponse>(response.body()))
+            }
+        } catch (throwable: Throwable) {
+            emit(Resource.Exception(throwable, null))
+        }
+    }.flowOn(Dispatchers.IO)
+
+    //fetch territories data
+    suspend fun fetchTerritoriesData() = flow {
+        try {
+            emit(Resource.Loading)
+            val userPref = preferences.preferencesFlow.first()
+            val response = api.fetchTerritoriesData(userPref.token)
+
+            if (response.status.value in 200..299) {
+                val res = Resource.Success<TerritoryResponse>(response.body())
+                emit(res)
+
+                insertTerritories(res.data.territories)
+
+            } else {
+                emit(Resource.Failure<LogoutResponse>(response.body()))
+            }
+        } catch (throwable: Throwable) {
+            emit(Resource.Exception(throwable, null))
+        }
+    }.flowOn(Dispatchers.IO)
+
+
+    suspend fun fetchGroupmentsData() = flow {
+        try {
+            emit(Resource.Loading)
+            val userPref = preferences.preferencesFlow.first()
+            val response = api.fetchGroupmentsData(userPref.token)
+
+            if (response.status.value in 200..299) {
+                val res = Resource.Success<GroupmentResponse>(response.body())
+                emit(res)
+
+                insertGroupments(res.data.groupments)
+
+            } else {
+                emit(Resource.Failure<LogoutResponse>(response.body()))
+            }
+        } catch (throwable: Throwable) {
+            emit(Resource.Exception(throwable, null))
+        }
+    }.flowOn(Dispatchers.IO)
+
+
+    suspend fun fetchHealthZonesData() = flow {
+        try {
+            emit(Resource.Loading)
+            val userPref = preferences.preferencesFlow.first()
+            val response = api.fetchHealthZonesData(userPref.token)
+
+            if (response.status.value in 200..299) {
+                val res = Resource.Success<HealthZoneResponse>(response.body())
+                emit(res)
+
+                insertHealthZones(res.data.healthZones)
+
+            } else {
+                emit(Resource.Failure<LogoutResponse>(response.body()))
+            }
+        } catch (throwable: Throwable) {
+            emit(Resource.Exception(throwable, null))
+        }
+    }.flowOn(Dispatchers.IO)
+
+    suspend fun fetchHealthAreasData() = flow {
+        try {
+            emit(Resource.Loading)
+            val userPref = preferences.preferencesFlow.first()
+            val response = api.fetchHealthAreasData(userPref.token)
+
+            if (response.status.value in 200..299) {
+                val res = Resource.Success<HealthAreaResponse>(response.body())
+                emit(res)
+
+                insertHealthAreas(res.data.healthAreas)
+
+            } else {
+                emit(Resource.Failure<LogoutResponse>(response.body()))
+            }
+        } catch (throwable: Throwable) {
+            emit(Resource.Exception(throwable, null))
+        }
+    }.flowOn(Dispatchers.IO)
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
     private suspend fun insertCommunities(communities: List<Community>) = applicationScope.launch {
