@@ -1,7 +1,10 @@
 package io.bewsys.spmobile.ui.auth
 
+import android.content.Context
+import androidx.fragment.app.Fragment
 import androidx.lifecycle.*
 import io.bewsys.spmobile.LOGIN_RESULT_OK
+import io.bewsys.spmobile.R
 import io.bewsys.spmobile.data.remote.model.auth.login.ErrorResponse
 import io.bewsys.spmobile.data.remote.model.auth.logout.LogoutResponse
 
@@ -46,9 +49,7 @@ class LoginViewModel(
 
 
     fun loginClicked() = viewModelScope.launch {
-        if (email.isBlank() || password.isBlank()) {
-            showInvalidInputMessage()
-        } else {
+
             authRepository.login(email, password).collectLatest { results ->
                 when (results) {
                     is Resource.Success -> {
@@ -73,7 +74,7 @@ class LoginViewModel(
                     }
                 }
             }
-        }
+
     }
 
     fun logout() = viewModelScope.launch {
@@ -107,26 +108,7 @@ class LoginViewModel(
 
     }
 
-    private fun showInvalidInputMessage() = viewModelScope.launch {
-        _eventChannel.send(
-            Event.ShowSnackBar(
-                "One or more fields empty!"
-            )
-        )
-    }
 
-
-
-    fun showLoggedOutSnackMessage() {
-        viewModelScope.launch {
-            delay(400L)
-            _eventChannel.send(
-                Event.ShowSnackBar(
-                    "You logged out!"
-                )
-            )
-        }
-    }
 
 
 

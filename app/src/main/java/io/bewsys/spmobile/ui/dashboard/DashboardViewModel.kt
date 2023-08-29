@@ -7,6 +7,7 @@ import io.bewsys.spmobile.UPDATE_USER_RESULT_OK
 import io.bewsys.spmobile.data.repository.DashboardRepository
 import io.bewsys.spmobile.data.repository.HouseholdRepository
 import io.bewsys.spmobile.data.repository.MemberRepository
+import io.bewsys.spmobile.ui.common.BaseViewModel
 import io.bewsys.spmobile.util.PairMediatorLiveData
 import io.bewsys.spmobile.util.Resource
 import io.ktor.client.statement.HttpResponse
@@ -25,54 +26,32 @@ class DashboardViewModel(
     private val dashboardRepository: DashboardRepository,
     private val householdRepository: HouseholdRepository,
     private val membersRepository: MemberRepository,
-) : ViewModel() {
+) : BaseViewModel<Unit>() {
 
 
-    private val _dashboardEventChannel = Channel<DashboardEvent>()
-    val dashboardEvent = _dashboardEventChannel.receiveAsFlow()
-
-    private val provinceCount = dashboardRepository.provinceCountFlow.asLiveData()
-    private val communityCount = dashboardRepository.communityCountFlow.asLiveData()
-    private val territoryCount = dashboardRepository.territoryCountFlow.asLiveData()
-    private val groupmentCount = dashboardRepository.groupementCountFlow.asLiveData()
-
-    private val householdCount = householdRepository.getHouseHoldCount.asLiveData()
-    private val membersCount = membersRepository.getMembersCount.asLiveData()
-
-    val provinceAndCommunity = PairMediatorLiveData(provinceCount, communityCount)
-    val territoryAndGroupement = PairMediatorLiveData(territoryCount, groupmentCount)
-    val householdAndMembers = PairMediatorLiveData(householdCount, membersCount)
+    val provinceAndCommunity = PairMediatorLiveData(
+        dashboardRepository.provinceCountFlow.asLiveData(),
+        dashboardRepository.communityCountFlow.asLiveData()
+    )
+    val territoryAndGroupement = PairMediatorLiveData(
+        dashboardRepository.territoryCountFlow.asLiveData(),
+        dashboardRepository.groupementCountFlow.asLiveData()
+    )
+    val householdAndMembers = PairMediatorLiveData(
+        householdRepository.getHouseHoldCount.asLiveData(),
+        membersRepository.getMembersCount.asLiveData()
+    )
 
 
- /*   fun loadData() = viewModelScope.launch {
-        dashboardRepository.fetchData().collectLatest { results ->
-
-            when (results) {
-                is Resource.Loading -> _dashboardEventChannel.send(DashboardEvent.Loading)
-                is Resource.Success -> _dashboardEventChannel.send(DashboardEvent.Successful)
-                is Resource.Failure -> {
-                    _dashboardEventChannel.send(DashboardEvent.Failure)
-                }
-
-                is Resource.Exception -> {
-                    results.throwable.localizedMessage?.let { errorMsg ->
-                        DashboardEvent.Exception(
-                            errorMsg
-                        )
-                    }?.let { _dashboardEventChannel.send(it) }
-                }
-            }
-        }
-    }*/
 
     fun loadAllData() = viewModelScope.launch {
         coroutineScope {
             var provinceResponse: Flow<Resource<Any>>? = null
             var communityResponse: Flow<Resource<Any>>? = null
-            var territoryResponse:  Flow<Resource<Any>>? = null
-            var groupmentResponse:  Flow<Resource<Any>>? =  null
-            var healthZoneResponse:  Flow<Resource<Any>>? = null
-            var healthAreaResponse:  Flow<Resource<Any>>?=  null
+            var territoryResponse: Flow<Resource<Any>>? = null
+            var groupmentResponse: Flow<Resource<Any>>? = null
+            var healthZoneResponse: Flow<Resource<Any>>? = null
+            var healthAreaResponse: Flow<Resource<Any>>? = null
 
             val provinceCall = async { dashboardRepository.fetchProvinceData() }
             val communityCall = async { dashboardRepository.fetchCommunitiesData() }
@@ -82,41 +61,49 @@ class DashboardViewModel(
             val healthAreaCall = async { dashboardRepository.fetchHealthAreasData() }
 
             try {
-                provinceCall.await()
                 provinceResponse = provinceCall.await()
-                 communityResponse = communityCall.await()
-                 territoryResponse = territoryCall.await()
-                 groupmentResponse = groupmentCall.await()
-                 healthZoneResponse = healthZoneCall.await()
-                 healthAreaResponse = healthAreaCall.await()
+                communityResponse = communityCall.await()
+                territoryResponse = territoryCall.await()
+                groupmentResponse = groupmentCall.await()
+                healthZoneResponse = healthZoneCall.await()
+                healthAreaResponse = healthAreaCall.await()
 
             } catch (ex: Exception) {
                 ex.printStackTrace()
             }
 
-            processData(listOf(provinceResponse, communityResponse, territoryResponse, groupmentResponse, healthZoneResponse, healthAreaResponse))
+            processData(
+                listOf(
+                    provinceResponse,
+                    communityResponse,
+                    territoryResponse,
+                    groupmentResponse,
+                    healthZoneResponse,
+                    healthAreaResponse
+                )
+            )
 
         }
 
 
     }
 
-    private suspend fun processData(list: List< Flow<Resource<Any>>?>){
+    private suspend fun processData(list: List<Flow<Resource<Any>>?>) {
         list.map {
             it?.collectLatest { results ->
                 when (results) {
-                    is Resource.Loading -> _dashboardEventChannel.send(DashboardEvent.Loading)
-                    is Resource.Success -> _dashboardEventChannel.send(DashboardEvent.Successful)
+                    is Resource.Loading -> _eventChannel.send(Event.Loading)
+                    is Resource.Success -> _eventChannel.send(Event.Successful(1))
                     is Resource.Failure -> {
-                        _dashboardEventChannel.send(DashboardEvent.Failure)
+                        _eventChannel.send(Event.Error("Something went wrong!"))
                     }
 
                     is Resource.Exception -> {
                         results.throwable.localizedMessage?.let { errorMsg ->
-                            DashboardEvent.Exception(
+                          Event.Error(
                                 errorMsg
                             )
-                        }?.let { _dashboardEventChannel.send(it) }
+                        }?.let { _eventChannel.send(it) }
                     }
                 }
             }
@@ -134,8 +121,8 @@ class DashboardViewModel(
 
     private fun showLoginSuccessfulMessage() =
         viewModelScope.launch {
-            _dashboardEventChannel.send(
-                DashboardEvent.ShowMessage(
+            _eventChannel.send(
+               Event.ShowSnackBar(
                     "Login Successful!"
                 )
             )
@@ -144,8 +131,8 @@ class DashboardViewModel(
 
     private fun showUpdateSuccessfulMessage() =
         viewModelScope.launch {
-            _dashboardEventChannel.send(
-                DashboardEvent.ShowMessage(
+            _eventChannel.send(
+               Event.ShowSnackBar(
                     "User updated Successfully!"
                 )
             )
@@ -154,25 +141,12 @@ class DashboardViewModel(
     fun showDashboardUpdatedSuccessfulMessage() =
         viewModelScope.launch {
             delay(500L)
-            _dashboardEventChannel.send(
-                DashboardEvent.ShowMessage(
+            _eventChannel.send(
+                Event.ShowSnackBar(
                     "Dashboard updated Successfully!"
                 )
             )
         }
-
-
-    sealed class DashboardEvent {
-        data class ShowMessage(val msg: String) : DashboardEvent()
-
-        //    data class ShowUpdateSuccessfulMessage(val msg: String) : DashboardEvent()
-        object Failure : DashboardEvent()
-        object Successful : DashboardEvent()
-        data class Exception(val errorMsg: String) : DashboardEvent()
-        object Loading : DashboardEvent()
-
-
-    }
 
 
 }

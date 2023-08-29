@@ -13,7 +13,7 @@ buildscript {
         constraintLayoutVersion = "2.1.4"
         coroutinesVersion = "1.6.4"
         espressoVersion = "3.5.1"
-        fragmentVersion = "1.5.5"
+
         gradleVersion = '7.4.2'
 
         // koin dependency injection

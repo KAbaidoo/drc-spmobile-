@@ -13,7 +13,6 @@ import io.bewsys.spmobile.ui.auth.LoginViewModel
 import io.bewsys.spmobile.ui.nonconsenting.NonConsentingViewModel
 import io.bewsys.spmobile.ui.nonconsenting.form.AddNonConsentingHouseholdViewModel
 import io.bewsys.spmobile.ui.profile.ProfileViewModel
-import io.bewsys.spmobile.ui.targeting.TargetingViewModel
 import io.bewsys.spmobile.ui.MainViewModel
 import io.bewsys.spmobile.ui.auth.ForgotPasswordViewModel
 import io.bewsys.spmobile.ui.auth.LoginDialogViewModel
@@ -62,7 +61,6 @@ val appModule = module {
     viewModel { HouseholdsViewModel(get(), get(),get()) }
     viewModel { NonConsentingViewModel(get(), get()) }
     viewModel { ProfileViewModel(get(),get(),get()) }
-    viewModel { TargetingViewModel(get()) }
     viewModel { AddNonConsentingHouseholdViewModel(get(), get(), get(),get())}
     viewModel { SharedDevelopmentalFormViewModel(get(), get(),get(),get(),get()) }
     viewModel { LoginViewModel(get(), get()) }
@@ -70,7 +68,7 @@ val appModule = module {
     viewModel { LoginDialogViewModel(get()) }
     viewModel { DeleteHouseholdViewModel(get(),get(), get()) }
     viewModel { ForgotPasswordViewModel(get(),get()) }
-    viewModel{HouseholdDetailViewModel(get())}
+    viewModel{HouseholdDetailViewModel()}
     viewModel{ DashboardDetailViewModel(get()) }
 }
 //HttpClient(Android).engine

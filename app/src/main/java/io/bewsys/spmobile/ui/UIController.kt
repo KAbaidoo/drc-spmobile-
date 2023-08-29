@@ -4,5 +4,4 @@ interface UIController {
     fun showProgressBar(show:Boolean)
 
     fun hideSoftKeyboard()
-
 }

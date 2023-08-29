@@ -8,6 +8,8 @@ import io.ktor.http.*
 
 class DashboardApi(private val client: HttpClient) {
 
+
+
     suspend fun fetchData(accessToken:String): HttpResponse = client.get("dashboard") {
         headers {
             append(HttpHeaders.Authorization, "Bearer $accessToken")
@@ -47,15 +49,3 @@ class DashboardApi(private val client: HttpClient) {
 
 }
 
-/*
-/api/dashboard/province
-/api/dashboard/territories
-/api/dashboard/communities
-/api/dashboard/targets
-/api/dashboard/non-consent-households
-/api/dashboard/groupments
-/api/dashboard/cbt-area-assignments
-/api/dashboard/forms
-/api/dashboard/health-zones
-/api/dashboard/health-areas
-/api/dashboard/permissions*/

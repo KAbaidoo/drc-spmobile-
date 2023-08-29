@@ -272,10 +272,7 @@
         android:id="@+id/groupments_detail_fragment"
         android:name="io.bewsys.spmobile.ui.dashboard.detail.GroupmentsDetailFragment"
         android:label="@string/groupments" />
-    <fragment
-        android:id="@+id/householdListDetailFragment"
-        android:name="io.bewsys.spmobile.ui.dashboard.detail.HouseholdListDetailFragment"
-        android:label="@string/households" />
+
     <fragment
         android:id="@+id/membersDetailFragment"
         android:name="io.bewsys.spmobile.ui.dashboard.detail.MembersDetailFragment"

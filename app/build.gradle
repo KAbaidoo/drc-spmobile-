@@ -4,11 +4,9 @@ plugins {
     id 'androidx.navigation.safeargs.kotlin'
     id 'org.jetbrains.kotlin.android'
     id 'kotlin-kapt'
-//    id 'app.cash.sqldelight'
     id 'com.squareup.sqldelight'
     id 'kotlin-parcelize'
     id 'org.jetbrains.kotlin.plugin.serialization'
-
     id 'com.google.firebase.crashlytics'
     id 'com.google.gms.google-services'
 }
@@ -88,6 +86,8 @@ dependencies {
     // Optional -- Mockk framework
     testImplementation "io.mockk:mockk:$mockkVersion"
 
+    def fragmentVersion = "1.5.5"
+
     // Fragment
     implementation "androidx.fragment:fragment-ktx:$fragmentVersion"
 
@@ -107,10 +107,6 @@ dependencies {
     implementation "io.insert-koin:koin-logger-slf4j:$koin_ktor"
 
 //     SQL Delight
-//    implementation "app.cash.sqldelight:android-driver:$sqldelight_version"
-//    implementation "app.cash.sqldelight:coroutines-extensions:$sqldelight_version"
-
-
     implementation "com.squareup.sqldelight:android-driver:$sqldelight_version"
     implementation "com.squareup.sqldelight:coroutines-extensions-jvm:$sqldelight_version"
     implementation "com.squareup.sqldelight:android-paging3-extensions:$sqldelight_version"
@@ -176,10 +172,4 @@ dependencies {
     kapt 'com.github.bumptech.glide:compiler:4.11.0'
 
 }
-//sqldelight {
-//    databases {
-//        Database {
-//            packageName = "io.bewsys.spmobile"
-//        }
-//    }
-//}
+

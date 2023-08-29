@@ -22,6 +22,7 @@ import io.bewsys.spmobile.R
 import io.bewsys.spmobile.databinding.FragmentLoginBinding
 import io.bewsys.spmobile.ui.common.BaseFragment
 import io.bewsys.spmobile.ui.common.BaseViewModel
+import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
 import org.koin.androidx.viewmodel.ext.android.viewModel
@@ -57,7 +58,7 @@ class LoginFragment : BaseFragment<FragmentLoginBinding>(FragmentLoginBinding::i
         textFieldPassword.editText?.addTextChangedListener {
             viewModel.password = it.toString()
         }
-
+        showProgressBar(false)
         viewLifecycleOwner.lifecycleScope.launch {
             viewLifecycleOwner.lifecycle.repeatOnLifecycle(Lifecycle.State.STARTED) {
                 viewModel.events.collectLatest { event ->
@@ -78,7 +79,6 @@ class LoginFragment : BaseFragment<FragmentLoginBinding>(FragmentLoginBinding::i
                             showProgressBar(false)
                         }
 
-
                         is BaseViewModel.Event.Error -> {
                             showProgressBar(false)
 
@@ -94,7 +94,15 @@ class LoginFragment : BaseFragment<FragmentLoginBinding>(FragmentLoginBinding::i
         }
 
         buttonLogin.setOnClickListener {
-            viewModel.loginClicked()
+            viewModel.apply {
+                if (email.isBlank() || password.isBlank()) {
+                    showInvalidInputMessage()
+                } else{
+                    viewModel.loginClicked()
+                }
+            }
+
+
         }
         btnForgotPassword.setOnClickListener {
             val action =  LoginFragmentDirections.actionNavLoginToForgotPasswordFragment(
@@ -102,7 +110,27 @@ class LoginFragment : BaseFragment<FragmentLoginBinding>(FragmentLoginBinding::i
             )
             navigateTo(action)
         }
-        viewModel.showLoggedOutSnackMessage()
+        showLoggedOutSnackBar()
 
     }// end of initialize
+
+   private fun showLoggedOutSnackBar(){
+       lifecycleScope.launch {
+           delay(400L)
+               showSnackBar(
+                   getString(R.string.you_logged_out)
+               )
+
+       }
+   }
+
+        private fun showInvalidInputMessage() {
+     lifecycleScope.launch {
+         showSnackBar(
+             getString(R.string.fields_empty)
+         )
+     }
+
+
+    }
 }

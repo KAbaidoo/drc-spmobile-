@@ -51,16 +51,17 @@ class MainActivity : AppCompatActivity(), UIController {
 
         // Initializing the handler and the runnable
         mHandler = Handler(Looper.getMainLooper())
-
+//
         mRunnable = Runnable {
 
-            navController.navigate(R.id.nav_login)
+//            navController.navigate(R.id.nav_login)
 
             Toast.makeText(
                 applicationContext,
                 "User inactive for ${mTime / 60_000} mins!",
                 Toast.LENGTH_SHORT
             ).show()
+
         }
 
 
@@ -80,7 +81,7 @@ class MainActivity : AppCompatActivity(), UIController {
         lifecycleScope.launchWhenStarted {
             viewModel.userState.collectLatest {
                 if (it.not()) {
-                    navController.navigate(R.id.nav_login)
+//                    navController.navigate(R.id.nav_login)
                 }
             }
         }

@@ -11,63 +11,40 @@ import androidx.recyclerview.widget.LinearLayoutManager
 
 import io.bewsys.spmobile.R
 import io.bewsys.spmobile.databinding.FragmentMembersDetailBinding
+import io.bewsys.spmobile.ui.common.BaseFragment
 import io.bewsys.spmobile.ui.dashboard.adaptors.MemberListAdapter
 
 import kotlinx.coroutines.launch
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 
-class MembersDetailFragment : Fragment(R.layout.fragment_members_detail)
-   {
+class MembersDetailFragment :
+    BaseFragment<FragmentMembersDetailBinding>(FragmentMembersDetailBinding::inflate) {
     val viewModel: DashboardDetailViewModel by viewModel()
-
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-
-
-        val binding = FragmentMembersDetailBinding.bind(view)
+    override fun FragmentMembersDetailBinding.initialize() {
         var mAdapter = MemberListAdapter()
 
-
-
-
-
-        binding.apply {
-            progressBar.isVisible = true
-
-            recyclerView.apply {
-                adapter = mAdapter
-                layoutManager = LinearLayoutManager(requireContext())
-                setHasFixedSize(true)
-            }
-
-            progressBar.isVisible = true
-
-
-            lifecycleScope.launch{
-                viewModel.members().collect{pagingData->
-//                    val filteredData = pagingData.filter { it.name != "prefManager.dummyFarmerName "}
-                    mAdapter.submitData(pagingData)
-
-                }
-            }
-
-            progressBar.isVisible = false
-
-
+        recyclerView.apply {
+            adapter = mAdapter
+            layoutManager = LinearLayoutManager(requireContext())
+            setHasFixedSize(true)
         }
 
+        showProgressBar(true)
+
+
+        lifecycleScope.launch {
+            viewModel.members().collect { pagingData ->
+                mAdapter.submitData(pagingData)
+
+            }
+        }
+
+        showProgressBar(false)
 
 
     }
 
-
-
-
-    companion object {
-        const val TAG = "CommunityList"
-
-    }
 
 
 }

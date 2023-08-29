@@ -30,11 +30,15 @@ abstract class BaseFragment<VB : ViewBinding>(private val inflateMethod: (Layout
     ): View? {
         _binding = inflateMethod.invoke(inflater, container, false)
 
-        // Calling the extension function
-        binding.initialize()
-
         // replaced _binding!! with binding
         return binding.root
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+        // Calling the extension function
+        binding.initialize()
     }
 
     open fun showSnackBar(message: String) {
@@ -47,6 +51,10 @@ abstract class BaseFragment<VB : ViewBinding>(private val inflateMethod: (Layout
 
     open fun navigateTo(action: NavDirections) {
         findNavController().navigate(action)
+    }
+
+    open fun navigateTo(destinationId: Int, bundle: Bundle) {
+        findNavController().navigate(destinationId, bundle)
     }
 
     open fun navigateBack() {
