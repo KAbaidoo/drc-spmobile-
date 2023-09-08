@@ -17,7 +17,9 @@ import kotlinx.coroutines.coroutineScope
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.collectLatest
+import kotlinx.coroutines.flow.combine
 import kotlinx.coroutines.flow.receiveAsFlow
+import kotlinx.coroutines.flow.zip
 import kotlinx.coroutines.launch
 
 private const val TAG = "Dashboard"
@@ -43,8 +45,7 @@ class DashboardViewModel(
     )
 
 
-
-    fun loadAllData() = viewModelScope.launch {
+    private fun loadAllData() = viewModelScope.launch {
         coroutineScope {
             var provinceResponse: Flow<Resource<Any>>? = null
             var communityResponse: Flow<Resource<Any>>? = null
@@ -72,6 +73,8 @@ class DashboardViewModel(
                 ex.printStackTrace()
             }
 
+
+
             processData(
                 listOf(
                     provinceResponse,
@@ -89,6 +92,8 @@ class DashboardViewModel(
     }
 
     private suspend fun processData(list: List<Flow<Resource<Any>>?>) {
+
+
         list.map {
             it?.collectLatest { results ->
                 when (results) {
@@ -100,7 +105,7 @@ class DashboardViewModel(
 
                     is Resource.Exception -> {
                         results.throwable.localizedMessage?.let { errorMsg ->
-                          Event.Error(
+                            Event.Error(
                                 errorMsg
                             )
                         }?.let { _eventChannel.send(it) }
@@ -122,7 +127,7 @@ class DashboardViewModel(
     private fun showLoginSuccessfulMessage() =
         viewModelScope.launch {
             _eventChannel.send(
-               Event.ShowSnackBar(
+                Event.ShowSnackBar(
                     "Login Successful!"
                 )
             )
@@ -132,7 +137,7 @@ class DashboardViewModel(
     private fun showUpdateSuccessfulMessage() =
         viewModelScope.launch {
             _eventChannel.send(
-               Event.ShowSnackBar(
+                Event.ShowSnackBar(
                     "User updated Successfully!"
                 )
             )
