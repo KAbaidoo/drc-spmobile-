@@ -118,7 +118,6 @@ class MainActivity : AppCompatActivity() {
             when (menuItem.id) {
                 R.id.nav_profile -> navController.navigate(R.id.nav_profile)
                 R.id.nav_settings -> navController.navigate(R.id.nav_settings)
-
                 R.id.nav_login -> {
                     navController.navigate(R.id.nav_login)
 

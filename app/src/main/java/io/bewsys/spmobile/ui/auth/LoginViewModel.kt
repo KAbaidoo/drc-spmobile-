@@ -23,11 +23,9 @@ class LoginViewModel(
         setLoggedInState()
     }
 
-
     private fun setLoggedInState() = viewModelScope.launch {
         authRepository.setLoggedInState(false)
     }
-
 
     private val _loginEventChannel = Channel<LoginEvent>()
     val loginEvent = _loginEventChannel.receiveAsFlow()
@@ -62,8 +60,6 @@ class LoginViewModel(
                         _loginEventChannel.send(LoginEvent.Loading)
                     }
                     is Resource.Failure -> {
-//                        val errorResponse = results.error
-
                         _loginEventChannel.send(LoginEvent.Failure(results.error.toString()))
                     }
                     is Resource.Exception -> {

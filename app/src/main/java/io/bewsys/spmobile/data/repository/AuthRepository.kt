@@ -77,6 +77,7 @@ class AuthRepository(
     }.flowOn(Dispatchers.IO)
 
 
+    //logout flow
     suspend fun logOut() = flow {
         try {
             emit(Resource.Loading)

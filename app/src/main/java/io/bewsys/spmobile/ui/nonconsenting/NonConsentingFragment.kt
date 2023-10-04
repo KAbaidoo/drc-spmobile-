@@ -18,7 +18,6 @@ import com.google.android.material.snackbar.Snackbar
 import io.bewsys.spmobile.R
 import io.bewsys.spmobile.data.local.NonConsentHouseholdModel
 import io.bewsys.spmobile.databinding.FragmentNonConsentingBinding
-import io.bewsys.spmobile.ui.households.HouseholdsFragment
 import io.bewsys.spmobile.ui.households.HouseholdsFragmentDirections
 import io.bewsys.spmobile.util.exhaustive
 import org.koin.androidx.viewmodel.ext.android.viewModel
@@ -125,7 +124,6 @@ class NonConsentingFragment : Fragment(R.layout.fragment_non_consenting),
                 return when (menuItem.itemId) {
 
                     R.id.action_upload_households -> {
-//                        Log.d(HouseholdsFragment.TAG, "Upload clicked")
 
                         viewModel.onUploadMenuItemClicked()
                         true
