@@ -15,6 +15,7 @@ class LoginDialogFragment : DialogFragment() {
 
     private val viewModel: LoginDialogViewModel by viewModel()
 
+
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog =
         AlertDialog.Builder(requireContext())
             .setTitle(getString(R.string.failure_dialog_message))

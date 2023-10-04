@@ -85,6 +85,8 @@ class MainActivity : AppCompatActivity() {
         val header: View = navigationView.getHeaderView(0)
         val tv: TextView = header.findViewById(R.id.tv_username)
 
+
+       //get user auth state
         lifecycleScope.launchWhenStarted {
             viewModel.userState.collectLatest {
                 if (it.not()) {
