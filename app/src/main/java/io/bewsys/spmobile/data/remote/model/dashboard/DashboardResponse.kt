@@ -11,18 +11,46 @@ data class DashboardResponse(
     val provinces: List<Province>,
     val groupments: List<Groupment>,
     val healthZones: List<HealthZone>,
-    val healthAreas: List<HealthArea>
-    ,
+    val healthAreas: List<HealthArea>,
     @Transient
-    val cbt_area_assignments: List<CbtAreaAssignment> ?=null,
+    val cbt_area_assignments: List<CbtAreaAssignment>? = null,
     @Transient
-    val forms: List<Form>?=null,
+    val forms: List<Form>? = null,
     @Transient
-    val non_consent_households: List<NonConsentHousehold>?=null,
+    val non_consent_households: List<NonConsentHousehold>? = null,
     @Transient
-    val permissions: List<String>?=null,
+    val permissions: List<String>? = null,
     @Transient
-    val targets: List<String>?=null
+    val targets: List<String>? = null
 
+)
 
+@Serializable
+data class ProvinceResponse(
+    val provinces: List<Province>
+)
+
+@Serializable
+data class TerritoryResponse(
+    val territories: List<Territory>
+)
+
+@Serializable
+data class CommunitiesResponse(
+    val communities: List<Community>,
+)
+
+@Serializable
+data class GroupmentResponse(
+    val groupments: List<Groupment>,
+)
+
+@Serializable
+data class HealthZoneResponse(
+    val healthZones: List<HealthZone>,
+)
+
+@Serializable
+data class HealthAreaResponse(
+    val healthAreas: List<HealthArea>,
 )

@@ -16,6 +16,7 @@ import io.bewsys.spmobile.data.prefsstore.PreferencesManager.PreferenceKeys.TEAM
 import io.bewsys.spmobile.data.prefsstore.PreferencesManager.PreferenceKeys.TEAM_LEADER_ID
 import io.bewsys.spmobile.data.prefsstore.PreferencesManager.PreferenceKeys.TOKEN
 import io.bewsys.spmobile.data.remote.model.auth.login.User
+import io.bewsys.spmobile.data.remote.model.auth.login.UserX
 
 import kotlinx.coroutines.flow.catch
 import kotlinx.coroutines.flow.map
@@ -83,7 +84,25 @@ class PreferencesManager(context: Context) {
             )
         }
 
-    suspend fun saveUser(user: User) {
+    suspend fun saveUser(user: UserX) {
+        dataStore.edit { preferences ->
+            preferences[NAME] = user.name.toString()
+            preferences[EMAIL] = user.email.toString()
+            preferences[PASSWORD] = user.password.toString()
+            preferences[ID] = user.id as Long
+            preferences[PHONE_NUMBER] = user.phone_number.toString()
+//            preferences[TEAM_LEADER] =
+//                user.enumerator_team_leader_relation?.team_leader?.name.toString()
+//            preferences[TEAM_LEADER_ID] =
+//                user.enumerator_team_leader_relation?.team_leader?.id.toString()
+//            preferences[SUPERVISOR_NAME] =
+//                user.enumerator_team_leader_relation?.team_leader?.supervisor.toString()
+//            preferences[SUPERVISOR_ID] =
+//                user.enumerator_team_leader_relation?.team_leader?.id.toString()
+        }
+    }
+
+    suspend fun saveUpdateUser(user: User) {
         dataStore.edit { preferences ->
             preferences[NAME] = user.name.toString()
             preferences[EMAIL] = user.email.toString()

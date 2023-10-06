@@ -18,101 +18,87 @@ import com.google.android.material.snackbar.Snackbar
 import io.bewsys.spmobile.R
 import io.bewsys.spmobile.data.local.NonConsentHouseholdModel
 import io.bewsys.spmobile.databinding.FragmentNonConsentingBinding
+import io.bewsys.spmobile.ui.common.BaseFragment
+import io.bewsys.spmobile.ui.households.HouseholdsFragment
 import io.bewsys.spmobile.ui.households.HouseholdsFragmentDirections
 import io.bewsys.spmobile.util.exhaustive
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 
-class NonConsentingFragment : Fragment(R.layout.fragment_non_consenting),
+class NonConsentingFragment :
+    BaseFragment<FragmentNonConsentingBinding>(FragmentNonConsentingBinding::inflate),
     NonConsentingHouseholdAdapter.OnItemClickListener {
     val viewModel: NonConsentingViewModel by viewModel()
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
+    override fun FragmentNonConsentingBinding.initialize() {
+        fabNonConsenting.setOnClickListener {
+            viewModel.onFabClicked()
+        }
 
+        val nonConsentingHouseholdAdapter = NonConsentingHouseholdAdapter(this@NonConsentingFragment)
+        recyclerViewNonConsentingHouseholds.apply {
+            adapter = nonConsentingHouseholdAdapter
+            layoutManager = LinearLayoutManager(requireContext())
+            setHasFixedSize(true)
+        }
 
-        val binding = FragmentNonConsentingBinding.bind(view)
-        val nonConsentingHouseholdAdapter = NonConsentingHouseholdAdapter(this)
+        viewModel.nonConsentingHouseholds.observe(viewLifecycleOwner) {
+            nonConsentingHouseholdAdapter.submitList(it)
+        }
 
-        binding.apply {
-            fabNonConsenting.setOnClickListener {
-                viewModel.onFabClicked()
-            }
-            recyclerViewNonConsentingHouseholds.apply {
-                adapter = nonConsentingHouseholdAdapter
-                layoutManager = LinearLayoutManager(requireContext())
-                setHasFixedSize(true)
-            }
+        viewLifecycleOwner.lifecycleScope.launchWhenStarted {
+            viewModel.nonConsentingEvent.collect { event ->
+                when (event) {
+                    is NonConsentingViewModel.NonConsentingEvent.NavigateToNonConsentingHouseholdsForm -> {
 
-
-            viewModel.nonConsentingHouseholds.observe(viewLifecycleOwner) {
-                nonConsentingHouseholdAdapter.submitList(it)
-            }
-
-            viewLifecycleOwner.lifecycleScope.launchWhenStarted {
-                viewModel.nonConsentingEvent.collect { event ->
-                    when (event) {
-                        is NonConsentingViewModel.NonConsentingEvent.NavigateToNonConsentingHouseholdsForm -> {
-
-                            val action =
-                                NonConsentingFragmentDirections.actionNavNonConsentingToNonConsentingFormFragment(
-                                    title = getString(R.string.add_non_consenting_household),
-                                    household = null
-                                )
-                            findNavController().navigate(action)
-
-                        }
-
-                        is NonConsentingViewModel.NonConsentingEvent.ShowNonConsentingHouseholdSavedConfirmationMessage -> Snackbar.make(
-                            requireView(),
-                            event.msg,
-                            Snackbar.LENGTH_SHORT
-                        ).show()
-
-                        is NonConsentingViewModel.NonConsentingEvent.NavigateToEditNonConsentingHouseholdsForm -> {
-                            val action =
-                                NonConsentingFragmentDirections.actionNavNonConsentingToNonConsentingFormFragment(
-                                    title = getString(R.string.edit_non_consenting_household),
-                                    household = event.nonConsentingHousehold
-                                )
-                            findNavController().navigate(action)
-                        }
-
-                        is NonConsentingViewModel.NonConsentingEvent.Exception -> {
-                            progressBar.isVisible = false
-                            val action =
-                                HouseholdsFragmentDirections.actionGlobalLoginDialogFragment(event.errMsg)
-                            findNavController().navigate(action)
-                        }
-
-                        is NonConsentingViewModel.NonConsentingEvent.Failure -> {
-                            progressBar.isVisible = false
-                            val action =
-                                HouseholdsFragmentDirections.actionGlobalLoginDialogFragment(event.errMsg)
-                            findNavController().navigate(action)
-                        }
-
-                        is NonConsentingViewModel.NonConsentingEvent.Loading -> progressBar.isVisible =
-                            true
-
-                        is NonConsentingViewModel.NonConsentingEvent.Successful -> {
-                            progressBar.isVisible = false
-
-//                        val msg = getString(
-//                            R.string.upload_success_message,
-//                            "${event.households}",
-//                            "${event.members}"
-//                        )
-                            val action =
-                                HouseholdsFragmentDirections.actionGlobalLoginDialogFragment(event.msg)
-                            findNavController().navigate(action)
-                        }
-
+                        val action =
+                            NonConsentingFragmentDirections.actionNavNonConsentingToNonConsentingFormFragment(
+                                title = getString(R.string.add_non_consenting_household),
+                                household = null
+                            )
+                       navigateTo(action)
 
                     }
-                }.exhaustive
-            }
+
+                    is NonConsentingViewModel.NonConsentingEvent.ShowNonConsentingHouseholdSavedConfirmationMessage -> showSnackBar(event.msg)
+
+                    is NonConsentingViewModel.NonConsentingEvent.NavigateToEditNonConsentingHouseholdsForm -> {
+                        val action =
+                            NonConsentingFragmentDirections.actionNavNonConsentingToNonConsentingFormFragment(
+                                title = getString(R.string.edit_non_consenting_household),
+                                household = event.nonConsentingHousehold
+                            )
+                        navigateTo(action)
+                    }
+
+                    is NonConsentingViewModel.NonConsentingEvent.Exception -> {
+                       showProgressBar(false)
+                        val action =
+                            HouseholdsFragmentDirections.actionGlobalLoginDialogFragment(event.errMsg)
+                        navigateTo(action)
+                    }
+
+                    is NonConsentingViewModel.NonConsentingEvent.Failure -> {
+                       showProgressBar(false)
+                        val action =
+                            HouseholdsFragmentDirections.actionGlobalLoginDialogFragment(event.errMsg)
+                       navigateTo(action)
+                    }
+
+                    is NonConsentingViewModel.NonConsentingEvent.Loading -> showProgressBar(true)
+
+                    is NonConsentingViewModel.NonConsentingEvent.Successful -> {
+                     showProgressBar(false)
+
+                        val action =
+                            HouseholdsFragmentDirections.actionGlobalLoginDialogFragment(event.msg)
+                     navigateTo(action)
+                    }
+
+
+                }
+            }.exhaustive
         }
-//         set up menu
+
         val menuHost = requireActivity()
         menuHost.addMenuProvider(object : MenuProvider {
             override fun onCreateMenu(menu: Menu, menuInflater: MenuInflater) {
@@ -124,6 +110,7 @@ class NonConsentingFragment : Fragment(R.layout.fragment_non_consenting),
                 return when (menuItem.itemId) {
 
                     R.id.action_upload_households -> {
+//                        Log.d(HouseholdsFragment.TAG, "Upload clicked")
 
                         viewModel.onUploadMenuItemClicked()
                         true
@@ -139,6 +126,7 @@ class NonConsentingFragment : Fragment(R.layout.fragment_non_consenting),
             viewModel.onAddNonConsentingHouseholdResult(result)
         }
     }
+
 
     override fun onItemClick(nonConsentingHousehold: NonConsentHouseholdModel) {
         viewModel.onHousholdSelected(nonConsentingHousehold)

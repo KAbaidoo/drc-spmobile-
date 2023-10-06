@@ -254,4 +254,27 @@
             android:id="@+id/action_householdDetailFragment_to_form_navigation"
             app:destination="@id/form_navigation" />
     </fragment>
+    <fragment
+        android:id="@+id/communities_detail_fragment"
+        android:name="io.bewsys.spmobile.ui.dashboard.detail.CommunitiesDetailFragment"
+        android:label="@string/communities"
+        tools:layout="@layout/fragment_communities_detail" />
+    <fragment
+        android:id="@+id/provinces_detail_fragment"
+        android:name="io.bewsys.spmobile.ui.dashboard.detail.ProvincesDetailFragment"
+        android:label="@string/provinces"
+        tools:layout="@layout/fragment_provinces_detail" />
+    <fragment
+        android:id="@+id/territories_detail_fragment"
+        android:name="io.bewsys.spmobile.ui.dashboard.detail.TerritoriesDetailFragment"
+        android:label="@string/territories" />
+    <fragment
+        android:id="@+id/groupments_detail_fragment"
+        android:name="io.bewsys.spmobile.ui.dashboard.detail.GroupmentsDetailFragment"
+        android:label="@string/groupments" />
+
+    <fragment
+        android:id="@+id/membersDetailFragment"
+        android:name="io.bewsys.spmobile.ui.dashboard.detail.MembersDetailFragment"
+        android:label="@string/members" />
 </navigation>

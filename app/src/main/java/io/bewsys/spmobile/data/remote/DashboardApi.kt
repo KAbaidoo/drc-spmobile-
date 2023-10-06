@@ -7,10 +7,45 @@ import io.ktor.http.*
 
 
 class DashboardApi(private val client: HttpClient) {
+
+
+
     suspend fun fetchData(accessToken:String): HttpResponse = client.get("dashboard") {
         headers {
             append(HttpHeaders.Authorization, "Bearer $accessToken")
         }
     }
 
+    suspend fun fetchProvinceData(accessToken:String): HttpResponse = client.get("dashboard/province") {
+        headers {
+            append(HttpHeaders.Authorization, "Bearer $accessToken")
+        }
+    }
+    suspend fun fetchTerritoriesData(accessToken:String): HttpResponse = client.get("dashboard/territories") {
+        headers {
+            append(HttpHeaders.Authorization, "Bearer $accessToken")
+        }
+    }
+    suspend fun fetchCommunitiesData(accessToken:String): HttpResponse = client.get("dashboard/communities") {
+        headers {
+            append(HttpHeaders.Authorization, "Bearer $accessToken")
+        }
+    }
+    suspend fun fetchGroupmentsData(accessToken:String): HttpResponse = client.get("dashboard/groupments") {
+        headers {
+            append(HttpHeaders.Authorization, "Bearer $accessToken")
+        }
+    }
+    suspend fun fetchHealthZonesData(accessToken:String): HttpResponse = client.get("dashboard/health-zones") {
+        headers {
+            append(HttpHeaders.Authorization, "Bearer $accessToken")
+        }
+    }
+    suspend fun fetchHealthAreasData(accessToken:String): HttpResponse = client.get("dashboard/health-areas") {
+        headers {
+            append(HttpHeaders.Authorization, "Bearer $accessToken")
+        }
+    }
+
 }
+
