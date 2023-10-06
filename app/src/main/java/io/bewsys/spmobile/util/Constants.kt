@@ -18,3 +18,12 @@ const val PERMISSION_LOCATION_REQUEST_CODE = Activity.RESULT_FIRST_USER + 5
 const val PERMISSION_CAMERA_REQUEST_CODE = Activity.RESULT_FIRST_USER + 6
 const val PERMISSION_WRITE_EXTERNAL_REQUEST_CODE = Activity.RESULT_FIRST_USER + 7
 const val PERMISSION_MEDIA_REQUEST_CODE = Activity.RESULT_FIRST_USER + 8
+const val FORGOT_PASSWORD_RESULT_OK = Activity.RESULT_FIRST_USER + 9
+
+
+ const val COMMUNITIES= "communities"
+ const val PROVINCES= "provinces"
+ const val GROUPMENTS= "groupements"
+ const val TERRITORIES= "territories"
+ const val HOUSEHOLDS= "households"
+ const val MEMEBERS= "members"

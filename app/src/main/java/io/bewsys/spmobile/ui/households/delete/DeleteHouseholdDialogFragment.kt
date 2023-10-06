@@ -3,12 +3,20 @@ package io.bewsys.spmobile.ui.households.delete
 import android.app.AlertDialog
 import android.app.Dialog
 import android.os.Bundle
+import android.view.View
 import androidx.core.os.bundleOf
 import androidx.fragment.app.DialogFragment
 import androidx.fragment.app.setFragmentResult
+import androidx.lifecycle.SavedStateHandle
+import androidx.lifecycle.ViewModel
 import androidx.navigation.fragment.findNavController
+import androidx.navigation.ui.AppBarConfiguration
 import io.bewsys.spmobile.DELETE_HOUSEHOLD_RESULT_OK
 import io.bewsys.spmobile.R
+import io.bewsys.spmobile.data.repository.HouseholdRepository
+import io.bewsys.spmobile.util.ApplicationScope
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.launch
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 
@@ -36,5 +44,6 @@ class DeleteHouseholdDialogFragment : DialogFragment() {
             }
             .create()
     }
-
 }
+
+

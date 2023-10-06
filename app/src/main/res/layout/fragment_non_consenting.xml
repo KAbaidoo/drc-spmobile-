@@ -7,13 +7,7 @@
 
     xmlns:tools="http://schemas.android.com/tools"
     tools:context=".ui.nonconsenting.NonConsentingFragment">
-    <ProgressBar
-        android:id="@+id/progress_bar"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:visibility="invisible"
-        android:layout_gravity="center"
-        tools:visibility="visible" />
+
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recycler_view_non_consenting_households"

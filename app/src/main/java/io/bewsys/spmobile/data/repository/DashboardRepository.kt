@@ -1,9 +1,16 @@
 package io.bewsys.spmobile.data.repository
 
 
-import app.cash.sqldelight.coroutines.asFlow
-import app.cash.sqldelight.coroutines.mapToList
-import app.cash.sqldelight.coroutines.mapToOne
+import androidx.paging.Pager
+import androidx.paging.PagingConfig
+import androidx.paging.PagingData
+import androidx.paging.PagingSource
+import com.squareup.sqldelight.Query
+import com.squareup.sqldelight.Transacter
+import com.squareup.sqldelight.android.paging3.QueryPagingSource
+import com.squareup.sqldelight.runtime.coroutines.asFlow
+import com.squareup.sqldelight.runtime.coroutines.mapToList
+import com.squareup.sqldelight.runtime.coroutines.mapToOne
 import io.bewsys.spmobile.Database
 import io.bewsys.spmobile.data.*
 import io.bewsys.spmobile.data.prefsstore.PreferencesManager
@@ -24,12 +31,16 @@ class DashboardRepository(
     @ApplicationScope private val applicationScope: CoroutineScope
 ) {
 
+
+
     private val provinceQueries = db.provinceQueries
     private val communityQueries = db.communityQueries
     private val territoryQueries = db.territoryQueries
     private val groupmentQueries = db.groupmentQueries
     private val healthAreaQueries = db.healthAreaQueries
     private val healthZoneQueries = db.healthZoneQueries
+    private val memberQueries = db.householdMemberQueries
+    private val householdQueries = db.householdQueries
 
     suspend fun getAllProvinces(): Flow<List<ProvinceEntity>> =
         withContext(Dispatchers.IO) {
@@ -49,13 +60,10 @@ class DashboardRepository(
         }
 
 
-
     suspend fun getProvinceByName(query: String): Flow<List<ProvinceEntity>> =
         withContext(Dispatchers.IO) {
             provinceQueries.getByName(query).asFlow().mapToList(Dispatchers.Default)
         }
-
-
 
 
     suspend fun getProvinceById(id: Long): ProvinceEntity? = withContext(Dispatchers.IO) {
@@ -64,10 +72,118 @@ class DashboardRepository(
 
 //   Community
 
-    suspend fun getAllCommunities(): Flow<List<CommunityEntity>> =
-        withContext(Dispatchers.IO) {
-            communityQueries.getAllCommunities().asFlow().mapToList(Dispatchers.Default)
-        }
+    //create community paging source
+
+    fun communitiesFlow(): Flow<PagingData<CommunityEntity>> {
+        return Pager(
+            config = PagingConfig(
+                pageSize = 30,
+                enablePlaceholders = false
+            ),
+            pagingSourceFactory = {
+                QueryPagingSource(
+                    countQuery = communityQueries.getCommunityCount(),
+                    transacter = communityQueries,
+                    dispatcher = Dispatchers.IO,
+                    queryProvider = communityQueries::communities,
+                )
+            }
+        ).flow
+    }
+
+    //province paging source
+
+
+    fun provincesFlow(): Flow<PagingData<ProvinceEntity>> {
+        return Pager(
+            config = PagingConfig(
+                pageSize = 30,
+                enablePlaceholders = false
+            ),
+            pagingSourceFactory = {
+                QueryPagingSource(
+                    countQuery = provinceQueries.getProvinceCount(),
+                    transacter = provinceQueries,
+                    dispatcher = Dispatchers.IO,
+                    queryProvider = provinceQueries::provinces,
+                )
+            }
+        ).flow
+    }
+
+    //territory paging source
+    fun territoriesFlow(): Flow<PagingData<TerritoryEntity>> {
+        return Pager(
+            config = PagingConfig(
+                pageSize = 30,
+                enablePlaceholders = false
+            ),
+            pagingSourceFactory = {
+                QueryPagingSource(
+                    countQuery = territoryQueries.getTerritoryCount(),
+                    transacter = territoryQueries,
+                    dispatcher = Dispatchers.IO,
+                    queryProvider = territoryQueries::territories,
+                )
+            }
+        ).flow
+    }
+
+    //groupment paging source
+
+    fun groupmentsFlow(): Flow<PagingData<GroupmentEntity>> {
+        return Pager(
+            config = PagingConfig(
+                pageSize = 30,
+                enablePlaceholders = false
+            ),
+            pagingSourceFactory = {
+                QueryPagingSource(
+                    countQuery = groupmentQueries.getGroupmentCount(),
+                    transacter = groupmentQueries,
+                    dispatcher = Dispatchers.IO,
+                    queryProvider = groupmentQueries::groupments,
+                )
+            }
+        ).flow
+    }
+
+    //members paging source
+    fun membersFlow(): Flow<PagingData<MemberEntity>> {
+        return Pager(
+            config = PagingConfig(
+                pageSize = 30,
+                enablePlaceholders = false
+            ),
+            pagingSourceFactory = {
+                QueryPagingSource(
+                    countQuery = memberQueries.getHouseholdMembersCount(),
+                    transacter = memberQueries,
+                    dispatcher = Dispatchers.IO,
+                    queryProvider = memberQueries::members,
+                )
+            }
+        ).flow
+    }
+
+    //household paging source
+    fun householdsFlow(): Flow<PagingData<HouseholdEntity>> {
+        return Pager(
+            config = PagingConfig(
+                pageSize = 30,
+                enablePlaceholders = false
+            ),
+            pagingSourceFactory = {
+                QueryPagingSource(
+                    countQuery = householdQueries.getHouseholdCount(),
+                    transacter = householdQueries,
+                    dispatcher = Dispatchers.IO,
+                    queryProvider = householdQueries::households,
+                )
+            }
+        ).flow
+    }
+
 
     suspend fun getCommunitiesList(territoryId: String) =
         withContext(Dispatchers.IO) {
@@ -85,17 +201,6 @@ class DashboardRepository(
             communityQueries.getByTerritoryId(territoryId).asFlow().mapToList(Dispatchers.Default)
         }
 
-    suspend fun insertCommunity(community: Community): Unit =
-        withContext(Dispatchers.IO) {
-            community.apply {
-                communityQueries.insertCommunity(
-                    id,
-                    name,
-                    territory_id,
-                    survey_no_code
-                )
-            }
-        }
 
     suspend fun getCommunityByName(query: String): Flow<List<CommunityEntity>> =
         withContext(Dispatchers.IO) {
@@ -106,11 +211,6 @@ class DashboardRepository(
         communityQueries.getById(id).executeAsOneOrNull()
     }
 
-    //              Territory
-    suspend fun getAllTerritories(): Flow<List<TerritoryEntity>> =
-        withContext(Dispatchers.IO) {
-            territoryQueries.getAllTerritoriess().asFlow().mapToList(Dispatchers.Default)
-        }
 
     suspend fun getTerritoriesList(provinceId: String) =
         withContext(Dispatchers.IO) {
@@ -128,17 +228,6 @@ class DashboardRepository(
             territoryQueries.getByProvinceId(provinceId).asFlow().mapToList(Dispatchers.Default)
         }
 
-    suspend fun insertTerritory(territory: Territory): Unit =
-        withContext(Dispatchers.IO) {
-            territory.apply {
-                territoryQueries.insertTerritory(
-                    id,
-                    name,
-                    province_id,
-                    survey_no_code
-                )
-            }
-        }
 
     suspend fun getTerritoryByName(query: String): Flow<List<TerritoryEntity>> =
         withContext(Dispatchers.IO) {
@@ -149,11 +238,6 @@ class DashboardRepository(
         territoryQueries.getById(id).executeAsOneOrNull()
     }
 
-    //                  Groupment
-    suspend fun getAllGroupments(): Flow<List<GroupmentEntity>> =
-        withContext(Dispatchers.IO) {
-            groupmentQueries.getAllGroupments().asFlow().mapToList(Dispatchers.Default)
-        }
 
     val provinceCountFlow =
         provinceQueries.getProvinceCount().asFlow().mapToOne(Dispatchers.Default)
@@ -223,17 +307,6 @@ class DashboardRepository(
             groupmentQueries.getByCommunityId(communityId).asFlow().mapToList(Dispatchers.Default)
         }
 
-    suspend fun insertGroupment(groupment: Groupment): Unit =
-        withContext(Dispatchers.IO) {
-            groupment.apply {
-                groupmentQueries.insertGroupment(
-                    id,
-                    name,
-                    community_id,
-                    survey_no_code
-                )
-            }
-        }
 
     suspend fun getGroupmentByName(query: String): Flow<List<GroupmentEntity>> =
         withContext(Dispatchers.IO) {
@@ -243,9 +316,11 @@ class DashboardRepository(
     suspend fun getGroupmentById(id: Long): GroupmentEntity? = withContext(Dispatchers.IO) {
         groupmentQueries.getById(id).executeAsOneOrNull()
     }
+
     suspend fun getHealthAreaById(id: Long): HealthAreaEntity? = withContext(Dispatchers.IO) {
         healthAreaQueries.getById(id).executeAsOneOrNull()
     }
+
     suspend fun getHealthZoneById(id: Long): HealthZoneEntity? = withContext(Dispatchers.IO) {
         healthZoneQueries.getById(id).executeAsOneOrNull()
     }
@@ -256,7 +331,6 @@ class DashboardRepository(
     =============================================================== */
 
     suspend fun fetchData() = flow {
-
         try {
             emit(Resource.Loading)
             val userPref = preferences.preferencesFlow.first()
@@ -265,7 +339,6 @@ class DashboardRepository(
             if (response.status.value in 200..299) {
                 val res = Resource.Success<DashboardResponse>(response.body())
                 emit(res)
-
 
                 insertTerritories(res.data.territories)
                 insertCommunities(res.data.communities)
@@ -282,37 +355,157 @@ class DashboardRepository(
         }
     }.flowOn(Dispatchers.IO)
 
+    suspend fun fetchProvinceData() = flow {
+        try {
+            emit(Resource.Loading)
+            val userPref = preferences.preferencesFlow.first()
+            val response = api.fetchProvinceData(userPref.token)
 
-//    private suspend fun insertCommunities(communities: List<Community>) = applicationScope.launch {
-//        withContext(Dispatchers.IO) {
-//            communities.forEach {
-//                insertCommunity(it)
-//            }
-//        }
-//    }
-    private suspend fun  insertCommunities(communities: List<Community>)  = applicationScope.launch {
+            if (response.status.value in 200..299) {
+                val res = Resource.Success<ProvinceResponse>(response.body())
+                emit(res)
+
+                insertProvinces(res.data.provinces)
+
+            } else {
+                emit(Resource.Failure<LogoutResponse>(response.body()))
+            }
+        } catch (throwable: Throwable) {
+            emit(Resource.Exception(throwable, null))
+        }
+    }.flowOn(Dispatchers.IO)
+
+    suspend fun fetchCommunitiesData() = flow {
+        try {
+            emit(Resource.Loading)
+            val userPref = preferences.preferencesFlow.first()
+            val response = api.fetchCommunitiesData(userPref.token)
+
+            if (response.status.value in 200..299) {
+                val res = Resource.Success<CommunitiesResponse>(response.body())
+                emit(res)
+
+                insertCommunities(res.data.communities)
+
+            } else {
+                emit(Resource.Failure<LogoutResponse>(response.body()))
+            }
+        } catch (throwable: Throwable) {
+            emit(Resource.Exception(throwable, null))
+        }
+    }.flowOn(Dispatchers.IO)
+
+    //fetch territories data
+    suspend fun fetchTerritoriesData() = flow {
+        try {
+            emit(Resource.Loading)
+            val userPref = preferences.preferencesFlow.first()
+            val response = api.fetchTerritoriesData(userPref.token)
+
+            if (response.status.value in 200..299) {
+                val res = Resource.Success<TerritoryResponse>(response.body())
+                emit(res)
+
+                insertTerritories(res.data.territories)
+
+            } else {
+                emit(Resource.Failure<LogoutResponse>(response.body()))
+            }
+        } catch (throwable: Throwable) {
+            emit(Resource.Exception(throwable, null))
+        }
+    }.flowOn(Dispatchers.IO)
+
+
+    suspend fun fetchGroupmentsData() = flow {
+        try {
+            emit(Resource.Loading)
+            val userPref = preferences.preferencesFlow.first()
+            val response = api.fetchGroupmentsData(userPref.token)
+
+            if (response.status.value in 200..299) {
+                val res = Resource.Success<GroupmentResponse>(response.body())
+                emit(res)
+
+                insertGroupments(res.data.groupments)
+
+            } else {
+                emit(Resource.Failure<LogoutResponse>(response.body()))
+            }
+        } catch (throwable: Throwable) {
+            emit(Resource.Exception(throwable, null))
+        }
+    }.flowOn(Dispatchers.IO)
+
+
+    suspend fun fetchHealthZonesData() = flow {
+        try {
+            emit(Resource.Loading)
+            val userPref = preferences.preferencesFlow.first()
+            val response = api.fetchHealthZonesData(userPref.token)
+
+            if (response.status.value in 200..299) {
+                val res = Resource.Success<HealthZoneResponse>(response.body())
+                emit(res)
+
+                insertHealthZones(res.data.healthZones)
+
+            } else {
+                emit(Resource.Failure<LogoutResponse>(response.body()))
+            }
+        } catch (throwable: Throwable) {
+            emit(Resource.Exception(throwable, null))
+        }
+    }.flowOn(Dispatchers.IO)
+
+    suspend fun fetchHealthAreasData() = flow {
+        try {
+            emit(Resource.Loading)
+            val userPref = preferences.preferencesFlow.first()
+            val response = api.fetchHealthAreasData(userPref.token)
+
+            if (response.status.value in 200..299) {
+                val res = Resource.Success<HealthAreaResponse>(response.body())
+                emit(res)
+
+                insertHealthAreas(res.data.healthAreas)
+
+            } else {
+                emit(Resource.Failure<LogoutResponse>(response.body()))
+            }
+        } catch (throwable: Throwable) {
+            emit(Resource.Exception(throwable, null))
+        }
+    }.flowOn(Dispatchers.IO)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    private suspend fun insertCommunities(communities: List<Community>) = applicationScope.launch {
         withContext(Dispatchers.IO) {
             communityQueries.transaction {
                 communities.forEach { communitiy ->
                     communitiy.apply {
                         communityQueries.insertCommunity(
                             id,
-                            name,territory_id,survey_no_code
+                            name, territory_id, survey_no_code
                         )
                     }
                 }
             }
         }
     }
-
-
-//    private suspend fun insertProvinces(provinces: List<Province>) = applicationScope.launch {
-//        withContext(Dispatchers.IO) {
-//            provinces.forEach {
-//                insertProvince(it)
-//            }
-//        }
-//    }
 
 
     private suspend fun insertProvinces(provinces: List<Province>) = applicationScope.launch {
@@ -322,7 +515,7 @@ class DashboardRepository(
                     province.apply {
                         provinceQueries.insertProvince(
                             id,
-                            name,survey_no_code
+                            name, survey_no_code
                         )
                     }
                 }
@@ -330,13 +523,6 @@ class DashboardRepository(
         }
     }
 
-//    private suspend fun insertGroupments(groupments: List<Groupment>) = applicationScope.launch {
-//        withContext(Dispatchers.IO) {
-//            groupments.forEach {
-//                insertGroupment(it)
-//            }
-//        }
-//    }
 
     private suspend fun insertGroupments(groupments: List<Groupment>) = applicationScope.launch {
         withContext(Dispatchers.IO) {
@@ -345,7 +531,7 @@ class DashboardRepository(
                     groupment.apply {
                         groupmentQueries.insertGroupment(
                             id,
-                            name,community_id,survey_no_code
+                            name, community_id, survey_no_code
                         )
                     }
                 }
@@ -353,13 +539,6 @@ class DashboardRepository(
         }
     }
 
-//    private suspend fun insertTerritories(territories: List<Territory>) = applicationScope.launch {
-//        withContext(Dispatchers.IO) {
-//            territories.forEach {
-//                insertTerritory(it)
-//            }
-//        }
-//    }
 
     private suspend fun insertTerritories(territories: List<Territory>) = applicationScope.launch {
         withContext(Dispatchers.IO) {

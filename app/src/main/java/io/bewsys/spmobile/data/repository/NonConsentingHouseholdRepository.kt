@@ -1,7 +1,7 @@
 package io.bewsys.spmobile.data.repository
 
-import app.cash.sqldelight.coroutines.asFlow
-import app.cash.sqldelight.coroutines.mapToList
+import com.squareup.sqldelight.runtime.coroutines.asFlow
+import com.squareup.sqldelight.runtime.coroutines.mapToList
 import io.bewsys.spmobile.Database
 import io.bewsys.spmobile.data.NonConsentHouseholdEntity
 import io.bewsys.spmobile.data.local.NonConsentHouseholdModel

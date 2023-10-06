@@ -373,4 +373,8 @@
     <string name="phone_number_helper_text">Entrez seulement 9 chiffres</string>
     <string name="voter_id_helper_text">Entrez seulement 11 chiffres</string>
     <string name="member">Membre</string>
+    <string name="survey_no">" Numéro d'enquête :"</string>
+    <string name="password_sent_to_email">mot de passe envoyé par email</string>
+    <string name="fields_empty">"Un ou plusieurs champs vides ! "</string>
+    <string name="you_logged_out">Vous vous êtes déconnecté!</string>
 </resources>

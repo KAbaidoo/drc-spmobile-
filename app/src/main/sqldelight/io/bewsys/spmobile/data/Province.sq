@@ -13,6 +13,11 @@ getProvinceList:
 SELECT (name)
 FROM provinceEntity;
 
+provinces:
+SELECT *
+FROM provinceEntity
+LIMIT :limit OFFSET :offset;
+
 getProvinceCount:
 SELECT COUNT(*)
 FROM provinceEntity;

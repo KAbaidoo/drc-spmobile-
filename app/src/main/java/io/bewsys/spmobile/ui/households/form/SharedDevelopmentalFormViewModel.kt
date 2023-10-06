@@ -7,7 +7,6 @@ import android.util.Log
 import androidx.lifecycle.*
 
 import androidx.work.*
-import app.cash.sqldelight.db.QueryResult.Unit.value
 import io.bewsys.spmobile.ADD_HOUSEHOLD_RESULT_OK
 import io.bewsys.spmobile.KEY_DATA_ID
 import io.bewsys.spmobile.data.local.HouseholdModel

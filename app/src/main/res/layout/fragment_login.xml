@@ -113,7 +113,7 @@
             android:id="@+id/version_name"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="56dp"
+            android:layout_marginTop="120dp"
             android:text="@string/version_name"
             tools:text="v2.2.3"
             android:textAlignment="center" />

@@ -1,26 +1,16 @@
 package io.bewsys.spmobile.ui
 
 
-import android.Manifest
-import android.annotation.SuppressLint
 import android.content.Context
-import android.content.SharedPreferences
-import android.content.pm.PackageManager
-import android.location.Location
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
-import android.util.Log
 import android.view.MotionEvent
 import android.view.View
+import android.view.inputmethod.InputMethodManager
 import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
-import androidx.appcompat.app.AppCompatDelegate
-import androidx.core.app.ActivityCompat
-import androidx.core.os.LocaleListCompat
-import androidx.core.os.bundleOf
-import androidx.core.view.get
 import androidx.drawerlayout.widget.DrawerLayout
 import androidx.drawerlayout.widget.DrawerLayout.LOCK_MODE_LOCKED_CLOSED
 import androidx.lifecycle.lifecycleScope
@@ -39,11 +29,11 @@ import kotlinx.coroutines.flow.collectLatest
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 
-class MainActivity : AppCompatActivity() {
+class MainActivity : AppCompatActivity(), UIController {
 
 
     private lateinit var appBarConfiguration: AppBarConfiguration
-    private lateinit var binding: ActivityMainBinding
+    lateinit var binding: ActivityMainBinding
     private lateinit var navController: NavController
 
     //============================
@@ -61,16 +51,17 @@ class MainActivity : AppCompatActivity() {
 
         // Initializing the handler and the runnable
         mHandler = Handler(Looper.getMainLooper())
-
+//
         mRunnable = Runnable {
 
-            navController.navigate(R.id.nav_login)
+//            navController.navigate(R.id.nav_login)
 
             Toast.makeText(
                 applicationContext,
                 "User inactive for ${mTime / 60_000} mins!",
                 Toast.LENGTH_SHORT
             ).show()
+
         }
 
 
@@ -79,6 +70,8 @@ class MainActivity : AppCompatActivity() {
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
         setSupportActionBar(binding.appBarMain.toolbar)
+
+
 
 
         val navigationView: NavigationView = findViewById(R.id.nav_view)
@@ -90,7 +83,7 @@ class MainActivity : AppCompatActivity() {
         lifecycleScope.launchWhenStarted {
             viewModel.userState.collectLatest {
                 if (it.not()) {
-                    navController.navigate(R.id.nav_login)
+//                    navController.navigate(R.id.nav_login)
                 }
             }
         }
@@ -172,8 +165,23 @@ class MainActivity : AppCompatActivity() {
         mHandler.removeCallbacks(mRunnable)
     }
 
+
+
     companion object {
         private const val TAG = "MainActivity"
+    }
+
+    override fun showProgressBar(show: Boolean) {
+        binding.appBarMain.progressBarMain.visibility = if (show) View.VISIBLE else View.GONE
+    }
+
+    override fun hideSoftKeyboard() {
+        if (currentFocus != null) {
+            val inputMethodManager = getSystemService(
+                Context.INPUT_METHOD_SERVICE) as InputMethodManager
+            inputMethodManager
+                .hideSoftInputFromWindow(currentFocus!!.windowToken, 0)
+        }
     }
 
 }

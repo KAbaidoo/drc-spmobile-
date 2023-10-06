@@ -13,6 +13,7 @@ import io.bewsys.spmobile.data.remote.model.auth.login.ErrorResponse
 import io.bewsys.spmobile.data.remote.model.household.BulkUploadResponse
 import io.bewsys.spmobile.data.repository.NonConsentingHouseholdRepository
 import io.bewsys.spmobile.data.repository.DashboardRepository
+import io.bewsys.spmobile.ui.common.BaseViewModel
 import io.bewsys.spmobile.ui.households.HouseholdsViewModel
 import io.bewsys.spmobile.util.Resource
 import io.bewsys.spmobile.work.NonConsentUploadWorker
@@ -23,7 +24,7 @@ import kotlinx.coroutines.launch
 class NonConsentingViewModel(
     private val nonConsentingHouseholdRepository: NonConsentingHouseholdRepository,
     private val dashboardRepository: DashboardRepository
-) : ViewModel() {
+) : BaseViewModel<Unit>() {
 
     private val _nonConsentingEventChannel = Channel<NonConsentingEvent>()
     val nonConsentingEvent = _nonConsentingEventChannel.receiveAsFlow()
@@ -121,6 +122,7 @@ class NonConsentingViewModel(
                     }?.let { _nonConsentingEventChannel.send(it) }
                 }
 
+                else -> {}
             }
 
         }

@@ -6,13 +6,6 @@ import android.widget.Button
 import androidx.preference.PreferenceManager
 
 
-//inline fun Button.onButtonClicked(crossinline action: () -> Unit) {
-//    this.setOnClickListener(object : View.OnClickListener {
-//        override fun onClick(v: View?) {
-//            action()
-//        }
-//    })
-//}
 
 fun Context.getPreferences(preferenceKey: String): String? {
     PreferenceManager.getDefaultSharedPreferences(this).apply {
