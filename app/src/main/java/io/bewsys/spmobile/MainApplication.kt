@@ -1,6 +1,7 @@
 package io.bewsys.spmobile
 
 import android.app.Application
+import com.google.firebase.crashlytics.FirebaseCrashlytics
 
 import io.bewsys.spmobile.di.appModule
 import org.koin.android.ext.koin.androidContext
@@ -11,7 +12,8 @@ class MainApplication : Application() {
     override fun onCreate() {
         super.onCreate()
 
-        // setup koin dependency injection
+        FirebaseCrashlytics.getInstance().setCrashlyticsCollectionEnabled(!BuildConfig.DEBUG)
+
         startKoin{
             androidContext(this@MainApplication)
             modules(appModule)
