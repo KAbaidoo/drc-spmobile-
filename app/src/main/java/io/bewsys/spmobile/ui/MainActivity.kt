@@ -54,7 +54,7 @@ class MainActivity : AppCompatActivity(), UIController {
 //
         mRunnable = Runnable {
 
-//            navController.navigate(R.id.nav_login)
+            navController.navigate(R.id.nav_login)
 
             Toast.makeText(
                 applicationContext,
@@ -83,7 +83,7 @@ class MainActivity : AppCompatActivity(), UIController {
         lifecycleScope.launchWhenStarted {
             viewModel.userState.collectLatest {
                 if (it.not()) {
-//                    navController.navigate(R.id.nav_login)
+                    navController.navigate(R.id.nav_login)
                 }
             }
         }
