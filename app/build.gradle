@@ -35,10 +35,11 @@ android {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
             buildConfigField "Long", "SESSION_TIMEOUT", '1_800_000L'
+            manifestPlaceholders["crashlyticsCollectionEnabled"] = true
         }
         debug {
             buildConfigField "Long", "SESSION_TIMEOUT", '120_000L'
-            manifestPlaceholders = [enableCrashReporting: "false"]
+            manifestPlaceholders["crashlyticsCollectionEnabled"] = false
         }
 
     }
