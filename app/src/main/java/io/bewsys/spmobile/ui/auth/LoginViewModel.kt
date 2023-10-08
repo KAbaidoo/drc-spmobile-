@@ -34,7 +34,6 @@ class LoginViewModel(
 
 
 
-
     var email = state.get<String>("email") ?: ""
         set(value) {
             field = value
